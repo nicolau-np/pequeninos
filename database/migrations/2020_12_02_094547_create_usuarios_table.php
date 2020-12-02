@@ -17,10 +17,10 @@ class CreateUsuariosTable extends Migration
             $table->engine = "InnoDB";
             $table->bigIncrements('id');
             $table->bigInteger('id_pessoa')->unsigned()->index();
-            $table->string('email')->unique()->nullable();
-            $table->text('password')->nullable();
-            $table->string('estado')->nullable();
-            $table->string('nivel_acesso')->nullable();
+            $table->string('username')->unique();
+            $table->text('password');
+            $table->string('estado');
+            $table->string('nivel_acesso');
             $table->string('provider')->nullable();
             $table->text('provider_id')->nullable();
             $table->date('email_verified_at')->nullable();

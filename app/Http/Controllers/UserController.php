@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 class UserController extends Controller
 {
     public function loginForm(){
+        if(Auth::check()){
+            return redirect()->route('home');
+        }
         $data = [
             'title'=>"Iniciar Sessão",
             'type'=>"login",
@@ -25,17 +28,18 @@ class UserController extends Controller
 
     public function logar(Request $request)
     {
-        $request->validate([
-                'email' => ['required','email'],
-                'password' => ['required', 'string']
-            ]);
+        $request->validate(
+            [
+                'username' => ['required', 'string', 'max:255'],
+                'password' => ['required', 'string', 'max:255']
+            ]
+        );
 
-        $credencials = array_merge($request->only('email', 'password'), ['isVerified' => 1]);
+        $credencials = $request->only('username', 'password');
         if (Auth::attempt($credencials)) {
             return redirect()->route('home');
         } else {
-
-            return back()->with(['error' => "Erro no Email ou Palavra-Passe"]);
+            return back()->with(['error' => "Usuário ou Palavra-Passe Incorrectos"]);
         }
     }
 

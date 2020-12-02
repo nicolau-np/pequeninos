@@ -12,7 +12,7 @@ class UsuarioSeeder extends Seeder
         DB::table('usuarios')->insert([
             [
                 'id_pessoa' => 1,
-                'email' => "nicolau.pungue@gmail.com",
+                'username' => "nicolau.pungue",
                 'password' => Hash::make("olamundo2015"),
                 'estado' => "on",
                 'nivel_acesso' => "admin",
@@ -20,7 +20,7 @@ class UsuarioSeeder extends Seeder
             ],
             [
                 'id_pessoa' => 2,
-                'email' => "hebraim.zua@gmail.com",
+                'username' => "hebraim.zua",
                 'password' => Hash::make("olaola"),
                 'estado' => "on",
                 'nivel_acesso' => "user",
@@ -28,7 +28,7 @@ class UsuarioSeeder extends Seeder
             ],
             [
                 'id_pessoa' => 3,
-                'email' => "fernanda.rosa@gmail.com",
+                'username' => "fernanda.rosa",
                 'password' => Hash::make("babaca"),
                 'estado' => "on",
                 'nivel_acesso' => "user",

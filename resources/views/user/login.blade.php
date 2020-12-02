@@ -57,13 +57,13 @@
                                 @endif
                                 
                                 <div class="input-group">
-                                    {{Form::email('email', null, ['placeholder'=>"Nome de Usuário", 'class'=>"form-control"])}}
+                                    {{Form::text('username', null, ['placeholder'=>"Nome de Usuário", 'class'=>"form-control"])}}
                                     <span class="md-line"></span>
                                    
                                 </div>
                                 <div class="erro">
-                                @if($errors->has('email'))
-                                <div class="text-danger">{{$errors->first('email')}}</div>
+                                @if($errors->has('username'))
+                                <div class="text-danger">{{$errors->first('username')}}</div>
                                 @endif 
                                 </div>
                                

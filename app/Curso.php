@@ -21,4 +21,8 @@ class Curso extends Model
         return $this->hasMany(TabelaPreco::class, 'id_curso', 'id');
     }
 
+    public function grade(){
+        return $this->hasMany(Grade::class, 'id_curso', 'id');
+    }
+
 }

@@ -1,0 +1,62 @@
+.btnPesquisar{
+	position: fixed;
+	float: bottom;
+	bottom: 15px;
+	right: 15px;
+	z-index: 100;
+}
+
+
+.btnPesquisarBtn {
+	display: inline-block;
+}
+
+.btnCircular{
+	border-radius: 50%;
+    
+}
+
+.btnPrincipal{
+	font-size: 20px;
+	padding: 12px;
+    text-align: center;
+    font-weight: bold;
+    box-shadow: 2px 4px 47px -4px rgba(0,0,0,0.82);
+}
+
+.btnPrincipal:hover{
+	background-color: #4680ff;
+    border:0px;
+}
+
+fieldset{
+    border: 1px solid #4680ff;
+    padding: 10px;
+    box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.12);
+}
+
+fieldset legend{
+    padding: 10px;
+    background:#4680ff;
+    color: #fff;
+    font-size: 14px;
+    margin-left: 2%;
+    width: 30%;
+    box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.12);
+    border-radius: 4px;
+}
+.erro{
+    font-size: 12px;
+}
+
+.text-right{
+    float: right;
+}
+
+
+.pagination{
+    float: right;
+}
+.not_found{
+    text-align: center;
+}

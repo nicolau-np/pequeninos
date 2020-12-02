@@ -18,6 +18,10 @@ Route::get('/login', "UserController@loginForm")->name('login');
 Route::post('/logar', "UserController@logar")->name('logar');
 Route::get('/logout', "UserController@logout")->name('logout');
 
+Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
+    Route::post('/getClasses', "AjaxController@getClasses")->name('getClasses');
+});
+
 Route::group(['prefix' => 'institucional'], function () {
     Route::group(['prefix' => 'cursos'], function () {
         Route::get('/', "InstitucionalController@curso_list");
@@ -25,5 +29,31 @@ Route::group(['prefix' => 'institucional'], function () {
         Route::post('/store', "InstitucionalController@curso_store");
         Route::get('/edit/{id}', "InstitucionalController@curso_edit");
         Route::put('/update/{id}', "InstitucionalController@curso_update");
+    });
+
+    Route::group(['prefix' => 'turmas'], function () {
+        Route::get('/', "InstitucionalController@turma_list");
+        Route::get('/create', "InstitucionalController@turma_create");
+        Route::post('/store', "InstitucionalController@turma_store");
+        Route::get('/edit/{id}', "InstitucionalController@turma_edit");
+        Route::put('/update/{id}', "InstitucionalController@turma_update");
+    });
+
+    Route::group(['prefix' => 'disciplinas'], function () {
+        Route::get('/', "InstitucionalController@disciplina_list");
+        Route::get('/create', "InstitucionalController@disciplina_create");
+        Route::post('/store', "InstitucionalController@disciplina_store");
+        Route::get('/edit/{id}', "InstitucionalController@disciplina_edit");
+        Route::put('/update/{id}', "InstitucionalController@disciplina_update");
+    });
+});
+
+Route::group(['prefix' => 'financas'], function () {
+    Route::group(['prefix' => 'tabela_precos'], function () {
+        Route::get('/', "FinancaController@tabela_preco_list");
+        Route::get('/create', "FinancaController@tabela_preco_create");
+        Route::post('/store', "FinancaController@tabela_preco_store");
+        Route::get('/edit/{id}', "FinancaController@tabela_preco_edit");
+        Route::put('/update/{id}', "FinancaController@tabela_preco_update");
     });
 });

@@ -29,6 +29,8 @@
       <!-- Style.css -->
       <link rel="stylesheet" type="text/css" href="{{asset('assets/template/css/style.css')}}">
       <link rel="stylesheet" type="text/css" href="{{asset('assets/template/css/jquery.mCustomScrollbar.css')}}">
+      <link rel="stylesheet" type="text/css" href="{{asset('assets/template/style.css')}}">
+      <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
   </head>
   @if($type!="login")
   <body>
@@ -240,6 +242,14 @@
 
                                 <li class="">
                                     <a href="/">
+                                        <span class="pcoded-micon"><i class="ti-layout-media-overlay-alt"></i><b>E</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Encarregados</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                                <li class="">
+                                    <a href="/">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i><b>F</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Estudantes</span>
                                         <span class="pcoded-mcaret"></span>
@@ -266,15 +276,15 @@
                                             </a>
                                         </li>
                                        
-                                        <li class=" ">
-                                            <a href="button.html">
+                                        <li class="@if($menu=="Turmas") active @endif">
+                                            <a href="/institucional/turmas/">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Turmas</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
-                                        <li class=" ">
-                                            <a href="tabs.html">
+                                        <li class="@if($menu=="Disciplinas") active @endif">
+                                            <a href="/institucional/disciplinas/">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Disciplinas</span>
                                                 <span class="pcoded-mcaret"></span>
@@ -292,22 +302,22 @@
                                     </ul>
                                 </li>
 
-                                <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu @if($type=="financas") active pcoded-trigger @endif">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="ti-money"></i></span>
                                         <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Finanças</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        <li class=" ">
+                                        <li class="">
                                             <a href="accordion.html">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Tipos de Pagamentos</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
-                                        <li class=" ">
-                                            <a href="breadcrumb.html">
+                                        <li class="@if($menu=="Tabela de Preços") active @endif">
+                                            <a href="/financas/tabela_precos/">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Tabela de Preços</span>
                                                 <span class="pcoded-mcaret"></span>

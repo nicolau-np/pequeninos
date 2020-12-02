@@ -27,27 +27,37 @@
                     @if(session('success'))
                     <div class="alert alert-success">{{session('success')}}</div>
                     @endif
-                        {{Form::open(['method'=>"put", 'url'=>"/institucional/cursos/update/{$getCurso->id}"])}}
+                        {{Form::open(['method'=>"put", 'url'=>"/institucional/disciplinas/update/{$getDisciplina->id}"])}}
                         @csrf
                         <fieldset>
-                            <legend><i class="ti-list"></i> Dados do curso</legend>
+                            <legend><i class="ti-list"></i> Dados da disciplina</legend>
                             <div class="row">
-                                <div class="col-md-4">
-                                    {{Form::label('ensino', "Ensino")}}
-                                    {{Form::select('ensino', $getEnsinos, $getCurso->id_ensino, ['class'=>"form-control", 'placeholder'=>"Ensino"])}}
+                                <div class="col-md-3">
+                                    {{Form::label('componente', "Componente")}}
+                                    {{Form::select('componente', $getComponentes, $getDisciplina->id_componente, ['class'=>"form-control", 'placeholder'=>"Componente"])}}
                                 <div class="erro">
-                                    @if($errors->has('ensino'))
-                                    <div class="text-danger">{{$errors->first('ensino')}}</div>
+                                    @if($errors->has('componente'))
+                                    <div class="text-danger">{{$errors->first('componente')}}</div>
                                     @endif 
                                 </div>
                                 </div>
 
-                                <div class="col-md-5">
-                                    {{Form::label('curso', "Nome do curso")}}
-                                    {{Form::text('curso', $getCurso->curso, ['class'=>"form-control", 'placeholder'=>"Curso"])}}
+                                <div class="col-md-4">
+                                    {{Form::label('disciplina', "Disciplina")}}
+                                    {{Form::text('disciplina', $getDisciplina->disciplina, ['class'=>"form-control", 'placeholder'=>"Disciplina"])}}
                                     <div class="erro">
-                                        @if($errors->has('curso'))
-                                        <div class="text-danger">{{$errors->first('curso')}}</div>
+                                        @if($errors->has('disciplina'))
+                                        <div class="text-danger">{{$errors->first('disciplina')}}</div>
+                                        @endif 
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    {{Form::label('sigla', "Sígla")}}
+                                    {{Form::text('sigla', $getDisciplina->sigla, ['class'=>"form-control", 'placeholder'=>"Sígla"])}}
+                                    <div class="erro">
+                                        @if($errors->has('sigla'))
+                                        <div class="text-danger">{{$errors->first('sigla')}}</div>
                                         @endif 
                                     </div>
                                 </div>
@@ -61,9 +71,7 @@
                                  </div>
 
                             </div>
-                        
-                       
-                        
+                   
                         {{Form::close()}}
                    </div>
                 </div>
@@ -78,7 +86,7 @@
 <!-- botão pesquisar -->
 <div class="btnPesquisar">
 	<div class="btnPesquisarBtn">
-		<a href="/institucional/cursos/" class="btn btn-primary btnCircular btnPrincipal" title="Listar"><i class="ti-search"></i></a>
+		<a href="/institucional/disciplinas/" class="btn btn-primary btnCircular btnPrincipal" title="Listar"><i class="ti-search"></i></a>
 	</div>
 </div>
 

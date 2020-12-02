@@ -1,58 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<style>
- /* Botão pesquisar e Mais Botões */
-.btnPesquisar{
-	position: fixed;
-	float: bottom;
-	bottom: 15px;
-	right: 15px;
-	z-index: 100;
-}
 
-
-.btnPesquisarBtn {
-	display: inline-block;
-}
-
-.btnCircular{
-	border-radius: 50%;
-    
-}
-
-.btnPrincipal{
-	font-size: 20px;
-	padding: 12px;
-    text-align: center;
-    font-weight: bold;
-    box-shadow: 2px 4px 47px -4px rgba(0,0,0,0.82);
-}
-
-.btnPrincipal:hover{
-	background-color: #4680ff;
-    border:0px;
-}
-
-fieldset{
-    border: 1px solid #4680ff;
-    padding: 10px;
-    box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.12);
-}
-
-fieldset legend{
-    padding: 10px;
-    background:#4680ff;
-    color: #fff;
-    font-size: 14px;
-    margin-left: 2%;
-    width: 30%;
-    box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.12);
-    border-radius: 4px;
-}
-.erro{
-    font-size: 12px;
-}
-</style>
 <div class="page-body">
     <div class="row">
         <div class="col-sm-12">
@@ -86,7 +34,7 @@ fieldset legend{
                             <div class="row">
                                 <div class="col-md-4">
                                     {{Form::label('ensino', "Ensino")}}
-                                    {{Form::select('ensino', $getCursos, null, ['class'=>"form-control", 'placeholder'=>"Ensino"])}}
+                                    {{Form::select('ensino', $getEnsinos, null, ['class'=>"form-control", 'placeholder'=>"Ensino"])}}
                                 <div class="erro">
                                     @if($errors->has('ensino'))
                                     <div class="text-danger">{{$errors->first('ensino')}}</div>
@@ -130,7 +78,7 @@ fieldset legend{
 <!-- botão pesquisar -->
 <div class="btnPesquisar">
 	<div class="btnPesquisarBtn">
-		<a href="/institucional/cursos/" class="btn btn-success btnCircular btnPrincipal" title="Novo"><i class="ti-search"></i></a>
+		<a href="/institucional/cursos/" class="btn btn-primary btnCircular btnPrincipal" title="Listar"><i class="ti-search"></i></a>
 	</div>
 </div>
 

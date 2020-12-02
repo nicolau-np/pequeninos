@@ -40,21 +40,25 @@
                                     <th>#</th>
                                     <th>Ensino</th>
                                     <th>Curso</th>
+                                    <th>Classe</th>
+                                    <th>Turma</th>
                                     <th>Operações</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if($getCursos->count()==0)
-                                <span class="not_found">Nenhum curso cadastrado</span>
+                                @if($getTurmas->count()==0)
+                                <span class="not_found">Nenhuma turma cadastrada</span>
                                 @else
-                                @foreach ($getCursos as $cursos)
+                                @foreach ($getTurmas as $turmas)
                                     
                                 <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$cursos->ensino->ensino}}</td>
-                                    <td>{{$cursos->curso}}</td>
+                                    <td>{{$turmas->curso->ensino->ensino}}</td>
+                                    <td>{{$turmas->curso->curso}}</td>
+                                    <td>{{$turmas->classe->classe}}</td>
+                                    <td>{{$turmas->turma}}</td>
                                     <td>
-                                        <a href="/institucional/cursos/edit/{{$cursos->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
+                                        <a href="/institucional/turmas/edit/{{$turmas->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
                                         <a href="http://" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
                                     </td>
                                 </tr>
@@ -67,7 +71,7 @@
                     </div>
 
                     <div class="pagination">
-                        {{$getCursos->links()}}
+                        {{$getTurmas->links()}}
                     </div>
                 </div>
             </div>
@@ -81,7 +85,7 @@
 <!-- botão pesquisar -->
 <div class="btnPesquisar">
 	<div class="btnPesquisarBtn">
-		<a href="/institucional/cursos/create" class="btn btn-primary btnCircular btnPrincipal" title="Novo"><i class="ti-plus"></i></a>
+		<a href="/institucional/turmas/create" class="btn btn-primary btnCircular btnPrincipal" title="Novo"><i class="ti-plus"></i></a>
 	</div>
 </div>
 

@@ -24,4 +24,8 @@ class Classe extends Model
     public function tabela_preco(){
         return $this->hasMany(TabelaPreco::class, 'id_classe', 'id');
     }
+
+    public function grade(){
+        return $this->hasMany(Grade::class, 'id_classe', 'id');
+    }
 }

@@ -38,23 +38,25 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Ensino</th>
-                                    <th>Curso</th>
+                                    <th>Componente</th>
+                                    <th>Disciplina</th>
+                                    <th>Sígla</th>
                                     <th>Operações</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if($getCursos->count()==0)
-                                <span class="not_found">Nenhum curso cadastrado</span>
+                                @if($getDisciplinas->count()==0)
+                                <span class="not_found">Nenhuma disciplina cadastrada</span>
                                 @else
-                                @foreach ($getCursos as $cursos)
+                                @foreach ($getDisciplinas as $disciplinas)
                                     
                                 <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$cursos->ensino->ensino}}</td>
-                                    <td>{{$cursos->curso}}</td>
+                                    <td>{{$disciplinas->componente->componente}}</td>
+                                    <td>{{$disciplinas->disciplina}}</td>
+                                    <td>{{$disciplinas->sigla}}</td>
                                     <td>
-                                        <a href="/institucional/cursos/edit/{{$cursos->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
+                                        <a href="/institucional/disciplinas/edit/{{$disciplinas->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
                                         <a href="http://" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
                                     </td>
                                 </tr>
@@ -67,7 +69,7 @@
                     </div>
 
                     <div class="pagination">
-                        {{$getCursos->links()}}
+                        {{$getDisciplinas->links()}}
                     </div>
                 </div>
             </div>
@@ -81,7 +83,7 @@
 <!-- botão pesquisar -->
 <div class="btnPesquisar">
 	<div class="btnPesquisarBtn">
-		<a href="/institucional/cursos/create" class="btn btn-primary btnCircular btnPrincipal" title="Novo"><i class="ti-plus"></i></a>
+		<a href="/institucional/disciplinas/create" class="btn btn-primary btnCircular btnPrincipal" title="Novo"><i class="ti-plus"></i></a>
 	</div>
 </div>
 

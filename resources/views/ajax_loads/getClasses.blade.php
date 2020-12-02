@@ -1,0 +1,1 @@
+{{Form::select('classe', $getClasses, null, ['class'=>"form-control", 'placeholder'=>"Classe"])}}

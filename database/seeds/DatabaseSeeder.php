@@ -24,6 +24,7 @@ class DatabaseSeeder extends Seeder
            ClasseSeeder::class,
            FuncionarioSeeder::class,
            TipoPagamentoSeeder::class,
+           CompoDisciplinaSeeder::class,
        ]);
     }
 }

@@ -13,7 +13,7 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-      
+        $this->middleware('auth');
     }
 
     /**
@@ -23,6 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
+        
         $data = [
             'title'=>"Okussoleka - Sistema de Gestão Escolar",
             'type'=>"home",

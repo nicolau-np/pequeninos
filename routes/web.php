@@ -13,5 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::get('/login', 'UserController@loginForm')->name('login');
+Route::get('/', "HomeController@index")->name('home');
+Route::get('/login', "UserController@loginForm")->name('login');
+Route::post('/logar', "UserController@logar")->name('logar');
+Route::get('/logout', "UserController@logout")->name('logout');

@@ -1,6 +1,13 @@
 @extends('layouts.app')
 @section('content')
-
+<style>
+    .text-danger{
+        font-size: 12px;
+    }
+    .erro{
+        margin-left: 0%;
+    }
+</style>
 <body class="fix-menu">
     <!-- Pre-loader start -->
     <div class="theme-loader">
@@ -28,7 +35,9 @@
                 <div class="col-sm-12">
                     <!-- Authentication card start -->
                     <div class="login-card card-block auth-body mr-auto ml-auto">
-                        <form class="md-float-material">
+                        {{Form::open(['method'=>"post", 'class'=>"md-float-material", 'url'=>"/logar"])}}
+                        
+
                             <div class="text-center">
                                 <img src="{{asset('assets/template/images/auth/logo-dark.png')}}" alt="logo.png')}}">
                             </div>
@@ -39,13 +48,34 @@
                                     </div>
                                 </div>
                                 <hr/>
+                                @if(session('error'))
+                                <div class="alert alert-danger">{{session('error')}}</div>
+                                @endif
+            
+                                @if(session('success'))
+                                <div class="alert alert-success">{{session('success')}}</div>
+                                @endif
+                                
                                 <div class="input-group">
-                                    <input type="email" class="form-control" placeholder="Your Email Address">
+                                    {{Form::email('email', null, ['placeholder'=>"Nome de Usuário", 'class'=>"form-control"])}}
                                     <span class="md-line"></span>
+                                   
                                 </div>
+                                <div class="erro">
+                                @if($errors->has('email'))
+                                <div class="text-danger">{{$errors->first('email')}}</div>
+                                @endif 
+                                </div>
+                               
                                 <div class="input-group">
-                                    <input type="password" class="form-control" placeholder="Password">
+                                    <input type="password" class="form-control" placeholder="Palavra-Passe" name="password">
                                     <span class="md-line"></span>
+                                   
+                                </div>
+                                <div class="erro">
+                                    @if($errors->has('password'))
+						            <div class="text-danger">{{$errors->first('password')}}</div>
+						            @endif
                                 </div>
                                 <div class="row m-t-25 text-left">
                                     <div class="col-sm-7 col-xs-12">
@@ -63,7 +93,7 @@
                                 </div>
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
-                                        <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Sign in</button>
+                                        <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Sign in</button>
                                     </div>
                                 </div>
                                 <hr/>
@@ -78,7 +108,7 @@
                                 </div>
 
                             </div>
-                        </form>
+                        {{Form::close()}}
                         <!-- end of form -->
                     </div>
                     <!-- Authentication card end -->

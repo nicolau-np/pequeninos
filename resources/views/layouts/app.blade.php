@@ -157,8 +157,8 @@
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="auth-normal-sign-in.html">
-                                            <i class="ti-layout-sidebar-left"></i> Logout
+                                    <a href="{{route('logout')}}">
+                                            <i class="ti-layout-sidebar-left"></i> Sair
                                         </a>
                                     </li>
                                 </ul>

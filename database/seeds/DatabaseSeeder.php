@@ -17,7 +17,13 @@ class DatabaseSeeder extends Seeder
            MunicipioSeeder::class,
            PessoaSeeder::class,
            UsuarioSeeder::class,
+           CargoSeeder::class,
+           EscalaoSeeder::class,
+           EnsinoSeeder::class,
+           TurnoSeeder::class,
+           ClasseSeeder::class,
            FuncionarioSeeder::class,
+           TipoPagamentoSeeder::class,
        ]);
     }
 }

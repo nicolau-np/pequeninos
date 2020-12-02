@@ -38,4 +38,8 @@ class User extends Authenticatable
     public function pessoa(){
         return $this->belongsTo(Pessoa::class, 'id_pessoa', 'id');
     }
+
+    public function pagamento(){
+        return $this->hasMany(Pagamento::class, 'id_usuario', 'id');
+    }
 }

@@ -214,7 +214,7 @@
                             </div>
                             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Principal</div>
                             <ul class="pcoded-item pcoded-left-item">
-                                <li class="active">
+                                <li class="@if($menu=="Home") active @endif">
                                     <a href="/">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>H</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Home</span>
@@ -248,30 +248,24 @@
 
                                
                             </ul>
-                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Configurações</div>
+                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Extras</div>
                             <ul class="pcoded-item pcoded-left-item">
 
-                                <li class="pcoded-hasmenu">
+                                <li class="pcoded-hasmenu @if($type=="institucional") active pcoded-trigger @endif">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="ti-settings"></i></span>
-                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Extras</span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Institucional</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        <li class=" ">
-                                            <a href="accordion.html">
+                                        <li class="@if($menu=="Cursos") active @endif">
+                                            <a href="/institucional/cursos/">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Cursos</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
-                                        <li class=" ">
-                                            <a href="breadcrumb.html">
-                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Classes</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
+                                       
                                         <li class=" ">
                                             <a href="button.html">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
@@ -289,7 +283,7 @@
                                         <li class=" ">
                                             <a href="color.html">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Grades</span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Grade Curricular</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
@@ -297,6 +291,32 @@
 
                                     </ul>
                                 </li>
+
+                                <li class="pcoded-hasmenu">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="ti-money"></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Finanças</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class=" ">
+                                            <a href="accordion.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Tipos de Pagamentos</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class=" ">
+                                            <a href="breadcrumb.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Tabela de Preços</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+               
+                                    </ul>
+                                </li>
+
 
 
                                 <li>
@@ -346,8 +366,8 @@
                                                 <div class="page-header-title">
                                                     <i class="icofont icofont-layout bg-c-blue"></i>
                                                     <div class="d-inline">
-                                                        <h4>Animated Tooltip</h4>
-                                                        <span>lorem ipsum dolor sit amet, consectetur adipisicing elit</span>
+                                                        <h4>{{$menu}}</h4>
+                                                    <span>{{$type}}</span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -355,13 +375,13 @@
                                                 <div class="page-header-breadcrumb">
                                                     <ul class="breadcrumb-title">
                                                         <li class="breadcrumb-item">
-                                                            <a href="index.html">
+                                                        <a href="{{route('home')}}">
                                                                 <i class="icofont icofont-home"></i>
                                                             </a>
                                                         </li>
-                                                        <li class="breadcrumb-item"><a href="#!">Basic Components</a>
+                                                        <li class="breadcrumb-item"><a href="#!">{{$menu}}</a>
                                                         </li>
-                                                        <li class="breadcrumb-item"><a href="#!">Animated Tooltip</a>
+                                                        <li class="breadcrumb-item"><a href="#!">{{$submenu}}</a>
                                                         </li>
                                                     </ul>
                                                 </div>

@@ -17,5 +17,8 @@ class Curso extends Model
         return $this->belongsTo(Ensino::class, 'id_ensino', 'id');
     }
 
- 
+    public function tabela_preco(){
+        return $this->hasMany(TabelaPreco::class, 'id_curso', 'id');
+    }
+
 }

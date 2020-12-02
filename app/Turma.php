@@ -26,5 +26,13 @@ class Turma extends Model
     public function turno(){
         return $this->belongsTo(Turno::class, 'id_turno', 'id');
     }
+
+    public function estudante(){
+        return $this->hasMany(Estudante::class, 'id_turma', 'id');
+    }
+
+    public function historico(){
+        return $this->hasMany(HistoricEstudante::class, 'id_turma', 'id');
+    }
     
 }

@@ -22,6 +22,7 @@ class Pessoa extends Model
         'pai',
         'mae',
         'comuna',
+        'foto',
     ];
 
     public function municipio(){
@@ -32,5 +33,7 @@ class Pessoa extends Model
         return $this->hasMany(User::class, 'id_pessoa', 'id');
     }
 
-    
+    public function estudante(){
+        return $this->hasMany(Estudante::class, 'id_pessoa', 'id');
+    }
 }

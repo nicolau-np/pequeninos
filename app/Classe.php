@@ -20,4 +20,8 @@ class Classe extends Model
     public function turma(){
         return $this->hasMany(Turma::class, 'id_classe', 'id');
     }
+
+    public function tabela_preco(){
+        return $this->hasMany(TabelaPreco::class, 'id_classe', 'id');
+    }
 }

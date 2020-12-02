@@ -23,7 +23,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        
         $data = [
             'title'=>"Okussoleka - Sistema de Gestão Escolar",
             'type'=>"home",

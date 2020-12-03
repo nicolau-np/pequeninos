@@ -1,0 +1,1 @@
+{{Form::select('municipio', $getMunicipios, null, ['class'=>"form-control", 'placeholder'=>"Município"])}}

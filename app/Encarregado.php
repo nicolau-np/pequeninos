@@ -16,4 +16,8 @@ class Encarregado extends Model
     public function pessoa(){
         return $this->belongsTo(Pessoa::class, 'id_pessoa', 'id');
     }
+
+    public function estudante(){
+        return $this->hasMany(Estudante::class, 'id_encarregado', 'id');
+    }
 }

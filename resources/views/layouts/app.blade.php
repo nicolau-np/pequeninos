@@ -240,8 +240,8 @@
                                     </a>
                                 </li>
 
-                                <li class="">
-                                    <a href="/">
+                                <li class="@if($menu=="Encarregados") active @endif">
+                                    <a href="/encarregados/">
                                         <span class="pcoded-micon"><i class="ti-layout-media-overlay-alt"></i><b>E</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Encarregados</span>
                                         <span class="pcoded-mcaret"></span>

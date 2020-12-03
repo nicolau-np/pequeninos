@@ -11,6 +11,7 @@ class Estudante extends Model
     protected $fillable = [
         'id_turma',
         'id_pessoa',
+        'id_encarregado',
         'estado',
         'ano_lectivo',
     ];
@@ -29,6 +30,10 @@ class Estudante extends Model
 
     public function historico(){
         return $this->hasMany(HistoricEstudante::class, 'id_estudante', 'id');
+    }
+
+    public function encarregado(){
+        return $this->belongsTo(Encarregado::class, 'id_encarregado', 'id');
     }
 
 }

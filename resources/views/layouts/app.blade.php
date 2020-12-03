@@ -248,8 +248,8 @@
                                     </a>
                                 </li>
 
-                                <li class="">
-                                    <a href="/">
+                                <li class="@if($menu=="Estudantes") active @endif">
+                                    <a href="/estudantes/">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i><b>F</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Estudantes</span>
                                         <span class="pcoded-mcaret"></span>
@@ -413,13 +413,13 @@
         </div>
     </div>
 </div>
-
+@if($menu=="Home")
 <div class="fixed-button">
 	<a href="https://codedthemes.com/item/guru-able-admin-template/" target="_blank" class="btn btn-md btn-primary">
 	  <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
 	</a>
 </div>
-
+@endif
 <!-- Warning Section Starts -->
 <!-- Older IE warning message -->
     <!--[if lt IE 9]>

@@ -20,7 +20,7 @@ class CreateEstudantesTable extends Migration
             $table->bigInteger('id_pessoa')->unsigned()->index();
             $table->bigInteger('id_encarregado')->unsigned()->index();
             $table->string('estado');
-            $table->bigInteger('ano_lectivo');
+            $table->string('ano_lectivo');
             $table->timestamps();
         });
 

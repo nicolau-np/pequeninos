@@ -21,6 +21,7 @@ Route::get('/logout', "UserController@logout")->name('logout');
 Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/getClasses', "AjaxController@getClasses")->name('getClasses');
     Route::post('/getMunicipios', "AjaxController@getMunicipios")->name('getMunicipios');
+    Route::post('/getTurmas', "AjaxController@getTurmas")->name('getTurmas');
 });
 
 Route::group(['prefix' => 'institucional'], function () {
@@ -65,4 +66,12 @@ Route::group(['prefix' => 'encarregados'], function () {
         Route::post('/store', "EncarregadoController@store");
         Route::get('/edit/{id}', "EncarregadoController@edit");
         Route::put('/update/{id}', "EncarregadoController@update");
+});
+
+Route::group(['prefix' => 'estudantes'], function () {
+    Route::get('/', "EstudanteController@index");
+    Route::get('/create', "EstudanteController@create");
+    Route::post('/store', "EstudanteController@store");
+    Route::get('/edit/{id}', "EstudanteController@edit");
+    Route::put('/update/{id}', "EstudanteController@update");
 });

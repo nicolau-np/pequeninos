@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Classe;
 use App\Curso;
 use App\Municipio;
+use App\Turma;
 use Illuminate\Http\Request;
 
 class AjaxController extends Controller
@@ -34,5 +35,18 @@ class AjaxController extends Controller
             'getMunicipios'=>$municipio,
         ];
         return view('ajax_loads.getMunicipios', $data);
+    }
+
+    public function getTurmas(Request $request){
+        $request->validate([
+            'id_classe'=>['required', 'Integer'],
+            'id_curso'=>['required', 'Integer']
+        ]);
+       $turmas = Turma::where(['id_curso'=>$request->id_curso, 'id_classe'=>$request->id_classe])->pluck('turma','id');
+    
+        $data = [
+            'getTurmas'=>$turmas,
+        ];
+        return view('ajax_loads.getTurmas', $data);
     }
 }

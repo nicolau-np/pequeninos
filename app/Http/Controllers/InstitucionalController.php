@@ -43,7 +43,7 @@ class InstitucionalController extends Controller
     public function curso_store(Request $request){
         $request->validate([
             'ensino'=>['required', 'Integer'],
-            'curso'=>['required', 'string', 'min:6', 'max:255']
+            'curso'=>['required', 'string', 'min:4', 'max:255']
         ]);
 
         $data=[
@@ -81,7 +81,7 @@ class InstitucionalController extends Controller
         }
         $request->validate([
             'ensino'=>['required', 'Integer'],
-            'curso'=>['required', 'string', 'min:6', 'max:255']
+            'curso'=>['required', 'string', 'min:4', 'max:255']
         ]);
 
         $data=[

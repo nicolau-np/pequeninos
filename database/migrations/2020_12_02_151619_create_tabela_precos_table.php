@@ -20,6 +20,7 @@ class CreateTabelaPrecosTable extends Migration
             $table->bigInteger('id_curso')->unsigned()->index();
             $table->bigInteger('id_classe')->unsigned()->index();
             $table->decimal('preco', 14,2);
+            $table->string('forma_pagamento');
             $table->timestamps();
         });
 

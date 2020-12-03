@@ -13,6 +13,7 @@ class TabelaPreco extends Model
         'id_curso',
         'id_classe',
         'preco', 
+        'forma_pagamento',
     ];
 
     public function tipo_pagamento(){

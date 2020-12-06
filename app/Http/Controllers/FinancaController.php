@@ -129,4 +129,77 @@ class FinancaController extends Controller
             return back()->with(['success'=>"Feito com sucesso"]);
         }
     }
+
+    public function tipo_pagamento_list(){
+        $tipo_pagamentos = TipoPagamento::paginate(5);
+        $data = [
+            'title' => "Tipo de Pagamentos",
+            'type' => "financas",
+            'menu' => "Tipo de Pagamentos",
+            'submenu' => "Listar",
+            'getTipoPagamentos' => $tipo_pagamentos,
+        ];
+        return view('financas.tipo_pagamento.list', $data);
+    }
+
+    public function tipo_pagamento_create(){
+        $data = [
+            'title' => "Tipo de Pagamentos",
+            'type' => "financas",
+            'menu' => "Tipo de Pagamentos",
+            'submenu' => "Novo",
+        ];
+        return view('financas.tipo_pagamento.new', $data);
+    }
+
+    public function tipo_pagamento_store(Request $request){
+        $request->validate([
+            'tipo_pagamento'=>['required', 'string', 'min:5', 'max:255', 'unique:tipo_pagamentos,tipo']
+        ]);
+
+        $data = [
+            'tipo'=>$request->tipo_pagamento,
+        ];
+
+        if(TipoPagamento::create($data)){
+            return back()->with(['success'=>"Feito com sucesso"]);
+        }
+    }
+
+    public function tipo_pagamento_edit($id){
+        $tipo_pagamento = TipoPagamento::find($id);
+        if(!$tipo_pagamento){
+            return back()->with(['error'=>"Nao encontrou"]);
+        }
+
+        $data = [
+            'title' => "Tipo de Pagamentos",
+            'type' => "financas",
+            'menu' => "Tipo de Pagamentos",
+            'submenu' => "Editar",
+            'getTipoPagamento'=>$tipo_pagamento,
+        ];
+        return view('financas.tipo_pagamento.edit', $data);
+    }
+
+    public function tipo_pagamento_update(Request $request, $id){
+        $tipo_pagamento = TipoPagamento::find($id);
+        if(!$tipo_pagamento){
+            return back()->with(['error'=>"Nao encontrou"]);
+        }
+        
+        $data = [
+            'tipo'=>$request->tipo_pagamento,
+        ];
+        
+        if($request->tipo_pagamento!=$tipo_pagamento->tipo){
+            if(TipoPagamento::where('tipo', $data['tipo'])->first()){
+                return back()->with(['error'=>"Já cadastrou"]);
+            }
+        }
+
+        if(TipoPagamento::find($tipo_pagamento->id)->update($data)){
+           return back()->with(['success'=>"Feito com sucesso"]); 
+        }
+    }
 }

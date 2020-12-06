@@ -232,8 +232,8 @@
                                     </a>
                                 </li>
 
-                                <li class="">
-                                    <a href="/">
+                                <li class="@if($menu=="Funcionários") active @endif">
+                                    <a href="/funcionarios/">
                                         <span class="pcoded-micon"><i class="ti-layout-tab-v"></i><b>F</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Funcionários</span>
                                         <span class="pcoded-mcaret"></span>
@@ -309,8 +309,8 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        <li class="">
-                                            <a href="accordion.html">
+                                        <li class="@if($menu=="Tipo de Pagamentos") active @endif">
+                                            <a href="/financas/tipo_pagamentos/">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Tipos de Pagamentos</span>
                                                 <span class="pcoded-mcaret"></span>

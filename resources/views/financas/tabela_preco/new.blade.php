@@ -34,7 +34,7 @@
                             <div class="row">
 
                                 <div class="col-md-3">
-                                    {{Form::label('tipo_pagamento', "Pagamento")}}
+                                    {{Form::label('tipo_pagamento', "Pagamento")}} <span class="text-danger">*</span>
                                     {{Form::select('tipo_pagamento', $getTipoPagamentos, null, ['class'=>"form-control", 'placeholder'=>"Pagamento"])}}
                                 
                                 <div class="erro">
@@ -45,7 +45,7 @@
                                 </div>
 
                                 <div class="col-md-3">
-                                    {{Form::label('forma_pagamento', "Forma de Pagamento")}}
+                                    {{Form::label('forma_pagamento', "Forma de Pagamento")}} <span class="text-danger">*</span>
                                     {{Form::select('forma_pagamento', [
                                         'Trimestral'=>"Trimestral",
                                         'Mensal'=>"Mensal",
@@ -60,7 +60,7 @@
                                 </div>
 
                                 <div class="col-md-3">
-                                    {{Form::label('curso', "Curso")}}
+                                    {{Form::label('curso', "Curso")}} <span class="text-danger">*</span>
                                     {{Form::select('curso', $getCursos, null, ['class'=>"form-control curso", 'placeholder'=>"Curso"])}}
                                 <div class="erro">
                                     @if($errors->has('curso'))
@@ -70,7 +70,7 @@
                                 </div>
 
                                 <div class="col-md-2">
-                                    {{Form::label('classe', "Classe")}}
+                                    {{Form::label('classe', "Classe")}} <span class="text-danger">*</span>
                                     <span class="load_classes">
                                     {{Form::select('classe', [], null, ['class'=>"form-control", 'placeholder'=>"Classe"])}}
                                 </span>
@@ -82,7 +82,7 @@
                                 </div>
 
                                 <div class="col-md-2">
-                                    {{Form::label('preco', "Preço (Akz)")}}
+                                    {{Form::label('preco', "Preço (Akz)")}} <span class="text-danger">*</span>
                                     {{Form::number('preco', null, ['class'=>"form-control", 'placeholder'=>"Preço"])}}
                                     <div class="erro">
                                         @if($errors->has('preco'))

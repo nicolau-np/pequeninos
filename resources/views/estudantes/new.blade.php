@@ -116,7 +116,7 @@
                                 <div class="col-md-3">
                                     {{Form::label('estado_civil', "Estado Civíl")}} 
                                     {{Form::select('estado_civil', [
-                                        'solteiro(a)'=>"Solteiro(a)",
+                                        'Solteiro(a)'=>"Solteiro(a)",
                                         'Casado(a)'=>"Casado(a)",
                                     ], null, ['class'=>"form-control", 'placeholder'=>"Estado Civíl"])}}
                                 

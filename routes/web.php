@@ -59,6 +59,14 @@ Route::group(['prefix' => 'financas'], function () {
         Route::get('/edit/{id}', "FinancaController@tabela_preco_edit");
         Route::put('/update/{id}', "FinancaController@tabela_preco_update");
     });
+
+    Route::group(['prefix' => 'tipo_pagamentos'], function () {
+        Route::get('/', "FinancaController@tipo_pagamento_list");
+        Route::get('/create', "FinancaController@tipo_pagamento_create");
+        Route::post('/store', "FinancaController@tipo_pagamento_store");
+        Route::get('/edit/{id}', "FinancaController@tipo_pagamento_edit");
+        Route::put('/update/{id}', "FinancaController@tipo_pagamento_update");
+    });
 });
 
 Route::group(['prefix' => 'encarregados'], function () {
@@ -75,4 +83,12 @@ Route::group(['prefix' => 'estudantes'], function () {
     Route::post('/store', "EstudanteController@store");
     Route::get('/edit/{id}', "EstudanteController@edit");
     Route::put('/update/{id}', "EstudanteController@update");
+});
+
+Route::group(['prefix' => 'funcionarios'], function () {
+    Route::get('/', "FuncionarioController@index");
+    Route::get('/create', "FuncionarioController@create");
+    Route::post('/store', "FuncionarioController@store");
+    Route::get('/edit/{id}', "FuncionarioController@edit");
+    Route::put('/update/{id}', "FuncionarioController@update");
 });

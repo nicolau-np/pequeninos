@@ -23,6 +23,10 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/getMunicipios', "AjaxController@getMunicipios")->name('getMunicipios');
     Route::post('/getTurmas', "AjaxController@getTurmas")->name('getTurmas');
     Route::post('/getEncarregados', "AjaxController@getEncarregados")->name('getEncarregados');
+    Route::post('/getDisciplinas', "AjaxController@getDisciplinas")->name('getDisciplinas');
+    Route::get('/addDisciplinas', "AjaxController@addDisciplinas")->name('addDisciplinas');
+    Route::get('/getDisciplinasSelecionadas', "AjaxController@getDisciplinasSelecionadas")->name('getDisciplinasSelecionadas');
+    Route::get('/removeDisciplinas', "AjaxController@removeDisciplinas")->name('removeDisciplinas');
 });
 
 Route::group(['prefix' => 'institucional'], function () {
@@ -48,6 +52,14 @@ Route::group(['prefix' => 'institucional'], function () {
         Route::post('/store', "InstitucionalController@disciplina_store");
         Route::get('/edit/{id}', "InstitucionalController@disciplina_edit");
         Route::put('/update/{id}', "InstitucionalController@disciplina_update");
+    });
+
+    Route::group(['prefix' => 'grades'], function () {
+        Route::get('/', "InstitucionalController@grade_list");
+        Route::get('/create', "InstitucionalController@grade_create");
+        Route::post('/store', "InstitucionalController@grade_store");
+        Route::get('/edit/{id}', "InstitucionalController@grade_edit");
+        Route::put('/update/{id}', "InstitucionalController@grade_update");
     });
 });
 
@@ -91,4 +103,8 @@ Route::group(['prefix' => 'funcionarios'], function () {
     Route::post('/store', "FuncionarioController@store");
     Route::get('/edit/{id}', "FuncionarioController@edit");
     Route::put('/update/{id}', "FuncionarioController@update");
+});
+
+Route::group(['prefix' => 'usuarios', 'middleware'=>"admin"], function () {
+    Route::get('/', "UserController@index");
 });

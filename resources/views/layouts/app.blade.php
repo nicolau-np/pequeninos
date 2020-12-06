@@ -224,8 +224,8 @@
                                     </a>
                                 </li>
 
-                                <li class="">
-                                    <a href="/">
+                                <li class="@if($menu=="Usuários") active @endif">
+                                    <a href="/usuarios/">
                                         <span class="pcoded-micon"><i class="ti-user"></i><b>U</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Usuários</span>
                                         <span class="pcoded-mcaret"></span>
@@ -290,14 +290,29 @@
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
-                                        <li class=" ">
-                                            <a href="color.html">
+                                        <li class="@if($menu=="Grades Curricular") active @endif">
+                                            <a href="/institucional/grades/">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Grade Curricular</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
                                         
+                                        <li class=" ">
+                                            <a href="color.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Salas</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
+                                        <li class=" ">
+                                            <a href="color.html">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Horas</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
                                     </ul>
                                 </li>

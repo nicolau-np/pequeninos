@@ -2,11 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function index(){
+        $usuarios = User::where('nivel_acesso', '!=', 'admin')->paginate(8);
+        $data = [
+            'title'=>"Usuários",
+            'type'=>"usuarios",
+            'menu'=>"Usuários",
+            'submenu'=>"Listar",
+            'getUsuarios'=>$usuarios,
+        ];
+        return view('user.list', $data);
+    } 
+    
     public function loginForm(){
         if(Auth::check()){
             return redirect()->route('home');

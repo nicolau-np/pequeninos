@@ -6,6 +6,7 @@ use App\CompoDisciplina;
 use App\Curso;
 use App\Disciplina;
 use App\Ensino;
+use App\Grade;
 use App\Turma;
 use App\Turno;
 use Illuminate\Http\Request;
@@ -293,5 +294,39 @@ class InstitucionalController extends Controller
         if(Disciplina::find($id)->update($data)){
             return back()->with(['success'=>"Feito com sucesso"]); 
         }
+    }
+
+    public function grade_list(){
+        $grade = Grade::paginate(5);
+        $data = [
+            'title'=>"Grades Curricular",
+            'type'=>"institucional",
+            'menu'=>"Grades Curricular",
+            'submenu'=>"Listar",
+            'getGrades'=>$grade,
+        ];
+        return view('institucional.grades.list', $data);
+    }
+
+    public function grade_create(){
+        $data = [
+            'title'=>"Grades Curricular",
+            'type'=>"institucional",
+            'menu'=>"Grades Curricular",
+            'submenu'=>"Novo",
+        ];
+        return view('institucional.grades.new', $data);
+    }
+
+    public function grade_store(Request $request){
+        
+    }
+
+    public function grade_edit($id){
+        
+    }
+
+    public function grade_update(Request $request, $id){
+        
     }
 }

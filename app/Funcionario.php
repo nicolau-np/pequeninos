@@ -22,4 +22,8 @@ class Funcionario extends Model
     public function cargo(){
         return $this->belongsTo(Cargo::class, 'id_cargo', 'id');
     }
+
+    public function pessoa(){
+        return $this->belongsTo(Pessoa::class, 'id_pessoa', 'id');
+    }
 }

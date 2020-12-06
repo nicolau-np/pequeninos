@@ -36,4 +36,8 @@ class Pessoa extends Model
     public function estudante(){
         return $this->hasMany(Estudante::class, 'id_pessoa', 'id');
     }
+
+    public function funcionario(){
+        return $this->hasMany(Funcionario::class, 'id_pessoa', 'id');
+    }
 }

@@ -34,7 +34,7 @@
                             <div class="row">
 
                                 <div class="col-md-4">
-                                    {{Form::label('nome', "Nome completo")}}
+                                    {{Form::label('nome', "Nome completo")}} <span class="text-danger">*</span>
                                     {{Form::text('nome', null, ['class'=>"form-control", 'placeholder'=>"Nome completo"])}}
                                     <div class="erro">
                                         @if($errors->has('nome'))
@@ -44,7 +44,7 @@
                                 </div>
 
                                 <div class="col-md-3">
-                                    {{Form::label('provincia', "Provincia")}}
+                                    {{Form::label('provincia', "Provincia")}} <span class="text-danger">*</span>
                                     {{Form::select('provincia', $getProvincias, null, ['class'=>"form-control provincia", 'placeholder'=>"Província"])}}
                                 
                                 <div class="erro">
@@ -56,7 +56,7 @@
 
 
                                 <div class="col-md-3">
-                                    {{Form::label('municipio', "Município")}}
+                                    {{Form::label('municipio', "Município")}} <span class="text-danger">*</span>
                                     <span class="load_municipios">
                                     {{Form::select('municipio', [], null, ['class'=>"form-control", 'placeholder'=>"Município"])}}
                                 </span>
@@ -68,7 +68,7 @@
                                 </div>
 
                                 <div class="col-md-2">
-                                    {{Form::label('genero', "Gênero")}}
+                                    {{Form::label('genero', "Gênero")}} <span class="text-danger">*</span>
                                     {{Form::select('genero', [
                                         'M'=>"M",
                                         'F'=>"F"
@@ -82,7 +82,7 @@
                                 </div>
 
                                 <div class="col-md-3">
-                                    {{Form::label('telefone', "Telefone")}}
+                                    {{Form::label('telefone', "Telefone")}} <span class="text-danger">*</span>
                                     {{Form::number('telefone', null, ['class'=>"form-control", 'placeholder'=>"Telefone"])}}
                                     <div class="erro">
                                         @if($errors->has('telefone'))

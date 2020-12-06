@@ -33,7 +33,7 @@
                             <legend><i class="ti-list"></i> Dados da turma</legend>
                             <div class="row">
                                 <div class="col-md-3">
-                                    {{Form::label('curso', "Curso")}}
+                                    {{Form::label('curso', "Curso")}} <span class="text-danger">*</span>
                                     {{Form::select('curso', $getCursos, null, ['class'=>"form-control curso", 'placeholder'=>"Curso"])}}
                                 <div class="erro">
                                     @if($errors->has('curso'))
@@ -43,7 +43,7 @@
                                 </div>
 
                                 <div class="col-md-2">
-                                    {{Form::label('classe', "Classe")}}
+                                    {{Form::label('classe', "Classe")}} <span class="text-danger">*</span>
                                     <span class="load_classes">
                                     {{Form::select('classe', [], null, ['class'=>"form-control", 'placeholder'=>"Classe"])}}
                                 </span>
@@ -55,7 +55,7 @@
                                 </div>
 
                                 <div class="col-md-2">
-                                    {{Form::label('turno', "Turno")}}
+                                    {{Form::label('turno', "Turno")}} <span class="text-danger">*</span>
                                     {{Form::select('turno', $getTurnos, null, ['class'=>"form-control", 'placeholder'=>"Turno"])}}
                                 
                                 <div class="erro">
@@ -66,7 +66,7 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    {{Form::label('turma', "Designação da turma")}}
+                                    {{Form::label('turma', "Designação da turma")}} <span class="text-danger">*</span>
                                     {{Form::text('turma', null, ['class'=>"form-control", 'placeholder'=>"Designação da turma"])}}
                                     <div class="erro">
                                         @if($errors->has('turma'))

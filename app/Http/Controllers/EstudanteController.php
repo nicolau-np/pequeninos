@@ -82,6 +82,7 @@ class EstudanteController extends Controller
             ]);
         }
 
+        
         $ano_lectivo = AnoLectivo::find($request->ano_lectivo);
 
         $data['pessoa'] = [

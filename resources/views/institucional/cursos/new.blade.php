@@ -33,7 +33,7 @@
                             <legend><i class="ti-list"></i> Dados do curso</legend>
                             <div class="row">
                                 <div class="col-md-4">
-                                    {{Form::label('ensino', "Ensino")}}
+                                    {{Form::label('ensino', "Ensino")}} <span class="text-danger">*</span>
                                     {{Form::select('ensino', $getEnsinos, null, ['class'=>"form-control", 'placeholder'=>"Ensino"])}}
                                 <div class="erro">
                                     @if($errors->has('ensino'))
@@ -43,7 +43,7 @@
                                 </div>
 
                                 <div class="col-md-5">
-                                    {{Form::label('curso', "Nome do curso")}}
+                                    {{Form::label('curso', "Nome do curso")}} <span class="text-danger">*</span>
                                     {{Form::text('curso', null, ['class'=>"form-control", 'placeholder'=>"Curso"])}}
                                     <div class="erro">
                                         @if($errors->has('curso'))

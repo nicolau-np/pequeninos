@@ -33,7 +33,7 @@
                             <legend><i class="ti-list"></i> Dados da disciplina</legend>
                             <div class="row">
                                 <div class="col-md-3">
-                                    {{Form::label('componente', "Componente")}}
+                                    {{Form::label('componente', "Componente")}} <span class="text-danger">*</span>
                                     {{Form::select('componente', $getComponentes, $getDisciplina->id_componente, ['class'=>"form-control", 'placeholder'=>"Componente"])}}
                                 <div class="erro">
                                     @if($errors->has('componente'))
@@ -43,7 +43,7 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    {{Form::label('disciplina', "Disciplina")}}
+                                    {{Form::label('disciplina', "Disciplina")}} <span class="text-danger">*</span>
                                     {{Form::text('disciplina', $getDisciplina->disciplina, ['class'=>"form-control", 'placeholder'=>"Disciplina"])}}
                                     <div class="erro">
                                         @if($errors->has('disciplina'))
@@ -53,7 +53,7 @@
                                 </div>
 
                                 <div class="col-md-3">
-                                    {{Form::label('sigla', "Sígla")}}
+                                    {{Form::label('sigla', "Sígla")}} <span class="text-danger">*</span>
                                     {{Form::text('sigla', $getDisciplina->sigla, ['class'=>"form-control", 'placeholder'=>"Sígla"])}}
                                     <div class="erro">
                                         @if($errors->has('sigla'))

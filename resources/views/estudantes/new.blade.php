@@ -194,7 +194,14 @@
                                     {{Form::text('encarregador', null, ['class'=>"form-control encarregador", 'placeholder'=>"Encarregado"])}}
                                 </div>
                                 <div class="col-md-12">
-                                    <input type="radio" name="id_encarregado" id="id_encarregado"/>
+                                    <span class="load_encarregados">
+                                         <input type="radio" name="encarregado" id="encarregado"/>
+                                    </span>
+                                    <div class="erro">
+                                        @if($errors->has('encarregado'))
+                                        <div class="text-danger">{{$errors->first('encarregado')}}</div>
+                                        @endif 
+                                    </div>
                                 </div>
                             </div>
                         </fieldset>
@@ -314,7 +321,19 @@
         });
 
         $('.encarregador').keyup(function(){
-            
+            var data = {
+                search_text: $(this).val(),
+                _token: "{{ csrf_token() }}"
+            };
+            $.ajax({
+                type: "post",
+                url: "{{route('getEncarregados')}}",
+                data: data,
+                dataType: "html",
+                success: function (response) {
+                    $('.load_encarregados').html(response);
+                }
+            });
         });
 
     });

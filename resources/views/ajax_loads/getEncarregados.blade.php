@@ -1,2 +1,3 @@
-
-<input type="radio" name="id_encarregado" id="id_encarregado"/>
+@foreach ($getEncarregados as $encarregados)
+<input type="radio" name="encarregado" id="encarregado" value="{{$encarregados->id}}"/> {{$encarregados->pessoa->nome}} {{$encarregados->pessoa->telefone}}<br/>
+@endforeach

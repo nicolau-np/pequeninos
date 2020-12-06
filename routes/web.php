@@ -22,6 +22,7 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/getClasses', "AjaxController@getClasses")->name('getClasses');
     Route::post('/getMunicipios', "AjaxController@getMunicipios")->name('getMunicipios');
     Route::post('/getTurmas', "AjaxController@getTurmas")->name('getTurmas');
+    Route::post('/getEncarregados', "AjaxController@getEncarregados")->name('getEncarregados');
 });
 
 Route::group(['prefix' => 'institucional'], function () {

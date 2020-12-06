@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Classe;
 use App\Curso;
+use App\Encarregado;
 use App\Municipio;
 use App\Turma;
 use Illuminate\Http\Request;
@@ -48,5 +49,16 @@ class AjaxController extends Controller
             'getTurmas'=>$turmas,
         ];
         return view('ajax_loads.getTurmas', $data);
+    }
+
+    public function getEncarregados(Request $request){
+    
+        $encarregados = Encarregado::whereHas('pessoa', function($query) use($request){
+            $query->where('nome', 'LIKE', "%{$request->search_text}%");
+        })->get();
+        $data = [
+            'getEncarregados'=>$encarregados,
+        ];
+        return view('ajax_loads.getEncarregados', $data);
     }
 }

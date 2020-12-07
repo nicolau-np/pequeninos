@@ -6,6 +6,8 @@ use App\Classe;
 use App\Curso;
 use App\Disciplina;
 use App\Encarregado;
+use App\Estudante;
+use App\Funcionario;
 use App\Municipio;
 use App\Turma;
 use Illuminate\Http\Request;
@@ -104,5 +106,38 @@ class AjaxController extends Controller
             }
         }
         return response()->json(['status'=>"error", "sms"=>"Já Removeu"]);
+    }
+
+    public function searchEstudantes(Request $request){
+        $estudantes  = Estudante::whereHas('pessoa', function($query) use ($request){
+            $query->where('nome', 'LIKE', "%{$request->search_text}%");
+        })->get();
+
+        $data = [
+            'getEstudantes'=>$estudantes
+        ];
+        return view('ajax_loads.searchEstudantes', $data);
+    }
+
+    public function searchFuncionarios(Request $request){
+        $funcionarios  = Funcionario::whereHas('pessoa', function($query) use ($request){
+            $query->where('nome', 'LIKE', "%{$request->search_text}%");
+        })->get();
+
+        $data = [
+            'getFuncionarios'=>$funcionarios
+        ];
+        return view('ajax_loads.searchFuncionarios', $data);
+    }
+
+    public function searchEncarregados(Request $request){
+        $encarregados  = Encarregado::whereHas('pessoa', function($query) use ($request){
+            $query->where('nome', 'LIKE', "%{$request->search_text}%");
+        })->get();
+
+        $data = [
+            'getEncarregados'=>$encarregados
+        ];
+        return view('ajax_loads.searchEncarregados', $data);
     }
 }

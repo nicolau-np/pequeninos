@@ -298,16 +298,16 @@
                                             </a>
                                         </li>
                                         
-                                        <li class=" ">
-                                            <a href="color.html">
+                                        <li class="@if($menu=="Salas") active @endif">
+                                            <a href="/institucional/salas/">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Salas</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
 
-                                        <li class=" ">
-                                            <a href="color.html">
+                                        <li class="@if($menu=="Horas") active @endif">
+                                            <a href="/institucional/horas/">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Horas</span>
                                                 <span class="pcoded-mcaret"></span>

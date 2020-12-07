@@ -23,7 +23,7 @@
                         {{Form::open(['class'=>"form_search", 'method'=>"post", 'url'=>"#"])}}
                         <div class="row text-right">
                             <div class="col-md-8">
-                                {{Form::text('text_search', null, ['class'=>"form-control text_search", 'placeholder'=>"Pesquisar..."])}}
+                                {{Form::text('text_search', null, ['class'=>"form-control text_seach", 'placeholder'=>"Pesquisar..."])}}
                             </div>
                             <div class="col-md-1">
                                 <button class="btn btn-success btn-sm"><i class="ti-search"></i></button>
@@ -38,28 +38,27 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Nome</th>
-                                    <th>Provincia</th>
-                                    <th>Muncipio</th>
-                                    <th>Telefone</th>
+                                    <th>Turno</th>
+                                    <th>Hora de entrada</th>
+                                    <th>Hora de saída</th>
                                     <th>Operações</th>
                                 </tr>
                             </thead>
-                            <tbody class="load_encarregados">
-                                @if($getEncarregados->count()==0)
-                                <span class="not_found">Nenhum encarregado cadastrado</span>
+                            <tbody>
+                                @if($getHoras->count()==0)
+                                <span class="not_found">Nenhuma hora cadastrada</span>
                                 @else
-                                @foreach ($getEncarregados as $encarregados)
+                                @foreach ($getHoras as $horas)
                                     
                                 <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$encarregados->pessoa->nome}}</td>
-                                    <td>{{$encarregados->pessoa->municipio->provincia->provincia}}</td>
-                                    <td>{{$encarregados->pessoa->municipio->municipio}}</td>
-                                    <td>{{$encarregados->pessoa->telefone}}</td>
+                                    <td>{{$horas->turno->turno}}</td>
+                                    <td>{{$horas->hora_entrada}}</td>
+                                    <td>{{$horas->hora_saida}}</td>
+                                   
                                     <td>
-                                        <a href="/encarregados/edit/{{$encarregados->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
-                                        <a href="http://" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
+                                    <a href="/institucional/horas/edit/{{$horas->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
+                                        <a href="#" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
                                     </td>
                                 </tr>
 
@@ -71,7 +70,7 @@
                     </div>
 
                     <div class="pagination">
-                        {{$getEncarregados->links()}}
+                        {{$getHoras->links()}}
                     </div>
                 </div>
             </div>
@@ -85,30 +84,9 @@
 <!-- botão pesquisar -->
 <div class="btnPesquisar">
 	<div class="btnPesquisarBtn">
-		<a href="/encarregados/create" class="btn btn-primary btnCircular btnPrincipal" title="Novo"><i class="ti-plus"></i></a>
+		<a href="/institucional/horas/create" class="btn btn-primary btnCircular btnPrincipal" title="Novo"><i class="ti-plus"></i></a>
 	</div>
 </div>
 
-
-<script>
-    $(document).ready(function(){
-        $('.text_search').keyup(function(e){
-            e.preventDefault();
-            var data = {
-                search_text: $(this).val(),
-                _token: "{{ csrf_token() }}" 
-            };
-            $.ajax({
-                type: "post",
-                url: "{{route('searchEncarregados')}}",
-                data: data,
-                dataType: "html",
-                success: function (response) {
-                    $('.load_encarregados').html(response);
-                }
-            });
-        });
-    });
-</script>
 
 @endsection

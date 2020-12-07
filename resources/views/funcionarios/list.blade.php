@@ -23,7 +23,7 @@
                         {{Form::open(['class'=>"form_search", 'method'=>"post", 'url'=>"#"])}}
                         <div class="row text-right">
                             <div class="col-md-8">
-                                {{Form::text('text_search', null, ['class'=>"form-control text_seach", 'placeholder'=>"Pesquisar..."])}}
+                                {{Form::text('text_search', null, ['class'=>"form-control text_search", 'placeholder'=>"Pesquisar..."])}}
                             </div>
                             <div class="col-md-1">
                                 <button class="btn btn-success btn-sm"><i class="ti-search"></i></button>
@@ -45,7 +45,7 @@
                                     <th>Operações</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="load_funcionarios">
                                 @if($getFuncionarios->count()==0)
                                 <span class="not_found">Nenhum funcionário cadastrado</span>
                                 @else
@@ -58,6 +58,7 @@
                                     <td>{{$funcionarios->cargo->cargo}}</td>
                                     <td>{{$funcionarios->escalao->escalao}}</td>
                                     <td>
+                                        <a href="/funcionarios/horario/{{$funcionarios->id}}" class="btn btn-success btn-sm"><i class="ti-time"></i> Hora.</a>
                                         <a href="/funcionarios/edit/{{$funcionarios->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
                                         <a href="http://" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
                                     </td>
@@ -90,4 +91,24 @@
 </div>
 
 
+<script>
+    $(document).ready(function(){
+        $('.text_search').keyup(function(e){
+            e.preventDefault();
+            var data = {
+                search_text: $(this).val(),
+                _token: "{{ csrf_token() }}" 
+            };
+            $.ajax({
+                type: "post",
+                url: "{{route('searchFuncionarios')}}",
+                data: data,
+                dataType: "html",
+                success: function (response) {
+                    $('.load_funcionarios').html(response);
+                }
+            });
+        });
+    });
+</script>
 @endsection

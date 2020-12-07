@@ -27,6 +27,11 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::get('/addDisciplinas', "AjaxController@addDisciplinas")->name('addDisciplinas');
     Route::get('/getDisciplinasSelecionadas', "AjaxController@getDisciplinasSelecionadas")->name('getDisciplinasSelecionadas');
     Route::get('/removeDisciplinas', "AjaxController@removeDisciplinas")->name('removeDisciplinas');
+
+    Route::post('/searchEstudantes', "AjaxController@searchEstudantes")->name('searchEstudantes');
+    Route::post('/searchFuncionarios', "AjaxController@searchFuncionarios")->name('searchFuncionarios');
+    Route::post('/searchEncarregados', "AjaxController@searchEncarregados")->name('searchEncarregados');
+    
 });
 
 Route::group(['prefix' => 'institucional'], function () {
@@ -61,6 +66,22 @@ Route::group(['prefix' => 'institucional'], function () {
         Route::get('/edit/{id}', "InstitucionalController@grade_edit");
         Route::put('/update/{id}', "InstitucionalController@grade_update");
     });
+
+    Route::group(['prefix' => 'salas'], function () {
+        Route::get('/', "InstitucionalController@sala_list");
+        Route::get('/create', "InstitucionalController@sala_create");
+        Route::post('/store', "InstitucionalController@sala_store");
+        Route::get('/edit/{id}', "InstitucionalController@sala_edit");
+        Route::put('/update/{id}', "InstitucionalController@sala_update");
+    });
+
+    Route::group(['prefix' => 'horas'], function () {
+        Route::get('/', "InstitucionalController@hora_list");
+        Route::get('/create', "InstitucionalController@hora_create");
+        Route::post('/store', "InstitucionalController@hora_store");
+        Route::get('/edit/{id}', "InstitucionalController@hora_edit");
+        Route::put('/update/{id}', "InstitucionalController@hora_update");
+    });
 });
 
 Route::group(['prefix' => 'financas'], function () {
@@ -79,6 +100,8 @@ Route::group(['prefix' => 'financas'], function () {
         Route::get('/edit/{id}', "FinancaController@tipo_pagamento_edit");
         Route::put('/update/{id}', "FinancaController@tipo_pagamento_update");
     });
+
+    
 });
 
 Route::group(['prefix' => 'encarregados'], function () {
@@ -95,6 +118,10 @@ Route::group(['prefix' => 'estudantes'], function () {
     Route::post('/store', "EstudanteController@store");
     Route::get('/edit/{id}', "EstudanteController@edit");
     Route::put('/update/{id}', "EstudanteController@update");
+});
+
+Route::group(['prefix' => 'pagamentos'], function () {
+    Route::get('/create/{id_estudante}', "PagamentoController@create");
 });
 
 Route::group(['prefix' => 'funcionarios'], function () {

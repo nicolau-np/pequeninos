@@ -23,7 +23,7 @@
                         {{Form::open(['class'=>"form_search", 'method'=>"post", 'url'=>"#"])}}
                         <div class="row text-right">
                             <div class="col-md-8">
-                                {{Form::text('text_search', null, ['class'=>"form-control text_seach", 'placeholder'=>"Pesquisar..."])}}
+                                {{Form::text('text_search', null, ['class'=>"form-control text_search", 'placeholder'=>"Pesquisar..."])}}
                             </div>
                             <div class="col-md-1">
                                 <button class="btn btn-success btn-sm"><i class="ti-search"></i></button>
@@ -47,7 +47,7 @@
                                     <th>Operações</th>
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="load_estudantes">
                                 @if($getEstudantes->count()==0)
                                 <span class="not_found">Nenhum estudante cadastrado</span>
                                 @else
@@ -62,6 +62,7 @@
                                     <td>{{$estudantes->turma->turma}}</td>
                                     <td>{{$estudantes->ano_lectivo}}</td>
                                     <td>
+                                        <a href="/pagamentos/create/{{$estudantes->id}}" class="btn btn-success btn-sm"><i class="ti-money"></i> Pag.</a>
                                         <a href="/estudantes/edit/{{$estudantes->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
                                         <a href="http://" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
                                     </td>
@@ -93,5 +94,24 @@
 	</div>
 </div>
 
-
+<script>
+    $(document).ready(function(){
+        $('.text_search').keyup(function(e){
+            e.preventDefault();
+            var data = {
+                search_text: $(this).val(),
+                _token: "{{ csrf_token() }}" 
+            };
+            $.ajax({
+                type: "post",
+                url: "{{route('searchEstudantes')}}",
+                data: data,
+                dataType: "html",
+                success: function (response) {
+                    $('.load_estudantes').html(response);
+                }
+            });
+        });
+    });
+</script>
 @endsection

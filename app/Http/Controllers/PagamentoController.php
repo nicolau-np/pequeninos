@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\AnoLectivo;
+use App\EpocaPagamento;
 use App\Estudante;
+use App\FormaPagamento;
 use App\HistoricEstudante;
+use App\Pagamento;
 use App\TabelaPreco;
 use App\TipoPagamento;
 use Illuminate\Http\Request;
@@ -50,13 +53,22 @@ class PagamentoController extends Controller
         if(!$tabela_preco){
             return back()->with(['error'=>"Não encontrou preco"]);
         }
+
+        $forma_pagamento = FormaPagamento::where('forma_pagamento', $tabela_preco->forma_pagamento)->first();
+        $epocas_pagemento = EpocaPagamento::where('id_forma_pagamento', $forma_pagamento->id)->get();
+
+        $meses_pagos = Pagamento::where(['id_estudante'=>$historico->id_estudante, 'ano_lectivo'=>$historico->ano_lectivo])->get();
+        $meses_nao_pagos = 
         $data = [
             'title'=>"Pagamentos",
             'type'=>"pagamento",
             'menu'=>"Estudantes",
             'submenu'=>"Pagamentos",
             'getTabelaPreco'=>$tabela_preco,
-            'getHistorico'=>$historico,
+            'getHistoricoEstudante'=>$historico,
+            'getEpocasPagamento'=>$epocas_pagemento,
+            'getPagos'=>$meses_pagos,
+            'getNaoPagos'=>null,
         ];
         return view('pagamento.new', $data);
     }
@@ -120,9 +132,9 @@ class PagamentoController extends Controller
     public function listar($id_estudante, $ano){
         $historicos = HistoricEstudante::orderBy('id', 'desc')->where('id_estudante', $id_estudante)->get();
         $historico = HistoricEstudante::where(['ano_lectivo'=>$ano, 'id_estudante'=>$id_estudante])->first();
-       /* if(!$historico){
+        if(!$historico){
             return back()->with(['error'=>"Nao encontrou"]);
-        }*/
+        }
        
         $data = [
             'id_classe'=>$historico->estudante->turma->classe->id,

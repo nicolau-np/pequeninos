@@ -19,8 +19,72 @@
                     </div>
                 </div>
                 <div class="card-block">
-                 {{$getTabelaPreco->forma_pagamento}}
-
+                    <div class="row">
+                        <div class="col-md-12">
+                         @if(session('error'))
+                         <div class="alert alert-danger">{{session('error')}}</div>
+                         @endif
+                        </div>
+                         <div class="col-md-12">
+                            @if(session('success'))
+                            <div class="alert alert-danger">{{session('success')}}</div>
+                            @endif
+                        </div>
+                
+                     <div class="col-md-8">
+                            <ul class="nav nav-tabs md-tabs" role="tablist">
+                                <li class="nav-item">
+                                    <a class="nav-link active" data-toggle="tab" href="#home3" role="tab" aria-expanded="true">À Pagar</a>
+                                    <div class="slide"></div>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#profile3" role="tab" aria-expanded="false">Pagos</a>
+                                    <div class="slide"></div>
+                                </li>
+                              
+                            </ul>
+                            <!-- Tab panes -->
+                            <div class="tab-content card-block">
+                                <div class="tab-pane active" id="home3" role="tabpanel" aria-expanded="true">
+                                    <p class="m-0">
+                                        Meses Á Pagar
+                                    </p>
+                                </div>
+                                <div class="tab-pane" id="profile3" role="tabpanel" aria-expanded="false">
+                                    <p class="m-0">
+                                        @if ($getPagos->count()==0)
+                                            Nenhum pago 
+                                        @else  
+                                        <ul>
+                                            @foreach ($getPagos as $pagos)
+                                                <li>{{$pagos->epoca}}</li>
+                                            @endforeach
+                                        </ul>
+                                        @endif
+                                   </div>
+                                </div>
+                        
+                     </div>
+ 
+                     <div class="col-md-4">
+                        <fieldset>
+                             <legend style="width:90%;"><b><i class="ti-user"></i> {{$getHistoricoEstudante->estudante->pessoa->nome}}</b></legend>
+                             
+                             <div class="row">
+                            <div class="col-md-12">
+                            <p>Turma: {{$getHistoricoEstudante->turma->turma}}</p>
+                             <p>Curso: {{$getHistoricoEstudante->turma->curso->curso}}</p>
+                             <p>Classe: {{$getHistoricoEstudante->turma->classe->classe}}</p>
+                             <p>Ano de Confirmação: {{$getHistoricoEstudante->ano_lectivo}}</p>
+                            </div>
+                             </div>
+                            
+                         </fieldset>
+                     </div>
+                    </div>
+                   
+                 
+               
                 </div>
             </div>
         </div>

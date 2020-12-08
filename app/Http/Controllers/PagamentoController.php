@@ -8,6 +8,7 @@ use App\HistoricEstudante;
 use App\TabelaPreco;
 use App\TipoPagamento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class PagamentoController extends Controller
 {
@@ -21,33 +22,9 @@ class PagamentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index($id_estudante, $ano)
+    public function index()
     {
-      
-        $anos_lectivos = AnoLectivo::orderBy('id', 'desc')->pluck('ano_lectivo', 'id');
-        $historico = HistoricEstudante::where(['ano_lectivo'=>$ano, 'id_estudante'=>$id_estudante])->first();
-        if(!$historico){
-            return back()->with(['error'=>"Nao encontrou"]);
-        }
-       
-        $ano_lectivo = AnoLectivo::where('ano_lectivo', $ano)->first();
         
-        $data = [
-            'id_classe'=>$historico->turma->classe->id_classe,
-            'id_curso'=>$historico->turma->curso->id_curso,
-        ];
-        $tabela_preco = TabelaPreco::where($data)->get();
-        $data = [
-            'title'=>"Pagamentos",
-            'type'=>"pagamento",
-            'menu'=>"Estudantes",
-            'submenu'=>"Pagamentos",
-            'getHistoricoEstudante'=>$historico,
-            'getTabelaPreco'=>$tabela_preco,
-            'getAnos'=>$anos_lectivos,
-            'getAno'=>$ano_lectivo,
-        ];
-        return view('pagamento.list', $data);
     }
 
     /**
@@ -55,20 +32,31 @@ class PagamentoController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id_estudante)
+    public function create($id_tipo_pagamento)
     {
-        $estudante = Estudante::find($id_estudante);
-        if(!$estudante){
-            return back()->with(['error'=>"Não está confirmado para este Ano"]);
+       $id_historico = Session::get('id_historico');
+       $historico = HistoricEstudante::find($id_historico);
+        if(!$historico){
+            return back()->with(['error'=>"Não encontrou historico"]);
         }
-        $tipo_pagamentos = TipoPagamento::pluck('tipo', 'id');
+        
+        $data = [
+            'id_classe'=>$historico->estudante->turma->classe->id,
+            'id_curso'=>$historico->estudante->turma->curso->id,
+            'id_tipo_pagamento'=>$id_tipo_pagamento,
+        ];
+        
+        $tabela_preco = TabelaPreco::where($data)->first();
+        if(!$tabela_preco){
+            return back()->with(['error'=>"Não encontrou preco"]);
+        }
         $data = [
             'title'=>"Pagamentos",
             'type'=>"pagamento",
             'menu'=>"Estudantes",
             'submenu'=>"Pagamentos",
-            'getEstudante'=>$estudante,
-            'getTipPagamentos'=>$tipo_pagamentos,
+            'getTabelaPreco'=>$tabela_preco,
+            'getHistorico'=>$historico,
         ];
         return view('pagamento.new', $data);
     }
@@ -90,37 +78,9 @@ class PagamentoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Request $request)
+    public function show()
     {
-        $request->validate([
-            'id_estudante'=>['required', 'Integer'],
-            'ano_lectivo'=>['required', 'Integer']
-        ]);
-        $getAno = AnoLectivo::find($request->ano_lectivo);
-        $anos_lectivos = AnoLectivo::orderBy('id', 'desc')->pluck('ano_lectivo', 'id');
-        $historico = HistoricEstudante::where(['ano_lectivo'=>$getAno->ano_lectivo, 'id_estudante'=>$request->id_estudante])->first();
-        if(!$historico){
-            return back()->with(['error'=>"Não está confirmado para este Ano"]);
-        }
-       
-        $ano_lectivo = AnoLectivo::where('ano_lectivo', $getAno->ano_lectivo)->first();
         
-        $data = [
-            'id_classe'=>$historico->turma->classe->id_classe,
-            'id_curso'=>$historico->turma->curso->id_curso,
-        ];
-        $tabela_preco = TabelaPreco::where($data)->get();
-        $data = [
-            'title'=>"Pagamentos",
-            'type'=>"pagamento",
-            'menu'=>"Estudantes",
-            'submenu'=>"Pagamentos",
-            'getHistoricoEstudante'=>$historico,
-            'getTabelaPreco'=>$tabela_preco,
-            'getAnos'=>$anos_lectivos,
-            'getAno'=>$ano_lectivo,
-        ];
-        return view('pagamento.list', $data);
     }
 
     /**
@@ -156,4 +116,32 @@ class PagamentoController extends Controller
     {
         //
     }
+
+    public function listar($id_estudante, $ano){
+        $historicos = HistoricEstudante::orderBy('id', 'desc')->where('id_estudante', $id_estudante)->get();
+        $historico = HistoricEstudante::where(['ano_lectivo'=>$ano, 'id_estudante'=>$id_estudante])->first();
+       /* if(!$historico){
+            return back()->with(['error'=>"Nao encontrou"]);
+        }*/
+       
+        $data = [
+            'id_classe'=>$historico->estudante->turma->classe->id,
+            'id_curso'=>$historico->estudante->turma->curso->id,
+        ];
+       $tabela_preco = TabelaPreco::where($data)->get();
+       Session::put('id_historico', $historico->id);
+        $data = [
+            'title'=>"Pagamentos",
+            'type'=>"pagamento",
+            'menu'=>"Estudantes",
+            'submenu'=>"Pagamentos",
+            'getHistoricoEstudante'=>$historico,
+            'getHistoricosEstudantes'=>$historicos,
+            'getTabelaPreco'=>$tabela_preco,
+            
+        ];
+        return view('pagamento.list', $data);
+    }
+
+  
 }

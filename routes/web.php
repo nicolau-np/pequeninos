@@ -121,9 +121,8 @@ Route::group(['prefix' => 'estudantes'], function () {
 });
 
 Route::group(['prefix' => 'pagamentos'], function () {
-    Route::get('/{id_estudante}/{ano_lectivo}', "PagamentoController@index");
-    Route::get('/list', "PagamentoController@show");
-    Route::get('/create/{id_estudante}', "PagamentoController@create");
+    Route::get('/listar/{id_estudante}/{ano_lectivo}', "PagamentoController@listar");
+    Route::get('/create/{id_tipo_pagamento}', "PagamentoController@create");
     
 });
 

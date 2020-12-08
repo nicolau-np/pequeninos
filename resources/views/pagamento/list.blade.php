@@ -6,7 +6,12 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>{{$submenu}}</h5>
+                    <h5>{{$submenu}} &nbsp;&nbsp;&nbsp; 
+                        @foreach ($getHistoricosEstudantes as $historicos)
+                    <a href="/pagamentos/listar/{{$historicos->id_estudante}}/{{$historicos->ano_lectivo}}" style="color:#4680ff;">{{$historicos->ano_lectivo}}</a>
+                    <i class="ti-angle-right"></i>
+                    @endforeach
+                    </h5>
                     <span></span>
                     <div class="card-header-right">
                         
@@ -32,20 +37,24 @@
                                 Não encontrou Tipos de Pagamentos
                             @else
                             @foreach ($getTabelaPreco as $tabela_preco)
+                            
                             <div class="col-md-6 col-xl-6">
+                            <a href="/pagamentos/create/{{$tabela_preco->tipo_pagamento->id}}" style="text-decoration: none;">
                                 <div class="card widget-card-1">
                                 <div class="card-block-small">
                                     <i class="icofont icofont-money bg-c-blue card1-icon"></i>
-                                    <span class="text-c-pink f-w-600">Revenue</span>
-                                    <h4>$23,589</h4>
+                                <span class="text-c-pink f-w-600" style="font-size:13px;">{{$tabela_preco->tipo_pagamento->tipo}}</span>
+                                    <h4 style="font-size:17px;">{{number_format($tabela_preco->preco,2,',','.')}} Akz</h4>
                                     <div>
                                         <span class="f-left m-t-10 text-muted">
-                                            <i class="text-c-pink f-16 icofont icofont-calendar m-r-10"></i>Last 24 hours
+                                            <i class="text-c-pink f-16 icofont icofont-calendar m-r-10"></i>{{$tabela_preco->forma_pagamento}}
                                         </span>
                                     </div>
                                 </div>
                                 </div>
+                                </a>
                                 </div>
+                            
                             @endforeach
                             @endif
                             
@@ -57,21 +66,7 @@
                     <div class="col-md-4">
                        <fieldset>
                             <legend style="width:90%;"><b><i class="ti-user"></i> {{$getHistoricoEstudante->estudante->pessoa->nome}}</b></legend>
-                            {{Form::open(['method'=>"get", 'url'=>"/pagamentos/list"])}}
-                            <div class="row">
-                               
-                                <div class="col-md-7">
-                                    {{Form::hidden('id_estudante', $getHistoricoEstudante->id_estudante, []) }}
-                                    {{Form::select('ano_lectivo', $getAnos, $getAno->id, 
-                                    ['class'=>"form-control", 'placeholder'=>"Ano Lectivo"])}}
-                                </div>
-                                <div class="col-md-3">
-                                    {{Form::submit('Pesquisar', ['class'=>"btn btn-primary btn-sm"])}}
-                                </div>
-                               
-                            </div>
-                            {{Form::close()}}
-                            <hr/>
+                            
                             <div class="row">
                                 <div class="col-md-12">
                                      <p>Turma: {{$getHistoricoEstudante->turma->turma}}</p>

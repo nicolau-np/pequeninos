@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -27,6 +28,8 @@ class DatabaseSeeder extends Seeder
            CompoDisciplinaSeeder::class,
            AnoLectivoSeeder::class,
            TipoSalaSeeder::class,
+           FormaPagamentoSeeder::class,
+           EpocaPagamentoSeeder::class,
        ]);
     }
 }

@@ -27,34 +27,34 @@
                     @if(session('success'))
                     <div class="alert alert-success">{{session('success')}}</div>
                     @endif
-                        {{Form::open(['method'=>"post", 'url'=>"/encarregados/store"])}}
+                        {{Form::open(['method'=>"post", 'url'=>""])}}
                         @csrf
                         <fieldset>
-                            <legend><i class="ti-list"></i> Dados do encarregado</legend>
+                            <legend>
+                                <b><i class="ti-user"></i> 
+                                {{$getEstudante->pessoa->nome}}&nbsp;&nbsp;
+                                </b>
+                            </legend>
                             <div class="row">
-
-                                <div class="col-md-4">
-                                    {{Form::label('nome', "Nome completo")}} <span class="text-danger">*</span>
-                                    {{Form::text('nome', null, ['class'=>"form-control", 'placeholder'=>"Nome completo"])}}
-                                    <div class="erro">
-                                        @if($errors->has('nome'))
-                                        <div class="text-danger">{{$errors->first('nome')}}</div>
-                                        @endif 
-                                    </div>
+                                <div class="col-md-3">
+                                   {{Form::select('tipo_pagamento', $getTipPagamentos, null, [
+                                       'placeholder'=>"Pagamento",
+                                       'class'=>"form-control"
+                                   ])}} 
                                 </div>
 
-                            </div>
+                                <div class="col-md-2">
+                                    {{Form::number('ano_lectivo',date('Y'), ['placeholder'=>"Ano Lectivo", 'class'=>"form-control"])}} 
+                                 </div>
+
+                                 <div class="col-md-2">
+                                     {{Form::submit('Pesquisar', ['class'=>"btn btn-primary btn-sm"])}}
+                                 </div>
+                                </div>
                             <br/>
                         </fieldset>
                         <br/>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    {{Form::submit('Salvar', ['class'=>"btn btn-primary"])}}
-                                 </div>
-
-                            </div>
-                        
-                       
+                          
                         
                         {{Form::close()}}
                    </div>

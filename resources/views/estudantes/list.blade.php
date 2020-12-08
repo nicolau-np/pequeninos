@@ -62,7 +62,7 @@
                                     <td>{{$estudantes->turma->turma}}</td>
                                     <td>{{$estudantes->ano_lectivo}}</td>
                                     <td>
-                                        <a href="/pagamentos/create/{{$estudantes->id}}" class="btn btn-success btn-sm"><i class="ti-money"></i> Pag.</a>
+                                    <a href="/pagamentos/{{$estudantes->id}}/{{$estudantes->ano_lectivo}}" class="btn btn-success btn-sm"><i class="ti-money"></i> Pag.</a>
                                         <a href="/estudantes/edit/{{$estudantes->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
                                         <a href="http://" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
                                     </td>

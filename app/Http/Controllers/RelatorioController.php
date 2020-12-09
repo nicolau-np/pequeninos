@@ -8,6 +8,7 @@ use App\Pagamento;
 use App\PagamentoPai;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use PDF;
 
 class RelatorioController extends Controller
 {
@@ -36,9 +37,13 @@ class RelatorioController extends Controller
         }
         
         $data = [
-            'getPagamento'=>$pagamento
+            'getPagamento'=>$pagamento,
+            'getHistorico'=>$historico,
+            'getId_tipo_pagamento'=>$id_tipo_pagamento,
         ];
+        $pdf = PDF::loadView('relatorios.fatura', $data)->setPaper('A4', 'normal');
+
+        return $pdf->stream('fatura' . $id_fatura . '-' . date('Y') . '.pdf');
         
-        return view('relatorios.fatura', $data);
     }
 }

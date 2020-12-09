@@ -46,16 +46,35 @@
                             <!-- Tab panes -->
                             <div class="tab-content card-block">
                                 <div class="tab-pane active" id="home3" role="tabpanel" aria-expanded="true">
+                                    
                                     {{Form::open(['method'=>"post", 'url'=>"/pagamentos/store"])}}
-                                    @if ($getNaoPagos==null)
+                                   <div class="row">
+                                       <div class="col-md-12">
+                                        @if ($getNaoPagos==null)
                                             Já pagou todos meses
                                         @else
-                                        @foreach ($getNaoPagos as $nao_pagos)
+                                            @foreach ($getNaoPagos as $nao_pagos)
                                             <input type="checkbox" name="meses_a_pagar[]" value="{{$nao_pagos['epoca']}}" /> {{$nao_pagos['epoca']}}<br/>
-                                        @endforeach
-                                    @endif
+                                            @endforeach
+                                            <div class="erro">
+                                                @if($errors->has('meses_a_pagar'))
+                                                <div class="text-danger">{{$errors->first('meses_a_pagar')}}</div>
+                                                @endif 
+                                            </div>
+                                        @endif
+                                        <hr/>
+                                       </div>
+                                      
+                                       <div class="col-md-6">
+                                        
+                                           {{Form::submit('Salvar', ['class'=>'btn btn-primary']) }}
+                                       </div>
+                                   </div>
+                                   
                                     {{Form::close()}}
+
                                 </div>
+
                                 <div class="tab-pane" id="profile3" role="tabpanel" aria-expanded="false">
                                     <p class="m-0">
                                         @if ($getPagos==null)

@@ -104,7 +104,13 @@ class PagamentoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'meses_a_pagar'=>['required'],
+            'meses_a_pagar.*'=>['string']
+        ]);
+        foreach($request->meses_a_pagar as $meses){
+            echo $meses."<br/>";
+        }
     }
 
     /**

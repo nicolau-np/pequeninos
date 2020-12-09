@@ -13,6 +13,7 @@ use App\TipoSala;
 use App\Turma;
 use App\Turno;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 use Svg\Tag\Rect;
 
 class InstitucionalController extends Controller
@@ -332,17 +333,39 @@ class InstitucionalController extends Controller
 
     public function grade_create()
     {
+        $cursos = Curso::pluck('curso', 'id');
         $data = [
             'title' => "Grades Curricular",
             'type' => "institucional",
             'menu' => "Grades Curricular",
             'submenu' => "Novo",
+            'getCursos' => $cursos,
         ];
         return view('institucional.grades.new', $data);
     }
 
     public function grade_store(Request $request)
     {
+        $request->validate([
+            'curso' => ['required', 'Integer'],
+            'classe' => ['required', 'Integer'],
+            'epoca' => ['required', 'string'],
+        ]);
+
+        if (!Session::has('disciplinas')) {
+            return back()->with(['error' => "Deve selecionar disciplinas"]);
+        }
+
+        if (Session::get('disciplinas') == null) {
+            return back()->with(['error' => "Deve selecionar disciplinas"]);
+        }
+
+        $data = [
+            'id_curso' => $request->curso,
+            'id_classe' => $request->classe,
+            'id_disciplina' => null,
+            'tipo' => $request->tipo,
+        ];
     }
 
     public function grade_edit($id)

@@ -32,6 +32,42 @@
                         <fieldset>
                             <legend><i class="ti-list"></i> Dados da Grade Curricular</legend>
                             <div class="row">
+                               
+                                <div class="col-md-4">
+                                    {{Form::label('curso', "Curso")}} <span class="text-danger">*</span>
+                                    {{Form::select('curso', $getCursos, null, ['class'=>"form-control curso", 'placeholder'=>"Curso"])}}
+                                <div class="erro">
+                                    @if($errors->has('curso'))
+                                    <div class="text-danger">{{$errors->first('curso')}}</div>
+                                    @endif 
+                                </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    {{Form::label('classe', "Classe")}} <span class="text-danger">*</span>
+                                    <span class="load_classes">
+                                    {{Form::select('classe', [], null, ['class'=>"form-control", 'placeholder'=>"Classe"])}}
+                                </span>
+                                <div class="erro">
+                                    @if($errors->has('classe'))
+                                    <div class="text-danger">{{$errors->first('classe')}}</div>
+                                    @endif 
+                                </div>
+                                </div>
+
+                                <div class="col-md-4">
+                                    {{Form::label('epoca', "Epoca")}} <span class="text-danger">*</span>
+                                    {{Form::select('epoca', [
+                                        'Anual'=>"Anual",
+                                        'Semestral'=>"Semestral",
+                                    ], null, ['class'=>"form-control", 'placeholder'=>"Epoca"])}}
+                                <div class="erro">
+                                    @if($errors->has('epoca'))
+                                    <div class="text-danger">{{$errors->first('epoca')}}</div>
+                                    @endif 
+                                </div>
+                                </div>
+
                                 <div class="col-md-12">
                                     {{Form::label('disciplina', "Disciplina")}}
                                     {{Form::text('disciplina', null, ['class'=>"form-control disciplina", 'placeholder'=>"Pesquisar disciplina"])}}
@@ -137,6 +173,23 @@
                         disciplinas();
                     }
                   
+                }
+            });
+        });
+
+        $('.curso').change(function(e){
+            e.preventDefault();
+            var data = {
+                id_curso: $(this).val(),
+                _token: "{{ csrf_token() }}"
+            }
+            $.ajax({
+                type: "post",
+                url: "{{route('getClasses')}}",
+                data: data,
+                dataType: "html",
+                success: function (response) {
+                    $('.load_classes').html(response);
                 }
             });
         });

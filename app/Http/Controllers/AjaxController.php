@@ -85,23 +85,24 @@ class AjaxController extends Controller
             'id_disciplina'=>$request->id_disciplina,
             'sigla'=>$request->sigla,
         ];
-        session()->push('disciplinas', $data['disciplinas']);
-        return response()->json(['status' => "ok", 'sms' => "Feito com suceso"]);
+        Session::push('disciplinas', $data['disciplinas']);
+        return response()->json(['status' => "ok", 'sms' => $data['disciplinas']]);
+        
     }
 
     public function getDisciplinasSelecionadas()
     {
-      
-        if (session()->has('disciplinas')) {
-         return view('ajax_loads.getDisciplinasSelecionadas');
-        }
-        return "Nenhuma Selecionada";
+        if(Session::has('disciplinas')){
+           return view('ajax_loads.getDisciplinasSelecionadas'); 
+        }else{
+            return "Não encontrou";
+        }  
     }
 
     public function removeDisciplinas()
     {
-        if (session()->has('disciplinas')) {
-            if (session()->forget('disciplinas')) {
+        if (Session::has('disciplinas')) {
+            if (Session::forget('disciplinas')) {
                 return response()->json(['status' => "ok", "sms" => "Removeu disciplinas"]);
             }
         }

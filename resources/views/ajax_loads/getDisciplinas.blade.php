@@ -20,11 +20,11 @@
             $.ajax({
                 type: "get",
                 url: "{{route('addDisciplinas')}}",
-                data: "data",
+                data: data,
                 dataType: "json",
                 success: function (response) {
                     if(response.status === "ok"){
-                        alert(response.sms);
+                        
                     }else if(response.status === "error"){
                         alert(response.sms);
                     }

@@ -46,18 +46,29 @@
                             <!-- Tab panes -->
                             <div class="tab-content card-block">
                                 <div class="tab-pane active" id="home3" role="tabpanel" aria-expanded="true">
+                                    {{Form::open(['method'=>"post", 'url'=>"/pagamentos/store"])}}
+                                    {!! Form::checkbox($name, $value, $checked, [$options]) !!}
                                     <p class="m-0">
-                                        Meses Á Pagar
+                                        @if ($getNaoPagos==null)
+                                            Já pagou todos meses
+                                        @else
+                                        <ul>
+                                            @foreach ($getNaoPagos as $nao_pagos)
+                                                <li>{{$nao_pagos["epoca"]}}</li>
+                                            @endforeach
+                                        </ul>
+                                        @endif
                                     </p>
+                                    {{Form::close()}}
                                 </div>
                                 <div class="tab-pane" id="profile3" role="tabpanel" aria-expanded="false">
                                     <p class="m-0">
-                                        @if ($getPagos->count()==0)
+                                        @if ($getPagos==null)
                                             Nenhum pago 
                                         @else  
                                         <ul>
                                             @foreach ($getPagos as $pagos)
-                                                <li>{{$pagos->epoca}}</li>
+                                                <li>{{$pagos["epoca"]}}</li>
                                             @endforeach
                                         </ul>
                                         @endif

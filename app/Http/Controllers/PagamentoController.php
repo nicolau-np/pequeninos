@@ -18,7 +18,7 @@ class PagamentoController extends Controller
 
     public function __construct()
     {
-        $this->middleware('admin');   
+        $this->middleware('admin');
     }
     /**
      * Display a listing of the resource.
@@ -27,7 +27,6 @@ class PagamentoController extends Controller
      */
     public function index()
     {
-        
     }
 
     /**
@@ -37,38 +36,62 @@ class PagamentoController extends Controller
      */
     public function create($id_tipo_pagamento)
     {
-       $id_historico = Session::get('id_historico');
-       $historico = HistoricEstudante::find($id_historico);
-        if(!$historico){
-            return back()->with(['error'=>"Não encontrou historico"]);
-        }
-        
-        $data = [
-            'id_classe'=>$historico->estudante->turma->classe->id,
-            'id_curso'=>$historico->estudante->turma->curso->id,
-            'id_tipo_pagamento'=>$id_tipo_pagamento,
+        $data_pagos = [
+            'epoca' => null,
         ];
-        
+        $data_nao_pagos = [
+            'epoca'=>null,
+        ];
+        $data_epocas_pagamentos = [
+            'epoca'=>null,
+        ];
+        $array_pagos = [];
+        $array_nao_pagos = [];
+        $array_epocas_pagamento = [];
+        $id_historico = Session::get('id_historico');
+        $historico = HistoricEstudante::find($id_historico);
+        if (!$historico) {
+            return back()->with(['error' => "Não encontrou historico"]);
+        }
+
+        $data = [
+            'id_classe' => $historico->estudante->turma->classe->id,
+            'id_curso' => $historico->estudante->turma->curso->id,
+            'id_tipo_pagamento' => $id_tipo_pagamento,
+        ];
+
         $tabela_preco = TabelaPreco::where($data)->first();
-        if(!$tabela_preco){
-            return back()->with(['error'=>"Não encontrou preco"]);
+        if (!$tabela_preco) {
+            return back()->with(['error' => "Não encontrou preco"]);
         }
 
         $forma_pagamento = FormaPagamento::where('forma_pagamento', $tabela_preco->forma_pagamento)->first();
         $epocas_pagemento = EpocaPagamento::where('id_forma_pagamento', $forma_pagamento->id)->get();
 
-        $meses_pagos = Pagamento::where(['id_estudante'=>$historico->id_estudante, 'ano_lectivo'=>$historico->ano_lectivo])->get();
-        $meses_nao_pagos = 
+        $meses_pagos = Pagamento::where(['id_estudante' => $historico->id_estudante, 'ano_lectivo' => $historico->ano_lectivo])->get();
+
+        //preencher o array de meses pagos
+        foreach ($meses_pagos as $pagos) {
+            $data_pagos['epoca'] = $pagos->epoca;
+            array_push($array_pagos, $data_pagos);
+        }
+        //preencher o array de epocas de pagamento
+        foreach($epocas_pagemento as $epocas){
+           $data_epocas_pagamentos['epoca'] = $epocas->epoca;
+           array_push($array_epocas_pagamento, $data_epocas_pagamentos);
+        }
+        
+        $array_nao_pagos = array_diff_assoc($array_epocas_pagamento, $array_pagos);
         $data = [
-            'title'=>"Pagamentos",
-            'type'=>"pagamento",
-            'menu'=>"Estudantes",
-            'submenu'=>"Pagamentos",
-            'getTabelaPreco'=>$tabela_preco,
-            'getHistoricoEstudante'=>$historico,
-            'getEpocasPagamento'=>$epocas_pagemento,
-            'getPagos'=>$meses_pagos,
-            'getNaoPagos'=>null,
+            'title' => "Pagamentos",
+            'type' => "pagamento",
+            'menu' => "Estudantes",
+            'submenu' => "Pagamentos",
+            'getTabelaPreco' => $tabela_preco,
+            'getHistoricoEstudante' => $historico,
+            'getEpocasPagamento' => $epocas_pagemento,
+            'getPagos' => $array_pagos,
+            'getNaoPagos' => $array_nao_pagos,
         ];
         return view('pagamento.new', $data);
     }
@@ -92,7 +115,6 @@ class PagamentoController extends Controller
      */
     public function show()
     {
-        
     }
 
     /**
@@ -129,31 +151,30 @@ class PagamentoController extends Controller
         //
     }
 
-    public function listar($id_estudante, $ano){
+    public function listar($id_estudante, $ano)
+    {
         $historicos = HistoricEstudante::orderBy('id', 'desc')->where('id_estudante', $id_estudante)->get();
-        $historico = HistoricEstudante::where(['ano_lectivo'=>$ano, 'id_estudante'=>$id_estudante])->first();
-        if(!$historico){
-            return back()->with(['error'=>"Nao encontrou"]);
+        $historico = HistoricEstudante::where(['ano_lectivo' => $ano, 'id_estudante' => $id_estudante])->first();
+        if (!$historico) {
+            return back()->with(['error' => "Nao encontrou"]);
         }
-       
+
         $data = [
-            'id_classe'=>$historico->estudante->turma->classe->id,
-            'id_curso'=>$historico->estudante->turma->curso->id,
+            'id_classe' => $historico->estudante->turma->classe->id,
+            'id_curso' => $historico->estudante->turma->curso->id,
         ];
-       $tabela_preco = TabelaPreco::where($data)->get();
-       Session::put('id_historico', $historico->id);
+        $tabela_preco = TabelaPreco::where($data)->get();
+        Session::put('id_historico', $historico->id);
         $data = [
-            'title'=>"Pagamentos",
-            'type'=>"pagamento",
-            'menu'=>"Estudantes",
-            'submenu'=>"Pagamentos",
-            'getHistoricoEstudante'=>$historico,
-            'getHistoricosEstudantes'=>$historicos,
-            'getTabelaPreco'=>$tabela_preco,
-            
+            'title' => "Pagamentos",
+            'type' => "pagamento",
+            'menu' => "Estudantes",
+            'submenu' => "Pagamentos",
+            'getHistoricoEstudante' => $historico,
+            'getHistoricosEstudantes' => $historicos,
+            'getTabelaPreco' => $tabela_preco,
+
         ];
         return view('pagamento.list', $data);
     }
-
-  
 }

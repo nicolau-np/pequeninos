@@ -37,15 +37,7 @@ class PagamentoController extends Controller
      */
     public function create($id_tipo_pagamento)
     {
-        $data_pagos = [
-            'epoca' => null,
-        ];
-        $data_nao_pagos = [
-            'epoca'=>null,
-        ];
-        $data_epocas_pagamentos = [
-            'epoca'=>null,
-        ];
+
         $array_pagos = [];
         $array_nao_pagos = [];
         $array_epocas_pagamento = [];
@@ -55,13 +47,13 @@ class PagamentoController extends Controller
             return back()->with(['error' => "Não encontrou historico"]);
         }
 
-        $data = [
+        $data['tabela_preco'] = [
             'id_classe' => $historico->estudante->turma->classe->id,
             'id_curso' => $historico->estudante->turma->curso->id,
             'id_tipo_pagamento' => $id_tipo_pagamento,
         ];
 
-        $tabela_preco = TabelaPreco::where($data)->first();
+        $tabela_preco = TabelaPreco::where($data['tabela_preco'])->first();
         if (!$tabela_preco) {
             return back()->with(['error' => "Não encontrou preco"]);
         }
@@ -69,21 +61,24 @@ class PagamentoController extends Controller
 
         $forma_pagamento = FormaPagamento::where('forma_pagamento', $tabela_preco->forma_pagamento)->first();
         $epocas_pagemento = EpocaPagamento::where('id_forma_pagamento', $forma_pagamento->id)->get();
-
-        $meses_pagos = Pagamento::where(['id_estudante' => $historico->id_estudante, 'ano_lectivo' => $historico->ano_lectivo])->get();
+        $data['pagamento'] = [
+            'id_tipo_pagamento'=>$id_tipo_pagamento,
+            'id_estudante' => $historico->id_estudante, 
+            'ano_lectivo' => $historico->ano_lectivo,
+        ];
+        $meses_pagos = Pagamento::where($data['pagamento'])->get();
 
         //preencher o array de meses pagos
         foreach ($meses_pagos as $pagos) {
-            $data_pagos['epoca'] = $pagos->epoca;
-            array_push($array_pagos, $data_pagos);
+            array_push($array_pagos, $pagos->epoca);
         }
         //preencher o array de epocas de pagamento
-        foreach($epocas_pagemento as $epocas){
-           $data_epocas_pagamentos['epoca'] = $epocas->epoca;
-           array_push($array_epocas_pagamento, $data_epocas_pagamentos);
+        foreach ($epocas_pagemento as $epocas) {
+            array_push($array_epocas_pagamento, $epocas->epoca);
         }
         
         $array_nao_pagos = array_diff_assoc($array_epocas_pagamento, $array_pagos);
+       
         $data = [
             'title' => "Pagamentos",
             'type' => "pagamento",
@@ -114,8 +109,8 @@ class PagamentoController extends Controller
             return back()->with(['error' => "Não encontrou historico"]);
         }
         $request->validate([
-            'meses_a_pagar'=>['required'],
-            'meses_a_pagar.*'=>['string']
+            'meses_a_pagar' => ['required'],
+            'meses_a_pagar.*' => ['string']
         ]);
 
         $data = [
@@ -128,21 +123,23 @@ class PagamentoController extends Controller
         if (!$tabela_preco) {
             return back()->with(['error' => "Não encontrou preco"]);
         }
-        
-        
 
         $data = [
-        'id_tipo_pagamento',
-        'id_usuario',
-        'id_estudante',
-        'epoca',
-        'preco',
-        'data_pagamento',
-        'ano_lectivo',
+            'id_tipo_pagamento' => $id_tipo_pagamento,
+            'id_usuario' => $id_user,
+            'id_estudante' => $historico->id_estudante,
+            'epoca' => null,
+            'preco' => $tabela_preco->preco,
+            'data_pagamento' => date('Y-m-d'),
+            'ano_lectivo' => $historico->ano_lectivo,
         ];
 
-        foreach($request->meses_a_pagar as $meses){
-            echo $meses."<br/>";
+        foreach ($request->meses_a_pagar as $epoca) {
+            $data['epoca'] = $epoca;
+            $pagamento = Pagamento::create($data);
+        }
+        if ($pagamento) {
+            return back()->with(['success' => "Feito com sucesso"]);
         }
     }
 

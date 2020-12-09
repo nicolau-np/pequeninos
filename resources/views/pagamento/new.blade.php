@@ -27,7 +27,7 @@
                         </div>
                          <div class="col-md-12">
                             @if(session('success'))
-                            <div class="alert alert-danger">{{session('success')}}</div>
+                            <div class="alert alert-success">{{session('success')}}</div>
                             @endif
                         </div>
                 
@@ -54,7 +54,7 @@
                                             Já pagou todos meses
                                         @else
                                             @foreach ($getNaoPagos as $nao_pagos)
-                                            <input type="checkbox" name="meses_a_pagar[]" value="{{$nao_pagos['epoca']}}" /> {{$nao_pagos['epoca']}}<br/>
+                                            <input type="checkbox" name="meses_a_pagar[]" value="{{$nao_pagos}}" /> {{$nao_pagos}}<br/>
                                             @endforeach
                                             <div class="erro">
                                                 @if($errors->has('meses_a_pagar'))
@@ -82,7 +82,7 @@
                                         @else  
                                         <ul>
                                             @foreach ($getPagos as $pagos)
-                                                <li>{{$pagos["epoca"]}}</li>
+                                                <li>{{$pagos}}</li>
                                             @endforeach
                                         </ul>
                                         @endif

@@ -11,6 +11,7 @@ use App\Pagamento;
 use App\TabelaPreco;
 use App\TipoPagamento;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class PagamentoController extends Controller
@@ -64,6 +65,7 @@ class PagamentoController extends Controller
         if (!$tabela_preco) {
             return back()->with(['error' => "Não encontrou preco"]);
         }
+        Session::put('id_tipo_pagamento', $id_tipo_pagamento);
 
         $forma_pagamento = FormaPagamento::where('forma_pagamento', $tabela_preco->forma_pagamento)->first();
         $epocas_pagemento = EpocaPagamento::where('id_forma_pagamento', $forma_pagamento->id)->get();
@@ -104,10 +106,41 @@ class PagamentoController extends Controller
      */
     public function store(Request $request)
     {
+        $id_user = Auth::user()->id;
+        $id_historico = Session::get('id_historico');
+        $id_tipo_pagamento = Session::get('id_tipo_pagamento');
+        $historico = HistoricEstudante::find($id_historico);
+        if (!$historico) {
+            return back()->with(['error' => "Não encontrou historico"]);
+        }
         $request->validate([
             'meses_a_pagar'=>['required'],
             'meses_a_pagar.*'=>['string']
         ]);
+
+        $data = [
+            'id_classe' => $historico->estudante->turma->classe->id,
+            'id_curso' => $historico->estudante->turma->curso->id,
+            'id_tipo_pagamento' => $id_tipo_pagamento,
+        ];
+
+        $tabela_preco = TabelaPreco::where($data)->first();
+        if (!$tabela_preco) {
+            return back()->with(['error' => "Não encontrou preco"]);
+        }
+        
+        
+
+        $data = [
+        'id_tipo_pagamento',
+        'id_usuario',
+        'id_estudante',
+        'epoca',
+        'preco',
+        'data_pagamento',
+        'ano_lectivo',
+        ];
+
         foreach($request->meses_a_pagar as $meses){
             echo $meses."<br/>";
         }

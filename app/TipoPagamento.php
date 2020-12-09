@@ -19,4 +19,8 @@ class TipoPagamento extends Model
     public function pagamento(){
         return $this->hasMany(Pagamento::class, 'id_tipo_pagamento', 'id');
     }
+
+    public function pagamento_pai(){
+        return $this->hasMany(PagamentoPai::class, 'id_tipo_pagamento', 'id');
+    }
 }

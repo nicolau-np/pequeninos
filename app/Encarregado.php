@@ -20,4 +20,8 @@ class Encarregado extends Model
     public function estudante(){
         return $this->hasMany(Estudante::class, 'id_encarregado', 'id');
     }
+
+    public function pagamento_pai(){
+        return $this->hasMany(PagamentoPai::class, 'id_encarregado', 'id');
+    }
 }

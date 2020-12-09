@@ -4,15 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-
-class Pagamento extends Model
+class PagamentoPai extends Model
 {
-    protected $table = "pagamentos";
+    protected $table = "pagamento_pais";
 
     protected $fillable = [
         'id_tipo_pagamento',
         'id_usuario',
-        'id_estudante',
+        'id_encarregado',
         'epoca',
         'preco',
         'data_pagamento',
@@ -28,7 +27,7 @@ class Pagamento extends Model
         return $this->belongsTo(User::class, 'id_usuario', 'id');
     }
 
-    public function estudante(){
-        return $this->belongsTo(Estudante::class, 'id_estudante', 'id');
+    public function encarregado(){
+        return $this->belongsTo(Encarregado::class, 'id_estudante', 'id');
     }
 }

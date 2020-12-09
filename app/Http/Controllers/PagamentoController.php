@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\AnoLectivo;
 use App\EpocaPagamento;
 use App\Estudante;
+use App\Fatura;
 use App\FormaPagamento;
 use App\HistoricEstudante;
 use App\Pagamento;
+use App\PagamentoPai;
 use App\TabelaPreco;
 use App\TipoPagamento;
 use Illuminate\Http\Request;
@@ -68,8 +70,21 @@ class PagamentoController extends Controller
             'id_estudante' => $historico->id_estudante, 
             'ano_lectivo' => $historico->ano_lectivo,
         ];
-        $meses_pagos = Pagamento::where($data['pagamento'])->get();
 
+        $data['pagamento_pai'] = [
+            'id_tipo_pagamento'=>$id_tipo_pagamento,
+            'id_encarregado' => $historico->estudante->id_encarregado, 
+            'ano_lectivo' => $historico->ano_lectivo,
+        ];
+        
+        //apagamento pai
+        if($id_tipo_pagamento == 3){
+            $meses_pagos = PagamentoPai::where($data['pagamento_pai'])->get();
+        }else{
+            //pagamento estudante
+            $meses_pagos = Pagamento::where($data['pagamento'])->get();
+        }
+        
         //preencher o array de meses pagos
         foreach ($meses_pagos as $pagos) {
             array_push($array_pagos, $pagos->epoca);
@@ -126,22 +141,68 @@ class PagamentoController extends Controller
         $tabela_preco = TabelaPreco::where($data)->first();
         if (!$tabela_preco) {
             return back()->with(['error' => "Não encontrou preco"]);
-        }
-
-        $data = [
+        }    
+        $data['fatura'] = [
+            'data_fatura'=>date('Y-m-d'),
+            'ano'=>date('Y'),
+        ];
+        $fatura = Fatura::create($data['fatura']);
+        $data['where'] = [
+            'id_tipo_pagamento' => $id_tipo_pagamento,
+            'id_estudante' => $historico->id_estudante,
+            'epoca' => null,
+            'ano_lectivo' => $historico->ano_lectivo,
+        ];
+        
+         $data['store'] = [
             'id_tipo_pagamento' => $id_tipo_pagamento,
             'id_usuario' => $id_user,
             'id_estudante' => $historico->id_estudante,
             'epoca' => null,
             'preco' => $tabela_preco->preco,
             'data_pagamento' => date('Y-m-d'),
+            'fatura'=>$fatura->id,
+            'ano_lectivo' => $historico->ano_lectivo,   
+        ];
+
+        $data['where_pai'] = [
+            'id_tipo_pagamento' => $id_tipo_pagamento,
+            'id_encarregado' => $historico->estudante->id_encarregado,
+            'epoca' => null,
             'ano_lectivo' => $historico->ano_lectivo,
         ];
 
-        foreach ($request->meses_a_pagar as $epoca) {
-            $data['epoca'] = $epoca;
-            $pagamento = Pagamento::create($data);
+        $data['store_pai'] = [
+            'id_tipo_pagamento' => $id_tipo_pagamento,
+            'id_usuario' => $id_user,
+            'id_encarregado' => $historico->estudante->id_encarregado,
+            'epoca' => null,
+            'preco' => $tabela_preco->preco,
+            'data_pagamento' => date('Y-m-d'),
+            'fatura'=>$fatura->id,
+            'ano_lectivo' => $historico->ano_lectivo, 
+        ];
+
+        //apagamento pai
+        if($id_tipo_pagamento == 3){
+            foreach ($request->meses_a_pagar as $epoca) {
+                $data['store_pai']['epoca'] = $epoca;
+                $data['where_pai']['epoca'] = $epoca;
+                if(!PagamentoPai::where($data['where_pai'])->first()){
+                    $pagamento = PagamentoPai::create($data['store_pai']);
+                }
+            } 
+        }else{
+            //pagamento estudante
+            foreach ($request->meses_a_pagar as $epoca) {
+            $data['store']['epoca'] = $epoca;
+            $data['where']['epoca'] = $epoca;
+            if(!Pagamento::where($data['where'])->first()){
+                $pagamento = Pagamento::create($data['store']);
+            }
+            }
         }
+        
         if ($pagamento) {
             return back()->with(['success' => "Feito com sucesso"]);
         }

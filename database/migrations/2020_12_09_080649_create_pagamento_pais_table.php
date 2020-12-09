@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePagamentosTable extends Migration
+class CreatePagamentoPaisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,11 @@ class CreatePagamentosTable extends Migration
      */
     public function up()
     {
-        Schema::create('pagamentos', function (Blueprint $table) {
-            $table->engine = "InnoDB";
+        Schema::create('pagamento_pais', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->bigInteger('id_tipo_pagamento')->unsigned()->index();
             $table->bigInteger('id_usuario')->unsigned()->index();
-            $table->bigInteger('id_estudante')->unsigned()->index();
+            $table->bigInteger('id_encarregado')->unsigned()->index();
             $table->string('epoca');
             $table->decimal('preco', 14,2);
             $table->date('data_pagamento');
@@ -27,10 +26,10 @@ class CreatePagamentosTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('pagamentos', function (Blueprint $table) {
+        Schema::table('pagamento_pais', function (Blueprint $table) {
             $table->foreign('id_tipo_pagamento')->references('id')->on('tipo_pagamentos')->onUpdate('cascade');
             $table->foreign('id_usuario')->references('id')->on('usuarios')->onUpdate('cascade');
-            $table->foreign('id_estudante')->references('id')->on('estudantes')->onUpdate('cascade');
+            $table->foreign('id_encarregado')->references('id')->on('encarregados')->onUpdate('cascade');
         });
     }
 
@@ -41,6 +40,6 @@ class CreatePagamentosTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('pagamentos');
+        Schema::dropIfExists('pagamento_pais');
     }
 }

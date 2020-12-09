@@ -47,18 +47,13 @@
                             <div class="tab-content card-block">
                                 <div class="tab-pane active" id="home3" role="tabpanel" aria-expanded="true">
                                     {{Form::open(['method'=>"post", 'url'=>"/pagamentos/store"])}}
-                                    {!! Form::checkbox($name, $value, $checked, [$options]) !!}
-                                    <p class="m-0">
-                                        @if ($getNaoPagos==null)
+                                    @if ($getNaoPagos==null)
                                             Já pagou todos meses
                                         @else
-                                        <ul>
-                                            @foreach ($getNaoPagos as $nao_pagos)
-                                                <li>{{$nao_pagos["epoca"]}}</li>
-                                            @endforeach
-                                        </ul>
-                                        @endif
-                                    </p>
+                                        @foreach ($getNaoPagos as $nao_pagos)
+                                            <input type="checkbox" name="meses_a_pagar[]" value="{{$nao_pagos['epoca']}}" /> {{$nao_pagos['epoca']}}<br/>
+                                        @endforeach
+                                    @endif
                                     {{Form::close()}}
                                 </div>
                                 <div class="tab-pane" id="profile3" role="tabpanel" aria-expanded="false">

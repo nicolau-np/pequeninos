@@ -132,6 +132,16 @@ Route::group(['prefix' => 'funcionarios'], function () {
     Route::put('/update/{id}', "FuncionarioController@update");
 });
 
+Route::group(['prefix' => 'estatisticas'], function () {
+    Route::group(['prefix' => 'pagamentos'], function () {
+        Route::get('/', "EstatisticaController@lista_pagamento");
+    });
+
+    Route::group(['prefix' => 'balancos'], function () {
+        Route::get('/', "EstatisticaController@balanco");
+    });
+});
+
 Route::group(['prefix' => 'relatorios'], function () {
     Route::get('/fatura/{id_fatura}', "RelatorioController@fatura");
 });

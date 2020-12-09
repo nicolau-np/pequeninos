@@ -49,7 +49,6 @@
                                 <span class="not_found">Nenhum grade cadastrada</span>
                                 @else
                                 @foreach ($getGrades as $grades)
-                                    
                                 <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$grades->disciplina->disciplina}}</td>

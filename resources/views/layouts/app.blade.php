@@ -342,7 +342,30 @@
                                     </ul>
                                 </li>
 
-
+                                <li class="pcoded-hasmenu @if($type=="estatisticas") active pcoded-trigger @endif">
+                                    <a href="javascript:void(0)">
+                                        <span class="pcoded-micon"><i class="ti-bar-chart"></i></span>
+                                        <span class="pcoded-mtext"  data-i18n="nav.basic-components.main">Estatísticas</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                    <ul class="pcoded-submenu">
+                                        <li class="@if($menu=="Listas de Pagamentos") active @endif">
+                                            <a href="/estatisticas/pagamentos/">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Listas de Pagamentos</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+                                        <li class="@if($menu=="Balanços") active @endif">
+                                            <a href="/estatisticas/balancos/">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Balanços</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+               
+                                    </ul>
+                                </li>
 
                                 <li>
                                     <a href="form-elements-component.html">

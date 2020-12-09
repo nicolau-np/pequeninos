@@ -47,6 +47,11 @@
                                     <a class="nav-link" data-toggle="tab" href="#profile3" role="tab" aria-expanded="false">Pagos</a>
                                     <div class="slide"></div>
                                 </li>
+
+                                <li class="nav-item">
+                                    <a class="nav-link" data-toggle="tab" href="#encarregado3" role="tab" aria-expanded="false">{{$getEstudante->encarregado->pessoa->nome}}</a>
+                                    <div class="slide"></div>
+                                </li>
                               
                             </ul>
                             <!-- Tab panes -->
@@ -93,6 +98,16 @@
                                         </ul>
                                         @endif
                                    </div>
+
+                                   <div class="tab-pane" id="encarregado3" role="tabpanel" aria-expanded="false">
+                                    <p class="m-0">
+                                        <ul>
+                                            @foreach ($getEducandos as $educandos)
+                                                <li>{{$educandos->pessoa->nome}}</li>
+                                            @endforeach
+                                        </ul>
+                                    </p>
+                                   </div>
                                 </div>
                         
                      </div>
@@ -103,7 +118,7 @@
                              
                              <div class="row">
                             <div class="col-md-12">
-                            <p>Encarregado: {{$getEncarregado->encarregado->pessoa->nome}}</p>
+                            <p>Encarregado: {{$getEstudante->encarregado->pessoa->nome}}</p>
                             <p>Turma: {{$getHistoricoEstudante->turma->turma}}</p>
                              <p>Curso: {{$getHistoricoEstudante->turma->curso->curso}}</p>
                              <p>Classe: {{$getHistoricoEstudante->turma->classe->classe}}</p>

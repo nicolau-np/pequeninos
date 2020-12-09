@@ -61,7 +61,8 @@ class PagamentoController extends Controller
 
         $forma_pagamento = FormaPagamento::where('forma_pagamento', $tabela_preco->forma_pagamento)->first();
         $epocas_pagemento = EpocaPagamento::where('id_forma_pagamento', $forma_pagamento->id)->get();
-        $encarregado = Estudante::find($historico->id_estudante);
+        $estudante = Estudante::find($historico->id_estudante);
+        $educandos = Estudante::where('id_encarregado',$estudante->id_encarregado)->get();
         $data['pagamento'] = [
             'id_tipo_pagamento'=>$id_tipo_pagamento,
             'id_estudante' => $historico->id_estudante, 
@@ -90,7 +91,8 @@ class PagamentoController extends Controller
             'getEpocasPagamento' => $epocas_pagemento,
             'getPagos' => $array_pagos,
             'getNaoPagos' => $array_nao_pagos,
-            'getEncarregado'=>$encarregado,
+            'getEstudante'=>$estudante,
+            'getEducandos'=>$educandos,
         ];
         return view('pagamento.new', $data);
     }

@@ -102,9 +102,8 @@ class AjaxController extends Controller
     public function removeDisciplinas()
     {
         if (Session::has('disciplinas')) {
-            if (Session::forget('disciplinas')) {
-                return response()->json(['status' => "ok", "sms" => "Removeu disciplinas"]);
-            }
+            Session::forget('disciplinas');
+            return response()->json(['status' => "ok", "sms" => "Removeu disciplinas"]);
         }
         return response()->json(['status'=>"error", "sms"=>"Já Removeu"]);
     }

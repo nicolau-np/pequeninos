@@ -24,12 +24,24 @@
                 dataType: "json",
                 success: function (response) {
                     if(response.status === "ok"){
-                        
+                        disciplinas();
                     }else if(response.status === "error"){
                         alert(response.sms);
                     }
                 }
             });
         });
+
+        function disciplinas(){
+            $.ajax({
+                type: "get",
+                url: "{{route('getDisciplinasSelecionadas')}}",
+                data: null,
+                dataType: "html",
+                success: function (response) {
+                    $('.load_selected').html(response);
+                }
+            });
+        }
     });
 </script>

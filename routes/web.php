@@ -31,7 +31,6 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/searchEstudantes', "AjaxController@searchEstudantes")->name('searchEstudantes');
     Route::post('/searchFuncionarios', "AjaxController@searchFuncionarios")->name('searchFuncionarios');
     Route::post('/searchEncarregados', "AjaxController@searchEncarregados")->name('searchEncarregados');
-    
 });
 
 Route::group(['prefix' => 'institucional'], function () {
@@ -100,16 +99,14 @@ Route::group(['prefix' => 'financas'], function () {
         Route::get('/edit/{id}', "FinancaController@tipo_pagamento_edit");
         Route::put('/update/{id}', "FinancaController@tipo_pagamento_update");
     });
-
-    
 });
 
 Route::group(['prefix' => 'encarregados'], function () {
-        Route::get('/', "EncarregadoController@index");
-        Route::get('/create', "EncarregadoController@create");
-        Route::post('/store', "EncarregadoController@store");
-        Route::get('/edit/{id}', "EncarregadoController@edit");
-        Route::put('/update/{id}', "EncarregadoController@update");
+    Route::get('/', "EncarregadoController@index");
+    Route::get('/create', "EncarregadoController@create");
+    Route::post('/store', "EncarregadoController@store");
+    Route::get('/edit/{id}', "EncarregadoController@edit");
+    Route::put('/update/{id}', "EncarregadoController@update");
 });
 
 Route::group(['prefix' => 'estudantes'], function () {
@@ -124,6 +121,7 @@ Route::group(['prefix' => 'pagamentos'], function () {
     Route::get('/listar/{id_estudante}/{ano_lectivo}', "PagamentoController@listar");
     Route::get('/create/{id_tipo_pagamento}', "PagamentoController@create");
     Route::post('/store', "PagamentoController@store");
+    Route::post('/show', "PagamentoController@show")->name('show_pagamento');
 });
 
 Route::group(['prefix' => 'funcionarios'], function () {
@@ -134,6 +132,10 @@ Route::group(['prefix' => 'funcionarios'], function () {
     Route::put('/update/{id}', "FuncionarioController@update");
 });
 
-Route::group(['prefix' => 'usuarios', 'middleware'=>"admin"], function () {
+Route::group(['prefix' => 'relatorios'], function () {
+    Route::get('/fatura/{id_fatura}', "RelatorioController@fatura");
+});
+
+Route::group(['prefix' => 'usuarios', 'middleware' => "admin"], function () {
     Route::get('/', "UserController@index");
 });

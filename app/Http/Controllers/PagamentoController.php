@@ -214,8 +214,41 @@ class PagamentoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show()
+    public function show(Request $request)
     {
+        $id_historico = Session::get('id_historico');
+        $id_tipo_pagamento = Session::get('id_tipo_pagamento');
+        $historico = HistoricEstudante::find($id_historico);
+        if (!$historico) {
+            return back()->with(['error' => "Não encontrou historico"]);
+        }
+        
+        $data['where_pai'] = [
+            'id_tipo_pagamento'=>$id_tipo_pagamento,
+            'id_encarregado'=>$historico->estudante->id_encarregado,
+            'epoca'=>$request->epoca,
+            'ano_lectivo'=>$historico->ano_lectivo,
+        ];
+
+        $data['where_estudante'] = [
+            'id_tipo_pagamento'=>$id_tipo_pagamento,
+            'id_estudante'=>$historico->id_estudante,
+            'epoca'=>$request->epoca,
+            'ano_lectivo'=>$historico->ano_lectivo,
+        ];
+        
+        if($id_tipo_pagamento == 3){
+           $pagamento = PagamentoPai::where($data['where_pai'])->first(); 
+        }else{
+            $pagamento = Pagamento::where($data['where_estudante'])->first();
+        }
+
+        $data = [
+            'getPagamentoDetails'=>$pagamento,
+        ];
+
+        return view('ajax_loads.getPagamentoDetails', $data);
+        
     }
 
     /**

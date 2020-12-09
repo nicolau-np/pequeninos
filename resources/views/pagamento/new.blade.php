@@ -93,10 +93,15 @@
                                         @else  
                                         <ul>
                                             @foreach ($getPagos as $pagos)
-                                                <li>{{$pagos}}</li>
+                                        <li><a data-epoca="{{$pagos}}" href="#" style="color:#4680ff;" class="show_pagamento">{{$pagos}}</a></li>
                                             @endforeach
                                         </ul>
                                         @endif
+                                    </p>
+
+                                    <div class="load_pagamento">
+
+                                    </div>
                                    </div>
 
                                    <div class="tab-pane" id="encarregado3" role="tabpanel" aria-expanded="false">
@@ -148,5 +153,25 @@
 	</div>
 </div>
 
-
+<script>
+    $(document).ready(function () {
+         $('.show_pagamento').click(function(e){
+            e.preventDefault();
+            var data = {
+                epoca: $(this).data('epoca'),
+                _token: "{{ csrf_token() }}"
+            };
+            //$('.load_pagamento').html("hello:"+ epoca);
+            $.ajax({
+                type: "post",
+                url: "{{route('show_pagamento')}}",
+                data: data,
+                dataType: "html",
+                success: function (response) {
+                    $('.load_pagamento').html(response);
+                }
+            });
+         });
+      });
+</script>
 @endsection

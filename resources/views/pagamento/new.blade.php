@@ -6,7 +6,13 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>{{$submenu}}</h5>
+                    <h5>
+                        {{$submenu}}
+                        <i class="ti-angle-right"></i>
+                        {{$getTabelaPreco->tipo_pagamento->tipo}}
+                        <i class="ti-angle-right"></i>
+                        {{number_format($getTabelaPreco->preco,2,',','.')}}
+                    </h5>
                     <span></span>
                     <div class="card-header-right">
                         
@@ -97,6 +103,7 @@
                              
                              <div class="row">
                             <div class="col-md-12">
+                            <p>Encarregado: {{$getEncarregado->encarregado->pessoa->nome}}</p>
                             <p>Turma: {{$getHistoricoEstudante->turma->turma}}</p>
                              <p>Curso: {{$getHistoricoEstudante->turma->curso->curso}}</p>
                              <p>Classe: {{$getHistoricoEstudante->turma->classe->classe}}</p>

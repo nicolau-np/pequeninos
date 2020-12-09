@@ -360,12 +360,34 @@ class InstitucionalController extends Controller
             return back()->with(['error' => "Deve selecionar disciplinas"]);
         }
 
-        $data = [
+        $data['store']= [
             'id_curso' => $request->curso,
             'id_classe' => $request->classe,
             'id_disciplina' => null,
-            'tipo' => $request->tipo,
+            'tipo' => $request->epoca,
         ];
+
+        $data['where'] = [
+            'id_curso' => $request->curso,
+            'id_classe' => $request->classe,
+            'id_disciplina' => null,
+        ];
+
+        foreach(Session::get('disciplinas') as $disciplina){
+            $data['store']['id_disciplina'] = $disciplina['id_disciplina'];
+            $data['where']['id_disciplina'] = $disciplina['id_disciplina'];
+            if(!Grade::where($data['where'])->first()){
+                $grade = Grade::create($data['store']); 
+            }else{
+                $grade = false;
+            }
+         }
+
+        if($grade){
+            return back()->with(['success'=>"Feito com sucesso"]);
+        }else{
+            return back()->with(['error'=>"Já cadastrou"]);  
+        }
     }
 
     public function grade_edit($id)

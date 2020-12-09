@@ -85,8 +85,15 @@ class AjaxController extends Controller
             'id_disciplina'=>$request->id_disciplina,
             'sigla'=>$request->sigla,
         ];
+        if (Session::has('disciplinas')) {
+            foreach(Session::get('disciplinas') as $disciplinas){
+                if($disciplinas['id_disciplina'] == $data['disciplinas']['id_disciplina']){
+                  return response()->json(['status'=>"error", 'sms'=>"Já adicionou esta disciplina"]);
+                }
+            }
+        }
         Session::push('disciplinas', $data['disciplinas']);
-        return response()->json(['status' => "ok", 'sms' => $data['disciplinas']]);
+        return response()->json(['status' => "ok", 'sms' => "Feito com sucesso"]);
         
     }
 

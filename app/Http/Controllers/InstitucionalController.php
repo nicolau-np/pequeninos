@@ -312,7 +312,6 @@ class InstitucionalController extends Controller
             }
         }
 
-
         if (Disciplina::find($id)->update($data)) {
             return back()->with(['success' => "Feito com sucesso"]);
         }

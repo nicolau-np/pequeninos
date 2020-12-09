@@ -44,6 +44,8 @@
                                 </div>
                                 
                                 <div class="col-md-6">
+                                    {{Form::submit('Salvar', ['class'=>"btn btn-primary btn-sm float-left"])}}
+                                     
                                     <a href="#" class="btn btn-danger btn-sm float-right remover_todas"><i class="ti-trash" aria-hidden="true"></i></a>
                                    <table class="table table-bordered">
                                     <thead>
@@ -68,13 +70,8 @@
                             </div>
                             <br/>
                         </fieldset>
-                        <br/>
-                            <div class="row">
-                                <div class="col-md-4">
-                                    {{Form::submit('Salvar', ['class'=>"btn btn-primary"])}}
-                                 </div>
-
-                            </div>
+                       
+                   
                        
                         {{Form::close()}}
                    </div>

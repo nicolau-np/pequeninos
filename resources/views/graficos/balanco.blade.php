@@ -71,37 +71,24 @@ use App\Http\Controllers\ControladorStatic;
                             borderWidth: 0
                         }
                     },
-                    series: [{
-                        name: 'Proprina',
+                    series: [
+                      <?php 
+                      foreach($getTipoPagamentos as $tipo_pagamentos){
+                      ?>  
+                    {
+                        name: '{{$tipo_pagamentos->tipo}}',
                         data: [
                             <?php
                                 foreach($getEpocasPagamento as $epocas){
+                                $valores = ControladorStatic::getValoresBalanco($epocas->epoca, $tipo_pagamentos->id, $getAno);
                             ?>
-                            49.9,
+                            {{$valores}},
                             <?php }?>
                             ]
                 
-                    }, {
-                        name: 'Comparticipação dos Pais',
-                        data: [
-                            <?php
-                                foreach($getEpocasPagamento as $epocas){
-                            ?>
-                            49.9,
-                            <?php }?>
-                            ]
-                
-                    }, {
-                        name: 'Matrícula & Confirmação de Matrícula',
-                        data: [
-                            <?php
-                                foreach($getEpocasPagamento as $epocas){
-                            ?>
-                            49.9,
-                            <?php }?>
-                        ]
-                
-                    },]
+                    }, 
+                    <?php }?>
+                    ]
                 });
             </script>
                 </div>

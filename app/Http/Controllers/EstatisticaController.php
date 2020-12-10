@@ -53,6 +53,7 @@ class EstatisticaController extends Controller
 
         $forma_pagamento = FormaPagamento::where('forma_pagamento', $request->forma_pagamento)->first();
         $epocaPagamento = EpocaPagamento::where('id_forma_pagamento', $forma_pagamento->id)->get();
+        $tipo_pagamentos = TipoPagamento::get();
         $data = [
             'title' => "Balanços",
             'type' => "estatisticas",
@@ -60,6 +61,7 @@ class EstatisticaController extends Controller
             'submenu' => "Gráfico",
             'getEpocasPagamento'=>$epocaPagamento,
             'getAno'=>$request->ano_lectivo,
+            'getTipoPagamentos'=>$tipo_pagamentos
         ];
         return view('graficos.balanco', $data);
     }

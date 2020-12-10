@@ -20,7 +20,7 @@
                 </div>
                 <div class="card-block">
                    <div class="form">
-                       {{Form::open(['method'=>"post", 'url'=>"/relatorios/lista_pagamentos/"])}}
+                       {{Form::open(['method'=>"get", 'url'=>"/relatorios/lista_pagamentos/"])}}
                        <fieldset>
                            <legend><i class="ti-search"></i> Dados da pesquisa</legend>
 

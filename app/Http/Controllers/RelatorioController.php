@@ -2,10 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\EpocaPagamento;
+use App\Estudante;
 use App\Fatura;
+use App\FormaPagamento;
 use App\HistoricEstudante;
 use App\Pagamento;
 use App\PagamentoPai;
+use App\TabelaPreco;
 use App\TipoPagamento;
 use App\Turma;
 use Illuminate\Http\Request;
@@ -67,11 +71,23 @@ class RelatorioController extends Controller
         if(!$turma){
             return back()->with(['error'=>"Não encontrou turma"]);
         }
-
+        $data['where'] = [
+            'id_curso'=>$request->curso,
+            'id_classe'=>$request->classe,
+            'id_tipo_pagamento'=>$request->tipo_pagamento,
+        ];
+       $tabela_preco = TabelaPreco::where($data['where'])->first();
+        $forma_pagamentos = FormaPagamento::where('forma_pagamento', $tabela_preco->forma_pagamento)->first();
+        $epoca_pagamentos = EpocaPagamento::where('id_forma_pagamento', $forma_pagamentos->id)->get();
+        $historico = HistoricEstudante::where(['id_turma'=>$request->turma, 'ano_lectivo'=>$request->ano_lectivo])->get();
         $data = [
             'getTipoPagamento'=>$tipo_pagamento,
             'getTurma'=>$turma,
             'getAno'=>$request->ano_lectivo,
+            'getTabelaPreco'=>$tabela_preco,
+            'getEpocasPagamento'=>$epoca_pagamentos,
+            'getHistoricoEstudante'=>$historico,
+            
         ];
         $pdf = PDF::loadView('relatorios.lista_pagamento', $data)->setPaper('A4', 'normal');
 

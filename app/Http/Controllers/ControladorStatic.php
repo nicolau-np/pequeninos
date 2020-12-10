@@ -28,9 +28,16 @@ class ControladorStatic extends Controller
         ];
 
         if($id_tipo_pagamento == 3){
-            $pagamento = PagamentoPai::where('id_tipo_pagamento', $id_tipo_pagamento)->get();
+            $pagamentos = PagamentoPai::where('id_tipo_pagamento', $id_tipo_pagamento)->get();
+            foreach($pagamentos as $pagamento){
+                $retorno = $retorno + $pagamento->preco;
+            }
+            
         }else{
-            $pagamento = Pagamento::where('id_tipo_pagamento', $id_tipo_pagamento)->get();
+            $pagamentos = Pagamento::where('id_tipo_pagamento', $id_tipo_pagamento)->get();
+            foreach($pagamentos as $pagamento){
+                $retorno = $retorno + $pagamento->preco;
+            }
         }
         
         return $retorno;

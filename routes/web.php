@@ -139,6 +139,7 @@ Route::group(['prefix' => 'estatisticas'], function () {
 
     Route::group(['prefix' => 'balancos'], function () {
         Route::get('/', "EstatisticaController@balanco");
+        Route::get('/grafico', "EstatisticaController@grafico");
     });
 });
 

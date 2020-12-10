@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AnoLectivo;
 use App\EpocaPagamento;
 use App\Estudante;
 use App\Fatura;
@@ -70,6 +71,11 @@ class RelatorioController extends Controller
         $turma = Turma::find($request->turma);
         if(!$turma){
             return back()->with(['error'=>"Não encontrou turma"]);
+        }
+
+        $ano_lectivo = AnoLectivo::where('ano_lectivo', $request->ano_lectivo)->first();
+        if(!$ano_lectivo){
+            return back()->with(['error'=>"Não encontrou este ano lectivo"]);
         }
         $data['where'] = [
             'id_curso'=>$request->curso,

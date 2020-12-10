@@ -46,6 +46,7 @@
                     </tr>
                 </thead>
                 <tbody>
+                   
                     @foreach ($getHistoricoEstudante as $histoEstudantes)
                         <tr>
                         <td>{{$histoEstudantes->estudante->pessoa->nome}}</td>

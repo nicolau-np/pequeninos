@@ -31,6 +31,10 @@
       <link rel="stylesheet" type="text/css" href="{{asset('assets/template/css/jquery.mCustomScrollbar.css')}}">
       <link rel="stylesheet" type="text/css" href="{{asset('assets/template/style.css')}}">
       <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+      <script src="{{asset('assets/highcharts/highcharts.js')}}"></script>
+      <script src="{{asset('assets/highcharts/modules/exporting.js')}}"></script>
+      <script src="{{asset('assets/highcharts/modules/export-data.js')}}"></script>
+      <script src="{{asset('assets/highcharts/modules/accessibility.js')}}"></script>
   </head>
   @if($type!="login")
   <body>

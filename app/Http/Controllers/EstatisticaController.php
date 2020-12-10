@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\AnoLectivo;
 use App\Curso;
+use App\EpocaPagamento;
+use App\FormaPagamento;
 use App\TipoPagamento;
 use Illuminate\Http\Request;
 
@@ -35,5 +38,28 @@ class EstatisticaController extends Controller
             'submenu' => "Listar",
         ];
         return view('estatistica.balanco.list', $data);
+    }
+
+    public function grafico(Request $request){
+        $request->validate([
+            'ano_lectivo'=>['required', 'Integer'],
+            'forma_pagamento'=>['required', 'string'],
+        ]);
+
+        $ano_lectivo = AnoLectivo::where('ano_lectivo', $request->ano_lectivo)->first();
+        if(!$ano_lectivo){
+            return back()->with(['error'=>"Não encontrou este ano lectivo"]);
+        }
+
+        $forma_pagamento = FormaPagamento::where('forma_pagamento', $request->forma_pagamento)->first();
+        $epocaPagamento = EpocaPagamento::where('id_forma_pagamento', $forma_pagamento->id)->get();
+        $data = [
+            'title' => "Balanços",
+            'type' => "estatisticas",
+            'menu' => "Balanços",
+            'submenu' => "Gráfico",
+            'getEpocasPagamento'=>$epocaPagamento,
+        ];
+        return view('estatistica.balanco.grafico', $data);
     }
 }

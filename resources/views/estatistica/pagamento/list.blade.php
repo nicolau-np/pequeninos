@@ -20,6 +20,13 @@
                 </div>
                 <div class="card-block">
                    <div class="form">
+                    @if(session('error'))
+                    <div class="alert alert-danger">{{session('error')}}</div>
+                    @endif
+
+                    @if(session('success'))
+                    <div class="alert alert-success">{{session('success')}}</div>
+                    @endif
                        {{Form::open(['method'=>"get", 'url'=>"/relatorios/lista_pagamentos/"])}}
                        <fieldset>
                            <legend><i class="ti-search"></i> Dados da pesquisa</legend>
@@ -90,13 +97,7 @@
                        {{Form::close()}}
                    </div>
                     
-                    <div class="table-responsive">
-                       
-                    </div>
-
-                    <div class="pagination">
-                       
-                    </div>
+                    
                 </div>
             </div>
         </div>

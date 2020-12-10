@@ -59,7 +59,8 @@ class EstatisticaController extends Controller
             'menu' => "Balanços",
             'submenu' => "Gráfico",
             'getEpocasPagamento'=>$epocaPagamento,
+            'getAno'=>$request->ano_lectivo,
         ];
-        return view('estatistica.balanco.grafico', $data);
+        return view('graficos.balanco', $data);
     }
 }

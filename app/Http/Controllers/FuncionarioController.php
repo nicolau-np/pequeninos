@@ -108,7 +108,9 @@ class FuncionarioController extends Controller
 
         $palavra_passe = Hash::make("olamundo2015");
         $nivel_acesso = null;
-        $username = strtolower($request->nome);
+        $string_nome = explode(" ", $request->nome);
+        $primeiro_nome = $string_nome[0];
+        $ultimo_nome = end($string_nome);
         $isUser = false;
 
         if ($request->cargo == 1 || $request->cargo == 2 || $request->cargo == 3) {
@@ -127,7 +129,7 @@ class FuncionarioController extends Controller
 
         $data['usuario'] = [
             'id_pessoa' => null,
-            'username' => $username,
+            'username' => null,
             'password' => $palavra_passe,
             'estado' => "on",
             'nivel_acesso' => $nivel_acesso,
@@ -144,6 +146,7 @@ class FuncionarioController extends Controller
         if ($pessoa) {
             $data['funcionario']['id_pessoa'] = $pessoa->id;
             $data['usuario']['id_pessoa'] = $pessoa->id;
+            $data['usuario']['username'] = strtolower($primeiro_nome.".".$ultimo_nome)."".$pessoa->id;
             $funcionario = Funcionario::create($data['funcionario']);
             if ($funcionario) {
                 if ($isUser) {
@@ -250,9 +253,7 @@ class FuncionarioController extends Controller
             'estado' => "on",
         ];
 
-        $palavra_passe = Hash::make("olamundo2015");
         $nivel_acesso = null;
-        $username = strtolower($request->nome);
         $isUser = false;
 
         if ($request->cargo == 1 || $request->cargo == 2 || $request->cargo == 3) {

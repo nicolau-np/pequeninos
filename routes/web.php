@@ -164,6 +164,14 @@ Route::group(['prefix' => 'relatorios'], function () {
     Route::get('/lista_comparticicacao', "RelatorioController@lista_comparticipacao");
 });
 
+Route::group(['prefix' => 'cadernetas'], function () {
+    Route::get('/', "CadernetaController@index");
+});
+
+Route::group(['prefix' => 'minha_turma'], function () {
+    Route::get('/', "MinhaTurmaController@index");
+});
+
 Route::group(['prefix' => 'usuarios', 'middleware' => "admin"], function () {
     Route::get('/', "UserController@index");
 });

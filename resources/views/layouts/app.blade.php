@@ -395,6 +395,27 @@
                                 
                             </ul>
 
+                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Professor</div>
+                            <ul class="pcoded-item pcoded-left-item">
+                                <li class="@if($menu=="Caderneta") active @endif">
+                                    <a href="/cadernetas/">
+                                        <span class="pcoded-micon"><i class="ti-home"></i><b>H</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Caderneta</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                                <li class="@if($menu=="Minha Turma") active @endif">
+                                    <a href="/minha_turma/">
+                                        <span class="pcoded-micon"><i class="ti-user"></i><b>U</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Minha Turma</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                               
+                            </ul>
+
                             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Acerca</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li>

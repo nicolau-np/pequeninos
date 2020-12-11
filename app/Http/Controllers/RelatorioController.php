@@ -88,7 +88,7 @@ class RelatorioController extends Controller
        $tabela_preco = TabelaPreco::where($data['where'])->first();
         $forma_pagamentos = FormaPagamento::where('forma_pagamento', $tabela_preco->forma_pagamento)->first();
         $epoca_pagamentos = EpocaPagamento::where('id_forma_pagamento', $forma_pagamentos->id)->get();
-        $historico = HistoricEstudante::where(['id_turma'=>$request->turma, 'ano_lectivo'=>$request->ano_lectivo])->get();
+        $historico = HistoricEstudante::where(['id_turma'=>$request->turma, 'ano_lectivo'=>$request->ano_lectivo])->get()->sortBy('estudante.pessoa.nome');;
         $data = [
             'getTipoPagamento'=>$tipo_pagamento,
             'getTurma'=>$turma,

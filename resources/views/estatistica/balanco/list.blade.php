@@ -57,6 +57,35 @@ $meses = [1,2,3,4,5,6,7,8,9,10,11,12,];
                             <div class="tab-content tabs-left-content card-block">
                                 <div class="tab-pane active" id="home5" role="tabpanel">
                                     <p class="m-0">
+                                        <div class="tabela">
+                                            <table class="table table-bordered" style="font-size:12px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Tipos de Pagamentos</th>
+                                                        <?php 
+                                                        foreach($trimestres as $trimestre){
+                                                        ?>
+                                                        <th>{{$trimestre}}</th>
+                                                        <?php }?>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    foreach($getTipoPagamentos as $tipo_pagamentos){
+                                                    ?>
+                                                    <tr>
+                                                    <td>{{$tipo_pagamentos->tipo}}</td>
+                                                        <?php 
+                                                        foreach($trimestres as $trimestre){
+                                                            $valores = ControladorStatic::getValoresBalancoTrimestral($trimestre, $tipo_pagamentos->id, $getAno);
+                                                        ?>
+                                                        <td>{{number_format($valores,2,',','.')}} Akz</td>
+                                                        <?php }?>
+                                                    </tr>
+                                                <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                         <!-- pagamentos trimestrais-->
                                         <figure class="highcharts-figure">
                                             <div id="container_trimestral" style="width: 100%;"></div>
@@ -131,6 +160,36 @@ $meses = [1,2,3,4,5,6,7,8,9,10,11,12,];
                                 </div>
                                 <div class="tab-pane" id="profile5" role="tabpanel">
                                     <p class="m-0">
+                                        <div class="tabela">
+                                            <table class="table table-bordered" style="font-size:12px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Tipos de Pagamentos</th>
+                                                        <?php 
+                                                        foreach($meses as $mes){
+                                                            $getMes = ControladorStatic::converterMes($mes);
+                                                        ?>
+                                                        <th>{{$getMes}}</th>
+                                                        <?php }?>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    foreach($getTipoPagamentos as $tipo_pagamentos){
+                                                    ?>
+                                                    <tr>
+                                                    <td>{{$tipo_pagamentos->tipo}}</td>
+                                                        <?php 
+                                                        foreach($meses as $mes){
+                                                        $valores = ControladorStatic::getValoresBalancoMensal($mes, $tipo_pagamentos->id, $getAno);
+                                                        ?>
+                                                        <td>{{number_format($valores,2,',','.')}} Akz</td>
+                                                        <?php }?>
+                                                    </tr>
+                                                <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                         <!-- pagamentos mensais-->
                                         <figure class="highcharts-figure">
                                             <div id="container_mensal" style="width: 100%;"></div>
@@ -206,6 +265,31 @@ $meses = [1,2,3,4,5,6,7,8,9,10,11,12,];
                                 </div>
                                 <div class="tab-pane" id="messages5" role="tabpanel">
                                     <p class="m-0">
+                                        <div class="tabela">
+                                            <table class="table table-bordered" style="font-size:12px;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>Tipos de Pagamentos</th>
+                                                        <th>{{$getAno}}</th>
+                                                        
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <?php
+                                                    foreach($getTipoPagamentos as $tipo_pagamentos){
+                                                    ?>
+                                                    <tr>
+                                                    <td>{{$tipo_pagamentos->tipo}}</td>
+                                                    <?php
+                                                        $valores = ControladorStatic::getValoresBalancoAnual($tipo_pagamentos->id, $getAno);
+                                                    ?>
+                                                        <td>{{number_format($valores,2,',','.')}} Akz</td>
+                                                    <?php ?>
+                                                    </tr>
+                                                <?php } ?>
+                                                </tbody>
+                                            </table>
+                                        </div>
                                         <!-- pagamentos anuais-->
                                         <figure class="highcharts-figure">
                                             <div id="container_anual" style="width: 100%;"></div>

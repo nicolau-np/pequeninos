@@ -9,6 +9,7 @@ class FormaPagamentoSeeder extends Seeder
         ['forma_pagamento' => "Trimestral"],
         ['forma_pagamento' => "Mensal"],
         ['forma_pagamento' => "Anual"],
+        ['forma_pagamento' => "Momental"],
     ];
     public function run()
     {

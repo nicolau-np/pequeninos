@@ -17,6 +17,7 @@ class Pagamento extends Model
         'preco',
         'data_pagamento',
         'fatura',
+        'mes_pagamento',
         'ano_lectivo',
     ];
 

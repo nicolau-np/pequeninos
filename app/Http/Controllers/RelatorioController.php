@@ -36,17 +36,20 @@ class RelatorioController extends Controller
         if (!$historico) {
             return back()->with(['error' => "Não encontrou historico"]);
         }
-
+        $tipo_pagamento = TipoPagamento::find($id_tipo_pagamento);
         if($id_tipo_pagamento == 3){
             $pagamento = PagamentoPai::where('fatura', $id_fatura)->get();
         }else{
             $pagamento = Pagamento::where('fatura', $id_fatura)->get();
         }
-        
+        $educandos = Estudante::where('id_encarregado', $historico->estudante->id_encarregado)->get();
         $data = [
             'getPagamento'=>$pagamento,
             'getHistorico'=>$historico,
             'getId_tipo_pagamento'=>$id_tipo_pagamento,
+            'getTipoPagamento'=>$tipo_pagamento,
+            'getNumeroFatura'=>$id_fatura,
+            'getEducandos'=>$educandos,
         ];
         $pdf = PDF::loadView('relatorios.fatura', $data)->setPaper('A4', 'normal');
 

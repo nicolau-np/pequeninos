@@ -309,7 +309,8 @@
                 id_curso: $(this).val(),
                 _token: "{{ csrf_token() }}"
             };
-            $.ajax({
+            if(data.id_curso!=""){
+                $.ajax({
                 type: "post",
                 url: "{{route('getClasses')}}",
                 data: data,
@@ -318,6 +319,8 @@
                     $('.load_classes').html(response);
                 }
             });
+            }
+         
         });
 
         $('.encarregador').keyup(function(){

@@ -49,7 +49,8 @@
                                     {{Form::select('forma_pagamento', [
                                         'Trimestral'=>"Trimestral",
                                         'Mensal'=>"Mensal",
-                                        'Anual'=>"Anual"
+                                        'Anual'=>"Anual",
+                                        'Momental'=>"Momental",
                                     ], null, ['class'=>"form-control", 'placeholder'=>"Forma de Pagamento"])}}
                                 
                                 <div class="erro">

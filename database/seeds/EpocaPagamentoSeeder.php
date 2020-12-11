@@ -73,6 +73,11 @@ class EpocaPagamentoSeeder extends Seeder
         'id_forma_pagamento'=>3,
         'epoca'=>"1ª Vez"
        ],
+       //momental
+       [
+        'id_forma_pagamento'=>4,
+        'epoca'=>"Pagamento"
+       ],
    ];
     public function run()
     {

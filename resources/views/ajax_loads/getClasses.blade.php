@@ -10,8 +10,8 @@
                 id_classe: $(this).val(),
                 _token: "{{ csrf_token() }}"
             };
-
-            $.ajax({
+            if((data.id_classe!="") && (data.id_curso!="")){
+                $.ajax({
                 type: "post",
                 url: "{{route('getTurmas')}}",
                 data: data,
@@ -19,7 +19,9 @@
                 success: function (response) {
                     $('.load_turmas').html(response);
                 }
-            });
+            });  
+            }
+          
         });
     });
 </script>

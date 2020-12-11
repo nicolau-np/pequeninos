@@ -31,10 +31,15 @@
       <link rel="stylesheet" type="text/css" href="{{asset('assets/template/css/jquery.mCustomScrollbar.css')}}">
       <link rel="stylesheet" type="text/css" href="{{asset('assets/template/style.css')}}">
       <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
+      
+      @if($menu=="Gráfico" || $submenu == "Gráfico")
       <script src="{{asset('assets/highcharts/highcharts.js')}}"></script>
       <script src="{{asset('assets/highcharts/modules/exporting.js')}}"></script>
       <script src="{{asset('assets/highcharts/modules/export-data.js')}}"></script>
       <script src="{{asset('assets/highcharts/modules/accessibility.js')}}"></script>
+      @endif
+     
+
   </head>
   @if($type!="login")
   <body>
@@ -361,7 +366,7 @@
                                             </a>
                                         </li>
                                         <li class="@if($menu=="Balanços") active @endif">
-                                            <a href="/estatisticas/balancos/">
+                                            <a href="/estatisticas/balancos/list/{{date('Y')}}">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Balanços</span>
                                                 <span class="pcoded-mcaret"></span>

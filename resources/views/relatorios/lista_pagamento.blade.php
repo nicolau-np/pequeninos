@@ -37,6 +37,7 @@
             <table class="table">
                 <thead>
                     <tr>
+                        <th>Nº</th>
                         <th>Estudante</th>
                         <th>Nome Encarregado</th>
                         <th>Telefone</th>
@@ -49,6 +50,7 @@
                    
                     @foreach ($getHistoricoEstudante as $histoEstudantes)
                         <tr>
+                        <td>{{$loop->iteration}}</td>
                         <td>{{$histoEstudantes->estudante->pessoa->nome}}</td>
                         <td>{{$histoEstudantes->estudante->encarregado->pessoa->nome}}</td>
                         <td>{{$histoEstudantes->estudante->encarregado->pessoa->telefone}}</td>

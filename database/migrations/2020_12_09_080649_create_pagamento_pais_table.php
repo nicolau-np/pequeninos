@@ -22,6 +22,7 @@ class CreatePagamentoPaisTable extends Migration
             $table->decimal('preco', 14,2);
             $table->date('data_pagamento');
             $table->bigInteger('fatura');
+            $table->bigInteger('mes_pagamento');
             $table->bigInteger('ano_lectivo');
             $table->timestamps();
         });

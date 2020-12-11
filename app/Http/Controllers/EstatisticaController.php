@@ -30,39 +30,19 @@ class EstatisticaController extends Controller
         return view('estatistica.pagamento.list', $data);
     }
 
-    public function balanco(){
-        $data = [
-            'title' => "Balanços",
-            'type' => "estatisticas",
-            'menu' => "Balanços",
-            'submenu' => "Listar",
-        ];
-        return view('estatistica.balanco.list', $data);
-    }
-
-    public function grafico(Request $request){
-        $request->validate([
-            'ano_lectivo'=>['required', 'Integer'],
-            'forma_pagamento'=>['required', 'string'],
-        ]);
-
-        $ano_lectivo = AnoLectivo::where('ano_lectivo', $request->ano_lectivo)->first();
-        if(!$ano_lectivo){
-            return back()->with(['error'=>"Não encontrou este ano lectivo"]);
-        }
-
-        $forma_pagamento = FormaPagamento::where('forma_pagamento', $request->forma_pagamento)->first();
-        $epocaPagamento = EpocaPagamento::where('id_forma_pagamento', $forma_pagamento->id)->get();
+    public function balanco($ano){
+        $anos = AnoLectivo::orderBy('id', 'desc')->get();
         $tipo_pagamentos = TipoPagamento::get();
         $data = [
             'title' => "Balanços",
             'type' => "estatisticas",
             'menu' => "Balanços",
             'submenu' => "Gráfico",
-            'getEpocasPagamento'=>$epocaPagamento,
-            'getAno'=>$request->ano_lectivo,
-            'getTipoPagamentos'=>$tipo_pagamentos
+            'getTipoPagamentos'=>$tipo_pagamentos,
+            'getAnos'=>$anos,
+            'getAno'=>$ano,
         ];
-        return view('graficos.balanco', $data);
+        return view('estatistica.balanco.list', $data);
     }
+
 }

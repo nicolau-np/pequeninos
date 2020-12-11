@@ -136,6 +136,7 @@ class PagamentoController extends Controller
             'id_classe' => $historico->estudante->turma->classe->id,
             'id_curso' => $historico->estudante->turma->curso->id,
             'id_tipo_pagamento' => $id_tipo_pagamento,
+            
         ];
 
         $tabela_preco = TabelaPreco::where($data)->first();
@@ -162,6 +163,7 @@ class PagamentoController extends Controller
             'preco' => $tabela_preco->preco,
             'data_pagamento' => date('Y-m-d'),
             'fatura'=>$fatura->id,
+            'mes_pagamento'=>date('m'),
             'ano_lectivo' => $historico->ano_lectivo,   
         ];
 
@@ -180,6 +182,7 @@ class PagamentoController extends Controller
             'preco' => $tabela_preco->preco,
             'data_pagamento' => date('Y-m-d'),
             'fatura'=>$fatura->id,
+            'mes_pagamento'=>date('m'),
             'ano_lectivo' => $historico->ano_lectivo, 
         ];
 

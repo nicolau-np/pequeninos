@@ -111,7 +111,25 @@ class DirectorTurmaController extends Controller
      */
     public function edit($id)
     {
-        //
+        $director = DirectorTurma::find($id);
+        if(!$director){
+            return back()->with(['error'=>"Não encontrou director"]);
+        }
+
+        $cursos = Curso::pluck('curso', 'id');
+        $ano_lectivos = AnoLectivo::pluck('ano_lectivo', 'id');
+        $ano_lectivo = AnoLectivo::where('ano_lectivo', $director->ano_lectivo)->first();
+        $data = [
+            'title' => "Directores de Turma",
+            'type' => "directores",
+            'menu' => "Directores de Turma",
+            'submenu' => "Editar",
+            'getCursos'=>$cursos,
+            'getAnoLectivo'=>$ano_lectivos,
+            'getDirector'=>$director,
+            'getAno'=>$ano_lectivo,
+        ];
+        return view('directores.edit', $data);
     }
 
     /**
@@ -123,7 +141,50 @@ class DirectorTurmaController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $director = DirectorTurma::find($id);
+        if(!$director){
+            return back()->with(['error'=>"Não encontrou director"]);
+        }
+
+        $request->validate([
+            'funcionario'=>['required', 'Integer'],
+            'curso'=>['required', 'Integer'],
+            'classe'=>['required', 'Integer'],
+            'turma'=>['required', 'Integer'],
+            'ano_lectivo'=>['required', 'Integer'],
+        ]);
+
+        $ano_lectivo = AnoLectivo::find($request->ano_lectivo);
+        if(!$ano_lectivo){
+            return back()->with(['error'=>"Não encontrou este ano"]);
+        }
+        
+        $data['store'] = [
+        'id_funcionario'=>$request->funcionario,
+        'id_turma'=>$request->turma,
+        'ano_lectivo'=>$ano_lectivo->ano_lectivo,
+        ];
+
+        $data['where'] = [
+            'id_turma'=>$request->turma,
+            'ano_lectivo'=>$ano_lectivo->ano_lectivo,
+        ];
+
+        if($data['store']['id_funcionario'] != $director->id_funcionario 
+        ||$data['store']['id_turma'] != $director->id_turma || 
+        $data['store']['ano_lectivo']!=$director->ano_lectivo){
+            if(DirectorTurma::where($data['store'])->first()){
+                return back()->with(['error'=>"Já cadastrou como Director"]);
+            }
+    
+            if(DirectorTurma::where($data['where'])->first()){
+                return back()->with(['error'=>"Esta turma já tem Director"]);
+            } 
+        }
+       
+        if(DirectorTurma::find($id)->update($data['store'])){
+            return back()->with(['success'=>"Feito com sucesso"]); 
+        }
     }
 
     /**

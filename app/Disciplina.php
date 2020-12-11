@@ -21,4 +21,8 @@ class Disciplina extends Model
     public function grade(){
         return $this->hasMany(Grade::class, 'id_disciplina', 'id');
     }
+
+    public function horario(){
+        return $this->hasMany(Horario::class, 'id_disciplina', 'id');
+    }
 }

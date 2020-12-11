@@ -11,6 +11,7 @@ class Horario extends Model
     protected $fillable = [
         'id_funcionario',
         'id_turma',
+        'id_disciplina',
         'id_sala',
         'id_hora',
         'ano_lectivo',
@@ -31,5 +32,9 @@ class Horario extends Model
     public function hora(){
         return $this->belongsTo(Hora::class, 'id_hora', 'id');
     }
+
+    public function disciplina(){
+        return $this->belongsTo(Disciplina::class, 'id_disciplina', 'id');
+    } 
 
 }

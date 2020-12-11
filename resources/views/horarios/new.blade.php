@@ -27,7 +27,7 @@
                     @if(session('success'))
                     <div class="alert alert-success">{{session('success')}}</div>
                     @endif
-                        {{Form::open(['method'=>"post", 'url'=>"/estudantes/store"])}}
+                        {{Form::open(['method'=>"put", 'url'=>"/horarios/store/{$getFuncionario->id}"])}}
                         @csrf
                         <fieldset>
                             <legend><i class="ti-list"></i> Dados acadêmicos</legend>
@@ -55,6 +55,18 @@
                                 </div>
 
                                 <div class="col-md-3">
+                                    {{Form::label('disciplina', "Disciplina")}} <span class="text-danger">*</span>
+                                    <span class="load_disciplinas">
+                                    {{Form::select('disciplina', [], null, ['class'=>"form-control", 'placeholder'=>"Disciplina"])}}
+                                </span>
+                                <div class="erro">
+                                    @if($errors->has('disciplina'))
+                                    <div class="text-danger">{{$errors->first('disciplina')}}</div>
+                                    @endif 
+                                </div>
+                                </div>
+
+                                <div class="col-md-3">
                                     {{Form::label('turma', "Turma")}} <span class="text-danger">*</span>
                                     <span class="load_turmas">
                                     {{Form::select('turma', [], null, ['class'=>"form-control", 'placeholder'=>"Turma"])}}
@@ -62,6 +74,30 @@
                                 <div class="erro">
                                     @if($errors->has('turma'))
                                     <div class="text-danger">{{$errors->first('turma')}}</div>
+                                    @endif 
+                                </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    {{Form::label('hora', "Hora")}} <span class="text-danger">*</span>
+                                    <span class="load_horas">
+                                    {{Form::select('hora', [], null, ['class'=>"form-control", 'placeholder'=>"Hora"])}}
+                                </span>
+                                <div class="erro">
+                                    @if($errors->has('hora'))
+                                    <div class="text-danger">{{$errors->first('hora')}}</div>
+                                    @endif 
+                                </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    {{Form::label('sala', "Sala")}} <span class="text-danger">*</span>
+                                    
+                                    {{Form::select('sala', [], null, ['class'=>"form-control", 'placeholder'=>"Sala"])}}
+                                
+                                <div class="erro">
+                                    @if($errors->has('sala'))
+                                    <div class="text-danger">{{$errors->first('sala')}}</div>
                                     @endif 
                                 </div>
                                 </div>
@@ -91,6 +127,43 @@
                         
                         {{Form::close()}}
                    </div>
+                   <hr/>
+                   <div class="tabela">
+                       <fieldset>
+                       <legend><i class="ti-list"></i> Horarios de {{$getFuncionario->pessoa->nome}}</legend>
+                       <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>Disciplina</th>
+                                <th>Sala</th>
+                                <th>Turma</th>
+                                <th>Horas</th>
+                                <th>Operações</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($getHorarios as $horarios)
+                             <tr>
+                             <td>{{$horarios->funcionario->pessoa->nome}}</td>
+                             <td>{{$horarios->disciplina->disciplina}}</td>
+                             <td>{{$horarios->sala->sala}}</td>
+                             <td>{{$horarios->turma->turma}}</td>
+                             <td>{{$horarios->hora->hora_entrada}} - {{$horarios->hora->hora_saida}}</td>
+                             <td>
+                                <a href="http://" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
+                             </td>
+                            </tr>   
+                            
+                            @endforeach
+                        </tbody>
+                   </table>   
+                    </fieldset>
+                     
+                   </div>
+                   <div class="pagination">
+                    {{$getHorarios->links()}}
+                </div>
                 </div>
             </div>
         </div>

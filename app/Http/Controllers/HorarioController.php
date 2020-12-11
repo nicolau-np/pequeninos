@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AnoLectivo;
 use App\Curso;
 use App\Funcionario;
+use App\Horario;
 use Illuminate\Http\Request;
 
 class HorarioController extends Controller
@@ -32,7 +33,7 @@ class HorarioController extends Controller
         }
         $cursos = Curso::pluck('curso', 'id');
         $ano_lectivos = AnoLectivo::pluck('ano_lectivo', 'id');
-
+        $horarios = Horario::orderBy('id', 'desc')->where('id_funcionario', $id_funcionario)->paginate('8');
         $data = [
             'title' => "Horários",
             'type' => "funcionarios",
@@ -41,6 +42,7 @@ class HorarioController extends Controller
             'getCursos' => $cursos,
             'getAnoLectivo' => $ano_lectivos,
             'getFuncionario' => $funcionario,
+            'getHorarios'=>$horarios,
         ];
         return view('horarios.new', $data);
     }
@@ -51,9 +53,14 @@ class HorarioController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id_funcionario)
     {
-        //
+        $funcionario = Funcionario::find($id_funcionario);
+        if (!$funcionario) {
+            return back()->with(['error' => "Não encontrou funcionário"]);
+        }
+
+        echo "save";
     }
 
     /**

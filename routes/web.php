@@ -134,6 +134,7 @@ Route::group(['prefix' => 'funcionarios'], function () {
 
 Route::group(['prefix'=>"horarios"], function(){
     Route::get('/create/{id_funcionario}', "HorarioController@create");
+    Route::put('/store/{id_funcionario}', "HorarioController@store");
 });
 
 Route::group(['prefix' => 'estatisticas'], function () {

@@ -249,6 +249,14 @@
                                     </a>
                                 </li>
 
+                                <li class="@if($menu=="Directores de Turma") active @endif">
+                                    <a href="/directores/">
+                                        <span class="pcoded-micon"><i class="ti-briefcase"></i><b>D</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Directores de Turma</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
                                 <li class="@if($menu=="Encarregados") active @endif">
                                     <a href="/encarregados/">
                                         <span class="pcoded-micon"><i class="ti-layout-media-overlay-alt"></i><b>E</b></span>

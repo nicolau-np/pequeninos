@@ -33,6 +33,7 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/searchEncarregados', "AjaxController@searchEncarregados")->name('searchEncarregados');
     Route::post('/getDisciplinasCad', "AjaxController@getDisciplinasCad")->name('getDisciplinasCad');
     Route::post('/getHoras', "AjaxController@getHoras")->name('getHoras');
+    Route::post('/getFuncionarios', "AjaxController@getFuncionarios")->name('getFuncionarios');
 });
 
 Route::group(['prefix' => 'institucional'], function () {
@@ -132,6 +133,11 @@ Route::group(['prefix' => 'funcionarios'], function () {
     Route::post('/store', "FuncionarioController@store");
     Route::get('/edit/{id}', "FuncionarioController@edit");
     Route::put('/update/{id}', "FuncionarioController@update");
+});
+
+Route::group(['prefix' => 'directores'], function () {
+    Route::get('/', "DirectorTurmaController@index");
+    Route::get('/create', "DirectorTurmaController@create");
 });
 
 Route::group(['prefix'=>"horarios"], function(){

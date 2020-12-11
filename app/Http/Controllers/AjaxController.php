@@ -168,4 +168,14 @@ class AjaxController extends Controller
 
         return view('ajax_loads.getHoras', $data);
     }
+
+    public function getFuncionarios(Request $request){
+        $funcionarios = Funcionario::whereHas('pessoa', function ($query) use ($request) {
+            $query->where('nome', 'LIKE', "%{$request->search_text}%");
+        })->get();
+        $data = [
+            'getFuncionarios' => $funcionarios,
+        ];
+        return view('ajax_loads.getFuncionarios', $data);
+    }
 }

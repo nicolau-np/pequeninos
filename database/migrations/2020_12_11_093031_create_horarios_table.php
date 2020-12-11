@@ -21,6 +21,8 @@ class CreateHorariosTable extends Migration
             $table->bigInteger('id_disciplina')->unsigned()->index();
             $table->bigInteger('id_sala')->unsigned()->index();
             $table->bigInteger('id_hora')->unsigned()->index();
+            $table->string('semana');
+            $table->string('estado')->nullable();
             $table->bigInteger('ano_lectivo');
             $table->timestamps();
         });

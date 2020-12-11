@@ -28,7 +28,7 @@
         function getDisciplinas(data){
             $.ajax({
                 type: "post",
-                url: "{{route('getDisciplinas')}}",
+                url: "{{route('getDisciplinasCad')}}",
                 data: data,
                 dataType: "html",
                 success: function (response) {

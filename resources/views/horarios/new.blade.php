@@ -103,6 +103,24 @@
                                 </div>
 
                                 <div class="col-md-3">
+                                    {{Form::label('semana', "Semana")}} <span class="text-danger">*</span>
+                                    
+                                    {{Form::select('semana', [
+                                        'Segunda'=>"Segunda",
+                                        'Terça'=>"Terça",
+                                        'Quarta'=>"Quarta",
+                                        'Quinta'=>"Quinta",
+                                        'Sexta'=>"Sexta"
+                                    ], null, ['class'=>"form-control", 'placeholder'=>"Semana"])}}
+                                
+                                <div class="erro">
+                                    @if($errors->has('semana'))
+                                    <div class="text-danger">{{$errors->first('semana')}}</div>
+                                    @endif 
+                                </div>
+                                </div>
+
+                                <div class="col-md-3">
                                     {{Form::label('ano_lectivo', "Ano Lectivo")}} <span class="text-danger">*</span>
                                     {{Form::select('ano_lectivo', $getAnoLectivo, null, ['class'=>"form-control", 'placeholder'=>"Ano Lectivo"])}}
                                 
@@ -134,22 +152,24 @@
                        <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Nome</th>
                                 <th>Disciplina</th>
                                 <th>Sala</th>
                                 <th>Turma</th>
+                                <th>Semana</th>
                                 <th>Horas</th>
+                                <th>Estado</th>
                                 <th>Operações</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($getHorarios as $horarios)
                              <tr>
-                             <td>{{$horarios->funcionario->pessoa->nome}}</td>
                              <td>{{$horarios->disciplina->disciplina}}</td>
                              <td>{{$horarios->sala->sala}}</td>
                              <td>{{$horarios->turma->turma}}</td>
+                             <td>{{$horarios->semana}}</td>
                              <td>{{$horarios->hora->hora_entrada}} - {{$horarios->hora->hora_saida}}</td>
+                             <td>{{$horarios->estado}}</td>
                              <td>
                                 <a href="http://" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
                              </td>

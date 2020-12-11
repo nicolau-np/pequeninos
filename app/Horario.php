@@ -14,6 +14,8 @@ class Horario extends Model
         'id_disciplina',
         'id_sala',
         'id_hora',
+        'semana',
+        'estado',
         'ano_lectivo',
     ];
 

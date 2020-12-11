@@ -36,4 +36,24 @@ class Estudante extends Model
         return $this->belongsTo(Encarregado::class, 'id_encarregado', 'id');
     }
 
+    public function avaliacao()
+    {
+        return $this->hasMany(Avaliacao::class, 'id_estudante', 'id');
+    }
+
+    public function prova()
+    {
+        return $this->hasMany(Prova::class, 'id_estudante', 'id');
+    }
+
+    public function notas_trimestrais()
+    {
+        return $this->hasMany(NotaTrimestral::class, 'id_estudante', 'id');
+    }
+
+    public function nota_final()
+    {
+        return $this->hasMany(NotaFinal::class, 'id_estudante', 'id');
+    }
+
 }

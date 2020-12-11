@@ -25,4 +25,21 @@ class Disciplina extends Model
     public function horario(){
         return $this->hasMany(Horario::class, 'id_disciplina', 'id');
     }
+
+    public function avaliacao(){
+        return $this->hasMany(Avaliacao::class, 'id_disciplina', 'id');
+    }
+
+    public function prova(){
+        return $this->hasMany(Prova::class, 'id_disciplina', 'id');
+    }
+
+    public function notas_trimestrais(){
+        return $this->hasMany(NotaTrimestral::class, 'id_disciplina', 'id');
+    }
+
+    public function nota_final(){
+        return $this->hasMany(NotaFinal::class, 'id_disciplina', 'id');
+    }
+
 }

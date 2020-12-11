@@ -55,7 +55,41 @@ class DirectorTurmaController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'funcionario'=>['required', 'Integer'],
+            'curso'=>['required', 'Integer'],
+            'classe'=>['required', 'Integer'],
+            'turma'=>['required', 'Integer'],
+            'ano_lectivo'=>['required', 'Integer'],
+        ]);
+
+        $ano_lectivo = AnoLectivo::find($request->ano_lectivo);
+        if(!$ano_lectivo){
+            return back()->with(['error'=>"Não encontrou este ano"]);
+        }
+        
+        $data['store'] = [
+        'id_funcionario'=>$request->funcionario,
+        'id_turma'=>$request->turma,
+        'ano_lectivo'=>$ano_lectivo->ano_lectivo,
+        ];
+
+        $data['where'] = [
+            'id_turma'=>$request->turma,
+            'ano_lectivo'=>$ano_lectivo->ano_lectivo,
+        ];
+
+        if(DirectorTurma::where($data['store'])->first()){
+            return back()->with(['error'=>"Já cadastrou como Director"]);
+        }
+
+        if(DirectorTurma::where($data['where'])->first()){
+            return back()->with(['error'=>"Esta turma já tem Director"]);
+        }
+
+        if(DirectorTurma::create($data['store'])){
+            return back()->with(['success'=>"Feito com sucesso"]); 
+        }
     }
 
     /**

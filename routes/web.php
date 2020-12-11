@@ -138,6 +138,7 @@ Route::group(['prefix' => 'funcionarios'], function () {
 Route::group(['prefix' => 'directores'], function () {
     Route::get('/', "DirectorTurmaController@index");
     Route::get('/create', "DirectorTurmaController@create");
+    Route::post('/store', "DirectorTurmaController@store");
 });
 
 Route::group(['prefix'=>"horarios"], function(){

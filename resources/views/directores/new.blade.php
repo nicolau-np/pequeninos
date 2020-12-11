@@ -27,7 +27,7 @@
                     @if(session('success'))
                     <div class="alert alert-success">{{session('success')}}</div>
                     @endif
-                        {{Form::open(['method'=>"post", 'url'=>"/estudantes/store"])}}
+                        {{Form::open(['method'=>"post", 'url'=>"/directores/store"])}}
                         @csrf
                       
                         <fieldset>

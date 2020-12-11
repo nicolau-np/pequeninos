@@ -54,18 +54,19 @@
                         <td>{{$histoEstudantes->estudante->pessoa->nome}}</td>
                         <td>{{$histoEstudantes->estudante->encarregado->pessoa->nome}}</td>
                         <td>{{$histoEstudantes->estudante->encarregado->pessoa->telefone}}</td>
-                        @foreach ($getEpocasPagamento as $epocas)
-                        @php
-                            $comparticipacao = ControladorStatic::getPagamentosComparticipacao($histoEstudantes->estudante->id_encarregado, $epocas->epoca, $getAno);
-                        @endphp
+                        <?php 
+                        
+                        foreach($getEpocasPagamento as $epocas){
+                        $comparticipacao = ControladorStatic::getPagamentosComparticipacao($histoEstudantes->estudante->id_encarregado, $epocas->epoca, $getAno);
+                       ?>
                         <td>
                             @if ($comparticipacao==null)
-                                Não Pago
+                                --
                             @else
-                                Pago
+                                {{$comparticipacao->preco}}
                             @endif
                         </td>
-                        @endforeach 
+                    <?php }?>
                         </tr>
                     @endforeach
                     

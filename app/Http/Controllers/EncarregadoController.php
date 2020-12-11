@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AnoLectivo;
 use App\Encarregado;
 use App\Pessoa;
 use App\Provincia;
@@ -17,13 +18,16 @@ class EncarregadoController extends Controller
     
     public function index()
     {
+        
         $encarregados = Encarregado::paginate(5);
+        $anos = AnoLectivo::pluck('ano_lectivo', 'id');
         $data = [
             'title' => "Encarregados",
             'type' => "encarregados",
             'menu' => "Encarregados",
             'submenu' => "Listar",
             'getEncarregados' => $encarregados,
+            'getAnos'=>$anos,
         ];
         return view('encarregados.list', $data);
     }

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AnoLectivo;
+use App\Encarregado;
 use App\EpocaPagamento;
 use App\Estudante;
 use App\Fatura;
@@ -88,7 +89,7 @@ class RelatorioController extends Controller
        $tabela_preco = TabelaPreco::where($data['where'])->first();
         $forma_pagamentos = FormaPagamento::where('forma_pagamento', $tabela_preco->forma_pagamento)->first();
         $epoca_pagamentos = EpocaPagamento::where('id_forma_pagamento', $forma_pagamentos->id)->get();
-        $historico = HistoricEstudante::where(['id_turma'=>$request->turma, 'ano_lectivo'=>$request->ano_lectivo])->get()->sortBy('estudante.pessoa.nome');;
+        $historico = HistoricEstudante::where(['id_turma'=>$request->turma, 'ano_lectivo'=>$request->ano_lectivo])->get()->sortBy('estudante.pessoa.nome');
         $data = [
             'getTipoPagamento'=>$tipo_pagamento,
             'getTurma'=>$turma,
@@ -101,5 +102,27 @@ class RelatorioController extends Controller
         $pdf = PDF::loadView('relatorios.lista_pagamento', $data)->setPaper('A4', 'normal');
 
         return $pdf->stream('Lista de ' . $tipo_pagamento->tipo . '-' . $turma->turma .' '.$request->ano_lectivo .'.pdf');
+    }
+
+    public function lista_comparticipacao(Request $request){
+        $request->validate([
+            'ano_lectivo'=>['required', 'Integer'],
+        ]);
+        $ano_lectivo = AnoLectivo::find($request->ano_lectivo);
+        if(!$ano_lectivo){
+            return back()->with(['error'=>"Ano lectivo não encontrado"]);
+        }
+
+        $encarregados = Encarregado::WhereHas('pessoa', function($query){
+            $query->orderBy('nome', 'desc');
+        })->get();
+
+        $data = [
+            'getAno'=>$ano_lectivo,
+            'getEncarregados'=>$encarregados,
+        ];
+        $pdf = PDF::loadView('relatorios.lista_encarregados', $data)->setPaper('A4', 'normal');
+
+        return $pdf->stream('Lista de Comparticipação ' . $ano_lectivo->ano_lectivo .'.pdf');
     }
 }

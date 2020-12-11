@@ -73,6 +73,39 @@
                     <div class="pagination">
                         {{$getEncarregados->links()}}
                     </div>
+
+                    <div class="pesquisa_avancada">
+                       <div class="form">
+                        @if(session('error'))
+                        <div class="alert alert-danger">{{session('error')}}</div>
+                        @endif
+    
+                        @if(session('success'))
+                        <div class="alert alert-success">{{session('success')}}</div>
+                        @endif
+
+                           {{Form::open(['method'=>"get", 'url'=>"/relatorios/lista_comparticicacao",])}}
+                            <fieldset>
+                                <legend>
+                                    <i class="ti-search"></i> Lista de Comparticipação
+                                </legend>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        {{ Form::select('ano_lectivo', $getAnos, null, ['placeholder'=>"Ano Lectivo", 'class'=>"form-control"]) }}
+                                        <div class="erro">
+                                            @if($errors->has('ano_lectivo'))
+                                            <div class="text-danger">{{$errors->first('ano_lectivo')}}</div>
+                                            @endif 
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        {{ Form::submit('Pesquisar', ['class'=>"btn btn-primary"])}}
+                                    </div>
+                                </div>
+                            </fieldset>
+                           {{Form::close()}}
+                       </div>
+                    </div>
                 </div>
             </div>
         </div>

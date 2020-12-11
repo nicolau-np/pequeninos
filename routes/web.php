@@ -145,6 +145,7 @@ Route::group(['prefix' => 'estatisticas'], function () {
 Route::group(['prefix' => 'relatorios'], function () {
     Route::get('/fatura/{id_fatura}', "RelatorioController@fatura");
     Route::get('/lista_pagamentos', "RelatorioController@lista_pagamentos");
+    Route::get('/lista_comparticicacao', "RelatorioController@lista_comparticipacao");
 });
 
 Route::group(['prefix' => 'usuarios', 'middleware' => "admin"], function () {

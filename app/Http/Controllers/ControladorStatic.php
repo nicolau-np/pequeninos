@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Estudante;
 use App\Pagamento;
 use App\PagamentoPai;
 use App\TipoPagamento;
@@ -119,5 +120,27 @@ class ControladorStatic extends Controller
         }
         
         return $retorno;
+    }
+
+    public static function getEducandos($id_encarregado){
+        $estudante = Estudante::WhereHas('pessoa', function($query){
+            $query->orderBy('nome', 'asc');
+        })->where('id_encarregado', $id_encarregado)->get();
+
+        return $estudante;
+    }
+
+    public static function getValoresComparticipacao($epoca, $id_encarregado, $ano_lectivo){
+        
+        $data = [
+            'epoca'=>$epoca,
+            'id_encarregado'=>$id_encarregado,
+            'ano_lectivo'=>$ano_lectivo,
+        ];
+
+        $pagamentos = PagamentoPai::where($data)->first();
+        
+
+        return $pagamentos;
     }
 }

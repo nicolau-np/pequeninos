@@ -8,6 +8,8 @@ use App\Disciplina;
 use App\Encarregado;
 use App\Estudante;
 use App\Funcionario;
+use App\Grade;
+use App\Hora;
 use App\Municipio;
 use App\Turma;
 use Illuminate\Http\Request;
@@ -146,5 +148,24 @@ class AjaxController extends Controller
             'getEncarregados'=>$encarregados
         ];
         return view('ajax_loads.searchEncarregados', $data);
+    }
+
+    public function getDisciplinasCad(Request $request){
+        $disciplinas = Grade::where(['id_curso'=>$request->id_curso, 'id_classe'=>$request->id_classe])->get();
+        $data = [
+            'getGrade'=>$disciplinas,
+        ];
+        return view('ajax_loads.getDisciplinasCad', $data);
+    }
+
+    public function getHoras(Request $request){
+        $turma = Turma::find($request->id_turma);
+        $horas = Hora::where('id_turno', $turma->id_turno)->get();
+
+        $data = [
+            'getHoras'=>$horas
+        ];
+
+        return view('ajax_loads.getHoras', $data);
     }
 }

@@ -6,6 +6,7 @@ use App\AnoLectivo;
 use App\Curso;
 use App\Funcionario;
 use App\Horario;
+use App\Sala;
 use Illuminate\Http\Request;
 
 class HorarioController extends Controller
@@ -34,6 +35,7 @@ class HorarioController extends Controller
         $cursos = Curso::pluck('curso', 'id');
         $ano_lectivos = AnoLectivo::pluck('ano_lectivo', 'id');
         $horarios = Horario::orderBy('id', 'desc')->where('id_funcionario', $id_funcionario)->paginate('8');
+        $salas = Sala::pluck('sala', 'id');
         $data = [
             'title' => "Horários",
             'type' => "funcionarios",
@@ -43,6 +45,7 @@ class HorarioController extends Controller
             'getAnoLectivo' => $ano_lectivos,
             'getFuncionario' => $funcionario,
             'getHorarios'=>$horarios,
+            'getSalas'=>$salas,
         ];
         return view('horarios.new', $data);
     }
@@ -55,12 +58,21 @@ class HorarioController extends Controller
      */
     public function store(Request $request, $id_funcionario)
     {
+        $request->validate([
+            'curso'=>['required', 'Integer'],
+            'classe'=>['required', 'Integer'],
+            'disciplina'=>['required', 'Integer'],
+            'sala'=>['required', 'Integer'],
+            'hora'=>['required', 'Integer'],
+            'turma'=>['required', 'Integer'],
+            'ano_lectivo'=>['required', 'Integer'], 
+        ]);
         $funcionario = Funcionario::find($id_funcionario);
         if (!$funcionario) {
             return back()->with(['error' => "Não encontrou funcionário"]);
         }
 
-        echo "save";
+        
     }
 
     /**

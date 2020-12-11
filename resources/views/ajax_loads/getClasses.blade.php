@@ -18,11 +18,24 @@
                 dataType: "html",
                 success: function (response) {
                     $('.load_turmas').html(response);
+                    getDisciplinas(data);
                 }
             });  
             }
           
         });
+
+        function getDisciplinas(data){
+            $.ajax({
+                type: "post",
+                url: "{{route('getDisciplinas')}}",
+                data: data,
+                dataType: "html",
+                success: function (response) {
+                    $('.load_disciplinas').html(response);
+                }
+            });
+        }
     });
 </script>
 

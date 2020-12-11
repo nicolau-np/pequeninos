@@ -31,6 +31,8 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/searchEstudantes', "AjaxController@searchEstudantes")->name('searchEstudantes');
     Route::post('/searchFuncionarios', "AjaxController@searchFuncionarios")->name('searchFuncionarios');
     Route::post('/searchEncarregados', "AjaxController@searchEncarregados")->name('searchEncarregados');
+    Route::post('/getDisciplinas', "AjaxController@getDisciplinasCad")->name('getDisciplinas');
+    Route::post('/getHoras', "AjaxController@getHoras")->name('getHoras');
 });
 
 Route::group(['prefix' => 'institucional'], function () {

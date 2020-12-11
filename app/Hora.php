@@ -17,4 +17,8 @@ class Hora extends Model
     public function turno(){
         return $this->belongsTo(Turno::class, 'id_turno', 'id');
     }
+
+    public function horario(){
+        return $this->hasMany(Horario::class, 'id_hora', 'id');
+    }
 }

@@ -17,4 +17,8 @@ class Sala extends Model
     public function tipo_sala(){
         return $this->belongsTo(TipoSala::class, 'id_tipo_sala', 'id');
     }
+
+    public function horario(){
+        return $this->hasMany(Horario::class, 'id_sala', 'id');
+    }
 }

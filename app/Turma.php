@@ -34,5 +34,13 @@ class Turma extends Model
     public function historico(){
         return $this->hasMany(HistoricEstudante::class, 'id_turma', 'id');
     }
+
+    public function horario(){
+        return $this->hasMany(Horario::class, 'id_turma', 'id');
+    }
+
+    public function director_turma(){
+        return $this->hasMany(DirectorTurma::class, 'id_turma', 'id');
+    }
     
 }

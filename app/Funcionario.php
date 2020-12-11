@@ -26,4 +26,12 @@ class Funcionario extends Model
     public function pessoa(){
         return $this->belongsTo(Pessoa::class, 'id_pessoa', 'id');
     }
+
+    public function horario(){
+        return $this->hasMany(Horario::class, 'id_funcionario', 'id');
+    }
+
+    public function director_turma(){
+        return $this->hasMany(DirectorTurma::class, 'id_funcionario', 'id');
+    }
 }

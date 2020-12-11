@@ -132,6 +132,10 @@ Route::group(['prefix' => 'funcionarios'], function () {
     Route::put('/update/{id}', "FuncionarioController@update");
 });
 
+Route::group(['prefix'=>"horarios"], function(){
+    Route::get('/create/{id_funcionario}', "HorarioController@create");
+});
+
 Route::group(['prefix' => 'estatisticas'], function () {
     Route::group(['prefix' => 'pagamentos'], function () {
         Route::get('/', "EstatisticaController@lista_pagamento");

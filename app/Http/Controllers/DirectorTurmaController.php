@@ -14,6 +14,11 @@ class DirectorTurmaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public function __construct()
+    {
+        $this->middleware('admin');
+    }
     public function index()
     {
         $directores = DirectorTurma::paginate(5);
@@ -22,7 +27,7 @@ class DirectorTurmaController extends Controller
             'type' => "directores",
             'menu' => "Directores de Turma",
             'submenu' => "Listar",
-            'getDirectores'=>$directores,
+            'getDirectores' => $directores,
         ];
         return view('directores.list', $data);
     }
@@ -41,8 +46,8 @@ class DirectorTurmaController extends Controller
             'type' => "directores",
             'menu' => "Directores de Turma",
             'submenu' => "Novo",
-            'getCursos'=>$cursos,
-            'getAnoLectivo'=>$ano_lectivos,
+            'getCursos' => $cursos,
+            'getAnoLectivo' => $ano_lectivos,
         ];
         return view('directores.new', $data);
     }
@@ -56,39 +61,39 @@ class DirectorTurmaController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'funcionario'=>['required', 'Integer'],
-            'curso'=>['required', 'Integer'],
-            'classe'=>['required', 'Integer'],
-            'turma'=>['required', 'Integer'],
-            'ano_lectivo'=>['required', 'Integer'],
+            'funcionario' => ['required', 'Integer'],
+            'curso' => ['required', 'Integer'],
+            'classe' => ['required', 'Integer'],
+            'turma' => ['required', 'Integer'],
+            'ano_lectivo' => ['required', 'Integer'],
         ]);
 
         $ano_lectivo = AnoLectivo::find($request->ano_lectivo);
-        if(!$ano_lectivo){
-            return back()->with(['error'=>"Não encontrou este ano"]);
+        if (!$ano_lectivo) {
+            return back()->with(['error' => "Não encontrou este ano"]);
         }
-        
+
         $data['store'] = [
-        'id_funcionario'=>$request->funcionario,
-        'id_turma'=>$request->turma,
-        'ano_lectivo'=>$ano_lectivo->ano_lectivo,
+            'id_funcionario' => $request->funcionario,
+            'id_turma' => $request->turma,
+            'ano_lectivo' => $ano_lectivo->ano_lectivo,
         ];
 
         $data['where'] = [
-            'id_turma'=>$request->turma,
-            'ano_lectivo'=>$ano_lectivo->ano_lectivo,
+            'id_turma' => $request->turma,
+            'ano_lectivo' => $ano_lectivo->ano_lectivo,
         ];
 
-        if(DirectorTurma::where($data['store'])->first()){
-            return back()->with(['error'=>"Já cadastrou como Director"]);
+        if (DirectorTurma::where($data['store'])->first()) {
+            return back()->with(['error' => "Já cadastrou como Director"]);
         }
 
-        if(DirectorTurma::where($data['where'])->first()){
-            return back()->with(['error'=>"Esta turma já tem Director"]);
+        if (DirectorTurma::where($data['where'])->first()) {
+            return back()->with(['error' => "Esta turma já tem Director"]);
         }
 
-        if(DirectorTurma::create($data['store'])){
-            return back()->with(['success'=>"Feito com sucesso"]); 
+        if (DirectorTurma::create($data['store'])) {
+            return back()->with(['success' => "Feito com sucesso"]);
         }
     }
 
@@ -112,8 +117,8 @@ class DirectorTurmaController extends Controller
     public function edit($id)
     {
         $director = DirectorTurma::find($id);
-        if(!$director){
-            return back()->with(['error'=>"Não encontrou director"]);
+        if (!$director) {
+            return back()->with(['error' => "Não encontrou director"]);
         }
 
         $cursos = Curso::pluck('curso', 'id');
@@ -124,10 +129,10 @@ class DirectorTurmaController extends Controller
             'type' => "directores",
             'menu' => "Directores de Turma",
             'submenu' => "Editar",
-            'getCursos'=>$cursos,
-            'getAnoLectivo'=>$ano_lectivos,
-            'getDirector'=>$director,
-            'getAno'=>$ano_lectivo,
+            'getCursos' => $cursos,
+            'getAnoLectivo' => $ano_lectivos,
+            'getDirector' => $director,
+            'getAno' => $ano_lectivo,
         ];
         return view('directores.edit', $data);
     }
@@ -142,48 +147,50 @@ class DirectorTurmaController extends Controller
     public function update(Request $request, $id)
     {
         $director = DirectorTurma::find($id);
-        if(!$director){
-            return back()->with(['error'=>"Não encontrou director"]);
+        if (!$director) {
+            return back()->with(['error' => "Não encontrou director"]);
         }
 
         $request->validate([
-            'funcionario'=>['required', 'Integer'],
-            'curso'=>['required', 'Integer'],
-            'classe'=>['required', 'Integer'],
-            'turma'=>['required', 'Integer'],
-            'ano_lectivo'=>['required', 'Integer'],
+            'funcionario' => ['required', 'Integer'],
+            'curso' => ['required', 'Integer'],
+            'classe' => ['required', 'Integer'],
+            'turma' => ['required', 'Integer'],
+            'ano_lectivo' => ['required', 'Integer'],
         ]);
 
         $ano_lectivo = AnoLectivo::find($request->ano_lectivo);
-        if(!$ano_lectivo){
-            return back()->with(['error'=>"Não encontrou este ano"]);
+        if (!$ano_lectivo) {
+            return back()->with(['error' => "Não encontrou este ano"]);
         }
-        
+
         $data['store'] = [
-        'id_funcionario'=>$request->funcionario,
-        'id_turma'=>$request->turma,
-        'ano_lectivo'=>$ano_lectivo->ano_lectivo,
+            'id_funcionario' => $request->funcionario,
+            'id_turma' => $request->turma,
+            'ano_lectivo' => $ano_lectivo->ano_lectivo,
         ];
 
         $data['where'] = [
-            'id_turma'=>$request->turma,
-            'ano_lectivo'=>$ano_lectivo->ano_lectivo,
+            'id_turma' => $request->turma,
+            'ano_lectivo' => $ano_lectivo->ano_lectivo,
         ];
 
-        if($data['store']['id_funcionario'] != $director->id_funcionario 
-        ||$data['store']['id_turma'] != $director->id_turma || 
-        $data['store']['ano_lectivo']!=$director->ano_lectivo){
-            if(DirectorTurma::where($data['store'])->first()){
-                return back()->with(['error'=>"Já cadastrou como Director"]);
+        if (
+            $data['store']['id_funcionario'] != $director->id_funcionario
+            || $data['store']['id_turma'] != $director->id_turma ||
+            $data['store']['ano_lectivo'] != $director->ano_lectivo
+        ) {
+            if (DirectorTurma::where($data['store'])->first()) {
+                return back()->with(['error' => "Já cadastrou como Director"]);
             }
-    
-            if(DirectorTurma::where($data['where'])->first()){
-                return back()->with(['error'=>"Esta turma já tem Director"]);
-            } 
+
+            if (DirectorTurma::where($data['where'])->first()) {
+                return back()->with(['error' => "Esta turma já tem Director"]);
+            }
         }
-       
-        if(DirectorTurma::find($id)->update($data['store'])){
-            return back()->with(['success'=>"Feito com sucesso"]); 
+
+        if (DirectorTurma::find($id)->update($data['store'])) {
+            return back()->with(['success' => "Feito com sucesso"]);
         }
     }
 

@@ -20,6 +20,16 @@
                 </div>
                 <div class="card-block">
                   <div class="row">
+                    <div class="col-md-12">
+                         @if(session('error'))
+                    <div class="alert alert-danger">{{session('error')}}</div>
+                    @endif
+
+                    @if(session('success'))
+                    <div class="alert alert-success">{{session('success')}}</div>
+                    @endif
+                    </div>
+                   
 
                     @if($getHorario->count()==0)
                     Nenhuma turma encontrada
@@ -36,7 +46,7 @@
                                         Ano Lectivo: {{$horario->ano_lectivo}}
                                         <hr/>
                                        <div class="operacoes">
-                                        <a href="#" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="" data-original-title="Inserir Notas">
+                                        <a href="/cadernetas/create/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="" data-original-title="Inserir Notas">
                                             <i class="icofont icofont-edit-alt"></i>
                                         </a>&nbsp;
                                         <a href="#" type="button" class="btn btn-danger btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mini Pauta">
@@ -47,7 +57,10 @@
                                         </a>&nbsp;
                                         <a href="#" type="button" class="btn btn-warning btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Baixar Excel">
                                             <i class="icofont icofont-download-alt"></i>
-                                        </a>
+                                        </a>&nbsp;
+                                        <a href="/cadernetas/store/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}" type="button" class="btn btn-info btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Actualizar">
+                                            <i class="icofont icofont-refresh"></i>
+                                        </a>&nbsp;
                                        </div>
                                     </span>
                                 </div>

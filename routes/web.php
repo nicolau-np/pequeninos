@@ -166,6 +166,8 @@ Route::group(['prefix' => 'relatorios', 'middleware' => "auth"], function () {
 
 Route::group(['prefix' => 'cadernetas', 'middleware' => "auth"], function () {
     Route::get('/', "CadernetaController@index");
+    Route::get('/create/{id_turma}/{id_disciplina}/{ano_lectivo}', "CadernetaController@create");
+    Route::get('/store/{id_turma}/{id_disciplina}/{ano_lectivo}', "CadernetaController@store");
 });
 
 Route::group(['prefix' => 'minha_turma', 'middleware' => "auth"], function () {

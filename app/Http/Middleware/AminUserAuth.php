@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class AminUserAuth
 {
@@ -15,6 +16,9 @@ class AminUserAuth
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if(Auth::user()->nivel_acesso =="admin" || Auth::user()->nivel_acesso =="user"){
+            return $next($request);
+        }
+        return redirect()->route('home');
     }
 }

@@ -68,6 +68,11 @@ class HorarioController extends Controller
         if (!$funcionario) {
             return back()->with(['error' => "Não encontrou funcionário"]);
         }
+
+        $ano_lectivo = AnoLectivo::find($request->ano_lectivo);
+        if (!$ano_lectivo) {
+            return back()->with(['error' => "Não encontrou ano lectivo"]);
+        }
         
         $request->validate([
             'curso'=>['required', 'Integer'],
@@ -88,7 +93,7 @@ class HorarioController extends Controller
         'id_hora'=>$request->hora,
         'semana'=>$request->semana,
         'estado'=>null,
-        'ano_lectivo'=>$request->ano_lectivo,
+        'ano_lectivo'=>$ano_lectivo->ano_lectivo,
        
         ];
         $data['where1']=[
@@ -98,27 +103,27 @@ class HorarioController extends Controller
             'id_sala'=>$request->sala,
             'id_hora'=>$request->hora,
             'semana'=>$request->semana,
-            'ano_lectivo'=>$request->ano_lectivo,  
+            'ano_lectivo'=>$ano_lectivo->ano_lectivo,  
         ];
 
         $data['where2']=[
             'id_turma'=>$request->turma,
             'semana'=>$request->semana,
             'id_hora'=>$request->hora,
-            'ano_lectivo'=>$request->ano_lectivo,  
+            'ano_lectivo'=>$ano_lectivo->ano_lectivo,  
         ];
 
         $data['where3']=[
             'id_funcionario'=>$id_funcionario,
             'semana'=>$request->semana,
             'id_hora'=>$request->hora,
-            'ano_lectivo'=>$request->ano_lectivo,  
+            'ano_lectivo'=>$ano_lectivo->ano_lectivo,  
         ];
 
         $data['where4']=[
             'id_disciplina'=>$request->disciplina,
             'id_turma'=>$request->turma,
-            'ano_lectivo'=>$request->ano_lectivo,  
+            'ano_lectivo'=>$ano_lectivo->ano_lectivo,  
         ];
 
         //existencia de horario

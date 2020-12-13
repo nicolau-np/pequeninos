@@ -60,3 +60,21 @@ fieldset legend{
 .not_found{
     text-align: center;
 }
+@media (max-width:600px){
+    fieldset{
+        border: 1px solid #4680ff;
+        padding: 10px;
+        box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.12);
+    }
+    
+    fieldset legend{
+        padding: 10px;
+        background:#4680ff;
+        color: #fff;
+        font-size: 14px;
+        margin-left: 2%;
+        width: 30%;
+        box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.12);
+        border-radius: 4px;
+    }
+}

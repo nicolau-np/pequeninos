@@ -149,11 +149,11 @@ Route::group(['prefix' => "horarios", 'middleware' => "auth"], function () {
 });
 
 Route::group(['prefix' => 'estatisticas', 'middleware' => "auth"], function () {
-    Route::group(['prefix' => 'pagamentos'], function () {
+    Route::group(['prefix' => 'pagamentos', 'middleware' => "AdminUser"], function () {
         Route::get('/', "EstatisticaController@lista_pagamento");
     });
 
-    Route::group(['prefix' => 'balancos'], function () {
+    Route::group(['prefix' => 'balancos', 'middleware' => "admin"], function () {
         Route::get('/list/{ano}', "EstatisticaController@balanco");
     });
 });

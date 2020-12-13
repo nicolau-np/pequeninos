@@ -11,10 +11,6 @@ use Illuminate\Http\Request;
 
 class EstatisticaController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
     
     public function lista_pagamento(){
         $tipo_pagamentos = TipoPagamento::pluck('tipo', 'id');

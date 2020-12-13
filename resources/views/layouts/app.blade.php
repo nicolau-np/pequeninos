@@ -223,6 +223,7 @@
                                     <span class="search-icon"><i class="ti-search" aria-hidden="true"></i></span>
                                 </div>
                             </div>
+
                             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Principal</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="@if($menu=="Home") active @endif">
@@ -232,7 +233,7 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-
+                                @if (Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="user")
                                 <li class="@if($menu=="Usuários") active @endif">
                                     <a href="/usuarios/">
                                         <span class="pcoded-micon"><i class="ti-user"></i><b>U</b></span>
@@ -272,12 +273,14 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-
-                               
+                                @endif
                             </ul>
-                            <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Extras</div>
+
+                            @if (Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="user")
+                                  <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Extras</div>
                             <ul class="pcoded-item pcoded-left-item">
 
+                                @if(Auth::user()->nivel_acesso=="admin")
                                 <li class="pcoded-hasmenu @if($type=="institucional") active pcoded-trigger @endif">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="ti-settings"></i></span>
@@ -333,7 +336,9 @@
 
                                     </ul>
                                 </li>
+                                @endif
 
+                                @if(Auth::user()->nivel_acesso=="admin")
                                 <li class="pcoded-hasmenu @if($type=="financas") active pcoded-trigger @endif">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="ti-money"></i></span>
@@ -358,6 +363,8 @@
                
                                     </ul>
                                 </li>
+                                @endif
+
 
                                 <li class="pcoded-hasmenu @if($type=="estatisticas") active pcoded-trigger @endif">
                                     <a href="javascript:void(0)">
@@ -366,6 +373,7 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
+                                        @if(Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="user")
                                         <li class="@if($menu=="Listas de Pagamentos") active @endif">
                                             <a href="/estatisticas/pagamentos/">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
@@ -373,6 +381,9 @@
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
+                                        @endif
+
+                                        @if(Auth::user()->nivel_acesso=="admin")
                                         <li class="@if($menu=="Balanços") active @endif">
                                             <a href="/estatisticas/balancos/list/{{date('Y')}}">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
@@ -380,10 +391,10 @@
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
-               
+                                        @endif
                                     </ul>
                                 </li>
-
+                                @if(Auth::user()->nivel_acesso=="admin")
                                 <li>
                                     <a href="form-elements-component.html">
                                         <span class="pcoded-micon"><i class="ti-key"></i><b>B</b></span>
@@ -391,10 +402,12 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                             
+                             @endif
                                 
                             </ul>
-
+                            @endif
+                          
+                            @if(Auth::user()->nivel_acesso=="professor")
                             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Professor</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="@if($menu=="Caderneta") active @endif">
@@ -415,6 +428,7 @@
 
                                
                             </ul>
+                            @endif
 
                             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Acerca</div>
                             <ul class="pcoded-item pcoded-left-item">

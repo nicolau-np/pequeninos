@@ -16,7 +16,7 @@ class FuncionarioController extends Controller
 
     public function __construct()
     {
-        $this->middleware('admin');
+        $this->middleware('AdminUser');
     }
     /**
      * Display a listing of the resource.

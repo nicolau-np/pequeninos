@@ -19,4 +19,8 @@ class Turno extends Model
     public function hora(){
         return $this->hasMany(Hora::class, 'id_turno', 'id');
     }
+
+    public function tabela_preco(){
+        return $this->hasMany(TabelaPreco::class, 'id_turno', 'id');
+    }
 }

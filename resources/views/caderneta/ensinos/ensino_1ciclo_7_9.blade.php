@@ -26,7 +26,53 @@
                     </div>
                 </div>
                 <div class="card-block">
-                   aqui
+
+                    <div class="col-lg-12 col-xl-12">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs md-tabs tabs-left b-none" role="tablist">
+                            <li class="nav-item">
+                                <a class="nav-link active" data-toggle="tab" href="#trimestre1" role="tab">1º Trimestre</a>
+                                <div class="slide"></div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#trimestre2" role="tab">2º Trimestre</a>
+                                <div class="slide"></div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#trimestre3" role="tab">3º Trimestre</a>
+                                <div class="slide"></div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" data-toggle="tab" href="#global" role="tab">Global</a>
+                                <div class="slide"></div>
+                            </li>
+                        </ul>
+                        <!-- Tab panes -->
+                        <div class="tab-content tabs-left-content card-block">
+                            <div class="tab-pane active" id="trimestre1" role="tabpanel">
+                                <p class="m-0">
+                                    1.Trimestre
+                                </p>
+                            </div>
+                            <div class="tab-pane" id="trimestre2" role="tabpanel">
+                                <p class="m-0">
+                                    2.Trimestre
+                                </p>
+                            </div>
+                            <div class="tab-pane" id="trimestre3" role="tabpanel">
+                                <p class="m-0">
+                                    3.Trimestre
+                                </p>
+                            </div>
+                            <div class="tab-pane" id="global" role="tabpanel">
+                                <p class="m-0">
+                                    Global
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>

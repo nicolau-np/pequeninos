@@ -20,6 +20,7 @@ Route::get('/logout', "UserController@logout")->name('logout');
 
 Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/getClasses', "AjaxController@getClasses")->name('getClasses');
+    Route::post('/getClasses2', "AjaxController@getClasses2")->name('getClasses2');
     Route::post('/getMunicipios', "AjaxController@getMunicipios")->name('getMunicipios');
     Route::post('/getTurmas', "AjaxController@getTurmas")->name('getTurmas');
     Route::post('/getEncarregados', "AjaxController@getEncarregados")->name('getEncarregados');

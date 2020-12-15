@@ -52,6 +52,7 @@ class PagamentoController extends Controller
         $data['tabela_preco'] = [
             'id_classe' => $historico->estudante->turma->classe->id,
             'id_curso' => $historico->estudante->turma->curso->id,
+            'id_turno'=>$historico->estudante->turma->id_turno,
             'id_tipo_pagamento' => $id_tipo_pagamento,
         ];
 
@@ -135,6 +136,7 @@ class PagamentoController extends Controller
         $data = [
             'id_classe' => $historico->estudante->turma->classe->id,
             'id_curso' => $historico->estudante->turma->curso->id,
+            'id_turno'=>$historico->estudante->turma->id_turno,
             'id_tipo_pagamento' => $id_tipo_pagamento,
             
         ];
@@ -299,6 +301,7 @@ class PagamentoController extends Controller
         $data = [
             'id_classe' => $historico->estudante->turma->classe->id,
             'id_curso' => $historico->estudante->turma->curso->id,
+            'id_turno' =>$historico->estudante->turma->id_turno,
         ];
         $tabela_preco = TabelaPreco::where($data)->get();
         Session::put('id_historico', $historico->id);

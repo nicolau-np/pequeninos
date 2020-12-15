@@ -71,8 +71,20 @@
                                 </div>
 
                                 <div class="col-md-2">
+                                    {{Form::label('turno', "Turno")}} <span class="text-danger">*</span>
+                                    
+                                    {{Form::select('turno', $getTurnos, null, ['class'=>"form-control", 'placeholder'=>"Turno"])}}
+                                
+                                <div class="erro">
+                                    @if($errors->has('turno'))
+                                    <div class="text-danger">{{$errors->first('turno')}}</div>
+                                    @endif 
+                                </div>
+                                </div>
+
+                                <div class="col-md-2">
                                     {{Form::label('classe', "Classe")}} <span class="text-danger">*</span>
-                                    <span class="load_classes">
+                                    <span class="load_classes2">
                                     {{Form::select('classe', [], null, ['class'=>"form-control", 'placeholder'=>"Classe"])}}
                                 </span>
                                 <div class="erro">
@@ -129,16 +141,19 @@
             var data = {
                 id_curso: $(this).val(),
                 _token: "{{ csrf_token() }}"
-            }
-            $.ajax({
+            };
+            if(data.id_curso!=""){
+               $.ajax({
                 type: "post",
-                url: "{{route('getClasses')}}",
+                url: "{{route('getClasses2')}}",
                 data: data,
                 dataType: "html",
                 success: function (response) {
-                    $('.load_classes').html(response);
+                    $('.load_classes2').html(response);
                 }
-            });
+            }); 
+            }
+            
         });
     });
 </script>

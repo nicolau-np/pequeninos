@@ -19,6 +19,7 @@ class CreateTabelaPrecosTable extends Migration
             $table->bigInteger('id_tipo_pagamento')->unsigned()->index();
             $table->bigInteger('id_curso')->unsigned()->index();
             $table->bigInteger('id_classe')->unsigned()->index();
+            $table->bigInteger('id_turno')->unsigned()->index();
             $table->decimal('preco', 14,2);
             $table->string('forma_pagamento');
             $table->timestamps();
@@ -28,6 +29,7 @@ class CreateTabelaPrecosTable extends Migration
             $table->foreign('id_tipo_pagamento')->references('id')->on('tipo_pagamentos')->onUpdate('cascade');
             $table->foreign('id_curso')->references('id')->on('cursos')->onUpdate('cascade');
             $table->foreign('id_classe')->references('id')->on('classes')->onUpdate('cascade');
+            $table->foreign('id_turno')->references('id')->on('turnos')->onUpdate('cascade');
         });
     }
 

@@ -178,4 +178,20 @@ class AjaxController extends Controller
         ];
         return view('ajax_loads.getFuncionarios', $data);
     }
+
+    public function getClasses2(Request $request){
+        $request->validate([
+            'id_curso' => ['required', 'Integer'],
+        ]);
+        $curso = Curso::find($request->id_curso);
+        if (!$curso) {
+            return response()->json(['error' => "Não encontrou curso"]);
+        }
+        $classes = Classe::where('id_ensino', $curso->id_ensino)->get();
+        $data = [
+            'getClasses' => $classes,
+        ];
+        return view('ajax_loads.getClasses2', $data);
+        
+    }
 }

@@ -41,6 +41,7 @@
                                     <th>Tipo</th>
                                     <th>Curso</th>
                                     <th>Classe</th>
+                                    <th>Turno</th>
                                     <th>Preço</th>
                                     <th>Operações</th>
                                 </tr>
@@ -56,6 +57,7 @@
                                     <td>{{$precos->tipo_pagamento->tipo}}</td>
                                     <td>{{$precos->curso->curso}}</td>
                                     <td>{{$precos->classe->classe}}</td>
+                                    <td>{{$precos->turno->turno}}</td>
                                     <td>{{number_format($precos->preco,2,',','.')}}</td>
                                     <td>
                                         <a href="/financas/tabela_precos/edit/{{$precos->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>

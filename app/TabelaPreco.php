@@ -12,6 +12,7 @@ class TabelaPreco extends Model
         'id_tipo_pagamento',
         'id_curso',
         'id_classe',
+        'id_turno',
         'preco', 
         'forma_pagamento',
     ];
@@ -26,5 +27,9 @@ class TabelaPreco extends Model
 
     public function classe(){
         return $this->belongsTo(Classe::class, 'id_classe', 'id');
+    }
+
+    public function turno(){
+        return $this->belongsTo(Turno::class, 'id_turno', 'id');
     }
 }

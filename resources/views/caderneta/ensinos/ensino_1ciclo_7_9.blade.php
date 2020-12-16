@@ -1,6 +1,10 @@
 @extends('layouts.app')
 @section('content')
-
+<style>
+    .notaP, .notaA{
+        width: 70px;
+    }
+</style>
 <div class="page-body">
     <div class="row">
         <div class="col-sm-12">
@@ -51,22 +55,298 @@
                         <div class="tab-content tabs-left-content card-block">
                             <div class="tab-pane @if(session('epoca')=="1") active @endif" role="tabpanel">
                                 <p class="m-0">
-                                    1.Trimestre
-                                </p>
+
+                                    {{Form::open(['method'=>"post"])}}
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <!--avaliacao-->
+                                             <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th rowspan="2">Nº</th>
+                                                        <th rowspan="2">Estudante</th>
+                                                        <th colspan="3">Avaliações</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Fev</th>
+                                                        <th>Mar</th>
+                                                        <th>Abr</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @if (session('epoca')==1)
+                                        @if ($getAvaliacao!=null)
+                                            @if ($getAvaliacao->count()==0)
+                                                Nenhum estudante encontrado
+                                            @else
+                                            @foreach ($getAvaliacao as $avaliacao)
+                                            <tr>
+                                            <td>{{$loop->iteration}}</td>
+                                            <td>{{$avaliacao->estudante->pessoa->nome}}</td>
+                                                <td>
+                                                <input type="number" name="av1" data-id="{{$avaliacao->id}}" data-campo="1" value="{{$avaliacao->valo1}}" class="form-control notaA" />
+                                                </td>
+                                                <td>
+                                                <input type="number" name="av2" data-id="{{$avaliacao->id}}" data-campo="2" value="{{$avaliacao->valo2}}" class="form-control notaA" />
+                                                </td>
+                                                <td>
+                                                <input type="number" name="av3" data-id="{{$avaliacao->id}}" data-campo="3" value="{{$avaliacao->valo3}}" class="form-control notaA" />  
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                            @endif
+                                        @endif
+                                    @endif
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- provas-->
+                                        <div class="col-md-3">
+                                            <table class="table table-bordered">
+                                               <thead>
+                                                   <tr>
+                                                       <th>Provas</th>
+                                                   </tr>
+                                                   <tr>
+                                                       <th>P1</th>
+                                                   </tr>
+                                               </thead>
+                                               <tbody>
+                                                   @if (session('epoca')==1)
+                                       @if ($getProva!=null)
+                                           @if ($getProva->count()==0)
+                                               Nenhum estudante encontrado
+                                           @else
+                                           @foreach ($getProva as $prova)
+                                           <tr>
+                                            <td>
+                                                <input type="number" name="p1" data-id="{{$prova->id}}" data-campo="1" value="{{$prova->valor1}}" class="form-control notaP" />
+                                            </td>
+                                           </tr>
+                                           @endforeach
+                                           @endif
+                                       @endif
+                                   @endif
+                                                   
+                                               </tbody>
+                                           </table>
+                                       </div>
+                                       
+                                    </div>
+                                    {{Form::close()}}
+                                 </p>
                             </div>
                             <div class="tab-pane @if(session('epoca')=="2") active @endif" role="tabpanel">
                                 <p class="m-0">
-                                    2.Trimestre
+                                    {{Form::open(['method'=>"post"])}}
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <!--avaliacao-->
+                                             <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th rowspan="2">Nº</th>
+                                                        <th rowspan="2">Estudante</th>
+                                                        <th colspan="3">Avaliações</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Fev</th>
+                                                        <th>Mar</th>
+                                                        <th>Abr</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @if (session('epoca')==2)
+                                        @if ($getAvaliacao!=null)
+                                            @if ($getAvaliacao->count()==0)
+                                                Nenhum estudante encontrado
+                                            @else
+                                            @foreach ($getAvaliacao as $avaliacao)
+                                            <tr>
+                                            <td>{{$loop->iteration}}</td>
+                                            <td>{{$avaliacao->estudante->pessoa->nome}}</td>
+                                                <td>
+                                                <input type="number" name="av1" data-id="{{$avaliacao->id}}" data-campo="1" value="{{$avaliacao->valo1}}" class="form-control notaA" />
+                                                </td>
+                                                <td>
+                                                <input type="number" name="av2" data-id="{{$avaliacao->id}}" data-campo="2" value="{{$avaliacao->valo2}}" class="form-control notaA" />
+                                                </td>
+                                                <td>
+                                                <input type="number" name="av3" data-id="{{$avaliacao->id}}" data-campo="3" value="{{$avaliacao->valo3}}" class="form-control notaA" />  
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                            @endif
+                                        @endif
+                                    @endif
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- provas-->
+                                        <div class="col-md-3">
+                                            <table class="table table-bordered">
+                                               <thead>
+                                                   <tr>
+                                                       <th>Provas</th>
+                                                   </tr>
+                                                   <tr>
+                                                       <th>P1</th>
+                                                   </tr>
+                                               </thead>
+                                               <tbody>
+                                                   @if (session('epoca')==2)
+                                       @if ($getProva!=null)
+                                           @if ($getProva->count()==0)
+                                               Nenhum estudante encontrado
+                                           @else
+                                           @foreach ($getProva as $prova)
+                                           <tr>
+                                            <td>
+                                                <input type="number" name="p1" data-id="{{$prova->id}}" data-campo="1" value="{{$prova->valor1}}" class="form-control notaP" />
+                                            </td>
+                                           </tr>
+                                           @endforeach
+                                           @endif
+                                       @endif
+                                   @endif
+                                                   
+                                               </tbody>
+                                           </table>
+                                       </div>
+                                       
+                                    </div>
+                                    {{Form::close()}}
                                 </p>
                             </div>
                             <div class="tab-pane @if(session('epoca')=="3") active @endif" role="tabpanel">
                                 <p class="m-0">
-                                    3.Trimestre
+                                    {{Form::open(['method'=>"post"])}}
+                                    <div class="row">
+                                        <div class="col-md-9">
+                                            <!--avaliacao-->
+                                             <table class="table table-bordered">
+                                                <thead>
+                                                    <tr>
+                                                        <th rowspan="2">Nº</th>
+                                                        <th rowspan="2">Estudante</th>
+                                                        <th colspan="3">Avaliações</th>
+                                                    </tr>
+                                                    <tr>
+                                                        <th>Fev</th>
+                                                        <th>Mar</th>
+                                                        <th>Abr</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @if (session('epoca')==3)
+                                        @if ($getAvaliacao!=null)
+                                            @if ($getAvaliacao->count()==0)
+                                                Nenhum estudante encontrado
+                                            @else
+                                            @foreach ($getAvaliacao as $avaliacao)
+                                            <tr>
+                                            <td>{{$loop->iteration}}</td>
+                                            <td>{{$avaliacao->estudante->pessoa->nome}}</td>
+                                                <td>
+                                                <input type="number" name="av1" data-id="{{$avaliacao->id}}" data-campo="1" value="{{$avaliacao->valo1}}" class="form-control notaA" />
+                                                </td>
+                                                <td>
+                                                <input type="number" name="av2" data-id="{{$avaliacao->id}}" data-campo="2" value="{{$avaliacao->valo2}}" class="form-control notaA" />
+                                                </td>
+                                                <td>
+                                                <input type="number" name="av3" data-id="{{$avaliacao->id}}" data-campo="3" value="{{$avaliacao->valo3}}" class="form-control notaA" />  
+                                                </td>
+                                            </tr>
+                                            @endforeach
+                                            @endif
+                                        @endif
+                                    @endif
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <!-- provas-->
+                                        <div class="col-md-3">
+                                            <table class="table table-bordered">
+                                               <thead>
+                                                   <tr>
+                                                       <th>Provas</th>
+                                                   </tr>
+                                                   <tr>
+                                                       <th>P1</th>
+                                                   </tr>
+                                               </thead>
+                                               <tbody>
+                                                   @if (session('epoca')==3)
+                                       @if ($getProva!=null)
+                                           @if ($getProva->count()==0)
+                                               Nenhum estudante encontrado
+                                           @else
+                                           @foreach ($getProva as $prova)
+                                           <tr>
+                                            <td>
+                                                <input type="number" name="p1" data-id="{{$prova->id}}" data-campo="1" value="{{$prova->valor1}}" class="form-control notaP" />
+                                            </td>
+                                           </tr>
+                                           @endforeach
+                                           @endif
+                                       @endif
+                                   @endif
+                                                   
+                                               </tbody>
+                                           </table>
+                                       </div>
+                                       
+                                    </div>
+                                    {{Form::close()}}
                                 </p>
                             </div>
                             <div class="tab-pane @if(session('epoca')=="4") active @endif" role="tabpanel">
                                 <p class="m-0">
-                                    Global
+                                    {{Form::open(['method'=>"post"])}}
+                                      <!-- provas-->
+                                      <div class="row">
+                                      <div class="col-md-3">
+                                        <table class="table table-bordered">
+                                           <thead>
+                                               <tr>
+                                                   <th rowspan="2">Nº</th>
+                                                   <th rowspan="2">Estudante</th>
+                                                   <th>Prova Global</th>
+                                               </tr>
+                                               <tr>
+                                                   <th>CPE</th>
+                                               </tr>
+                                           </thead>
+                                           <tbody>
+                                               @if (session('epoca')==4)
+                                   @if ($getGlobal!=null)
+                                       @if ($getGlobal->count()==0)
+                                           Nenhum estudante encontrado
+                                       @else
+                                       @foreach ($getGlobal as $global)
+                                       <tr>
+                                       <td>{{$loop->iteration}}</td>
+                                       <td>{{$global->estudante->pessoa->nome}}</td>
+                                        <td>
+                                            <input type="number" name="global" data-id="{{$global->id}}" data-campo="cpe" value="{{$global->cpe}}" class="form-control notaG" />
+                                        </td>
+                                       </tr>
+                                       @endforeach
+                                       @endif
+                                   @endif
+                               @endif
+                                               
+                                           </tbody>
+                                       </table>
+                                   </div>
+                                </div>
+                                {{Form::close()}}
                                 </p>
                             </div>
                         </div>
@@ -89,4 +369,101 @@
 	</div>
 </div>
 
+<script>
+    $(document).ready(function () { 
+        $('.notaA').on('keypress', function(e){
+            if(e.which == 13){
+                var valor = $(this).val();
+                var id_avalicao = $(this).data('id');
+                var campo = $(this).data('campo');
+
+                if((valor==="") || (valor<0) || (valor>20)){
+                    $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                }else{
+                    var update = updateAvaliacao(valor, id_avalicao, campo);
+                    if(update){
+                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'}); 
+                    }else{
+                        $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'}); 
+                    }
+                }
+               
+            }
+        });
+
+        $('.notaP').on('keypress', function(e){
+            if(e.which == 13){
+                var valor = $(this).val();
+                var id_prova = $(this).data('id');
+                var campo = $(this).data('campo');
+                if((valor==="") || (valor<0) || (valor>20)){
+                    $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                }else{
+                    prova = updateProva(valor, id_prova, campo);
+                    if(prova){
+                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'}); 
+                    }else{
+                        $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'}); 
+                    }
+                    
+                }
+            }
+        });
+
+        function updateAvaliacao(valor, id_avalicao, campo){
+            retorno = false;
+            var data = {
+                valor: valor,
+                id_avaliacao: id_avalicao,
+                campo: campo,
+                _token: "{{ csrf_token() }}"
+            };
+
+            $.ajax({
+                type: "post",
+                url: "{{route('updateAvaliacao')}}",
+                data: data,
+                dataType: "json",
+                async: false,
+                success: function (response) {
+                    if(response.status === "ok"){
+                      retorno = true;
+                    }else{
+                        retorno = false;
+                    }
+                    console.log(response.sms);
+                }
+            });
+            return retorno;
+        }
+
+        function updateProva(valor, id_prova, campo){
+            retorno = false;
+            var data = {
+                valor: valor,
+                id_prova: id_prova,
+                campo: campo,
+                _token: "{{ csrf_token() }}"
+            };
+
+            $.ajax({
+                type: "post",
+                url: "{{route('updateProva')}}",
+                data: data,
+                dataType: "json",
+                async: false,
+                success: function (response) {
+                    if(response.status === "ok"){
+                      retorno = true;
+                    }else{
+                        retorno = false;
+                    }
+                    console.log(response.sms);
+                }
+            });
+            return retorno;
+        }
+
+     });
+</script>
 @endsection

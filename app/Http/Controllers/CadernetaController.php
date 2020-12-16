@@ -56,30 +56,35 @@ class CadernetaController extends Controller
      */
     public function create($id_turma, $id_disciplina, $ano_lectivo, $epoca)
     {
-        if(($epoca != 1) && ($epoca!=2) && ($epoca!=3) && ($epoca!=4)){
-            return back()->with(['error'=>"Não encontrou epoca"]);
-        }else{
+        //verificar se a epoca existe
+        if (($epoca != 1) && ($epoca != 2) && ($epoca != 3) && ($epoca != 4)) {
+            return back()->with(['error' => "Não encontrou epoca"]);
+        } else {
             Session::put('epoca', $epoca);
         }
-        
+
+        //veirficar turma se existe
         $id_ensino = null;
         $turma = Turma::find($id_turma);
         if (!$turma) {
             return back()->with(['error' => "Não encontrou turma"]);
         }
-        
+        //buscando ensino atraves de turma
         $id_ensino = $turma->classe->id_ensino;
-        
+
+        //pegando ano lectivo e verificando
         $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
         if (!$ano_lectivos) {
             return back()->with(['error' => "Não encontrou ano lectivo"]);
         }
 
+        //verificando disciplina
         $disciplina = Disciplina::find($id_disciplina);
         if (!$disciplina) {
             return back()->with(['error' => "Não encontrou disciplina"]);
         }
 
+        //verificando se o professor e dono desta turma
         if (Session::has('id_funcionario')) {
             //verificando horario e funcionario
             $data['where_horario'] = [
@@ -89,68 +94,68 @@ class CadernetaController extends Controller
                 'ano_lectivo' => $ano_lectivo,
                 'estado' => "visivel"
             ];
-            
+
             $horario = Horario::where($data['where_horario'])->first();
             if (!$horario) {
                 return back()->with(['error' => "Não é professor desta turma"]);
             }
-        }else{
-            return back()->with(['error'=>"Deve iniciar sessão"]);
+        } else {
+            return back()->with(['error' => "Deve iniciar sessão"]);
         }
         //prova e avalicao
-        $data['session'] = [
-            'id_disciplina'=>$id_disciplina,
-            'id_turma'=>$id_turma,
-            'ano_lectivo'=>$ano_lectivo,
-            'epoca'=>$epoca,
-        ];
-        //prova global
-        $data['session2'] = [
-            'id_disciplina'=>$id_disciplina,
-            'id_turma'=>$id_turma,
-            'ano_lectivo'=>$ano_lectivo,
-        ];
-
         $data2 = [
-            'id_disciplina'=>$id_disciplina,
-            'id_turma'=>$id_turma,
-            'ano_lectivo'=>$ano_lectivo,
-            'epoca'=>$epoca,
+            'id_disciplinaCAD' => $id_disciplina,
+            'id_turmaCAD' => $id_turma,
+            'ano_lectivoCAD' => $ano_lectivo,
+            'epocaCAD' => $epoca,
         ];
 
-        Session::put('data_caderneta', $data['session']);
+        Session::put($data2);
+        
         $avalicao = null;
         $prova = null;
         $global = null;
-        
-        if($epoca == 1 || $epoca == 2 || $epoca==3){
-            $avalicao = Avaliacao::whereHas(['estudante.pessoa',], function($query) use ($data2){
-                $query->where('id_turma', $data2['id_turma']);
-                $query->where('ano_lectivo', $data2['ano_lectivo']);
-                
-            })->get();
-            $prova = Prova::where($data['session'])->sortBy('estudante.pessoa.nome')->get();
-        }else{
-            $global = NotaFinal::where($data['session2'])->sortBy('estudante.pessoa.nome')->get();
+
+        if ($epoca != 4) {
+            //pegando avalicao
+            $avalicao = Avaliacao::whereHas('estudante', function ($query) use ($data2) {
+                $query->where('id_turma', $data2['id_turmaCAD']);
+                $query->where('ano_lectivo', $data2['ano_lectivoCAD']);
+            })->where(['epoca' => $data2['epocaCAD'], 'id_disciplina' => $data2['id_disciplinaCAD']])
+                ->get()->sortBy('estudante.pessoa.nome');
+             
+            //pegando prova
+            $prova = Prova::whereHas('estudante', function($query) use ($data2){
+                $query->where('id_turma', $data2['id_turmaCAD']);
+                $query->where('ano_lectivo', $data2['ano_lectivoCAD']);
+            })->where(['epoca' => $data2['epocaCAD'], 'id_disciplina' => $data2['id_disciplinaCAD']])
+                ->get()->sortBy('estudante.pessoa.nome');
+        } else {
+            //pegando global
+            $global = NotaFinal::whereHas('estudante', function($query) use ($data2){
+                $query->where('id_turma', $data2['id_turmaCAD']);
+                $query->where('ano_lectivo', $data2['ano_lectivoCAD']);
+            })->where(['id_disciplina' => $data2['id_disciplinaCAD']])
+                ->get()->sortBy('estudante.pessoa.nome');
         }
+        
         $data = [
             'title' => "Caderneta",
             'type' => "caderneta",
             'menu' => "Caderneta",
             'submenu' => "Lancamento",
             'getHorario' => $horario,
-            'getId_turma'=>$id_turma,
-            'getId_disciplina'=>$id_disciplina,
-            'getAno_lectivo'=>$ano_lectivo,
-            'getAvaliacao'=>$avalicao,
-            'getProva'=>$prova,
-            'getGlobal'=>$global,
+            'getId_turma' => $id_turma,
+            'getId_disciplina' => $id_disciplina,
+            'getAno_lectivo' => $ano_lectivo,
+            'getAvaliacao' => $avalicao,
+            'getProva' => $prova,
+            'getGlobal' => $global,
         ];
-        
-        if($id_ensino == 1){
+
+        if ($id_ensino == 1) {
             return "ensino primario iniciacao ate 6 classe";
-        }
-        elseif($id_ensino == 2){
+        } elseif ($id_ensino == 2) {
             return view('caderneta.ensinos.ensino_1ciclo_7_9', $data);
         }
     }
@@ -190,15 +195,15 @@ class CadernetaController extends Controller
                 'ano_lectivo' => $ano_lectivo,
                 'estado' => "visivel"
             ];
-            
+
             $horario = Horario::where($data['where_horario'])->first();
             if (!$horario) {
                 return back()->with(['error' => "Não é professor desta turma"]);
             }
-        }else{
-            return back()->with(['error'=>"Deve iniciar sessão"]);
+        } else {
+            return back()->with(['error' => "Deve iniciar sessão"]);
         }
-        
+
         $data['avaliacao'] = [
             'id_estudante' => null,
             'id_disciplina' => $id_disciplina,
@@ -221,9 +226,9 @@ class CadernetaController extends Controller
         ];
 
         $data['final'] = [
-            'id_estudante'=>null,
-            'id_disciplina'=>$id_disciplina,
-            'ano_lectivo'=>$ano_lectivo,
+            'id_estudante' => null,
+            'id_disciplina' => $id_disciplina,
+            'ano_lectivo' => $ano_lectivo,
         ];
 
         $estudantes = Estudante::where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])->get();
@@ -231,9 +236,9 @@ class CadernetaController extends Controller
         //cadastrar avaliacao
         foreach ($epocas as $epoca) {
             $data['avaliacao']['epoca'] = $epoca;
-            foreach($estudantes as $estudante){
+            foreach ($estudantes as $estudante) {
                 $data['avaliacao']['id_estudante'] = $estudante->id;
-                if(!Avaliacao::where($data['avaliacao'])->first()){
+                if (!Avaliacao::where($data['avaliacao'])->first()) {
                     $avaliacao = Avaliacao::create($data['avaliacao']);
                 }
             }
@@ -241,34 +246,33 @@ class CadernetaController extends Controller
         //cadastrar prova
         foreach ($epocas as $epoca) {
             $data['prova']['epoca'] = $epoca;
-            foreach($estudantes as $estudante){
+            foreach ($estudantes as $estudante) {
                 $data['prova']['id_estudante'] = $estudante->id;
-                if(!Prova::where($data['prova'])->first()){
+                if (!Prova::where($data['prova'])->first()) {
                     $prova = Prova::create($data['prova']);
                 }
             }
         }
-        
+
         //cadastrar notas trimestrais
         foreach ($epocas as $epoca) {
             $data['trimestral']['epoca'] = $epoca;
-            foreach($estudantes as $estudante){
+            foreach ($estudantes as $estudante) {
                 $data['trimestral']['id_estudante'] = $estudante->id;
-                if(!NotaTrimestral::where($data['trimestral'])->first()){
+                if (!NotaTrimestral::where($data['trimestral'])->first()) {
                     $nota_trimestral = NotaTrimestral::create($data['trimestral']);
                 }
             }
         }
         //cadastrar notas finais
-            foreach($estudantes as $estudante){
-                $data['final']['id_estudante'] = $estudante->id;
-                if(!NotaFinal::where($data['final'])->first()){
-                    $nota_trimestral = NotaFinal::create($data['final']);
-                }
+        foreach ($estudantes as $estudante) {
+            $data['final']['id_estudante'] = $estudante->id;
+            if (!NotaFinal::where($data['final'])->first()) {
+                $nota_trimestral = NotaFinal::create($data['final']);
+            }
         }
 
-        return back()->with(['success'=>"Actualizou com sucesso"]);
-        
+        return back()->with(['success' => "Actualizou com sucesso"]);
     }
 
     /**

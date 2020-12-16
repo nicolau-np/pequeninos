@@ -31,40 +31,40 @@
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs md-tabs tabs-left b-none" role="tablist">
                             <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#trimestre1" role="tab">1º Trimestre</a>
+                                <a class="nav-link @if(session('epoca')=="1") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/1">1º Trimestre</a>
                                 <div class="slide"></div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#trimestre2" role="tab">2º Trimestre</a>
+                                <a class="nav-link @if(session('epoca')=="2") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/2">2º Trimestre</a>
                                 <div class="slide"></div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#trimestre3" role="tab">3º Trimestre</a>
+                                <a class="nav-link @if(session('epoca')=="3") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/3">3º Trimestre</a>
                                 <div class="slide"></div>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#global" role="tab">Global</a>
+                                <a class="nav-link @if(session('epoca')=="4") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/4">Global</a>
                                 <div class="slide"></div>
                             </li>
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content tabs-left-content card-block">
-                            <div class="tab-pane active" id="trimestre1" role="tabpanel">
+                            <div class="tab-pane @if(session('epoca')=="1") active @endif" role="tabpanel">
                                 <p class="m-0">
                                     1.Trimestre
                                 </p>
                             </div>
-                            <div class="tab-pane" id="trimestre2" role="tabpanel">
+                            <div class="tab-pane @if(session('epoca')=="2") active @endif" role="tabpanel">
                                 <p class="m-0">
                                     2.Trimestre
                                 </p>
                             </div>
-                            <div class="tab-pane" id="trimestre3" role="tabpanel">
+                            <div class="tab-pane @if(session('epoca')=="3") active @endif" role="tabpanel">
                                 <p class="m-0">
                                     3.Trimestre
                                 </p>
                             </div>
-                            <div class="tab-pane" id="global" role="tabpanel">
+                            <div class="tab-pane @if(session('epoca')=="4") active @endif" role="tabpanel">
                                 <p class="m-0">
                                     Global
                                 </p>

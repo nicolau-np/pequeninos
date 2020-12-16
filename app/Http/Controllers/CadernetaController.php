@@ -54,8 +54,14 @@ class CadernetaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create($id_turma, $id_disciplina, $ano_lectivo)
+    public function create($id_turma, $id_disciplina, $ano_lectivo, $epoca)
     {
+        if(($epoca != 1) && ($epoca!=2) && ($epoca!=3) && ($epoca!=4)){
+            return back()->with(['error'=>"Não encontrou epoca"]);
+        }else{
+            Session::put('epoca', $epoca);
+        }
+        
         $id_ensino = null;
         $turma = Turma::find($id_turma);
         if (!$turma) {
@@ -91,21 +97,54 @@ class CadernetaController extends Controller
         }else{
             return back()->with(['error'=>"Deve iniciar sessão"]);
         }
-
+        //prova e avalicao
         $data['session'] = [
+            'id_disciplina'=>$id_disciplina,
+            'id_turma'=>$id_turma,
+            'ano_lectivo'=>$ano_lectivo,
+            'epoca'=>$epoca,
+        ];
+        //prova global
+        $data['session2'] = [
             'id_disciplina'=>$id_disciplina,
             'id_turma'=>$id_turma,
             'ano_lectivo'=>$ano_lectivo,
         ];
 
+        $data2 = [
+            'id_disciplina'=>$id_disciplina,
+            'id_turma'=>$id_turma,
+            'ano_lectivo'=>$ano_lectivo,
+            'epoca'=>$epoca,
+        ];
+
         Session::put('data_caderneta', $data['session']);
+        $avalicao = null;
+        $prova = null;
+        $global = null;
         
+        if($epoca == 1 || $epoca == 2 || $epoca==3){
+            $avalicao = Avaliacao::whereHas(['estudante.pessoa',], function($query) use ($data2){
+                $query->where('id_turma', $data2['id_turma']);
+                $query->where('ano_lectivo', $data2['ano_lectivo']);
+                
+            })->get();
+            $prova = Prova::where($data['session'])->sortBy('estudante.pessoa.nome')->get();
+        }else{
+            $global = NotaFinal::where($data['session2'])->sortBy('estudante.pessoa.nome')->get();
+        }
         $data = [
             'title' => "Caderneta",
             'type' => "caderneta",
             'menu' => "Caderneta",
             'submenu' => "Lancamento",
             'getHorario' => $horario,
+            'getId_turma'=>$id_turma,
+            'getId_disciplina'=>$id_disciplina,
+            'getAno_lectivo'=>$ano_lectivo,
+            'getAvaliacao'=>$avalicao,
+            'getProva'=>$prova,
+            'getGlobal'=>$global,
         ];
         
         if($id_ensino == 1){

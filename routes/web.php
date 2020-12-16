@@ -37,7 +37,7 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/getFuncionarios', "AjaxController@getFuncionarios")->name('getFuncionarios');
     Route::post('/updateAvaliacao', "AjaxController@updateAvaliacao")->name('updateAvaliacao');
     Route::post('/updateProva', "AjaxController@updateProva")->name('updateProva');
-    
+    Route::post('/updateGlobal', "AjaxController@updateGlobal")->name('updateGlobal');
 });
 
 Route::group(['prefix' => 'institucional', 'middleware' => "auth"], function () {

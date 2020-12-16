@@ -19,6 +19,7 @@ use App\Turma;
 use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use PhpParser\Node\Stmt\Global_;
 
 class AjaxController extends Controller
 {
@@ -219,16 +220,16 @@ class AjaxController extends Controller
         }
 
         $trimestral = NotaTrimestral::where([
-            'id_estudante'=>$avaliacao->id_estudante,
-            'id_disciplina'=>$avaliacao->id_disciplina,
-            'epoca'=>$avaliacao->epoca,
-            'ano_lectivo'=>$avaliacao->ano_lectivo,
+            'id_estudante' => $avaliacao->id_estudante,
+            'id_disciplina' => $avaliacao->id_disciplina,
+            'epoca' => $avaliacao->epoca,
+            'ano_lectivo' => $avaliacao->ano_lectivo,
         ])->first();
 
         $final = NotaFinal::where([
-            'id_estudante'=>$avaliacao->id_estudante,
-            'id_disciplina'=>$avaliacao->id_disciplina,
-            'ano_lectivo'=>$avaliacao->ano_lectivo,
+            'id_estudante' => $avaliacao->id_estudante,
+            'id_disciplina' => $avaliacao->id_disciplina,
+            'ano_lectivo' => $avaliacao->ano_lectivo,
         ])->first();
 
         $coluna1 = "valo" . $request->campo;
@@ -237,7 +238,7 @@ class AjaxController extends Controller
             "$coluna1" => $request->valor,
             "$coluna2" => date('Y-m-d'),
         ];
-        
+
         $avalia = Avaliacao::find($request->id_avaliacao)->update($data['avaliacao']);
         if ($avalia) {
             $verifica_avaliacao = Avaliacao::find($request->id_avaliacao);
@@ -278,27 +279,27 @@ class AjaxController extends Controller
 
             $mac = NotaTrimestral::mac($soma, $quant_avaliacao);
             $ct = NotaTrimestral::ct($mac, $trimestral->cpp);
-            $trimest = NotaTrimestral::find($trimestral->id)->update(['mac'=>$mac, 'ct'=>$ct]);
-            if($trimest){
+            $trimest = NotaTrimestral::find($trimestral->id)->update(['mac' => $mac, 'ct' => $ct]);
+            if ($trimest) {
                 $soma_ct = NotaTrimestral::soma_ct($avaliacao->id_estudante, $avaliacao->id_disciplina, $avaliacao->ano_lectivo);
                 $cap = NotaFinal::cap($soma_ct);
                 $cf = NotaFinal::cf($cap, $final->cpe);
-                
+
                 $fin = NotaFinal::find($final->id)->update([
-                    'cap'=>$cap,
-                    'cf'=>$cf,
+                    'cap' => $cap,
+                    'cf' => $cf,
                 ]);
-                if($fin){
+                if ($fin) {
                     return response()->json(['status' => "ok", 'sms' => "Feito com sucesso"]);
-                }  
+                }
             }
-           
         } else {
             return response()->json(['status' => "error", 'sms' => "Erro temporário no servidor"]);
         }
     }
 
-    public function updateProva(Request $request){
+    public function updateProva(Request $request)
+    {
         $request->validate([
             'valor' => ['required', 'numeric'],
             'campo' => ['required', 'Integer'],
@@ -311,16 +312,16 @@ class AjaxController extends Controller
         }
 
         $trimestral = NotaTrimestral::where([
-            'id_estudante'=>$prova->id_estudante,
-            'id_disciplina'=>$prova->id_disciplina,
-            'epoca'=>$prova->epoca,
-            'ano_lectivo'=>$prova->ano_lectivo,
+            'id_estudante' => $prova->id_estudante,
+            'id_disciplina' => $prova->id_disciplina,
+            'epoca' => $prova->epoca,
+            'ano_lectivo' => $prova->ano_lectivo,
         ])->first();
 
         $final = NotaFinal::where([
-            'id_estudante'=>$prova->id_estudante,
-            'id_disciplina'=>$prova->id_disciplina,
-            'ano_lectivo'=>$prova->ano_lectivo,
+            'id_estudante' => $prova->id_estudante,
+            'id_disciplina' => $prova->id_disciplina,
+            'ano_lectivo' => $prova->ano_lectivo,
         ])->first();
 
         $coluna1 = "valor" . $request->campo;
@@ -329,82 +330,83 @@ class AjaxController extends Controller
             "$coluna1" => $request->valor,
             "$coluna2" => date('Y-m-d'),
         ];
-        
+
         $prov = Prova::find($request->id_prova)->update($data['prova']);
         if ($prov) {
             $verifica_prova = Prova::find($request->id_prova);
             $cpp = 0;
             $soma = 0;
-            $quant_prova= 0;
+            $quant_prova = 0;
 
-            /*//caso 1
-            if ($verifica_prova->valo1 != "" && $verifica_prova->valo2 != "" && $verifica_prova->valo3 != "") {
-                $quant_avaliacao = 3;
-                $soma = ($verifica_avaliacao->valo1 + $verifica_avaliacao->valo2 + $verifica_avaliacao->valo3);
+            //caso 1
+            if ($verifica_prova->valor1 != "" && $verifica_prova->valor2 != "") {
+                $soma = ($verifica_prova->valor1 + $verifica_prova->valor2);
+                $quant_prova = 2;
             }
             //caso 2
-            elseif ($verifica_avaliacao->valo1 != "" && $verifica_avaliacao->valo2 != "" && $verifica_avaliacao->valo3 == "") {
-                $quant_avaliacao = 2;
-                $soma = ($verifica_avaliacao->valo1 + $verifica_avaliacao->valo2);
+            elseif ($verifica_prova->valor1 != "" && $verifica_prova->valor2 == "") {
+                $soma = ($verifica_prova->valor1);
+                $quant_prova = 1;
             }
             //caso 3
-            elseif ($verifica_avaliacao->valo1 != "" && $verifica_avaliacao->valo2 == "" && $verifica_avaliacao->valo3 == "") {
-                $quant_avaliacao = 1;
-                $soma = ($verifica_avaliacao->valo1);
+            elseif ($verifica_prova->valor1 == "" && $verifica_prova->valor2 != "") {
+                $soma = ($verifica_prova->valor2);
+                $quant_prova = 1;
             }
-            //caso 4
-            elseif ($verifica_avaliacao->valo1 == "" && $verifica_avaliacao->valo2 == "" && $verifica_avaliacao->valo3 != "") {
-                $quant_avaliacao = 1;
-                $soma = ($verifica_avaliacao->valo3);
-            }
-            //caso 5
-            elseif ($verifica_avaliacao->valo1 == "" && $verifica_avaliacao->valo2 != "" && $verifica_avaliacao->valo3 != "") {
-                $quant_avaliacao = 2;
-                $soma = ($verifica_avaliacao->valo2 + $verifica_avaliacao->valo3);
-            }
-            //caso 6
-            elseif ($verifica_avaliacao->valo1 == "" && $verifica_avaliacao->valo2 != "" && $verifica_avaliacao->valo3 == "") {
-                $quant_avaliacao = 1;
-                $soma = ($verifica_avaliacao->valo2);
-            }*/
-
-               //caso 1
-    if ($verifica_prova->valor1 != "" && $verifica_prova->valor2 != "") {
-        $soma = ($verifica_prova->valor1 + $verifica_prova->valor2);
-        $quant_prova = 2;
-    }
-    //caso 2
-    elseif ($verifica_prova->valor1 != "" && $verifica_prova->valor2 == "") {
-        $soma = ($verifica_prova->valor1);
-        $quant_prova = 1;
-    }
-    //caso 3
-    elseif ($verifica_prova->valor1 == "" && $verifica_prova->valor2!=""){
-        $soma = ($verifica_prova->valor2);
-        $quant_prova = 1;
-    }
-//fim
+            //fim
 
             $cpp = NotaTrimestral::cpp($soma, $quant_prova);
             $ct = NotaTrimestral::ct($trimestral->mac, $cpp);
-            $trimest = NotaTrimestral::find($trimestral->id)->update(['cpp'=>$cpp, 'ct'=>$ct]);
-            if($trimest){
+            $trimest = NotaTrimestral::find($trimestral->id)->update(['cpp' => $cpp, 'ct' => $ct]);
+            if ($trimest) {
                 $soma_ct = NotaTrimestral::soma_ct($prova->id_estudante, $prova->id_disciplina, $prova->ano_lectivo);
                 $cap = NotaFinal::cap($soma_ct);
                 $cf = NotaFinal::cf($cap, $final->cpe);
-                
+
                 $fin = NotaFinal::find($final->id)->update([
-                    'cap'=>$cap,
-                    'cf'=>$cf,
+                    'cap' => $cap,
+                    'cf' => $cf,
                 ]);
-                if($fin){
+                if ($fin) {
                     return response()->json(['status' => "ok", 'sms' => "Feito com sucesso"]);
-                }  
+                }
             }
-           
         } else {
             return response()->json(['status' => "error", 'sms' => "Erro temporário no servidor"]);
         }
     }
-    
+
+    public function updateGlobal(Request $request)
+    {
+        $request->validate([
+            'valor' => ['required', 'numeric'],
+            'id_global' => ['required', 'Integer'],
+        ]);
+
+        $final = NotaFinal::find($request->id_global);
+        if (!$final) {
+            return response()->json(['status' => "error", 'sms' => "Nao encontrou avaliacao"]);
+        }
+
+        $data['global'] = [
+            "cpe" => $request->valor,
+            "data_lancamento" => date('Y-m-d'),
+        ];
+
+        $fin = NotaFinal::find($request->id_global)->update($data['global']);
+        if ($fin) {
+            $verifica_final = NotaFinal::find($request->id_global);
+            $cf = 0;
+            $cf = NotaFinal::cf($verifica_final->cap, $verifica_final->cpe);
+
+            $fini = NotaFinal::find($final->id)->update([
+                'cf' => $cf,
+            ]);
+            if ($fini) {
+                return response()->json(['status' => "ok", 'sms' => "Feito com sucesso"]);
+            }
+        } else {
+            return response()->json(['status' => "error", 'sms' => "Erro temporário no servidor"]);
+        }
+    }
 }

@@ -410,6 +410,24 @@
             }
         });
 
+        $('.notaG').on('keypress', function(e){
+            if(e.which == 13){
+                var valor = $(this).val();
+                var id_global = $(this).data('id');
+                if((valor==="") || (valor<0) || (valor>20)){
+                    $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                }else{
+                    global = updateGlobal(valor, id_global);
+                    if(global){
+                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'}); 
+                    }else{
+                        $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'}); 
+                    }
+                    
+                }
+            }
+        });
+
         function updateAvaliacao(valor, id_avalicao, campo){
             retorno = false;
             var data = {
@@ -449,6 +467,32 @@
             $.ajax({
                 type: "post",
                 url: "{{route('updateProva')}}",
+                data: data,
+                dataType: "json",
+                async: false,
+                success: function (response) {
+                    if(response.status === "ok"){
+                      retorno = true;
+                    }else{
+                        retorno = false;
+                    }
+                    console.log(response.sms);
+                }
+            });
+            return retorno;
+        }
+
+        function updateGlobal(valor, id_global){
+            retorno = false;
+            var data = {
+                valor: valor,
+                id_global: id_global,
+                _token: "{{ csrf_token() }}"
+            };
+
+            $.ajax({
+                type: "post",
+                url: "{{route('updateGlobal')}}",
                 data: data,
                 dataType: "json",
                 async: false,

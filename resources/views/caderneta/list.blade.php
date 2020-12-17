@@ -49,7 +49,7 @@
                                         <a href="/cadernetas/create/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}/1" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="" data-original-title="Inserir Notas">
                                             <i class="icofont icofont-edit-alt"></i>
                                         </a>&nbsp;
-                                        <a href="#" type="button" class="btn btn-danger btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mini Pauta">
+                                        <a href="/minipautas/show/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}" type="button" class="btn btn-danger btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mini Pauta">
                                             <i class="icofont icofont-clip-board"></i>
                                         </a>&nbsp;
                                         <a href="#" type="button" class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Estatística">

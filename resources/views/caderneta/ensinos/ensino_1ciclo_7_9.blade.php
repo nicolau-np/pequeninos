@@ -17,6 +17,8 @@
                     {{$getHorario->disciplina->disciplina}}
                     <i class="ti-angle-right"></i>
                     {{$getHorario->ano_lectivo}}
+                    <i class="ti-angle-right"></i>
+                    <a href="/cadernetas/store_copy/{{$getHorario->id_turma}}/{{$getHorario->id_disciplina}}/{{session('epoca')}}/{{$getHorario->ano_lectivo}}"><i class="ti-reload"></i></a>
                     </h5>
                     <span></span>
                     <div class="card-header-right">

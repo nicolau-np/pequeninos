@@ -12,11 +12,11 @@
                 <div class="card-header">
                     <h5>{{$submenu}} 
                     <i class="ti-angle-right"></i>
-                    {{$getTurma->turma}}
+                    {{$getHorario->turma->turma}}
                     <i class="ti-angle-right"></i>
-                    {{$getDisciplina->disciplina}}
+                    {{$getHorario->disciplina->disciplina}}
                     <i class="ti-angle-right"></i>
-                    {{$getAno_lectivo->ano_lectivo}}
+                    {{$getHorario->ano_lectivo}}
                     </h5>
                     <span></span>
                     <div class="card-header-right">
@@ -33,19 +33,22 @@
                     <div class="row">
                        <div class="col-lg-12 col-xl-12">
                        <div class="tabela">
-                           <table>
+                           <table class="table table-bordered table-striped">
                               <thead>
                                   <tr>
-                                      <th></th>
-                                      <th></th>
-                                      <th></th>
+                                      <th>Nº</th>
+                                      <th>Nome do Estudante</th>
+                                      <th>Gênero</th>
                                   </tr>
                               </thead>
                               <tbody>
+                                  @foreach ($getHistorico as $historico)
                                   <tr>
-                                      <td></td>
-                                      <td></td>
+                                  <td>{{$loop->iteration}}</td>
+                                  <td>{{$historico->estudante->pessoa->nome}}</td>
+                                  <td>{{$historico->estudante->pessoa->genero}}</td>
                                   </tr>
+                                @endforeach
                               </tbody>
                            </table>
                        </div>

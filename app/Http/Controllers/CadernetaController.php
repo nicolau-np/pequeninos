@@ -111,7 +111,7 @@ class CadernetaController extends Controller
         ];
 
         Session::put($data2);
-        
+
         $avalicao = null;
         $prova = null;
         $global = null;
@@ -123,22 +123,22 @@ class CadernetaController extends Controller
                 $query->where('ano_lectivo', $data2['ano_lectivoCAD']);
             })->where(['epoca' => $data2['epocaCAD'], 'id_disciplina' => $data2['id_disciplinaCAD']])
                 ->get()->sortBy('estudante.pessoa.nome');
-             
+
             //pegando prova
-            $prova = Prova::whereHas('estudante', function($query) use ($data2){
+            $prova = Prova::whereHas('estudante', function ($query) use ($data2) {
                 $query->where('id_turma', $data2['id_turmaCAD']);
                 $query->where('ano_lectivo', $data2['ano_lectivoCAD']);
             })->where(['epoca' => $data2['epocaCAD'], 'id_disciplina' => $data2['id_disciplinaCAD']])
                 ->get()->sortBy('estudante.pessoa.nome');
         } else {
             //pegando global
-            $global = NotaFinal::whereHas('estudante', function($query) use ($data2){
+            $global = NotaFinal::whereHas('estudante', function ($query) use ($data2) {
                 $query->where('id_turma', $data2['id_turmaCAD']);
                 $query->where('ano_lectivo', $data2['ano_lectivoCAD']);
             })->where(['id_disciplina' => $data2['id_disciplinaCAD']])
                 ->get()->sortBy('estudante.pessoa.nome');
         }
-        
+
         $data = [
             'title' => "Caderneta",
             'type' => "caderneta",
@@ -318,5 +318,110 @@ class CadernetaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function store_copy($id_turma, $id_disciplina, $epoca, $ano_lectivo)
+    {
+        if (($epoca == 1) || ($epoca == 2) || ($epoca == 3)) {
+
+            $turma = Turma::find($id_turma);
+            if (!$turma) {
+                return back()->with(['error' => "Não encontrou turma"]);
+            }
+
+            $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
+            if (!$ano_lectivos) {
+                return back()->with(['error' => "Não encontrou ano lectivo"]);
+            }
+
+            $disciplina = Disciplina::find($id_disciplina);
+            if (!$disciplina) {
+                return back()->with(['error' => "Não encontrou disciplina"]);
+            }
+
+            if (Session::has('id_funcionario')) {
+                //verificando horario e funcionario
+                $data['where_horario'] = [
+                    'id_funcionario' => Session::get('id_funcionario'),
+                    'id_turma' => $id_turma,
+                    'id_disciplina' => $id_disciplina,
+                    'ano_lectivo' => $ano_lectivo,
+                    'estado' => "visivel"
+                ];
+
+                $horario = Horario::where($data['where_horario'])->first();
+                if (!$horario) {
+                    return back()->with(['error' => "Não é professor desta turma"]);
+                }
+            } else {
+                return back()->with(['error' => "Deve iniciar sessão"]);
+            }
+
+            $data['avaliacao'] = [
+                'id_estudante' => null,
+                'id_disciplina' => $id_disciplina,
+                'epoca' => $epoca,
+                'ano_lectivo' => $ano_lectivo,
+            ];
+
+            $data['prova'] = [
+                'id_estudante' => null,
+                'id_disciplina' => $id_disciplina,
+                'epoca' => $epoca,
+                'ano_lectivo' => $ano_lectivo,
+            ];
+
+            $data['trimestral'] = [
+                'id_estudante' => null,
+                'id_disciplina' => $id_disciplina,
+                'epoca' => $epoca,
+                'ano_lectivo' => $ano_lectivo,
+            ];
+
+            $data['final'] = [
+                'id_estudante' => null,
+                'id_disciplina' => $id_disciplina,
+                'ano_lectivo' => $ano_lectivo,
+            ];
+
+            $estudantes = Estudante::where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])->get();
+
+            //cadastrar avaliacao
+
+            foreach ($estudantes as $estudante) {
+                $data['avaliacao']['id_estudante'] = $estudante->id;
+                if (!Avaliacao::where($data['avaliacao'])->first()) {
+                    $avaliacao = Avaliacao::create($data['avaliacao']);
+                }
+            }
+
+            //cadastrar prova
+
+            foreach ($estudantes as $estudante) {
+                $data['prova']['id_estudante'] = $estudante->id;
+                if (!Prova::where($data['prova'])->first()) {
+                    $prova = Prova::create($data['prova']);
+                }
+            }
+
+            foreach ($estudantes as $estudante) {
+                $data['trimestral']['id_estudante'] = $estudante->id;
+                if (!NotaTrimestral::where($data['trimestral'])->first()) {
+                    $nota_trimestral = NotaTrimestral::create($data['trimestral']);
+                }
+            }
+
+            //cadastrar notas finais
+            foreach ($estudantes as $estudante) {
+                $data['final']['id_estudante'] = $estudante->id;
+                if (!NotaFinal::where($data['final'])->first()) {
+                    $nota_trimestral = NotaFinal::create($data['final']);
+                }
+            }
+
+            return back()->with(['success' => "Actualizou com sucesso"]);
+        } else {
+            return back(['success' => "Actualizado com sucesso"]);
+        }
     }
 }

@@ -172,6 +172,7 @@ Route::group(['prefix' => 'cadernetas', 'middleware' => "auth"], function () {
     Route::get('/', "CadernetaController@index");
     Route::get('/create/{id_turma}/{id_disciplina}/{ano_lectivo}/{epoca}', "CadernetaController@create");
     Route::get('/store/{id_turma}/{id_disciplina}/{ano_lectivo}', "CadernetaController@store");
+    Route::get('/store_copy/{id_turma}/{id_disciplina}/{epoca}/{ano_lectivo}', "CadernetaController@store_copy");
 });
 
 Route::group(['prefix' => 'minipautas'], function () {

@@ -195,8 +195,12 @@ class ControladorStatic extends Controller
         $retorno = null;
         if ($nota <= 4.5 && $nota >= 10) {
             $retorno = "positivo";
-        } else {
+        }elseif ($nota >= 0 && $nota <= 4.4) {
             $retorno = "negativo";
+        } elseif ($nota == "") {
+            $retorno = "nenhum";
+        } else {
+            $retorno = "nenhum";
         }
 
         return $retorno;

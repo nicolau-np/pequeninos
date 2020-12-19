@@ -1,8 +1,17 @@
+@php 
+use App\Http\Controllers\ControladorStatic;
+@endphp
 @extends('layouts.app')
 @section('content')
 <style>
-    .notaP, .notaA{
-        width: 70px;
+    .positivo{
+        color: blue;
+    }
+    .negativo{
+        color: red;
+    }
+    .nenhum{
+        color: #333;
     }
 </style>
 <div class="page-body">
@@ -39,6 +48,10 @@
                                       <th>Nº</th>
                                       <th>Nome do Estudante</th>
                                       <th>Gênero</th>
+                                      <th colspan="3">I Trimestre</th>
+                                      <th colspan="3">II Trimestre</th>
+                                      <th colspan="3">III Trimestre</th>
+                                      <th colspan="3">Dados Finais</th>
                                   </tr>
                               </thead>
                               <tbody>
@@ -47,6 +60,80 @@
                                   <td>{{$loop->iteration}}</td>
                                   <td>{{$historico->estudante->pessoa->nome}}</td>
                                   <td>{{$historico->estudante->pessoa->genero}}</td>
+                                  
+                                  
+                                  <!-- 1 trimestre-->
+                                  <?php 
+                                  $trimestre1 = ControladorStatic::getValoresMiniPautaTrimestral($historico->id_estudante, 1);
+                                  if($trimestre1->count() == 0){?>
+                                   <td>---</td>
+                                   <td>---</td>
+                                   <td>---</td> 
+                                  <?php }
+                                  else{
+                                  foreach ($trimestre1 as $valor1) { 
+                                        $v1_estilo = ControladorStatic::nota_20($valor1->mac);
+                                        $v2_estilo = ControladorStatic::nota_20($valor1->cpp);
+                                        $v3_estilo = ControladorStatic::nota_20($valor1->ct);
+                                    ?>
+                                     <td class="{{$v1_estilo}}">@if($valor1->mac == null) --- @else {{$valor1->mac}} @endif</td>
+                                     <td class="{{$v2_estilo}}">@if($valor1->cpp == null) --- @else {{$valor1->cpp}} @endif</td>
+                                     <td class="{{$v3_estilo}}">@if($valor1->ct == null) --- @else {{$valor1->ct}} @endif</td> 
+                                  <?php }} ?>
+                                  <!-- fim 1 trimestre-->
+
+                                  <!-- 2 trimestre-->
+                                  <?php 
+                                  $trimestre2 = ControladorStatic::getValoresMiniPautaTrimestral($historico->id_estudante, 2);
+                                  if($trimestre2->count() == 0){?>
+                                   <td>---</td>
+                                   <td>---</td>
+                                   <td>---</td> 
+                                  <?php }
+                                  else{
+                                  foreach ($trimestre2 as $valor2) { 
+                                    ?>
+                                     <td>@if($valor2->mac == null) --- @else {{$valor2->mac}} @endif</td>
+                                     <td>@if($valor2->cpp == null) --- @else {{$valor2->cpp}} @endif</td>
+                                     <td>@if($valor2->ct == null) --- @else {{$valor2->ct}} @endif</td> 
+                                  <?php }} ?>
+                                  <!-- fim 2 trimestre-->
+
+                                <!-- 3 trimestre-->
+                                <?php 
+                                $trimestre3 = ControladorStatic::getValoresMiniPautaTrimestral($historico->id_estudante, 3);
+                                if($trimestre3->count() == 0){?>
+                                <td>---</td>
+                                <td>---</td>
+                                <td>---</td> 
+                                <?php }
+                                else{
+                                    foreach ($trimestre3 as $valor3) { 
+                                ?>
+                                <td>@if($valor3->mac == null) --- @else {{$valor3->mac}} @endif</td>
+                                <td>@if($valor3->cpp == null) --- @else {{$valor3->cpp}} @endif</td>
+                                <td>@if($valor3->ct == null) --- @else {{$valor3->ct}} @endif</td> 
+                                <?php }} ?>
+                                <!-- fim 3 trimestre-->
+
+
+                                  <!-- finais-->
+                                <?php 
+                                $final = ControladorStatic::getValoresMiniPautaFinal($historico->id_estudante);
+                                if($final->count() == 0){?>
+                                <td>---</td>
+                                <td>---</td>
+                                <td>---</td> 
+                                <?php }
+                                else{
+                                    foreach ($final as $valorf) { 
+                                ?>
+                                <td>@if($valorf->cap == null) --- @else {{$valorf->cap}} @endif</td>
+                                <td>@if($valorf->cpe == null) --- @else {{$valorf->cpe}} @endif</td>
+                                <td>@if($valorf->cf == null) --- @else {{$valorf->cf}} @endif</td> 
+                                <?php }} ?>
+                                <!-- fim finais-->
+
                                   </tr>
                                 @endforeach
                               </tbody>

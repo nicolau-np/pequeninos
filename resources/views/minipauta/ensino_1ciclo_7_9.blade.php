@@ -51,7 +51,7 @@ use App\Http\Controllers\ControladorStatic;
                 <div class="card-block">
                     <div class="row">
                        <div class="col-lg-12 col-xl-12">
-                       <div class="tabela">
+                       <div class="table-responsive tabela">
                            <table class="table table-bordered table-striped">
                               <thead>
                                   <tr>

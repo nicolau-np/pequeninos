@@ -30,8 +30,8 @@
                     @endif
                     </div>
                    
-
-                    @if($getHorario->count()==0)
+                    
+                        @if($getHorario->count()==0)
                     Nenhuma turma encontrada
                     @else
                     @foreach ($getHorario as $horario)
@@ -69,6 +69,11 @@
                     </div>
                     @endforeach
                     @endif
+                   
+                    
+                    <div class="col-md-12 pagination">
+                        {{$getHorario->links()}}
+                    </div>
                   </div>
                 </div>
             </div>

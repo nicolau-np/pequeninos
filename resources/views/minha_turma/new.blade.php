@@ -27,10 +27,10 @@
                 </div>
                 <div class="card-block">
 
-                    {{Form::open(['method'=>"post", 'url'=>""])}}
+                    {{Form::open(['method'=>"put", 'url'=>"/pautas/show/{$getDirector->id_turma}/{$getDirector->ano_lectivo}"])}}
                     <div class="row">
                         <div class="col-md-6">
-                            {{Form::submit('Salvar', ['class'=>"btn btn-primary btn-sm float-left"])}}
+                            {{Form::submit('Visualizar', ['class'=>"btn btn-primary btn-sm float-left"])}}
                              
                             <a href="#" class="btn btn-danger btn-sm float-right remover_todas"><i class="ti-trash" aria-hidden="true"></i></a>
                            <table class="table table-bordered">
@@ -80,6 +80,9 @@
 
 <script>
     $(document).ready(function(){
+
+        disciplinas();
+
         $('.adicionar').click(function(e){
             e.preventDefault();
             var data = {
@@ -98,6 +101,24 @@
                     }else if(response.status === "error"){
                         alert(response.sms);
                     }
+                }
+            });
+        });
+
+        $('.remover_todas').click(function(e){
+            e.preventDefault();
+            $.ajax({
+                type: "get",
+                url: "{{route('removeDisciplinas')}}",
+                data: null,
+                dataType: "json",
+                success: function (response) {
+                    if(response.status === "ok"){
+                        disciplinas();
+                    }else if(response.status === "error"){
+                        disciplinas();
+                    }
+                  
                 }
             });
         });

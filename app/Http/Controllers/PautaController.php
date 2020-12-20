@@ -89,9 +89,44 @@ class PautaController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($id_turma, $ano_lectivo)
     {
-        //
+        $id_pessoa = Auth::user()->pessoa->id;
+        $funcionario = Funcionario::where('id_pessoa', $id_pessoa)->first();
+        if(!$funcionario){
+            return back()->with(['error'=>"Não encontrou"]);
+        }
+        
+        $turma = Turma::find($id_turma);
+        if(!$turma){
+            return back()->with(['error'=>"Não encontrou"]);
+        }
+        
+        $ano_lecti = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
+        if(!$ano_lecti){
+            return back()->with(['error'=>"Não encontrou"]);
+        }
+
+        $directorTurma = DirectorTurma::where([
+            'id_funcionario'=>$funcionario->id,
+            'id_turma'=>$id_turma,
+            'ano_lectivo'=>$ano_lectivo,
+        ])->first();
+
+        if(!$directorTurma){
+            return back()->with(['error'=>"Não é Director desta turma"]);
+        }
+        
+        
+        $data = [
+            'title' => "Pauta",
+            'type' => "pauta",
+            'menu' => "pauta",
+            'submenu' => "Novo",
+            'getDirector'=>$directorTurma,
+        ];
+
+        echo "elloh";
     }
 
     /**

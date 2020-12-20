@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Disciplina;
 use App\Estudante;
 use App\NotaFinal;
 use App\NotaTrimestral;
@@ -204,5 +205,20 @@ class ControladorStatic extends Controller
         }
 
         return $retorno;
+    }
+
+    public static function getDisciplinaID($id_disciplina){
+        $disciplina = Disciplina::find($id_disciplina);
+        return $disciplina;
+    }
+
+    public static function getValoresMiniPautaFinal2($id_estudante, $id_disciplina){
+        $data = [
+            'id_estudante' => $id_estudante,
+            'id_disciplina' => $id_disciplina,
+            'ano_lectivo' => Session::get('ano_lectivoP'),
+        ];
+        $final = NotaFinal::where($data)->get();
+        return $final;
     }
 }

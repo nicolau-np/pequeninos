@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AnoLectivo;
 use App\DirectorTurma;
 use App\Funcionario;
+use App\Grade;
 use App\Turma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -53,13 +54,19 @@ class PautaController extends Controller
         if(!$directorTurma){
             return back()->with(['error'=>"Não é Director desta turma"]);
         }
-
+        
+        $grade_disciplinas = Grade::where([
+            'id_curso'=>$turma->id_curso,
+            'id_classe'=>$turma->id_classe,
+        ])->get();
+        
         $data = [
             'title' => "Pauta",
             'type' => "pauta",
             'menu' => "pauta",
             'submenu' => "Novo",
             'getDirector'=>$directorTurma,
+            'getGrade'=>$grade_disciplinas,
         ];
 
         return view('minha_turma.new', $data);

@@ -26,16 +26,45 @@
                     </div>
                 </div>
                 <div class="card-block">
+
+                    {{Form::open(['method'=>"post", 'url'=>""])}}
                     <div class="row">
-                    <div class="col-lg-12 col-xl-12">
-                    
-                    </div> 
+                        <div class="col-md-6">
+                            {{Form::submit('Salvar', ['class'=>"btn btn-primary btn-sm float-left"])}}
+                             
+                            <a href="#" class="btn btn-danger btn-sm float-right remover_todas"><i class="ti-trash" aria-hidden="true"></i></a>
+                           <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>Disciplina</th>
+                                    <th>Sígla</th>
+                                    <th>Operações</th>
+                                </tr>
+                            </thead>
+                            <tbody class="load_disciplina">
+                                @foreach ($getGrade as $grades)
+                                <tr>
+                                <td scope="row">{{$grades->disciplina->disciplina}}</td>
+                                <td>{{$grades->disciplina->sigla}}</td>
+                                <td>
+                                    <a href="#" class="btn btn-primary btn-sm adicionar" data-id="{{$grades->id_disciplina}}" data-sigla="{{$grades->disciplina->sigla}}"><i class="ti-plus" aria-hidden="true"></i></a>
+                                </td>
+                                </tr> 
+                                @endforeach
+                              </tbody>
+                        </table>
+                        </div>
+                        <div class="col-md-6 load_selected">
+                          Nenhuma selecionada
+                        </div>
+                        
                     </div>
-                 </div>
+                    {{Form::close()}}
+                </div>
+                    
             </div>
         </div>
     </div>
-    
 </div>
 
 <!-- hidden-sm-up -->
@@ -47,4 +76,43 @@
 	</div>
 </div>
 
+
+
+<script>
+    $(document).ready(function(){
+        $('.adicionar').click(function(e){
+            e.preventDefault();
+            var data = {
+                id_disciplina: $(this).data('id'),
+                sigla: $(this).data('sigla')
+            };
+
+            $.ajax({
+                type: "get",
+                url: "{{route('addDisciplinas')}}",
+                data: data,
+                dataType: "json",
+                success: function (response) {
+                    if(response.status === "ok"){
+                        disciplinas();
+                    }else if(response.status === "error"){
+                        alert(response.sms);
+                    }
+                }
+            });
+        });
+
+        function disciplinas(){
+            $.ajax({
+                type: "get",
+                url: "{{route('getDisciplinasSelecionadas')}}",
+                data: null,
+                dataType: "html",
+                success: function (response) {
+                    $('.load_selected').html(response);
+                }
+            });
+        }
+    });
+</script>
 @endsection

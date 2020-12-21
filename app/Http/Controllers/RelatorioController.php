@@ -6,6 +6,7 @@ use App\AnoLectivo;
 use App\Encarregado;
 use App\EpocaPagamento;
 use App\Estudante;
+use App\Exports\EstudanteExport;
 use App\Fatura;
 use App\FormaPagamento;
 use App\HistoricEstudante;
@@ -16,6 +17,7 @@ use App\TipoPagamento;
 use App\Turma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 
 class RelatorioController extends Controller
@@ -124,5 +126,31 @@ class RelatorioController extends Controller
         $pdf = PDF::loadView('relatorios.lista_encarregados', $data)->setPaper('A4', 'normal');
 
         return $pdf->stream('Lista de Comparticipação ' . $ano_lectivo->ano_lectivo .'.pdf');
+    }
+
+    public function lista_nominal(Request $request){
+        $request->validate([
+            'curso'=>['required', 'Integer'],
+            'classe'=>['required', 'Integer'],
+            'turma'=>['required', 'Integer'],
+            'ano_lectivo'=>['required', 'Integer'],
+        ]);
+
+        $turma = Turma::find($request->turma);
+        if(!$turma){
+            return back()->with(['error'=>"Turma não encontrada"]);
+        }
+
+        $ano_lectivo = AnoLectivo::where('ano_lectivo', $request->ano_lectivo)->first();
+        if(!$ano_lectivo){
+            return back()->with(['error'=>"Não encontrou ano lectivo"]);
+        }
+        
+        /*
+        $pdf = PDF::loadView('relatorios.lista_nominal', $data)->setPaper('A4', 'normal');
+
+        return $pdf->stream('Lista de Nominal -' .$turma->turma. $request->ano_lectivo .'.pdf');*/
+        $fileName = "Lista de Nominal-" .$turma->turma." ".$request->ano_lectivo.".xlsx";
+        return (new EstudanteExport($request->turma, $request->ano_lectivo))->download($fileName);
     }
 }

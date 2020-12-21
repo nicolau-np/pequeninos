@@ -146,7 +146,9 @@ class FuncionarioController extends Controller
         if ($pessoa) {
             $data['funcionario']['id_pessoa'] = $pessoa->id;
             $data['usuario']['id_pessoa'] = $pessoa->id;
-            $data['usuario']['username'] = strtolower($primeiro_nome.".".$ultimo_nome)."".$pessoa->id;
+            $nome_completo = strtolower($primeiro_nome.".".$ultimo_nome)."".$pessoa->id;
+            $nome_converte = $this->converter_acentos($nome_completo);
+            $data['usuario']['username'] = $nome_converte;
             $funcionario = Funcionario::create($data['funcionario']);
             if ($funcionario) {
                 if ($isUser) {
@@ -158,6 +160,8 @@ class FuncionarioController extends Controller
                 }
             }
         }
+
+        
     }
 
     /**
@@ -306,5 +310,14 @@ class FuncionarioController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function converter_acentos($string) {
+    
+        return preg_replace(array("/(á|â|ã|à)/", "/(Á|Â|Ã|À)/", 
+                "/(é|è|ê)/", "/(É|È|Ê)/", "/(í|ì|î)/", "/(Í|Ì|Î)/",
+                "/(ó|ò|õ|ô)/", "/(Ó|Ò|Õ|Ô)/", "/(ú|ù|û)/", "/(Ú|Ù|Û)/",
+                "/(ñ)/", "/(Ñ)/", "/(ç)/", "/(Ç)/"), 
+                explode(" ","a A e E i I o O u U n N c C"), $string);
     }
 }

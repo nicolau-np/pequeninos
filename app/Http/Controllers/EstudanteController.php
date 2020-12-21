@@ -23,12 +23,14 @@ class EstudanteController extends Controller
     public function index()
     {
         $estudantes = Estudante::paginate(5);
+        $cursos = Curso::pluck('curso', 'id');
         $data = [
             'title' => "Estudantes",
             'type' => "estudantes",
             'menu' => "Estudantes",
             'submenu' => "Listar",
             'getEstudantes' => $estudantes,
+            'getCursos'=>$cursos,
         ];
         return view('estudantes.list', $data);
     }

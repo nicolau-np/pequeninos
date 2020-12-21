@@ -166,6 +166,7 @@ Route::group(['prefix' => 'relatorios', 'middleware' => "auth"], function () {
     Route::get('/fatura/{id_fatura}', "RelatorioController@fatura");
     Route::get('/lista_pagamentos', "RelatorioController@lista_pagamentos");
     Route::get('/lista_comparticicacao', "RelatorioController@lista_comparticipacao");
+    Route::get('/lista_nominal', "RelatorioController@lista_nominal");
 });
 
 Route::group(['prefix' => 'cadernetas', 'middleware' => "auth"], function () {
@@ -175,7 +176,7 @@ Route::group(['prefix' => 'cadernetas', 'middleware' => "auth"], function () {
     Route::get('/store_copy/{id_turma}/{id_disciplina}/{epoca}/{ano_lectivo}', "CadernetaController@store_copy");
 });
 
-Route::group(['prefix' => 'minipautas'], function () {
+Route::group(['prefix' => 'minipautas', 'middleware'=>"auth"], function () {
     Route::get('/show/{id_turma}/{id_disciplina}/{ano_lectivo}', "MiniPautaController@show");
 });
 
@@ -183,7 +184,7 @@ Route::group(['prefix' => 'minha_turma', 'middleware' => "auth"], function () {
     Route::get('/', "MinhaTurmaController@index");
 });
 
-Route::group(['prefix' => 'pautas'], function () {
+Route::group(['prefix' => 'pautas', 'middleware'=>"auth"], function () {
     Route::get('/create/{id_turma}/{ano_lectivo}', "PautaController@create");
     Route::put('/show/{id_turma}/{ano_lectivo}', "PautaController@show");
 });

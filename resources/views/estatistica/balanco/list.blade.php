@@ -57,7 +57,7 @@ $meses = [1,2,3,4,5,6,7,8,9,10,11,12,];
                             <div class="tab-content tabs-left-content card-block">
                                 <div class="tab-pane active" id="home5" role="tabpanel">
                                     <p class="m-0">
-                                        <div class="tabela">
+                                        <div class="table-responsive">
                                             <table class="table table-bordered" style="font-size:12px;">
                                                 <thead>
                                                     <tr>
@@ -160,7 +160,7 @@ $meses = [1,2,3,4,5,6,7,8,9,10,11,12,];
                                 </div>
                                 <div class="tab-pane" id="profile5" role="tabpanel">
                                     <p class="m-0">
-                                        <div class="tabela">
+                                        <div class="table-responsive">
                                             <table class="table table-bordered" style="font-size:12px;">
                                                 <thead>
                                                     <tr>
@@ -265,7 +265,7 @@ $meses = [1,2,3,4,5,6,7,8,9,10,11,12,];
                                 </div>
                                 <div class="tab-pane" id="messages5" role="tabpanel">
                                     <p class="m-0">
-                                        <div class="tabela">
+                                        <div class="table-responsive">
                                             <table class="table table-bordered" style="font-size:12px;">
                                                 <thead>
                                                     <tr>

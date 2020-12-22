@@ -61,7 +61,6 @@ class PagamentoController extends Controller
             return back()->with(['error' => "Não encontrou preco"]);
         }
         Session::put('id_tipo_pagamento', $id_tipo_pagamento);
-
         $forma_pagamento = FormaPagamento::where('forma_pagamento', $tabela_preco->forma_pagamento)->first();
         $epocas_pagemento = EpocaPagamento::where('id_forma_pagamento', $forma_pagamento->id)->get();
         $estudante = Estudante::find($historico->id_estudante);
@@ -147,7 +146,7 @@ class PagamentoController extends Controller
         }    
         $data['fatura'] = [
             'data_fatura'=>date('Y-m-d'),
-            'ano'=>date('Y'),
+            'ano'=>$historico->ano_lectivo,
         ];
         $fatura = Fatura::create($data['fatura']);
         $data['where'] = [

@@ -16,7 +16,7 @@ class CreateFaturasTable extends Migration
         Schema::create('faturas', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->date('data_fatura');
-            $table->bigInteger('ano');
+            $table->string('ano');
             $table->timestamps();
         });
     }

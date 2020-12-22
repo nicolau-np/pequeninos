@@ -23,7 +23,7 @@ class CreateNotaTrimestralsTable extends Migration
             $table->decimal('cpp', 4,2)->nullable();
             $table->decimal('ct', 4,2)->nullable();
             $table->date('data_lancamento')->nullable();
-            $table->bigInteger('ano_lectivo');
+            $table->string('ano_lectivo');
             $table->string('estado')->nullable();
             $table->timestamps();
         });

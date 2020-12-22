@@ -44,7 +44,7 @@ class EstudanteController extends Controller
     {
         $provincias = Provincia::pluck('provincia', 'id');
         $cursos = Curso::pluck('curso', 'id');
-        $ano_lectivos = AnoLectivo::pluck('ano_lectivo', 'id');
+        $ano_lectivos = AnoLectivo::pluck('ano_lectivo', 'ano_lectivo');
         $data = [
             'title' => "Estudantes",
             'type' => "estudantes",
@@ -75,7 +75,7 @@ class EstudanteController extends Controller
             'curso' => ['required', 'Integer'],
             'classe' => ['required', 'Integer'],
             'turma' => ['required', 'Integer'],
-            'ano_lectivo' => ['required', 'Integer'],
+            'ano_lectivo' => ['required', 'string'],
         ]);
 
         if ($request->bilhete != "") {
@@ -85,7 +85,7 @@ class EstudanteController extends Controller
         }
 
 
-        $ano_lectivo = AnoLectivo::find($request->ano_lectivo);
+        $ano_lectivo = AnoLectivo::where('ano_lectivo',$request->ano_lectivo)->first();
 
         $data['pessoa'] = [
             'id_municipio' => $request->municipio,
@@ -109,14 +109,14 @@ class EstudanteController extends Controller
             'id_pessoa' => null,
             'id_encarregado' => $request->encarregado,
             'estado' => "on",
-            'ano_lectivo' => $ano_lectivo->ano_lectivo,
+            'ano_lectivo' => $request->ano_lectivo,
         ];
 
         $data['historico'] = [
             'id_estudante' => null,
             'id_turma' => $request->turma,
             'estado' => "on",
-            'ano_lectivo' => $ano_lectivo->ano_lectivo,
+            'ano_lectivo' => $request->ano_lectivo,
         ];
 
         if (Pessoa::where([

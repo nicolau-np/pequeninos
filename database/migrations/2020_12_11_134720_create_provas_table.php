@@ -23,7 +23,7 @@ class CreateProvasTable extends Migration
             $table->date('data1')->nullable();
             $table->decimal('valor2', 4,2)->nullable();
             $table->date('data2')->nullable();
-            $table->bigInteger('ano_lectivo');
+            $table->string('ano_lectivo');
             $table->timestamps();
         });
         

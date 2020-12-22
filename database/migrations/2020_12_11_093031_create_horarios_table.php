@@ -23,7 +23,7 @@ class CreateHorariosTable extends Migration
             $table->bigInteger('id_hora')->unsigned()->index();
             $table->string('semana');
             $table->string('estado')->nullable();
-            $table->bigInteger('ano_lectivo');
+            $table->string('ano_lectivo');
             $table->timestamps();
         });
 

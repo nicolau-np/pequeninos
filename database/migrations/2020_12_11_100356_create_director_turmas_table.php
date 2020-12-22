@@ -19,7 +19,7 @@ class CreateDirectorTurmasTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('id_funcionario')->unsigned()->index();
             $table->bigInteger('id_turma')->unsigned()->index();
-            $table->bigInteger('ano_lectivo');
+            $table->string('ano_lectivo');
             $table->timestamps();
         });
 

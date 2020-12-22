@@ -25,7 +25,7 @@ class CreateAvaliacaosTable extends Migration
              $table->date('data2', 4,2)->nullable();
              $table->decimal('valo3', 4,2)->nullable();
              $table->date('data3', 4,2)->nullable();
-             $table->bigInteger('ano_lectivo');
+             $table->string('ano_lectivo');
              $table->timestamps();
          });
  

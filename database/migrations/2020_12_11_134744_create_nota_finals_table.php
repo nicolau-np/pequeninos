@@ -22,7 +22,7 @@ class CreateNotaFinalsTable extends Migration
             $table->decimal('cpe', 4,2)->nullable();
             $table->decimal('cf', 4,0)->nullable();
             $table->date('data_lancamento')->nullable();
-            $table->bigInteger('ano_lectivo');
+            $table->string('ano_lectivo');
             $table->string('estado')->nullable();
             $table->timestamps();
         });

@@ -370,10 +370,10 @@
 					<!-- Single Footer -->
 					<div class="col-sm-3">
 						<div class="single-footer">
-							<h4>Huambo-Angola</h4>
-							<p>Cidade Alta <br />
+							<h4>Huíla-Lubango-Angola</h4>
+							<p>Bairro da Minhota <br />
 							+(244) 946 216 795 <br />
-							pequeninos@gmail.com <br />
+							geral@okussoleka.com <br />
 							</p>
 						</div>
 					</div>

@@ -55,8 +55,9 @@
 							<div class="navbar-collapse collapse">
 								<ul class="nav navbar-nav navbar-right">
 									<li><a href="#home">Principal</a></li>
-									<li><a href="#about">Sobre</a></li>
+                                    <li><a href="#about">Sobre</a></li>
                                     <li><a href="#contact-us">Contactar</a></li>
+                                    <li><a href="#">Consultar</a></li>
                                 <li><a href="{{route('login')}}">Entrar</a></li>
 								</ul>
 							</div>
@@ -79,18 +80,18 @@
 						<div class="item active">
 							<img src="{{asset('assets/template2/img/slide1.jpg')}}" alt="Sider Big Image" style="width: 100%; height:38em;">
 							<div class="carousel-caption">
-								<h1 class="wow fadeInLeft">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
+								<h1 class="wow fadeInLeft">Todos juntos por uma educação Inclusiva</h1>
 								<div class="slider-btn wow fadeIn">
-									<a href="#" class="btn btn-learn">Learn More</a>
+									<a href="#" class="btn btn-learn">OKUSSOLEKA</a>
 								</div>
 							</div>
 						</div>
 						<div class="item">
 							<img src="{{asset('assets/template2/img/slide2.jpeg')}}" alt="Sider Big Image" style="width: 100%; height:38em;">
 							<div class="carousel-caption">
-								<h1 class="wow fadeInLeft">Lorem ipsum dolor sit amet, consectetur adipiscing elit</h1>
+								<h1 class="wow fadeInLeft">Aprender e ensinar de forma abrangente</h1>
 								<div class="slider-btn wow fadeIn">
-									<a href="#" class="btn btn-learn">Learn More</a>
+									<a href="#" class="btn btn-learn">OKUSSOLEKA</a>
 								</div>
 							</div>
 						</div>
@@ -114,9 +115,10 @@
 					</div>
 					<div class="col-sm-6">
 						<div class="about-text wow fadeInRight">
-							<h3>About Our Company</h3>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-							<a href="#" class="btn btn-read-more">Read More</a>
+							<h3>Sobre OKUSSOLEKA</h3>
+							<p>O Melhor Sistema de Gestão e Estatística Escolar. Aulas, pautas, estatísticas, provas em online e muito mais... 
+                                Cadastre urgentemente a sua escola, e seja um dos bem sucedidos no que tem haver ao gerenciamento da sua escola.<br/> Basta entrar em contacto connosco  </p>
+							<a href="#" class="btn btn-read-more">Ler Mais</a>
 						</div>
 					</div>
 				</div>
@@ -132,7 +134,7 @@
 				<div class="row">
 					<div class="col-sm-4">
 						<div class="progress-bar-custom wow fadeInLeft">
-							<h5>Photoshop</h5>
+							<h5>Estatísticas</h5>
 							<div class="progress">
 							  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
 								60%
@@ -141,7 +143,7 @@
 						</div>
 						
 						<div class="progress-bar-custom wow fadeInLeft">
-							<h5>Illustrator</h5>
+							<h5>Pautas</h5>
 							<div class="progress">
 							  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 90%;">
 								90%
@@ -154,7 +156,7 @@
 					<div class="col-sm-4">
 						
 						<div class="progress-bar-custom wow fadeInLeft">
-							<h5>Web Design</h5>
+							<h5>Aulas</h5>
 							<div class="progress">
 							  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
 								80%
@@ -163,7 +165,7 @@
 						</div>
 						
 						<div class="progress-bar-custom wow fadeInLeft">
-							<h5>WordPress</h5>
+							<h5>Finanças</h5>
 							<div class="progress">
 							  <div class="progress-bar" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 70%;">
 								70%
@@ -179,7 +181,7 @@
 							<div class="trophy">
 								<i class="fa fa-trophy"></i>
 							</div>
-							<h3>180 <br /> awards get & win</h3>
+							<h3>180 <br /> Temos Para sí</h3>
 						</div>
 					</div>
 				</div>
@@ -198,7 +200,7 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="title">
-							<h3>Client <span>Testimonials</span></h3>
+							<h3>Satisfação das <span>Escolas</span></h3>
 						</div>
 					</div>
 				</div>
@@ -432,7 +434,8 @@
 								<ul>
 									<li><a href="#">Home</a></li>
 									<li><a href="#">Sobre</a></li>
-									<li><a href="#">Contactar</a></li>
+                                    <li><a href="#">Contactar</a></li>
+                                    <li><a href="#">Consultar</a></li>
                                 <li><a href="{{route('login')}}">Entrar</a></li>
 								</ul>
 							</div>

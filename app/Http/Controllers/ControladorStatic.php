@@ -25,6 +25,17 @@ class ControladorStatic extends Controller
         return $comparticipacao;
     }
 
+    public static function getPagamentos($id_estudante, $epoca, $ano_lectivo)
+    {
+        $data = [
+            'id_estudante' => $id_estudante,
+            'epoca' => $epoca,
+            'ano_lectivo' => $ano_lectivo
+        ];
+        $comparticipacao = Pagamento::where($data)->first();
+        return $comparticipacao;
+    }
+
     public static function converterMes($mes)
     {
         $mes_extenso = null;

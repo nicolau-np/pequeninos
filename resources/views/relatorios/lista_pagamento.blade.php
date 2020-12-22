@@ -92,10 +92,10 @@
                         <td>{{$histoEstudantes->estudante->pessoa->nome}}</td>
                         @foreach ($getEpocasPagamento as $epocas)
                         @php
-                            $comparticipacao = ControladorStatic::getPagamentosComparticipacao($histoEstudantes->estudante->id_encarregado, $epocas->epoca, $getAno);
+                            $pagamento = ControladorStatic::getPagamentos($histoEstudantes->id_estudante, $epocas->epoca, $getAno);
                         @endphp
                         <td>
-                            @if ($comparticipacao==null)
+                            @if ($pagamento==null)
                                 Não Pago
                             @else
                                 Pago

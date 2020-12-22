@@ -1,5 +1,4 @@
-
-<!doctype html>
+<!DOCTYPE html>
 <html class="no-js" lang="">
     <head>
         <meta charset="utf-8">
@@ -26,7 +25,17 @@
         <link rel="stylesheet" href="{{asset('assets/template2/css/responsive.css')}}">
         <script src="{{asset('assets/template2/js/vendor/modernizr-2.8.3.min.js')}}"></script>
 		
-		
+		<style>
+            
+
+            @media (max-width:700px){
+            .sld{
+                width: 100%;
+                height: 100px;
+            }
+
+            }
+        </style>
     </head>
     <body>
         <!--[if lt IE 8]>
@@ -78,7 +87,7 @@
 				 
 					<div class="carousel-inner" role="listbox">
 						<div class="item active">
-							<img src="{{asset('assets/template2/img/slide1.jpg')}}" alt="Sider Big Image" style="width: 100%; height:38em;">
+							<img src="{{asset('assets/template2/img/slide1.jpg')}}" alt="Sider Big Image" class="img_sld" style="width: 100%; height:38em;">
 							<div class="carousel-caption">
 								<h1 class="wow fadeInLeft">Todos juntos por uma educação Inclusiva</h1>
 								<div class="slider-btn wow fadeIn">
@@ -87,7 +96,7 @@
 							</div>
 						</div>
 						<div class="item">
-							<img src="{{asset('assets/template2/img/slide2.jpeg')}}" alt="Sider Big Image" style="width: 100%; height:38em;">
+							<img src="{{asset('assets/template2/img/slide2.jpeg')}}" alt="Sider Big Image" class="img_sld" style="width: 100%; height:38em;">
 							<div class="carousel-caption">
 								<h1 class="wow fadeInLeft">Aprender e ensinar de forma abrangente</h1>
 								<div class="slider-btn wow fadeIn">
@@ -496,5 +505,26 @@
             r.parentNode.insertBefore(e,r)}(window,document,'script','ga'));
             ga('create','UA-XXXXX-X','auto');ga('send','pageview');
         </script>
+
+<SCRIPT LANGUAGE="JavaScript">
+    <!-- Disable
+    function disableselect(e){
+    return false
+    }
+    
+    function reEnable(){
+    return true
+    }
+    
+    //if IE4+
+    document.onselectstart=new Function ("return false")
+    document.oncontextmenu=new Function ("return false")
+    //if NS6
+    if (window.sidebar){
+    document.onmousedown=disableselect
+    document.onclick=reEnable
+    }
+    //-->
+    </script>
     </body>
 </html>

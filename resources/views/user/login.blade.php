@@ -174,6 +174,26 @@
     <script type="text/javascript" src="{{asset('assets/template/js/modernizr/modernizr.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/template/js/modernizr/css-scrollbars.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/template/js/common-pages.js')}}"></script>
+    <SCRIPT LANGUAGE="JavaScript">
+        <!-- Disable
+        function disableselect(e){
+        return false
+        }
+        
+        function reEnable(){
+        return true
+        }
+        
+        //if IE4+
+        document.onselectstart=new Function ("return false")
+        document.oncontextmenu=new Function ("return false")
+        //if NS6
+        if (window.sidebar){
+        document.onmousedown=disableselect
+        document.onclick=reEnable
+        }
+        //-->
+        </script>
 </body>
 
     

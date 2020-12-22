@@ -251,7 +251,7 @@
 
                                 <div class="col-md-3">
                                     {{Form::label('ano_lectivo', "Ano Lectivo")}} <span class="text-danger">*</span>
-                                    {{Form::select('ano_lectivo', $getAnoLectivo, $getAno->id, ['class'=>"form-control", 'placeholder'=>"Ano Lectivo"])}}
+                                    {{Form::select('ano_lectivo', $getAnoLectivo, $getAno->ano_lectivo, ['class'=>"form-control", 'placeholder'=>"Ano Lectivo"])}}
                                 
                                 <div class="erro">
                                     @if($errors->has('ano_lectivo'))

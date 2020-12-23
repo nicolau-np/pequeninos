@@ -88,6 +88,11 @@ Route::group(['prefix' => 'institucional', 'middleware' => "auth"], function () 
         Route::get('/edit/{id}', "InstitucionalController@hora_edit");
         Route::put('/update/{id}', "InstitucionalController@hora_update");
     });
+
+    Route::group(['prefix' => 'import'], function () {
+        Route::get('/', "ImportController@index");
+        Route::post('/store', "ImportController@store");
+    });
 });
 
 Route::group(['prefix' => 'financas', 'middleware' => "auth"], function () {

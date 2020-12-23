@@ -227,7 +227,7 @@
                             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Principal</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="@if($menu=="Home") active @endif">
-                                    <a href="/">
+                                    <a href="/home">
                                         <span class="pcoded-micon"><i class="ti-home"></i><b>H</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Home</span>
                                         <span class="pcoded-mcaret"></span>
@@ -334,6 +334,13 @@
                                             </a>
                                         </li>
 
+                                        <li class="@if($menu=="Importar") active @endif">
+                                            <a href="/institucional/import/">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Importar</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </li>
                                 @endif

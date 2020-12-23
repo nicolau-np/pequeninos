@@ -2,6 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Encarregado;
+use App\Estudante;
+use App\Funcionario;
+use App\User;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -23,11 +27,20 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+        $usuarios = User::all();
+        $funcionarios = Funcionario::all();
+        $estudantes = Estudante::all();
+        $encarregados = Encarregado::all();
         $data = [
             'title'=>"Okussoleka - Sistema de Gestão Escolar",
             'type'=>"home",
             'menu'=>"Home",
-            'submenu'=>""
+            'submenu'=>"",
+            'getUsuarios'=>$usuarios,
+            'getFuncionarios'=>$funcionarios,
+            'getEstudantes'=>$estudantes,
+            'getEncarregados'=>$encarregados,
         ];
         return view('home', $data);
     }

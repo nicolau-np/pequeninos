@@ -17,10 +17,9 @@ class ImportController extends Controller
         return view('import.new', $data);
     }
 
-    public function show(){
-        
-    }
-    public function store(){
+   
+    public function store(Request $request){
+        $file = $request->file('arquivo');
         
     }
 }

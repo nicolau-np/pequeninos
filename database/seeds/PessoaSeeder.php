@@ -27,6 +27,13 @@ class PessoaSeeder extends Seeder
             'genero'=>"Femenino",
             'estado_civil'=>"solteira" 
           ],
+          [
+            'id_municipio'=>4,
+            'nome'=>"Encarregado Exemplo",
+            'data_nascimento'=>"1990-01-01",
+            'genero'=>"Masculino",
+            'estado_civil'=>"solteiro" 
+          ],
           
     ];
         

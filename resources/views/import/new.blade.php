@@ -34,7 +34,7 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     {{Form::label('arquivo', "Arquivo")}} <span class="text-danger">*</span>
-                                    {{Form::file('arquivo', null, ['class'=>"form-control curso", 'placeholder'=>"Arquivo"])}}
+                                    {{Form::file('arquivo', null, ['class'=>"form-control", 'placeholder'=>"Arquivo"])}}
                                 <div class="erro">
                                     @if($errors->has('arquivo'))
                                     <div class="text-danger">{{$errors->first('arquivo')}}</div>

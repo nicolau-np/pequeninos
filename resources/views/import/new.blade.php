@@ -27,7 +27,7 @@
                     @if(session('success'))
                     <div class="alert alert-success">{{session('success')}}</div>
                     @endif
-                        {{Form::open(['method'=>"post", 'name'=>"import_estudantes", 'url'=>"/import/store", 'enctype'=>"multipart/form-data"])}}
+                        {{Form::open(['method'=>"post", 'name'=>"import_estudantes", 'url'=>"/institucional/import/store", 'enctype'=>"multipart/form-data"])}}
                         @csrf
                         <fieldset>
                             <legend><i class="ti-list"></i> Importar Estudantes</legend>

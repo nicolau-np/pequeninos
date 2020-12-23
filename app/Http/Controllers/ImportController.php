@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Imports\EstudanteImport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ImportController extends Controller
 {
@@ -21,5 +23,7 @@ class ImportController extends Controller
     public function store(Request $request){
         $file = $request->file('arquivo');
         
+        Excel::import(new EstudanteImport, $file);
+        return back()->with(['success'=>"Feito com sucesso"]);
     }
 }

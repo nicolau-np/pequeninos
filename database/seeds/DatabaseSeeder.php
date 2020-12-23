@@ -25,6 +25,7 @@ class DatabaseSeeder extends Seeder
            TurnoSeeder::class,
            ClasseSeeder::class,
            CursoSeeder::class,
+           TurmaSeeder::class,
            FuncionarioSeeder::class,
            TipoPagamentoSeeder::class,
            CompoDisciplinaSeeder::class,

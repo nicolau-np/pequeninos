@@ -13,30 +13,40 @@
         font-family: Arial, Helvetica, sans-serif;
         font-size: 12px;
     }
-    table, th, td {
-    border: 1px solid black;
-    }
-    
+
+    .tr_especial{
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+        .header{
+            text-align: center;
+            font-weight: bold;
+        }
 </style>
 </head>
 <body>
     <div class="header">
-
+        DIRECÇÃO PROVINCIAL DA EDUCAÇÃO CIÊNCIA E TECNOLOGIA<BR/>
+        ESCOLA PRIMÁRIA E Iº CÍCLO LAR DOS PEQUENINOS<BR/>
+        DAS IRMÃS DO SANTÍSSIMO SALVADOR-HUAMBO<BR/>
     </div>
     <div class="title">
-        <p>Curso: {{$getTurma->curso->curso}}</p> 
+        <br/><br/>
+        <p style="font-weight: bold; text-align: center;">Lista de {{$getTipoPagamento->tipo}}</p>
+         
         <p>Classe: {{$getTurma->classe->classe}}</p> 
         <p>Turma: {{$getTurma->turma}}</p>
+        <p>Turno: {{$getTurma->turno->turno}}</p>
         <p>Ano Lectivo: {{$getAno}}</p>
 
-        <p style="font-weight: bold; text-align: center;">Lista de {{$getTipoPagamento->tipo}}</p>
+        
     </div>
     <div class="body">
         @if($getTipoPagamento->id == 3)
         <div class="tabela_comparticipacaoPais">
-            <table class="table">
+            <table class="table" border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 70%;">
                 <thead>
-                    <tr>
+                    <tr class="tr_especial">
                         <th>Nº</th>
                         <th>Estudante</th>
                         <th>Nome Encarregado</th>
@@ -63,7 +73,7 @@
                             @if ($comparticipacao==null)
                                 --
                             @else
-                                {{$comparticipacao->preco}}
+                                {{number_format($comparticipacao->preco,2,',','.')}} Akz
                             @endif
                         </td>
                     <?php }?>
@@ -77,9 +87,10 @@
 
         @else
         <div class="tabela_propina">
-            <table class="table">
+            <table class="table" class="table" border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 70%;">
                 <thead>
-                    <tr>
+                    <tr class="tr_especial">
+                        <th>Nº</th>
                         <th>Estudante</th>
                         @foreach ($getEpocasPagamento as $epocas)
                         <th>{{$epocas->epoca}}</th>
@@ -89,6 +100,7 @@
                 <tbody>
                     @foreach ($getHistoricoEstudante as $histoEstudantes)
                         <tr>
+                        <td>{{$loop->iteration}}</td>
                         <td>{{$histoEstudantes->estudante->pessoa->nome}}</td>
                         @foreach ($getEpocasPagamento as $epocas)
                         @php
@@ -96,9 +108,9 @@
                         @endphp
                         <td>
                             @if ($pagamento==null)
-                                Não Pago
+                                ---
                             @else
-                                Pago
+                                {{number_format($pagamento->preco,2,',','.')}} Akz
                             @endif
                         </td>
                         @endforeach 

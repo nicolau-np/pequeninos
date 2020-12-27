@@ -20,21 +20,32 @@ $trimestre_totais = [
         font-family: Arial, Helvetica, sans-serif;
         font-size: 12px;
     }
+    .tr_especial{
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
+        .header{
+            text-align: center;
+            font-weight: bold;
+        }
 </style>
 </head>
 <body>
     <div class="header">
-        <p>CABECALHO</p>
+        DIRECÇÃO PROVINCIAL DA EDUCAÇÃO CIÊNCIA E TECNOLOGIA<BR/>
+        ESCOLA PRIMÁRIA E Iº CÍCLO LAR DOS PEQUENINOS<BR/>
+        DAS IRMÃS DO SANTÍSSIMO SALVADOR-HUAMBO<BR/>
     </div>
 
     <div class="body-header">
-    <p style="text-align: center;">Lista de Comparticipação de Encarregados referente {{$getAno->ano_lectivo}}</p>
+        <br/><br/>
+        <p style="text-align: center; font-weight: bold;">Lista de Comparticipação de Encarregados referente {{$getAno->ano_lectivo}}</p>
     </div>
 
     <div class="tabela">
-        <table border="1">
+        <table class="table" border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
             <thead>
-                <tr>
+                <tr class="tr_especial">
                     <th>Nº</th>
                     <th>Nome do Encarregado</th>
                     <th>Telefone</th>
@@ -76,12 +87,7 @@ $trimestre_totais = [
                     @endforeach
                 </tr>
                 @endforeach
-                <tr>
-                    <td colspan="4">Total Geral</td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                </tr>
+               
             </tbody>
         </table>
     </div>

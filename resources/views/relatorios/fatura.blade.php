@@ -49,7 +49,7 @@
     <div class="header">
         <div class="desc_empresa">
         <p>
-               <span style="font-weight: bold;">ESCOLA PRIMÁRIA E Iº CÍCLO LAR DOS PEQUENINOS <BR/>
+               <span style="font-weight: bold;">COMPLEXO ESCOLAR LAR DOS PEQUENINOS <BR/>
                DAS IRMÃS DO SANTÍSSIMO SALVADOR-HUAMBO</span><BR/>
                NIF: 5121019874<BR/>
         </p>
@@ -206,7 +206,7 @@
      <div class="header">
         <div class="desc_empresa">
         <p>
-               <span style="font-weight: bold;">ESCOLA PRIMÁRIA E Iº CÍCLO LAR DOS PEQUENINOS <BR/>
+               <span style="font-weight: bold;">COMPLEXO ESCOLAR LAR DOS PEQUENINOS <BR/>
                DAS IRMÃS DO SANTÍSSIMO SALVADOR-HUAMBO</span><BR/>
                NIF: 5121019874<BR/>
         </p>

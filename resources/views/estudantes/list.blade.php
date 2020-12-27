@@ -64,6 +64,7 @@
                                     <td>
                                         <a href="/pagamentos/listar/{{$estudantes->id}}/{{$estudantes->ano_lectivo}}" class="btn btn-success btn-sm"><i class="ti-money"></i> Pag.</a>
                                         <a href="/pagamentos/extrato/{{$estudantes->id}}/{{$estudantes->ano_lectivo}}" class="btn btn-warning btn-sm"><i class="ti-list"></i> Extra.</a>
+                                        <a href="/pagamentos/confirmar/{{$estudantes->id}}/{{$estudantes->ano_lectivo}}" class="btn btn-info btn-sm"><i class="ti-file"></i> Confir.</a>
                                         <a href="/estudantes/edit/{{$estudantes->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
                                         <a href="http://" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
                                     </td>

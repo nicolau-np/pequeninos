@@ -33,7 +33,7 @@ $trimestre_totais = [
 <body>
     <div class="header">
         DIRECÇÃO PROVINCIAL DA EDUCAÇÃO CIÊNCIA E TECNOLOGIA<BR/>
-        ESCOLA PRIMÁRIA E Iº CÍCLO LAR DOS PEQUENINOS<BR/>
+        COMPLEXO ESCOLAR LAR DOS PEQUENINOS<BR/>
         DAS IRMÃS DO SANTÍSSIMO SALVADOR-HUAMBO<BR/>
     </div>
 

@@ -637,4 +637,45 @@ class InstitucionalController extends Controller
             return back()->with(['success' => "Feito com sucesso"]);
         }
     }
+
+    public function ano_lectivo_edit($id)
+    {
+        $ano_lectivo = AnoLectivo::find($id);
+        if (!$ano_lectivo) {
+            return back()->with(['error' => "Não encontrou ano lectivo"]);
+        }
+        $data = [
+            'title' => "Ano Lectivo",
+            'type' => "institucional",
+            'menu' => "Ano Lectivo",
+            'submenu' => "Editar",
+            'getAnoLectivo' => $ano_lectivo,
+        ];
+        return view('institucional.ano_lectivo.edit', $data);
+    }
+
+    public function ano_lectivo_update(Request $request, $id)
+    {
+        $ano_lectivo = AnoLectivo::find($id);
+        if (!$ano_lectivo) {
+            return back()->with(['error' => "Não encontrou ano lectivo"]);
+        }
+        $request->validate([
+            'ano_lectivo' => ['required', 'Integer'],
+        ]);
+
+        $data['ano'] = [
+            'ano_lectivo' => $request->ano_lectivo,
+        ];
+
+        if ($request->ano_lectivo != $ano_lectivo->ano_lectivo) {
+            if (AnoLectivo::where($data['ano'])->first()) {
+                return back()->with(['error' => "Já cadastrou este ano lectivo"]);
+            }
+        }
+
+        if (AnoLectivo::find($id)->update($data['ano'])) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
+    }
 }

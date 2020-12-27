@@ -27,7 +27,7 @@
                     @if(session('success'))
                     <div class="alert alert-success">{{session('success')}}</div>
                     @endif
-                        {{Form::open(['method'=>"post", 'url'=>"/institucional/ano_lectivos/store"])}}
+                        {{Form::open(['method'=>"put", 'url'=>"/institucional/ano_lectivos/update/{$getAnoLectivo->id}"])}}
                         @csrf
                         <fieldset>
                             <legend><i class="ti-list"></i> Dados do Ano Lectivo</legend>
@@ -35,7 +35,7 @@
                                
                                 <div class="col-md-3">
                                     {{Form::label('ano_lectivo', "Ano Lectivo")}} <span class="text-danger">*</span>
-                                    {{Form::text('ano_lectivo', null, ['class'=>"form-control", 'placeholder'=>"Ano Lectivo"])}}
+                                    {{Form::text('ano_lectivo', $getAnoLectivo->ano_lectivo, ['class'=>"form-control", 'placeholder'=>"Ano Lectivo"])}}
                                     <div class="erro">
                                         @if($errors->has('ano_lectivo'))
                                         <div class="text-danger">{{$errors->first('ano_lectivo')}}</div>

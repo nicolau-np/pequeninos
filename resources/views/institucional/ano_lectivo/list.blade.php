@@ -52,7 +52,7 @@
                                 <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$ano_lectivos->ano_lectivo}}</td>
                                     <td>
-                                        <a href="/ano_lectivos/edit/{{$ano_lectivos->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
+                                        <a href="/institucional/ano_lectivos/edit/{{$ano_lectivos->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
                                         <a href="http://" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
                                     </td>
                                 </tr>

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', "PrincipalController@index")->name('principal');
 Route::get('/home', "HomeController@index")->name('home');
 Route::get('/login', "UserController@loginForm")->name('login');
@@ -93,6 +94,8 @@ Route::group(['prefix' => 'institucional', 'middleware' => "auth"], function () 
         Route::get('/', "InstitucionalController@ano_lectivo_list");
         Route::get('/create', "InstitucionalController@ano_lectivo_create");
         Route::post('/store', "InstitucionalController@ano_lectivo_store");
+        Route::get('/edit/{id}', "InstitucionalController@ano_lectivo_edit");
+        Route::put('/update/{id}', "InstitucionalController@ano_lectivo_update");
     });
 
     Route::group(['prefix' => 'import'], function () {
@@ -189,7 +192,7 @@ Route::group(['prefix' => 'cadernetas', 'middleware' => "auth"], function () {
     Route::get('/store_copy/{id_turma}/{id_disciplina}/{epoca}/{ano_lectivo}', "CadernetaController@store_copy");
 });
 
-Route::group(['prefix' => 'minipautas', 'middleware'=>"auth"], function () {
+Route::group(['prefix' => 'minipautas', 'middleware' => "auth"], function () {
     Route::get('/show/{id_turma}/{id_disciplina}/{ano_lectivo}', "MiniPautaController@show");
 });
 
@@ -197,7 +200,7 @@ Route::group(['prefix' => 'minha_turma', 'middleware' => "auth"], function () {
     Route::get('/', "MinhaTurmaController@index");
 });
 
-Route::group(['prefix' => 'pautas', 'middleware'=>"auth"], function () {
+Route::group(['prefix' => 'pautas', 'middleware' => "auth"], function () {
     Route::get('/create/{id_turma}/{ano_lectivo}', "PautaController@create");
     Route::put('/show/{id_turma}/{ano_lectivo}', "PautaController@show");
 });

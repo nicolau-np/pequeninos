@@ -142,7 +142,7 @@
                             
                             <li class="user-profile header-notification">
                                 <a href="#!">
-                                    <img src="{{asset('assets/template/images/avatar-4.jpg')}}" class="img-radius" alt="User-Profile-Image">
+                                    <img src="{{asset('assets/template/images/profile.png')}}" class="img-radius" alt="User-Profile-Image">
                                     <span>
                                         @auth
                                             {{Auth::user()->username}}
@@ -191,7 +191,7 @@
                         <div class="pcoded-inner-navbar main-menu">
                             <div class="">
                                 <div class="main-menu-header">
-                                    <img class="img-40 img-radius" src="{{asset('assets/template/images/avatar-4.jpg')}}" alt="User-Profile-Image">
+                                    <img class="img-40 img-radius" src="{{asset('assets/template/images/profile.png')}}" alt="User-Profile-Image">
                                     <div class="user-details">
                                         <span>
                                             @auth

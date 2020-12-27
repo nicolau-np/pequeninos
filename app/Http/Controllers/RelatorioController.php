@@ -51,7 +51,7 @@ class RelatorioController extends Controller
             'getHistorico'=>$historico,
             'getId_tipo_pagamento'=>$id_tipo_pagamento,
             'getTipoPagamento'=>$tipo_pagamento,
-            'getNumeroFatura'=>$id_fatura,
+            'getFatura'=>$fatura,
             'getEducandos'=>$educandos,
         ];
         $pdf = PDF::loadView('relatorios.fatura', $data)->setPaper('A4', 'normal');

@@ -10,24 +10,80 @@
             font-family: Arial, Helvetica, sans-serif;
             font-size: 12px;
         }
+        .header{
+            display: block;
+        }
+        .desc_empresa{
+            float: left;
+        }
+        .desc_cliente{
+            float: right;
+            border: 1px solid #333;
+            padding: 4px;
+            width: 300px;
+        }
+        .rodape{
+            display: block;
+        }
+        .encarregado{
+            float: left;
+            text-align: center;
+        }
+        .secretaria{
+            float: right;
+            text-align: center;
+        }
+        .linha_divisoria{
+            text-align: center;
+        }
+        .tabela1{
+            background-color: #f5f5f5;
+        }
+        .tr_especial{
+            background-color: #f5f5f5;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <div class="header">
         <div class="desc_empresa">
-           <p>CABECALHO </p>
+        <p>
+               <span style="font-weight: bold;">ESCOLA PRIMÁRIA E Iº CÍCLO LAR DOS PEQUENINOS <BR/>
+               DAS IRMÃS DO SANTÍSSIMO SALVADOR-HUAMBO</span><BR/>
+               NIF: 5121019874<BR/>
+        </p>
         </div>
+        <div class="desc_cliente">
+            <p>
+              Exmo Sr(a).  <BR/>
+              <span style="font-weight: bold;">
+                {{$getHistorico->estudante->encarregado->pessoa->nome}}<br/>
+                HUAMBO-ANGOLA
+              </span>
+            </p>
+            
+        </div>
+        <br/><br/><br/><br/>
     </div>
 
     <div class="header-body">
-        <p style="text-align: center;">Comprovativo de Pagamento referente a {{$getTipoPagamento->tipo}}</p>
-    <p>Fatura Nº {{$getNumeroFatura}}</p>
+        <br/><br/><br/><br/>
+        <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000" class="tabela1">
+            <tr>
+                <td colspan="2">PAGAMENTO DE {{strtoupper($getTipoPagamento->tipo)}}</td>
+            </tr>
+            <tr>
+                <td>Fact. Nº {{date('dmY', strtotime($getFatura->data_fatura))}}{{$getFatura->id}}</td>
+            <td>Data: {{date('d-m-Y', strtotime($getFatura->data_fatura))}} {{date('H:i:s', strtotime($getFatura->created_at))}}</td>
+            </tr>
+        </table>
     </div>
 
    <div class="body">
        @if ($getId_tipo_pagamento == 3)
              <div class="tableComparticipacao">
-                <table border="1">
+                <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000">
                     <thead>
                         <tr>
                         <th>Encarregado</th>
@@ -48,9 +104,9 @@
                 </table>
 
                 <hr/>
-                <table border="1">
+                <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000">
                     <thead>
-                        <tr>
+                        <tr class="tr_especial">
                             <th>Epoca</th>
                             <th>Valor</th>
                         </tr>
@@ -72,16 +128,33 @@
                        
                     </tbody>
                 </table>
-                <p>
-                    Total Pago: {{number_format($total,2,',','.')}} Akz&nbsp;&nbsp;&nbsp; Data: {{date('d-m-Y', strtotime($created_at))}} {{date('H:s:i', strtotime($created_at))}}
+                <p style="font-size:14px;">
+                    Total Geral: {{number_format($total,2,',','.')}} Akz
                 </p>
             </div>
 
         @else
         <div class="tablePagamento">
-            <table border="1">
+            <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%">
+                <tr class="tr_especial">
+                    <td>Nº Processo</td>
+                    <td>Nome completo</td>
+                    <td>Classe</td>
+                    <td>Turma</td>
+                    <td>Turno</td>
+                </tr>
+                <tr>
+                <td>{{$getHistorico->id_estudante}}</td>
+                <td>{{$getHistorico->estudante->pessoa->nome}}</td>
+                <td>{{$getHistorico->turma->classe->classe}}</td>
+                <td>{{$getHistorico->turma->turma}}</td>
+                <td>{{$getHistorico->turma->turno->turno}}</td>
+                </tr>
+            </table>
+            <br/>
+            <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 60%;">
                 <thead>
-                    <tr>
+                    <tr class="tr_especial">
                         <th>Epoca</th>
                         <th>Valor (Akz)</th>
                     </tr>
@@ -103,11 +176,28 @@
                    
                 </tbody>
             </table>
-            <p>
-                Total Pago: {{number_format($total,2,',','.')}} Akz&nbsp;&nbsp;&nbsp; Data: {{date('d-m-Y', strtotime($created_at))}} {{date('H:s:i', strtotime($created_at))}}
+            <p style="font-size:14px;">
+                Total Geral: {{number_format($total,2,',','.')}} Akz
             </p>
         </div>
        @endif
     </div>
+    <div class="rodape">
+        <div class="encarregado">
+            Encarregado<br/>
+        ________________________
+        </div>
+        <div class="secretaria">
+            Secretaria<br/>
+            ______________________
+        </div>
+    </div>
+    <div class="linha_divisoria">
+        <br/><br/>
+        <p>
+            -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+        </p>
+     </div>
+    
 </body>
 </html>

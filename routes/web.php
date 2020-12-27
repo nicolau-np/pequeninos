@@ -89,6 +89,11 @@ Route::group(['prefix' => 'institucional', 'middleware' => "auth"], function () 
         Route::put('/update/{id}', "InstitucionalController@hora_update");
     });
 
+    Route::group(['prefix' => 'ano_lectivos'], function () {
+        Route::get('/', "InstitucionalController@ano_lectivo_list");
+        Route::get('/create', "InstitucionalController@ano_lectivo_create");
+    });
+
     Route::group(['prefix' => 'import'], function () {
         Route::get('/', "ImportController@index");
         Route::post('/store', "ImportController@store");

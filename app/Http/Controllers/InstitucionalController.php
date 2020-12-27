@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AnoLectivo;
 use App\CompoDisciplina;
 use App\Curso;
 use App\Disciplina;
@@ -593,5 +594,28 @@ class InstitucionalController extends Controller
         if (Hora::find($id)->update($data)) {
             return back()->with(['success' => "Feito com sucesso"]);
         }
+    }
+
+    public function ano_lectivo_list(){
+        $ano_lectivos = AnoLectivo::orderBy('id', 'desc')->paginate(8);
+        $data = [
+            'title' => "Ano Lectivo",
+            'type' => "institucional",
+            'menu' => "Ano Lectivo",
+            'submenu' => "Listar",
+            'getAnoLectivos'=>$ano_lectivos,
+        ];
+        return view('institucional.ano_lectivo.list', $data);
+    }
+
+    public function ano_lectivo_create(){
+        
+        $data = [
+            'title' => "Ano Lectivo",
+            'type' => "institucional",
+            'menu' => "Ano Lectivo",
+            'submenu' => "Novo",
+        ];
+        return view('institucional.ano_lectivo.new', $data);
     }
 }

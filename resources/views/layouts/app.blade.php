@@ -334,6 +334,14 @@
                                             </a>
                                         </li>
 
+                                        <li class="@if($menu=="Ano Lectivo") active @endif">
+                                            <a href="/institucional/ano_lectivos/">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Ano Lectivo</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
                                         <li class="@if($menu=="Importar") active @endif">
                                             <a href="/institucional/import/">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>

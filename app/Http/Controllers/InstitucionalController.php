@@ -361,7 +361,7 @@ class InstitucionalController extends Controller
             return back()->with(['error' => "Deve selecionar disciplinas"]);
         }
 
-        $data['store']= [
+        $data['store'] = [
             'id_curso' => $request->curso,
             'id_classe' => $request->classe,
             'id_disciplina' => null,
@@ -374,20 +374,20 @@ class InstitucionalController extends Controller
             'id_disciplina' => null,
         ];
 
-        foreach(Session::get('disciplinas') as $disciplina){
+        foreach (Session::get('disciplinas') as $disciplina) {
             $data['store']['id_disciplina'] = $disciplina['id_disciplina'];
             $data['where']['id_disciplina'] = $disciplina['id_disciplina'];
-            if(!Grade::where($data['where'])->first()){
-                $grade = Grade::create($data['store']); 
-            }else{
+            if (!Grade::where($data['where'])->first()) {
+                $grade = Grade::create($data['store']);
+            } else {
                 $grade = false;
             }
-         }
+        }
 
-        if($grade){
-            return back()->with(['success'=>"Feito com sucesso"]);
-        }else{
-            return back()->with(['error'=>"Já cadastrou"]);  
+        if ($grade) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        } else {
+            return back()->with(['error' => "Já cadastrou"]);
         }
     }
 
@@ -596,20 +596,22 @@ class InstitucionalController extends Controller
         }
     }
 
-    public function ano_lectivo_list(){
+    public function ano_lectivo_list()
+    {
         $ano_lectivos = AnoLectivo::orderBy('id', 'desc')->paginate(8);
         $data = [
             'title' => "Ano Lectivo",
             'type' => "institucional",
             'menu' => "Ano Lectivo",
             'submenu' => "Listar",
-            'getAnoLectivos'=>$ano_lectivos,
+            'getAnoLectivos' => $ano_lectivos,
         ];
         return view('institucional.ano_lectivo.list', $data);
     }
 
-    public function ano_lectivo_create(){
-        
+    public function ano_lectivo_create()
+    {
+
         $data = [
             'title' => "Ano Lectivo",
             'type' => "institucional",
@@ -617,5 +619,22 @@ class InstitucionalController extends Controller
             'submenu' => "Novo",
         ];
         return view('institucional.ano_lectivo.new', $data);
+    }
+
+    public function ano_lectivo_store(Request $request)
+    {
+        $request->validate([
+            'ano_lectivo' => ['required', 'Integer'],
+        ]);
+
+        $data['ano'] = [
+            'ano_lectivo' => $request->ano_lectivo,
+        ];
+        if (AnoLectivo::where($data['ano'])->first()) {
+            return back()->with(['error' => "Já cadastrou este ano lectivo"]);
+        }
+        if (AnoLectivo::create($data['ano'])) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
     }
 }

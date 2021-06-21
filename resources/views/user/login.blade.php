@@ -102,6 +102,9 @@
                                         <p class="text-inverse text-left m-b-0">Obrigado e aproveite nosso site.</p>
                                         <p class="text-inverse text-left"><b>Sua equipe de autenticação</b></p>
                                     </div>
+                                    <div class="col-md-2">
+                                        <a href="/"><i class="fa fa-home"></i> home</a>
+                                    </div>
                                 </div>
 
                             </div>

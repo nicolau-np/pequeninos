@@ -58,8 +58,10 @@
 									<span class="icon-bar"></span>
 								</button>
 
-								<a href="#" class="navbar-brand">
-                                    SIGE
+								<a href="/" class="navbar-brand">
+                                    <div style="font-weight: bold; font-size:26px;">
+                                       <span style="color:#3ea0e6;">SI</span>GE
+                                    </div>
                                 </a>
 							</div>
 

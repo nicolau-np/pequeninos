@@ -97,7 +97,7 @@
 							<div class="carousel-caption">
 								<h1 class="wow fadeInLeft">Todos juntos por uma educação Inclusiva</h1>
 								<div class="slider-btn wow fadeIn">
-									<a href="#" class="btn btn-learn">OKUSSOLEKA</a>
+									<a href="#" class="btn btn-learn">SIGE</a>
 								</div>
 							</div>
 						</div>
@@ -106,7 +106,7 @@
 							<div class="carousel-caption">
 								<h1 class="wow fadeInLeft">Aprender e ensinar de forma abrangente</h1>
 								<div class="slider-btn wow fadeIn">
-									<a href="#" class="btn btn-learn">OKUSSOLEKA</a>
+									<a href="#" class="btn btn-learn">SIGE</a>
 								</div>
 							</div>
 						</div>
@@ -130,7 +130,7 @@
 					</div>
 					<div class="col-sm-6">
 						<div class="about-text wow fadeInRight">
-							<h3>Sobre OKUSSOLEKA</h3>
+							<h3>Sobre SIGE</h3>
 							<p>O Melhor Sistema de Gestão e Estatística Escolar. Aulas, pautas, estatísticas, provas em online e muito mais...
                                 Cadastre urgentemente a sua escola, e seja um dos bem sucedidos no que tem haver ao gerenciamento da sua escola.<br/> Basta entrar em contacto connosco  </p>
 							<a href="#" class="btn btn-read-more">Ler Mais</a>
@@ -215,7 +215,7 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="title">
-							<h3>Satisfação dos <span>Clientes</span></h3>
+							<h3>Nossos <span>Clientes</span></h3>
 						</div>
 					</div>
 				</div>
@@ -232,13 +232,13 @@
 								<div class="col-sm-6">
 									<div class="single-testimonials">
 										<div class="text">
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+											<p>Complexo escolar das Irmãs do santíssimo salvador, ensino primário do 1º Cíclo e 2º Cíclo.</p>
 										</div>
 
 										<div class="profile-image">
-											<img src="{{asset('assets/template2/img/client.jpg')}}" alt="Author Image" />
-											<h4>John Doe</h4>
-											<p>Marketing Manager</p>
+											<img src="{{asset('assets/template/images/auth/Logo-small-bottom.png')}}" alt="Author Image" />
+											<h4>Colégio dos Pequeninos</h4>
+											<p>Huambo-Angola</p>
 										</div>
 
 									</div>
@@ -247,13 +247,13 @@
 								<div class="col-sm-6">
 									<div class="single-testimonials">
 										<div class="text">
-											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+											<p>Liceu Welwitchia Mirábilis, ensino secundário do 2º Cíclo<br/> </p>
 										</div>
 
 										<div class="profile-image">
-											<img src="{{asset('assets/template2/img/client.jpg')}}" alt="Author Image" />
-											<h4>John Doe</h4>
-											<p>Marketing Manager</p>
+											<img src="{{asset('assets/template/images/auth/Logo-small-bottom.png')}}" alt="Author Image" />
+											<h4>Liceu Welwitchia Mirábilis</h4>
+											<p>Moçamedes-Namibe</p>
 										</div>
 
 									</div>
@@ -262,7 +262,7 @@
 						</div>
 
 						<!-- Next Slide -->
-						<div class="item">
+						<!--<div class="item">
 							<div class="row">
 								<div class="col-sm-6">
 									<div class="single-testimonials">
@@ -294,7 +294,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div>-->
 						<!-- Next Slide -->
 
 					</div>
@@ -388,7 +388,7 @@
 							<h4>Huíla-Lubango-Angola</h4>
 							<p>Bairro da Minhota <br />
 							+(244) 946 216 795 <br />
-							geral@okussoleka.com <br />
+							geral@SIGE.com <br />
 							</p>
 						</div>
 					</div>
@@ -441,7 +441,7 @@
 					<div class="row">
 						<div class="col-sm-4">
 							<div class="copy-text">
-								<p>Todos os direitos reservados | Copyright {{date('Y')}} © O template Bizium por pFind's Goodies</p>
+								<p>Todos os direitos reservados | Copyright {{date('Y')}} © powered by SIGE</p>
 							</div>
 						</div>
 						<div class="col-sm-5">

@@ -9,13 +9,13 @@
 
         <link rel="apple-touch-icon" href="apple-touch-icon.png')}}">
         <!-- Place favicon.ico in the root directory -->
-		
+
 		<!-- Font -->
 		<link href='https://fonts.googleapis.com/css?family=Open+Sans:400,300,300italic,400italic,600,700,600italic,700italic,800,800italic' rel='stylesheet' type='text/css'>
 		<link href='https://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 		<!-- Font -->
-		
-		
+
+
         <link rel="stylesheet" href="{{asset('assets/template2/css/normalize.css')}}">
         <link rel="stylesheet" href="{{asset('assets/template2/css/main.css')}}">
         <link rel="stylesheet" href="{{asset('assets/template2/css/font-awesome.min.css')}}">
@@ -24,9 +24,9 @@
         <link rel="stylesheet" href="{{asset('assets/template2/css/style.css')}}">
         <link rel="stylesheet" href="{{asset('assets/template2/css/responsive.css')}}">
         <script src="{{asset('assets/template2/js/vendor/modernizr-2.8.3.min.js')}}"></script>
-		
+
 		<style>
-            
+
 
             @media (max-width:700px){
             .sld{
@@ -41,10 +41,10 @@
         <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-		
+
 		<!-- Header Start -->
 		<header id="home">
-			
+
 			<!-- Main Menu Start -->
 			<div class="main-menu">
 				<div class="navbar-wrapper">
@@ -57,10 +57,10 @@
 									<span class="icon-bar"></span>
 									<span class="icon-bar"></span>
 								</button>
-								
-								<a href="#" class="navbar-brand"><img src="{{asset('assets/template2/img/logo.png')}}" alt="Logo" /></a>							
+
+								<a href="#" class="navbar-brand"><img src="{{asset('assets/template2/img/logo.png')}}" alt="Logo" /></a>
 							</div>
-							
+
 							<div class="navbar-collapse collapse">
 								<ul class="nav navbar-nav navbar-right">
 									<li><a href="#home">Principal</a></li>
@@ -70,13 +70,13 @@
                                 <li><a href="{{route('login')}}">Entrar</a></li>
 								</ul>
 							</div>
-							
+
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- Main Menu End -->
-			
+
 			<!-- Sider Start -->
 			<div class="slider">
 				<div id="fawesome-carousel" class="carousel slide" data-ride="carousel">
@@ -84,7 +84,7 @@
 						<li data-target="#fawesome-carousel" data-slide-to="0" class="active"></li>
 						<li data-target="#fawesome-carousel" data-slide-to="1"></li>
 					</ol>
-				 
+
 					<div class="carousel-inner" role="listbox">
 						<div class="item active">
 							<img src="{{asset('assets/template2/img/slide1.jpg')}}" alt="Sider Big Image" class="img_sld" style="width: 100%; height:38em;">
@@ -108,11 +108,11 @@
 				</div>
 			</div>
 			<!-- Sider End -->
-			
+
 		</header>
 		<!-- Header End -->
-		
-		
+
+
 		<!-- About Section -->
 		<section id="about" class="site-padding">
 			<div class="container">
@@ -125,7 +125,7 @@
 					<div class="col-sm-6">
 						<div class="about-text wow fadeInRight">
 							<h3>Sobre OKUSSOLEKA</h3>
-							<p>O Melhor Sistema de Gestão e Estatística Escolar. Aulas, pautas, estatísticas, provas em online e muito mais... 
+							<p>O Melhor Sistema de Gestão e Estatística Escolar. Aulas, pautas, estatísticas, provas em online e muito mais...
                                 Cadastre urgentemente a sua escola, e seja um dos bem sucedidos no que tem haver ao gerenciamento da sua escola.<br/> Basta entrar em contacto connosco  </p>
 							<a href="#" class="btn btn-read-more">Ler Mais</a>
 						</div>
@@ -134,10 +134,10 @@
 			</div>
 		</section>
 		<!-- About Section -->
-		
-		
+
+
 		<!-- Award Winning Section -->
-		
+
 		<section id="awards" class="site-padding">
 			<div class="container">
 				<div class="row">
@@ -150,7 +150,7 @@
 							  </div>
 							</div>
 						</div>
-						
+
 						<div class="progress-bar-custom wow fadeInLeft">
 							<h5>Pautas</h5>
 							<div class="progress">
@@ -159,11 +159,11 @@
 							  </div>
 							</div>
 						</div>
-						
+
 					</div>
-					
+
 					<div class="col-sm-4">
-						
+
 						<div class="progress-bar-custom wow fadeInLeft">
 							<h5>Aulas</h5>
 							<div class="progress">
@@ -172,7 +172,7 @@
 							  </div>
 							</div>
 						</div>
-						
+
 						<div class="progress-bar-custom wow fadeInLeft">
 							<h5>Finanças</h5>
 							<div class="progress">
@@ -181,10 +181,10 @@
 							  </div>
 							</div>
 						</div>
-						
+
 					</div>
-					
-					
+
+
 					<div class="col-sm-4">
 						<div class="award-win wow fadeInRight">
 							<div class="trophy">
@@ -196,30 +196,30 @@
 				</div>
 			</div>
 		</section>
-		
+
 		<!-- Award Winning Section -->
-	
-		
-		
+
+
+
 		<!-- Testimonials -->
-		
+
 		<section id="testimonials">
 			<div class="container">
-				
+
 				<div class="row">
 					<div class="col-sm-12">
 						<div class="title">
-							<h3>Satisfação das <span>Escolas</span></h3>
+							<h3>Satisfação dos <span>Clientes</span></h3>
 						</div>
 					</div>
 				</div>
-				
+
 				<div id="fawesome-carousel-two" class="carousel slide" data-ride="carousel">
 					<ol class="carousel-indicators">
 						<li data-target="#fawesome-carousel-two" data-slide-to="0" class="active"></li>
 						<li data-target="#fawesome-carousel-two" data-slide-to="1"></li>
 					</ol>
-				 
+
 					<div class="carousel-inner" role="listbox">
 						<div class="item active">
 							<div class="row">
@@ -228,33 +228,33 @@
 										<div class="text">
 											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 										</div>
-										
+
 										<div class="profile-image">
 											<img src="{{asset('assets/template2/img/client.jpg')}}" alt="Author Image" />
 											<h4>John Doe</h4>
 											<p>Marketing Manager</p>
 										</div>
-										
+
 									</div>
 								</div>
-								
+
 								<div class="col-sm-6">
 									<div class="single-testimonials">
 										<div class="text">
 											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 										</div>
-										
+
 										<div class="profile-image">
 											<img src="{{asset('assets/template2/img/client.jpg')}}" alt="Author Image" />
 											<h4>John Doe</h4>
 											<p>Marketing Manager</p>
 										</div>
-										
+
 									</div>
 								</div>
 							</div>
 						</div>
-						
+
 						<!-- Next Slide -->
 						<div class="item">
 							<div class="row">
@@ -263,43 +263,43 @@
 										<div class="text">
 											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 										</div>
-										
+
 										<div class="profile-image">
 											<img src="{{asset('assets/template2/img/client.jpg')}}" alt="Author Image" />
 											<h4>Jason Cheng</h4>
 											<p>Marketing Manager</p>
 										</div>
-										
+
 									</div>
 								</div>
-								
+
 								<div class="col-sm-6">
 									<div class="single-testimonials">
 										<div class="text">
 											<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
 										</div>
-										
+
 										<div class="profile-image">
 											<img src="{{asset('assets/template2/img/client.jpg')}}" alt="Author Image" />
 											<h4>Kim Cheng</h4>
 											<p>Marketing Manager</p>
 										</div>
-										
+
 									</div>
 								</div>
 							</div>
 						</div>
 						<!-- Next Slide -->
-						
+
 					</div>
-				 
+
 				</div>
-				
+
 			</div>
 		</section>
-		
+
 		<!-- Testimonials -->
-		
+
 		<!-- Contact -->
 		<section id="contact-us">
 			<div class="container">
@@ -311,11 +311,11 @@
 					</div>
 				</div>
 			</div>
-		
+
 			<div class="map">
 				<iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d14608.272959726353!2d90.38896245!3d23.744945849999997!3m2!1i1024!2i768!4f13.1!4m3!3e1!4m0!4m0!5e0!3m2!1sen!2sbd!4v1465238371126" width="100%" height="600" frameborder="0" style="border:0" allowfullscreen></iframe>
 			</div>
-		
+
 			<div class="contact">
 				<div class="container">
 					<div class="row">
@@ -344,7 +344,7 @@
 										</div>
 										<p>
 											<button class="btn btn-theme margintop10 pull-left" type="submit">Enviar mensagem</button>
-											
+
 										</p>
 									</div>
 								</div>
@@ -353,16 +353,16 @@
 					</div>
 				</div>
 			</div>
-		</section>		
+		</section>
 		<!-- Contact -->
-		
-		
+
+
 		<!-- footer -->
-		
+
 		<footer>
 			<div class="container">
 				<div class="row">
-				
+
 					<!-- Single Footer -->
 					<div class="col-sm-3">
 						<div class="single-footer">
@@ -374,8 +374,8 @@
 						</div>
 					</div>
 					<!-- Single Footer -->
-					
-					
+
+
 					<!-- Single Footer -->
 					<div class="col-sm-3">
 						<div class="single-footer">
@@ -387,14 +387,14 @@
 						</div>
 					</div>
 					<!-- Single Footer -->
-					
-					
+
+
 					<!-- Single Footer -->
 					<div class="col-sm-3">
 						<div class="single-footer">
 							<h4>Subscrição</h4>
 							<p>Digite seu endereço de e-mail para assinar nossos boletins mensais</p>
-							
+
 							<form action="">
 								<div class="form-group">
 									<input type="email" class="form-control my-form" id="exampleInputEmail1" placeholder="Insira o seu endereço de email">
@@ -403,11 +403,11 @@
 									<button class="btn btn-subscribe">Subscrever-se</button>
 								</div>
 							</form>
-							
+
 						</div>
 					</div>
 					<!-- Single Footer -->
-					
+
 					<!-- Single Footer -->
 					<div class="col-sm-3">
 						<div class="single-footer">
@@ -423,12 +423,12 @@
 						</div>
 					</div>
 					<!-- Single Footer -->
-					
+
 				</div>
 			</div>
-			
+
 		</footer>
-		
+
 		<!-- Copyright -->
 		<div class="copyright">
 				<div class="container">
@@ -462,11 +462,11 @@
 					</div>
 				</div>
 			</div>
-		
+
 		<!-- footer -->
-		
-		
-		
+
+
+
 
         <script src="https://code.jquery.com/jquery-1.12.0.min.js')}}"></script>
         <script>window.jQuery || document.write('<script src="{{asset('assets/template2/js/vendor/jquery-1.12.0.min.js')}}"><\/script>')</script>
@@ -478,8 +478,8 @@
         <script src="{{asset('assets/template2/js/jquery.sticky.js')}}"></script>
         <script src="{{asset('assets/template2/js/wow.min.js')}}"></script>
         <script src="{{asset('assets/template2/js/main.js')}}"></script>
-        
-		
+
+
 		<script type="text/javascript">
 			$(document).ready(function(){
 				$('a[href^="#"]').on('click',function (e) {
@@ -494,7 +494,7 @@
 					});
 			});
 		</script>
-		
+
 		<script src="{{asset('assets/template2/js/custom.js')}}"></script>
         <!-- Google Analytics: change UA-XXXXX-X to be your site's ID. -->
         <script>
@@ -511,11 +511,11 @@
     function disableselect(e){
     return false
     }
-    
+
     function reEnable(){
     return true
     }
-    
+
     //if IE4+
     document.onselectstart=new Function ("return false")
     document.oncontextmenu=new Function ("return false")

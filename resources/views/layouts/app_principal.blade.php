@@ -3,11 +3,13 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title></title>
-        <meta name="description" content="">
+        <title>SIGE - Sistema de Gestão Escolar</title>
+        <meta name="description" content="SIGE - Sistema de Gestão Escolar">
+        <meta name="keywords" content="sistema , gestão, escolar, Sistema, Gestão, Escolar, SIGE, sige, escola, gestor, sistema de gestao escolar">
+        <meta name="author" content="Nicolau NP">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <link rel="apple-touch-icon" href="apple-touch-icon.png')}}">
+        <link rel="icon" href="{{asset('assets/template/images/favicon.ico')}}" type="image/x-icon">
         <!-- Place favicon.ico in the root directory -->
 
 		<!-- Font -->

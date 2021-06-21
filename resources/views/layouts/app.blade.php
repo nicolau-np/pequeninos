@@ -14,9 +14,9 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="description" content="CodedThemes">
-      <meta name="keywords" content=" Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
-      <meta name="author" content="CodedThemes">
+      <meta name="description" content="SIGE - Sistema de Gestão Escolar">
+      <meta name="keywords" content="sistema , gestão, escolar, Sistema, Gestão, Escolar, SIGE, sige, escola, gestor, sistema de gestao escolar">
+      <meta name="author" content="Nicolau NP">
       <!-- Favicon icon -->
       <link rel="icon" href="{{asset('assets/template/images/favicon.ico')}}" type="image/x-icon">
       <!-- Google font--><link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,800" rel="stylesheet">

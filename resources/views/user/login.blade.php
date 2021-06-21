@@ -103,7 +103,7 @@
                                         <p class="text-inverse text-left"><b>Sua equipe de autenticação</b></p>
                                     </div>
                                     <div class="col-md-2">
-                                        <a href="/"><i class="fa fa-home"></i> home</a>
+                                        <a href="/" title="Voltar a Página Principal"><i class="ti-home"></i></a>
                                     </div>
                                 </div>
 

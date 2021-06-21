@@ -36,10 +36,10 @@
                     <!-- Authentication card start -->
                     <div class="login-card card-block auth-body mr-auto ml-auto">
                         {{Form::open(['method'=>"post", 'class'=>"md-float-material", 'url'=>"/logar"])}}
-                        
+
 
                             <div class="text-center">
-                                <img src="{{asset('assets/template/images/auth/logo-dark.png')}}" alt="logo.png')}}">
+                                <img src="{{asset('assets/logos/logo1.png')}}" alt='logo.png' style="width:150px; height:120px;"/>
                             </div>
                             <div class="auth-box">
                                 <div class="row m-b-20">
@@ -51,26 +51,26 @@
                                 @if(session('error'))
                                 <div class="alert alert-danger">{{session('error')}}</div>
                                 @endif
-            
+
                                 @if(session('success'))
                                 <div class="alert alert-success">{{session('success')}}</div>
                                 @endif
-                                
+
                                 <div class="input-group">
                                     {{Form::text('username', null, ['placeholder'=>"Nome de Usuário", 'class'=>"form-control"])}}
                                     <span class="md-line"></span>
-                                   
+
                                 </div>
                                 <div class="erro">
                                 @if($errors->has('username'))
                                 <div class="text-danger">{{$errors->first('username')}}</div>
-                                @endif 
+                                @endif
                                 </div>
-                               
+
                                 <div class="input-group">
                                     <input type="password" class="form-control" placeholder="Palavra-Passe" name="password">
                                     <span class="md-line"></span>
-                                   
+
                                 </div>
                                 <div class="erro">
                                     @if($errors->has('password'))
@@ -101,9 +101,6 @@
                                     <div class="col-md-10">
                                         <p class="text-inverse text-left m-b-0">Obrigado e aproveite nosso site.</p>
                                         <p class="text-inverse text-left"><b>Sua equipe de autenticação</b></p>
-                                    </div>
-                                    <div class="col-md-2">
-                                        <img src="{{asset('assets/template/images/auth/Logo-small-bottom.png')}}" alt="small-logo.png">
                                     </div>
                                 </div>
 
@@ -179,11 +176,11 @@
         function disableselect(e){
         return false
         }
-        
+
         function reEnable(){
         return true
         }
-        
+
         //if IE4+
         document.onselectstart=new Function ("return false")
         document.oncontextmenu=new Function ("return false")
@@ -196,5 +193,5 @@
         </script>
 </body>
 
-    
+
 @endsection

@@ -58,7 +58,7 @@
 									<span class="icon-bar"></span>
 								</button>
 
-								<a href="#" class="navbar-brand"><img src="{{asset('assets/logos/logo1.png')}}" style="width:30%; height: 120px;" alt="Logo" /></a>
+								<a href="#" class="navbar-brand"><img src="{{asset('assets/logos/logo1.png')}}" style="width:30%; height: 120px; display:block; margin-top:0;" alt="Logo" /></a>
 							</div>
 
 							<div class="navbar-collapse collapse">

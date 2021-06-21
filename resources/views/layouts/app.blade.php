@@ -76,9 +76,9 @@
                         <a class="mobile-search morphsearch-search" href="#">
                             <i class="ti-search"></i>
                         </a>
-                        <a href="index.html">
+                        <a href="/">
                             <!--<img class="img-fluid" src="{{asset('assets/logos/logo2.png')}}" style="width:50%; height:50px;" alt="Theme-Logo" />-->
-                            SIGE
+                            <span style="font-weight: bold; font-size:25px;">SIGE</span>
                         </a>
                         <a class="mobile-options">
                             <i class="ti-more"></i>

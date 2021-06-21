@@ -38,7 +38,7 @@
                         {{Form::open(['method'=>"post", 'class'=>"md-float-material", 'url'=>"/logar"])}}
 
 
-                            <div class="text-center">
+                            <div class="text-center" style="font-size:30px; font-weight: bold;">
                                 SIGE
                             </div>
                             <div class="auth-box">

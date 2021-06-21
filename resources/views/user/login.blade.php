@@ -39,7 +39,7 @@
 
 
                             <div class="text-center">
-                                <img src="{{asset('assets/logos/logo1.png')}}" alt='logo.png' style="width:150px; height:120px;"/>
+                                SIGE
                             </div>
                             <div class="auth-box">
                                 <div class="row m-b-20">

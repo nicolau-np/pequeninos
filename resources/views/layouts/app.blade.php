@@ -31,14 +31,14 @@
       <link rel="stylesheet" type="text/css" href="{{asset('assets/template/css/jquery.mCustomScrollbar.css')}}">
       <link rel="stylesheet" type="text/css" href="{{asset('assets/template/style.css')}}">
       <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
-      
+
       @if($menu=="Gráfico" || $submenu == "Gráfico")
       <script src="{{asset('assets/highcharts/highcharts.js')}}"></script>
       <script src="{{asset('assets/highcharts/modules/exporting.js')}}"></script>
       <script src="{{asset('assets/highcharts/modules/export-data.js')}}"></script>
       <script src="{{asset('assets/highcharts/modules/accessibility.js')}}"></script>
       @endif
-     
+
 
   </head>
   @if($type!="login")
@@ -77,7 +77,8 @@
                             <i class="ti-search"></i>
                         </a>
                         <a href="index.html">
-                            <img class="img-fluid" src="{{asset('assets/template/images/logo.png')}}" alt="Theme-Logo" />
+                            <!--<img class="img-fluid" src="{{asset('assets/logos/logo2.png')}}" style="width:50%; height:50px;" alt="Theme-Logo" />-->
+                            SIGE
                         </a>
                         <a class="mobile-options">
                             <i class="ti-more"></i>
@@ -89,7 +90,7 @@
                             <li>
                                 <div class="sidebar_toggle"><a href="javascript:void(0)"><i class="ti-menu"></i></a></div>
                             </li>
-                            
+
                             <li>
                                 <a href="#!" onclick="javascript:toggleFullScreen()">
                                     <i class="ti-fullscreen"></i>
@@ -139,7 +140,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            
+
                             <li class="user-profile header-notification">
                                 <a href="#!">
                                     <img src="{{asset('assets/template/images/profile.png')}}" class="img-radius" alt="User-Profile-Image">
@@ -179,7 +180,7 @@
                                 </ul>
                             </li>
                         </ul>
-                        
+
                     </div>
                 </div>
             </nav>
@@ -295,7 +296,7 @@
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
-                                       
+
                                         <li class="@if($menu=="Turmas") active @endif">
                                             <a href="/institucional/turmas/">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
@@ -317,7 +318,7 @@
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
-                                        
+
                                         <li class="@if($menu=="Salas") active @endif">
                                             <a href="/institucional/salas/">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
@@ -375,7 +376,7 @@
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
-               
+
                                     </ul>
                                 </li>
                                 @endif
@@ -418,10 +419,10 @@
                                     </a>
                                 </li>
                              @endif
-                                
+
                             </ul>
                             @endif
-                          
+
                             @if(Auth::user()->nivel_acesso=="professor")
                             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Professor</div>
                             <ul class="pcoded-item pcoded-left-item">
@@ -441,7 +442,7 @@
                                     </a>
                                 </li>
 
-                               
+
                             </ul>
                             @endif
 
@@ -461,8 +462,8 @@
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
-                             
-                                
+
+
                             </ul>
 
                         </div>

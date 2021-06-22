@@ -71,7 +71,7 @@
         <div class="col-md-12 col-xl-8">
             <div class="card">
                 <div class="card-header">
-                    <h5>Bem vindo {{Auth::user()->pessoa->nome}} ao Okussoleka</h5>
+                    <h5>Bem vindo {{Auth::user()->pessoa->nome}} ao SIGE</h5>
                     <div class="card-header-left ">
                     </div>
                     <div class="card-header-right">
@@ -98,18 +98,18 @@
                         <i class="ti-money"></i>
                         <div class="d-inline-block">
                             <h5>Pagamentos</h5>
-                            <span>blog page timeline</span>
+                            <span>Módulo para propinas</span>
                         </div>
                     </div>
                     <div class="card-block text-center">
                         <div class="row">
                             <div class="col-6 b-r-default">
-                                <h2>23</h2>
-                                <p class="text-muted">Active</p>
+                                <h2>1</h2>
+                                <p class="text-muted">Activar</p>
                             </div>
                             <div class="col-6">
-                                <h2>23</h2>
-                                <p class="text-muted">Comment</p>
+                                <h2>2</h2>
+                                <p class="text-muted">Detalhes</p>
                             </div>
                         </div>
                     </div>
@@ -119,18 +119,18 @@
                         <i class="ti-receipt"></i>
                         <div class="d-inline-block">
                             <h5>Notas</h5>
-                            <span>Product page analysis</span>
+                            <span>Módulo para notas</span>
                         </div>
                     </div>
                     <div class="card-block text-center">
                         <div class="row">
                             <div class="col-6 b-r-default">
-                                <h2>23</h2>
-                                <p class="text-muted">Live</p>
+                                <h2>1</h2>
+                                <p class="text-muted">Activar</p>
                             </div>
                             <div class="col-6">
-                                <h2>23</h2>
-                                <p class="text-muted">Message</p>
+                                <h2>2</h2>
+                                <p class="text-muted">Detalhes</p>
                             </div>
                         </div>
                     </div>
@@ -140,25 +140,25 @@
                         <i class="ti-bar-chart"></i>
                         <div class="d-inline-block">
                             <h5>Estatísticas</h5>
-                            <span>current new timeline</span>
+                            <span>Estatística notas e propinas</span>
                         </div>
                     </div>
                     <div class="card-block text-center">
                         <div class="row">
                             <div class="col-6 b-r-default">
-                                <h2>25</h2>
-                                <p class="text-muted">new tweet</p>
+                                <h2>1</h2>
+                                <p class="text-muted">Activar</p>
                             </div>
                             <div class="col-6">
-                                <h2>450+</h2>
-                                <p class="text-muted">Follower</p>
+                                <h2>2</h2>
+                                <p class="text-muted">Detalhes</p>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-       
-  
+
+
     </div>
 <!-- Page-body end -->
 @endsection

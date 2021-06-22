@@ -428,7 +428,7 @@
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="@if($menu=="Caderneta") active @endif">
                                     <a href="/cadernetas/">
-                                        <span class="pcoded-micon"><i class="ti-home"></i><b>H</b></span>
+                                        <span class="pcoded-micon"><i class="ti-file"></i><b>H</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Caderneta</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
@@ -522,7 +522,7 @@
 @if($menu=="Home")
 <div class="fixed-button">
 	<a href="https://codedthemes.com/item/guru-able-admin-template/" target="_blank" class="btn btn-md btn-primary">
-	  <i class="fa fa-shopping-cart" aria-hidden="true"></i> Upgrade To Pro
+	  <i class="fa fa-shopping-cart" aria-hidden="true"></i> Versão PRO
 	</a>
 </div>
 @endif

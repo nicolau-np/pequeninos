@@ -441,9 +441,7 @@ class AjaxController extends Controller
             $cf = 0;
             $cf = NotaFinal::cf($verifica_final->cap, $verifica_final->cpe);
 
-            $fini = NotaFinal::find($final->id)->update([
-                'cf' => $cf,
-            ]);
+            $fini = NotaFinal::find($final->id)->update(['cf' => $cf,]);
             if ($fini) {
                 return response()->json(['status' => "ok", 'sms' => "Feito com sucesso"]);
             }

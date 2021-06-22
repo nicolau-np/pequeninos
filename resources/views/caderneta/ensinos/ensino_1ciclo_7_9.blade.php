@@ -285,6 +285,24 @@
             }
         });
 
+        $('.notaG').on('keypress', function(e){
+            if(e.which == 13){
+                var valor = $(this).val();
+                var id_global = $(this).data('id');
+                if((valor==="") || (valor<0) || (valor>20)){
+                    $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                }else{
+                    global = updateGlobal(valor, id_global);
+                    if(global){
+                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
+                    }else{
+                        $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                    }
+
+                }
+            }
+        });
+
 
         function updatetrimestral(valor, id_trimestral, campo){
             retorno = false;
@@ -336,7 +354,7 @@
                     console.log(response.sms);
                 }
             });
-            return retorno;
+            return true;
         }
 
      });

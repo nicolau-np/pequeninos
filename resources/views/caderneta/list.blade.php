@@ -9,7 +9,7 @@
                     <h5>{{$submenu}}</h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -29,8 +29,8 @@
                     <div class="alert alert-success">{{session('success')}}</div>
                     @endif
                     </div>
-                   
-                    
+
+
                         @if($getHorario->count()==0)
                     Nenhuma turma encontrada
                     @else
@@ -58,9 +58,9 @@
                                         <a href="#" type="button" class="btn btn-warning btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Baixar Excel">
                                             <i class="icofont icofont-download-alt"></i>
                                         </a>&nbsp;
-                                        <a href="/cadernetas/store/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}" type="button" class="btn btn-info btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Actualizar">
+                                        <!--<a href="/cadernetas/store/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}" type="button" class="btn btn-info btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Actualizar">
                                             <i class="icofont icofont-refresh"></i>
-                                        </a>&nbsp;
+                                        </a>&nbsp;-->
                                        </div>
                                     </span>
                                 </div>
@@ -69,8 +69,8 @@
                     </div>
                     @endforeach
                     @endif
-                   
-                    
+
+
                     <div class="col-md-12 pagination">
                         {{$getHorario->links()}}
                     </div>
@@ -79,7 +79,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- hidden-sm-up -->

@@ -166,7 +166,7 @@ class CadernetaController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store($id_turma, $id_disciplina, $ano_lectivo)
+    /*public function store($id_turma, $id_disciplina, $ano_lectivo)
     {
         $epocas = [
             1, 2, 3
@@ -273,7 +273,7 @@ class CadernetaController extends Controller
         }
 
         return back()->with(['success' => "Actualizou com sucesso"]);
-    }
+    }*/
 
     /**
      * Display the specified resource.

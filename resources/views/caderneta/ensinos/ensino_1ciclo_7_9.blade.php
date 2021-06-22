@@ -151,7 +151,7 @@
                                 <p class="m-0">
                                     {{Form::open(['method'=>"post"])}}
                                     <div class="row">
-                                        <div class="col-md-9">
+                                        <div class="col-md-12">
                                             <!--3 trimestre-->
                                              <table class="table table-bordered">
                                                 <thead>
@@ -197,7 +197,7 @@
                                     {{Form::open(['method'=>"post"])}}
                                       <!-- provas-->
                                       <div class="row">
-                                      <div class="col-md-3">
+                                      <div class="col-md-12">
                                         <table class="table table-bordered">
                                            <thead>
                                                <tr>

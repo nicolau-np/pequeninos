@@ -112,13 +112,14 @@ class CadernetaController extends Controller
 
         Session::put($data2);
 
-        $avalicao = null;
-        $prova = null;
+        /*$avalicao = null;
+        $prova = null;*/
+        $trimestral = null;
         $global = null;
 
         if ($epoca != 4) {
             //pegando avalicao
-            $avalicao = Avaliacao::whereHas('estudante', function ($query) use ($data2) {
+            /*$avalicao = Avaliacao::whereHas('estudante', function ($query) use ($data2) {
                 $query->where('id_turma', $data2['id_turmaCAD']);
                 $query->where('ano_lectivo', $data2['ano_lectivoCAD']);
             })->where(['epoca' => $data2['epocaCAD'], 'id_disciplina' => $data2['id_disciplinaCAD']])
@@ -126,6 +127,12 @@ class CadernetaController extends Controller
 
             //pegando prova
             $prova = Prova::whereHas('estudante', function ($query) use ($data2) {
+                $query->where('id_turma', $data2['id_turmaCAD']);
+                $query->where('ano_lectivo', $data2['ano_lectivoCAD']);
+            })->where(['epoca' => $data2['epocaCAD'], 'id_disciplina' => $data2['id_disciplinaCAD']])
+                ->get()->sortBy('estudante.pessoa.nome');*/
+
+            $trimestral = NotaTrimestral::whereHas('estudante', function ($query) use ($data2) {
                 $query->where('id_turma', $data2['id_turmaCAD']);
                 $query->where('ano_lectivo', $data2['ano_lectivoCAD']);
             })->where(['epoca' => $data2['epocaCAD'], 'id_disciplina' => $data2['id_disciplinaCAD']])
@@ -148,8 +155,9 @@ class CadernetaController extends Controller
             'getId_turma' => $id_turma,
             'getId_disciplina' => $id_disciplina,
             'getAno_lectivo' => $ano_lectivo,
-            'getAvaliacao' => $avalicao,
-            'getProva' => $prova,
+            /*'getAvaliacao' => $avalicao,
+            'getProva' => $prova,*/
+            'getTrimestral' => $trimestral,
             'getGlobal' => $global,
         ];
 

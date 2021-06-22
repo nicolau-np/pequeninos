@@ -32,8 +32,16 @@
                     </div>
                 </div>
                 <div class="card-block">
+                    @if(session('error'))
+                    <div class="alert alert-danger">{{session('error')}}</div>
+                    @endif
 
+                    @if(session('success'))
+                    <div class="alert alert-success">{{session('success')}}</div>
+                    @endif
+                    
                     <div class="col-lg-12 col-xl-12">
+
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs md-tabs tabs-left b-none" role="tablist">
                             <li class="nav-item">
@@ -73,19 +81,19 @@
                                                 </thead>
                                                 <tbody>
                                                     @if (session('epoca')==1)
-                                        @if ($getAvaliacao!=null)
-                                            @if ($getAvaliacao->count()==0)
+                                        @if ($getTrimestral!=null)
+                                            @if ($getTrimestral->count()==0)
                                                 Nenhum estudante encontrado
                                             @else
-                                            @foreach ($getAvaliacao as $avaliacao)
+                                            @foreach ($getTrimestral as $trimestral)
                                             <tr>
                                             <td>{{$loop->iteration}}</td>
-                                            <td>{{$avaliacao->estudante->pessoa->nome}}</td>
+                                            <td>{{$trimestral->estudante->pessoa->nome}}</td>
                                                 <td>
-                                                <input type="number" name="mac" data-id="{{$avaliacao->id}}" data-campo="1" value="{{$avaliacao->valo1}}" class="form-control notaA" />
+                                                <input type="number" name="mac" data-id="{{$trimestral->id}}" data-campo="1" value="{{$trimestral->mac}}" class="form-control notaA" />
                                                 </td>
                                                 <td>
-                                                <input type="number" name="cpp" data-id="{{$avaliacao->id}}" data-campo="2" value="{{$avaliacao->valo2}}" class="form-control notaA" />
+                                                <input type="number" name="cpp" data-id="{{$trimestral->id}}" data-campo="2" value="{{$trimestral->cpp}}" class="form-control notaA" />
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -119,19 +127,19 @@
                                                 </thead>
                                                 <tbody>
                                                     @if (session('epoca')==2)
-                                        @if ($getAvaliacao!=null)
-                                            @if ($getAvaliacao->count()==0)
+                                        @if ($getTrimestral!=null)
+                                            @if ($getTrimestral->count()==0)
                                                 Nenhum estudante encontrado
                                             @else
-                                            @foreach ($getAvaliacao as $avaliacao)
+                                            @foreach ($getTrimestral as $trimestral)
                                             <tr>
                                             <td>{{$loop->iteration}}</td>
-                                            <td>{{$avaliacao->estudante->pessoa->nome}}</td>
+                                            <td>{{$trimestral->estudante->pessoa->nome}}</td>
                                                 <td>
-                                                <input type="number" name="mac" data-id="{{$avaliacao->id}}" data-campo="1" value="{{$avaliacao->valo1}}" class="form-control notaA" />
+                                                <input type="number" name="mac" data-id="{{$trimestral->id}}" data-campo="1" value="{{$trimestral->mac}}" class="form-control notaA" />
                                                 </td>
                                                 <td>
-                                                <input type="number" name="cpp" data-id="{{$avaliacao->id}}" data-campo="2" value="{{$avaliacao->valo2}}" class="form-control notaA" />
+                                                <input type="number" name="cpp" data-id="{{$trimestral->id}}" data-campo="2" value="{{$trimestral->cpp}}" class="form-control notaA" />
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -164,19 +172,19 @@
                                                 </thead>
                                                 <tbody>
                                                     @if (session('epoca')==3)
-                                        @if ($getAvaliacao!=null)
-                                            @if ($getAvaliacao->count()==0)
+                                        @if ($getTrimestral!=null)
+                                            @if ($getTrimestral->count()==0)
                                                 Nenhum estudante encontrado
                                             @else
-                                            @foreach ($getAvaliacao as $avaliacao)
+                                            @foreach ($getTrimestral as $trimestral)
                                             <tr>
                                             <td>{{$loop->iteration}}</td>
-                                            <td>{{$avaliacao->estudante->pessoa->nome}}</td>
+                                            <td>{{$trimestral->estudante->pessoa->nome}}</td>
                                                 <td>
-                                                <input type="number" name="mac" data-id="{{$avaliacao->id}}" data-campo="1" value="{{$avaliacao->valo1}}" class="form-control notaA" />
+                                                <input type="number" name="mac" data-id="{{$trimestral->id}}" data-campo="1" value="{{$trimestral->mac}}" class="form-control notaA" />
                                                 </td>
                                                 <td>
-                                                <input type="number" name="cpp" data-id="{{$avaliacao->id}}" data-campo="2" value="{{$avaliacao->valo2}}" class="form-control notaA" />
+                                                <input type="number" name="cpp" data-id="{{$trimestral->id}}" data-campo="2" value="{{$trimestral->cpp}}" class="form-control notaA" />
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -266,7 +274,7 @@
                 if((valor==="") || (valor<0) || (valor>20)){
                     $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
                 }else{
-                    var update = updateAvaliacao(valor, id_avalicao, campo);
+                    var update = updatetrimestral(valor, id_avalicao, campo);
                     if(update){
                         $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
                     }else{
@@ -277,122 +285,6 @@
             }
         });
 
-        $('.notaP').on('keypress', function(e){
-            if(e.which == 13){
-                var valor = $(this).val();
-                var id_prova = $(this).data('id');
-                var campo = $(this).data('campo');
-                if((valor==="") || (valor<0) || (valor>20)){
-                    $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
-                }else{
-                    prova = updateProva(valor, id_prova, campo);
-                    if(prova){
-                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
-                    }else{
-                        $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
-                    }
-
-                }
-            }
-        });
-
-        $('.notaG').on('keypress', function(e){
-            if(e.which == 13){
-                var valor = $(this).val();
-                var id_global = $(this).data('id');
-                if((valor==="") || (valor<0) || (valor>20)){
-                    $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
-                }else{
-                    global = updateGlobal(valor, id_global);
-                    if(global){
-                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
-                    }else{
-                        $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
-                    }
-
-                }
-            }
-        });
-
-        function updateAvaliacao(valor, id_avalicao, campo){
-            retorno = false;
-            var data = {
-                valor: valor,
-                id_avaliacao: id_avalicao,
-                campo: campo,
-                _token: "{{ csrf_token() }}"
-            };
-
-            $.ajax({
-                type: "post",
-                url: "{{route('updateAvaliacao')}}",
-                data: data,
-                dataType: "json",
-                async: false,
-                success: function (response) {
-                    if(response.status === "ok"){
-                      retorno = true;
-                    }else{
-                        retorno = false;
-                    }
-                    console.log(response.sms);
-                }
-            });
-            return retorno;
-        }
-
-        function updateProva(valor, id_prova, campo){
-            retorno = false;
-            var data = {
-                valor: valor,
-                id_prova: id_prova,
-                campo: campo,
-                _token: "{{ csrf_token() }}"
-            };
-
-            $.ajax({
-                type: "post",
-                url: "{{route('updateProva')}}",
-                data: data,
-                dataType: "json",
-                async: false,
-                success: function (response) {
-                    if(response.status === "ok"){
-                      retorno = true;
-                    }else{
-                        retorno = false;
-                    }
-                    console.log(response.sms);
-                }
-            });
-            return retorno;
-        }
-
-        function updateGlobal(valor, id_global){
-            retorno = false;
-            var data = {
-                valor: valor,
-                id_global: id_global,
-                _token: "{{ csrf_token() }}"
-            };
-
-            $.ajax({
-                type: "post",
-                url: "{{route('updateGlobal')}}",
-                data: data,
-                dataType: "json",
-                async: false,
-                success: function (response) {
-                    if(response.status === "ok"){
-                      retorno = true;
-                    }else{
-                        retorno = false;
-                    }
-                    console.log(response.sms);
-                }
-            });
-            return retorno;
-        }
 
      });
 </script>

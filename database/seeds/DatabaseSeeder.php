@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
            TipoSalaSeeder::class,
            FormaPagamentoSeeder::class,
            EpocaPagamentoSeeder::class,
+           BloqueioEpocaSeeder::class,
        ]);
     }
 }

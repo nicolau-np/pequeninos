@@ -421,7 +421,7 @@ class AjaxController extends Controller
     public function updateGlobal(Request $request)
     {
         $request->validate([
-            'valor' => ['required', 'numeric'],
+            'valor' => ['required', 'numeric', 'min:0'],
             'id_global' => ['required', 'Integer'],
         ]);
 

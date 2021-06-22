@@ -19,7 +19,7 @@ class Estudante extends Model
     public function turma(){
         return $this->belongsTo(Turma::class, 'id_turma', 'id');
     }
-    
+
     public function pessoa(){
         return $this->belongsTo(Pessoa::class, 'id_pessoa', 'id');
     }
@@ -54,6 +54,10 @@ class Estudante extends Model
     public function nota_final()
     {
         return $this->hasMany(NotaFinal::class, 'id_estudante', 'id');
+    }
+
+    public function declaracaos(){
+        return $this->hasMany(Declaracaos::class, 'id_estudante', 'id');
     }
 
 }

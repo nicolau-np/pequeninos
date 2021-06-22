@@ -105,6 +105,11 @@ Route::group(['prefix' => 'institucional', 'middleware' => "auth"], function () 
     });
 });
 
+Route::group(['prefix' => 'bloqueios'], function () {
+    Route::get('/', "BloqueioController@index");
+    Route::get('/update/{id}', "BloqueioController@update");
+});
+
 Route::group(['prefix' => 'financas', 'middleware' => "auth"], function () {
     Route::group(['prefix' => 'tabela_precos'], function () {
         Route::get('/', "FinancaController@tabela_preco_list");

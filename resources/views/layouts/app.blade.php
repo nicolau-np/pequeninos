@@ -411,8 +411,8 @@
                                     </ul>
                                 </li>
                                 @if(Auth::user()->nivel_acesso=="admin")
-                                <li>
-                                    <a href="form-elements-component.html">
+                                <li class="@if($menu=="Bloqueios de Epocas") active @endif">
+                                    <a href="/bloqueios">
                                         <span class="pcoded-micon"><i class="ti-key"></i><b>B</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Bloqueios</span>
                                         <span class="pcoded-mcaret"></span>

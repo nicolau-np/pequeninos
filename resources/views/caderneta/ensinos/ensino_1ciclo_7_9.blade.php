@@ -18,7 +18,9 @@
                     <i class="ti-angle-right"></i>
                     {{$getHorario->ano_lectivo}}
                     <i class="ti-angle-right"></i>
+                    @if(session('epoca')!="4")
                     <a href="/cadernetas/store_copy/{{$getHorario->id_turma}}/{{$getHorario->id_disciplina}}/{{session('epoca')}}/{{$getHorario->ano_lectivo}}"><i class="ti-reload"></i></a>
+                    @endif
                     </h5>
                     <span></span>
                     <div class="card-header-right">
@@ -44,25 +46,35 @@
 
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs md-tabs tabs-left b-none" role="tablist">
+                            @if ($getEpoca1->estado!="off")
                             <li class="nav-item">
                                 <a class="nav-link @if(session('epoca')=="1") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/1">1º Trimestre</a>
                                 <div class="slide"></div>
                             </li>
+                            @endif
+                            @if ($getEpoca2->estado!="off")
                             <li class="nav-item">
                                 <a class="nav-link @if(session('epoca')=="2") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/2">2º Trimestre</a>
                                 <div class="slide"></div>
                             </li>
+                            @endif
+                            @if ($getEpoca3->estado!="off")
                             <li class="nav-item">
                                 <a class="nav-link @if(session('epoca')=="3") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/3">3º Trimestre</a>
                                 <div class="slide"></div>
                             </li>
+                            @endif
+                            @if ($getEpoca4->estado!="off")
                             <li class="nav-item">
                                 <a class="nav-link @if(session('epoca')=="4") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/4">Global</a>
                                 <div class="slide"></div>
                             </li>
+                            @endif
+
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content tabs-left-content card-block">
+                            @if ($getEpoca1->estado!="off")
                             <div class="tab-pane @if(session('epoca')=="1") active @endif" role="tabpanel">
                                 <p class="m-0">
 
@@ -110,6 +122,9 @@
                                     {{Form::close()}}
                                  </p>
                             </div>
+                            @endif
+
+                            @if ($getEpoca2->estado!="off")
                             <div class="tab-pane @if(session('epoca')=="2") active @endif" role="tabpanel">
                                 <p class="m-0">
                                     {{Form::open(['method'=>"post"])}}
@@ -155,6 +170,9 @@
                                     {{Form::close()}}
                                 </p>
                             </div>
+                            @endif
+
+                            @if ($getEpoca3->estado!="off")
                             <div class="tab-pane @if(session('epoca')=="3") active @endif" role="tabpanel">
                                 <p class="m-0">
                                     {{Form::open(['method'=>"post"])}}
@@ -200,6 +218,9 @@
                                     {{Form::close()}}
                                 </p>
                             </div>
+                            @endif
+
+                            @if ($getEpoca4->estado!="off")
                             <div class="tab-pane @if(session('epoca')=="4") active @endif" role="tabpanel">
                                 <p class="m-0">
                                     {{Form::open(['method'=>"post"])}}
@@ -243,6 +264,8 @@
                                 {{Form::close()}}
                                 </p>
                             </div>
+                            @endif
+                            
                         </div>
                     </div>
 

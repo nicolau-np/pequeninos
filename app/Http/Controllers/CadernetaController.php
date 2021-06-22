@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AnoLectivo;
 use App\Avaliacao;
+use App\BloqueioEpoca;
 use App\Disciplina;
 use App\Estudante;
 use App\Funcionario;
@@ -146,6 +147,12 @@ class CadernetaController extends Controller
                 ->get()->sortBy('estudante.pessoa.nome');
         }
 
+
+        $estado_epoca1 = BloqueioEpoca::where(['epoca'=>1])->first();
+        $estado_epoca2 = BloqueioEpoca::where(['epoca'=>2])->first();
+        $estado_epoca3 = BloqueioEpoca::where(['epoca'=>3])->first();
+        $estado_epoca4 = BloqueioEpoca::where(['epoca'=>4])->first();
+
         $data = [
             'title' => "Caderneta",
             'type' => "caderneta",
@@ -159,6 +166,10 @@ class CadernetaController extends Controller
             'getProva' => $prova,*/
             'getTrimestral' => $trimestral,
             'getGlobal' => $global,
+            'getEpoca1'=>$estado_epoca1,
+            'getEpoca2'=>$estado_epoca2,
+            'getEpoca3'=>$estado_epoca3,
+            'getEpoca4'=>$estado_epoca4,
         ];
 
         if ($id_ensino == 1) {

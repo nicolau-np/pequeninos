@@ -10,7 +10,7 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>{{$submenu}} 
+                    <h5>{{$submenu}}
                     <i class="ti-angle-right"></i>
                     {{$getHorario->turma->turma}}
                     <i class="ti-angle-right"></i>
@@ -22,7 +22,7 @@
                     </h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -60,19 +60,15 @@
 
                                     {{Form::open(['method'=>"post"])}}
                                     <div class="row">
-                                        <div class="col-md-9">
-                                            <!--avaliacao-->
+                                        <div class="col-md-12">
+                                            <!--1 trimestre-->
                                              <table class="table table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th rowspan="2">Nº</th>
                                                         <th rowspan="2">Estudante</th>
-                                                        <th colspan="3">Avaliações</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Fev</th>
-                                                        <th>Mar</th>
-                                                        <th>Abr</th>
+                                                        <th colspan="1">MAC</th>
+                                                        <th colspan="1">CPP</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -86,56 +82,22 @@
                                             <td>{{$loop->iteration}}</td>
                                             <td>{{$avaliacao->estudante->pessoa->nome}}</td>
                                                 <td>
-                                                <input type="number" name="av1" data-id="{{$avaliacao->id}}" data-campo="1" value="{{$avaliacao->valo1}}" class="form-control notaA" />
+                                                <input type="number" name="mac" data-id="{{$avaliacao->id}}" data-campo="1" value="{{$avaliacao->valo1}}" class="form-control notaA" />
                                                 </td>
                                                 <td>
-                                                <input type="number" name="av2" data-id="{{$avaliacao->id}}" data-campo="2" value="{{$avaliacao->valo2}}" class="form-control notaA" />
-                                                </td>
-                                                <td>
-                                                <input type="number" name="av3" data-id="{{$avaliacao->id}}" data-campo="3" value="{{$avaliacao->valo3}}" class="form-control notaA" />  
+                                                <input type="number" name="cpp" data-id="{{$avaliacao->id}}" data-campo="2" value="{{$avaliacao->valo2}}" class="form-control notaA" />
                                                 </td>
                                             </tr>
                                             @endforeach
                                             @endif
                                         @endif
                                     @endif
-                                                    
+
                                                 </tbody>
                                             </table>
                                         </div>
 
-                                        <!-- provas-->
-                                        <div class="col-md-3">
-                                            <table class="table table-bordered">
-                                               <thead>
-                                                   <tr>
-                                                       <th>Provas</th>
-                                                   </tr>
-                                                   <tr>
-                                                       <th>P1</th>
-                                                   </tr>
-                                               </thead>
-                                               <tbody>
-                                                   @if (session('epoca')==1)
-                                       @if ($getProva!=null)
-                                           @if ($getProva->count()==0)
-                                               Nenhum estudante encontrado
-                                           @else
-                                           @foreach ($getProva as $prova)
-                                           <tr>
-                                            <td>
-                                                <input type="number" name="p1" data-id="{{$prova->id}}" data-campo="1" value="{{$prova->valor1}}" class="form-control notaP" />
-                                            </td>
-                                           </tr>
-                                           @endforeach
-                                           @endif
-                                       @endif
-                                   @endif
-                                                   
-                                               </tbody>
-                                           </table>
-                                       </div>
-                                       
+
                                     </div>
                                     {{Form::close()}}
                                  </p>
@@ -144,19 +106,15 @@
                                 <p class="m-0">
                                     {{Form::open(['method'=>"post"])}}
                                     <div class="row">
-                                        <div class="col-md-9">
-                                            <!--avaliacao-->
+                                        <div class="col-md-12">
+                                            <!--2 trimestre-->
                                              <table class="table table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th rowspan="2">Nº</th>
                                                         <th rowspan="2">Estudante</th>
-                                                        <th colspan="3">Avaliações</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Fev</th>
-                                                        <th>Mar</th>
-                                                        <th>Abr</th>
+                                                        <th colspan="1">MAC</th>
+                                                        <th colspan="1">CPP</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -170,56 +128,21 @@
                                             <td>{{$loop->iteration}}</td>
                                             <td>{{$avaliacao->estudante->pessoa->nome}}</td>
                                                 <td>
-                                                <input type="number" name="av1" data-id="{{$avaliacao->id}}" data-campo="1" value="{{$avaliacao->valo1}}" class="form-control notaA" />
+                                                <input type="number" name="mac" data-id="{{$avaliacao->id}}" data-campo="1" value="{{$avaliacao->valo1}}" class="form-control notaA" />
                                                 </td>
                                                 <td>
-                                                <input type="number" name="av2" data-id="{{$avaliacao->id}}" data-campo="2" value="{{$avaliacao->valo2}}" class="form-control notaA" />
-                                                </td>
-                                                <td>
-                                                <input type="number" name="av3" data-id="{{$avaliacao->id}}" data-campo="3" value="{{$avaliacao->valo3}}" class="form-control notaA" />  
+                                                <input type="number" name="cpp" data-id="{{$avaliacao->id}}" data-campo="2" value="{{$avaliacao->valo2}}" class="form-control notaA" />
                                                 </td>
                                             </tr>
                                             @endforeach
                                             @endif
                                         @endif
                                     @endif
-                                                    
+
                                                 </tbody>
                                             </table>
                                         </div>
 
-                                        <!-- provas-->
-                                        <div class="col-md-3">
-                                            <table class="table table-bordered">
-                                               <thead>
-                                                   <tr>
-                                                       <th>Provas</th>
-                                                   </tr>
-                                                   <tr>
-                                                       <th>P1</th>
-                                                   </tr>
-                                               </thead>
-                                               <tbody>
-                                                   @if (session('epoca')==2)
-                                       @if ($getProva!=null)
-                                           @if ($getProva->count()==0)
-                                               Nenhum estudante encontrado
-                                           @else
-                                           @foreach ($getProva as $prova)
-                                           <tr>
-                                            <td>
-                                                <input type="number" name="p1" data-id="{{$prova->id}}" data-campo="1" value="{{$prova->valor1}}" class="form-control notaP" />
-                                            </td>
-                                           </tr>
-                                           @endforeach
-                                           @endif
-                                       @endif
-                                   @endif
-                                                   
-                                               </tbody>
-                                           </table>
-                                       </div>
-                                       
                                     </div>
                                     {{Form::close()}}
                                 </p>
@@ -229,18 +152,14 @@
                                     {{Form::open(['method'=>"post"])}}
                                     <div class="row">
                                         <div class="col-md-9">
-                                            <!--avaliacao-->
+                                            <!--3 trimestre-->
                                              <table class="table table-bordered">
                                                 <thead>
                                                     <tr>
                                                         <th rowspan="2">Nº</th>
                                                         <th rowspan="2">Estudante</th>
-                                                        <th colspan="3">Avaliações</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Fev</th>
-                                                        <th>Mar</th>
-                                                        <th>Abr</th>
+                                                        <th colspan="1">MAC</th>
+                                                        <th colspan="1">CPP</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
@@ -254,56 +173,21 @@
                                             <td>{{$loop->iteration}}</td>
                                             <td>{{$avaliacao->estudante->pessoa->nome}}</td>
                                                 <td>
-                                                <input type="number" name="av1" data-id="{{$avaliacao->id}}" data-campo="1" value="{{$avaliacao->valo1}}" class="form-control notaA" />
+                                                <input type="number" name="mac" data-id="{{$avaliacao->id}}" data-campo="1" value="{{$avaliacao->valo1}}" class="form-control notaA" />
                                                 </td>
                                                 <td>
-                                                <input type="number" name="av2" data-id="{{$avaliacao->id}}" data-campo="2" value="{{$avaliacao->valo2}}" class="form-control notaA" />
-                                                </td>
-                                                <td>
-                                                <input type="number" name="av3" data-id="{{$avaliacao->id}}" data-campo="3" value="{{$avaliacao->valo3}}" class="form-control notaA" />  
+                                                <input type="number" name="cpp" data-id="{{$avaliacao->id}}" data-campo="2" value="{{$avaliacao->valo2}}" class="form-control notaA" />
                                                 </td>
                                             </tr>
                                             @endforeach
                                             @endif
                                         @endif
                                     @endif
-                                                    
+
                                                 </tbody>
                                             </table>
                                         </div>
 
-                                        <!-- provas-->
-                                        <div class="col-md-3">
-                                            <table class="table table-bordered">
-                                               <thead>
-                                                   <tr>
-                                                       <th>Provas</th>
-                                                   </tr>
-                                                   <tr>
-                                                       <th>P1</th>
-                                                   </tr>
-                                               </thead>
-                                               <tbody>
-                                                   @if (session('epoca')==3)
-                                       @if ($getProva!=null)
-                                           @if ($getProva->count()==0)
-                                               Nenhum estudante encontrado
-                                           @else
-                                           @foreach ($getProva as $prova)
-                                           <tr>
-                                            <td>
-                                                <input type="number" name="p1" data-id="{{$prova->id}}" data-campo="1" value="{{$prova->valor1}}" class="form-control notaP" />
-                                            </td>
-                                           </tr>
-                                           @endforeach
-                                           @endif
-                                       @endif
-                                   @endif
-                                                   
-                                               </tbody>
-                                           </table>
-                                       </div>
-                                       
                                     </div>
                                     {{Form::close()}}
                                 </p>
@@ -343,7 +227,7 @@
                                        @endif
                                    @endif
                                @endif
-                                               
+
                                            </tbody>
                                        </table>
                                    </div>
@@ -359,7 +243,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- hidden-sm-up -->
@@ -372,7 +256,7 @@
 </div>
 
 <script>
-    $(document).ready(function () { 
+    $(document).ready(function () {
         $('.notaA').on('keypress', function(e){
             if(e.which == 13){
                 var valor = $(this).val();
@@ -384,12 +268,12 @@
                 }else{
                     var update = updateAvaliacao(valor, id_avalicao, campo);
                     if(update){
-                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'}); 
+                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
                     }else{
-                        $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'}); 
+                        $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
                     }
                 }
-               
+
             }
         });
 
@@ -403,11 +287,11 @@
                 }else{
                     prova = updateProva(valor, id_prova, campo);
                     if(prova){
-                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'}); 
+                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
                     }else{
-                        $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'}); 
+                        $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
                     }
-                    
+
                 }
             }
         });
@@ -421,11 +305,11 @@
                 }else{
                     global = updateGlobal(valor, id_global);
                     if(global){
-                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'}); 
+                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
                     }else{
-                        $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'}); 
+                        $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
                     }
-                    
+
                 }
             }
         });

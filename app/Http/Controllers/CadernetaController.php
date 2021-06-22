@@ -357,7 +357,7 @@ class CadernetaController extends Controller
                 return back()->with(['error' => "Deve iniciar sessão"]);
             }
 
-            $data['avaliacao'] = [
+            /*$data['avaliacao'] = [
                 'id_estudante' => null,
                 'id_disciplina' => $id_disciplina,
                 'epoca' => $epoca,
@@ -369,7 +369,7 @@ class CadernetaController extends Controller
                 'id_disciplina' => $id_disciplina,
                 'epoca' => $epoca,
                 'ano_lectivo' => $ano_lectivo,
-            ];
+            ];*/
 
             $data['trimestral'] = [
                 'id_estudante' => null,
@@ -388,21 +388,21 @@ class CadernetaController extends Controller
 
             //cadastrar avaliacao
 
-            foreach ($estudantes as $estudante) {
+            /*foreach ($estudantes as $estudante) {
                 $data['avaliacao']['id_estudante'] = $estudante->id;
                 if (!Avaliacao::where($data['avaliacao'])->first()) {
                     $avaliacao = Avaliacao::create($data['avaliacao']);
                 }
-            }
+            }*/
 
             //cadastrar prova
 
-            foreach ($estudantes as $estudante) {
+            /*foreach ($estudantes as $estudante) {
                 $data['prova']['id_estudante'] = $estudante->id;
                 if (!Prova::where($data['prova'])->first()) {
                     $prova = Prova::create($data['prova']);
                 }
-            }
+            }*/
 
             foreach ($estudantes as $estudante) {
                 $data['trimestral']['id_estudante'] = $estudante->id;

@@ -36,8 +36,9 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/getDisciplinasCad', "AjaxController@getDisciplinasCad")->name('getDisciplinasCad');
     Route::post('/getHoras', "AjaxController@getHoras")->name('getHoras');
     Route::post('/getFuncionarios', "AjaxController@getFuncionarios")->name('getFuncionarios');
-    Route::post('/updateAvaliacao', "AjaxController@updateAvaliacao")->name('updateAvaliacao');
-    Route::post('/updateProva', "AjaxController@updateProva")->name('updateProva');
+    /*Route::post('/updateAvaliacao', "AjaxController@updateAvaliacao")->name('updateAvaliacao');
+    Route::post('/updateProva', "AjaxController@updateProva")->name('updateProva');*/
+    Route::post('/updateTrimestral', "AjaxController@updateTrimestral")->name('updatetrimestral');
     Route::post('/updateGlobal', "AjaxController@updateGlobal")->name('updateGlobal');
 });
 

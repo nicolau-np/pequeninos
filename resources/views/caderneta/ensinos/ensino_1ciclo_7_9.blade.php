@@ -2,7 +2,7 @@
 @section('content')
 <style>
     .notaP, .notaA{
-        width: 70px;
+        width: 80px;
     }
 </style>
 <div class="page-body">
@@ -39,7 +39,7 @@
                     @if(session('success'))
                     <div class="alert alert-success">{{session('success')}}</div>
                     @endif
-                    
+
                     <div class="col-lg-12 col-xl-12">
 
                         <!-- Nav tabs -->
@@ -90,10 +90,10 @@
                                             <td>{{$loop->iteration}}</td>
                                             <td>{{$trimestral->estudante->pessoa->nome}}</td>
                                                 <td>
-                                                <input type="number" name="mac" data-id="{{$trimestral->id}}" data-campo="1" value="{{$trimestral->mac}}" class="form-control notaA" />
+                                                <input type="number" name="mac" data-id="{{$trimestral->id}}" data-campo="mac" value="{{$trimestral->mac}}" class="form-control notaA" />
                                                 </td>
                                                 <td>
-                                                <input type="number" name="cpp" data-id="{{$trimestral->id}}" data-campo="2" value="{{$trimestral->cpp}}" class="form-control notaA" />
+                                                <input type="number" name="cpp" data-id="{{$trimestral->id}}" data-campo="cpp" value="{{$trimestral->cpp}}" class="form-control notaA" />
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -136,10 +136,10 @@
                                             <td>{{$loop->iteration}}</td>
                                             <td>{{$trimestral->estudante->pessoa->nome}}</td>
                                                 <td>
-                                                <input type="number" name="mac" data-id="{{$trimestral->id}}" data-campo="1" value="{{$trimestral->mac}}" class="form-control notaA" />
+                                                <input type="number" name="mac" data-id="{{$trimestral->id}}" data-campo="mac" value="{{$trimestral->mac}}" class="form-control notaA" />
                                                 </td>
                                                 <td>
-                                                <input type="number" name="cpp" data-id="{{$trimestral->id}}" data-campo="2" value="{{$trimestral->cpp}}" class="form-control notaA" />
+                                                <input type="number" name="cpp" data-id="{{$trimestral->id}}" data-campo="cpp" value="{{$trimestral->cpp}}" class="form-control notaA" />
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -181,10 +181,10 @@
                                             <td>{{$loop->iteration}}</td>
                                             <td>{{$trimestral->estudante->pessoa->nome}}</td>
                                                 <td>
-                                                <input type="number" name="mac" data-id="{{$trimestral->id}}" data-campo="1" value="{{$trimestral->mac}}" class="form-control notaA" />
+                                                <input type="number" name="mac" data-id="{{$trimestral->id}}" data-campo="mac" value="{{$trimestral->mac}}" class="form-control notaA" />
                                                 </td>
                                                 <td>
-                                                <input type="number" name="cpp" data-id="{{$trimestral->id}}" data-campo="2" value="{{$trimestral->cpp}}" class="form-control notaA" />
+                                                <input type="number" name="cpp" data-id="{{$trimestral->id}}" data-campo="cpp" value="{{$trimestral->cpp}}" class="form-control notaA" />
                                                 </td>
                                             </tr>
                                             @endforeach
@@ -268,13 +268,13 @@
         $('.notaA').on('keypress', function(e){
             if(e.which == 13){
                 var valor = $(this).val();
-                var id_avalicao = $(this).data('id');
+                var id_trimestral = $(this).data('id');
                 var campo = $(this).data('campo');
 
                 if((valor==="") || (valor<0) || (valor>20)){
                     $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
                 }else{
-                    var update = updatetrimestral(valor, id_avalicao, campo);
+                    var update = updatetrimestral(valor, id_trimestral, campo);
                     if(update){
                         $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
                     }else{
@@ -285,6 +285,59 @@
             }
         });
 
+
+        function updatetrimestral(valor, id_trimestral, campo){
+            retorno = false;
+            var data = {
+                valor: valor,
+                id_trimestral: id_trimestral,
+                campo: campo,
+                _token: "{{ csrf_token() }}"
+            };
+
+            $.ajax({
+                type: "post",
+                url: "{{route('updatetrimestral')}}",
+                data: data,
+                dataType: "json",
+                async: false,
+                success: function (response) {
+                    if(response.status === "ok"){
+                      retorno = true;
+                    }else{
+                        retorno = false;
+                    }
+                    console.log(response.sms);
+                }
+            });
+            return true;
+        }
+
+        function updateGlobal(valor, id_global){
+            retorno = false;
+            var data = {
+                valor: valor,
+                id_global: id_global,
+                _token: "{{ csrf_token() }}"
+            };
+
+            $.ajax({
+                type: "post",
+                url: "{{route('updateGlobal')}}",
+                data: data,
+                dataType: "json",
+                async: false,
+                success: function (response) {
+                    if(response.status === "ok"){
+                      retorno = true;
+                    }else{
+                        retorno = false;
+                    }
+                    console.log(response.sms);
+                }
+            });
+            return retorno;
+        }
 
      });
 </script>

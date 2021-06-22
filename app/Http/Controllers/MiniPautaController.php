@@ -65,7 +65,7 @@ class MiniPautaController extends Controller
             return back()->with(['error'=>"Não encontrou disciplina"]);
         }
 
-        
+
         if (Session::has('id_funcionario')) {
             //verificando horario e funcionario
             $data['where_horario'] = [
@@ -93,13 +93,13 @@ class MiniPautaController extends Controller
         ];
 
         Session::put($data2);
-        
+
         $data = [
             'title' => "Mini Pauta",
             'type' => "minipauta",
-            'menu' => "Mini Pauta",
+            'menu' => "Caderneta",
             'submenu' => "Listar",
-            'getHorario' => $horario, 
+            'getHorario' => $horario,
             'getHistorico'=>$historico,
         ];
         $id_ensino = $horario->turma->classe->id_ensino;
@@ -110,7 +110,7 @@ class MiniPautaController extends Controller
             return view('minipauta.ensino_1ciclo_7_9', $data);
         }
 
-        
+
     }
 
     /**

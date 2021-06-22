@@ -206,7 +206,7 @@ class AjaxController extends Controller
         return view('ajax_loads.getClasses2', $data);
     }
 
-    public function updateAvaliacao(Request $request)
+    /*public function updateAvaliacao(Request $request)
     {
         $request->validate([
             'valor' => ['required', 'numeric'],
@@ -296,9 +296,9 @@ class AjaxController extends Controller
         } else {
             return response()->json(['status' => "error", 'sms' => "Erro temporário no servidor"]);
         }
-    }
+    }*/
 
-    public function updateProva(Request $request)
+    /*public function updateProva(Request $request)
     {
         $request->validate([
             'valor' => ['required', 'numeric'],
@@ -374,6 +374,48 @@ class AjaxController extends Controller
         } else {
             return response()->json(['status' => "error", 'sms' => "Erro temporário no servidor"]);
         }
+    }*/
+
+    public function updateTrimestral(Request $request){
+        $request->validate([
+            'valor' => ['required', 'numeric', 'min:0'],
+            'campo' => ['required', 'string'],
+            'id_trimestral' => ['required', 'Integer'],
+        ]);
+
+        $campo = "" . $request->campo;
+        $data['trimestral'] = [
+            "$campo" => $request->valor,
+        ];
+
+        $trimestral = NotaTrimestral::find($request->id_trimestral);
+        if (!$trimestral) {
+            return response()->json(['status' => "error", 'sms' => "Nao encontrou Nota"]);
+        }
+
+        $final = NotaFinal::where([
+            'id_estudante' => $trimestral->id_estudante,
+            'id_disciplina' => $trimestral->id_disciplina,
+            'ano_lectivo' => $trimestral->ano_lectivo,
+        ])->first();
+
+        NotaTrimestral::find($request->id_trimestral)->update($data['trimestral']);
+        $trimestral = NotaTrimestral::find($request->id_trimestral);
+        if($trimestral){
+            $ct = NotaTrimestral::ct($trimestral->mac, $trimestral->cpp);
+            $update_trimestralCT = NotaTrimestral::find($request->id_trimestral)->update(['ct'=>$ct]);
+            if($update_trimestralCT){
+                $soma_ct = NotaTrimestral::soma_ct($trimestral->id_estudante, $trimestral->id_disciplina, $trimestral->ano_lectivo);
+                $cap = NotaFinal::cap($soma_ct);
+                $cf = NotaFinal::cf($cap, $final->cpe);
+
+
+                if (NotaFinal::find($final->id)->update(['cap' => $cap, 'cf' => $cf])) {
+                    return response()->json(['status' => "ok", 'sms' => "Feito com sucesso"]);
+                }
+            }
+        }
+
     }
 
     public function updateGlobal(Request $request)

@@ -32,7 +32,7 @@
       <link rel="stylesheet" type="text/css" href="{{asset('assets/template/style.css')}}">
     <script src="{{asset('assets/template/js/jquery-360.js')}}"></script>
 
-      @if($menu=="Gráfico" || $submenu == "Gráfico" || $type=="estatistica")
+      @if($menu=="Gráfico" || $submenu == "Gráfico")
       <script src="{{asset('assets/highcharts/highcharts.js')}}"></script>
       <script src="{{asset('assets/highcharts/modules/exporting.js')}}"></script>
       <script src="{{asset('assets/highcharts/modules/export-data.js')}}"></script>

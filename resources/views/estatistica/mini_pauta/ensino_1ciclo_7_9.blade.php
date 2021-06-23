@@ -26,7 +26,7 @@ foreach($getHistorico as $historico){
     color: #4680ff;
 }
 .tabEstatistica thead tr{
-   
+
 }
 .positiva{
     color:#fff;
@@ -40,6 +40,7 @@ foreach($getHistorico as $historico){
     color:#fff;
     background:#387d14;
 }
+
 </style>
 <div class="page-body">
     <div class="row">
@@ -367,7 +368,63 @@ foreach($getHistorico as $historico){
                                         </figure>
 
                                        <!-- espaco para o grafico-->
+                                       <script type="text/javascript">
+                                        Highcharts.chart('container_trimestral', {
+                                            chart: {
+                                                type: 'column'
+                                            },
+                                            title: {
+                                                text: 'Gráfico de Aproveitamento de {{$getAno}}'
+                                            },
+                                            subtitle: {
+                                                text: 'Disciplina: {{$getHorario->disciplina->disciplina}}'
+                                            },
+                                            xAxis: {
+                                                categories: [
+                                                    '1º Trimestre',
+                                                    '2º Trimestre',
+                                                    '3º Trimestre',
+                                                ],
+                                                crosshair: true
+                                            },
+                                            yAxis: {
+                                                min: 0,
+                                                title: {
+                                                    text: 'Total'
+                                                }
+                                            },
+                                            tooltip: {
+                                                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                                                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                                    '<td style="padding:0"><b>{point.y:.0f} </b></td></tr>',
+                                                footerFormat: '</table>',
+                                                shared: true,
+                                                useHTML: true
+                                            },
+                                            plotOptions: {
+                                                column: {
+                                                    pointPadding: 0.2,
+                                                    borderWidth: 0
+                                                }
+                                            },
+                                            series: [{
+                                                name: 'Positivas',
+                                                data: [{{$po1}}, {{$po2}}, {{$po3}}, ],
+                                                color: '#4680ff',
 
+                                            }, {
+                                                name: 'Negativas',
+                                                data: [{{$ne1}}, {{$ne2}}, {{$ne3}}, ],
+                                                color: '#b10930',
+
+                                            }, {
+                                                name: 'Lançamentos',
+                                                data: [{{$la1}}, {{$la2}}, {{$la3}}, ],
+                                                color: '#387d14',
+
+                                            }, ]
+                                        });
+                                                </script>
                                        <!-- fim -->
                                     </p>
                                 </div>

@@ -100,7 +100,7 @@ class EstatisticaController extends Controller
             'title' => "Estatística",
             'type' => "estatisticas",
             'menu' => "Caderneta",
-            'submenu' => "Estatistica",
+            'submenu' => "Gráfico",
             'getAno'=>$ano_lectivo,
             'getHorario'=>$horario,
             'getTrimestral1' =>$trimestral1,

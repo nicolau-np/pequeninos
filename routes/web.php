@@ -182,6 +182,10 @@ Route::group(['prefix' => 'estatisticas', 'middleware' => "auth"], function () {
     Route::group(['prefix' => 'balancos', 'middleware' => "admin"], function () {
         Route::get('/list/{ano}', "EstatisticaController@balanco");
     });
+
+    Route::group(['prefix' =>"minipautas", 'middleware'=>"prof"], function(){
+        Route::get('/list/{id_turma}/{id_disciplina}/{ano_lectivo}', "EstatisticaController@minipauta");
+    });
 });
 
 Route::group(['prefix' => 'relatorios', 'middleware' => "auth"], function () {
@@ -202,9 +206,6 @@ Route::group(['prefix' => 'minipautas', 'middleware' => "auth"], function () {
     Route::get('/show/{id_turma}/{id_disciplina}/{ano_lectivo}', "MiniPautaController@show");
 });
 
-Route::group(['prefix' =>"estatistic", 'middleware'=>"auth"], function(){
-    Route::get('/show/{id_turma}/{id_disciplina}/{ano_lectivo}', "EstatisticController@show");
-});
 
 Route::group(['prefix' => 'minha_turma', 'middleware' => "auth"], function () {
     Route::get('/', "MinhaTurmaController@index");

@@ -32,7 +32,7 @@
       <link rel="stylesheet" type="text/css" href="{{asset('assets/template/style.css')}}">
       <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 
-      @if($menu=="Gráfico" || $submenu == "Gráfico")
+      @if($menu=="Gráfico" || $submenu == "Gráfico" || $type=="estatistica")
       <script src="{{asset('assets/highcharts/highcharts.js')}}"></script>
       <script src="{{asset('assets/highcharts/modules/exporting.js')}}"></script>
       <script src="{{asset('assets/highcharts/modules/export-data.js')}}"></script>

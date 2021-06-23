@@ -105,37 +105,161 @@ foreach($getHistorico as $historico){
                                             </thead>
                                             <tbody>
                                                 <tr>
+                                                    <?php
+                                                        /*variaveis de todos semestres*/
+                                                        $po1 = 0;
+                                                        $po1F = 0;
+                                                        $po1M = 0;
+
+                                                        $po2 = 0;
+                                                        $po2F = 0;
+                                                        $po2M = 0;
+
+                                                        $po3 = 0;
+                                                        $po3F = 0;
+                                                        $po3M = 0;
+
+                                                        $po_total = 0;
+                                                        /*fim*/
+
+                                                        /*primeiro trimestre positivas*/
+                                                        foreach ($getTrimestral1 as $t1){
+
+                                                        if($t1->ct!="" && $t1->ct>=10){
+                                                            if($t1->estudante->pessoa->genero == "M"){
+
+                                                                $po1M ++;
+                                                            }else{
+
+                                                                $po1F ++;
+                                                            }
+                                                            $po1 ++;
+                                                        }
+                                                        }
+                                                        /*fim*/
+
+                                                         /*segundo trimestre positivas*/
+                                                        foreach ($getTrimestral2 as $t2){
+                                                        if($t2->ct!="" && $t2->ct>=10){
+                                                            if($t2->estudante->pessoa->genero == "M"){
+                                                                $po2M ++;
+                                                            }else{
+                                                                $po2F ++;
+                                                            }
+                                                            $po2 ++;
+                                                        }
+                                                        }
+                                                        /*fim*/
+
+                                                         /*terceiro trimestre positivas*/
+                                                        foreach ($getTrimestral3 as $t3){
+                                                        if($t3->ct!="" && $t3->ct>=10){
+                                                            if($t3->estudante->pessoa->genero == "M"){
+                                                                $po3M ++;
+                                                            }else{
+                                                                $po3F ++;
+                                                            }
+                                                            $po3 ++;
+                                                        }
+                                                        }
+                                                        /*fim*/
+
+                                                        $po_total=$po1+$po2+$po3;
+                                                        ?>
                                                     <td>Positivas</td>
 
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>{{$po1M}}</td>
+                                                    <td>{{$po1F}}</td>
+                                                    <td class="total">{{$po1}}</td>
 
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>{{$po2M}}</td>
+                                                    <td>{{$po2F}}</td>
+                                                    <td class="total">{{$po2}}</td>
 
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>{{$po3M}}</td>
+                                                    <td>{{$po3F}}</td>
+                                                    <td class="total">{{$po3}}</td>
 
-                                                    <td></td>
+                                                    <td class="total_geral">{{$po_total}}</td>
                                                  </tr>
                                                  <tr>
+                                                    <?php
+                                                    /*variaveis de todos semestres*/
+                                                    $ne1 = 0;
+                                                    $ne1F = 0;
+                                                    $ne1M = 0;
+
+                                                    $ne2 = 0;
+                                                    $ne2F = 0;
+                                                    $ne2M = 0;
+
+                                                    $ne3 = 0;
+                                                    $ne3F = 0;
+                                                    $ne3M = 0;
+
+                                                    $ne_total = 0;
+                                                    /*fim*/
+
+                                                    /*primeiro trimestre positivas*/
+                                                    foreach ($getTrimestral1 as $t1){
+
+                                                    if($t1->ct!="" && $t1->ct<=9.5){
+                                                        if($t1->estudante->pessoa->genero == "M"){
+
+                                                            $ne1M ++;
+                                                        }else{
+
+                                                            $ne1F ++;
+                                                        }
+                                                        $ne1 ++;
+                                                    }
+                                                    }
+                                                    /*fim*/
+
+                                                     /*segundo trimestre positivas*/
+                                                    foreach ($getTrimestral2 as $t2){
+                                                    if($t2->ct!="" && $t2->ct<=9.5){
+                                                        if($t2->estudante->pessoa->genero == "M"){
+                                                            $ne2M ++;
+                                                        }else{
+                                                            $ne2F ++;
+                                                        }
+                                                        $ne2 ++;
+                                                    }
+                                                    }
+                                                    /*fim*/
+
+                                                     /*terceiro trimestre positivas*/
+                                                    foreach ($getTrimestral3 as $t3){
+                                                    if($t3->ct!="" && $t3->ct<=9.5){
+                                                        if($t3->estudante->pessoa->genero == "M"){
+                                                            $ne3M ++;
+                                                        }else{
+                                                            $ne3F ++;
+                                                        }
+                                                        $ne3 ++;
+                                                    }
+                                                    }
+                                                    /*fim*/
+
+                                                    $ne_total=$ne1+$ne2+$ne3;
+                                                    ?>
+
+
                                                     <td>Negativas</td>
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>{{$ne1M}}</td>
+                                                    <td>{{$ne1F}}</td>
+                                                    <td class="total">{{$ne1}}</td>
 
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>{{$ne2M}}</td>
+                                                    <td>{{$ne2F}}</td>
+                                                    <td class="total">{{$ne2}}</td>
 
-                                                    <td></td>
-                                                    <td></td>
-                                                    <td></td>
+                                                    <td>{{$ne3M}}</td>
+                                                    <td>{{$ne3F}}</td>
+                                                    <td class="total">{{$ne3}}</td>
 
-                                                    <td></td>
+                                                    <td class="total_geral">{{$ne_total}}</td>
                                                  </tr>
                                                  <tr>
                                                      <?php

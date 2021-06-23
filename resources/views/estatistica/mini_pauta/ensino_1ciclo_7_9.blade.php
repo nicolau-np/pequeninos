@@ -18,11 +18,18 @@ foreach($getHistorico as $historico){
 <style>
 .total{
     font-weight:bold;
+    color: #4680ff;
 }
 .total_geral{
     font-weight:bold;
     font-size:13px;
+    color: #4680ff;
 }
+.tabEstatistica thead tr{
+    background-color: #4680ff;
+    color:#fff;
+}
+
 </style>
 <div class="page-body">
     <div class="row">
@@ -70,7 +77,7 @@ foreach($getHistorico as $historico){
                                     <p class="m-0">
                                         <div class="table-responsive">
                                             <!-- espaco para tabela-->
-                                            <table class="table table-bordered" style="font-size:12px;">
+                                            <table class="table table-bordered tabEstatistica" style="font-size:12px;">
                                             <thead>
                                                 <tr>
                                                     <th colspan="13">

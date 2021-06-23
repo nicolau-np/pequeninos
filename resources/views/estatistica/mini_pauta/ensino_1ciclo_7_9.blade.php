@@ -26,10 +26,20 @@ foreach($getHistorico as $historico){
     color: #4680ff;
 }
 .tabEstatistica thead tr{
-    background-color: #4680ff;
-    color:#fff;
+   
 }
-
+.positiva{
+    color:#fff;
+    background: #4680ff;
+}
+.negativa{
+    color:#fff;
+    background:#b10930;
+}
+.lancamento{
+    color:#fff;
+    background:#387d14;
+}
 </style>
 <div class="page-body">
     <div class="row">
@@ -173,7 +183,7 @@ foreach($getHistorico as $historico){
 
                                                         $po_total=$po1+$po2+$po3;
                                                         ?>
-                                                    <td>Positivas</td>
+                                                    <td class="positiva">Positivas</td>
 
                                                     <td>{{$po1M}}</td>
                                                     <td>{{$po1F}}</td>
@@ -253,7 +263,7 @@ foreach($getHistorico as $historico){
                                                     ?>
 
 
-                                                    <td>Negativas</td>
+                                                    <td class="negativa">Negativas</td>
                                                     <td>{{$ne1M}}</td>
                                                     <td>{{$ne1F}}</td>
                                                     <td class="total">{{$ne1}}</td>
@@ -327,7 +337,7 @@ foreach($getHistorico as $historico){
 
                                                         $la_total=$la1+$la2+$la3;
                                                         ?>
-                                                     <td>Lançamentos</td>
+                                                     <td class="lancamento">Lançamentos</td>
 
                                                     <td>{{$la1M}}</td>
                                                     <td>{{$la1F}}</td>

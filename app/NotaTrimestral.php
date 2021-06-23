@@ -57,12 +57,24 @@ class NotaTrimestral extends Model
             'ano_lectivo' => $ano_lectivo
         ])->get();
 
-        foreach($trimestral as $trimestre){
-            if($trimestre->ct!=null){
+        foreach ($trimestral as $trimestre) {
+            if ($trimestre->ct != null) {
                 $soma = $soma + $trimestre->ct;
             }
         }
 
         return $soma;
+    }
+
+    public static function getNotasEstudantesEpoca($data2, $ano_lectivo, $epoca)
+    {
+        $data = [
+            'ano_lectivo' => $ano_lectivo,
+            'epoca' => $epoca
+        ];
+        return NotaTrimestral::whereHas('estudante', function ($query) use ($data2) {
+            $query->where('id_turma', $data2['id_turma']);
+            $query->where('id_disciplina', $data2['id_disciplina']);
+        })->where($data)->get();
     }
 }

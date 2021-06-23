@@ -9,6 +9,7 @@ use App\EpocaPagamento;
 use App\FormaPagamento;
 use App\HistoricEstudante;
 use App\Horario;
+use App\NotaTrimestral;
 use App\TipoPagamento;
 use App\Turma;
 use Illuminate\Http\Request;
@@ -85,6 +86,16 @@ class EstatisticaController extends Controller
         $historico = HistoricEstudante::where(['id_turma'=>$id_turma, 'ano_lectivo'=>$ano_lectivo])
         ->get()->sortBy('estudante.pessoa.nome');
 
+        $d1 = [
+        'id_turma'=>$id_turma,
+        'id_disciplina' =>$id_disciplina
+        ];
+
+        $trimestral1 = NotaTrimestral::getNotasEstudantesEpoca($d1, $ano_lectivo, 1);
+        $trimestral2 = NotaTrimestral::getNotasEstudantesEpoca($d1, $ano_lectivo, 2);
+        $trimestral3 = NotaTrimestral::getNotasEstudantesEpoca($d1, $ano_lectivo, 3);
+
+
         $data = [
             'title' => "Estatística",
             'type' => "estatisticas",
@@ -92,9 +103,19 @@ class EstatisticaController extends Controller
             'submenu' => "Estatistica",
             'getAno'=>$ano_lectivo,
             'getHorario'=>$horario,
+            'getTrimestral1' =>$trimestral1,
+            'getTrimestral2'=>$trimestral2,
+            'getTrimestral3' => $trimestral3,
         ];
 
-        return view('estatistica.mini_pauta.list', $data);
+        $id_ensino = $horario->turma->classe->id_ensino;
+
+        if ($id_ensino == 1) {
+            return "ensino primario iniciacao ate 6 classe";
+        } elseif ($id_ensino == 2) {
+            return view('estatistica.mini_pauta.ensino_1ciclo_7_9', $data);
+        }
+
     }
 
 }

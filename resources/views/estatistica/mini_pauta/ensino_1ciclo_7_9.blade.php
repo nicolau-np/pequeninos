@@ -1,9 +1,29 @@
-@php
-use App\Http\Controllers\ControladorStatic;
-@endphp
+<?php
+$estF = 0;
+$estM = 0;
+
+$estT = 0;
+
+foreach($getHistorico as $historico){
+    if($historico->estudante->pessoa->genero == "M"){
+        $estM ++;
+    }else{
+        $estF ++;
+    }
+    $estT ++;
+}
+?>
 @extends('layouts.app')
 @section('content')
-
+<style>
+.total{
+    font-weight:bold;
+}
+.total_geral{
+    font-weight:bold;
+    font-size:13px;
+}
+</style>
 <div class="page-body">
     <div class="row">
         <div class="col-sm-12">
@@ -52,6 +72,13 @@ use App\Http\Controllers\ControladorStatic;
                                             <!-- espaco para tabela-->
                                             <table class="table table-bordered" style="font-size:12px;">
                                             <thead>
+                                                <tr>
+                                                    <th colspan="13">
+                                                        Total de Estudantes: {{$estT}} &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        Masculino: {{$estM}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                                        Femenino: {{$estF}}
+                                                    </th>
+                                                </tr>
                                                 <tr>
                                                     <th></th>
                                                     <th colspan="3">1º Trimestre</th>
@@ -173,18 +200,18 @@ use App\Http\Controllers\ControladorStatic;
 
                                                     <td>{{$la1M}}</td>
                                                     <td>{{$la1F}}</td>
-                                                    <td>{{$la1}}</td>
+                                                    <td class="total">{{$la1}}</td>
 
 
                                                     <td>{{$la2M}}</td>
                                                     <td>{{$la2F}}</td>
-                                                    <td>{{$la2}}</td>
+                                                    <td class="total">{{$la2}}</td>
 
                                                     <td>{{$la3M}}</td>
                                                     <td>{{$la3F}}</td>
-                                                    <td>{{$la3}}</td>
+                                                    <td class="total">{{$la3}}</td>
 
-                                                    <td>{{$la_total}}</td>
+                                                    <td class="total_geral">{{$la_total}}</td>
                                                  </tr>
                                             </tbody>
                                             </table>

@@ -106,6 +106,7 @@ class EstatisticaController extends Controller
             'getTrimestral1' =>$trimestral1,
             'getTrimestral2'=>$trimestral2,
             'getTrimestral3' => $trimestral3,
+            'getHistorico'=>$historico,
         ];
 
         $id_ensino = $horario->turma->classe->id_ensino;

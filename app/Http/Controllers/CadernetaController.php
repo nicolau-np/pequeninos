@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\AnoLectivo;
-use App\Avaliacao;
 use App\BloqueioEpoca;
 use App\Disciplina;
 use App\Estudante;
@@ -11,7 +10,6 @@ use App\Funcionario;
 use App\Horario;
 use App\NotaFinal;
 use App\NotaTrimestral;
-use App\Prova;
 use App\Turma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

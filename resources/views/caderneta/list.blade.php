@@ -52,7 +52,7 @@
                                         <a href="/minipautas/show/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}" type="button" class="btn btn-danger btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mini Pauta">
                                             <i class="icofont icofont-clip-board"></i>
                                         </a>&nbsp;
-                                        <a href="#" type="button" class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Estatística">
+                                        <a href="/estatistic/show/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}" type="button" class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Estatística">
                                             <i class="icofont icofont-chart-bar-graph"></i>
                                         </a>&nbsp;
                                         <a href="#" type="button" class="btn btn-warning btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Baixar Excel">

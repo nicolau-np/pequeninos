@@ -202,6 +202,10 @@ Route::group(['prefix' => 'minipautas', 'middleware' => "auth"], function () {
     Route::get('/show/{id_turma}/{id_disciplina}/{ano_lectivo}', "MiniPautaController@show");
 });
 
+Route::group(['prefix' =>"estatistic", 'middleware'=>"auth"], function(){
+    Route::get('/show/{id_turma}/{id_disciplina}/{ano_lectivo}', "EstatisticController@show");
+});
+
 Route::group(['prefix' => 'minha_turma', 'middleware' => "auth"], function () {
     Route::get('/', "MinhaTurmaController@index");
 });

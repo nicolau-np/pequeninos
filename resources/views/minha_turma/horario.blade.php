@@ -39,13 +39,29 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                <?php
+                                    foreach($getHora as $hora ){
+                                        if($hora->id_turno == $getTurma->id_turno){
+                                    ?>
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                <td>{{$hora->hora_entrada}} - {{$hora->hora_saida}}</td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+
+                                    </td>
+                                    <td>
+
+                                    </td>
                                 </tr>
+                            <?php }}?>
                             </tbody>
                       </table>
                   </div>

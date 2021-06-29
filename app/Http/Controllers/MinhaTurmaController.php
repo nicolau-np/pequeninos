@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AnoLectivo;
 use App\DirectorTurma;
 use App\Funcionario;
+use App\Hora;
 use App\Horario;
 use App\Turma;
 use Illuminate\Http\Request;
@@ -59,6 +60,8 @@ class MinhaTurmaController extends Controller
 
         $horario = Horario::where(['id_turma' => $id_turma, 'ano_lectivo'=>$ano_lectivo])->get();
 
+        $hora = Hora::orderBy('hora_entrada', 'asc')->get();
+
         $data = [
             'title' => "Horário",
             'type' => "Horário",
@@ -67,6 +70,7 @@ class MinhaTurmaController extends Controller
             'getTurma'=>$turma,
             'getHorario'=>$horario,
             'getAno'=>$ano_lectivo,
+            'getHora'=>$hora,
         ];
 
 

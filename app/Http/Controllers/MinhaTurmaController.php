@@ -46,8 +46,8 @@ class MinhaTurmaController extends Controller
             return back()->with(['error' => "Não encontrou"]);
         }
 
-        $ano_lectivo = AnoLectivo::find($ano_lectivo);
-        if(!$ano_lectivo){
+        $ano = AnoLectivo::where(['ano_lectivo'=>$ano_lectivo])->first();
+        if(!$ano){
             return back()->with(['error' => "Não encontrou"]);
         }
 
@@ -61,11 +61,12 @@ class MinhaTurmaController extends Controller
 
         $data = [
             'title' => "Horário",
-            'type' => "minha turma",
-            'menu' => "Horário",
-            'submenu' => "Listar",
+            'type' => "Horário",
+            'menu' => "Minha Turma",
+            'submenu' => "Horário",
             'getTurma'=>$turma,
             'getHorario'=>$horario,
+            'getAno'=>$ano_lectivo,
         ];
 
 

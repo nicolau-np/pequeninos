@@ -6,7 +6,14 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>{{$submenu}}</h5>
+                    <h5>{{$submenu}}
+                        <i class="ti-angle-right"></i>
+                        {{$getTurma->turma}}
+                        <i class="ti-angle-right"></i>
+                        {{$getTurma->curso->curso}}
+                        <i class="ti-angle-right"></i>
+                        {{$getAno}}
+                    </h5>
                     <span></span>
                     <div class="card-header-right">
 
@@ -19,7 +26,11 @@
                     </div>
                 </div>
                 <div class="card-block">
-                  hello
+                  <div class="tabe">
+                      <table class="table table-bordered">
+                        
+                      </table>
+                  </div>
 
                 </div>
             </div>

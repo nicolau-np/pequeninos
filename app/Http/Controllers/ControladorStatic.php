@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Disciplina;
 use App\Estudante;
+use App\Horario;
 use App\NotaFinal;
 use App\NotaTrimestral;
 use App\Pagamento;
@@ -231,5 +232,16 @@ class ControladorStatic extends Controller
         ];
         $final = NotaFinal::where($data)->get();
         return $final;
+    }
+
+    public static function getHorario($id_hora, $id_turma, $ano_lectivo, $semana){
+        $data = [
+            'id_turma' => $id_turma,
+            'ano_lectivo'=>$ano_lectivo,
+            'id_hora'=>$id_hora,
+            'semana'=>$semana,
+        ];
+        $horario = Horario::where($data)->get();
+        return $horario;
     }
 }

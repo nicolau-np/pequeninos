@@ -9,7 +9,7 @@
                     <h5>{{$submenu}}</h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -40,7 +40,7 @@
                                     <a href="#" type="button" class="btn btn-warning btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Baixar Excel">
                                         <i class="icofont icofont-download-alt"></i>
                                     </a>&nbsp;
-                                    <a href="#" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Horário">
+                                    <a href="/minha_turma/horario/{{$turmas->id_turma}}/{{$turmas->ano_lectivo}}" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Horário">
                                         <i class="icofont icofont-time"></i>
                                     </a>&nbsp;
                                     <a href="#" type="button" class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Lista Nominal">
@@ -59,7 +59,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- hidden-sm-up -->

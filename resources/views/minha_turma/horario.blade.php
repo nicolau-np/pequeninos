@@ -7,6 +7,12 @@ use \App\Http\Controllers\ControladorStatic;
     .prof{
         color: #4680ff;
     }
+    .disciplina{
+        font-weight: bold;
+    }
+    .sala{
+        font-size: 12px;
+    }
 </style>
 <div class="page-body">
     <div class="row">
@@ -39,15 +45,10 @@ use \App\Http\Controllers\ControladorStatic;
                                 <tr>
                                     <th>Hora</th>
                                     <th>Segunda</th>
-                                    <th>Sala</th>
                                     <th>Terça</th>
-                                    <th>Sala</th>
                                     <th>Quarta</th>
-                                    <th>Sala</th>
                                     <th>Quinta</th>
-                                    <th>Sala</th>
                                     <th>Sexta</th>
-                                    <th>Sala</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -64,29 +65,72 @@ use \App\Http\Controllers\ControladorStatic;
                                          $horario = ControladorStatic::getHorario($hora->id, $getTurma->id, $getAno, $semana);
                                         ?>
                                         @if ($horario->count()!=0)
-                                            {{$horario[0]->disciplina->disciplina}}<br/>
-                                            <span class="prof">{{$horario[0]->funcionario->pessoa->nome}}</span>
+                                        <span class="disciplina">{{$horario[0]->disciplina->disciplina}}</span><br/>
+                                            <span class="prof">{{$horario[0]->funcionario->pessoa->nome}}</span><br/>
+                                            <span class="sala">{{$horario[0]->sala->sala}}</span>
                                         @else
                                         ---
                                         @endif
 
                                     </td>
 
+                                    <td>
+                                    <?php
+                                    $semana = "Terça";
+                                   $horario = ControladorStatic::getHorario($hora->id, $getTurma->id, $getAno, $semana);
+                                  ?>
+                                  @if ($horario->count()!=0)
+                                  <span class="disciplina">{{$horario[0]->disciplina->disciplina}}</span><br/>
+                                      <span class="prof">{{$horario[0]->funcionario->pessoa->nome}}</span><br/>
+                                      <span class="sala">{{$horario[0]->sala->sala}}</span>
+                                  @else
+                                  ---
+                                  @endif
                                     </td>
 
 
                                     <td>
-
+                                        <?php
+                                          $semana = "Quarta";
+                                         $horario = ControladorStatic::getHorario($hora->id, $getTurma->id, $getAno, $semana);
+                                        ?>
+                                        @if ($horario->count()!=0)
+                                        <span class="disciplina">{{$horario[0]->disciplina->disciplina}}</span><br/>
+                                            <span class="prof">{{$horario[0]->funcionario->pessoa->nome}}</span><br/>
+                                            <span class="sala">{{$horario[0]->sala->sala}}</span>
+                                        @else
+                                        ---
+                                        @endif
                                     </td>
 
 
                                     <td>
-
+                                        <?php
+                                          $semana = "Quinta";
+                                         $horario = ControladorStatic::getHorario($hora->id, $getTurma->id, $getAno, $semana);
+                                        ?>
+                                        @if ($horario->count()!=0)
+                                        <span class="disciplina">{{$horario[0]->disciplina->disciplina}}</span><br/>
+                                            <span class="prof">{{$horario[0]->funcionario->pessoa->nome}}</span><br/>
+                                            <span class="sala">{{$horario[0]->sala->sala}}</span>
+                                        @else
+                                        ---
+                                        @endif
                                     </td>
 
 
                                     <td>
-
+<?php
+                                          $semana = "Sexta";
+                                         $horario = ControladorStatic::getHorario($hora->id, $getTurma->id, $getAno, $semana);
+                                        ?>
+                                        @if ($horario->count()!=0)
+                                            <span class="disciplina">{{$horario[0]->disciplina->disciplina}}</span><br/>
+                                            <span class="prof">{{$horario[0]->funcionario->pessoa->nome}}</span><br/>
+                                            <span class="sala">{{$horario[0]->sala->sala}}</span>
+                                        @else
+                                        ---
+                                        @endif
                                     </td>
                                 </tr>
                             <?php }}?>

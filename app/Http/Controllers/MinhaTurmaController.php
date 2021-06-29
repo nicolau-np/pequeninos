@@ -58,8 +58,6 @@ class MinhaTurmaController extends Controller
             return back()->with(['error'=>"Não encontrou"]);
         }
 
-        $horario = Horario::where(['id_turma' => $id_turma, 'ano_lectivo'=>$ano_lectivo])->get();
-
         $hora = Hora::orderBy('hora_entrada', 'asc')->get();
 
         $data = [
@@ -68,7 +66,6 @@ class MinhaTurmaController extends Controller
             'menu' => "Minha Turma",
             'submenu' => "Horário",
             'getTurma'=>$turma,
-            'getHorario'=>$horario,
             'getAno'=>$ano_lectivo,
             'getHora'=>$hora,
         ];

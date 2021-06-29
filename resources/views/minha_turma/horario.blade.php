@@ -28,7 +28,25 @@
                 <div class="card-block">
                   <div class="tabe">
                       <table class="table table-bordered">
-                        
+                            <thead>
+                                <tr>
+                                    <th>Hora</th>
+                                    <th>Segunda</th>
+                                    <th>Terça</th>
+                                    <th>Quarta</th>
+                                    <th>Quinta</th>
+                                    <th>Sexta</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
                       </table>
                   </div>
 

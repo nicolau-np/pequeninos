@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AnoLectivo;
 use App\DirectorTurma;
 use App\Funcionario;
+use App\Horario;
 use App\Turma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -55,12 +56,16 @@ class MinhaTurmaController extends Controller
         if(!$funcionario){
             return back()->with(['error'=>"Não encontrou"]);
         }
+
+        $horario = Horario::where(['id_turma' => $id_turma, 'ano_lectivo'=>$ano_lectivo])->get();
+
         $data = [
             'title' => "Horário",
             'type' => "minha turma",
             'menu' => "Horário",
             'submenu' => "Listar",
             'getTurma'=>$turma,
+            'getHorario'=>$horario,
         ];
 
 

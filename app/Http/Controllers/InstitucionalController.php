@@ -624,7 +624,7 @@ class InstitucionalController extends Controller
     public function ano_lectivo_store(Request $request)
     {
         $request->validate([
-            'ano_lectivo' => ['required', 'Integer'],
+            'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
         ]);
 
         $data['ano'] = [
@@ -661,7 +661,7 @@ class InstitucionalController extends Controller
             return back()->with(['error' => "Não encontrou ano lectivo"]);
         }
         $request->validate([
-            'ano_lectivo' => ['required', 'Integer'],
+            'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
         ]);
 
         $data['ano'] = [

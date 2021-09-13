@@ -77,7 +77,7 @@ class EstudanteController extends Controller
             'curso' => ['required', 'Integer'],
             'classe' => ['required', 'Integer'],
             'turma' => ['required', 'Integer'],
-            'ano_lectivo' => ['required', 'Integer'],
+            'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
         ]);
 
         if ($request->bilhete != "") {
@@ -210,7 +210,7 @@ class EstudanteController extends Controller
             'curso' => ['required', 'Integer'],
             'classe' => ['required', 'Integer'],
             'turma' => ['required', 'Integer'],
-            'ano_lectivo' => ['required', 'Integer'],
+            'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
         ]);
 
         if ($request->bilhete != "" || $request->bilhete != $estudante->bilhete) {
@@ -325,7 +325,7 @@ class EstudanteController extends Controller
             'curso' => ['required', 'Integer'],
             'classe' => ['required', 'Integer'],
             'turma' => ['required', 'Integer'],
-            'ano_lectivo' => ['required', 'Integer'],
+            'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
         ]);
 
         if ($request->bilhete != "" || $request->bilhete != $estudante->bilhete) {
@@ -373,7 +373,7 @@ class EstudanteController extends Controller
        if(HistoricEstudante::where(['id_estudante'=>$id_estudante, 'ano_lectivo'=>$data['estudante']['ano_lectivo']])->first()){
            return back()->with(['error'=>"Já confirmou para este ano"]);
        }
-       
+
        if(Pessoa::find($estudante->pessoa->id)->update($data['pessoa'])){
            if(Estudante::find($estudante->id)->update($data['estudante'])){
                if(HistoricEstudante::create($data['historico'])){

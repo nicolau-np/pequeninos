@@ -28,7 +28,7 @@ class RelatorioController extends Controller
     }
 
     public function fatura($id_fatura){
-        
+
         $fatura = Fatura::find($id_fatura);
         if(!$fatura){
             return back()->with(['error'=>"Não encontrou numero da fatura"]);
@@ -57,7 +57,7 @@ class RelatorioController extends Controller
         $pdf = PDF::loadView('relatorios.fatura', $data)->setPaper('A4', 'normal');
 
         return $pdf->stream('fatura' . $id_fatura . '-' . date('Y') . '.pdf');
-        
+
     }
 
     public function lista_pagamentos(Request $request){
@@ -66,13 +66,13 @@ class RelatorioController extends Controller
             'curso'=>['required', 'Integer'],
             'classe'=>['required', 'Integer'],
             'turma'=>['required', 'Integer'],
-            'ano_lectivo'=>['required', 'Integer'],
+            'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
         ]);
 
         $tipo_pagamento = TipoPagamento::find($request->tipo_pagamento);
         if(!$tipo_pagamento){
             return back()->with(['error'=>"Não encontrou pagamento"]);
-        } 
+        }
 
         $turma = Turma::find($request->turma);
         if(!$turma){
@@ -102,7 +102,7 @@ class RelatorioController extends Controller
             'getTabelaPreco'=>$tabela_preco,
             'getEpocasPagamento'=>$epoca_pagamentos,
             'getHistoricoEstudante'=>$historico,
-            
+
         ];
         $pdf = PDF::loadView('relatorios.lista_pagamento', $data)->setPaper('A4', 'normal');
 
@@ -111,7 +111,7 @@ class RelatorioController extends Controller
 
     public function lista_comparticipacao(Request $request){
         $request->validate([
-            'ano_lectivo'=>['required', 'Integer'],
+            'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
         ]);
         $ano_lectivo = AnoLectivo::find($request->ano_lectivo);
         if(!$ano_lectivo){
@@ -136,7 +136,7 @@ class RelatorioController extends Controller
             'curso'=>['required', 'Integer'],
             'classe'=>['required', 'Integer'],
             'turma'=>['required', 'Integer'],
-            'ano_lectivo'=>['required', 'Integer'],
+            'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
         ]);
 
         $turma = Turma::find($request->turma);
@@ -148,7 +148,7 @@ class RelatorioController extends Controller
         if(!$ano_lectivo){
             return back()->with(['error'=>"Não encontrou ano lectivo"]);
         }
-        
+
         /*
         $pdf = PDF::loadView('relatorios.lista_nominal', $data)->setPaper('A4', 'normal');
 

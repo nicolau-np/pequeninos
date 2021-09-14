@@ -16,8 +16,8 @@ class ExportController extends Controller
             return back()->with(['error'=>"Turma não encontrada"]);
         }
 
-        $ano_lectivo = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
-        if(!$ano_lectivo){
+        $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
+        if(!$ano_lectivos){
             return back()->with(['error'=>"Não encontrou ano lectivo"]);
         }
 

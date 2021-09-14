@@ -5,7 +5,8 @@ namespace App\Http\Controllers;
 use App\AnoLectivo;
 use App\DirectorTurma;
 use App\Disciplina;
-use App\Exports\ExportDocs;
+use App\Exports\MiniPauta;
+use App\Exports\Pauta;
 use App\Funcionario;
 use App\HistoricEstudante;
 use App\Turma;
@@ -32,7 +33,7 @@ class ExportController extends Controller
         }
 
         $fileName = "Mini Pauta-" .$turma->turma." ".$disciplina->disciplina." ".$ano_lectivo.".xlsx";
-        return (new ExportDocs($id_turma, $id_disciplina, $ano_lectivo))->download($fileName);
+        return (new MiniPauta($id_turma, $id_disciplina, $ano_lectivo))->download($fileName);
     }
 
     public function exports($id_turma, $ano_lectivo){
@@ -64,6 +65,6 @@ class ExportController extends Controller
         }
 
         $fileName = "Pauta-" .$turma->turma." ".$ano_lectivo.".xlsx";
-        return (new ExportDocs($id_turma,  $ano_lectivo))->download($fileName);
+        return (new Pauta($id_turma,  $ano_lectivo))->download($fileName);
     }
 }

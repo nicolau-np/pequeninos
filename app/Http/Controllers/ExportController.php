@@ -68,7 +68,7 @@ class ExportController extends Controller
             return back()->with(['error'=>"Deve selecionar as disciplinas"]);
         }
 
-        $fileName = "Pauta-" .$turma->turma." ".$ano_lectivo.".xlsx";
+        $fileName = "Pauta-" .$turma->turma." ".$turma->curso->curso." ".$ano_lectivo.".xlsx";
         return (new Pauta($id_turma,  $ano_lectivo))->download($fileName);
     }
 }

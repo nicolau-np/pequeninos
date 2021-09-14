@@ -14,8 +14,15 @@ class CreateTransferenciasTable extends Migration
     public function up()
     {
         Schema::create('transferencias', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
+            $table->bigInteger('id_estudante')->unsigned()->index();
+            $table->text('motivo');
+            $table->string('ano_lectivo');
             $table->timestamps();
+        });
+
+        Schema::table('transferencias', function (Blueprint $table) {
+            $table->foreign('id_estudante')->references('id')->on('estudantes')->onUpdate('cascade');
         });
     }
 

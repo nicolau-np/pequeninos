@@ -11,8 +11,8 @@ class Declaracao extends Model
     protected $fillable = [
         'id_estudante',
         'tipo',
+        'motivo',
         'ano_lectivo',
-        'data_emissao',
     ];
 
     public function estudante(){

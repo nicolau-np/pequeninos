@@ -60,4 +60,8 @@ class Estudante extends Model
         return $this->hasMany(Declaracaos::class, 'id_estudante', 'id');
     }
 
+    public function transferencia(){
+        return $this->hasMany(Transferencia::class, 'id_estudante', 'id');
+    }
+
 }

@@ -64,4 +64,8 @@ class Estudante extends Model
         return $this->hasMany(Transferencia::class, 'id_estudante', 'id');
     }
 
+    public function desistencia(){
+        return $this->hasMany(Desistencia::class, 'id_estudante', 'id');
+    }
+
 }

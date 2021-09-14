@@ -4,15 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Declaracao extends Model
+class Desistencia extends Model
 {
-    protected $table = "declaracaos";
+    protected $table = "desistencias";
 
     protected $fillable = [
         'id_estudante',
-        'tipo',
         'motivo',
-        'data_emissao',
+        'data_saida',
         'ano_lectivo',
     ];
 

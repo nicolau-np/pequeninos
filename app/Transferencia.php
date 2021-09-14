@@ -10,12 +10,13 @@ class Transferencia extends Model
 
     protected $fillable = [
         'id_estudante',
-         'motivo',
+        'motivo',
+        'data_emissao',
         'ano_lectivo',
     ];
 
-    public function estudante(){
+    public function estudante()
+    {
         return $this->belongsTo(Estudante::class, 'id_estudante', 'id');
     }
-
 }

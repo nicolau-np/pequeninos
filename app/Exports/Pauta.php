@@ -23,7 +23,7 @@ class Pauta implements FromView, ShouldAutoSize
 
     public function view(): View
     {
-        $turma = Turma::find($this->turma);
+        $turma = Turma::find($this->id_turma);
         $id_ensino = $turma->classe->id_ensino;
         $historico = HistoricEstudante::where([
             'id_turma' => $this->id_turma,

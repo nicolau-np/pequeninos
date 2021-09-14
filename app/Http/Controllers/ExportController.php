@@ -36,7 +36,7 @@ class ExportController extends Controller
         return (new MiniPauta($id_turma, $id_disciplina, $ano_lectivo))->download($fileName);
     }
 
-    public function exports($id_turma, $ano_lectivo){
+    public function pauta($id_turma, $ano_lectivo){
         $id_pessoa = Auth::user()->pessoa->id;
         $funcionario = Funcionario::where('id_pessoa', $id_pessoa)->first();
         if (!$funcionario) {
@@ -62,6 +62,10 @@ class ExportController extends Controller
             if (!$directorTurma) {
                 return back()->with(['error' => "Não é Director desta turma"]);
             }
+        }
+
+        if(!Session::has('disciplinas')){
+            return back()->with(['error'=>"Deve selecionar as disciplinas"]);
         }
 
         $fileName = "Pauta-" .$turma->turma." ".$ano_lectivo.".xlsx";

@@ -587,6 +587,8 @@
 <script src="{{asset('assets/template/js/pcoded.min.js')}}"></script>
 <script src="{{asset('assets/template/js/demo-12.js')}}"></script>
 <script src="{{asset('assets/template/js/jquery.mCustomScrollbar.concat.min.js')}}"></script>
+<!-- Accordion js -->
+<script type="text/javascript" src="{{asset('assets/template/pages/accordion/accordion.js')}}"></script>
 
 <script>
     $(document).ready(function() {

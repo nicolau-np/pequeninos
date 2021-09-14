@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AnoLectivo;
 use App\Curso;
+use App\Declaracao;
 use App\Estudante;
 use App\HistoricEstudante;
 use App\Pessoa;
@@ -459,6 +460,8 @@ class EstudanteController extends Controller
             'ano_lectivo'=> $request->ano_lectivo,
         ];
 
-        
+        if(Declaracao::create($data)){
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
     }
 }

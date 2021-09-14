@@ -285,7 +285,8 @@ class EstudanteController extends Controller
         //
     }
 
-    public function confirmar($id_estudante){
+    public function confirmar($id_estudante)
+    {
         $estudante = Estudante::find($id_estudante);
         if (!$estudante) {
             return back()->with(['error' => "Não encontrou"]);
@@ -309,7 +310,8 @@ class EstudanteController extends Controller
         return view('estudantes.confirmar', $data);
     }
 
-    public function store_confirmar(Request $request, $id_estudante){
+    public function store_confirmar(Request $request, $id_estudante)
+    {
         $estudante = Estudante::find($id_estudante);
         if (!$estudante) {
             return back()->with(['error' => "Não encontrou"]);
@@ -364,22 +366,43 @@ class EstudanteController extends Controller
         ];
 
         $data['historico'] = [
-            'id_estudante'=>$id_estudante,
+            'id_estudante' => $id_estudante,
             'id_turma' => $request->turma,
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
         ];
 
-       if(HistoricEstudante::where(['id_estudante'=>$id_estudante, 'ano_lectivo'=>$data['estudante']['ano_lectivo']])->first()){
-           return back()->with(['error'=>"Já confirmou para este ano"]);
-       }
+        if (HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $data['estudante']['ano_lectivo']])->first()) {
+            return back()->with(['error' => "Já confirmou para este ano"]);
+        }
 
-       if(Pessoa::find($estudante->pessoa->id)->update($data['pessoa'])){
-           if(Estudante::find($estudante->id)->update($data['estudante'])){
-               if(HistoricEstudante::create($data['historico'])){
-                   return back()->with(['success'=>"Feito com sucesso"]);
-               }
-           }
-       }
+        if (Pessoa::find($estudante->pessoa->id)->update($data['pessoa'])) {
+            if (Estudante::find($estudante->id)->update($data['estudante'])) {
+                if (HistoricEstudante::create($data['historico'])) {
+                    return back()->with(['success' => "Feito com sucesso"]);
+                }
+            }
+        }
+    }
+
+    public function ficha($id_estudante, $ano_lectivo)
+    {
+        $estudante = Estudante::find($id_estudante);
+        if (!$estudante) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+
+        $historicoAnos = HistoricEstudante::where(['id_estudante' => $id_estudante])->orderBy('id', 'desc')->get();
+        $historico = HistoricEstudante::where(['id_estudante'=> $id_estudante, 'ano_lectivo'=>$ano_lectivo])->first();
+        $data = [
+            'title' => "Estudantes",
+            'type' => "estudantes",
+            'menu' => "Estudantes",
+            'submenu' => "Ficha",
+            'getEstudante' => $estudante,
+            'getHistoricoEstudanteAnos' => $historicoAnos,
+            'getHistoricoEstudante'=>$historico,
+        ];
+        return view('estudantes.ficha', $data);
     }
 }

@@ -36,70 +36,35 @@
                        </div>
 
                     <div class="col-md-8">
+                        <div class="card">
+                            <div class="card-header">
+                                <h5 class="card-header-text">FICHAS ESTUDANTE </h5>
+                            </div>
+                            <div class="card-block accordion-block color-accordion-block">
+                                <div class="color-accordion" id="color-accordion">
 
-                            <div class="row">
+                                    <a class="accordion-msg b-none">Dados Pessoais</a>
+                                    <div class="accordion-desc">
+                                        <div class="data">
 
-
-                                <div class="col-lg-12">
-                                    <div class="card">
-                                        <div class="card-header">
-                                            <h5 class="card-header-text">COLOR ACCORDION</h5>
                                         </div>
-                                        <div class="card-block accordion-block color-accordion-block">
-                                            <div class="color-accordion ui-accordion ui-widget ui-helper-reset" id="color-accordion" role="tablist">
-                                                <a class="accordion-msg b-none ui-accordion-header ui-corner-top ui-state-default ui-accordion-header-active ui-state-active ui-accordion-icons scale_active" role="tab" id="ui-id-13" aria-controls="ui-id-14" aria-selected="true" aria-expanded="true" tabindex="0"><span class="ui-accordion-header-icon ui-icon zmdi zmdi-chevron-up"></span>Lorem Message 1</a>
-                                                <div class="accordion-desc ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content ui-accordion-content-active" style="" id="ui-id-14" aria-labelledby="ui-id-13" role="tabpanel" aria-hidden="false">
-                                                    <p>
-                                                        Lorem Ipsum is simply dummy text of the printing and
-                                                        typesetting industry. Lorem Ipsum has been the
-                                                        industry's standard dummy text ever since the 1500s,
-                                                        when an unknown printer took a galley of type and
-                                                        scrambled it to make a type specimen book. It has
-                                                        survived not only five centuries, but also the leap into
-                                                        electronic typesetting, remaining essentially unchanged.
-                                                        It was popularised in the 1960s with the release of
-                                                        Letraset sheets containing Lorem Ipsum passages, and
-                                                        more .
-                                                    </p>
-                                                </div>
-                                                <a class="accordion-msg bg-dark-primary b-none ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons scale_active" role="tab" id="ui-id-15" aria-controls="ui-id-16" aria-selected="false" aria-expanded="false" tabindex="-1"><span class="ui-accordion-header-icon ui-icon zmdi zmdi-chevron-down"></span>Lorem Message
-                                                    2</a>
-                                                    <div class="accordion-desc ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content" style="display: none;" id="ui-id-16" aria-labelledby="ui-id-15" role="tabpanel" aria-hidden="true">
-                                                        <p>
-                                                            Lorem Ipsum is simply dummy text of the printing and
-                                                            typesetting industry. Lorem Ipsum has been the
-                                                            industry's standard dummy text ever since the 1500s,
-                                                            when an unknown printer took a galley of type and
-                                                            scrambled it to make a type specimen book. It has
-                                                            survived not only five centuries, but also the leap into
-                                                            electronic typesetting, remaining essentially unchanged.
-                                                            It was popularised in the 1960s with the release of
-                                                            Letraset sheets containing Lorem Ipsum passages, and
-                                                            more .
-                                                        </p>
-                                                    </div>
-                                                    <a class="accordion-msg bg-darkest-primary b-none ui-accordion-header ui-corner-top ui-accordion-header-collapsed ui-corner-all ui-state-default ui-accordion-icons scale_active" role="tab" id="ui-id-17" aria-controls="ui-id-18" aria-selected="false" aria-expanded="false" tabindex="-1"><span class="ui-accordion-header-icon ui-icon zmdi zmdi-chevron-down"></span>Lorem Message
-                                                        3</a>
-                                                        <div class="accordion-desc ui-accordion-content ui-corner-bottom ui-helper-reset ui-widget-content" style="display: none;" id="ui-id-18" aria-labelledby="ui-id-17" role="tabpanel" aria-hidden="true">
-                                                            <p>
-                                                                Lorem Ipsum is simply dummy text of the printing and
-                                                                typesetting industry. Lorem Ipsum has been the
-                                                                industry's standard dummy text ever since the 1500s,
-                                                                when an unknown printer took a galley of type and
-                                                                scrambled it to make a type specimen book. It has
-                                                                survived not only five centuries, but also the leap into
-                                                                electronic typesetting, remaining essentially unchanged.
-                                                                It was popularised in the 1960s with the release of
-                                                                Letraset sheets containing Lorem Ipsum passages, and
-                                                                more .
-                                                            </p>
-                                                        </div>
-                                                    </div>
+                                    </div>
+
+                                    <a class="accordion-msg bg-dark-primary b-none">Dados Acadêmicos</a>                                        2</a>
+                                        <div class="accordion-desc">
+                                            <div class="data">
+
+                                            </div>
+                                        </div>
+                                        <a class="accordion-msg bg-darkest-primary b-none">Extra</a>
+                                            <div class="accordion-desc">
+                                                <div class="data">
+
                                                 </div>
                                             </div>
-
-                            </div>
-                        </div>
+                                        </div>
+                                    </div>
+                                </div>
                     </div>
 
                     <div class="col-md-4">

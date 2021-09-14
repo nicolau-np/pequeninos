@@ -408,4 +408,29 @@ class EstudanteController extends Controller
         ];
         return view('estudantes.ficha', $data);
     }
+
+    public function declaracao($id_estudante, $ano_lectivo){
+        $estudante= Estudante::find($id_estudante);
+        if (!$estudante) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+
+        $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
+        if(!$ano_lectivos){
+            return back()->with(['error' => "Não encontrou"]);
+        }
+
+        $anos = AnoLectivo::pluck('ano_lectivo','id');
+
+        $data = [
+            'title' => "Estudantes",
+            'type' => "estudantes",
+            'menu' => "Estudantes",
+            'submenu' => "Declaração",
+            'getEstudante' => $estudante,
+            'getAno'=>$ano_lectivo,
+            'getAnos'=>$ano_lectivos,
+        ];
+        return view('estudantes.create_declaracao', $data);
+    }
 }

@@ -146,6 +146,7 @@ Route::group(['prefix' => 'estudantes', 'middleware' => "auth"], function () {
     Route::put('/store_confirmar/{id_estudante}', "EstudanteController@store_confirmar");
     Route::get('/ficha/{id_estudante}/{ano_lectivo}', "EstudanteController@ficha");
     Route::get('/declaracao/{id_estudante}/{ano_lectivo}', "EstudanteController@declaracao");
+    Route::put('/store_declaracao/{id_estudante}', "EstudanteController@store_declaracao");
 });
 
 Route::group(['prefix' => 'pagamentos', 'middleware' => "auth"], function () {

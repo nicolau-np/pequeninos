@@ -57,6 +57,16 @@
                                         @endif
                                     </div>
                                 </div>
+
+                                <div class="col-md-3">
+                                    {{Form::label('ano_lectivo', "Ano Lectivo")}} <span class="text-danger">*</span>
+                                    {{Form::select('ano_lectivo', $getAnos, $getAno, ['class'=>"form-control", 'placeholder'=>"Ano Lectivo"])}}
+                                    <div class="erro">
+                                        @if($errors->has('ano_lectivo'))
+                                        <div class="text-danger">{{$errors->first('ano_lectivo')}}</div>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">

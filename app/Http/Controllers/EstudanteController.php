@@ -420,7 +420,7 @@ class EstudanteController extends Controller
             return back()->with(['error' => "Não encontrou"]);
         }
 
-        $anos = AnoLectivo::pluck('ano_lectivo','id');
+        $anos = AnoLectivo::pluck('ano_lectivo','ano_lectivo');
 
         $data = [
             'title' => "Estudantes",
@@ -432,5 +432,33 @@ class EstudanteController extends Controller
             'getAnos'=>$anos,
         ];
         return view('estudantes.create_declaracao', $data);
+    }
+
+    public function store_declaracao(Request $request, $id_estudante){
+        $estudante= Estudante::find($id_estudante);
+        if (!$estudante) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+        $request->validate([
+            'tipo'=> ['required', 'string', 'min:3', 'max:255'],
+            'data'=> ['required', 'date'],
+            'motivo'=> ['required', 'string', 'min:5'],
+            'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
+        ]);
+
+        $ano_lectivos = AnoLectivo::where('ano_lectivo', $request->ano_lectivo)->first();
+        if(!$ano_lectivos){
+            return back()->with(['error' => "Não encontrou"]);
+        }
+
+        $data = [
+            'id_estudante'=> $id_estudante,
+            'tipo'=>$request->tipo,
+            'motivo'=> $request->motivo,
+            'data_emissao'=> $request->data,
+            'ano_lectivo'=> $request->ano_lectivo,
+        ];
+
+        
     }
 }

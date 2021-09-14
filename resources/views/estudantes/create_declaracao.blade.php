@@ -6,7 +6,10 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>{{$submenu}}</h5>
+                    <h5>{{$submenu}}
+                        <i class="ti-angle-right"></i>
+                    {{$getEstudante->pessoa->nome}}
+                    </h5>
                     <span></span>
                     <div class="card-header-right">
 
@@ -32,16 +35,42 @@
                         <fieldset>
                             <legend><i class="ti-list"></i> Dados</legend>
                             <div class="row">
-                                <div class="col-md-4">
-                                    {{Form::label('nome', "Nome completo")}} <span class="text-danger">*</span>
-                                    {{Form::text('nome', null, ['class'=>"form-control", 'placeholder'=>"Nome completo"])}}
+                                <div class="col-md-3">
+                                    {{Form::label('tipo', "Tipo")}} <span class="text-danger">*</span>
+                                    {{Form::select('tipo',[
+                                        'sem nota'=>"sem nota",
+                                        'com nota'=>"com nota",
+                                    ], null, ['class'=>"form-control", 'placeholder'=>"Tipo"])}}
                                     <div class="erro">
-                                        @if($errors->has('nome'))
-                                        <div class="text-danger">{{$errors->first('nome')}}</div>
+                                        @if($errors->has('tipo'))
+                                        <div class="text-danger">{{$errors->first('tipo')}}</div>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    {{Form::label('data', "Data de Emissão")}} <span class="text-danger">*</span>
+                                    {{Form::date('data', null, ['class'=>"form-control", 'placeholder'=>"Data de Emissão"])}}
+                                    <div class="erro">
+                                        @if($errors->has('data'))
+                                        <div class="text-danger">{{$errors->first('data')}}</div>
                                         @endif
                                     </div>
                                 </div>
                             </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    {{Form::label('motivo', "Finalidade")}} <span class="text-danger">*</span>
+                                    {{Form::textarea('motivo', null, ['class'=>"form-control", 'placeholder'=>"Finalidade", 'cols'=>10, 'rows'=>4])}}
+                                    <div class="erro">
+                                        @if($errors->has('motivo'))
+                                        <div class="text-danger">{{$errors->first('motivo')}}</div>
+                                        @endif
+                                    </div>
+                                </div>
+                            </div>
+                            <br/>
                             <div class="row">
                                 <div class="col-md-4">
                                     {{Form::submit('Salvar', ['class'=>"btn btn-primary"])}}

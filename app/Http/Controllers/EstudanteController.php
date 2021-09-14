@@ -429,7 +429,7 @@ class EstudanteController extends Controller
             'submenu' => "Declaração",
             'getEstudante' => $estudante,
             'getAno'=>$ano_lectivo,
-            'getAnos'=>$ano_lectivos,
+            'getAnos'=>$anos,
         ];
         return view('estudantes.create_declaracao', $data);
     }

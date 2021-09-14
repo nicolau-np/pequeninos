@@ -15,7 +15,7 @@
                     </h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -36,7 +36,7 @@
                             <div class="alert alert-success">{{session('success')}}</div>
                             @endif
                         </div>
-                
+
                      <div class="col-md-8">
                             <ul class="nav nav-tabs md-tabs" role="tablist">
                                 <li class="nav-item">
@@ -49,15 +49,21 @@
                                 </li>
 
                                 <li class="nav-item">
-                                    <a class="nav-link" data-toggle="tab" href="#encarregado3" role="tab" aria-expanded="false">{{$getEstudante->encarregado->pessoa->nome}}</a>
+                                    <a class="nav-link" data-toggle="tab" href="#encarregado3" role="tab" aria-expanded="false">
+                                        @if($getEstudante->encarregado->pessoa->nome=="Encarregado Exemplo")
+                                        Não informado
+                                        @else
+                                        {{$getEstudante->encarregado->pessoa->nome}}
+                                        @endif
+                                    </a>
                                     <div class="slide"></div>
                                 </li>
-                              
+
                             </ul>
                             <!-- Tab panes -->
                             <div class="tab-content card-block">
                                 <div class="tab-pane active" id="home3" role="tabpanel" aria-expanded="true">
-                                    
+
                                     {{Form::open(['method'=>"post", 'url'=>"/pagamentos/store"])}}
                                    <div class="row">
                                        <div class="col-md-12">
@@ -70,18 +76,18 @@
                                             <div class="erro">
                                                 @if($errors->has('meses_a_pagar'))
                                                 <div class="text-danger">{{$errors->first('meses_a_pagar')}}</div>
-                                                @endif 
+                                                @endif
                                             </div>
                                         @endif
                                         <hr/>
                                        </div>
-                                      
+
                                        <div class="col-md-6">
-                                        
+
                                            {{Form::submit('Salvar', ['class'=>'btn btn-primary']) }}
                                        </div>
                                    </div>
-                                   
+
                                     {{Form::close()}}
 
                                 </div>
@@ -89,8 +95,8 @@
                                 <div class="tab-pane" id="profile3" role="tabpanel" aria-expanded="false">
                                     <p class="m-0">
                                         @if ($getPagos==null)
-                                            Nenhum pago 
-                                        @else  
+                                            Nenhum pago
+                                        @else
                                         <ul>
                                             @foreach ($getPagos as $pagos)
                                         <li><a data-epoca="{{$pagos}}" href="#" style="color:#4680ff;" class="show_pagamento">{{$pagos}}</a></li>
@@ -107,20 +113,25 @@
                                    <div class="tab-pane" id="encarregado3" role="tabpanel" aria-expanded="false">
                                     <p class="m-0">
                                         <ul>
+                                            @if($getEstudante->encarregado->pessoa->nome=="Encarregado Exemplo")
+                                        Encarregado não informado
+                                        @else
                                             @foreach ($getEducandos as $educandos)
                                                 <li>{{$educandos->pessoa->nome}}</li>
                                             @endforeach
+                                        @endif
+
                                         </ul>
                                     </p>
                                    </div>
                                 </div>
-                        
+
                      </div>
- 
+
                      <div class="col-md-4">
                         <fieldset>
                              <legend style="width:90%;"><b><i class="ti-user"></i> {{$getHistoricoEstudante->estudante->pessoa->nome}}</b></legend>
-                             
+
                              <div class="row">
                             <div class="col-md-12">
                             <p>Encarregado: {{$getEstudante->encarregado->pessoa->nome}}</p>
@@ -130,18 +141,18 @@
                              <p>Ano de Confirmação: {{$getHistoricoEstudante->ano_lectivo}}</p>
                             </div>
                              </div>
-                            
+
                          </fieldset>
                      </div>
                     </div>
-                   
-                 
-               
+
+
+
                 </div>
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- hidden-sm-up -->

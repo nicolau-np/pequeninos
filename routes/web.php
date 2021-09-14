@@ -217,6 +217,8 @@ Route::group(['prefix' => 'minha_turma', 'middleware' => "auth"], function () {
 Route::group(['prefix' => 'pautas', 'middleware' => "auth"], function () {
     Route::get('/create/{id_turma}/{ano_lectivo}', "PautaController@create");
     Route::put('/show/{id_turma}/{ano_lectivo}', "PautaController@show");
+
+    Route::put('/exports/{id_turma}/{ano_lectivo}', "ExportController@exports");
 });
 
 Route::group(['prefix' => 'usuarios', 'middleware' => "AdminUser"], function () {

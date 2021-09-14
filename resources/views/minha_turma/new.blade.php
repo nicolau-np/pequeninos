@@ -6,7 +6,7 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>{{$submenu}} 
+                    <h5>{{$submenu}}
                     <i class="ti-angle-right"></i>
                     {{$getDirector->turma->turma}}
                     <i class="ti-angle-right"></i>
@@ -16,7 +16,7 @@
                     </h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -30,8 +30,9 @@
                     {{Form::open(['method'=>"put", 'url'=>"/pautas/show/{$getDirector->id_turma}/{$getDirector->ano_lectivo}"])}}
                     <div class="row">
                         <div class="col-md-6">
-                            {{Form::submit('Visualizar', ['class'=>"btn btn-primary btn-sm float-left"])}}
-                             
+                            {{Form::submit('Visualizar', ['class'=>"btn btn-primary btn-sm float-left"])}}&nbsp;&nbsp;&nbsp;
+                            <a href="/pautas/exports/{{$getDirector->id_turma}}/{{$getDirector->ano_lectivo}}" class="btn btn-warning">Baixar</a>
+
                             <a href="#" class="btn btn-danger btn-sm float-right remover_todas"><i class="ti-trash" aria-hidden="true"></i></a>
                            <table class="table table-bordered">
                             <thead>
@@ -49,7 +50,7 @@
                                 <td>
                                     <a href="#" class="btn btn-primary btn-sm adicionar" data-id="{{$grades->id_disciplina}}" data-sigla="{{$grades->disciplina->sigla}}"><i class="ti-plus" aria-hidden="true"></i></a>
                                 </td>
-                                </tr> 
+                                </tr>
                                 @endforeach
                               </tbody>
                         </table>
@@ -57,11 +58,11 @@
                         <div class="col-md-6 load_selected">
                           Nenhuma selecionada
                         </div>
-                        
+
                     </div>
                     {{Form::close()}}
                 </div>
-                    
+
             </div>
         </div>
     </div>
@@ -118,7 +119,7 @@
                     }else if(response.status === "error"){
                         disciplinas();
                     }
-                  
+
                 }
             });
         });

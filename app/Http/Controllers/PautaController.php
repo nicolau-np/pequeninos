@@ -140,7 +140,7 @@ class PautaController extends Controller
         }
         if ($id_ensino == 1) {
             return "ensino primario iniciacao ate 6 classe";
-        } elseif ($id_ensino == 2) {
+        } else{
             return view('pauta.ensino_1ciclo_7_9', $data);
         }
     }

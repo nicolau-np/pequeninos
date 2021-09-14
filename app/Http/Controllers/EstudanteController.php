@@ -423,6 +423,8 @@ class EstudanteController extends Controller
 
         $anos = AnoLectivo::pluck('ano_lectivo','ano_lectivo');
 
+        $declaracaos = Declaracao::where(['id_estudante' => $id_estudante,])->orderBy('id', 'desc')->get();
+
         $data = [
             'title' => "Estudantes",
             'type' => "estudantes",
@@ -431,6 +433,7 @@ class EstudanteController extends Controller
             'getEstudante' => $estudante,
             'getAno'=>$ano_lectivo,
             'getAnos'=>$anos,
+            'getDeclaracaos'=>$declaracaos,
         ];
         return view('estudantes.create_declaracao', $data);
     }

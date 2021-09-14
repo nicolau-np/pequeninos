@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\HistoricEstudante;
+use App\Turma;
 use Maatwebsite\Excel\Concerns\FromView;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Illuminate\Contracts\View\View;
@@ -29,7 +30,9 @@ class ExportDocs implements FromView, ShouldAutoSize
         $data = [
             'getHistorico'=>$historico,
         ];
-        $id_ensino = $historico->turma->classe->id_ensino;
+
+        $turma = Turma::find($this->id_turma);
+        $id_ensino = $turma->classe->id_ensino;
 
         if ($id_ensino == 1) {
             return "ensino primario iniciacao ate 6 classe";

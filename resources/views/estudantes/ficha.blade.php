@@ -38,7 +38,7 @@
                     <div class="col-md-8">
                         <div class="card">
                             <div class="card-header">
-                                <h5 class="card-header-text">FICHAS ESTUDANTE </h5>
+                                <h5 class="card-header-text">FICHAS ESTUDANTE {{$getHistoricoEstudante->ano_lectivo}}</h5>
                             </div>
                             <div class="card-block accordion-block color-accordion-block">
                                 <div class="color-accordion" id="color-accordion">
@@ -46,20 +46,36 @@
                                     <a class="accordion-msg b-none">Dados Pessoais</a>
                                     <div class="accordion-desc">
                                         <div class="data">
-
-                                        </div>
+                                                <span class="title">Nome Completo:</span> {{$getHistoricoEstudante->estudante->pessoa->nome}}<br/>
+                                                <span class="title">Gênero:</span> {{$getHistoricoEstudante->estudante->pessoa->genero}}<br/>
+                                                <span class="title">Data de Nascimento:</span> {{$getHistoricoEstudante->estudante->pessoa->data_nascimento}}<br/>
+                                                <span class="title">Estado Civíl:</span> {{$getHistoricoEstudante->estudante->pessoa->estado_civil}}<br/>
+                                                <span class="title">Naturalidade:</span> {{$getHistoricoEstudante->estudante->pessoa->naturalidade}}<br/>
+                                                <span class="title">Telefone:</span> {{$getHistoricoEstudante->estudante->pessoa->telefone}}<br/>
+                                                <span class="title">Nº do Bilhete:</span> {{$getHistoricoEstudante->estudante->pessoa->bilhete}}<br/>
+                                                <span class="title">Data de Emissão:</span> {{$getHistoricoEstudante->estudante->pessoa->data_emissao}}<br/>
+                                                <span class="title">Local de Emissão:</span> {{$getHistoricoEstudante->estudante->pessoa->local_emissao}}<br/>
+                                                <span class="title">Pai:</span> {{$getHistoricoEstudante->estudante->pessoa->pai}}<br/>
+                                                <span class="title">Mãe:</span> {{$getHistoricoEstudante->estudante->pessoa->mae}}<br/>
+                                                <span class="title">Comuna:</span> {{$getHistoricoEstudante->estudante->pessoa->comuna}}<br/>
+                                            </div>
                                     </div>
 
-                                    <a class="accordion-msg bg-dark-primary b-none">Dados Acadêmicos</a>                                        2</a>
+                                    <a class="accordion-msg bg-dark-primary b-none">Dados Acadêmicos</a>
                                         <div class="accordion-desc">
                                             <div class="data">
-
+                                                <span class="title">Curso:</span> {{$getHistoricoEstudante->turma->curso->curso}}<br/>
+                                                <span class="title">Classe:</span> {{$getHistoricoEstudante->turma->classe->classe}}<br/>
+                                                <span class="title">Turma:</span> {{$getHistoricoEstudante->turma->turma}}<br/>
+                                                <span class="title">Turno:</span> {{$getHistoricoEstudante->turma->turno->turno}}<br/>
                                             </div>
+
                                         </div>
-                                        <a class="accordion-msg bg-darkest-primary b-none">Extra</a>
+                                        <a class="accordion-msg bg-darkest-primary b-none">Mais</a>
                                             <div class="accordion-desc">
                                                 <div class="data">
-
+                                                    <span class="title">Encarregado:</span> {{$getHistoricoEstudante->estudante->encarregado->pessoa->nome}}<br/>
+                                                    <span class="title">Telefone:</span> {{$getHistoricoEstudante->estudante->encarregado->pessoa->telefone}}<br/>
                                                 </div>
                                             </div>
                                         </div>

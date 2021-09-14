@@ -391,7 +391,10 @@ class EstudanteController extends Controller
         if (!$estudante) {
             return back()->with(['error' => "Não encontrou"]);
         }
-
+        $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
+        if(!$ano_lectivos){
+            return back()->with(['error' => "Não encontrou ano lectivo"]);
+        }
         $historicoAnos = HistoricEstudante::where(['id_estudante' => $id_estudante])->orderBy('id', 'desc')->get();
         $historico = HistoricEstudante::where(['id_estudante'=> $id_estudante, 'ano_lectivo'=>$ano_lectivo])->first();
         $data = [

@@ -156,7 +156,7 @@ use App\Http\Controllers\ControladorStatic;
                  <?php }} ?>
                  <!-- fim finais-->
 
-                 <td></td>
+                     <td>{{$valorf->cf}}</td>
                    </tr>
                  @endforeach
                </tbody>

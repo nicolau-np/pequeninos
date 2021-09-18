@@ -90,6 +90,46 @@
 
                         {{Form::close()}}
                    </div>
+
+
+                   <div class="tabela">
+                    <div class="table-responsive">
+                        <br/>
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Tipo</th>
+                                    <th>Finalidade</th>
+                                    <th>Data de Emissão</th>
+                                    <th>Ano Lectivo</th>
+                                    <th>Operações</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if($getDeclaracaos->count()==0)
+                                <span class="not_found">Nenhuma declaração criada</span>
+                                @else
+                                @foreach ($getDeclaracaos as $declaracaos)
+
+                                <tr>
+                                <th scope="row">{{$loop->iteration}}</th>
+                                    <td>{{$declaracaos->tipo}}</td>
+                                    <td>{{$declaracaos->motivo}}</td>
+                                    <td>{{$declaracaos->data_emissao}}</td>
+                                    <td>{{$declaracaos->ano_lectivo}}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-primary btn-sm"><i class="ti-print"></i> Imprimir</a>
+                                    </td>
+                                </tr>
+
+                                @endforeach
+                                @endif
+
+                            </tbody>
+                        </table>
+                    </div>
+                   </div>
                 </div>
             </div>
         </div>

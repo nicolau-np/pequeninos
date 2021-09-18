@@ -12,6 +12,7 @@ class HistoricEstudante extends Model
         'id_estudante',
         'id_turma',
         'estado',
+        'observacao_final',
         'ano_lectivo',
     ];
 

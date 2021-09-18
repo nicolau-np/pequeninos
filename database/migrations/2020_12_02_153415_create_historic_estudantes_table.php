@@ -19,13 +19,14 @@ class CreateHistoricEstudantesTable extends Migration
             $table->bigInteger('id_estudante')->unsigned()->index();
             $table->bigInteger('id_turma')->unsigned()->index();
             $table->string('estado');
+            $table->string('observacao_final');
             $table->string('ano_lectivo');
             $table->timestamps();
         });
 
         Schema::table('historic_estudantes', function (Blueprint $table) {
             $table->foreign('id_turma')->references('id')->on('turmas')->onUpdate('cascade');
-            $table->foreign('id_estudante')->references('id')->on('estudantes')->onUpdate('cascade'); 
+            $table->foreign('id_estudante')->references('id')->on('estudantes')->onUpdate('cascade');
         });
     }
 

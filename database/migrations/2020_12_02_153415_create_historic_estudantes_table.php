@@ -19,7 +19,7 @@ class CreateHistoricEstudantesTable extends Migration
             $table->bigInteger('id_estudante')->unsigned()->index();
             $table->bigInteger('id_turma')->unsigned()->index();
             $table->string('estado');
-            $table->string('observacao_final');
+            $table->string('observacao_final')->nullable();
             $table->string('ano_lectivo');
             $table->timestamps();
         });

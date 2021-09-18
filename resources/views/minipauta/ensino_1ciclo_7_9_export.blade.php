@@ -45,6 +45,7 @@ use App\Http\Controllers\ControladorStatic;
                        <th colspan="3">II TRIMESTRE</th>
                        <th colspan="3">III TRIMESTRE</th>
                        <th colspan="3">DADOS FINAIS</th>
+                       <th>OBSERVAÇÃO</th>
                    </tr>
                    <tr>
                      <th>MAC</th>
@@ -62,6 +63,8 @@ use App\Http\Controllers\ControladorStatic;
                      <th>CAP</th>
                      <th>CPE</th>
                      <th>CF</th>
+
+                     <th></th>
                    </tr>
                </thead>
                <tbody>
@@ -153,6 +156,7 @@ use App\Http\Controllers\ControladorStatic;
                  <?php }} ?>
                  <!-- fim finais-->
 
+                 <td></td>
                    </tr>
                  @endforeach
                </tbody>

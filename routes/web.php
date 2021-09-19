@@ -104,8 +104,17 @@ Route::group(['prefix' => 'institucional', 'middleware' => "auth"], function () 
         Route::post('/store', "ImportController@store");
     });
 
-    Route::group(['prefix' =>"observacoes"], function(){
+    Route::group(['prefix' => "observacoes"], function () {
         Route::get('/', "InstitucionalController@observacoes");
+        Route::group(['prefix' => "geral"], function () {
+            Route::get('/', "InstitucionalController@geral_list");
+            Route::get('/create', "InstitucionalController@geral_create");
+        });
+
+        Route::group(['prefix' =>"especifica"], function(){
+            Route::get('/', "InstitucionalController@geral_especifica");
+            Route::get('/create', "InstitucionalController@geral_especifica");
+        });
     });
 });
 
@@ -190,7 +199,7 @@ Route::group(['prefix' => 'estatisticas', 'middleware' => "auth"], function () {
         Route::get('/list/{ano}', "EstatisticaController@balanco");
     });
 
-    Route::group(['prefix' =>"minipautas", 'middleware'=>"prof"], function(){
+    Route::group(['prefix' => "minipautas", 'middleware' => "prof"], function () {
         Route::get('/list/{id_turma}/{id_disciplina}/{ano_lectivo}', "EstatisticaController@minipauta");
     });
 });

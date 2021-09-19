@@ -48,7 +48,7 @@
                             <tbody>
                                 @if ($getObservacoes->count()==0)
                                     Nenhuma observação registada
-
+                                @else
                                 @foreach ($getObservacoes as $observacoes)
                                     <tr>
                                         <td>{{$loop->iteration}}</td>

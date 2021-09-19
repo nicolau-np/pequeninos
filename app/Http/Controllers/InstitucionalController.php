@@ -695,7 +695,7 @@ class InstitucionalController extends Controller
 
     public function geral_list()
     {
-        $observacaoes = ObservacaoGeral::paginate(5);
+        $observacaoes = ObservacaoGeral::paginate(8);
         $data = [
             'title' => "Observações",
             'type' => "institucional",

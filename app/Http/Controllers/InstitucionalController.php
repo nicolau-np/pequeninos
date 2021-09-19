@@ -772,6 +772,6 @@ class InstitucionalController extends Controller
             'submenu' => "Específica",
             'getObservacoes' => $observacaoes,
         ];
-        return view('institucional.observacaoes.observacao_geral.list', $data);
+        return view('institucional.observacaoes.observacao_especifica.list', $data);
     }
 }

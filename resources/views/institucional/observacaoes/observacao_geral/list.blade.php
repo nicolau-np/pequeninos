@@ -46,23 +46,30 @@
                                 </tr>
                             </thead>
                             <tbody>
+                                @if ($getObservacoes->count()==0)
+                                    Nenhuma observação registada
+
                                 @foreach ($getObservacoes as $observacoes)
                                     <tr>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
-                                        <td></td>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>{{$observacoes->curso->curso}}</td>
+                                        <td>{{$observacoes->classe->classe}}</td>
+                                        <td>{{$observacoes->designacao}}</td>
+                                        <td>{{$observacoes->quantidade_negativas}}</td>
+                                        <td>
+
+                                            <a href="/institucional/observacoes/geral/edit/{{$observacoes->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
+                                            <a href="#" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
+                                        </td>
                                     </tr>
                                 @endforeach
-
+                                @endif
                             </tbody>
                         </table>
                     </div>
 
                     <div class="pagination">
-
+                        {{$getObservacoes->links()}}
                     </div>
                 </div>
             </div>
@@ -76,7 +83,7 @@
 <!-- botão pesquisar -->
 <div class="btnPesquisar">
 	<div class="btnPesquisarBtn">
-		<a href="#" class="btn btn-primary btnCircular btnPrincipal" title="Novo"><i class="ti-plus"></i></a>
+		<a href="/institucional/observacoes/geral/create" class="btn btn-primary btnCircular btnPrincipal" title="Novo"><i class="ti-plus"></i></a>
 	</div>
 </div>
 @endsection

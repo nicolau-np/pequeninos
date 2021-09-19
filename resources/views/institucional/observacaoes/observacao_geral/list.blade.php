@@ -46,9 +46,17 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
+                                @foreach ($getObservacoes as $observacoes)
+                                    <tr>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                        <td></td>
+                                    </tr>
+                                @endforeach
 
-                                </tr>
                             </tbody>
                         </table>
                     </div>

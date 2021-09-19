@@ -747,17 +747,22 @@ class InstitucionalController extends Controller
 
         foreach($request->classe as $classe){
             $data['create']['id_classe']=$classe;
+            $data['where']['id_classe']=$classe;
             if(!ObservacaoGeral::where($data['create'])->first()){
                 if(!ObservacaoGeral::where($data['where'])){
-                    $observacao = ObservacaoGeral::create($data['create']);
+                   echo "cadastrou";
+                }else{
+                    echo "erro segunda verificacao";
                 }
+            }else{
+                echo "erro 1 verificacao";
             }
         }
 
-        if($observacao){
+        /*if($observacao){
             return back()->with(['success' => "Feito com sucesso"]);
         }else{
             return back()->with(['error'=>"Já Cadastrou"]);
-        }
+        }*/
     }
 }

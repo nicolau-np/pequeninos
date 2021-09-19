@@ -7,6 +7,7 @@ use App\Estudante;
 use App\Horario;
 use App\NotaFinal;
 use App\NotaTrimestral;
+use App\ObservacaoGeral;
 use App\Pagamento;
 use App\PagamentoPai;
 use App\TipoPagamento;
@@ -244,4 +245,11 @@ class ControladorStatic extends Controller
         $horario = Horario::where($data)->get();
         return $horario;
     }
+
+    public static function observacao_geral($classe, $curso){
+        $observacao = ObservacaoGeral::where(['id_classe'=>$classe, 'id_curso'=>$curso])->first();
+        return $observacao;
+    }
+
+    public static
 }

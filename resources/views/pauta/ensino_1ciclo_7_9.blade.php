@@ -3,6 +3,10 @@ use App\Http\Controllers\ControladorStatic;
 @endphp
 @extends('layouts.app')
 @section('content')
+<?php
+$observacao_geral = ControladorStatic::observacao_geral($getDirector->turma->classe->id,$getDirector->turma->curso->id);
+$observacao_geralDB= $observacao_geral->quantidade_negativas;
+?>
 <style>
     .positivo{
         color: #4680ff;
@@ -79,13 +83,20 @@ use App\Http\Controllers\ControladorStatic;
                                   </tr>
                               </thead>
                           <tbody>
+                              @php
+                                $count_obs=0;
+                                $observacao_final = false;
+                              @endphp
                               @foreach ($getHistorico as $historico)
+
+                                    <?php
+                                        $observacao_final = false;
+                                        $count_obs = 0;
+                                    ?>
                                    <tr>
                                    <td>{{$loop->iteration}}</td>
                                     <td>{{$historico->estudante->pessoa->nome}}</td>
                                     <td>{{$historico->estudante->pessoa->genero}}</td>
-
-
                                     <!-- finais-->
                                 <?php
                                 foreach (Session::get('disciplinas') as $disciplina) {
@@ -97,6 +108,7 @@ use App\Http\Controllers\ControladorStatic;
                                 <td class="nenhum">---</td>
                                 <?php }
                                 else{
+
                                     foreach ($final as $valorf) {
                                     $v1_estilo = ControladorStatic::nota_20($valorf->cap);
                                     $v2_estilo = ControladorStatic::nota_20($valorf->cpe);
@@ -106,11 +118,25 @@ use App\Http\Controllers\ControladorStatic;
                                 <td class="{{$v2_estilo}}">@if($valorf->cpe == null) --- @else {{$valorf->cpe}} @endif</td>
                                 <td class="{{$v3_estilo}}">@if($valorf->cf == null) --- @else {{$valorf->cf}} @endif</td>
                                 <?php
-                                }}
+                                }
+                                if($valorf->cf<=9.5){
+                                    $count_obs ++;
+                                }
+
+                                if($count_obs >= $observacao_geralDB){
+                                    $observacao_final = true;
+                                }
+                            }
 
                                 }?>
                                 <!-- fim finais-->
-                                <td></td>
+                                <td class="@if($observacao_final) negativo @else positivo @endif">
+                                   @if($observacao_final)
+                                        Reprovado
+                                    @else
+                                    Aprovado
+                                   @endif
+                                </td>
                                 </tr>
                               @endforeach
 

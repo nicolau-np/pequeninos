@@ -34,16 +34,6 @@
                             <div class="row">
 
                                 <div class="col-md-3">
-                                    {{Form::label('designacao', "Designação")}} <span class="text-danger">*</span>
-                                    {{Form::text('designacao', null, ['class'=>"form-control", 'placeholder'=>"Designação"])}}
-                                    <div class="erro">
-                                        @if($errors->has('designacao'))
-                                        <div class="text-danger">{{$errors->first('designacao')}}</div>
-                                        @endif
-                                    </div>
-                                </div>
-
-                                <div class="col-md-3">
                                     {{Form::label('curso', "Curso")}} <span class="text-danger">*</span>
                                     {{Form::select('curso', $getCursos, null, ['class'=>"form-control curso", 'placeholder'=>"Curso"])}}
                                 <div class="erro">

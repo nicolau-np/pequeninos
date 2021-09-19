@@ -51,7 +51,7 @@ Route::group(['prefix' => 'institucional', 'middleware' => "auth"], function () 
         Route::put('/update/{id}', "InstitucionalController@curso_update");
     });
 
-    Route::group(['prefix' => 'turmas'], function () {
+    Route::group(['prefix' => 'turmas', 'middleware' => "auth"], function () {
         Route::get('/', "InstitucionalController@turma_list");
         Route::get('/create', "InstitucionalController@turma_create");
         Route::post('/store', "InstitucionalController@turma_store");
@@ -59,7 +59,7 @@ Route::group(['prefix' => 'institucional', 'middleware' => "auth"], function () 
         Route::put('/update/{id}', "InstitucionalController@turma_update");
     });
 
-    Route::group(['prefix' => 'disciplinas'], function () {
+    Route::group(['prefix' => 'disciplinas', 'middleware' => "auth"], function () {
         Route::get('/', "InstitucionalController@disciplina_list");
         Route::get('/create', "InstitucionalController@disciplina_create");
         Route::post('/store', "InstitucionalController@disciplina_store");
@@ -67,7 +67,7 @@ Route::group(['prefix' => 'institucional', 'middleware' => "auth"], function () 
         Route::put('/update/{id}', "InstitucionalController@disciplina_update");
     });
 
-    Route::group(['prefix' => 'grades'], function () {
+    Route::group(['prefix' => 'grades', 'middleware' => "auth"], function () {
         Route::get('/', "InstitucionalController@grade_list");
         Route::get('/create', "InstitucionalController@grade_create");
         Route::post('/store', "InstitucionalController@grade_store");
@@ -75,7 +75,7 @@ Route::group(['prefix' => 'institucional', 'middleware' => "auth"], function () 
         Route::put('/update/{id}', "InstitucionalController@grade_update");
     });
 
-    Route::group(['prefix' => 'salas'], function () {
+    Route::group(['prefix' => 'salas', 'middleware' => "auth"], function () {
         Route::get('/', "InstitucionalController@sala_list");
         Route::get('/create', "InstitucionalController@sala_create");
         Route::post('/store', "InstitucionalController@sala_store");
@@ -83,7 +83,7 @@ Route::group(['prefix' => 'institucional', 'middleware' => "auth"], function () 
         Route::put('/update/{id}', "InstitucionalController@sala_update");
     });
 
-    Route::group(['prefix' => 'horas'], function () {
+    Route::group(['prefix' => 'horas', 'middleware' => "auth"], function () {
         Route::get('/', "InstitucionalController@hora_list");
         Route::get('/create', "InstitucionalController@hora_create");
         Route::post('/store', "InstitucionalController@hora_store");
@@ -91,7 +91,7 @@ Route::group(['prefix' => 'institucional', 'middleware' => "auth"], function () 
         Route::put('/update/{id}', "InstitucionalController@hora_update");
     });
 
-    Route::group(['prefix' => 'ano_lectivos'], function () {
+    Route::group(['prefix' => 'ano_lectivos', 'middleware' => "auth"], function () {
         Route::get('/', "InstitucionalController@ano_lectivo_list");
         Route::get('/create', "InstitucionalController@ano_lectivo_create");
         Route::post('/store', "InstitucionalController@ano_lectivo_store");
@@ -99,13 +99,13 @@ Route::group(['prefix' => 'institucional', 'middleware' => "auth"], function () 
         Route::put('/update/{id}', "InstitucionalController@ano_lectivo_update");
     });
 
-    Route::group(['prefix' => 'import'], function () {
+    Route::group(['prefix' => 'import', 'middleware' => "auth"], function () {
         Route::get('/', "ImportController@index");
         Route::post('/store', "ImportController@store");
     });
 });
 
-Route::group(['prefix' => 'bloqueios'], function () {
+Route::group(['prefix' => 'bloqueios', 'middleware' => "auth"], function () {
     Route::get('/', "BloqueioController@index");
     Route::get('/update/{id}', "BloqueioController@update");
 });
@@ -119,7 +119,7 @@ Route::group(['prefix' => 'financas', 'middleware' => "auth"], function () {
         Route::put('/update/{id}', "FinancaController@tabela_preco_update");
     });
 
-    Route::group(['prefix' => 'tipo_pagamentos'], function () {
+    Route::group(['prefix' => 'tipo_pagamentos', 'middleware' => "auth"], function () {
         Route::get('/', "FinancaController@tipo_pagamento_list");
         Route::get('/create', "FinancaController@tipo_pagamento_create");
         Route::post('/store', "FinancaController@tipo_pagamento_store");

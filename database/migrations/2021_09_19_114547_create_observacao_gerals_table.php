@@ -17,7 +17,7 @@ class CreateObservacaoGeralsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('id_curso')->unsigned()->index();
             $table->bigInteger('id_classe')->unsigned()->index();
-            $table->string('disciplina');
+            $table->string('designacao');
             $table->bigInteger('quantidade_negativas');
             $table->string('estado');
             $table->timestamps();

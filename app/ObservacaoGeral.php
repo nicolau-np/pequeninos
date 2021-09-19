@@ -11,7 +11,7 @@ class ObservacaoGeral extends Model
     protected $fillable = [
         'id_curso',
         'id_classe',
-        'disciplina',
+        'designacao',
         'quantidade_negativas',
         'estado',
     ];

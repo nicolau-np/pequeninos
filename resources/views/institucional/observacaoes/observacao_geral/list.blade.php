@@ -38,12 +38,10 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Nome</th>
                                     <th>Curso</th>
                                     <th>Classe</th>
-                                    <th>Turno</th>
-                                    <th>Turma</th>
-                                    <th>Ano de Confirmação</th>
+                                    <th>Designação</th>
+                                    <th>Q. Negativa</th>
                                     <th>Operações</th>
                                 </tr>
                             </thead>

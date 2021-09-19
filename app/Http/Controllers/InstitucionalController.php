@@ -763,7 +763,8 @@ class InstitucionalController extends Controller
         }
     }
 
-    public function especifica_list(){
+    public function especifica_list()
+    {
         $observacaoes = ObservacaoUnica::paginate(8);
         $data = [
             'title' => "Observações",
@@ -775,7 +776,8 @@ class InstitucionalController extends Controller
         return view('institucional.observacaoes.observacao_especifica.list', $data);
     }
 
-    public function especifica_create(){
+    public function especifica_create()
+    {
         $cursos = Curso::pluck('curso', 'id');
         $data = [
             'title' => "Observações",
@@ -785,5 +787,30 @@ class InstitucionalController extends Controller
             'getCursos' => $cursos,
         ];
         return view('institucional.observacaoes.observacao_especifica.new', $data);
+    }
+
+    public function especifica_store(Request $request)
+    {
+        $request->validate([
+            'curso' => ['required', 'integer', 'min:1'],
+            'classe' => ['required', 'integer', 'min:1'],
+            'disciplina' => ['required', 'integer', 'min:1'],
+        ]);
+
+        $data = [
+            'id_curso' => $request->curso,
+            'id_classe' => $request->classe,
+            'id_disciplina' => $request->disciplina,
+            'quantidade_negativas' => 1,
+            'estado' => "on",
+        ];
+
+        if (ObservacaoUnica::where($data)->first()) {
+            return back()->with(['error' => "Já Cadastrou"]);
+        }
+
+        if (ObservacaoUnica::create($data)) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
     }
 }

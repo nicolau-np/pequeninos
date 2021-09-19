@@ -67,15 +67,7 @@
                                 </div>
                                 </div>
 
-                                <div class="col-md-2">
-                                    {{Form::label('quantidade_negativas', "Q. Negativas")}} <span class="text-danger">*</span>
-                                    {{Form::number('quantidade_negativas', null, ['class'=>"form-control", 'placeholder'=>"Q. Negativas"])}}
-                                    <div class="erro">
-                                        @if($errors->has('quantidade_negativas'))
-                                        <div class="text-danger">{{$errors->first('quantidade_negativas')}}</div>
-                                        @endif
-                                    </div>
-                                </div>
+                                
                             </div>
                             <br/>
                         </fieldset>

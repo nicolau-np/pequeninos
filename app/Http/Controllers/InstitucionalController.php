@@ -678,4 +678,16 @@ class InstitucionalController extends Controller
             return back()->with(['success' => "Feito com sucesso"]);
         }
     }
+
+
+    public function observacoes(){
+
+        $data = [
+            'title' => "Observações",
+            'type' => "institucional",
+            'menu' => "Observações",
+            'submenu' => "Tipos",
+        ];
+        return view('institucional.observacaoes.tipos', $data);
+    }
 }

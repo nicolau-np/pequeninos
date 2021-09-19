@@ -343,6 +343,14 @@
                                             </a>
                                         </li>
 
+                                        <li class="@if($menu=="Observações") active @endif">
+                                            <a href="/institucional/observacoes/">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Observações</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
                                         <li class="@if($menu=="Importar") active @endif">
                                             <a href="/institucional/import/">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>

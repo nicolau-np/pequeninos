@@ -45,7 +45,7 @@ use App\Http\Controllers\ControladorStatic;
                        <th colspan="3">II TRIMESTRE</th>
                        <th colspan="3">III TRIMESTRE</th>
                        <th colspan="3">DADOS FINAIS</th>
-                       <th>OBSERVAÇÃO</th>
+                       <th rowspan="2">OBSERVAÇÃO</th>
                    </tr>
                    <tr>
                      <th>MAC</th>
@@ -64,7 +64,7 @@ use App\Http\Controllers\ControladorStatic;
                      <th>CPE</th>
                      <th>CF</th>
 
-                     <th></th>
+
                    </tr>
                </thead>
                <tbody>
@@ -156,7 +156,7 @@ use App\Http\Controllers\ControladorStatic;
                  <?php }} ?>
                  <!-- fim finais-->
 
-                     <td>{{$valorf->cf}}</td>
+                 <td class="@if($valorf->cf>=9.5) positivo @else negativo @endif">@if($valorf->cf>=9.5) Aprovado @else Reprovado @endif</td>
                    </tr>
                  @endforeach
                </tbody>

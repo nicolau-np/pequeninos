@@ -28,4 +28,12 @@ class Classe extends Model
     public function grade(){
         return $this->hasMany(Grade::class, 'id_classe', 'id');
     }
+
+    public function observacao_geral(){
+        return $this->hasMany(ObservacaoGeral::class, 'id_classe', 'id');
+    }
+
+    public function observacao_unica(){
+        return $this->hasMany(ObservacaoUnica::class, 'id_classe', 'id');
+    }
 }

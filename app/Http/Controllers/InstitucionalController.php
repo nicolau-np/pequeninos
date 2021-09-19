@@ -776,6 +776,14 @@ class InstitucionalController extends Controller
     }
 
     public function especifica_create(){
-        
+        $cursos = Curso::pluck('curso', 'id');
+        $data = [
+            'title' => "Observações",
+            'type' => "institucional",
+            'menu' => "Observações",
+            'submenu' => "Geral",
+            'getCursos' => $cursos,
+        ];
+        return view('institucional.observacaoes.observacao_especifica.new', $data);
     }
 }

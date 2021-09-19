@@ -67,6 +67,7 @@ use App\Http\Controllers\ControladorStatic;
                                       <?php
                                       }
                                       ?>
+                                      <th rowspan="2">OBSERVAÇÃO</th>
                                   </tr>
                                   <tr>
                                     @foreach (Session::get('disciplinas') as $disciplina)
@@ -74,6 +75,7 @@ use App\Http\Controllers\ControladorStatic;
                                     <th>CPE</th>
                                     <th>CF</th>
                                     @endforeach
+
                                   </tr>
                               </thead>
                           <tbody>
@@ -108,7 +110,7 @@ use App\Http\Controllers\ControladorStatic;
 
                                 }?>
                                 <!-- fim finais-->
-
+                                <td></td>
                                 </tr>
                               @endforeach
 

@@ -30,8 +30,9 @@
                     {{Form::open(['method'=>"put", 'url'=>"/pautas/show/{$getDirector->id_turma}/{$getDirector->ano_lectivo}"])}}
                     <div class="row">
                         <div class="col-md-6">
-                            {{Form::submit('Visualizar', ['class'=>"btn btn-primary btn-sm float-left"])}}&nbsp;&nbsp;&nbsp;
-                            <a href="/pautas/exports/{{$getDirector->id_turma}}/{{$getDirector->ano_lectivo}}" class="btn btn-warning">Baixar</a>
+                            <button type="submit" class="btn btn-primary btn-sm float-left"><i class="ti-eye"></i>Visualizar</button>&nbsp;&nbsp;&nbsp;
+                            
+                            <a href="/pautas/exports/{{$getDirector->id_turma}}/{{$getDirector->ano_lectivo}}" class="btn btn-warning btn-sm"><i class="ti-download"></i> Baixar</a>
 
                             <a href="#" class="btn btn-danger btn-sm float-right remover_todas"><i class="ti-trash" aria-hidden="true"></i></a>
                            <table class="table table-bordered">

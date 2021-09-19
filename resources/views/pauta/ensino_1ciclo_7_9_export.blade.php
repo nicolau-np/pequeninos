@@ -47,6 +47,8 @@ use App\Http\Controllers\ControladorStatic;
                    <?php
                    }
                    ?>
+                 <th rowspan="2">OBSERVAÇÃO</th>
+
                </tr>
                <tr>
                  @foreach (Session::get('disciplinas') as $disciplina)
@@ -89,6 +91,7 @@ use App\Http\Controllers\ControladorStatic;
              }?>
              <!-- fim finais-->
 
+             <td>obs</td>
              </tr>
            @endforeach
 

@@ -15,4 +15,16 @@ class ObservacaoUnica extends Model
         'quantidade_negativas',
         'estado',
     ];
+
+    public function curso(){
+        return $this->belongsTo(Curso::class, 'id_curso', 'id');
+    }
+
+    public function classe(){
+        return $this->belongsTo(Classe::class, 'id_classe', 'id');
+    }
+
+    public function disciplina(){
+        return $this->belongsTo(Disciplina::class, 'id_disciplina', 'id');
+    }
 }

@@ -690,4 +690,14 @@ class InstitucionalController extends Controller
         ];
         return view('institucional.observacaoes.tipos', $data);
     }
+
+    public function geral_list(){
+        $data = [
+            'title' => "Observações",
+            'type' => "institucional",
+            'menu' => "Observações",
+            'submenu' => "Geral",
+        ];
+        return view('institucional.observacaoes.observacao_geral.list', $data);
+    }
 }

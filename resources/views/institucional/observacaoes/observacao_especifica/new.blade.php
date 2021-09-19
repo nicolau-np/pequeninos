@@ -55,6 +55,18 @@
                                 </div>
                                 </div>
 
+                                <div class="col-md-3">
+                                    {{Form::label('disciplina', "Disciplina")}} <span class="text-danger">*</span>
+                                    <span class="load_disciplinas">
+                                    {{Form::select('disciplina', [], null, ['class'=>"form-control", 'placeholder'=>"Disciplina"])}}
+                                </span>
+                                <div class="erro">
+                                    @if($errors->has('disciplina'))
+                                    <div class="text-danger">{{$errors->first('disciplina')}}</div>
+                                    @endif
+                                </div>
+                                </div>
+
                                 <div class="col-md-2">
                                     {{Form::label('quantidade_negativas', "Q. Negativas")}} <span class="text-danger">*</span>
                                     {{Form::number('quantidade_negativas', null, ['class'=>"form-control", 'placeholder'=>"Q. Negativas"])}}
@@ -106,7 +118,7 @@
             if(data.id_curso!=""){
                $.ajax({
                 type: "post",
-                url: "{{route('getClasses2')}}",
+                url: "{{route('getClasses')}}",
                 data: data,
                 dataType: "html",
                 success: function (response) {

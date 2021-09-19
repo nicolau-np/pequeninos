@@ -114,8 +114,8 @@ Route::group(['prefix' => 'institucional', 'middleware' => "auth"], function () 
         });
 
         Route::group(['prefix' =>"especifica"], function(){
-            Route::get('/', "InstitucionalController@geral_especifica");
-            Route::get('/create', "InstitucionalController@geral_especifica");
+            Route::get('/', "InstitucionalController@especifica_list");
+            Route::get('/create', "InstitucionalController@especifica_create");
         });
     });
 });

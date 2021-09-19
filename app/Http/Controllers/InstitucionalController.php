@@ -774,4 +774,8 @@ class InstitucionalController extends Controller
         ];
         return view('institucional.observacaoes.observacao_especifica.list', $data);
     }
+
+    public function especifica_create(){
+        
+    }
 }

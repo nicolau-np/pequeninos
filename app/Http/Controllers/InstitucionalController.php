@@ -703,4 +703,22 @@ class InstitucionalController extends Controller
         ];
         return view('institucional.observacaoes.observacao_geral.list', $data);
     }
+
+    public function geral_create(){
+        $cursos = Curso::pluck('curso', 'id');
+        $data = [
+            'title' => "Observações",
+            'type' => "institucional",
+            'menu' => "Observações",
+            'submenu' => "Geral",
+            'getCursos'=>$cursos,
+        ];
+        return view('institucional.observacaoes.observacao_geral.new', $data);
+    }
+
+    public function geral_store(Request $request){
+        $request->validate([
+            
+        ]);
+    }
 }

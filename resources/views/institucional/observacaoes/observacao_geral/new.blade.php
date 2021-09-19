@@ -101,7 +101,7 @@
 <!-- botão pesquisar -->
 <div class="btnPesquisar">
 	<div class="btnPesquisarBtn">
-		<a href="/financas/tabela_precos/" class="btn btn-primary btnCircular btnPrincipal" title="Listar"><i class="ti-search"></i></a>
+		<a href="/institucional/observacoes/geral/" class="btn btn-primary btnCircular btnPrincipal" title="Listar"><i class="ti-search"></i></a>
 	</div>
 </div>
 

@@ -681,7 +681,8 @@ class InstitucionalController extends Controller
     }
 
 
-    public function observacoes(){
+    public function observacoes()
+    {
 
         $data = [
             'title' => "Observações",
@@ -692,33 +693,71 @@ class InstitucionalController extends Controller
         return view('institucional.observacaoes.tipos', $data);
     }
 
-    public function geral_list(){
+    public function geral_list()
+    {
         $observacaoes = ObservacaoGeral::paginate(5);
         $data = [
             'title' => "Observações",
             'type' => "institucional",
             'menu' => "Observações",
             'submenu' => "Geral",
-            'getObservacoes'=>$observacaoes,
+            'getObservacoes' => $observacaoes,
         ];
         return view('institucional.observacaoes.observacao_geral.list', $data);
     }
 
-    public function geral_create(){
+    public function geral_create()
+    {
         $cursos = Curso::pluck('curso', 'id');
         $data = [
             'title' => "Observações",
             'type' => "institucional",
             'menu' => "Observações",
             'submenu' => "Geral",
-            'getCursos'=>$cursos,
+            'getCursos' => $cursos,
         ];
         return view('institucional.observacaoes.observacao_geral.new', $data);
     }
 
-    public function geral_store(Request $request){
+    public function geral_store(Request $request)
+    {
         $request->validate([
-            
+            'designacao' => ['required', 'string', 'min:3', 'max:255'],
+            'quantidade_negativas' => ['required', 'integer', 'min:1'],
+            'curso' => ['required', 'Integer', 'min:1'],
+            'classe' => ['required'],
+            'classe.*' => ['string']
         ]);
+
+        $data['create'] = [
+            'id_curso' => $request->curso,
+            'id_classe' => null,
+            'designacao' => $request->designacao,
+            'quantidade_negativas' => $request->quantidade_negativas,
+            'estado' => "on",
+        ];
+
+        $data['where'] = [
+            'id_curso' => $request->curso,
+            'id_classe' => null,
+            'estado' => "on",
+        ];
+
+        $observacao = false;
+
+        foreach($request->classe as $classe){
+            $data['create']['id_classe']=$classe;
+            if(!ObservacaoGeral::where($data['create'])->first()){
+                if(!ObservacaoGeral::where($data['where'])){
+                    $observacao = ObservacaoGeral::create($data['create']);
+                }
+            }
+        }
+
+        if($observacao){
+            return back()->with(['success' => "Feito com sucesso"]);
+        }else{
+            return back()->with(['error'=>"Já Cadastrou"]);
+        }
     }
 }

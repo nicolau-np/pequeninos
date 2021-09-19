@@ -10,6 +10,7 @@ use App\Ensino;
 use App\Grade;
 use App\Hora;
 use App\ObservacaoGeral;
+use App\ObservacaoUnica;
 use App\Sala;
 use App\TipoSala;
 use App\Turma;
@@ -760,5 +761,17 @@ class InstitucionalController extends Controller
         } else {
             return back()->with(['error' => "Já Cadastrou"]);
         }
+    }
+
+    public function especifica_list(){
+        $observacaoes = ObservacaoUnica::paginate(8);
+        $data = [
+            'title' => "Observações",
+            'type' => "institucional",
+            'menu' => "Observações",
+            'submenu' => "Específica",
+            'getObservacoes' => $observacaoes,
+        ];
+        return view('institucional.observacaoes.observacao_geral.list', $data);
     }
 }

@@ -27,7 +27,7 @@
                     @if(session('success'))
                     <div class="alert alert-success">{{session('success')}}</div>
                     @endif
-                        {{Form::open(['method'=>"post", 'url'=>"/institucional/observacoes/geral/store"])}}
+                        {{Form::open(['method'=>"post", 'url'=>"/institucional/observacoes/especifica/store"])}}
                         @csrf
                         <fieldset>
                             <legend><i class="ti-list"></i> Dados do preço</legend>

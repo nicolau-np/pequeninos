@@ -46,6 +46,7 @@ class CadernetaController_copy extends Controller
             Session::put('epoca', $epoca);
         }
 
+        //verificando se a epoca está bloqueada
         $bloqueios = BloqueioEpoca::where(['epoca' =>$epoca])->first();
         if($bloqueios->estado=="off"){
             return back()->with(['error' => "Epoca bloqueiada"]);
@@ -97,13 +98,14 @@ class CadernetaController_copy extends Controller
             'ano_lectivoCAD' => $ano_lectivo,
             'epocaCAD' => $epoca,
         ];
-
+        //guardando valores na secao
         Session::put($data2);
 
 
         $trimestral = null;
         $global = null;
 
+        //pegando dados trimestrais para exibir na view
         if ($epoca != 4) {
 
             $trimestral = Trimestral::whereHas('estudante', function ($query) use ($data2) {
@@ -112,7 +114,7 @@ class CadernetaController_copy extends Controller
             })->where(['epoca' => $data2['epocaCAD'], 'id_disciplina' => $data2['id_disciplinaCAD']])
                 ->get()->sortBy('estudante.pessoa.nome');
         } else {
-            //pegando global
+            //pegando dados finais para exibir na view
             $global = Finals::whereHas('estudante', function ($query) use ($data2) {
                 $query->where('id_turma', $data2['id_turmaCAD']);
                 $query->where('ano_lectivo', $data2['ano_lectivoCAD']);
@@ -120,7 +122,7 @@ class CadernetaController_copy extends Controller
                 ->get()->sortBy('estudante.pessoa.nome');
         }
 
-
+        //pegando todos os valores dos bloqueios dos trimestres
         $estado_epoca1 = BloqueioEpoca::where(['epoca' => 1])->first();
         $estado_epoca2 = BloqueioEpoca::where(['epoca' => 2])->first();
         $estado_epoca3 = BloqueioEpoca::where(['epoca' => 3])->first();
@@ -144,9 +146,9 @@ class CadernetaController_copy extends Controller
             'getEpoca4' => $estado_epoca4,
         ];
 
-        if ($id_ensino == 1) {
+        if ($id_ensino == 1) {//iniciacao ate 6
             return "ensino primario iniciacao ate 6 classe";
-        } elseif ($id_ensino == 2) {
+        } elseif ($id_ensino == 2) {//7 classe ate 9 ensino geral
             return view('caderneta.ensinos.ensino_1ciclo_7_9_copy', $data);
         }
     }

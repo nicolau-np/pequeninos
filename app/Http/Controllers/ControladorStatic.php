@@ -8,6 +8,7 @@ use App\Horario;
 use App\NotaFinal;
 use App\NotaTrimestral;
 use App\ObservacaoGeral;
+use App\ObservacaoUnica;
 use App\Pagamento;
 use App\PagamentoPai;
 use App\TipoPagamento;
@@ -251,5 +252,8 @@ class ControladorStatic extends Controller
         return $observacao;
     }
 
-    public static
+    public static function observacao_especifica($classe, $curso, $disciplina){
+        $observacao = ObservacaoUnica::where(['id_classe'=>$classe, 'id_curso'=>$curso, 'id_disciplina'=>$disciplina])->first();
+        return $observacao;
+    }
 }

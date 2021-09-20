@@ -108,7 +108,11 @@ $observacao_geralDB= $observacao_geral->quantidade_negativas;
                                 <td class="nenhum">---</td>
                                 <?php }
                                 else{
-
+                                    //faz a verificacao na observacao geral do controlador static, caso encontrar entao esta reprovado a variavel observacao vai ficar true caso nao encontrar prossiga
+                                    $observacao_especifica = ControladorStatic::observacao_especifica($getDirector->turma->classe->id, $getDirector->turma->curso->id, $disciplina["id_disciplina"]);
+                                    if($observacao_especifica->count()>=1){
+                                        $observacao_final = true;
+                                    }
                                     foreach ($final as $valorf) {
                                     $v1_estilo = ControladorStatic::nota_20($valorf->cap);
                                     $v2_estilo = ControladorStatic::nota_20($valorf->cpe);

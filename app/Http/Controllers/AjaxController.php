@@ -498,7 +498,7 @@ class AjaxController extends Controller
         //salvando a nota avaliacao
         $trimestral = Trimestral::find($request->id_trimestral)->update($data['trimestral']);
         if ($trimestral) {
-            echo " \\cadastrou as notas trimestrais\\ ";
+            echo " \\lancou avaliacao\\ ";
         } else {
             return null;
         }
@@ -657,13 +657,52 @@ class AjaxController extends Controller
         }
 
         //criando campos
-        $campo = "" . $request->campo; //campo de avaliacao
+        $campo = "" . $request->campo; //campo de provas
         $campo2 = $request->campo . "_data"; //campo de data
         $data['trimestral'] = [
             "$campo" => $request->valor,
             "$campo2" => date('Y-m-d'),
         ];
 
-        
+        $trimestral = Trimestral::find($request->id_trimestral)->update($data['trimestral']);
+        if ($trimestral) {
+            echo " \\lancou prova\\ ";
+        } else {
+            return null;
+        }
+
+        //efectuar os calculos a alteracao de uma nota
+        $trimestral = Trimestral::find($request->id_trimestral);
+        if (!$trimestral) {
+            return null;
+        }
+
+        //caculando mt
+        $somas = 0;
+        $quant_notas = 0;
+
+        $npp_data = $trimestral->nnp_data;
+        $pt_data = $trimestral->pt_data;
+
+        if ($npp_data != null && $pt_data == null) {
+            $somas = $trimestral->mac + $trimestral->npp;
+            $quant_notas = 2;
+        } elseif ($npp_data != null && $pt_data != null) {
+            $somas = $trimestral->mac + $trimestral->npp + $trimestral->pt;
+            $quant_notas = 3;
+        } elseif ($npp_data == null && $pt_data != null) {
+            $somas = $trimestral->mac + $trimestral->pt;
+            $quant_notas = 2;
+        }
+
+        $mt = Trimestral::mt($somas, $quant_notas);
+        $data['mt'] = [
+            'mt' => $mt
+        ];
+
+        if (Trimestral::find($request->id_trimestral)->update($data['mt'])) {
+            echo " \\lancou o mt\\ ";
+        }
+        //fim mt
     }
 }

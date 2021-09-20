@@ -79,11 +79,12 @@
                                 <p class="m-0">
 
                                     {{Form::open(['method'=>"post"])}}
-                                        <table>
+                                        <table class="table table-bordered">
                                             <thead>
                                                 <tr>
                                                     <th colspan="3">DADOS PESSOAIS</th>
                                                     <th colspan="3">AVALIAÇÃO</th>
+                                                    <th colspan="2">PROVAS</th>
                                                 </tr>
                                                 <tr>
                                                     <th>Nº</th>
@@ -92,6 +93,8 @@
                                                     <th>SET</th>
                                                     <th>OUT</th>
                                                     <th>NOV</th>
+                                                    <th>NPP</th>
+                                                    <th>PT</th>
                                                 </tr>
                                             </thead>
 
@@ -106,6 +109,23 @@
                                                                 <td>{{$loop->iteration}}</td>
                                                                 <td>{{$trimestral->estudante->pessoa->nome}}</td>
                                                                 <td>{{$trimestral->estudante->pessoa->genero}}</td>
+
+                                                                <td>
+                                                                    <input type="number" name="av1" data-id="{{$trimestral->id}}" data-campo="av1" value="{{$trimestral->av1}}" class="form-control avaliacao" />
+                                                                </td>
+                                                                <td>
+                                                                    <input type="number" name="av2" data-id="{{$trimestral->id}}" data-campo="av2" value="{{$trimestral->av2}}" class="form-control avaliacao" />
+                                                                </td>
+                                                                <td>
+                                                                    <input type="number" name="av3" data-id="{{$trimestral->id}}" data-campo="av3" value="{{$trimestral->av3}}" class="form-control avaliacao" />
+                                                                </td>
+
+                                                                <td>
+                                                                    <input type="number" name="npp" data-id="{{$trimestral->id}}" data-campo="npp" value="{{$trimestral->npp}}" class="form-control prova" />
+                                                                </td>
+                                                                <td>
+                                                                    <input type="number" name="npp" data-id="{{$trimestral->id}}" data-campo="pt" value="{{$trimestral->pt}}" class="form-control prova" />
+                                                                </td>
                                                             </tr>
                                                             @endforeach
                                                         @endif

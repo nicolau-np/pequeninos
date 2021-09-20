@@ -166,7 +166,7 @@ class ControladorStatic extends Controller
         return $pagamentos;
     }
 
-    public static function getValoresMiniPautaTrimestral($id_estudante, $epoca)
+    /*public static function getValoresMiniPautaTrimestral($id_estudante, $epoca)
     {
         $data = [
             'id_estudante' => $id_estudante,
@@ -176,9 +176,9 @@ class ControladorStatic extends Controller
         ];
         $trimestral = NotaTrimestral::where($data)->get();
         return $trimestral;
-    }
+    }*/
 
-    public static function getValoresMiniPautaFinal($id_estudante)
+    /*public static function getValoresMiniPautaFinal($id_estudante)
     {
         $data = [
             'id_estudante' => $id_estudante,
@@ -187,39 +187,9 @@ class ControladorStatic extends Controller
         ];
         $final = NotaFinal::where($data)->get();
         return $final;
-    }
+    }*/
 
-    public static function nota_20($nota)
-    {
-        $retorno = null;
-        if ($nota >= 9.5 && $nota <= 20) {
-            $retorno = "positivo";
-        } elseif ($nota >= 0 && $nota <= 9.4) {
-            $retorno = "negativo";
-        } elseif ($nota == "") {
-            $retorno = "nenhum";
-        } else {
-            $retorno = "nenhum";
-        }
-
-        return $retorno;
-    }
-
-    public static function nota_10($nota)
-    {
-        $retorno = null;
-        if ($nota <= 4.5 && $nota >= 10) {
-            $retorno = "positivo";
-        }elseif ($nota >= 0 && $nota <= 4.4) {
-            $retorno = "negativo";
-        } elseif ($nota == "") {
-            $retorno = "nenhum";
-        } else {
-            $retorno = "nenhum";
-        }
-
-        return $retorno;
-    }
+    
 
     public static function getDisciplinaID($id_disciplina){
         $disciplina = Disciplina::find($id_disciplina);

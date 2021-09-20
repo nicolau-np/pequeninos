@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Avaliacao;
+
 use App\Classe;
 use App\Curso;
 use App\Disciplina;
@@ -14,12 +14,9 @@ use App\Hora;
 use App\Municipio;
 use App\NotaFinal;
 use App\NotaTrimestral;
-use App\Prova;
 use App\Turma;
-use Facade\FlareClient\Http\Response;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use PhpParser\Node\Stmt\Global_;
 
 class AjaxController extends Controller
 {
@@ -376,7 +373,7 @@ class AjaxController extends Controller
         }
     }*/
 
-    public function updateTrimestral(Request $request){
+    /*public function updateTrimestral(Request $request){
         $request->validate([
             'valor' => ['required', 'numeric', 'min:0'],
             'campo' => ['required', 'string'],
@@ -416,7 +413,7 @@ class AjaxController extends Controller
             }
         }
 
-    }
+    }*/
 
     public function updateGlobal(Request $request)
     {
@@ -449,4 +446,16 @@ class AjaxController extends Controller
             return response()->json(['status' => "error", 'sms' => "Erro temporário no servidor"]);
         }
     }
+
+    public function updateTrimestral_copy(Request $request){
+        $request->validate([
+            'valor' => ['required', 'numeric', 'min:0'],
+            'campo' => ['required', 'string'],
+            'id_trimestral' => ['required', 'Integer'],
+        ]);
+
+        
+        }
+
+
 }

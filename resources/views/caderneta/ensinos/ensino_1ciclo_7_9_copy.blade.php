@@ -200,12 +200,43 @@
                 if((valor==="") || (valor<0) || (valor>20)){
                     $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
                 }else{
-
-                   $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
-
+                    var update_trimestral = updatetrimestral(valor, id_trimestral, campo);
+                    if(update_trimestral){
+                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
+                    }else{
+                        $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                    }
                 }
             }
         });
+
+        function updatetrimestral(valor, id_trimestral, campo){
+            retorno = false;
+            var data = {
+                valor: valor,
+                id_trimestral: id_trimestral,
+                campo: campo,
+                _token: "{{ csrf_token() }}"
+            };
+
+            $.ajax({
+                type: "post",
+                url: "{{route('updatetrimestral')}}",
+                data: data,
+                dataType: "json",
+                async: false,
+                success: function (response) {
+                    if(response.status === "ok"){
+                      retorno = true;
+                    }else{
+                        retorno = false;
+                    }
+                    console.log(response.sms);
+                }
+            });
+            return true;
+        }
+
     });
 </script>
 @endsection

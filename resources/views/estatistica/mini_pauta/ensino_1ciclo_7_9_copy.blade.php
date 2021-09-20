@@ -59,6 +59,20 @@
                                 <th colspan="4">3º Trimestre</th>
                             </tr>
                             <tr>
+                                <th>MAC1</th>
+                                <th>NPP1</th>
+                                <th>PT1</th>
+                                <th>MT1</th>
+
+                                <th>MAC2</th>
+                                <th>NPP2</th>
+                                <th>PT2</th>
+                                <th>MT2</th>
+
+                                <th>MAC3</th>
+                                <th>NPP3</th>
+                                <th>PT3</th>
+                                <th>MT3</th>
 
                             </tr>
                         </thead>

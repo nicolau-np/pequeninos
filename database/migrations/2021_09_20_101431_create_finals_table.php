@@ -14,7 +14,13 @@ class CreateFinalsTable extends Migration
     public function up()
     {
         Schema::create('finals', function (Blueprint $table) {
-            $table->id();
+            $table->engine = "InnoDB";
+            $table->bigInteger('id_estudante')->unsigned()->index();
+            $table->bigInteger('id_disciplina')->unsigned()->index();
+            $table->decimal('mfd', 4, 2)->nullable();
+            $table->date('mfd_data')->nullable();
+            $table->decimal('mf', 4, 2)->nullable();
+            $table->string('ano_lectivo');
             $table->timestamps();
         });
     }

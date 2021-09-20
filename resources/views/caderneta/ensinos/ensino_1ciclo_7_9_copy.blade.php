@@ -83,7 +83,7 @@
                                             <thead>
                                                 <tr>
                                                     <th colspan="3">DADOS PESSOAIS</th>
-                                                    <th colspan="3">AVALIAÇÃO</th>
+                                                    <th colspan="3">AVALIAÇÕES</th>
                                                     <th colspan="2">PROVAS</th>
                                                 </tr>
                                                 <tr>
@@ -191,7 +191,7 @@
 
 <script>
     $(document).ready(function () {
-        $('.notaA').on('keypress', function(e){
+        $('.avaliacao').on('keypress', function(e){
             if(e.which == 13){
                 var valor = $(this).val();
                 var id_trimestral = $(this).data('id');
@@ -200,89 +200,12 @@
                 if((valor==="") || (valor<0) || (valor>20)){
                     $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
                 }else{
-                    var update = updatetrimestral(valor, id_trimestral, campo);
-                    if(update){
-                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
-                    }else{
-                        $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
-                    }
-                }
 
-            }
-        });
-
-        $('.notaG').on('keypress', function(e){
-            if(e.which == 13){
-                var valor = $(this).val();
-                var id_global = $(this).data('id');
-                if((valor==="") || (valor<0) || (valor>20)){
-                    $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
-                }else{
-                    global = updateGlobal(valor, id_global);
-                    if(global){
-                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
-                    }else{
-                        $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
-                    }
+                   $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
 
                 }
             }
         });
-
-
-        function updatetrimestral(valor, id_trimestral, campo){
-            retorno = false;
-            var data = {
-                valor: valor,
-                id_trimestral: id_trimestral,
-                campo: campo,
-                _token: "{{ csrf_token() }}"
-            };
-
-            $.ajax({
-                type: "post",
-                url: "{{route('updatetrimestral')}}",
-                data: data,
-                dataType: "json",
-                async: false,
-                success: function (response) {
-                    if(response.status === "ok"){
-                      retorno = true;
-                    }else{
-                        retorno = false;
-                    }
-                    console.log(response.sms);
-                }
-            });
-            return true;
-        }
-
-        function updateGlobal(valor, id_global){
-            retorno = false;
-            var data = {
-                valor: valor,
-                id_global: id_global,
-                _token: "{{ csrf_token() }}"
-            };
-
-            $.ajax({
-                type: "post",
-                url: "{{route('updateGlobal')}}",
-                data: data,
-                dataType: "json",
-                async: false,
-                success: function (response) {
-                    if(response.status === "ok"){
-                      retorno = true;
-                    }else{
-                        retorno = false;
-                    }
-                    console.log(response.sms);
-                }
-            });
-            return true;
-        }
-
-     });
+    });
 </script>
 @endsection

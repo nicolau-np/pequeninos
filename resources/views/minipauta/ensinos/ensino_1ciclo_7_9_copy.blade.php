@@ -1,5 +1,5 @@
 @php
-use App\Http\Controllers\ControladorStatic;
+use App\Http\Controllers\ControladorNotas;
 @endphp
 @extends('layouts.app')
 @section('content')
@@ -84,10 +84,11 @@ use App\Http\Controllers\ControladorStatic;
                                   </tr>
                               </thead>
                               <tbody>
+                                @foreach ($getHistorico as $historico)
                                 <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$historico->estudante->pessoa->nome}}</td>
+                                    <td>{{$historico->estudante->pessoa->genero}}</td>
 
                                     <td></td>
                                     <td></td>
@@ -107,6 +108,7 @@ use App\Http\Controllers\ControladorStatic;
                                     <td></td>
                                     <td></td>
                                 </tr>
+                                @endforeach
                               </tbody>
                            </table>
                        </div>

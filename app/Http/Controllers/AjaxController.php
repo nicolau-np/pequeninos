@@ -449,7 +449,8 @@ class AjaxController extends Controller
         }
     }
 
-    public function updateTrimestral_copy(Request $request){
+    public function updateTrimestral_copy(Request $request)
+    {
         $request->validate([
             'valor' => ['required', 'numeric', 'min:0'],
             'campo' => ['required', 'string'],
@@ -457,12 +458,12 @@ class AjaxController extends Controller
         ]);
 
         //verificar se mudou os campos
-        if(($request->campo!="av1") || ($request->campo!="av2") || ($request->campo!="av3")){
+        if (($request->campo != "av1") || ($request->campo != "av2") || ($request->campo != "av3")) {
             echo "mudou campos";
         }
         //verificar se mudou o id do trimestre
         $trimestral = Trimestral::find($request->id_trimestral);
-        if(!$trimestral){
+        if (!$trimestral) {
             return null;
         }
 
@@ -479,7 +480,7 @@ class AjaxController extends Controller
 
             $horario = Horario::where($data['where_horario'])->first();
             if (!$horario) {
-               return null;
+                return null;
             }
         } else {
             return null;
@@ -487,23 +488,66 @@ class AjaxController extends Controller
 
         //criando campos
         $campo = "" . $request->campo; //campo de avaliacao
-        $campo2 = $request->campo."_data"; //campo de data
+        $campo2 = $request->campo . "_data"; //campo de data
         $data['trimestral'] = [
             "$campo" => $request->valor,
-            "$campo2"=>date('Y-m-d'),
+            "$campo2" => date('Y-m-d'),
         ];
 
+        //salvando a nota avaliacao
+        $trimestral = Trimestral::find($request->id_trimestral)->update($data['trimestral']);
+        if ($trimestral) {
+            echo "cadastrou as notas trimestrais<br/>";
+        } else {
+            return null;
+        }
 
-        $trimestral=Trimestral::find($request->id_trimestral)->update($data['trimestral']);
-            if($trimestral){
-                echo "feito com sucesso  ID";
-            }else{
-                echo "erro";
+        //efectuar os calculos a alteracao de uma nota
+        $trimestral = Trimestral::find($request->id_trimestral);
+        if (!$trimestral) {
+            return null;
+        }
+
+        //calculando mac
+        $soma_avaliacoes = 0;
+        $quant_avaliacoes = 0;
+
+        //caso 1
+        if ($trimestral->av1_data != null && $trimestral->av2_data == null && $trimestral->av3_data == null) {
+            $quant_avaliacoes = 1;
+            $soma_avaliacoes = $trimestral->av1;
+        } elseif ($trimestral->av2_data != null && $trimestral->av1_data == null && $trimestral->av3_data == null) {
+            $quant_avaliacoes = 1;
+            $soma_avaliacoes = $trimestral->av2;
+        } elseif ($trimestral->av3_data != null && $trimestral->av1_data == null && $trimestral->av2_data == null) {
+            $quant_avaliacoes = 1;
+            $soma_avaliacoes = $trimestral->av3;
+        }
+
+        //caso 2
+
+        if ($trimestral->av1_data != null && $trimestral->av2_data != null && $trimestral->av3_data == null) {
+            $quant_avaliacoes = 2;
+            $soma_avaliacoes = ($trimestral->av1 + $trimestral->av2);
+        } elseif ($trimestral->av2_data != null && $trimestral->av3_data != null && $trimestral->av1_data == null) {
+            $quant_avaliacoes = 2;
+            $soma_avaliacoes = ($trimestral->av2 + $trimestral->av3);
+        } elseif ($trimestral->av1_data != null && $trimestral->av3_data != null && $trimestral->av2_data == null) {
+            $quant_avaliacoes = 2;
+            $soma_avaliacoes = ($trimestral->av1 + $trimestral->av3);
+        }
+
+        //caso 3
+        if ($trimestral->av1_data != null && $trimestral->av2_data != null && $trimestral->av3_data != null) {
+            $quant_avaliacoes = 3;
+            $soma_avaliacoes = ($trimestral->av1 + $trimestral->av2 + $trimestral->av3);
         }
 
 
+        $mac = Trimestral::mac($soma_avaliacoes, $quant_avaliacoes);
+        $data['mac'] = [
+            'mac' => $mac,
+        ];
+        //fim mac
     }
-
-
-
 }

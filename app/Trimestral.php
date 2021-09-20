@@ -38,8 +38,8 @@ class Trimestral extends Model
         return $this->belongsTo(Disciplina::class, 'id_disciplina', 'id');
     }
 
-    public static function mac($av1, $av2, $av3){
-        $mac = ($av1+$av2+$av3)/3;
+    public static function mac($soma_avaliacoes, $quant_avaliacoes){
+        $mac = ($soma_avaliacoes)/$quant_avaliacoes;
 
         return $mac;
     }

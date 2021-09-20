@@ -454,7 +454,7 @@ class AjaxController extends Controller
     {
         $request->validate([
             'valor' => ['required', 'numeric', 'min:0'],
-            'campo' => ['required', 'string'],
+            'campo' => ['required', 'string', 'min:3', 'max:3'],
             'id_trimestral' => ['required', 'integer', 'min:1'],
         ]);
 
@@ -623,7 +623,7 @@ class AjaxController extends Controller
     {
         $request->validate([
             'valor' => ['required', 'numeric', 'min:0'],
-            'campo' => ['required', 'string'],
+            'campo' => ['required', 'string', 'min:2', 'max:3'],
             'id_trimestral' => ['required', 'integer', 'min:1'],
         ]);
 
@@ -663,5 +663,7 @@ class AjaxController extends Controller
             "$campo" => $request->valor,
             "$campo2" => date('Y-m-d'),
         ];
+
+        
     }
 }

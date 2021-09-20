@@ -27,14 +27,14 @@ class Finals extends Model
         return $this->belongsTo(Disciplina::class, 'id_disciplina', 'id');
     }
 
-    public static function mfd($mt1, $mt2, $mt3)
+    public static function mfd($soma_mts)
     {
-        $mfd = ($mt1 + $mt2 + $mt3) / 3;
+        $mfd = ($soma_mts) / 3;
 
         return $mfd;
     }
     public static function mf($mfd)
     {
-        
+
     }
 }

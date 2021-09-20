@@ -44,8 +44,8 @@ class Trimestral extends Model
         return $mac;
     }
 
-    public static function mt($mac, $npp, $pt){
-        $mt = ($mac+$npp+$pt)/3;
+    public static function mt($somas, $quant_notas){
+        $mt = $somas/$quant_notas;
 
         return $mt;
     }

@@ -459,7 +459,7 @@ class AjaxController extends Controller
 
         //verificar se mudou os campos
         if (($request->campo != "av1") || ($request->campo != "av2") || ($request->campo != "av3")) {
-            echo "\\mudou campos\\";
+            echo " \\mudou campos\\ ";
         }
         //verificar se mudou o id do trimestre
         $trimestral = Trimestral::find($request->id_trimestral);
@@ -497,7 +497,7 @@ class AjaxController extends Controller
         //salvando a nota avaliacao
         $trimestral = Trimestral::find($request->id_trimestral)->update($data['trimestral']);
         if ($trimestral) {
-            echo "\\cadastrou as notas trimestrais\\";
+            echo " \\cadastrou as notas trimestrais\\ ";
         } else {
             return null;
         }
@@ -549,15 +549,47 @@ class AjaxController extends Controller
             'mac' => $mac,
         ];
 
-        if(Trimestral::find($request->id_trimestral)->update($data['mac'])){
-            echo "\\lancou o mac\\";
+        if (Trimestral::find($request->id_trimestral)->update($data['mac'])) {
+            echo " \\lancou o mac\\ ";
         }
         //fim mac
 
-        //calculando mt
+        $trimestral = Trimestral::find($request->id_trimestral);
+        if (!$trimestral) {
+            return null;
+        }
 
+        //calculando mt
+        $somas = 0;
+        $quant_notas = 0;
+
+        $npp_data = $trimestral->npp_data;
+        $pt_data = $trimestral->pt_data;
+
+        if ($npp_data == null && $pt_data == null) {
+            $somas = $mac;
+            $quant_notas = 1;
+        } elseif ($npp_data != null && $pt_data == null) {
+            $somas = $mac + $trimestral->npp;
+            $quant_notas = 2;
+        } elseif ($npp_data != null && $pt_data != null) {
+            $somas = $mac + $trimestral->npp +$trimestral->pt;
+            $quant_notas = 3;
+        }elseif ($npp_data == null && $pt_data != null) {
+            $somas = $mac + $trimestral->pt;
+            $quant_notas = 2;
+        }
+
+        $mt = Trimestral::mt($somas, $quant_notas);
+        $data['mt']=[
+            'mt'=>$mt
+        ];
+        if(Trimestral::find($request->id_trimestral)->update($data['mt'])){
+            echo " \\lancou o mt\\ ";
+        }
         //fim mt
 
-
+        //calculando
+        
     }
 }

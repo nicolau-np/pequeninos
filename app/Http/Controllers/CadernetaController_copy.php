@@ -46,6 +46,8 @@ class CadernetaController_copy extends Controller
             Session::put('epoca', $epoca);
         }
 
+        
+
         //veirficar turma se existe
         $id_ensino = null;
         $turma = Turma::find($id_turma);

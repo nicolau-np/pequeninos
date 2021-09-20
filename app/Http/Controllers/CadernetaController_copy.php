@@ -46,7 +46,10 @@ class CadernetaController_copy extends Controller
             Session::put('epoca', $epoca);
         }
 
-        
+        $bloqueios = BloqueioEpoca::where(['epoca' =>$epoca])->first();
+        if($bloqueios->estado=="off"){
+            return back()->with(['error' => "Epoca bloqueiada"]);
+        }
 
         //veirficar turma se existe
         $id_ensino = null;

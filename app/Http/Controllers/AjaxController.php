@@ -573,31 +573,32 @@ class AjaxController extends Controller
             $somas = $mac + $trimestral->npp;
             $quant_notas = 2;
         } elseif ($npp_data != null && $pt_data != null) {
-            $somas = $mac + $trimestral->npp +$trimestral->pt;
+            $somas = $mac + $trimestral->npp + $trimestral->pt;
             $quant_notas = 3;
-        }elseif ($npp_data == null && $pt_data != null) {
+        } elseif ($npp_data == null && $pt_data != null) {
             $somas = $mac + $trimestral->pt;
             $quant_notas = 2;
         }
 
         $mt = Trimestral::mt($somas, $quant_notas);
-        $data['mt']=[
-            'mt'=>$mt
+        $data['mt'] = [
+            'mt' => $mt
         ];
-        if(Trimestral::find($request->id_trimestral)->update($data['mt'])){
+        if (Trimestral::find($request->id_trimestral)->update($data['mt'])) {
             echo " \\lancou o mt\\ ";
         }
         //fim mt
+        $data['where_mts'] = [
+            'id_estudante' => $trimestral->id_estudante,
+            'id_disciplina' => $trimestral->id_disciplina,
+            'ano_lectivo' => $trimestral->ano_lectivo,
+        ];
 
-        $trimestral = Trimestral::find($request->id_trimestral);
-        if (!$trimestral) {
-            return null;
-        }
-
+        $trimestral_mts = Trimestral::where($data['where_mts'])->get();
         //calculando mfd
-        $soma_mts=0;
-        
-        //fim mf
+        $soma_mts = 0;
+
+        //fim mfd
 
     }
 }

@@ -33,8 +33,10 @@ class Finals extends Model
 
         return $mfd;
     }
-    public static function mf($mfd)
+    public static function mf($soma_mts)
     {
+        $mf = ($soma_mts) / 3;
 
+        return $mf;
     }
 }

@@ -597,7 +597,7 @@ class AjaxController extends Controller
         ];
 
         $trimestral_mts = Trimestral::where($data['where_mts'])->get();
-        //calculando mfd
+        //calculando mfd e mf
         $soma_mts = 0;
         foreach ($trimestral_mts as $mts) {
             if ($mts->mt != null) {
@@ -606,13 +606,16 @@ class AjaxController extends Controller
         }
 
         $mfd = Finals::mfd($soma_mts);
-        $data['mfd'] = [
+        $mf = Finals::mf($soma_mts);
+        $data['calculo_final'] = [
+            'mf'=>$mf,
             'mfd' => $mfd,
         ];
-        if (Finals::where($data['where_mts'])->update($data['mfd'])) {
+        if (Finals::where($data['where_mts'])->update($data['calculo_final'])) {
             echo " \\lancou o mfd\\ ";
         }
         //fim mfd
 
+        
     }
 }

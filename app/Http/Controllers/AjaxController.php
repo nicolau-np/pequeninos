@@ -612,7 +612,7 @@ class AjaxController extends Controller
             'mfd' => $mfd,
         ];
         if (Finals::where($data['where_mts'])->update($data['calculo_final'])) {
-            echo " \\lancou o mfd\\ ";
+            echo " \\lancou o mfd e mf \\ ";
         }
         //fim mfd
 
@@ -704,5 +704,32 @@ class AjaxController extends Controller
             echo " \\lancou o mt\\ ";
         }
         //fim mt
-    }
+
+        $data['where_mts'] = [
+            'id_estudante' => $trimestral->id_estudante,
+            'id_disciplina' => $trimestral->id_disciplina,
+            'ano_lectivo' => $trimestral->ano_lectivo,
+        ];
+
+        $trimestral_mts = Trimestral::where($data['where_mts'])->get();
+
+        //calculando mfd e mf
+        $soma_mts = 0;
+        foreach ($trimestral_mts as $mts) {
+            if ($mts->mt != null) {
+                $soma_mts = $soma_mts + $mts->mt;
+            }
+        }
+
+        $mfd = Finals::mfd($soma_mts);
+        $mf = Finals::mf($soma_mts);
+        $data['calculo_final'] = [
+            'mf' => $mf,
+            'mfd' => $mfd,
+        ];
+        if (Finals::where($data['where_mts'])->update($data['calculo_final'])) {
+            echo " \\lancou o mfd e mf\\ ";
+        }
+        //fim mfd
+   }
 }

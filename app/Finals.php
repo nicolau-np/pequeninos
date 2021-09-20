@@ -11,6 +11,7 @@ class Finals extends Model
     protected $fillable = [
         'id_estudante',
         'id_disciplina',
+        'cap',
         'mfd',
         'mfd_data',
         'mf',
@@ -26,5 +27,12 @@ class Finals extends Model
     public function disciplina()
     {
         return $this->belongsTo(Disciplina::class, 'id_disciplina', 'id');
+    }
+
+    public static function cap(){
+
+    }
+    public static function mfd(){
+
     }
 }

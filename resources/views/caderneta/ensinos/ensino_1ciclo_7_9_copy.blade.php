@@ -201,8 +201,8 @@
                 if((valor==="") || (valor<0) || (valor>20)){
                     $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
                 }else{
-                    var updateAvaliacao = updateAvaliacao(valor, id_trimestral, campo);
-                    if(updateAvaliacao){
+                    var update = updateAvaliacao(valor, id_trimestral, campo);
+                    if(update){
                         $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
                     }else{
                         $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
@@ -220,8 +220,8 @@
                 if((valor==="") || (valor<0) || (valor>20)){
                     $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
                 }else{
-                    var updateProva = updateProva(valor, id_trimestral, campo);
-                    if(updateProva){
+                    var update = updateProva(valor, id_trimestral, campo);
+                    if(update){
                         $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
                     }else{
                         $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});

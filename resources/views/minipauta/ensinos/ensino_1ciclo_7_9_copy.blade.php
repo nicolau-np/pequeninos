@@ -1,5 +1,6 @@
 @php
 use App\Http\Controllers\ControladorNotas;
+use App\Http\Controllers\ControladorStatic;
 @endphp
 @extends('layouts.app')
 @section('content')
@@ -90,20 +91,55 @@ use App\Http\Controllers\ControladorNotas;
                                     <td>{{$historico->estudante->pessoa->nome}}</td>
                                     <td>{{$historico->estudante->pessoa->genero}}</td>
 
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <!-- primeiro trimestre-->
+                                    <?php
+                                        $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestral($historico->id_estudante, 1);
+                                        if($trimestre1->count()==0){
+                                    ?>
+                                    <td>---</td>
+                                    <td>---</td>
+                                    <td>---</td>
+                                    <td>---</td>
+                                        <?php }
+                                        else{
+                                            foreach($trimestre1 as $valor1){
+                                                $v1_estilo = ControladorStatic::nota_20($valor1->mac);
+                                                $v2_estilo = ControladorStatic::nota_20($valor1->npp);
+                                                $v3_estilo = ControladorStatic::nota_20($valor1->pt);
+                                                $v4_estilo = ControladorStatic::nota_20($valor1->mt);
+                                            ?>
 
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$valor1->mac}} @endif</td>
+                                    <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$valor1->npp}} @endif</td>
+                                    <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$valor1->pt}} @endif</td>
+                                    <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$valor1->mt}} @endif</td>
+                                            <?php }}?>
+                                    <!-- fim primeiro trimestre-->
 
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <!-- segundo trimestre-->
+                                    <?php
+                                        $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestral($historico->id_estudante, 2);
+                                        if($trimestre2->count()==0){
+                                    ?>
+                                    <td>---</td>
+                                    <td>---</td>
+                                    <td>---</td>
+                                    <td>---</td>
+                                        <?php }
+                                        else{
+                                            foreach($trimestre2 as $valor2){
+                                                $v1_estilo = ControladorStatic::nota_20($valor2->mac);
+                                                $v2_estilo = ControladorStatic::nota_20($valor2->npp);
+                                                $v3_estilo = ControladorStatic::nota_20($valor2->pt);
+                                                $v4_estilo = ControladorStatic::nota_20($valor2->mt);
+                                            ?>
+
+                                    <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{$valor2->mac}} @endif</td>
+                                    <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{$valor2->npp}} @endif</td>
+                                    <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{$valor2->pt}} @endif</td>
+                                    <td class="{{$v4_estilo}}">@if($valor2->mt==null) --- @else {{$valor2->mt}} @endif</td>
+                                            <?php }}?>
+                                    <!-- fim segundo trimestre-->
 
                                     <td></td>
                                     <td></td>

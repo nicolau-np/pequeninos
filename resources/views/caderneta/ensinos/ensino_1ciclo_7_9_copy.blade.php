@@ -200,8 +200,8 @@
                 if((valor==="") || (valor<0) || (valor>20)){
                     $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
                 }else{
-                    var update_trimestral = updatetrimestral(valor, id_trimestral, campo);
-                    if(update_trimestral){
+                    var updateAvaliacao = updateAvaliacao(valor, id_trimestral, campo);
+                    if(updateAvaliacao){
                         $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
                     }else{
                         $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
@@ -210,7 +210,7 @@
             }
         });
 
-        function updatetrimestral(valor, id_trimestral, campo){
+        function updateAvaliacao(valor, id_trimestral, campo){
             retorno = false;
             var data = {
                 valor: valor,
@@ -221,7 +221,7 @@
 
             $.ajax({
                 type: "post",
-                url: "{{route('updatetrimestral')}}",
+                url: "{{route('updateAvaliacao')}}",
                 data: data,
                 dataType: "html",
                 success: function (response) {
@@ -230,6 +230,10 @@
                 }
             });
             return true;
+        }
+
+        function updateProva(){
+
         }
 
     });

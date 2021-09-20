@@ -418,7 +418,7 @@ class AjaxController extends Controller
 
     }*/
 
-    public function updateGlobal(Request $request)
+   /* public function updateGlobal(Request $request)
     {
         $request->validate([
             'valor' => ['required', 'numeric', 'min:0'],
@@ -448,9 +448,9 @@ class AjaxController extends Controller
         } else {
             return response()->json(['status' => "error", 'sms' => "Erro temporário no servidor"]);
         }
-    }
+    }*/
 
-    public function updateTrimestral_copy(Request $request)
+    public function updateAvaliacao(Request $request)
     {
         $request->validate([
             'valor' => ['required', 'numeric', 'min:0'],
@@ -616,6 +616,12 @@ class AjaxController extends Controller
         }
         //fim mfd
 
-        
+
     }
+
+    public function updateProva(){
+        echo "ola";
+    }
+
+
 }

@@ -614,7 +614,7 @@ class AjaxController extends Controller
         if (Finals::where($data['where_mts'])->update($data['calculo_final'])) {
             echo " \\lancou o mfd e mf \\ ";
         }
-        //fim mfd
+        //fim mfd e mf
 
 
     }
@@ -681,7 +681,7 @@ class AjaxController extends Controller
         $somas = 0;
         $quant_notas = 0;
 
-        $npp_data = $trimestral->nnp_data;
+        $npp_data = $trimestral->npp_data;
         $pt_data = $trimestral->pt_data;
 
         if ($npp_data != null && $pt_data == null) {
@@ -730,6 +730,6 @@ class AjaxController extends Controller
         if (Finals::where($data['where_mts'])->update($data['calculo_final'])) {
             echo " \\lancou o mfd e mf\\ ";
         }
-        //fim mfd
+        //fim mfd e mf
    }
 }

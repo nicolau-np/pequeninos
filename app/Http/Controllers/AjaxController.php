@@ -8,6 +8,7 @@ use App\Curso;
 use App\Disciplina;
 use App\Encarregado;
 use App\Estudante;
+use App\Finals;
 use App\Funcionario;
 use App\Grade;
 use App\Hora;
@@ -588,6 +589,7 @@ class AjaxController extends Controller
             echo " \\lancou o mt\\ ";
         }
         //fim mt
+
         $data['where_mts'] = [
             'id_estudante' => $trimestral->id_estudante,
             'id_disciplina' => $trimestral->id_disciplina,
@@ -597,7 +599,19 @@ class AjaxController extends Controller
         $trimestral_mts = Trimestral::where($data['where_mts'])->get();
         //calculando mfd
         $soma_mts = 0;
+        foreach ($trimestral_mts as $mts) {
+            if ($mts->mt != null) {
+                $soma_mts = $soma_mts + $mts->mt;
+            }
+        }
 
+        $mfd = Finals::mfd($soma_mts);
+        $data['mfd'] = [
+            'mfd' => $mfd,
+        ];
+        if (Finals::where($data['where_mts'])->update($data['mfd'])) {
+            echo " \\lancou o mfd\\ ";
+        }
         //fim mfd
 
     }

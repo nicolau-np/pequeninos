@@ -79,7 +79,31 @@
                                 <p class="m-0">
 
                                     {{Form::open(['method'=>"post"])}}
-                                    
+                                        <table>
+                                            <thead>
+                                                <tr>
+                                                    <th>Nome</th>
+                                                    <th>Gênero</th>
+                                                </tr>
+                                            </thead>
+
+                                            <tbody>
+                                                @if (session('epoca')==1)
+                                                    @if ($getTrimestral!=null)
+                                                        @if ($getTrimestral->count()==0)
+                                                            Nenhum estudante encontrado
+                                                        @else
+                                                            @foreach ($getTrimestral as $trimestral)
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>1</td>
+                                                            </tr>
+                                                            @endforeach
+                                                        @endif
+                                                    @endif
+                                                @endif
+                                            </tbody>
+                                        </table>
                                     {{Form::close()}}
                                  </p>
                             </div>

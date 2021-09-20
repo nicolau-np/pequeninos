@@ -11,6 +11,7 @@ use App\Estudante;
 use App\Funcionario;
 use App\Grade;
 use App\Hora;
+use App\Horario;
 use App\Municipio;
 use App\NotaFinal;
 use App\NotaTrimestral;
@@ -455,10 +456,36 @@ class AjaxController extends Controller
             'id_trimestral' => ['required', 'integer', 'min:1'],
         ]);
 
+        //verificar se mudou os campos
         if(($request->campo!="av1") || ($request->campo!="av2") || ($request->campo!="av3")){
+            echo "mudou campos";
+        }
+        //verificar se mudou o id do trimestre
+        $trimestral = Trimestral::find($request->id_trimestral);
+        if(!$trimestral){
             return null;
         }
 
+        //verificando se o professor e dono desta turma
+        if (Session::has('id_funcionario')) {
+            //verificando horario e funcionario
+            $data['where_horario'] = [
+                'id_funcionario' => Session::get('id_funcionario'),
+                'id_turma' => $trimestral->estudante->id_turma,
+                'id_disciplina' => $trimestral->id_disciplina,
+                'ano_lectivo' => $trimestral->ano_lectivo,
+                'estado' => "visivel"
+            ];
+
+            $horario = Horario::where($data['where_horario'])->first();
+            if (!$horario) {
+               return null;
+            }
+        } else {
+            return null;
+        }
+
+        //criando campos
         $campo = "" . $request->campo; //campo de avaliacao
         $campo2 = $request->campo."_data"; //campo de data
         $data['trimestral'] = [
@@ -466,11 +493,15 @@ class AjaxController extends Controller
             "$campo2"=>date('Y-m-d'),
         ];
 
-        /*if(Trimestral::find($request->id_trimestral)->update($data)){
 
-        }*/
+        $trimestral=Trimestral::find($request->id_trimestral)->update($data['trimestral']);
+            if($trimestral){
+                echo "feito com sucesso  ID";
+            }else{
+                echo "erro";
+        }
 
-        
+
     }
 
 

@@ -459,7 +459,7 @@ class AjaxController extends Controller
 
         //verificar se mudou os campos
         if (($request->campo != "av1") || ($request->campo != "av2") || ($request->campo != "av3")) {
-            echo "mudou campos";
+            echo "\\mudou campos\\";
         }
         //verificar se mudou o id do trimestre
         $trimestral = Trimestral::find($request->id_trimestral);
@@ -497,7 +497,7 @@ class AjaxController extends Controller
         //salvando a nota avaliacao
         $trimestral = Trimestral::find($request->id_trimestral)->update($data['trimestral']);
         if ($trimestral) {
-            echo "cadastrou as notas trimestrais<br/>";
+            echo "\\cadastrou as notas trimestrais\\";
         } else {
             return null;
         }
@@ -548,6 +548,16 @@ class AjaxController extends Controller
         $data['mac'] = [
             'mac' => $mac,
         ];
+
+        if(Trimestral::find($request->id_trimestral)->update($data['mac'])){
+            echo "\\lancou o mac\\";
+        }
         //fim mac
+
+        //calculando mt
+
+        //fim mt
+
+
     }
 }

@@ -620,7 +620,7 @@ class AjaxController extends Controller
     }
 
     public function updateProva(){
-        echo "ola";
+        echo "ola update Prova";
     }
 
 

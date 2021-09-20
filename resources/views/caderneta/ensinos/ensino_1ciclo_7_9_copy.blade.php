@@ -191,6 +191,7 @@
 
 <script>
     $(document).ready(function () {
+
         $('.avaliacao').on('keypress', function(e){
             if(e.which == 13){
                 var valor = $(this).val();
@@ -209,6 +210,26 @@
                 }
             }
         });
+
+        $('.prova').on('keypress', function(e){
+            if(e.which == 13){
+                var valor = $(this).val();
+                var id_trimestral = $(this).data('id');
+                var campo = $(this).data('campo');
+
+                if((valor==="") || (valor<0) || (valor>20)){
+                    $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                }else{
+                    var updateProva = updateProva(valor, id_trimestral, campo);
+                    if(updateProva){
+                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
+                    }else{
+                        $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                    }
+                }
+            }
+        });
+
 
         function updateAvaliacao(valor, id_trimestral, campo){
             retorno = false;
@@ -232,8 +253,26 @@
             return true;
         }
 
-        function updateProva(){
+        function updateProva(valor, id_trimestral, campo){
+            retorno = false;
+            var data = {
+                valor: valor,
+                id_trimestral: id_trimestral,
+                campo: campo,
+                _token: "{{ csrf_token() }}"
+            };
 
+            $.ajax({
+                type: "post",
+                url: "{{route('updateProva')}}",
+                data: data,
+                dataType: "html",
+                success: function (response) {
+
+                    console.log(response);
+                }
+            });
+            return true;
         }
 
     });

@@ -14,8 +14,25 @@ class CreateTrimestralsTable extends Migration
     public function up()
     {
         Schema::create('trimestrals', function (Blueprint $table) {
-            $table->id();
+            $table->engine = "InnoDB";
+            $table->bigIncrements('id');
+            $table->bigInteger('id_estudante')->unsigned()->index();
+            $table->bigInteger('id_disciplina')->unsigned()->index();
+            $table->bigInteger('epoca');
+            $table->decimal('av1', 4, 2)->nullable();
+            $table->decimal('av2', 4, 2)->nullable();
+            $table->decimal('av3', 4, 2)->nullable();
+            $table->decimal('mac', 4, 2)->nullable();
+            $table->decimal('npp', 4, 2)->nullable();
+            $table->decimal('pt', 4, 2)->nullable();
+            $table->decimal('mt', 4, 2)->nullable();
+            $table->string('estado');
             $table->timestamps();
+        });
+
+        Schema::table('trimestrals', function (Blueprint $table) {
+            $table->foreign('id_estudante')->references('id')->on('estudantes')->onUpdate('cascade');
+            $table->foreign('id_disciplina')->references('id')->on('disciplinas')->onUpdate('cascade');
         });
     }
 

@@ -23,6 +23,11 @@ class CreateFinalsTable extends Migration
             $table->string('ano_lectivo');
             $table->timestamps();
         });
+
+        Schema::table('finals', function (Blueprint $table) {
+            $table->foreign('id_estudante')->references('id')->on('estudantes')->onUpdate('cascade');
+            $table->foreign('id_disciplina')->references('id')->on('disciplinas')->onUpdate('cascade');
+        });
     }
 
     /**

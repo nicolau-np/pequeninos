@@ -14,6 +14,7 @@ use App\Hora;
 use App\Municipio;
 use App\NotaFinal;
 use App\NotaTrimestral;
+use App\Trimestral;
 use App\Turma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -451,11 +452,27 @@ class AjaxController extends Controller
         $request->validate([
             'valor' => ['required', 'numeric', 'min:0'],
             'campo' => ['required', 'string'],
-            'id_trimestral' => ['required', 'Integer'],
+            'id_trimestral' => ['required', 'integer', 'min:1'],
         ]);
 
-        
+        if(($request->campo!="av1") || ($request->campo!="av2") || ($request->campo!="av3")){
+            return null;
         }
+
+        $campo = "" . $request->campo; //campo de avaliacao
+        $campo2 = $request->campo."_data"; //campo de data
+        $data['trimestral'] = [
+            "$campo" => $request->valor,
+            "$campo2"=>date('Y-m-d'),
+        ];
+
+        /*if(Trimestral::find($request->id_trimestral)->update($data)){
+
+        }*/
+
+        
+    }
+
 
 
 }

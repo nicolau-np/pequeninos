@@ -223,15 +223,10 @@
                 type: "post",
                 url: "{{route('updatetrimestral')}}",
                 data: data,
-                dataType: "json",
-                async: false,
+                dataType: "html",
                 success: function (response) {
-                    if(response.status === "ok"){
-                      retorno = true;
-                    }else{
-                        retorno = false;
-                    }
-                    console.log(response.sms);
+
+                    console.log(response);
                 }
             });
             return true;

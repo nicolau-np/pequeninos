@@ -234,7 +234,8 @@ Route::group(['prefix' => 'cadernetas', 'middleware' => "auth"], function () {
 });
 
 Route::group(['prefix' => 'minipautas', 'middleware' => "auth"], function () {
-    Route::get('/show/{id_turma}/{id_disciplina}/{ano_lectivo}', "MiniPautaController@show");
+    /*Route::get('/show/{id_turma}/{id_disciplina}/{ano_lectivo}', "MiniPautaController@show");*/
+    Route::get('/show/{id_turma}/{id_disciplina}/{ano_lectivo}', "MiniPautaController_copy@show");
 });
 
 

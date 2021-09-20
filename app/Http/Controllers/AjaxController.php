@@ -418,7 +418,7 @@ class AjaxController extends Controller
 
     }*/
 
-   /* public function updateGlobal(Request $request)
+    /* public function updateGlobal(Request $request)
     {
         $request->validate([
             'valor' => ['required', 'numeric', 'min:0'],
@@ -459,7 +459,7 @@ class AjaxController extends Controller
         ]);
 
         //verificar se mudou os campos
-        if (($request->campo != "av1") || ($request->campo != "av2") || ($request->campo != "av3")) {
+        if (($request->campo != "av1") or ($request->campo != "av2") or ($request->campo != "av3")) {
             echo " \\mudou campos\\ ";
         }
         //verificar se mudou o id do trimestre
@@ -608,7 +608,7 @@ class AjaxController extends Controller
         $mfd = Finals::mfd($soma_mts);
         $mf = Finals::mf($soma_mts);
         $data['calculo_final'] = [
-            'mf'=>$mf,
+            'mf' => $mf,
             'mfd' => $mfd,
         ];
         if (Finals::where($data['where_mts'])->update($data['calculo_final'])) {
@@ -619,9 +619,49 @@ class AjaxController extends Controller
 
     }
 
-    public function updateProva(){
-        echo "ola update Prova";
+    public function updateProva(Request $request)
+    {
+        $request->validate([
+            'valor' => ['required', 'numeric', 'min:0'],
+            'campo' => ['required', 'string'],
+            'id_trimestral' => ['required', 'integer', 'min:1'],
+        ]);
+
+        //verificar se mudou os campos
+        if (($request->campo != "npp") or ($request->campo != "pt")) {
+            echo " \\mudou campos\\ ";
+        }
+        //verificar se mudou o id do trimestre
+        $trimestral = Trimestral::find($request->id_trimestral);
+        if (!$trimestral) {
+            return null;
+        }
+
+        //verificando se o professor e dono desta turma
+        if (Session::has('id_funcionario')) {
+            //verificando horario e funcionario
+            $data['where_horario'] = [
+                'id_funcionario' => Session::get('id_funcionario'),
+                'id_turma' => $trimestral->estudante->id_turma,
+                'id_disciplina' => $trimestral->id_disciplina,
+                'ano_lectivo' => $trimestral->ano_lectivo,
+                'estado' => "visivel"
+            ];
+
+            $horario = Horario::where($data['where_horario'])->first();
+            if (!$horario) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+
+        //criando campos
+        $campo = "" . $request->campo; //campo de avaliacao
+        $campo2 = $request->campo . "_data"; //campo de data
+        $data['trimestral'] = [
+            "$campo" => $request->valor,
+            "$campo2" => date('Y-m-d'),
+        ];
     }
-
-
 }

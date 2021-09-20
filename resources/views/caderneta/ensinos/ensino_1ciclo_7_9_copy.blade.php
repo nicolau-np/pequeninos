@@ -82,8 +82,16 @@
                                         <table>
                                             <thead>
                                                 <tr>
-                                                    <th>Nome</th>
-                                                    <th>Gênero</th>
+                                                    <th colspan="3">DADOS PESSOAIS</th>
+                                                    <th colspan="3">AVALIAÇÃO</th>
+                                                </tr>
+                                                <tr>
+                                                    <th>Nº</th>
+                                                    <th>NOME</th>
+                                                    <th>G</th>
+                                                    <th>SET</th>
+                                                    <th>OUT</th>
+                                                    <th>NOV</th>
                                                 </tr>
                                             </thead>
 
@@ -95,8 +103,9 @@
                                                         @else
                                                             @foreach ($getTrimestral as $trimestral)
                                                             <tr>
-                                                                <td>1</td>
-                                                                <td>1</td>
+                                                                <td>{{$loop->iteration}}</td>
+                                                                <td>{{$trimestral->estudante->pessoa->nome}}</td>
+                                                                <td>{{$trimestral->estudante->pessoa->genero}}</td>
                                                             </tr>
                                                             @endforeach
                                                         @endif

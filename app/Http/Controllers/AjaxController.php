@@ -589,7 +589,15 @@ class AjaxController extends Controller
         }
         //fim mt
 
-        //calculando
+        $trimestral = Trimestral::find($request->id_trimestral);
+        if (!$trimestral) {
+            return null;
+        }
+
+        //calculando mfd
+        $soma_mts=0;
         
+        //fim mf
+
     }
 }

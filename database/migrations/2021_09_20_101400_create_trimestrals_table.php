@@ -20,13 +20,19 @@ class CreateTrimestralsTable extends Migration
             $table->bigInteger('id_disciplina')->unsigned()->index();
             $table->bigInteger('epoca');
             $table->decimal('av1', 4, 2)->nullable();
+            $table->date('av1_data')->nullable();
             $table->decimal('av2', 4, 2)->nullable();
+            $table->date('av2_data')->nullable();
             $table->decimal('av3', 4, 2)->nullable();
+            $table->date('av3_data')->nullable();
             $table->decimal('mac', 4, 2)->nullable();
             $table->decimal('npp', 4, 2)->nullable();
+            $table->date('npp_data')->nullable();
             $table->decimal('pt', 4, 2)->nullable();
+            $table->date('pt_data')->nullable();
             $table->decimal('mt', 4, 2)->nullable();
             $table->string('estado');
+            $table->string('ano_lectivo');
             $table->timestamps();
         });
 

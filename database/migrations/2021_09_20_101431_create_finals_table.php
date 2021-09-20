@@ -20,6 +20,7 @@ class CreateFinalsTable extends Migration
             $table->decimal('mfd', 4, 2)->nullable();
             $table->date('mfd_data')->nullable();
             $table->decimal('mf', 4, 2)->nullable();
+            $table->string('estado');
             $table->string('ano_lectivo');
             $table->timestamps();
         });

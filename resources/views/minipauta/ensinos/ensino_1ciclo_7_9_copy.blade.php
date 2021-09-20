@@ -56,14 +56,57 @@ use App\Http\Controllers\ControladorStatic;
                               <thead>
                                   <tr>
                                       <th rowspan="2">Nº</th>
-                                      <th rowspan="2">NOME</th>
+                                      <th rowspan="2">NOME COMPLETO</th>
                                       <th rowspan="2">G</th>
-
+                                      <th colspan="4">1º Trimestre</th>
+                                      <th colspan="4">2º Trimestre</th>
+                                      <th colspan="4">3º Trimestre</th>
+                                      <th colspan="2">-</th>
                                   </tr>
-                                 
+                                  <tr>
+                                      <th>MAC1</th>
+                                      <th>NPP1</th>
+                                      <th>PT1</th>
+                                      <th>MT1</th>
+
+                                      <th>MAC2</th>
+                                      <th>NPP2</th>
+                                      <th>PT2</th>
+                                      <th>MT2</th>
+
+                                      <th>MAC3</th>
+                                      <th>NPP3</th>
+                                      <th>PT3</th>
+                                      <th>MT3</th>
+
+                                      <th>MFD</th>
+                                      <th>MF</th>
+                                  </tr>
                               </thead>
                               <tbody>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
 
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+
+                                    <td></td>
+                                    <td></td>
+                                </tr>
                               </tbody>
                            </table>
                        </div>

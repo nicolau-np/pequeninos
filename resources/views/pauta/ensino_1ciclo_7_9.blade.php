@@ -92,6 +92,7 @@ $observacao_geralDB= $observacao_geral->quantidade_negativas;
                                     <?php
                                         $observacao_final = false;
                                         $count_obs = 0;
+                                        $observacao_especifica=false;
 
                                     ?>
                                    <tr>
@@ -124,15 +125,14 @@ $observacao_geralDB= $observacao_geral->quantidade_negativas;
                                     $count_obs ++;
                                      //faz a verificacao na observacao geral do controlador static, caso encontrar entao esta reprovado a variavel observacao vai ficar true caso nao encontrar prossiga
                                      $observacao_especifica = ControladorStatic::observacao_especifica($getDirector->turma->classe->id, $getDirector->turma->curso->id, $disciplina["id_disciplina"]);
-                                     if($observacao_especifica->count()>=1){
-                                            $observacao_final = true;
-                                    }
                                 }
 
                                 if($count_obs >= $observacao_geralDB){
                                     $observacao_final = true;
                                 }
-
+                                if($observacao_especifica){
+                                    $observacao_final = true;
+                                }
 
                             }
 

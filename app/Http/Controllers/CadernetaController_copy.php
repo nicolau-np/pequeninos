@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AnoLectivo;
 use App\BloqueioEpoca;
 use App\Disciplina;
+use App\Estudante;
 use App\Finals;
 use App\Funcionario;
 use App\Horario;
@@ -142,6 +143,82 @@ class CadernetaController_copy extends Controller
             return "ensino primario iniciacao ate 6 classe";
         } elseif ($id_ensino == 2) {
             return view('caderneta.ensinos.ensino_1ciclo_7_9_copy', $data);
+        }
+    }
+
+    public function store_copy($id_turma, $id_disciplina, $epoca, $ano_lectivo)
+    {
+        if (($epoca == 1) || ($epoca == 2) || ($epoca == 3)) {
+
+            $turma = Turma::find($id_turma);
+            if (!$turma) {
+                return back()->with(['error' => "Não encontrou turma"]);
+            }
+
+            $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
+            if (!$ano_lectivos) {
+                return back()->with(['error' => "Não encontrou ano lectivo"]);
+            }
+
+            $disciplina = Disciplina::find($id_disciplina);
+            if (!$disciplina) {
+                return back()->with(['error' => "Não encontrou disciplina"]);
+            }
+
+            if (Session::has('id_funcionario')) {
+                //verificando horario e funcionario
+                $data['where_horario'] = [
+                    'id_funcionario' => Session::get('id_funcionario'),
+                    'id_turma' => $id_turma,
+                    'id_disciplina' => $id_disciplina,
+                    'ano_lectivo' => $ano_lectivo,
+                    'estado' => "visivel"
+                ];
+
+                $horario = Horario::where($data['where_horario'])->first();
+                if (!$horario) {
+                    return back()->with(['error' => "Não é professor desta turma"]);
+                }
+            } else {
+                return back()->with(['error' => "Deve iniciar sessão"]);
+            }
+
+            $data['trimestral'] = [
+                'id_estudante' => null,
+                'id_disciplina' => $id_disciplina,
+                'epoca' => $epoca,
+                'estado'=>"on",
+                'ano_lectivo' => $ano_lectivo,
+            ];
+
+            $data['final'] = [
+                'id_estudante' => null,
+                'id_disciplina' => $id_disciplina,
+                'estado'=>"on",
+                'ano_lectivo' => $ano_lectivo,
+            ];
+
+            $estudantes = Estudante::where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])->get();
+
+            //cadastar trimestral
+            foreach ($estudantes as $estudante) {
+                $data['trimestral']['id_estudante'] = $estudante->id;
+                if (!Trimestral::where($data['trimestral'])->first()) {
+                    $nota_trimestral = Trimestral::create($data['trimestral']);
+                }
+            }
+
+            //cadastrar finais
+            foreach ($estudantes as $estudante) {
+                $data['final']['id_estudante'] = $estudante->id;
+                if (!Finals::where($data['final'])->first()) {
+                    $nota_trimestral = Finals::create($data['final']);
+                }
+            }
+
+            return back()->with(['success' => "Actualizou com sucesso"]);
+        } else {
+            return back(['success' => "Actualizado com sucesso"]);
         }
     }
 }

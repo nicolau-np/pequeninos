@@ -15,6 +15,7 @@ class CreateFinalsTable extends Migration
     {
         Schema::create('finals', function (Blueprint $table) {
             $table->engine = "InnoDB";
+            $table->bigIncrements('id');
             $table->bigInteger('id_estudante')->unsigned()->index();
             $table->bigInteger('id_disciplina')->unsigned()->index();
             $table->decimal('mfd', 4, 2)->nullable();

@@ -18,9 +18,7 @@ class CreateFinalsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('id_estudante')->unsigned()->index();
             $table->bigInteger('id_disciplina')->unsigned()->index();
-            $table->decimal('cap', 4, 2)->nullable();
             $table->decimal('mfd', 4, 2)->nullable();
-            $table->date('mfd_data')->nullable();
             $table->decimal('mf', 4, 2)->nullable();
             $table->string('estado');
             $table->string('ano_lectivo');

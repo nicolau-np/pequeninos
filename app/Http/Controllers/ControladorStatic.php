@@ -196,16 +196,6 @@ class ControladorStatic extends Controller
         return $disciplina;
     }
 
-    public static function getValoresMiniPautaFinal2($id_estudante, $id_disciplina){
-        $data = [
-            'id_estudante' => $id_estudante,
-            'id_disciplina' => $id_disciplina,
-            'ano_lectivo' => Session::get('ano_lectivoP'),
-        ];
-        $final = NotaFinal::where($data)->get();
-        return $final;
-    }
-
     public static function getHorario($id_hora, $id_turma, $ano_lectivo, $semana){
         $data = [
             'id_turma' => $id_turma,
@@ -217,5 +207,5 @@ class ControladorStatic extends Controller
         return $horario;
     }
 
-    
+
 }

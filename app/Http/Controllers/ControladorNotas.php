@@ -34,6 +34,17 @@ class ControladorNotas extends Controller
         return $final;
     }
 
+
+    public static function getValoresPautaFinal($id_estudante, $id_disciplina){
+        $data = [
+            'id_estudante' => $id_estudante,
+            'id_disciplina' => $id_disciplina,
+            'ano_lectivo' => Session::get('ano_lectivoP'),
+        ];
+        $final = Finals::where($data)->get();
+        return $final;
+    }
+
     public static function nota_20($nota)
     {
         $retorno = null;

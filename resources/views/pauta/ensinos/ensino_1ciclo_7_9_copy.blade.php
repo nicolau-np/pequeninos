@@ -68,7 +68,7 @@ $observacao_geralDB= $observacao_geral->quantidade_negativas;
                                       foreach(Session::get('disciplinas') as $disciplina){
                                         $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina'])
                                         ?>
-                                      <th colspan="2">{{$getDisciplina->disciplina}}</th>
+                                      <th colspan="2">{{strtoupper($getDisciplina->disciplina)}}</th>
                                       <?php } ?>
                                       <th rowspan="2">OBSERVAÇÃO</th>
                                   </tr>
@@ -80,26 +80,21 @@ $observacao_geralDB= $observacao_geral->quantidade_negativas;
                                  </tr>
                               </thead>
                               <tbody>
+                                @foreach ($getHistorico as $historico)
                                   <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{$loop->iteration}}</td>
+                                    <td>{{$historico->estudante->pessoa->nome}}</td>
+                                    <td>{{$historico->estudante->pessoa->genero}}</td>
 
+                                    <?php
+                                    foreach (Session::get('disciplinas') as $disciplina) {
+                                        ?>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-
+                                    <?php } ?>
                                     <td></td>
                                   </tr>
+                                  @endforeach
                               </tbody>
                            </table>
                        </div>

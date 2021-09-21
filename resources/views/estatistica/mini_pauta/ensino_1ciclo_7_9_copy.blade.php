@@ -501,13 +501,30 @@ table{
                                     else{
                                         $percent_positivas2['mac'] = ($count_positivas2['mac']*100)/$count_avaliados2['mac'];
                                     }
-                                    $percent_positivas2['npp'] = ($count_positivas2['npp']*100)/$count_avaliados2['npp'];
-                                    $percent_positivas2['pt'] = ($count_positivas2['pt']*100)/$count_avaliados2['pt'];
-                                    $percent_positivas2['mt'] = ($count_positivas2['mt']*100)/$count_avaliados2['mt'];
+                                    if($count_avaliados2['npp']==0){
+                                        $percent_positivas2['npp']=0;
+                                    else{
+                                        $percent_positivas2['npp'] = ($count_positivas2['npp']*100)/$count_avaliados2['npp'];
+                                    }
+                                    if($count_avaliados2['pt']==0){
+                                        $percent_positivas2['pt']=0;
+                                    else{
+                                        $percent_positivas2['pt'] = ($count_positivas2['pt']*100)/$count_avaliados2['pt'];
+                                    }
+                                    if($count_avaliados2['mt']==0){
+                                        $percent_positivas2['mt']=0;
+                                    else{
+                                        $percent_positivas2['mt'] = ($count_positivas2['mt']*100)/$count_avaliados2['mt'];
+                                    }
+
                                     //end segundo trimestre
 
                                     //terceiro trimestre
+                                    if($count_avaliados3['mac']==0){
+                                        $percent_positivas3['mac']=0;
+                                    else{
                                     $percent_positivas3['mac'] = ($count_positivas3['mac']*100)/$count_avaliados3['mac'];
+                                    }
                                     $percent_positivas3['npp'] = ($count_positivas3['npp']*100)/$count_avaliados3['npp'];
                                     $percent_positivas3['pt'] = ($count_positivas3['pt']*100)/$count_avaliados3['pt'];
                                     $percent_positivas3['mt'] = ($count_positivas3['mt']*100)/$count_avaliados3['mt'];

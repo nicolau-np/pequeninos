@@ -80,7 +80,16 @@ $observacao_geralDB= $observacao_geral->quantidade_negativas;
                                  </tr>
                               </thead>
                               <tbody>
+                                  <?php
+                                $count_obs=0;
+                                $observacao_final = false;
+                                  ?>
                                 @foreach ($getHistorico as $historico)
+                                    <?php
+                                            $observacao_final = false;
+                                            $count_obs = 0;
+                                            $observacao_especifica=false;
+                                    ?>
                                   <tr>
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$historico->estudante->pessoa->nome}}</td>
@@ -103,10 +112,28 @@ $observacao_geralDB= $observacao_geral->quantidade_negativas;
                                         <td class="{{$v2_estilo}}">@if($valorf->mf == null) --- @else {{$valorf->mf}} @endif</td>
 
                                     <?php }
+                                            if($valorf->mf<=9.9 && $valorf->mf!=null){
+                                            $count_obs ++;
+                                            //faz a verificacao na observacao geral do controlador static, caso encontrar entao esta reprovado a variavel observacao vai ficar true caso nao encontrar prossiga
+                                            $observacao_especifica = ControladorNotas::observacao_especifica($getDirector->turma->classe->id, $getDirector->turma->curso->id, $disciplina["id_disciplina"]);
+                                            }
+
+                                            if($count_obs >= $observacao_geralDB){
+                                                $observacao_final = true;
+                                            }
+                                            if($observacao_especifica){
+                                                $observacao_final = true;
+                                            }
                                         }
                                         }
                                         ?>
-                                    <td></td>
+                                      <td class="@if($observacao_final) negativo @else positivo @endif">
+                                        @if($observacao_final)
+                                             NÃO TRANSITA
+                                         @else
+                                         TRANSITA
+                                        @endif
+                                     </td>
                                   </tr>
                                   @endforeach
                               </tbody>

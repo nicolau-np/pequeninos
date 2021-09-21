@@ -1,3 +1,6 @@
+<?php
+$count_avaliados = 0;
+?>
 @extends('layouts.app')
 @section('content')
 <style>
@@ -54,9 +57,9 @@
                         <thead>
                             <tr>
                                 <th rowspan="2">-</th>
-                                <th colspan="4">1º Trimestre</th>
-                                <th colspan="4">2º Trimestre</th>
-                                <th colspan="4">3º Trimestre</th>
+                                <th colspan="4">1º TRIMESTRE</th>
+                                <th colspan="4">2º TRIMESTRE</th>
+                                <th colspan="4">3º TRIMESTRE</th>
                                 <th colspan="2">-</th>
                             </tr>
                             <tr>

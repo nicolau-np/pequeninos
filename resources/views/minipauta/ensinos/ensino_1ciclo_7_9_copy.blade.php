@@ -58,9 +58,9 @@ use App\Http\Controllers\ControladorNotas;
                                       <th rowspan="2">Nº</th>
                                       <th rowspan="2">NOME COMPLETO</th>
                                       <th rowspan="2">G</th>
-                                      <th colspan="4">1º Trimestre</th>
-                                      <th colspan="4">2º Trimestre</th>
-                                      <th colspan="4">3º Trimestre</th>
+                                      <th colspan="4">1º TRIMESTRE</th>
+                                      <th colspan="4">2º TRIMESTRE</th>
+                                      <th colspan="4">3º TRIMESTRE</th>
                                       <th colspan="2">-</th>
                                       <th rowspan="2">OBS.</th>
                                   </tr>

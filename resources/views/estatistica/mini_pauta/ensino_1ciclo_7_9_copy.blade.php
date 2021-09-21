@@ -1,6 +1,27 @@
 <?php
 use App\Http\Controllers\ControladorNotas;
-$count_avaliados = 0;
+$count_avaliados1 = [
+    'mac'=>0,
+    'npp'=>0,
+    'pt'=>0,
+    'mt'=>0,
+];
+
+$count_avaliados2 = [
+    'mac'=>0,
+    'npp'=>0,
+    'pt'=>0,
+    'mt'=>0,
+];
+
+$count_avaliados3 = [
+    'mac'=>0,
+    'npp'=>0,
+    'pt'=>0,
+    'mt'=>0,
+];
+
+
 ?>
 @extends('layouts.app')
 @section('content')
@@ -87,15 +108,22 @@ $count_avaliados = 0;
                         <tbody>
                             <tbody>
                                 <tr>
-                                    <?php
-                                        $trimestre1 = ControladorNotas::getNotasEstudantes($getAno, 1);
-                                        ?>
+
                                     <td>AVALIADOS</td>
 
+                                    <!-- primeiro trimeste-->
+                                    <?php
+                                        $trimestre1 = ControladorNotas::getNotasEstudantes($getAno, 1);
+                                        foreach ($trimestre1 as $valor1){
+                                            
+                                        }
+                                        ?>
                                     <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
+
+                                    <!-- end primeiro trimeste-->
 
                                     <td></td>
                                     <td></td>

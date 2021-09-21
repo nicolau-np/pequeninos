@@ -68,10 +68,8 @@ $observacao_geralDB= $observacao_geral->quantidade_negativas;
                                       foreach(Session::get('disciplinas') as $disciplina){
                                         $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina'])
                                         ?>
-                                      <th colspan="3">{{$getDisciplina->disciplina}}</th>
-                                      <?php
-                                      }
-                                      ?>
+                                      <th colspan="2">{{$getDisciplina->disciplina}}</th>
+                                      <?php } ?>
                                       <th rowspan="2">OBSERVAÇÃO</th>
                                   </tr>
                                   <tr>
@@ -98,6 +96,8 @@ $observacao_geralDB= $observacao_geral->quantidade_negativas;
                                     <td></td>
                                     <td></td>
                                     <td></td>
+                                    <td></td>
+
                                     <td></td>
                                   </tr>
                               </tbody>

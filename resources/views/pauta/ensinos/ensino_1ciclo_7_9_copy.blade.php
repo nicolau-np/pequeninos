@@ -81,6 +81,7 @@ $observacao_geralDB= $observacao_geral->quantidade_negativas;
                               </thead>
                               <tbody>
                                   <?php
+                                  $defice_disciplinas = [];
                                 $count_obs=0;
                                 $observacao_final = false;
                                   ?>
@@ -89,6 +90,8 @@ $observacao_geralDB= $observacao_geral->quantidade_negativas;
                                             $observacao_final = false;
                                             $count_obs = 0;
                                             $observacao_especifica=false;
+
+                                            $defice_disciplinas = [];
                                     ?>
                                   <tr>
                                     <td>{{$loop->iteration}}</td>
@@ -113,7 +116,10 @@ $observacao_geralDB= $observacao_geral->quantidade_negativas;
 
                                     <?php }
                                             if($valorf->mf<=9.9 && $valorf->mf!=null){
+                                            //conta disciplinas com negativa
                                             $count_obs ++;
+                                            //adiciona disciplinas com defices no array
+                                            array_push($defice_disciplinas, $valorf->disciplina->sigla);
                                             //faz a verificacao na observacao geral do controlador static, caso encontrar entao esta reprovado a variavel observacao vai ficar true caso nao encontrar prossiga
                                             $observacao_especifica = ControladorNotas::observacao_especifica($getDirector->turma->classe->id, $getDirector->turma->curso->id, $disciplina["id_disciplina"]);
                                             }
@@ -132,7 +138,16 @@ $observacao_geralDB= $observacao_geral->quantidade_negativas;
                                              NÃO TRANSITA
                                          @else
                                          TRANSITA
-                                        @endif
+                                         @if ($defice_disciplinas)
+                                            [DEF.(
+                                                @foreach ($defice_disciplinas as $item)
+                                                   {{strtoupper($item)}},
+                                                @endforeach
+                                                )]
+                                            @endif
+                                         @endif
+
+
                                      </td>
                                   </tr>
                                   @endforeach

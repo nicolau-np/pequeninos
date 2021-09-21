@@ -62,6 +62,7 @@ use App\Http\Controllers\ControladorNotas;
                                       <th colspan="4">2º Trimestre</th>
                                       <th colspan="4">3º Trimestre</th>
                                       <th colspan="2">-</th>
+                                      <th rowspan="2">OBS.</th>
                                   </tr>
                                   <tr>
                                       <th>MAC1</th>
@@ -182,6 +183,12 @@ use App\Http\Controllers\ControladorNotas;
                                     <td class="{{$v2_estilo}}">@if($valorf->mf==null) --- @else {{$valorf->mf}} @endif</td>
                                 <?php }}?>
                                 <!-- fim dados finais-->
+
+                                <!-- obs -->
+                                        <td class="@if($valorf->mf<=9.5) negativo @else positivo @endif">
+                                            @if($valorf->mf<=9.5) Reprovado @else Aprovado @endif
+                                        </td>
+                                <!-- fim obs -->
                                 </tr>
                                 @endforeach
                               </tbody>

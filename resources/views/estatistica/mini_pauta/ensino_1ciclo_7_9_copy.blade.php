@@ -57,6 +57,7 @@
                                 <th colspan="4">1º Trimestre</th>
                                 <th colspan="4">2º Trimestre</th>
                                 <th colspan="4">3º Trimestre</th>
+                                <th colspan="2">-</th>
                             </tr>
                             <tr>
                                 <th>MAC1</th>
@@ -73,6 +74,9 @@
                                 <th>NPP3</th>
                                 <th>PT3</th>
                                 <th>MT3</th>
+
+                                <th>MFD</th>
+                                <th>MF</th>
 
                             </tr>
                         </thead>

@@ -9,7 +9,7 @@
                     <h5>{{$submenu}}</h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -38,7 +38,7 @@
                                 <div class="erro">
                                     @if($errors->has('curso'))
                                     <div class="text-danger">{{$errors->first('curso')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
@@ -50,18 +50,18 @@
                                 <div class="erro">
                                     @if($errors->has('classe'))
                                     <div class="text-danger">{{$errors->first('classe')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
                                 <div class="col-md-2">
                                     {{Form::label('turno', "Turno")}} <span class="text-danger">*</span>
                                     {{Form::select('turno', $getTurnos, null, ['class'=>"form-control", 'placeholder'=>"Turno"])}}
-                                
+
                                 <div class="erro">
                                     @if($errors->has('turno'))
                                     <div class="text-danger">{{$errors->first('turno')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
@@ -71,7 +71,7 @@
                                     <div class="erro">
                                         @if($errors->has('turma'))
                                         <div class="text-danger">{{$errors->first('turma')}}</div>
-                                        @endif 
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -84,16 +84,14 @@
                                  </div>
 
                             </div>
-                        
-                       
-                        
+                     
                         {{Form::close()}}
                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- hidden-sm-up -->

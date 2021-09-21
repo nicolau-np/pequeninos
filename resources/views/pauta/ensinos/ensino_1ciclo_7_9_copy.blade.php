@@ -88,10 +88,24 @@ $observacao_geralDB= $observacao_geral->quantidade_negativas;
 
                                     <?php
                                     foreach (Session::get('disciplinas') as $disciplina) {
+                                        $final = ControladorNotas::getValoresPautaFinal($historico->id_estudante, $disciplina["id_disciplina"]);
+                                        if($final->count() == 0){
                                         ?>
-                                    <td></td>
-                                    <td></td>
-                                    <?php } ?>
+                                        <td>---</td>
+                                        <td>---</td>
+                                    <?php } else {
+                                        foreach ($final as $valorf) {
+                                        $v1_estilo = ControladorNotas::nota_20($valorf->mfd);
+                                        $v2_estilo = ControladorNotas::nota_20($valorf->mf);
+
+                                        ?>
+                                        <td class="{{$v1_estilo}}">@if($valorf->mfd == null) --- @else {{$valorf->mfd}} @endif</td>
+                                        <td class="{{$v2_estilo}}">@if($valorf->mf == null) --- @else {{$valorf->mf}} @endif</td>
+
+                                    <?php }
+                                        }
+                                        }
+                                        ?>
                                     <td></td>
                                   </tr>
                                   @endforeach

@@ -63,4 +63,15 @@ class ControladorNotas extends Controller
 
         return $retorno;
     }
+
+    public static function getNotasEstudantes($ano_lectivo, $epoca){
+        $data2 = [
+            'id_disciplina'=>Session::get('id_disciplinaES'),
+            'id_turma'=>Session::get('id_turmaES'),
+        ];
+
+        $trimestral = Trimestral::getNotasEstudantes($data2, $ano_lectivo, $epoca);
+
+        return $trimestral;
+    }
 }

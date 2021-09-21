@@ -49,4 +49,16 @@ class Trimestral extends Model
 
         return $mt;
     }
+
+    public static function getNotasEstudantes($data2, $ano_lectivo, $epoca)
+    {
+        $data = [
+            'ano_lectivo' => $ano_lectivo,
+            'epoca' => $epoca
+        ];
+        return Trimestral::whereHas('estudante', function ($query) use ($data2) {
+            $query->where('id_turma', $data2['id_turma']);
+            $query->where('id_disciplina', $data2['id_disciplina']);
+        })->where($data)->get();
+    }
 }

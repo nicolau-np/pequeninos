@@ -83,10 +83,12 @@ class EstatisticaController extends Controller
         $historico = HistoricEstudante::where(['id_turma'=>$id_turma, 'ano_lectivo'=>$ano_lectivo])
         ->get()->sortBy('estudante.pessoa.nome');
 
-        $d1 = [
-        'id_turma'=>$id_turma,
-        'id_disciplina' =>$id_disciplina
+        $dataEs = [
+            'id_turmaES'=> $id_turma,
+            'id_disciplinaES' =>$id_disciplina,
         ];
+
+        Session::put($dataEs);
 
         $data = [
             'title' => "Estatística",

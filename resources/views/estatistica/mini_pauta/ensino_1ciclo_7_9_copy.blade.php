@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\ControladorNotas;
 $count_avaliados = 0;
 ?>
 @extends('layouts.app')
@@ -86,6 +87,9 @@ $count_avaliados = 0;
                         <tbody>
                             <tbody>
                                 <tr>
+                                    <?php
+                                        
+                                        ?>
                                     <td>AVALIADOS</td>
 
                                     <td></td>

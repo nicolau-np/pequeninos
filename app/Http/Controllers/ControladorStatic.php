@@ -189,7 +189,7 @@ class ControladorStatic extends Controller
         return $final;
     }*/
 
-    
+
 
     public static function getDisciplinaID($id_disciplina){
         $disciplina = Disciplina::find($id_disciplina);
@@ -217,13 +217,5 @@ class ControladorStatic extends Controller
         return $horario;
     }
 
-    public static function observacao_geral($classe, $curso){
-        $observacao = ObservacaoGeral::where(['id_classe'=>$classe, 'id_curso'=>$curso])->first();
-        return $observacao;
-    }
-
-    public static function observacao_especifica($classe, $curso, $disciplina){
-        $observacao = ObservacaoUnica::where(['id_classe'=>$classe, 'id_curso'=>$curso, 'id_disciplina'=>$disciplina])->first();
-        return $observacao;
-    }
+    
 }

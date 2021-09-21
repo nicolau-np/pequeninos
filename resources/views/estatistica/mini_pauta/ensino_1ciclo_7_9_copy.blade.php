@@ -438,10 +438,10 @@ table{
                                     <td>{{$count_positivas2['pt']}}</td>
                                     <td>{{$count_positivas2['mt']}}</td>
 
-                                    <td>{{$count_positivas2['mac']}}</td>
-                                    <td>{{$count_positivas2['npp']}}</td>
-                                    <td>{{$count_positivas2['pt']}}</td>
-                                    <td>{{$count_positivas2['mt']}}</td>
+                                    <td>{{$count_positivas3['mac']}}</td>
+                                    <td>{{$count_positivas3['npp']}}</td>
+                                    <td>{{$count_positivas3['pt']}}</td>
+                                    <td>{{$count_positivas3['mt']}}</td>
 
                                     <td>{{$count_positivasf['mfd']}}</td>
                                     <td>{{$count_positivasf['mf']}}</td>

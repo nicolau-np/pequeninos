@@ -39,4 +39,15 @@ class Finals extends Model
 
         return $mf;
     }
+
+    public static function getNotasEstudantes($data2, $ano_lectivo)
+    {
+        $data = [
+            'ano_lectivo' => $ano_lectivo
+        ];
+        return Finals::whereHas('estudante', function ($query) use ($data2) {
+            $query->where('id_turma', $data2['id_turma']);
+            $query->where('id_disciplina', $data2['id_disciplina']);
+        })->where($data)->get();
+    }
 }

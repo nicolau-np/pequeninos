@@ -21,6 +21,11 @@ $count_avaliados3 = [
     'mt'=>0,
 ];
 
+$count_avaliadosf = [
+    'mfd'=>0,
+    'mf'=>0,
+];
+
 
 ?>
 @extends('layouts.app')
@@ -111,32 +116,94 @@ $count_avaliados3 = [
 
                                     <td>AVALIADOS</td>
 
-                                    <!-- primeiro trimeste-->
-                                    <?php
-                                        $trimestre1 = ControladorNotas::getNotasEstudantes($getAno, 1);
-                                        foreach ($trimestre1 as $valor1){
-                                            
-                                        }
-                                        ?>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                                                <!-- primeiro trimeste-->
+                                                                <?php
+                                                                    $trimestre1 = ControladorNotas::getNotasEstudantes($getAno, 1);
+                                                                    foreach ($trimestre1 as $valor1){
+                                                                        if($valor1->mac !=null){
+                                                                            $count_avaliados1['mac']=$count_avaliados1['mac']+1;
+                                                                        }
 
-                                    <!-- end primeiro trimeste-->
+                                                                        if($valor1->npp !=null){
+                                                                            $count_avaliados1['npp']=$count_avaliados1['npp']+1;
+                                                                        }
 
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                                                        if($valor1->pt !=null){
+                                                                            $count_avaliados1['pt']=$count_avaliados1['pt']+1;
+                                                                        }
 
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                                                        if($valor1->mt !=null){
+                                                                            $count_avaliados1['mt']=$count_avaliados1['mt']+1;
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                <td>{{$count_avaliados1['mac']}}</td>
+                                                                <td>{{$count_avaliados1['npp']}}</td>
+                                                                <td>{{$count_avaliados1['pt']}}</td>
+                                                                <td>{{$count_avaliados1['mt']}}</td>
 
-                                    <td></td>
-                                    <td></td>
+                                                                <!-- end primeiro trimeste-->
+
+                                                                <!-- segundo trimeste-->
+                                                                <?php
+                                                                    $trimestre2 = ControladorNotas::getNotasEstudantes($getAno, 2);
+                                                                    foreach ($trimestre2 as $valor2){
+                                                                        if($valor2->mac !=null){
+                                                                            $count_avaliados2['mac']=$count_avaliados2['mac']+1;
+                                                                        }
+
+                                                                        if($valor2->npp !=null){
+                                                                            $count_avaliados2['npp']=$count_avaliados2['npp']+1;
+                                                                        }
+
+                                                                        if($valor2->pt !=null){
+                                                                            $count_avaliados2['pt']=$count_avaliados2['pt']+1;
+                                                                        }
+
+                                                                        if($valor2->mt !=null){
+                                                                            $count_avaliados2['mt']=$count_avaliados2['mt']+1;
+                                                                        }
+                                                                    }
+                                                                    ?>
+                                                                <td>{{$count_avaliados2['mac']}}</td>
+                                                                <td>{{$count_avaliados2['npp']}}</td>
+                                                                <td>{{$count_avaliados2['pt']}}</td>
+                                                                <td>{{$count_avaliados2['mt']}}</td>
+
+                                                                <!-- end segundo trimeste-->
+
+                                                               <!-- terceiro trimeste-->
+                                                               <?php
+                                                               $trimestre3 = ControladorNotas::getNotasEstudantes($getAno, 3);
+                                                               foreach ($trimestre3 as $valor3){
+                                                                   if($valor3->mac !=null){
+                                                                       $count_avaliados3['mac']=$count_avaliados3['mac']+1;
+                                                                   }
+
+                                                                   if($valor3->npp !=null){
+                                                                       $count_avaliados3['npp']=$count_avaliados3['npp']+1;
+                                                                   }
+
+                                                                   if($valor3->pt !=null){
+                                                                       $count_avaliados3['pt']=$count_avaliados3['pt']+1;
+                                                                   }
+
+                                                                   if($valor3->mt !=null){
+                                                                       $count_avaliados3['mt']=$count_avaliados3['mt']+1;
+                                                                   }
+                                                               }
+                                                               ?>
+                                                           <td>{{$count_avaliados3['mac']}}</td>
+                                                           <td>{{$count_avaliados3['npp']}}</td>
+                                                           <td>{{$count_avaliados3['pt']}}</td>
+                                                           <td>{{$count_avaliados3['mt']}}</td>
+
+                                                           <!-- end terceiro trimeste-->
+
+                                                           <!-- finals -->
+                                                            <td></td>
+                                                            <td></td>
+                                                            <!-- end finals-->
                                 </tr>
 
                                 <tr>

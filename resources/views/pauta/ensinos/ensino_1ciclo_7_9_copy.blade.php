@@ -119,7 +119,7 @@ $observacao_geralDB= $observacao_geral->quantidade_negativas;
                                             //conta disciplinas com negativa
                                             $count_obs ++;
                                             //adiciona disciplinas com defices no array
-                                            array_push($defice_disciplinas, $valorf->disciplina->sigla);
+                                            array_push($defice_disciplinas, $valorf->disciplina->disciplina);
                                             //faz a verificacao na observacao geral do controlador static, caso encontrar entao esta reprovado a variavel observacao vai ficar true caso nao encontrar prossiga
                                             $observacao_especifica = ControladorNotas::observacao_especifica($getDirector->turma->classe->id, $getDirector->turma->curso->id, $disciplina["id_disciplina"]);
                                             }

@@ -52,6 +52,32 @@ $count_positivasf = [
     'mf'=>0,
 ];
 
+$percent_positivas1 = [
+    'mac'=>0,
+    'npp'=>0,
+    'pt'=>0,
+    'mt'=>0,
+];
+
+$percent_positivas2 = [
+    'mac'=>0,
+    'npp'=>0,
+    'pt'=>0,
+    'mt'=>0,
+];
+
+$percent_positivas3 = [
+    'mac'=>0,
+    'npp'=>0,
+    'pt'=>0,
+    'mt'=>0,
+];
+
+$percent_positivasf = [
+    'mfd'=>0,
+    'mf'=>0,
+];
+
 $count_negativas1 = [
     'mac'=>0,
     'npp'=>0,
@@ -74,6 +100,32 @@ $count_negativas3 = [
 ];
 
 $count_negativasf = [
+    'mfd'=>0,
+    'mf'=>0,
+];
+
+$percent_negativas1 = [
+    'mac'=>0,
+    'npp'=>0,
+    'pt'=>0,
+    'mt'=>0,
+];
+
+$percent_negativas2 = [
+    'mac'=>0,
+    'npp'=>0,
+    'pt'=>0,
+    'mt'=>0,
+];
+
+$percent_negativas3 = [
+    'mac'=>0,
+    'npp'=>0,
+    'pt'=>0,
+    'mt'=>0,
+];
+
+$percent_negativasf = [
     'mfd'=>0,
     'mf'=>0,
 ];
@@ -441,7 +493,11 @@ $count_negativasf = [
                                 <tr>
                                     <td>% POSITIVAS</td>
 
-                                    <td></td>
+                                    <td>
+                                        <?php
+
+                                        ?>
+                                    </td>
                                     <td></td>
                                     <td></td>
                                     <td></td>

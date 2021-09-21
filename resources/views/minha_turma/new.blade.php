@@ -28,10 +28,19 @@
                 <div class="card-block">
 
                     {{Form::open(['method'=>"put", 'url'=>"/pautas/show/{$getDirector->id_turma}/{$getDirector->ano_lectivo}"])}}
+
+                    @if(session('error'))
+                    <div class="alert alert-danger">{{session('error')}}</div>
+                    @endif
+
+                    @if(session('success'))
+                    <div class="alert alert-success">{{session('success')}}</div>
+                    @endif
+
                     <div class="row">
                         <div class="col-md-6">
                             <button type="submit" class="btn btn-primary btn-sm float-left"><i class="ti-eye"></i>Visualizar</button>&nbsp;&nbsp;&nbsp;
-                            
+
                             <a href="/pautas/exports/{{$getDirector->id_turma}}/{{$getDirector->ano_lectivo}}" class="btn btn-warning btn-sm"><i class="ti-download"></i> Baixar</a>
 
                             <a href="#" class="btn btn-danger btn-sm float-right remover_todas"><i class="ti-trash" aria-hidden="true"></i></a>

@@ -78,6 +78,7 @@ class PautaController_copy extends Controller
             return back()->with(['error' => "Não encontrou"]);
         }
 
+        //verificar se e director desta turma
         if (Auth::user()->nivel_acesso == "professor") {
             $directorTurma = DirectorTurma::where([
                 'id_funcionario' => $funcionario->id,
@@ -88,12 +89,16 @@ class PautaController_copy extends Controller
                 return back()->with(['error' => "Não é Director desta turma"]);
             }
         }
+
         Session::put('ano_lectivoP', $ano_lectivo);
+
         $id_ensino = $turma->classe->id_ensino;
+
         $historico = HistoricEstudante::where([
             'id_turma' => $id_turma,
             'ano_lectivo' => $ano_lectivo
         ])->get()->sortby('estudante.pessoa.nome');
+
         $data = [
             'title' => "Pauta",
             'type' => "pauta",
@@ -103,6 +108,7 @@ class PautaController_copy extends Controller
             'getHistorico' => $historico,
         ];
 
+        //verificar se selecionou a ordem das disciplinas
         if (!Session::has('disciplinas')) {
             return back()->with(['error' => "Deve selecionar as disciplinas"]);
         }

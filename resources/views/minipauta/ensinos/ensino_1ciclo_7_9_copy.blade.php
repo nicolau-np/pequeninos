@@ -185,8 +185,8 @@ use App\Http\Controllers\ControladorNotas;
                                 <!-- fim dados finais-->
 
                                 <!-- obs -->
-                                        <td class="@if($valorf->mf<=9.5) negativo @else positivo @endif">
-                                            @if($valorf->mf<=9.5) Reprovado @else Aprovado @endif
+                                        <td class="@if($valorf->mf<=9.9) negativo @else positivo @endif">
+                                            @if($valorf->mf<=9.9) Reprovado @else Aprovado @endif
                                         </td>
                                 <!-- fim obs -->
                                 </tr>

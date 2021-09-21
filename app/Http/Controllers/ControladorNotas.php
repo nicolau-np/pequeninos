@@ -35,9 +35,9 @@ class ControladorNotas extends Controller
     public static function nota_20($nota)
     {
         $retorno = null;
-        if ($nota >= 9.5 && $nota <= 20) {
+        if ($nota >= 10 && $nota <= 20) {
             $retorno = "positivo";
-        } elseif ($nota >= 0 && $nota <= 9.4) {
+        } elseif ($nota >= 0 && $nota <= 9.9) {
             $retorno = "negativo";
         } elseif ($nota == "") {
             $retorno = "nenhum";

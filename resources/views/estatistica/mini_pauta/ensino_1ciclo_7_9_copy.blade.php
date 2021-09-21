@@ -52,6 +52,32 @@ $count_positivasf = [
     'mf'=>0,
 ];
 
+$count_negativas1 = [
+    'mac'=>0,
+    'npp'=>0,
+    'pt'=>0,
+    'mt'=>0,
+];
+
+$count_negativas2 = [
+    'mac'=>0,
+    'npp'=>0,
+    'pt'=>0,
+    'mt'=>0,
+];
+
+$count_negativas3 = [
+    'mac'=>0,
+    'npp'=>0,
+    'pt'=>0,
+    'mt'=>0,
+];
+
+$count_negativasf = [
+    'mfd'=>0,
+    'mf'=>0,
+];
+
 
 ?>
 @extends('layouts.app')
@@ -142,48 +168,59 @@ $count_positivasf = [
 
                                     <td>AVALIADOS</td>
 
-                                                                <!-- primeiro trimeste-->
-                                                                <?php
-                                                                    $trimestre1 = ControladorNotas::getNotasEstudantes($getAno, 1);
-                                                                    foreach ($trimestre1 as $valor1){
-                                                                        //lancados
-                                                                        if($valor1->mac !=null){
-                                                                            $count_avaliados1['mac']=$count_avaliados1['mac']+1;
-                                                                        }
+                                    <!-- primeiro trimeste-->
+                                    <?php
+                                    $trimestre1 = ControladorNotas::getNotasEstudantes($getAno, 1);
+                                    foreach ($trimestre1 as $valor1){
+                                    //lancados
+                                    if($valor1->mac !=null){
+                                    $count_avaliados1['mac']=$count_avaliados1['mac']+1;
+                                    }
 
-                                                                        if($valor1->npp !=null){
-                                                                            $count_avaliados1['npp']=$count_avaliados1['npp']+1;
-                                                                        }
+                                    if($valor1->npp !=null){
+                                    $count_avaliados1['npp']=$count_avaliados1['npp']+1;
+                                    }
+                                    if($valor1->pt !=null){
+                                    $count_avaliados1['pt']=$count_avaliados1['pt']+1;
+                                    }
 
-                                                                        if($valor1->pt !=null){
-                                                                            $count_avaliados1['pt']=$count_avaliados1['pt']+1;
-                                                                        }
+                                    if($valor1->mt !=null){
+                                    $count_avaliados1['mt']=$count_avaliados1['mt']+1;
+                                    }
+                                   //end
 
-                                                                        if($valor1->mt !=null){
-                                                                            $count_avaliados1['mt']=$count_avaliados1['mt']+1;
-                                                                        }
-                                                                        //end
+                                //positivas
+                                 if($valor1->mac >=10){
+                                  $count_positivas1['mac']=$count_positivas1['mac']+1;
+                                  }
+                                  if($valor1->npp >=10){
+                                 $count_positivas1['npp']=$count_positivas1['npp']+1;
+                                 }
+                                 if($valor1->pt >=10){
+                                 $count_positivas1['pt']=$count_positivas1['pt']+1;
+                                 }
+                                if($valor1->mt >=10){
+                                 $count_positivas1['mt']=$count_positivas1['mt']+1;
+                                }
+                               //end
 
-                                                                        //positivas
-                                                                        if($valor1->mac >=10){
-                                                                            $count_positivas1['mac']=$count_positivas1['mac']+1;
-                                                                        }
+                               //negativas
+                               if($valor1->mac <=9.9){
+                                  $count_negativas1['mac']=$count_negativas1['mac']+1;
+                                  }
+                                  if($valor1->npp <=9.9){
+                                 $count_negativas1['npp']=$count_negativas1['npp']+1;
+                                 }
+                                 if($valor1->pt <=9.9){
+                                 $count_negativas1['pt']=$count_negativas1['pt']+1;
+                                 }
+                                if($valor1->mt <=9.9){
+                                 $count_negativas1['mt']=$count_negativas1['mt']+1;
+                                }
+                               //end
 
-                                                                        if($valor1->npp >=10){
-                                                                            $count_positivas1['npp']=$count_positivas1['npp']+1;
-                                                                        }
-
-                                                                        if($valor1->pt >=10){
-                                                                            $count_positivas1['pt']=$count_positivas1['pt']+1;
-                                                                        }
-
-                                                                        if($valor1->mt >=10){
-                                                                            $count_positivas1['mt']=$count_positivas1['mt']+1;
-                                                                        }
-                                                                        //end
-
-                                                                    }
-                                                                    ?>
+                                }
+                                 ?>
                                                                 <td>{{$count_avaliados1['mac']}}</td>
                                                                 <td>{{$count_avaliados1['npp']}}</td>
                                                                 <td>{{$count_avaliados1['pt']}}</td>
@@ -230,6 +267,21 @@ $count_positivasf = [
                                                                             $count_positivas2['mt']=$count_positivas2['mt']+1;
                                                                         }
                                                                         //end
+
+                                //negativas
+                               if($valor2->mac <=9.9){
+                                  $count_negativas2['mac']=$count_negativas2['mac']+1;
+                                  }
+                                  if($valor2->npp <=9.9){
+                                 $count_negativas2['npp']=$count_negativas2['npp']+1;
+                                 }
+                                 if($valor2->pt <=9.9){
+                                 $count_negativas2['pt']=$count_negativas2['pt']+1;
+                                 }
+                                if($valor2->mt <=9.9){
+                                 $count_negativas2['mt']=$count_negativas2['mt']+1;
+                                }
+                               //end
                                                                     }
                                                                     ?>
                                                                 <td>{{$count_avaliados2['mac']}}</td>
@@ -279,6 +331,20 @@ $count_positivasf = [
                                                                             $count_positivas3['mt']=$count_positivas3['mt']+1;
                                                                         }
                                                                         //end
+                                //negativas
+                               if($valor3->mac <=9.9){
+                                  $count_negativas3['mac']=$count_negativas3['mac']+1;
+                                  }
+                                  if($valor3->npp <=9.9){
+                                 $count_negativas3['npp']=$count_negativas3['npp']+1;
+                                 }
+                                 if($valor3->pt <=9.9){
+                                 $count_negativas3['pt']=$count_negativas3['pt']+1;
+                                 }
+                                if($valor3->mt <=9.9){
+                                 $count_negativas3['mt']=$count_negativas3['mt']+1;
+                                }
+                               //end
                                                                }
                                                                ?>
                                                            <td>{{$count_avaliados3['mac']}}</td>
@@ -309,6 +375,16 @@ $count_positivasf = [
 
                                                                    if($valorf->mf >=10){
                                                                        $count_positivasf['mf']=$count_positivasf['mf']+1;
+                                                                   }
+                                                                   //end
+
+                                                                   //negativas
+                                                                   if($valorf->mfd <=9.9){
+                                                                       $count_negativasf['mfd']=$count_negativasf['mfd']+1;
+                                                                   }
+
+                                                                   if($valorf->mf <=9.9){
+                                                                       $count_negativasf['mf']=$count_negativasf['mf']+1;
                                                                    }
                                                                    //end
                                                                }
@@ -343,23 +419,23 @@ $count_positivasf = [
                                 <tr>
                                     <td>NEGATIVAS</td>
 
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{$count_negativas1['mac']}}</td>
+                                    <td>{{$count_negativas1['npp']}}</td>
+                                    <td>{{$count_negativas1['pt']}}</td>
+                                    <td>{{$count_negativas1['mt']}}</td>
 
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{$count_negativas2['mac']}}</td>
+                                    <td>{{$count_negativas2['npp']}}</td>
+                                    <td>{{$count_negativas2['pt']}}</td>
+                                    <td>{{$count_negativas2['mt']}}</td>
 
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{$count_negativas3['mac']}}</td>
+                                    <td>{{$count_negativas3['npp']}}</td>
+                                    <td>{{$count_negativas3['pt']}}</td>
+                                    <td>{{$count_negativas3['mt']}}</td>
 
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{$count_negativasf['mfd']}}</td>
+                                    <td>{{$count_negativasf['mf']}}</td>
                                 </tr>
 
                                 <tr>

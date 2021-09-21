@@ -36,10 +36,6 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/getDisciplinasCad', "AjaxController@getDisciplinasCad")->name('getDisciplinasCad');
     Route::post('/getHoras', "AjaxController@getHoras")->name('getHoras');
     Route::post('/getFuncionarios', "AjaxController@getFuncionarios")->name('getFuncionarios');
-    /*Route::post('/updateAvaliacao', "AjaxController@updateAvaliacao")->name('updateAvaliacao');
-    Route::post('/updateProva', "AjaxController@updateProva")->name('updateProva');*/
-    /*Route::post('/updateTrimestral', "AjaxController@updateTrimestral")->name('updatetrimestral');
-    Route::post('/updateGlobal', "AjaxController@updateGlobal")->name('updateGlobal');*/
 
     Route::post('/updateAvaliacao', "AjaxController@updateAvaliacao")->name('updateAvaliacao');
     Route::post('/updateProva', "AjaxController@updateProva")->name('updateProva');
@@ -217,13 +213,6 @@ Route::group(['prefix' => 'relatorios', 'middleware' => "auth"], function () {
     Route::get('/lista_nominal', "RelatorioController@lista_nominal");
 });
 
-/*Route::group(['prefix' => 'cadernetas', 'middleware' => "auth"], function () {
-    Route::get('/', "CadernetaController@index");
-    Route::get('/print/{id_turma}/{id_disciplina}/{ano_lectivo}', "ExportController@minipauta");
-    Route::get('/create/{id_turma}/{id_disciplina}/{ano_lectivo}/{epoca}', "CadernetaController@create");
-    Route::get('/store/{id_turma}/{id_disciplina}/{ano_lectivo}', "CadernetaController@store");
-    Route::get('/store_copy/{id_turma}/{id_disciplina}/{epoca}/{ano_lectivo}', "CadernetaController@store_copy");
-});*/
 
 Route::group(['prefix' => 'cadernetas', 'middleware' => "auth"], function () {
     Route::get('/', "CadernetaController_copy@index");
@@ -234,7 +223,6 @@ Route::group(['prefix' => 'cadernetas', 'middleware' => "auth"], function () {
 });
 
 Route::group(['prefix' => 'minipautas', 'middleware' => "auth"], function () {
-    /*Route::get('/show/{id_turma}/{id_disciplina}/{ano_lectivo}', "MiniPautaController@show");*/
     Route::get('/show/{id_turma}/{id_disciplina}/{ano_lectivo}', "MiniPautaController_copy@show");
 });
 
@@ -245,8 +233,8 @@ Route::group(['prefix' => 'minha_turma', 'middleware' => "auth"], function () {
 });
 
 Route::group(['prefix' => 'pautas', 'middleware' => "auth"], function () {
-    Route::get('/create/{id_turma}/{ano_lectivo}', "PautaController@create");
-    Route::put('/show/{id_turma}/{ano_lectivo}', "PautaController@show");
+    Route::get('/create/{id_turma}/{ano_lectivo}', "PautaController_copy@create");
+    Route::put('/show/{id_turma}/{ano_lectivo}', "PautaController_copy@show");
 
     Route::get('/exports/{id_turma}/{ano_lectivo}', "ExportController@pauta");
 });

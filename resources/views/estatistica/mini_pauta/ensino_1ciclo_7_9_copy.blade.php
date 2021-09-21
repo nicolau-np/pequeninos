@@ -472,14 +472,35 @@ table{
                                 <tr>
                                     <?php
                                     //primeiro trimestre
-                                    $percent_positivas1['mac'] = ($count_positivas1['mac']*100)/$count_avaliados1['mac'];
-                                    $percent_positivas1['npp'] = ($count_positivas1['npp']*100)/$count_avaliados1['npp'];
-                                    $percent_positivas1['pt'] = ($count_positivas1['pt']*100)/$count_avaliados1['pt'];
-                                    $percent_positivas1['mt'] = ($count_positivas1['mt']*100)/$count_avaliados1['mt'];
+                                    if($count_avaliados1['mac']==0){
+                                        $percent_positivas1['mac']=0;
+                                    else{
+                                        $percent_positivas1['mac'] = ($count_positivas1['mac']*100)/$count_avaliados1['mac'];
+                                    }
+                                    if($count_avaliados1['npp']==0){
+                                        $percent_positivas1['npp']=0;
+                                    else{
+                                        $percent_positivas1['npp'] = ($count_positivas1['npp']*100)/$count_avaliados1['npp'];
+                                    }
+                                    if($count_avaliados1['pt']==0){
+                                        $percent_positivas1['pt']=0;
+                                    else{
+                                        $percent_positivas1['pt'] = ($count_positivas1['pt']*100)/$count_avaliados1['pt'];
+                                    }
+                                    if($count_avaliados1['mt']==0){
+                                        $percent_positivas1['mt']=0;
+                                    else{
+                                        $percent_positivas1['mt'] = ($count_positivas1['mt']*100)/$count_avaliados1['mt'];
+                                    }
+
                                     //end primeiro trimestre
 
                                     //segundo trimestre
-                                    $percent_positivas2['mac'] = ($count_positivas2['mac']*100)/$count_avaliados2['mac'];
+                                    if($count_avaliados2['mac']==0){
+                                        $percent_positivas2['mac']=0;
+                                    else{
+                                        $percent_positivas2['mac'] = ($count_positivas2['mac']*100)/$count_avaliados2['mac'];
+                                    }
                                     $percent_positivas2['npp'] = ($count_positivas2['npp']*100)/$count_avaliados2['npp'];
                                     $percent_positivas2['pt'] = ($count_positivas2['pt']*100)/$count_avaliados2['pt'];
                                     $percent_positivas2['mt'] = ($count_positivas2['mt']*100)/$count_avaliados2['mt'];

@@ -88,7 +88,7 @@ $count_avaliados = 0;
                             <tbody>
                                 <tr>
                                     <?php
-                                        
+                                        $trimestre1 = ControladorNotas::getNotasEstudantes($getAno, 1);
                                         ?>
                                     <td>AVALIADOS</td>
 

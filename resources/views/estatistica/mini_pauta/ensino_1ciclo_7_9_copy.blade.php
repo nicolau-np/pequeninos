@@ -410,11 +410,11 @@ table{
                                                                    //end
 
                                                                    //negativas
-                                                                   if($valorf->mfd <=9.9){
+                                                                   if($valorf->mfd <=9.9 && $valorf->mfd !=null){
                                                                        $count_negativasf['mfd']=$count_negativasf['mfd']+1;
                                                                    }
 
-                                                                   if($valorf->mf <=9.9){
+                                                                   if($valorf->mf <=9.9 && $valorf->mf !=null){
                                                                        $count_negativasf['mf']=$count_negativasf['mf']+1;
                                                                    }
                                                                    //end

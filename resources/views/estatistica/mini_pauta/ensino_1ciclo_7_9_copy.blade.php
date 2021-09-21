@@ -135,29 +135,8 @@ $percent_negativasf = [
 @extends('layouts.app')
 @section('content')
 <style>
-.total{
-    font-weight:bold;
-    color: #4680ff;
-}
-.total_geral{
-    font-weight:bold;
-    font-size:13px;
-    color: #4680ff;
-}
-.tabEstatistica thead tr{
-
-}
-.positiva{
-    color:#fff;
-    background: #4680ff;
-}
-.negativa{
-    color:#fff;
-    background:#b10930;
-}
-.lancamento{
-    color:#fff;
-    background:#387d14;
+table{
+    font-size:12px;
 }
 
 </style>
@@ -491,29 +470,52 @@ $percent_negativasf = [
                                 </tr>
 
                                 <tr>
+                                    <?php
+                                    //primeiro trimestre
+                                    $percent_positivas1['mac'] = ($count_positivas1['mac']*100)/$count_avaliados1['mac'];
+                                    $percent_positivas1['npp'] = ($count_positivas1['npp']*100)/$count_avaliados1['npp'];
+                                    $percent_positivas1['pt'] = ($count_positivas1['pt']*100)/$count_avaliados1['pt'];
+                                    $percent_positivas1['mt'] = ($count_positivas1['mt']*100)/$count_avaliados1['mt'];
+                                    //end primeiro trimestre
+
+                                    //segundo trimestre
+                                    $percent_positivas2['mac'] = ($count_positivas2['mac']*100)/$count_avaliados2['mac'];
+                                    $percent_positivas2['npp'] = ($count_positivas2['npp']*100)/$count_avaliados2['npp'];
+                                    $percent_positivas2['pt'] = ($count_positivas2['pt']*100)/$count_avaliados2['pt'];
+                                    $percent_positivas2['mt'] = ($count_positivas2['mt']*100)/$count_avaliados2['mt'];
+                                    //end segundo trimestre
+
+                                    //terceiro trimestre
+                                    $percent_positivas3['mac'] = ($count_positivas3['mac']*100)/$count_avaliados3['mac'];
+                                    $percent_positivas3['npp'] = ($count_positivas3['npp']*100)/$count_avaliados3['npp'];
+                                    $percent_positivas3['pt'] = ($count_positivas3['pt']*100)/$count_avaliados3['pt'];
+                                    $percent_positivas3['mt'] = ($count_positivas3['mt']*100)/$count_avaliados3['mt'];
+                                    //end terceiro trimestre
+
+                                    //terceiro trimestre
+                                    $percent_positivasf['mfd'] = ($count_positivasf['mfd']*100)/$count_avaliadosf['mfd'];
+                                    $percent_positivasf['mf'] = ($count_positivasf['mf']*100)/$count_avaliadosf['mf'];
+                                    //end terceiro trimestre
+                                        ?>
                                     <td>% POSITIVAS</td>
 
-                                    <td>
-                                        <?php
+                                    <td>{{number_format($percent_positivas1['mac'],1,',','.')}}</td>
+                                    <td>{{number_format($percent_positivas1['npp'],1,',','.')}}</td>
+                                    <td>{{number_format($percent_positivas1['pt'],1,',','.')}}</td>
+                                    <td>{{number_format($percent_positivas1['mt'],1,',','.')}}</td>
 
-                                        ?>
-                                    </td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{number_format($percent_positivas2['mac'],1,',','.')}}</td>
+                                    <td>{{number_format($percent_positivas2['npp'],1,',','.')}}</td>
+                                    <td>{{number_format($percent_positivas2['pt'],1,',','.')}}</td>
+                                    <td>{{number_format($percent_positivas2['mt'],1,',','.')}}</td>
 
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{number_format($percent_positivas3['mac'],1,',','.')}}</td>
+                                    <td>{{number_format($percent_positivas3['npp'],1,',','.')}}</td>
+                                    <td>{{number_format($percent_positivas3['pt'],1,',','.')}}</td>
+                                    <td>{{number_format($percent_positivas3['mt'],1,',','.')}}</td>
 
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{number_format($percent_positivasf['mfd'],1,',','.')}}</td>
+                                    <td>{{number_format($percent_positivasf['mf'],1,',','.')}}</td>
                                 </tr>
 
                                 <tr>

@@ -561,23 +561,23 @@ table{
                                         ?>
                                     <td>% POSITIVAS</td>
 
-                                    <td>{{number_format($percent_positivas1['mac'],1,',','.')}}</td>
-                                    <td>{{number_format($percent_positivas1['npp'],1,',','.')}}</td>
-                                    <td>{{number_format($percent_positivas1['pt'],1,',','.')}}</td>
-                                    <td>{{number_format($percent_positivas1['mt'],1,',','.')}}</td>
+                                    <td>{{round($percent_positivas1['mac'],2)}}%</td>
+                                    <td>{{round($percent_positivas1['npp'],2)}}%</td>
+                                    <td>{{round($percent_positivas1['pt'],2)}}%</td>
+                                    <td>{{round($percent_positivas1['mt'],2)}}%</td>
 
-                                    <td>{{number_format($percent_positivas2['mac'],1,',','.')}}</td>
-                                    <td>{{number_format($percent_positivas2['npp'],1,',','.')}}</td>
-                                    <td>{{number_format($percent_positivas2['pt'],1,',','.')}}</td>
-                                    <td>{{number_format($percent_positivas2['mt'],1,',','.')}}</td>
+                                    <td>{{round($percent_positivas2['mac'],2)}}%</td>
+                                    <td>{{round($percent_positivas2['npp'],2)}}%</td>
+                                    <td>{{round($percent_positivas2['pt'],2)}}%</td>
+                                    <td>{{round($percent_positivas2['mt'],2)}}%</td>
 
-                                    <td>{{number_format($percent_positivas3['mac'],1,',','.')}}</td>
-                                    <td>{{number_format($percent_positivas3['npp'],1,',','.')}}</td>
-                                    <td>{{number_format($percent_positivas3['pt'],1,',','.')}}</td>
-                                    <td>{{number_format($percent_positivas3['mt'],1,',','.')}}</td>
+                                    <td>{{round($percent_positivas3['mac'],2)}}%</td>
+                                    <td>{{round($percent_positivas3['npp'],2)}}%</td>
+                                    <td>{{round($percent_positivas3['pt'],2)}}%</td>
+                                    <td>{{round($percent_positivas3['mt'],2)}}%</td>
 
-                                    <td>{{number_format($percent_positivasf['mfd'],1,',','.')}}</td>
-                                    <td>{{number_format($percent_positivasf['mf'],1,',','.')}}</td>
+                                    <td>{{round($percent_positivasf['mfd'],2)}}%</td>
+                                    <td>{{round($percent_positivasf['mf'],2)}}%</td>
                                 </tr>
 
                                 <tr>
@@ -672,23 +672,23 @@ table{
                                         ?>
                                     <td>% NEGATIVAS</td>
 
-                                    <td>{{number_format($percent_negativas1['mac'],1,',','.')}}</td>
-                                    <td>{{number_format($percent_negativas1['npp'],1,',','.')}}</td>
-                                    <td>{{number_format($percent_negativas1['pt'],1,',','.')}}</td>
-                                    <td>{{number_format($percent_negativas1['mt'],1,',','.')}}</td>
+                                    <td>{{round($percent_negativas1['mac'],2)}}%</td>
+                                    <td>{{round($percent_negativas1['npp'],2)}}%</td>
+                                    <td>{{round($percent_negativas1['pt'],2)}}%</td>
+                                    <td>{{round($percent_negativas1['mt'],2)}}%</td>
 
-                                    <td>{{number_format($percent_negativas2['mac'],1,',','.')}}</td>
-                                    <td>{{number_format($percent_negativas2['npp'],1,',','.')}}</td>
-                                    <td>{{number_format($percent_negativas2['pt'],1,',','.')}}</td>
-                                    <td>{{number_format($percent_negativas2['mt'],1,',','.')}}</td>
+                                    <td>{{round($percent_negativas2['mac'],2)}}%</td>
+                                    <td>{{round($percent_negativas2['npp'],2)}}%</td>
+                                    <td>{{round($percent_negativas2['pt'],2)}}%</td>
+                                    <td>{{round($percent_negativas2['mt'],2)}}%</td>
 
-                                    <td>{{number_format($percent_negativas3['mac'],1,',','.')}}</td>
-                                    <td>{{number_format($percent_negativas3['npp'],1,',','.')}}</td>
-                                    <td>{{number_format($percent_negativas3['pt'],1,',','.')}}</td>
-                                    <td>{{number_format($percent_negativas3['mt'],1,',','.')}}</td>
+                                    <td>{{round($percent_negativas3['mac'],2)}}%</td>
+                                    <td>{{round($percent_negativas3['npp'],2)}}%</td>
+                                    <td>{{round($percent_negativas3['pt'],2)}}%</td>
+                                    <td>{{round($percent_negativas3['mt'],2)}}%</td>
 
-                                    <td>{{number_format($percent_negativasf['mfd'],1,',','.')}}</td>
-                                    <td>{{number_format($percent_negativasf['mf'],1,',','.')}}</td>
+                                    <td>{{round($percent_negativasf['mfd'],2)}}%</td>
+                                    <td>{{round($percent_negativasf['mf'],2)}}%</td>
                                 </tr>
 
 

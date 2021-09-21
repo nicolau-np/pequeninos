@@ -236,16 +236,16 @@ table{
                                //end
 
                                //negativas
-                               if($valor1->mac <=9.9){
+                               if($valor1->mac <=9.9 && $valor1->mac !=null){
                                   $count_negativas1['mac']=$count_negativas1['mac']+1;
                                   }
-                                  if($valor1->npp <=9.9){
+                                  if($valor1->npp <=9.9 && $valor1->npp !=null){
                                  $count_negativas1['npp']=$count_negativas1['npp']+1;
                                  }
-                                 if($valor1->pt <=9.9){
+                                 if($valor1->pt <=9.9 && $valor1->pt !=null){
                                  $count_negativas1['pt']=$count_negativas1['pt']+1;
                                  }
-                                if($valor1->mt <=9.9){
+                                if($valor1->mt <=9.9 && $valor1->mt !=null){
                                  $count_negativas1['mt']=$count_negativas1['mt']+1;
                                 }
                                //end
@@ -300,16 +300,16 @@ table{
                                                                         //end
 
                                 //negativas
-                               if($valor2->mac <=9.9){
+                               if($valor2->mac <=9.9 && $valor2->mac !=null){
                                   $count_negativas2['mac']=$count_negativas2['mac']+1;
                                   }
-                                  if($valor2->npp <=9.9){
+                                  if($valor2->npp <=9.9 && $valor2->npp !=null){
                                  $count_negativas2['npp']=$count_negativas2['npp']+1;
                                  }
-                                 if($valor2->pt <=9.9){
+                                 if($valor2->pt <=9.9 && $valor2->pt !=null){
                                  $count_negativas2['pt']=$count_negativas2['pt']+1;
                                  }
-                                if($valor2->mt <=9.9){
+                                if($valor2->mt <=9.9 && $valor2->mt !=null){
                                  $count_negativas2['mt']=$count_negativas2['mt']+1;
                                 }
                                //end
@@ -363,16 +363,16 @@ table{
                                                                         }
                                                                         //end
                                 //negativas
-                               if($valor3->mac <=9.9){
+                               if($valor3->mac <=9.9 && $valor3->mac !=null){
                                   $count_negativas3['mac']=$count_negativas3['mac']+1;
                                   }
-                                  if($valor3->npp <=9.9){
+                                  if($valor3->npp <=9.9 && $valor3->npp !=null){
                                  $count_negativas3['npp']=$count_negativas3['npp']+1;
                                  }
-                                 if($valor3->pt <=9.9){
+                                 if($valor3->pt <=9.9 && $valor3->pt !=null){
                                  $count_negativas3['pt']=$count_negativas3['pt']+1;
                                  }
-                                if($valor3->mt <=9.9){
+                                if($valor3->mt <=9.9 && $valor3->mt !=null){
                                  $count_negativas3['mt']=$count_negativas3['mt']+1;
                                 }
                                //end
@@ -474,22 +474,22 @@ table{
                                     //primeiro trimestre
                                     if($count_avaliados1['mac']==0){
                                         $percent_positivas1['mac']=0;
-                                    else{
+                                    }else{
                                         $percent_positivas1['mac'] = ($count_positivas1['mac']*100)/$count_avaliados1['mac'];
                                     }
                                     if($count_avaliados1['npp']==0){
                                         $percent_positivas1['npp']=0;
-                                    else{
+                                    }else{
                                         $percent_positivas1['npp'] = ($count_positivas1['npp']*100)/$count_avaliados1['npp'];
                                     }
                                     if($count_avaliados1['pt']==0){
                                         $percent_positivas1['pt']=0;
-                                    else{
+                                    }else{
                                         $percent_positivas1['pt'] = ($count_positivas1['pt']*100)/$count_avaliados1['pt'];
                                     }
                                     if($count_avaliados1['mt']==0){
                                         $percent_positivas1['mt']=0;
-                                    else{
+                                    }else{
                                         $percent_positivas1['mt'] = ($count_positivas1['mt']*100)/$count_avaliados1['mt'];
                                     }
 
@@ -498,22 +498,22 @@ table{
                                     //segundo trimestre
                                     if($count_avaliados2['mac']==0){
                                         $percent_positivas2['mac']=0;
-                                    else{
+                                    }else{
                                         $percent_positivas2['mac'] = ($count_positivas2['mac']*100)/$count_avaliados2['mac'];
                                     }
                                     if($count_avaliados2['npp']==0){
                                         $percent_positivas2['npp']=0;
-                                    else{
+                                    }else{
                                         $percent_positivas2['npp'] = ($count_positivas2['npp']*100)/$count_avaliados2['npp'];
                                     }
                                     if($count_avaliados2['pt']==0){
                                         $percent_positivas2['pt']=0;
-                                    else{
+                                    }else{
                                         $percent_positivas2['pt'] = ($count_positivas2['pt']*100)/$count_avaliados2['pt'];
                                     }
                                     if($count_avaliados2['mt']==0){
                                         $percent_positivas2['mt']=0;
-                                    else{
+                                    }else{
                                         $percent_positivas2['mt'] = ($count_positivas2['mt']*100)/$count_avaliados2['mt'];
                                     }
 
@@ -522,17 +522,41 @@ table{
                                     //terceiro trimestre
                                     if($count_avaliados3['mac']==0){
                                         $percent_positivas3['mac']=0;
-                                    else{
+                                    }else{
                                     $percent_positivas3['mac'] = ($count_positivas3['mac']*100)/$count_avaliados3['mac'];
                                     }
+                                    if($count_avaliados3['npp']==0){
+                                        $percent_positivas3['npp']=0;
+                                    }else{
                                     $percent_positivas3['npp'] = ($count_positivas3['npp']*100)/$count_avaliados3['npp'];
+                                    }
+                                    if($count_avaliados3['pt']==0){
+                                        $percent_positivas3['pt']=0;
+                                    }else{
                                     $percent_positivas3['pt'] = ($count_positivas3['pt']*100)/$count_avaliados3['pt'];
+                                    }
+                                    if($count_avaliados3['mt']==0){
+                                        $percent_positivas3['mt']=0;
+                                    }else{
                                     $percent_positivas3['mt'] = ($count_positivas3['mt']*100)/$count_avaliados3['mt'];
+                                    }
+
                                     //end terceiro trimestre
 
                                     //terceiro trimestre
-                                    $percent_positivasf['mfd'] = ($count_positivasf['mfd']*100)/$count_avaliadosf['mfd'];
-                                    $percent_positivasf['mf'] = ($count_positivasf['mf']*100)/$count_avaliadosf['mf'];
+                                    if($count_avaliadosf['mfd']==0){
+                                        $percent_positivasf['mfd'] = 0;
+                                    }else{
+                                        $percent_positivasf['mfd'] = ($count_positivasf['mfd']*100)/$count_avaliadosf['mfd'];
+                                    }
+
+                                    if($count_avaliadosf['mf']==0){
+                                        $percent_positivasf['mf'] = 0;
+                                    }else{
+                                        $percent_positivasf['mf'] = ($count_positivasf['mf']*100)/$count_avaliadosf['mf'];
+                                    }
+
+
                                     //end terceiro trimestre
                                         ?>
                                     <td>% POSITIVAS</td>

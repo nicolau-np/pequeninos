@@ -254,15 +254,7 @@
                                 <li class="@if($menu=="Directores de Turma") active @endif">
                                     <a href="/directores/">
                                         <span class="pcoded-micon"><i class="ti-briefcase"></i><b>D</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Directores de Turma</span>
-                                        <span class="pcoded-mcaret"></span>
-                                    </a>
-                                </li>
-
-                                <li class="@if($menu=="Encarregados") active @endif">
-                                    <a href="/encarregados/">
-                                        <span class="pcoded-micon"><i class="ti-layout-media-overlay-alt"></i><b>E</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Encarregados</span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Directores</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -271,6 +263,14 @@
                                     <a href="/estudantes/">
                                         <span class="pcoded-micon"><i class="ti-id-badge"></i><b>F</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Estudantes</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                                <li class="@if($menu=="Turmas") active @endif">
+                                    <a href="/turmas/">
+                                        <span class="pcoded-micon"><i class="ti-layers"></i><b>T</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Turmas</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
@@ -386,6 +386,15 @@
                                         </li>
 
                                     </ul>
+                                </li>
+
+
+                                <li class="@if($menu=="Encarregados") active @endif">
+                                    <a href="/encarregados/">
+                                        <span class="pcoded-micon"><i class="ti-layout-media-overlay-alt"></i><b>E</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.dash.main">Encarregados</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
                                 </li>
                                 @endif
 

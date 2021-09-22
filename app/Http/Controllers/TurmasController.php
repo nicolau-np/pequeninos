@@ -18,7 +18,7 @@ class TurmasController extends Controller
         $data = [
             'title' => "Turmas",
             'type' => "turmas",
-            'menu' => "Turmas",
+            'menu' => "Turma",
             'submenu' => "Listar",
             'getEnsinos' => $ensinos,
             'getAno'=>$ano_lectivo,

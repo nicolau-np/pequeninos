@@ -50,7 +50,7 @@ use App\Http\Controllers\ControladorStatic;
                                         ?>
                                             @if ($getTurmas->count()==0)
                                                 <div class="col-md-12">
-                                                    <span style="font-size:12px;">Nenhuma turma encontrada para este ensino</span><br/><br/>
+                                                    <span style="font-size:12px;">Nenhuma turma encontrada para este ensino</span>
                                                 </div>
 
                                             @else
@@ -75,7 +75,9 @@ use App\Http\Controllers\ControladorStatic;
                                                                     <a href="/relatorios/lista_nominal/{{$turmas->id}}/{{$getAno}}" type="button" class="btn btn-danger btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="" data-original-title="Lista Nominal">
                                                                         <i class="ti-printer"></i>
                                                                     </a>&nbsp;
-
+                                                                    <a href="#" type="button" class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Estatística">
+                                                                        <i class="icofont icofont-chart-bar-graph"></i>
+                                                                    </a>&nbsp;
                                                                 </div>
                                                                 </span>
                                                             </div>

@@ -65,7 +65,12 @@
                         $data_string = explode('-', $historico->estudante->pessoa->data_nascimento);
                         $idade = date('Y') - $data_string[0];
                         ?>
+                        @if ($idade==0)
+                        ---
+                        @else
                         {{$idade}}
+                        @endif
+
                     </td>
                     </tr>
                     @endforeach

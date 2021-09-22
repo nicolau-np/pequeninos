@@ -96,7 +96,7 @@ class ControladorNotas extends Controller
         return $retorno;
     }
 
-    public function estado_nota_qualitativa($nota)
+    public static function estado_nota_qualitativa($nota)
     {
         $retorno = null;
         if ($nota >= 8 && $nota <= 10) {

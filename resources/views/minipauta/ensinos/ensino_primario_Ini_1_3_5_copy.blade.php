@@ -14,7 +14,7 @@ use App\Http\Controllers\ControladorNotas;
         color: #333;
     }
     .neutro{
-        color: green;
+        color: #FFB64D;
     }
     .tabela{
         font-size: 12px;
@@ -53,6 +53,15 @@ use App\Http\Controllers\ControladorNotas;
                 </div>
                 <div class="card-block">
                     <div class="row">
+                        <div class="col-md-12">
+                            <p>
+                                <label class="badge badge-danger">MAU => [1-2]</label>&nbsp;&nbsp;&nbsp;
+                                <label class="badge badge-danger">MEDÍUCRE => [3-4]</label>&nbsp;&nbsp;&nbsp;
+                                <label class="badge badge-warning">SÚFICE => [5-6]</label>&nbsp;&nbsp;&nbsp;
+                                <label class="badge badge-success">BOM => [7-8]</label>&nbsp;&nbsp;&nbsp;
+                                <label class="badge badge-success">MUITO BOM => [9-10]</label>&nbsp;&nbsp;&nbsp;
+                            </p>
+                        </div>
                        <div class="col-lg-12 col-xl-12">
                        <div class="table-responsive tabela">
                            <table class="table table-bordered table-striped">
@@ -117,10 +126,10 @@ use App\Http\Controllers\ControladorNotas;
                                                 $v4_valor = ControladorNotas::estado_nota_qualitativa($valor1->mt);
                                             ?>
 
-                                                <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$v1_valor}} @endif</td>
-                                                <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{$v2_valor}} @endif</td>
-                                                <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{$v3_valor}} @endif</td>
-                                                <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{$v4_valor}} @endif</td>
+                                                <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$v1_valor}} @endif</td>
+                                                <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$v2_valor}} @endif</td>
+                                                <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$v3_valor}} @endif</td>
+                                                <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$v4_valor}} @endif</td>
                                             <?php }}?>
                                     <!-- fim primeiro trimestre-->
 
@@ -147,10 +156,10 @@ use App\Http\Controllers\ControladorNotas;
                                                 $v4_valor = ControladorNotas::estado_nota_qualitativa($valor2->mt);
                                             ?>
 
-                                                <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$v1_valor}} @endif</td>
-                                                <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{$v2_valor}} @endif</td>
-                                                <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{$v3_valor}} @endif</td>
-                                                <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{$v4_valor}} @endif</td>
+                                                <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{$v1_valor}} @endif</td>
+                                                <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{$v2_valor}} @endif</td>
+                                                <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{$v3_valor}} @endif</td>
+                                                <td class="{{$v4_estilo}}">@if($valor2->mt==null) --- @else {{$v4_valor}} @endif</td>
                                             <?php }}?>
                                     <!-- fim segundo trimestre-->
 
@@ -196,9 +205,12 @@ use App\Http\Controllers\ControladorNotas;
                                         foreach ($final as $valorf){
                                         $v1_estilo = ControladorNotas::nota_10Qualitativa($valorf->mfd);
                                         $v2_estilo = ControladorNotas::nota_10Qualitativa($valorf->mf);
+
+                                        $v1_valor = ControladorNotas::estado_nota_qualitativa($valorf->mfd);
+                                        $v2_valor = ControladorNotas::estado_nota_qualitativa($valorf->mf);
                                 ?>
-                                    <td class="{{$v1_estilo}}">@if($valorf->mfd==null) --- @else {{$valorf->mfd}} @endif</td>
-                                    <td class="{{$v2_estilo}}">@if($valorf->mf==null) --- @else {{$valorf->mf}} @endif</td>
+                                    <td class="{{$v1_estilo}}">@if($valorf->mfd==null) --- @else {{$v1_valor}} @endif</td>
+                                    <td class="{{$v2_estilo}}">@if($valorf->mf==null) --- @else {{$v2_valor}} @endif</td>
                                 <?php }}?>
                                 <!-- fim dados finais-->
 

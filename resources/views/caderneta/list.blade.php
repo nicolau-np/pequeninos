@@ -1,3 +1,6 @@
+<?php
+use App\Http\Controllers\ControladorStatic;
+?>
 @extends('layouts.app')
 @section('content')
 
@@ -35,6 +38,11 @@
                     Nenhuma turma encontrada
                     @else
                     @foreach ($getHorario as $horario)
+                    <?php
+                        $numero_estudantes = 0;
+                        $getEstudantes = ControladorStatic::getTotalEstudantesTurma($horario->id_turma, $horario->ano_lectivo);
+                        $numero_estudantes = $getEstudantes->count();
+                     ?>
                     <div class="col-md-4 col-xl-4">
                         <div class="card widget-card-1">
                             <div class="card-block-small">
@@ -43,7 +51,7 @@
                             <h4 style="font-size:20px;">Turma: {{$horario->turma->turma}}</h4>
                                 <div>
                                     <span class="f-left m-t-10 text-muted">
-                                        Ano Lectivo: {{$horario->ano_lectivo}}
+                                        Ano: {{$horario->ano_lectivo}} &nbsp;&nbsp; <b>[ {{$numero_estudantes}} ]</b>
                                         <hr/>
                                        <div class="operacoes">
                                         <a href="/cadernetas/create/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}/1" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="" data-original-title="Inserir Notas">

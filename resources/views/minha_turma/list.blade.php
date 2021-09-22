@@ -1,3 +1,6 @@
+<?php
+use App\Http\Controllers\ControladorStatic;
+?>
 @extends('layouts.app')
 @section('content')
 
@@ -23,6 +26,11 @@
                       Nenhuma Turma
                 @else
                 @foreach ($getTurmas as $turmas)
+                <?php
+                        $numero_estudantes = 0;
+                        $getEstudantes = ControladorStatic::getTotalEstudantesTurma($turmas->id_turma, $turmas->ano_lectivo);
+                        $numero_estudantes = $getEstudantes->count();
+                     ?>
                 <div class="col-md-4 col-xl-4">
                     <div class="card widget-card-1">
                         <div class="card-block-small">
@@ -31,7 +39,7 @@
                         <h4 style="font-size:20px;">Turma: {{$turmas->turma->turma}}</h4>
                             <div>
                                 <span class="f-left m-t-10 text-muted">
-                                    Ano Lectivo: {{$turmas->ano_lectivo}}
+                                    Ano: {{$turmas->ano_lectivo}}&nbsp;&nbsp;<b>[ {{$numero_estudantes}} ]</b>
                                     <hr/>
                                    <div class="operacoes">
                                     <a href="/pautas/create/{{$turmas->id_turma}}/{{$turmas->ano_lectivo}}" type="button" class="btn btn-danger btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pauta">

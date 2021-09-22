@@ -60,6 +60,7 @@ class CadernetaController_copy extends Controller
         }
         //buscando ensino atraves de turma
         $id_ensino = $turma->classe->id_ensino;
+        $classe = $turma->classe->classe;
 
         //pegando ano lectivo e verificando
         $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
@@ -147,7 +148,14 @@ class CadernetaController_copy extends Controller
         ];
 
         if ($id_ensino == 1) {//iniciacao ate 6
-            return "ensino primario iniciacao ate 6 classe";
+            //se for classificacao quantitativa
+            if(($classe=="2ª classe") || ($classe=="4ª classe") || ($classe=="6ª classe")){
+                return view('caderneta.ensinos.ensino_primario_2_4_6', $data);
+            }//se for classificacao quantitativa
+            elseif(($classe=="Iniciação") || ($classe=="1ª classe") || ($classe=="3ª classe") || ($classe=="5ª classe")){
+                return view('caderneta.ensinos.ensino_primario_Ini_1_3_5', $data);
+            }
+
         } elseif ($id_ensino == 2) {//7 classe ate 9 ensino geral
             return view('caderneta.ensinos.ensino_1ciclo_7_9_copy', $data);
         }

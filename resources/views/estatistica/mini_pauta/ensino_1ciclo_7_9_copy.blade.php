@@ -236,16 +236,16 @@ table{
                                //end
 
                                //negativas
-                               if($valor1->mac <=9.9 && $valor1->mac !=null){
+                               if($valor1->mac <=9.99 && $valor1->mac !=null){
                                   $count_negativas1['mac']=$count_negativas1['mac']+1;
                                   }
-                                  if($valor1->npp <=9.9 && $valor1->npp !=null){
+                                  if($valor1->npp <=9.99 && $valor1->npp !=null){
                                  $count_negativas1['npp']=$count_negativas1['npp']+1;
                                  }
-                                 if($valor1->pt <=9.9 && $valor1->pt !=null){
+                                 if($valor1->pt <=9.99 && $valor1->pt !=null){
                                  $count_negativas1['pt']=$count_negativas1['pt']+1;
                                  }
-                                if($valor1->mt <=9.9 && $valor1->mt !=null){
+                                if($valor1->mt <=9.99 && $valor1->mt !=null){
                                  $count_negativas1['mt']=$count_negativas1['mt']+1;
                                 }
                                //end
@@ -300,16 +300,16 @@ table{
                                                                         //end
 
                                 //negativas
-                               if($valor2->mac <=9.9 && $valor2->mac !=null){
+                               if($valor2->mac <=9.99 && $valor2->mac !=null){
                                   $count_negativas2['mac']=$count_negativas2['mac']+1;
                                   }
-                                  if($valor2->npp <=9.9 && $valor2->npp !=null){
+                                  if($valor2->npp <=9.99 && $valor2->npp !=null){
                                  $count_negativas2['npp']=$count_negativas2['npp']+1;
                                  }
-                                 if($valor2->pt <=9.9 && $valor2->pt !=null){
+                                 if($valor2->pt <=9.99 && $valor2->pt !=null){
                                  $count_negativas2['pt']=$count_negativas2['pt']+1;
                                  }
-                                if($valor2->mt <=9.9 && $valor2->mt !=null){
+                                if($valor2->mt <=9.99 && $valor2->mt !=null){
                                  $count_negativas2['mt']=$count_negativas2['mt']+1;
                                 }
                                //end
@@ -363,16 +363,16 @@ table{
                                                                         }
                                                                         //end
                                 //negativas
-                               if($valor3->mac <=9.9 && $valor3->mac !=null){
+                               if($valor3->mac <=9.99 && $valor3->mac !=null){
                                   $count_negativas3['mac']=$count_negativas3['mac']+1;
                                   }
-                                  if($valor3->npp <=9.9 && $valor3->npp !=null){
+                                  if($valor3->npp <=9.99 && $valor3->npp !=null){
                                  $count_negativas3['npp']=$count_negativas3['npp']+1;
                                  }
-                                 if($valor3->pt <=9.9 && $valor3->pt !=null){
+                                 if($valor3->pt <=9.99 && $valor3->pt !=null){
                                  $count_negativas3['pt']=$count_negativas3['pt']+1;
                                  }
-                                if($valor3->mt <=9.9 && $valor3->mt !=null){
+                                if($valor3->mt <=9.99 && $valor3->mt !=null){
                                  $count_negativas3['mt']=$count_negativas3['mt']+1;
                                 }
                                //end
@@ -410,11 +410,11 @@ table{
                                                                    //end
 
                                                                    //negativas
-                                                                   if($valorf->mfd <=9.9 && $valorf->mfd !=null){
+                                                                   if($valorf->mfd <=9.99 && $valorf->mfd !=null){
                                                                        $count_negativasf['mfd']=$count_negativasf['mfd']+1;
                                                                    }
 
-                                                                   if($valorf->mf <=9.9 && $valorf->mf !=null){
+                                                                   if($valorf->mf <=9.99 && $valorf->mf !=null){
                                                                        $count_negativasf['mf']=$count_negativasf['mf']+1;
                                                                    }
                                                                    //end

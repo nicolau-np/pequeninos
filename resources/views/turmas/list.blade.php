@@ -9,9 +9,9 @@ use App\Http\Controllers\ControladorStatic;
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>{{$submenu}}
+                    <h5>{{$submenu}} <i class="ti-angle-right"></i>
                         @foreach ($getAnos as $anos)
-                        <a href="/turmas/{{$anos->ano_lectivo}}" style="color:#4680ff;">{{$anos->ano_lectivo}}</a>
+                        <a href="/turmas/list/{{$anos->ano_lectivo}}" style="color:#4680ff;">{{$anos->ano_lectivo}}</a>
                         <i class="ti-angle-right"></i>
                         @endforeach
                     </h5>
@@ -45,7 +45,9 @@ use App\Http\Controllers\ControladorStatic;
                                             $getTurmas = ControladorStatic::getTurmaEnsino($curso->id_ensino);
                                         ?>
                                             @if ($getTurmas->count()==0)
-                                                Nenhuma turma encontrada
+                                                <div class="col-md-12">
+                                                    Nenhuma turma encontrada
+                                                </div>
                                             @else
 
                                                 @foreach ($getTurmas as $turmas)

@@ -183,7 +183,7 @@ class ControladorStatic extends Controller
         ];
         $turmas = Turma::whereHas('curso', function ($query) use ($data){
             $query->where($data);
-        })->get()->sortBy('curso.classe.id');
+        })->where('turma', '!=', "Nenhuma")->get()->sortBy('curso.classe.id');
 
         return $turmas;
     }

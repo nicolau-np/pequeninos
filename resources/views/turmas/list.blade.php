@@ -37,6 +37,20 @@ use App\Http\Controllers\ControladorStatic;
                     <div class="col-md-12">
                         <div class="row">
                             <div class="col-md-12">
+
+                        <div class="card-block accordion-block color-accordion-block">
+                            <div class="color-accordion" id="color-accordion">
+
+                                <a class="accordion-msg b-none">Dados Pessoais</a>
+                                <div class="accordion-desc">
+
+                                </div>
+
+                                </div>
+                            </div>
+
+
+
                                 @foreach ($getEnsinos as $ensinos)
                                 <span style="color:#4680ff; font-weight: bold; font-size:14px;">{{$ensinos->ensino}}</span>
                                 <br/><br/>
@@ -88,6 +102,10 @@ use App\Http\Controllers\ControladorStatic;
                             </div>
 
                         </div>
+
+
+                        </div>
+
                     </div>
                    </div>
                 </div>

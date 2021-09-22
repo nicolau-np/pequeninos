@@ -192,7 +192,7 @@ use App\Http\Controllers\ControladorNotas;
                                         <td>---</td>
                                         @else
                                         <td class="@if($valorf->mf<=4.99 && $valorf->mf!=null) negativo @else positivo @endif">
-                                            @if($valorf->mf<=4.99) NÃO TRANSITA @else TRANSITA @endif
+                                            @if($valorf->mf<=4.99 && $valorf->mf!=null) NÃO TRANSITA @else TRANSITA @endif
                                         </td>
                                 @endif
                                 <!-- fim obs -->

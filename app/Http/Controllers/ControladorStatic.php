@@ -177,8 +177,15 @@ class ControladorStatic extends Controller
     }
 
 
-    public static function getTurmaEnsino(){
-        $turmas = Turma::
+    public static function getTurmaEnsino($ensino){
+        $data = [
+            'id_ensino'=>$ensino
+        ];
+        $turmas = Turma::whereHas('curso', function ($query) use ($data){
+            $query->where($data);
+        })->sortBy('curso.classe')->get();
+
+        return $turmas;
     }
 
 

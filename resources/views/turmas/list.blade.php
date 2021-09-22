@@ -1,3 +1,6 @@
+<?php
+use App\Http\Controllers\ControladorStatic;
+?>
 @extends('layouts.app')
 @section('content')
 
@@ -30,10 +33,14 @@
                         <div class="row">
                             <div class="col-md-12">
                                 @foreach ($getEnsinos as $ensinos)
-                            {{$ensinos->ensino}} {{$getAno->ano_lectivo}}<hr/>
+                            {{$ensinos->ensino}} {{$getAno}}<hr/>
                                 <div class="row">
-                                    @foreach ($ensinos->curso as $item)
-                                    {{$item->curso}}<br/>
+                                    @foreach ($ensinos->curso as $curso)
+                                        <?php
+                                            $turmas = ControladorStatic::getTurmaEnsino($curso->id_ensino);
+                                        ?>
+
+                                        {{$turmas->id}}
                                     @endforeach
 
 

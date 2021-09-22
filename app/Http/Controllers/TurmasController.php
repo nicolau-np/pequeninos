@@ -10,14 +10,14 @@ class TurmasController extends Controller
 {
     public function index(){
         $ensinos = Ensino::orderBy('id', 'asc')->get();
-        $ano_lectivo = AnoLectivo::orderBy('id', "desc")->get();
+        //$ano_lectivo = AnoLectivo::orderBy('id', "desc")->get();
         $data = [
             'title' => "Turmas",
             'type' => "turmas",
             'menu' => "Turmas",
             'submenu' => "Listar",
             'getEnsinos' => $ensinos,
-            'getAno'=>$ano_lectivo,
+            'getAno'=>"2021-2022",
         ];
         return view('turmas.list', $data);
     }

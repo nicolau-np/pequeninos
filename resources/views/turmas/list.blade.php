@@ -30,8 +30,13 @@
                         <div class="row">
                             <div class="col-md-12">
                                 @foreach ($getEnsinos as $ensinos)
-                                {{$ensinos->ensino}}<hr/>
+                            {{$ensinos->ensino}} {{$getAno->ano_lectivo}}<hr/>
                                 <div class="row">
+                                    @foreach ($ensinos->curso as $item)
+                                    {{$item->curso}}<br/>
+                                    @endforeach
+
+
                                     <div class="col-md-4 col-xl-4">
                                         <div class="card widget-card-1">
                                             <div class="card-block-small">

@@ -5,15 +5,9 @@ namespace App\Http\Controllers;
 use App\Disciplina;
 use App\Estudante;
 use App\Horario;
-use App\NotaFinal;
-use App\NotaTrimestral;
-use App\ObservacaoGeral;
-use App\ObservacaoUnica;
 use App\Pagamento;
 use App\PagamentoPai;
-use App\TipoPagamento;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
+use App\Turma;
 
 class ControladorStatic extends Controller
 {
@@ -166,31 +160,6 @@ class ControladorStatic extends Controller
         return $pagamentos;
     }
 
-    /*public static function getValoresMiniPautaTrimestral($id_estudante, $epoca)
-    {
-        $data = [
-            'id_estudante' => $id_estudante,
-            'epoca' => $epoca,
-            'id_disciplina' => Session::get('id_disciplinaMIN'),
-            'ano_lectivo' => Session::get('ano_lectivoMIN'),
-        ];
-        $trimestral = NotaTrimestral::where($data)->get();
-        return $trimestral;
-    }*/
-
-    /*public static function getValoresMiniPautaFinal($id_estudante)
-    {
-        $data = [
-            'id_estudante' => $id_estudante,
-            'id_disciplina' => Session::get('id_disciplinaMIN'),
-            'ano_lectivo' => Session::get('ano_lectivoMIN'),
-        ];
-        $final = NotaFinal::where($data)->get();
-        return $final;
-    }*/
-
-
-
     public static function getDisciplinaID($id_disciplina){
         $disciplina = Disciplina::find($id_disciplina);
         return $disciplina;
@@ -205,6 +174,11 @@ class ControladorStatic extends Controller
         ];
         $horario = Horario::where($data)->get();
         return $horario;
+    }
+
+
+    public static function getTurmaEnsino(){
+        $turmas = Turma::
     }
 
 

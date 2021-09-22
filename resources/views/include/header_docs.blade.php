@@ -1,8 +1,8 @@
 <div>
     <p style="text-align: center;">
-        Complexo Escolar Privado "Sitio dos Pequeninos"-Moçâmedes<br/>
+        COMPLEXO ESCOLAR PRIVADO<br/>
         ENSINO PARTICULAR<br/>
-        COMPLEXO ESCOLAR PRIVADO "SITIO DOS PEQUENINOS"-MOÇÂMEDES<br/>
+        SITIO DOS PEQUENINOS-MOÇÂMEDES<br/>
     </p>
 </div>
 

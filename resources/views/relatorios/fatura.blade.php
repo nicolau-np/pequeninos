@@ -48,11 +48,7 @@
 <body>
     <div class="header">
         <div class="desc_empresa">
-        <p>
-               <span style="font-weight: bold;">COMPLEXO ESCOLAR LAR DOS PEQUENINOS <BR/>
-               DAS IRMÃS DO SANTÍSSIMO SALVADOR-HUAMBO</span><BR/>
-               NIF: 5121019874<BR/>
-        </p>
+        @include('include.header_docs_left')
         </div>
         <div class="desc_cliente">
             <p>
@@ -62,7 +58,7 @@
                 HUAMBO-ANGOLA
               </span>
             </p>
-            
+
         </div>
         <br/><br/><br/><br/>
     </div>
@@ -99,7 +95,7 @@
                             @endforeach
                         </td>
                        </tr>
-                     
+
                     </tbody>
                 </table>
 
@@ -115,7 +111,7 @@
                         <?php
                         $total = 0;
                         $created_at = null;
-                        
+
                         foreach ($getPagamento as $pagamento){
                         $created_at = $pagamento->created_at;
                         $total = $total + $pagamento->preco;
@@ -125,7 +121,7 @@
                             <td>{{number_format($pagamento->preco,2,',','.')}}</td>
                             </tr>
                         <?php }?>
-                       
+
                     </tbody>
                 </table>
                 <p style="font-size:14px;">
@@ -163,7 +159,7 @@
                     <?php
                     $total = 0;
                     $created_at = null;
-                    
+
                     foreach ($getPagamento as $pagamento){
                     $created_at = $pagamento->created_at;
                     $total = $total + $pagamento->preco;
@@ -173,7 +169,7 @@
                         <td>{{number_format($pagamento->preco,2,',','.')}}</td>
                         </tr>
                     <?php }?>
-                   
+
                 </tbody>
             </table>
             <p style="font-size:14px;">
@@ -198,7 +194,7 @@
             -----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
         </p>
      </div>
-    
+
 
 
 
@@ -219,7 +215,7 @@
                 HUAMBO-ANGOLA
               </span>
             </p>
-            
+
         </div>
         <br/><br/><br/><br/>
     </div>
@@ -256,7 +252,7 @@
                             @endforeach
                         </td>
                        </tr>
-                     
+
                     </tbody>
                 </table>
 
@@ -272,7 +268,7 @@
                         <?php
                         $total = 0;
                         $created_at = null;
-                        
+
                         foreach ($getPagamento as $pagamento){
                         $created_at = $pagamento->created_at;
                         $total = $total + $pagamento->preco;
@@ -282,7 +278,7 @@
                             <td>{{number_format($pagamento->preco,2,',','.')}}</td>
                             </tr>
                         <?php }?>
-                       
+
                     </tbody>
                 </table>
                 <p style="font-size:14px;">
@@ -320,7 +316,7 @@
                     <?php
                     $total = 0;
                     $created_at = null;
-                    
+
                     foreach ($getPagamento as $pagamento){
                     $created_at = $pagamento->created_at;
                     $total = $total + $pagamento->preco;
@@ -330,7 +326,7 @@
                         <td>{{number_format($pagamento->preco,2,',','.')}}</td>
                         </tr>
                     <?php }?>
-                   
+
                 </tbody>
             </table>
             <p style="font-size:14px;">

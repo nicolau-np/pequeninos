@@ -38,7 +38,8 @@ use App\Http\Controllers\ControladorStatic;
                         <div class="row">
                             <div class="col-md-12">
                                 @foreach ($getEnsinos as $ensinos)
-                            {{$ensinos->ensino}} {{$getAno}}<hr/>
+                                <span style="color:#4680ff; font-weight: bold; font-size:14px;">{{$ensinos->ensino}}</span>
+                                <br/><br/>
                                 <div class="row">
                                     @foreach ($ensinos->curso as $curso)
                                         <?php
@@ -46,8 +47,9 @@ use App\Http\Controllers\ControladorStatic;
                                         ?>
                                             @if ($getTurmas->count()==0)
                                                 <div class="col-md-12">
-                                                    Nenhuma turma encontrada
+                                                    <span style="font-size:12px;">Nenhuma turma encontrada para este ensino</span><br/><br/>
                                                 </div>
+
                                             @else
 
                                                 @foreach ($getTurmas as $turmas)

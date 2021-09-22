@@ -40,21 +40,10 @@ use App\Http\Controllers\ControladorStatic;
 
                         <div class="card-block accordion-block color-accordion-block">
                             <div class="color-accordion" id="color-accordion">
-
-                                <a class="accordion-msg b-none">Dados Pessoais</a>
-                                <div class="accordion-desc">
-
-                                </div>
-
-                                </div>
-                            </div>
-
-
-
                                 @foreach ($getEnsinos as $ensinos)
-                                <span style="color:#4680ff; font-weight: bold; font-size:14px;">{{$ensinos->ensino}}</span>
-                                <br/><br/>
-                                <div class="row">
+                                <a class="accordion-msg b-none">{{$ensinos->ensino}}</a>
+                                <div class="accordion-desc">
+                                    <div class="row">
                                     @foreach ($ensinos->curso as $curso)
                                         <?php
                                             $getTurmas = ControladorStatic::getTurmaEnsino($curso->id_ensino);
@@ -76,11 +65,11 @@ use App\Http\Controllers\ControladorStatic;
                                                     <div class="card widget-card-1">
                                                         <div class="card-block-small">
                                                             <i class="ti-layers bg-c-blue card1-icon"></i>
-                                                        <span class="text-c-blue f-w-600">Matriculados: {{$numero_estudantes}}</span>
+                                                        <span class="text-c-blue f-w-600">{{$curso->curso}}</span>
                                                         <h4 style="font-size:20px;">Turma: {{$turmas->turma}}</h4>
                                                             <div>
                                                                 <span class="f-left m-t-10 text-muted">
-                                                                    Ano Lectivo: {{$getAno}}
+                                                                    Ano: {{$getAno}}&nbsp;&nbsp; <b>[ {{$numero_estudantes}} ]</b>
                                                                     <hr/>
                                                                 <div class="operacoes">
                                                                     <a href="/relatorios/lista_nominal/{{$turmas->id}}/{{$getAno}}" type="button" class="btn btn-danger btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="" data-original-title="Lista Nominal">
@@ -98,7 +87,11 @@ use App\Http\Controllers\ControladorStatic;
 
                                     @endforeach
                                 </div>
+                                </div>
                                 @endforeach
+                                </div>
+                            </div>
+
                             </div>
 
                         </div>

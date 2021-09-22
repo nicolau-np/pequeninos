@@ -110,12 +110,17 @@ use App\Http\Controllers\ControladorNotas;
                                                 $v2_estilo = ControladorNotas::nota_10Qualitativa($valor1->npp);
                                                 $v3_estilo = ControladorNotas::nota_10Qualitativa($valor1->pt);
                                                 $v4_estilo = ControladorNotas::nota_10Qualitativa($valor1->mt);
+
+                                                $v1_valor = ControladorNotas::estado_nota_qualitativa($valor1->mac);
+                                                $v2_valor = ControladorNotas::estado_nota_qualitativa($valor1->npp);
+                                                $v3_valor = ControladorNotas::estado_nota_qualitativa($valor1->pt);
+                                                $v4_valor = ControladorNotas::estado_nota_qualitativa($valor1->mt);
                                             ?>
 
-                                    <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$valor1->mac}} @endif</td>
-                                    <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$valor1->npp}} @endif</td>
-                                    <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$valor1->pt}} @endif</td>
-                                    <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$valor1->mt}} @endif</td>
+                                                <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$v1_valor}} @endif</td>
+                                                <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{$v2_valor}} @endif</td>
+                                                <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{$v3_valor}} @endif</td>
+                                                <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{$v4_valor}} @endif</td>
                                             <?php }}?>
                                     <!-- fim primeiro trimestre-->
 
@@ -135,12 +140,17 @@ use App\Http\Controllers\ControladorNotas;
                                                 $v2_estilo = ControladorNotas::nota_10Qualitativa($valor2->npp);
                                                 $v3_estilo = ControladorNotas::nota_10Qualitativa($valor2->pt);
                                                 $v4_estilo = ControladorNotas::nota_10Qualitativa($valor2->mt);
+
+                                                $v1_valor = ControladorNotas::estado_nota_qualitativa($valor2->mac);
+                                                $v2_valor = ControladorNotas::estado_nota_qualitativa($valor2->npp);
+                                                $v3_valor = ControladorNotas::estado_nota_qualitativa($valor2->pt);
+                                                $v4_valor = ControladorNotas::estado_nota_qualitativa($valor2->mt);
                                             ?>
 
-                                    <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{$valor2->mac}} @endif</td>
-                                    <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{$valor2->npp}} @endif</td>
-                                    <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{$valor2->pt}} @endif</td>
-                                    <td class="{{$v4_estilo}}">@if($valor2->mt==null) --- @else {{$valor2->mt}} @endif</td>
+                                                <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$v1_valor}} @endif</td>
+                                                <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{$v2_valor}} @endif</td>
+                                                <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{$v3_valor}} @endif</td>
+                                                <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{$v4_valor}} @endif</td>
                                             <?php }}?>
                                     <!-- fim segundo trimestre-->
 
@@ -160,12 +170,17 @@ use App\Http\Controllers\ControladorNotas;
                                              $v2_estilo = ControladorNotas::nota_10Qualitativa($valor3->npp);
                                              $v3_estilo = ControladorNotas::nota_10Qualitativa($valor3->pt);
                                              $v4_estilo = ControladorNotas::nota_10Qualitativa($valor3->mt);
+
+                                             $v1_valor = ControladorNotas::estado_nota_qualitativa($valor3->mac);
+                                             $v2_valor = ControladorNotas::estado_nota_qualitativa($valor3->npp);
+                                             $v3_valor = ControladorNotas::estado_nota_qualitativa($valor3->pt);
+                                             $v4_valor = ControladorNotas::estado_nota_qualitativa($valor3->mt);
                                          ?>
 
-                                 <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$valor3->mac}} @endif</td>
-                                 <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{$valor3->npp}} @endif</td>
-                                 <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{$valor3->pt}} @endif</td>
-                                 <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{$valor3->mt}} @endif</td>
+                                 <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$v1_valor}} @endif</td>
+                                 <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{$v2_valor}} @endif</td>
+                                 <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{$v3_valor}} @endif</td>
+                                 <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{$v4_valor}} @endif</td>
                                          <?php }}?>
                                  <!-- fim terceiro trimestre-->
 

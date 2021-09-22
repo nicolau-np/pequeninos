@@ -155,7 +155,6 @@ class CadernetaController_copy extends Controller
             elseif(($classe=="Iniciação") || ($classe=="1ª classe") || ($classe=="3ª classe") || ($classe=="5ª classe")){
                 return view('caderneta.ensinos.ensino_primario_Ini_1_3_5', $data);
             }
-
         } elseif ($id_ensino == 2) {//7 classe ate 9 ensino geral
             return view('caderneta.ensinos.ensino_1ciclo_7_9_copy', $data);
         }

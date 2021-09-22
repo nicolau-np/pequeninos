@@ -209,7 +209,7 @@ class AjaxController extends Controller
     public function updateAvaliacao(Request $request)
     {
         $request->validate([
-            'valor' => ['required', 'numeric', 'min:0'],
+            'valor' => ['required', 'numeric', 'min:0', 'max:20'],
             'campo' => ['required', 'string', 'min:3', 'max:3'],
             'id_trimestral' => ['required', 'integer', 'min:1'],
         ]);
@@ -378,7 +378,7 @@ class AjaxController extends Controller
     public function updateProva(Request $request)
     {
         $request->validate([
-            'valor' => ['required', 'numeric', 'min:0'],
+            'valor' => ['required', 'numeric', 'min:0', 'max:20'],
             'campo' => ['required', 'string', 'min:2', 'max:3'],
             'id_trimestral' => ['required', 'integer', 'min:1'],
         ]);

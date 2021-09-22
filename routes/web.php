@@ -164,6 +164,10 @@ Route::group(['prefix' => 'estudantes', 'middleware' => "auth"], function () {
     Route::put('/store_declaracao/{id_estudante}', "EstudanteController@store_declaracao");
 });
 
+Route::group(['prefix'=>"turmas", 'middleware'=>"auth"], function(){
+    Route::get('/', "TurmasController@index");
+});
+
 Route::group(['prefix' => 'pagamentos', 'middleware' => "auth"], function () {
     Route::get('/listar/{id_estudante}/{ano_lectivo}', "PagamentoController@listar");
     Route::get('/create/{id_tipo_pagamento}', "PagamentoController@create");

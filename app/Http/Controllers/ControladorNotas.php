@@ -50,7 +50,7 @@ class ControladorNotas extends Controller
         $retorno = null;
         if ($nota >= 10 && $nota <= 20) {
             $retorno = "positivo";
-        } elseif ($nota >= 0 && $nota <= 9.9) {
+        } elseif ($nota >= 0 && $nota <= 9.99) {
             $retorno = "negativo";
         } elseif ($nota == "") {
             $retorno = "nenhum";

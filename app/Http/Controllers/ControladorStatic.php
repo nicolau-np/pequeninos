@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Disciplina;
 use App\Estudante;
+use App\HistoricEstudante;
 use App\Horario;
 use App\Pagamento;
 use App\PagamentoPai;
@@ -160,37 +161,44 @@ class ControladorStatic extends Controller
         return $pagamentos;
     }
 
-    public static function getDisciplinaID($id_disciplina){
+    public static function getDisciplinaID($id_disciplina)
+    {
         $disciplina = Disciplina::find($id_disciplina);
         return $disciplina;
     }
 
-    public static function getHorario($id_hora, $id_turma, $ano_lectivo, $semana){
+    public static function getHorario($id_hora, $id_turma, $ano_lectivo, $semana)
+    {
         $data = [
             'id_turma' => $id_turma,
-            'ano_lectivo'=>$ano_lectivo,
-            'id_hora'=>$id_hora,
-            'semana'=>$semana,
+            'ano_lectivo' => $ano_lectivo,
+            'id_hora' => $id_hora,
+            'semana' => $semana,
         ];
         $horario = Horario::where($data)->get();
         return $horario;
     }
 
 
-    public static function getTurmaEnsino($ensino){
+    public static function getTurmaEnsino($ensino)
+    {
         $data = [
-            'id_ensino'=>$ensino
+            'id_ensino' => $ensino
         ];
-        $turmas = Turma::whereHas('curso', function ($query) use ($data){
+        $turmas = Turma::whereHas('curso', function ($query) use ($data) {
             $query->where($data);
         })->where('turma', '!=', "Nenhuma")->get()->sortBy('curso.classe.id');
 
         return $turmas;
     }
 
-    public static function getTotalEstudantesTurma($id_turma, $ano_lectivo){
-        
+    public static function getTotalEstudantesTurma($id_turma, $ano_lectivo)
+    {
+        $data = [
+            'id_turma' => $id_turma,
+            'ano_lectivo' => $ano_lectivo,
+        ];
+        $estudantes = HistoricEstudante::where($data)->get();
+        return $estudantes;
     }
-
-
 }

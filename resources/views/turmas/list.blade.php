@@ -55,7 +55,8 @@ use App\Http\Controllers\ControladorStatic;
                                                 @foreach ($getTurmas as $turmas)
                                                 <?php
                                                     $numero_estudantes = 0;
-                                                    $getEstudantes = 
+                                                    $getEstudantes = $getTotalEstudantesTurma($id_turma, $ano_lectivo);
+                                                    $numero_estudantes = $getEstudantes->count();
                                                 ?>
                                                 <div class="col-md-4 col-xl-4">
                                                     <div class="card widget-card-1">

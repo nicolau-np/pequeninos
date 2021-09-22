@@ -862,10 +862,23 @@ class InstitucionalController extends Controller
     }
 
     public function especifica_edit($id_observacao){
-
+        $observacao=ObservacaoUnica::find($id_observacao);
+        if(!$observacao){
+            return back()->with(['error' => "Não encontrou"]);
+        }
+        $cursos = Curso::pluck('curso', 'id');
+        $data = [
+            'title' => "Observações",
+            'type' => "institucional",
+            'menu' => "Observações",
+            'submenu' => "Geral",
+            'getCursos' => $cursos,
+            'getObservacao' =>$observacao,
+        ];
+        return view('institucional.observacaoes.observacao_especifica.edit', $data);
     }
 
     public function especifica_update(Request $request, $id_observacao){
-        
+
     }
 }

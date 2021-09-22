@@ -879,6 +879,26 @@ class InstitucionalController extends Controller
     }
 
     public function especifica_update(Request $request, $id_observacao){
+        $observacao=ObservacaoUnica::find($id_observacao);
+        if(!$observacao){
+            return back()->with(['error' => "Não encontrou"]);
+        }
+        $request->validate([
+            'curso' => ['required', 'integer', 'min:1'],
+            'classe' => ['required', 'integer', 'min:1'],
+            'disciplina' => ['required', 'integer', 'min:1'],
+        ]);
 
+        $data = [
+            'id_curso' => $request->curso,
+            'id_classe' => $request->classe,
+            'id_disciplina' => $request->disciplina,
+            'quantidade_negativas' => 1,
+            'estado' => "on",
+        ];
+
+        if (ObservacaoUnica::find($id_observacao)->update($data)) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
     }
 }

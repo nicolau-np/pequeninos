@@ -60,7 +60,9 @@
                                 <div class="col-md-3">
                                     {{Form::label('disciplina', "Disciplina")}} <span class="text-danger">*</span>
                                     <span class="load_disciplinas">
-                                    {{Form::select('disciplina', [], null, ['class'=>"form-control", 'placeholder'=>"Disciplina"])}}
+                                    {{Form::select('disciplina', [
+                                       $getObservacao->id_disciplina=>$getObservacao->disciplina->disciplina
+                                    ], $getObservacao->id_disciplina, ['class'=>"form-control", 'placeholder'=>"Disciplina"])}}
                                 </span>
                                 <div class="erro">
                                     @if($errors->has('disciplina'))

@@ -10,7 +10,7 @@
 <div style="text-align: center; margin-top:10%;">
 <h1>Página Não encontrada</h1>
 <br/>
-<p>Voltar para a <a href="/">Página Principal</a></p>
+<p>Voltar para a <a href="/home">Página Principal</a></p>
 </div>
 </body>
 </html>

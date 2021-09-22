@@ -69,7 +69,7 @@ use App\Http\Controllers\ControladorStatic;
                                                                     Ano Lectivo: {{$getAno}}
                                                                     <hr/>
                                                                 <div class="operacoes">
-                                                                    <a href="#" type="button" class="btn btn-danger btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="" data-original-title="Lista Nominal">
+                                                                    <a href="/relatorios/lista_nominal/{{$turmas->id}}/{{$getAno}}" type="button" class="btn btn-danger btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="" data-original-title="Lista Nominal">
                                                                         <i class="ti-printer"></i>
                                                                     </a>&nbsp;
 

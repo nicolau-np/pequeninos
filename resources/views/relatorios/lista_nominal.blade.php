@@ -10,29 +10,40 @@
         font-family: Arial, Helvetica, sans-serif;
         font-size: 12px;
     }
+    .mini-cabecalho{
+        display: block;
+    }
+    .ano_curso{
+        float: left;
+    }
+    .periodo{
+        float: right;
+    }
 </style>
 </head>
 <body>
     <div class="cabecalho">
-
+        @include('include.header_docs')
     </div>
-    <div class="mini-cabecalho">
-        <p style="text-align: center; font-weight:bold;">Lista Nominal</p>
-        <p>
-            Curso: {{$getTurma->curso->curso}}<br/>
-            Turma: {{$getTurma->turma}}<br/>
-            Classe: {{$getTurma->classe->classe}}<br/>
-            Ano Lectivo: {{$getAno}}<br/>
-        </p>
+    <div class="titulo">
+        <p style="text-align: center; font-weight:bold;">LISTA NOMINAL</p>
      </div>
-
+     <div class="mini-cabecalho">
+        <div class="ano_curso">
+            {{$getAno}}
+        </div>
+        <div class="periodo">
+            Turno: {{$getTurma->turno->turno}}<br/>
+        </div>
+     </div>
+    <br/><br/>
      <div class="corpo">
          <div class="table-resposive">
              <table border="1">
                 <thead>
                     <tr>
                         <th>Nº</th>
-                        <th>Estudante</th>
+                        <th>NOME COMPLETO</th>
                         <th>Gênero</th>
                         <th>Idade</th>
                     </tr>
@@ -45,7 +56,7 @@
                     <td>{{$historico->estudante->pessoa->nome}}</td>
                     <td>{{$historico->estudante->pessoa->genero}}</td>
                     <td>
-                        <?php 
+                        <?php
                         $data_string = explode('-', $historico->estudante->pessoa->data_nascimento);
                         $idade = date('Y') - $data_string[0];
                         ?>

@@ -9,7 +9,12 @@ use App\Http\Controllers\ControladorStatic;
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>{{$submenu}}</h5>
+                    <h5>{{$submenu}}
+                        @foreach ($getAnos as $anos)
+                        <a href="#" style="color:#4680ff;">{{$anos->ano_lectivo}}</a>
+                        <i class="ti-angle-right"></i>
+                        @endforeach
+                    </h5>
                     <span></span>
                     <div class="card-header-right">
 
@@ -49,10 +54,10 @@ use App\Http\Controllers\ControladorStatic;
                                                         <div class="card-block-small">
                                                             <i class="ti-layers bg-c-blue card1-icon"></i>
                                                         <span class="text-c-blue f-w-600">#</span>
-                                                        <h4 style="font-size:20px;">Turma: #</h4>
+                                                        <h4 style="font-size:20px;">Turma: {{$turmas->turma}}</h4>
                                                             <div>
                                                                 <span class="f-left m-t-10 text-muted">
-                                                                    Ano Lectivo: #
+                                                                    Ano Lectivo: {{$getAno}}
                                                                     <hr/>
                                                                 <div class="operacoes">
                                                                     <a href="#" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="" data-original-title="Inserir Notas">

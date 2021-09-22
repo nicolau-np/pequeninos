@@ -6,7 +6,11 @@ use App\Http\Controllers\ControladorStatic;
 @section('content')
 <?php
 $observacao_geral = ControladorNotas::observacao_geral($getDirector->turma->classe->id,$getDirector->turma->curso->id);
+if(!$observacao_geral){
+    $observacao_geralDB=22;
+}else{
 $observacao_geralDB= $observacao_geral->quantidade_negativas;
+}
 ?>
 <style>
     .positivo{

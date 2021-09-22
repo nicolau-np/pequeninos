@@ -52,9 +52,15 @@
         </div>
         <div class="desc_cliente">
             <p>
+            @if ($getHistorico->estudante->encarregado->pessoa->nome=="Encarregado Exemplo")
+
+            @else
               Exmo Sr(a).  <BR/>
               <span style="font-weight: bold;">
                 {{$getHistorico->estudante->encarregado->pessoa->nome}}<br/>
+              </span>
+            @endif
+              <span style="font-weight: bold;">
                 NAMIBE-ANGOLA
               </span>
             </p>
@@ -205,9 +211,15 @@
         </div>
         <div class="desc_cliente">
             <p>
+            @if ($getHistorico->estudante->encarregado->pessoa->nome=="Encarregado Exemplo")
+
+            @else
               Exmo Sr(a).  <BR/>
               <span style="font-weight: bold;">
                 {{$getHistorico->estudante->encarregado->pessoa->nome}}<br/>
+              </span>
+            @endif
+              <span style="font-weight: bold;">
                 NAMIBE-ANGOLA
               </span>
             </p>

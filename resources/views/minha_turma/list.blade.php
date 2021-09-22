@@ -22,8 +22,9 @@ use App\Http\Controllers\ControladorStatic;
                     </div>
                 </div>
                 <div class="card-block">
-                  @if ($getTurmas->count()==0)
-                      Nenhuma Turma
+                <div class="row">
+               @if ($getTurmas->count()==0)
+                    <div class="col-md-12">Nenhuma Turma</div>
                 @else
                 @foreach ($getTurmas as $turmas)
                 <?php
@@ -60,9 +61,11 @@ use App\Http\Controllers\ControladorStatic;
                         </div>
                     </div>
                 </div>
-                @endforeach
-                  @endif
 
+                @endforeach
+
+                  @endif
+                </div>
                 </div>
             </div>
         </div>

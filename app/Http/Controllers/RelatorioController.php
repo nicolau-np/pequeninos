@@ -67,7 +67,7 @@ class RelatorioController extends Controller
             'curso' => ['required', 'Integer'],
             'classe' => ['required', 'Integer'],
             'turma' => ['required', 'Integer'],
-            'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
+            'ano_lectivo' => ['required', 'string', 'min:10', 'max:255'],
         ]);
 
         $tipo_pagamento = TipoPagamento::find($request->tipo_pagamento);
@@ -113,7 +113,7 @@ class RelatorioController extends Controller
     public function lista_comparticipacao(Request $request)
     {
         $request->validate([
-            'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
+            'ano_lectivo' => ['required', 'string', 'max:255'],
         ]);
         $ano_lectivo = AnoLectivo::find($request->ano_lectivo);
         if (!$ano_lectivo) {

@@ -20,26 +20,30 @@ $trimestre_totais = [
         font-family: Arial, Helvetica, sans-serif;
         font-size: 12px;
     }
-    .tr_especial{
+    /*.tr_especial{
             background-color: #f5f5f5;
             font-weight: bold;
-        }
+        }*/
         .header{
             text-align: center;
+            font-weight: bold;
+        }
+        table thead{
+            background-color: #4680ff;
+            color: #fff;
             font-weight: bold;
         }
 </style>
 </head>
 <body>
     <div class="header">
-        DIRECÇÃO PROVINCIAL DA EDUCAÇÃO CIÊNCIA E TECNOLOGIA<BR/>
-        COMPLEXO ESCOLAR LAR DOS PEQUENINOS<BR/>
-        DAS IRMÃS DO SANTÍSSIMO SALVADOR-HUAMBO<BR/>
+        @include('include.header_docs')
     </div>
 
     <div class="body-header">
-        <br/><br/>
-        <p style="text-align: center; font-weight: bold;">Lista de Comparticipação de Encarregados referente {{$getAno->ano_lectivo}}</p>
+        <p style="text-align: center; font-weight: bold;">LISTA DE COMPARTICIPAÇÃO DE ENCARREGADOS</p>
+        <br/>
+        ANO LECTIVO: [ {{$getAno->ano_lectivo}} ]<br/><br/>
     </div>
 
     <div class="tabela">
@@ -47,11 +51,11 @@ $trimestre_totais = [
             <thead>
                 <tr class="tr_especial">
                     <th>Nº</th>
-                    <th>Nome do Encarregado</th>
-                    <th>Telefone</th>
-                    <th>Educandos</th>
+                    <th>ENCARREGADO</th>
+                    <th>TELEFONE</th>
+                    <th>ESTUDANTE</th>
                     @foreach ($trimestres as $epoca)
-                       <th>{{$epoca}}</th>
+                       <th>{{strtoupper($epoca)}}</th>
                     @endforeach
                 </tr>
             </thead>

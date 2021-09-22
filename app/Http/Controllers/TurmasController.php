@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class TurmasController extends Controller
 {
     public function index(){
-        $ensinos = Ensino::all();
+        $ensinos = Ensino::orderBy('id', 'desc')->get();
         $data = [
             'title' => "Turmas",
             'type' => "turmas",

@@ -112,6 +112,7 @@ Route::group(['prefix' => 'institucional', 'middleware' => "auth"], function () 
             Route::get('/create', "InstitucionalController@geral_create");
             Route::post('/store', "InstitucionalController@geral_store");
             Route::get('/edit/{id_observacao}', "InstitucionalController@geral_edit");
+            Route::put('/update/{id_observacao}', "InstitucionalController@geral_update");
         });
 
         Route::group(['prefix' =>"especifica"], function(){

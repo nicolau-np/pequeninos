@@ -27,7 +27,7 @@
                     @if(session('success'))
                     <div class="alert alert-success">{{session('success')}}</div>
                     @endif
-                        {{Form::open(['method'=>"post", 'url'=>"/institucional/observacoes/geral/update/{$getObservacao->id}"])}}
+                        {{Form::open(['method'=>"put", 'url'=>"/institucional/observacoes/geral/update/{$getObservacao->id}"])}}
                         @csrf
                         <fieldset>
                             <legend><i class="ti-list"></i> Dados do preço</legend>
@@ -69,7 +69,7 @@
 
                                 <div class="col-md-2">
                                     {{Form::label('quantidade_negativas', "Q. Negativas")}} <span class="text-danger">*</span>
-                                    {{Form::number('quantidade_negativas', null, ['class'=>"form-control", 'placeholder'=>"Q. Negativas"])}}
+                                    {{Form::number('quantidade_negativas', $getObservacao->quantidade_negativas, ['class'=>"form-control", 'placeholder'=>"Q. Negativas"])}}
                                     <div class="erro">
                                         @if($errors->has('quantidade_negativas'))
                                         <div class="text-danger">{{$errors->first('quantidade_negativas')}}</div>

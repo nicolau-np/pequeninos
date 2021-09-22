@@ -763,10 +763,11 @@ class InstitucionalController extends Controller
         }
     }
 
-    public function geral_edit($id_observacao){
+    public function geral_edit($id_observacao)
+    {
         $observacao = ObservacaoGeral::find($id_observacao);
-        if(!$observacao){
-            return back()->with(['error'=>"Não encontrou"]);
+        if (!$observacao) {
+            return back()->with(['error' => "Não encontrou"]);
         }
 
         $cursos = Curso::pluck('curso', 'id');
@@ -776,9 +777,37 @@ class InstitucionalController extends Controller
             'menu' => "Observações",
             'submenu' => "Geral",
             'getCursos' => $cursos,
-            'getObservacao' =>$observacao,
+            'getObservacao' => $observacao,
         ];
         return view('institucional.observacaoes.observacao_geral.edit', $data);
+    }
+
+    public function geral_update(Request $request, $id_observacao)
+    {
+        $observacao = ObservacaoGeral::find($id_observacao);
+        if (!$observacao) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+        $request->validate([
+            'designacao' => ['required', 'string', 'min:3', 'max:255'],
+            'quantidade_negativas' => ['required', 'integer', 'min:1'],
+            'curso' => ['required', 'integer', 'min:1'],
+            'classe' => ['required', 'integer', 'min:1'],
+        ]);
+
+        $data['create'] = [
+            'id_curso' => $request->curso,
+            'id_classe' => $request->classe,
+            'designacao' => $request->designacao,
+            'quantidade_negativas' => $request->quantidade_negativas,
+            'estado' => "on",
+        ];
+
+        if (ObservacaoGeral::find($id_observacao)->update($data['create'])) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        } else {
+            return back()->with(['error' => "Já Cadastrou"]);
+        }
     }
 
     public function especifica_list()

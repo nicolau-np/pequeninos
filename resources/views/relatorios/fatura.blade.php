@@ -96,8 +96,8 @@
                 <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 60%">
                     <thead>
                         <tr class="tr_especial">
-                        <th>Encarregado</th>
-                        <th>Educandos</th>
+                        <th>ENCARREGADO</th>
+                        <th>ESTUDANTE</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -129,8 +129,8 @@
                 <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 60%;">
                     <thead>
                         <tr class="tr_especial">
-                            <th>Epoca</th>
-                            <th>Valor(Akz)</th>
+                            <th>EPOCA</th>
+                            <th>VALOR (Akz)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -160,11 +160,11 @@
             <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%">
             <thead>
                 <tr class="tr_especial">
-                    <td>Nº Processo</td>
-                    <td>Nome completo</td>
-                    <td>Classe</td>
-                    <td>Turma</td>
-                    <td>Turno</td>
+                    <td>Nº PROCESSO</td>
+                    <td>NOME COMPLETO</td>
+                    <td>CLASSE</td>
+                    <td>TURMA</td>
+                    <td>TURNO</td>
                 </tr>
             </thead>
             <tbody>
@@ -181,8 +181,8 @@
             <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 60%;">
                 <thead>
                     <tr class="tr_especial">
-                        <th>Epoca</th>
-                        <th>Valor (Akz)</th>
+                        <th>EPOCA</th>
+                        <th>VALOR (Akz)</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -273,8 +273,8 @@
                 <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 60%">
                     <thead>
                         <tr class="tr_especial">
-                        <th>Encarregado</th>
-                        <th>Educandos</th>
+                        <th>ENCARREGADO</th>
+                        <th>ESTUDANTE</th>
                         </tr>
                     </thead>
 
@@ -307,8 +307,8 @@
                 <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 60%;">
                     <thead>
                         <tr class="tr_especial">
-                            <th>Epoca</th>
-                            <th>Valor(Akz)</th>
+                            <th>EPOCA</th>
+                            <th>VALOR (Akz)</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -338,11 +338,11 @@
             <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%">
                 <thead>
                 <tr class="tr_especial">
-                    <td>Nº Processo</td>
-                    <td>Nome completo</td>
-                    <td>Classe</td>
-                    <td>Turma</td>
-                    <td>Turno</td>
+                    <td>Nº PROCESSO</td>
+                    <td>NOME COMPLETO</td>
+                    <td>CLASSE</td>
+                    <td>TURMA</td>
+                    <td>TURNO</td>
                 </tr>
             </thead>
             <tbody>
@@ -359,8 +359,8 @@
             <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 60%;">
                 <thead>
                     <tr class="tr_especial">
-                        <th>Epoca</th>
-                        <th>Valor (Akz)</th>
+                        <th>EPOCA</th>
+                        <th>VALOR (Akz)</th>
                     </tr>
                 </thead>
                 <tbody>

@@ -67,7 +67,7 @@ class RelatorioController extends Controller
             'curso' => ['required', 'Integer'],
             'classe' => ['required', 'Integer'],
             'turma' => ['required', 'Integer'],
-            'ano_lectivo' => ['required', 'string', 'min:10', 'max:255'],
+            'ano_lectivo' => ['required', 'string', 'max:255'],
         ]);
 
         $tipo_pagamento = TipoPagamento::find($request->tipo_pagamento);

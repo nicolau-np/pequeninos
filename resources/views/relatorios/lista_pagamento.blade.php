@@ -27,6 +27,15 @@
             color: #fff;
             font-weight: bold;
         }
+        .mini-cabecalho{
+        display: block;
+        }
+        .ano_curso{
+            float: left;
+        }
+        .periodo{
+            float: right;
+        }
 </style>
 </head>
 <body>
@@ -50,7 +59,7 @@
     <div class="body">
         @if($getTipoPagamento->id == 3)
         <div class="tabela_comparticipacaoPais">
-            <table class="table" border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 70%;">
+            <table class="table" border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
                 <thead>
                     <tr class="tr_especial">
                         <th>Nº</th>
@@ -93,7 +102,7 @@
 
         @else
         <div class="tabela_propina">
-            <table class="table" class="table" border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 70%;">
+            <table class="table" class="table" border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
                 <thead>
                     <tr class="tr_especial">
                         <th>Nº</th>

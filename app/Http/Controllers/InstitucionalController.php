@@ -860,4 +860,12 @@ class InstitucionalController extends Controller
             return back()->with(['success' => "Feito com sucesso"]);
         }
     }
+
+    public function especifica_edit($id_observacao){
+
+    }
+
+    public function especifica_update(Request $request, $id_observacao){
+        
+    }
 }

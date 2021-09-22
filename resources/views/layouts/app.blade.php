@@ -1,4 +1,7 @@
-
+<?php
+use App\Http\Controllers\ControladorStatic;
+$lastYear = ControladorStatic::getLastYear();
+?>
 <!DOCTYPE html>
 <html lang="{{app()->getLocale()}}">
 
@@ -268,7 +271,7 @@
                                 </li>
 
                                 <li class="@if($menu=="Turmas") active @endif">
-                                    <a href="/turmas/list/2021-2022">
+                                    <a href="/turmas/list/{{$lastYear}}">
                                         <span class="pcoded-micon"><i class="ti-layers"></i><b>T</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Turmas</span>
                                         <span class="pcoded-mcaret"></span>

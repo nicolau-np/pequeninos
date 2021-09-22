@@ -1,5 +1,6 @@
 <?php
 
+use App\AnoLectivo;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -246,3 +247,15 @@ Route::group(['prefix' => 'pautas', 'middleware' => "auth"], function () {
 Route::group(['prefix' => 'usuarios', 'middleware' => "AdminUser"], function () {
     Route::get('/', "UserController@index");
 });
+
+/*rota de test*/
+Route::get('test', function(){
+    $retorno = null;
+    $ano_lectivo = AnoLectivo::orderBy('id', 'desc')->limit(1)->get();
+    foreach ($ano_lectivo as $ano){
+        $retorno = $ano->ano_lectivo;
+    }
+
+echo $retorno;
+});
+/*fim*/

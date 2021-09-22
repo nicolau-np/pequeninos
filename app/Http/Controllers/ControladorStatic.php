@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\AnoLectivo;
 use App\Disciplina;
 use App\Estudante;
 use App\HistoricEstudante;
@@ -200,5 +201,16 @@ class ControladorStatic extends Controller
         ];
         $estudantes = HistoricEstudante::where($data)->get();
         return $estudantes;
+    }
+
+    public static function getLastYear()
+    {
+        $retorno = null;
+        $ano_lectivo = AnoLectivo::orderBy('id', 'desc')->limit(1)->get();
+        foreach ($ano_lectivo as $ano) {
+            $retorno = $ano->ano_lectivo;
+        }
+
+        return $retorno;
     }
 }

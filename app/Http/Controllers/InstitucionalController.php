@@ -769,7 +769,16 @@ class InstitucionalController extends Controller
             return back()->with(['error'=>"Não encontrou"]);
         }
 
-        
+        $cursos = Curso::pluck('curso', 'id');
+        $data = [
+            'title' => "Observações",
+            'type' => "institucional",
+            'menu' => "Observações",
+            'submenu' => "Geral",
+            'getCursos' => $cursos,
+            'getObservacao' =>$observacao,
+        ];
+        return view('institucional.observacaoes.observacao_geral.edit', $data);
     }
 
     public function especifica_list()

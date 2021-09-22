@@ -102,11 +102,23 @@
                     </thead>
                     <tbody>
                         <tr>
-                        <td>{{$getHistorico->estudante->encarregado->pessoa->nome}}</td>
                         <td>
-                            @foreach ($getEducandos as $educandos)
-                                {{$educandos->pessoa->nome}}<br/>
-                            @endforeach
+                            @if ($getHistorico->estudante->encarregado->pessoa->nome=="Encarregado Exemplo")
+                            Não Informado
+                            @else
+                            {{$getHistorico->estudante->encarregado->pessoa->nome}}
+                            @endif
+
+                        </td>
+                        <td>
+                            @if ($getHistorico->estudante->encarregado->pessoa->nome=="Encarregado Exemplo")
+                            {{$getHistorico->estudante->pessoa->nome}}
+                            @else
+                                @foreach ($getEducandos as $educandos)
+                                    {{$educandos->pessoa->nome}}<br/>
+                                @endforeach
+                            @endif
+
                         </td>
                        </tr>
 

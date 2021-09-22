@@ -763,6 +763,15 @@ class InstitucionalController extends Controller
         }
     }
 
+    public function geral_edit($id_observacao){
+        $observacao = ObservacaoGeral::find($id_observacao);
+        if(!$observacao){
+            return back()->with(['error'=>"Não encontrou"]);
+        }
+
+        
+    }
+
     public function especifica_list()
     {
         $observacaoes = ObservacaoUnica::paginate(8);

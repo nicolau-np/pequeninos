@@ -188,7 +188,7 @@ use App\Http\Controllers\ControladorNotas;
                                 @if($final->count()==0)
                                         <td>---</td>
                                         @else
-                                        <td class="@if($valorf->mf<=9.9) negativo @else positivo @endif">
+                                        <td class="@if($valorf->mf<=9.9 && $valorf->mf!=null) negativo @else positivo @endif">
                                             @if($valorf->mf<=9.9) NÃO TRANSITA @else TRANSITA @endif
                                         </td>
                                 @endif

@@ -19,6 +19,11 @@
     .periodo{
         float: right;
     }
+
+    table thead{
+            background-color: #4680ff;
+            color: #fff;
+    }
 </style>
 </head>
 <body>
@@ -30,22 +35,22 @@
      </div>
      <div class="mini-cabecalho">
         <div class="ano_curso">
-            {{$getAno}}
+            {{$getAno}} - [ {{strtoupper($getTurma->turma)}} - {{strtoupper($getTurma->curso->curso)}} ]
         </div>
         <div class="periodo">
-            Turno: {{$getTurma->turno->turno}}<br/>
+            PERÍODO: {{strtoupper($getTurma->turno->turno)}}<br/>
         </div>
      </div>
     <br/><br/>
      <div class="corpo">
          <div class="table-resposive">
-             <table border="1">
+             <table border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
                 <thead>
                     <tr>
                         <th>Nº</th>
                         <th>NOME COMPLETO</th>
-                        <th>Gênero</th>
-                        <th>Idade</th>
+                        <th>GÊNERO</th>
+                        <th>IDADE</th>
                     </tr>
 
                 </thead>

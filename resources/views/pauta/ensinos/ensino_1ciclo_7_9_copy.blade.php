@@ -9,7 +9,7 @@ $observacao_geral = ControladorNotas::observacao_geral($getDirector->turma->clas
 if(!$observacao_geral){
     $observacao_geralDB=22;
 }else{
-$observacao_geralDB= $observacao_geral->quantidade_negativas;
+    $observacao_geralDB= $observacao_geral->quantidade_negativas;
 }
 ?>
 <style>

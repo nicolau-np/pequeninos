@@ -188,5 +188,9 @@ class ControladorStatic extends Controller
         return $turmas;
     }
 
+    public static function getTotalEstudantesTurma($id_turma, $ano_lectivo){
+        
+    }
+
 
 }

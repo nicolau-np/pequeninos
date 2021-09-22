@@ -53,6 +53,10 @@ use App\Http\Controllers\ControladorStatic;
                                             @else
 
                                                 @foreach ($getTurmas as $turmas)
+                                                <?php
+                                                    $numero_estudantes = 0;
+                                                    $getEstudantes = 
+                                                ?>
                                                 <div class="col-md-4 col-xl-4">
                                                     <div class="card widget-card-1">
                                                         <div class="card-block-small">

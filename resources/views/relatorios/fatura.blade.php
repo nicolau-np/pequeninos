@@ -36,11 +36,17 @@
         .linha_divisoria{
             text-align: center;
         }
-        .tabela1{
+        /*.tabela1{
             background-color: #f5f5f5;
         }
         .tr_especial{
             background-color: #f5f5f5;
+            font-weight: bold;
+        }*/
+
+        table thead{
+            background-color: #4680ff;
+            color: #fff;
             font-weight: bold;
         }
     </style>
@@ -72,6 +78,7 @@
     <div class="header-body">
         <br/><br/><br/><br/>
         <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000" class="tabela1">
+            <thead>
             <tr>
                 <td colspan="2">PAGAMENTO DE {{strtoupper($getTipoPagamento->tipo)}}</td>
             </tr>
@@ -79,6 +86,7 @@
                 <td>Fact. Nº {{date('dmY', strtotime($getFatura->data_fatura))}}{{$getFatura->id}}</td>
             <td>Data: {{date('d-m-Y', strtotime($getFatura->data_fatura))}} {{date('H:i:s', strtotime($getFatura->created_at))}}</td>
             </tr>
+            </thead>
         </table>
     </div>
 
@@ -138,6 +146,7 @@
         @else
         <div class="tablePagamento">
             <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%">
+            <thead>
                 <tr class="tr_especial">
                     <td>Nº Processo</td>
                     <td>Nome completo</td>
@@ -145,6 +154,8 @@
                     <td>Turma</td>
                     <td>Turno</td>
                 </tr>
+            </thead>
+            <tbody>
                 <tr>
                 <td>{{$getHistorico->id_estudante}}</td>
                 <td>{{$getHistorico->estudante->pessoa->nome}}</td>
@@ -152,6 +163,7 @@
                 <td>{{$getHistorico->turma->turma}}</td>
                 <td>{{$getHistorico->turma->turno->turno}}</td>
                 </tr>
+            </tbody>
             </table>
             <br/>
             <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 60%;">
@@ -231,6 +243,7 @@
     <div class="header-body">
         <br/><br/><br/><br/>
         <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000" class="tabela1">
+            <thead>
             <tr>
                 <td colspan="2">PAGAMENTO DE {{strtoupper($getTipoPagamento->tipo)}}</td>
             </tr>
@@ -238,6 +251,7 @@
                 <td>Fact. Nº {{date('dmY', strtotime($getFatura->data_fatura))}}{{$getFatura->id}}</td>
             <td>Data: {{date('d-m-Y', strtotime($getFatura->data_fatura))}} {{date('H:i:s', strtotime($getFatura->created_at))}}</td>
             </tr>
+            </thead>
         </table>
     </div>
 
@@ -297,6 +311,7 @@
         @else
         <div class="tablePagamento">
             <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%">
+                <thead>
                 <tr class="tr_especial">
                     <td>Nº Processo</td>
                     <td>Nome completo</td>
@@ -304,6 +319,8 @@
                     <td>Turma</td>
                     <td>Turno</td>
                 </tr>
+            </thead>
+            <tbody>
                 <tr>
                 <td>{{$getHistorico->id_estudante}}</td>
                 <td>{{$getHistorico->estudante->pessoa->nome}}</td>
@@ -311,6 +328,7 @@
                 <td>{{$getHistorico->turma->turma}}</td>
                 <td>{{$getHistorico->turma->turno->turno}}</td>
                 </tr>
+            </tbody>
             </table>
             <br/>
             <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 60%;">

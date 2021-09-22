@@ -101,9 +101,16 @@ class EstatisticaController extends Controller
         ];
 
         $id_ensino = $horario->turma->classe->id_ensino;
-
+        $classe = $horario->turma->classe->classe;
         if ($id_ensino == 1) {
-            return "ensino primario iniciacao ate 6 classe";
+            //se for classificacao quantitativa
+            if(($classe=="2ª classe") || ($classe=="4ª classe") || ($classe=="6ª classe")){
+                return view('estatistica.mini_pauta.ensino_primario_2_4_6_copy', $data);
+            }//se for classificacao quantitativa
+            elseif(($classe=="Iniciação") || ($classe=="1ª classe") || ($classe=="3ª classe") || ($classe=="5ª classe")){
+                return view('estatistica.mini_pauta.ensino_primario_Ini_1_3_5_copy', $data);
+            }
+
         } elseif ($id_ensino == 2) {
             return view('estatistica.mini_pauta.ensino_1ciclo_7_9_copy', $data);
         }

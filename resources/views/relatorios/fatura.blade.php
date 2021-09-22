@@ -55,7 +55,7 @@
               Exmo Sr(a).  <BR/>
               <span style="font-weight: bold;">
                 {{$getHistorico->estudante->encarregado->pessoa->nome}}<br/>
-                HUAMBO-ANGOLA
+                NAMIBE-ANGOLA
               </span>
             </p>
 
@@ -201,18 +201,14 @@
 
      <div class="header">
         <div class="desc_empresa">
-        <p>
-               <span style="font-weight: bold;">COMPLEXO ESCOLAR LAR DOS PEQUENINOS <BR/>
-               DAS IRMÃS DO SANTÍSSIMO SALVADOR-HUAMBO</span><BR/>
-               NIF: 5121019874<BR/>
-        </p>
+            @include('include.header_docs_left')
         </div>
         <div class="desc_cliente">
             <p>
               Exmo Sr(a).  <BR/>
               <span style="font-weight: bold;">
                 {{$getHistorico->estudante->encarregado->pessoa->nome}}<br/>
-                HUAMBO-ANGOLA
+                NAMIBE-ANGOLA
               </span>
             </p>
 

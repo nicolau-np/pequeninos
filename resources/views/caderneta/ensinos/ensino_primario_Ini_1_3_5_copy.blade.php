@@ -44,7 +44,7 @@
                     <div class="col-md-12">
                         <p>
                             <label class="badge badge-danger">MAU => [1-2]</label>&nbsp;&nbsp;&nbsp;
-                            <label class="badge badge-danger">MEDIUCRE => [3-4]</label>&nbsp;&nbsp;&nbsp;
+                            <label class="badge badge-danger">MEDÍUCRE => [3-4]</label>&nbsp;&nbsp;&nbsp;
                             <label class="badge badge-warning">SÚFICE => [5-6]</label>&nbsp;&nbsp;&nbsp;
                             <label class="badge badge-success">BOM => [7-8]</label>&nbsp;&nbsp;&nbsp;
                             <label class="badge badge-success">MUITO BOM => [9-10]</label>&nbsp;&nbsp;&nbsp;

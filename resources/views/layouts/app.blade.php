@@ -268,7 +268,7 @@
                                 </li>
 
                                 <li class="@if($menu=="Turmas") active @endif">
-                                    <a href="/turmas/">
+                                    <a href="/turmas/list/2021-2022">
                                         <span class="pcoded-micon"><i class="ti-layers"></i><b>T</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Turmas</span>
                                         <span class="pcoded-mcaret"></span>

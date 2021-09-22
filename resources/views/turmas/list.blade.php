@@ -11,7 +11,7 @@ use App\Http\Controllers\ControladorStatic;
                 <div class="card-header">
                     <h5>{{$submenu}}
                         @foreach ($getAnos as $anos)
-                        <a href="#" style="color:#4680ff;">{{$anos->ano_lectivo}}</a>
+                        <a href="/turmas/{{$anos->ano_lectivo}}" style="color:#4680ff;">{{$anos->ano_lectivo}}</a>
                         <i class="ti-angle-right"></i>
                         @endforeach
                     </h5>

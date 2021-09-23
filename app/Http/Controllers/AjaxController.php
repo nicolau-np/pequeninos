@@ -504,4 +504,8 @@ class AjaxController extends Controller
         }
         //fim mfd e mf
     }
+
+    public function updateGlobal(){
+        
+    }
 }

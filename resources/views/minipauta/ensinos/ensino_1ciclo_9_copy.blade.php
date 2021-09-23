@@ -174,6 +174,7 @@ use App\Http\Controllers\ControladorNotas;
                                  ?>
                                     <td>---</td>
                                     <td>---</td>
+                                    <td>---</td>
                                 <?php }
                                     else{
                                         foreach ($final as $valorf){

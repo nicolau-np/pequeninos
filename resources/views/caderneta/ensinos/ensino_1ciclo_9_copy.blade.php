@@ -2,7 +2,7 @@
 @section('content')
 <style>
 
-    .npe, .avaliacao{
+    .npe{
         width: 80px;
     }
 </style>

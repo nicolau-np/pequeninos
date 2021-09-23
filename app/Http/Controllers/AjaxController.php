@@ -505,7 +505,32 @@ class AjaxController extends Controller
         //fim mfd e mf
     }
 
-    public function updateGlobal(){
-        
+    public function updateGlobal(Request $request){
+        if(Session::get('id_ensinoCAD') == 1){
+            $request->validate([
+                'valor' => ['required', 'numeric', 'min:0', 'max:10'],
+                'campo' => ['required', 'string', 'min:2', 'max:3'],
+                'id_final' => ['required', 'integer', 'min:1'],
+            ]);
+        }else{
+            $request->validate([
+            'valor' => ['required', 'numeric', 'min:0', 'max:20'],
+            'campo' => ['required', 'string', 'min:2', 'max:3'],
+            'id_final' => ['required', 'integer', 'min:1'],
+        ]);
+        }
+
+
+        //verificar se mudou os campos
+        if (($request->campo != "npe")) {
+            echo " \\mudou campos\\ ";
+        }
+        //verificar se mudou o id do trimestre
+        $final = Finals::find($request->id_final);
+        if (!$final) {
+            return null;
+        }
+
+        echo "\\ lancou npe \\";
     }
 }

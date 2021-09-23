@@ -1,7 +1,8 @@
 @extends('layouts.app')
 @section('content')
 <style>
-    .notaP, .notaA{
+
+    .npe, .avaliacao{
         width: 80px;
     }
 </style>
@@ -284,7 +285,7 @@
                                         </thead>
 
                                         <tbody>
-                                            @if (session('epoca')==3)
+                                            @if (session('epoca')==4)
                                                 @if ($getGlobal!=null)
                                                     @if ($getGlobal->count()==0)
                                                         Nenhum estudante encontrado
@@ -292,8 +293,8 @@
                                                         @foreach ($getGlobal as $global)
                                                         <tr>
                                                             <td>{{$loop->iteration}}</td>
-                                                            <td>{{$trimestral->estudante->pessoa->nome}}</td>
-                                                            <td>{{$trimestral->estudante->pessoa->genero}}</td>
+                                                            <td>{{$global->estudante->pessoa->nome}}</td>
+                                                            <td>{{$global->estudante->pessoa->genero}}</td>
 
                                                             <td>
                                                                 <input type="number" name="npe" data-id="{{$global->id}}" data-campo="npe" value="{{$global->mf}}" class="form-control npe" />

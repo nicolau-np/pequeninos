@@ -86,12 +86,17 @@ if(!$observacao_geral){
                               </thead>
                               <tbody>
                                   <?php
-                                  $defice_disciplinas = [];
-                                $count_obs=0;
-                                $observacao_final = false;
+                                    $defice_disciplinas = [];
+                                    $count_obs=0;
+                                    $observacao_final = false;
+
+                                    $numero_cadeiras = 0;
+                                    $numero_lancados = 0;
                                   ?>
                                 @foreach ($getHistorico as $historico)
                                     <?php
+                                            $numero_cadeiras = 0;
+                                            $numero_lancados = 0;
                                             $observacao_final = false;
                                             $count_obs = 0;
                                             $observacao_especifica=false;
@@ -105,6 +110,7 @@ if(!$observacao_geral){
 
                                     <?php
                                     foreach (Session::get('disciplinas') as $disciplina) {
+                                        $numero_cadeiras = $numero_cadeiras + 1;
                                         $final = ControladorNotas::getValoresPautaFinal($historico->id_estudante, $disciplina["id_disciplina"]);
                                         if($final->count() == 0){
                                         ?>
@@ -137,25 +143,37 @@ if(!$observacao_geral){
                                             if($observacao_especifica){
                                                 $observacao_final = true;
                                             }
+
+                                            if($valorf->mf!=null){
+                                            $numero_lancados = $numero_lancados +1;
+                                            }
                                         }
+
+
                                         }
                                         ?>
-                                      <td class="@if($observacao_final) negativo @else positivo @endif">
-                                        @if($observacao_final)
-                                             NÃO TRANSITA
-                                         @else
-                                         TRANSITA
-                                         @if ($defice_disciplinas)
-                                            [DEF.(
-                                                @foreach ($defice_disciplinas as $item)
-                                                   {{strtoupper($item)}},
-                                                @endforeach
-                                                )]
-                                            @endif
-                                         @endif
+
+                                        @if($numero_cadeiras != $numero_lancados)
+                                        <td>---</td>
+                                        @else
+                                        <td class="@if($observacao_final) negativo @else positivo @endif">
+                                            @if($observacao_final)
+                                                 NÃO TRANSITA
+                                             @else
+                                             TRANSITA
+                                             @if ($defice_disciplinas)
+                                                [DEF.(
+                                                    @foreach ($defice_disciplinas as $item)
+                                                       {{strtoupper($item)}},
+                                                    @endforeach
+                                                    )]
+                                                @endif
+                                             @endif
 
 
-                                     </td>
+                                         </td>
+                                        @endif
+
                                   </tr>
                                   @endforeach
                               </tbody>

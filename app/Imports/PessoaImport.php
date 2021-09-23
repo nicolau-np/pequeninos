@@ -43,26 +43,29 @@ class PessoaImport implements
         ];
 
         $data['historico'] = [
-            'id_estudante'=> null,
-            'id_turma'=> null,
-            'estado'=> "on",
-            'observacao_final'=> null,
-            'ano_lectivo'=> null,
+            'id_estudante' => null,
+            'id_turma' => null,
+            'estado' => "on",
+            'observacao_final' => null,
+            'ano_lectivo' => null,
         ];
         foreach ($rows as $row) {
-            $data['pessoa']['nome'] = $row['nome'];
-            $data['pessoa']['genero'] = $row['genero'];
-            $pessoa = Pessoa::create($data['pessoa']);
 
-            $data['estudante']['id_pessoa'] = $pessoa->id;
-            $data['estudante']['ano_lectivo'] = $row['ano_lectivo'];
-            $data['estudante']['id_turma'] = $row['id_turma'];
-            $estudante = Estudante::create($data['estudante']);
+            if (!Pessoa::where(['nome' => $row['nome']])->first()) {
+                $data['pessoa']['nome'] = $row['nome'];
+                $data['pessoa']['genero'] = $row['genero'];
+                $pessoa = Pessoa::create($data['pessoa']);
 
-            $data['historico']['id_estudante']=$estudante->id;
-            $data['historico']['id_turma']=$row['id_turma'];
-            $data['historico']['ano_lectivo'] = $row['ano_lectivo'];
-            $historico = HistoricEstudante::create($data['historico']);
+                $data['estudante']['id_pessoa'] = $pessoa->id;
+                $data['estudante']['ano_lectivo'] = $row['ano_lectivo'];
+                $data['estudante']['id_turma'] = $row['id_turma'];
+                $estudante = Estudante::create($data['estudante']);
+
+                $data['historico']['id_estudante'] = $estudante->id;
+                $data['historico']['id_turma'] = $row['id_turma'];
+                $data['historico']['ano_lectivo'] = $row['ano_lectivo'];
+                $historico = HistoricEstudante::create($data['historico']);
+            }
         }
     }
 

@@ -170,7 +170,7 @@ table{
                                 <th colspan="4">1º TRIMESTRE</th>
                                 <th colspan="4">2º TRIMESTRE</th>
                                 <th colspan="4">3º TRIMESTRE</th>
-                                <th colspan="2">-</th>
+                                <th colspan="2">DADOS FINAIS</th>
                             </tr>
                             <tr>
                                 <th>MAC1</th>

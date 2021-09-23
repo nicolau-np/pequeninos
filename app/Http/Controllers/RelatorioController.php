@@ -133,32 +133,6 @@ class RelatorioController extends Controller
         return $pdf->stream('Lista de Comparticipação ' . $ano_lectivo->ano_lectivo . '.pdf');
     }
 
-    /*public function lista_nominal(Request $request){
-        $request->validate([
-            'curso'=>['required', 'Integer'],
-            'classe'=>['required', 'Integer'],
-            'turma'=>['required', 'Integer'],
-            'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
-        ]);
-
-        $turma = Turma::find($request->turma);
-        if(!$turma){
-            return back()->with(['error'=>"Turma não encontrada"]);
-        }
-
-        $ano_lectivo = AnoLectivo::where('ano_lectivo', $request->ano_lectivo)->first();
-        if(!$ano_lectivo){
-            return back()->with(['error'=>"Não encontrou ano lectivo"]);
-        }
-
-        /*
-        $pdf = PDF::loadView('relatorios.lista_nominal', $data)->setPaper('A4', 'normal');
-
-        return $pdf->stream('Lista de Nominal -' .$turma->turma. $request->ano_lectivo .'.pdf');
-        $fileName = "Lista de Nominal-" .$turma->turma." ".$request->ano_lectivo.".xlsx";
-        return (new EstudanteExport($request->turma, $request->ano_lectivo))->download($fileName);
-    }*/
-
     public function lista_nominal($id_turma, $ano_lectivo)
     {
         $turma = Turma::find($id_turma);
@@ -170,7 +144,9 @@ class RelatorioController extends Controller
         if (!$ano_lectivo) {
             return back()->with(['error' => "Não encontrou"]);
         }
-        $historico = HistoricEstudante::where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])->get();
+        $historico = HistoricEstudante::whereHas('estudante.pessoa', function(){
+
+        })->where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])->get()->sortBy('estudante.pessoa.nome');
         $data = [
             'getHistorico' => $historico,
             'getAno' => $ano_lectivo,

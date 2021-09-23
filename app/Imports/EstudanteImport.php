@@ -68,7 +68,7 @@ class EstudanteImport implements
                 /*actualizando valores*/
                 $data['estudante']['id_turma'] = $row['id_turma'];
                 $data['estudante']['id_pessoa'] = $pessoa->id;
-                $data['ano_lectivo'] = $data['ano_lectivo'];
+                $data['estudante'] = $row['ano_lectivo'];
                 /*fim*/
                 $estudante = Estudante::create($data['estudante']);
 

@@ -6,7 +6,8 @@
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>{{$submenu}} &nbsp;&nbsp;&nbsp; 
+                    <h5>{{$submenu}}
+                    <i class="ti-angle-right"></i>
                         @foreach ($getHistoricosEstudantes as $historicos)
                     <a href="/pagamentos/listar/{{$historicos->id_estudante}}/{{$historicos->ano_lectivo}}" style="color:#4680ff;">{{$historicos->ano_lectivo}}</a>
                     <i class="ti-angle-right"></i>
@@ -14,7 +15,7 @@
                     </h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -30,14 +31,16 @@
                         <div class="alert alert-danger">{{session('error')}}</div>
                         @endif
                        </div>
-               
+
                     <div class="col-md-8">
                         <div class="row">
                             @if ($getTabelaPreco->count()==0)
-                                Não encontrou Tipos de Pagamentos
+                            <div class="col-md-6 col-xl-6">
+                            Não encontrou Tipos de Pagamentos
+                            </div>
                             @else
                             @foreach ($getTabelaPreco as $tabela_preco)
-                            
+
                             <div class="col-md-6 col-xl-6">
                             <a href="/pagamentos/create/{{$tabela_preco->tipo_pagamento->id}}" style="text-decoration: none;">
                                 <div class="card widget-card-1">
@@ -54,19 +57,19 @@
                                 </div>
                                 </a>
                                 </div>
-                            
+
                             @endforeach
                             @endif
-                            
-                         
+
+
                         </div>
-                      
+
                     </div>
 
                     <div class="col-md-4">
                        <fieldset>
                             <legend style="width:90%;"><b><i class="ti-user"></i> {{$getHistoricoEstudante->estudante->pessoa->nome}}</b></legend>
-                            
+
                             <div class="row">
                                 <div class="col-md-12">
                                      <p>Turma: {{$getHistoricoEstudante->turma->turma}}</p>
@@ -75,7 +78,7 @@
                             <p>Ano de Confirmação: {{$getHistoricoEstudante->ano_lectivo}}</p>
                                 </div>
                             </div>
-                           
+
                         </fieldset>
                     </div>
                    </div>
@@ -83,7 +86,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- hidden-sm-up -->

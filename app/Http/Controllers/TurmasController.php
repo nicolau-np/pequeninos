@@ -50,6 +50,8 @@ class TurmasController extends Controller
             'type' => "turmas",
             'menu' => "Turma",
             'submenu' => "Importar",
+            'getTurma' =>$turma,
+            'getAno' =>$ano_lectivo,
         ];
         return view('turmas.import', $data);
     }
@@ -59,7 +61,7 @@ class TurmasController extends Controller
             'arquivo' => ['required', 'mimes:xlsx,xls'],
         ]);
         $file = $request->file('arquivo');
- 
+
         $import = new PessoaImport;
 
         if($import->import($file)){

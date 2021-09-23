@@ -98,6 +98,8 @@ class CadernetaController_copy extends Controller
             'id_turmaCAD' => $id_turma,
             'ano_lectivoCAD' => $ano_lectivo,
             'epocaCAD' => $epoca,
+            'id_ensinoCAD'=>$id_ensino,
+            'classeCAD'=>$classe,
         ];
         //guardando valores na secao
         Session::put($data2);

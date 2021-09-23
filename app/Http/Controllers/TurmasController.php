@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\AnoLectivo;
 use App\Ensino;
 use App\Imports\PessoaImport;
+use App\Turma;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class TurmasController extends Controller
 {
@@ -28,7 +30,21 @@ class TurmasController extends Controller
         return view('turmas.list', $data);
     }
 
-    public function import_create(){
+    public function import_create($id_turma, $ano_lectivo){
+        $turma = Turma::find($id_turma);
+        if(!$turma){
+            return back()->with(['error' => "Não encontrou"]);
+        }
+        $ano_lectivos = AnoLectivo::where(['ano_lectivo'=>$ano_lectivo])->first();
+        if(!$ano_lectivos){
+            return back()->with(['error' => "Não encontrou"]);
+        }
+
+        Session::put([
+            'id_turmaIMP'=>$id_turma,
+            'ano_lectivoIMP' =>$ano_lectivo,
+        ]);
+        
         $data = [
             'title' => "Turmas",
             'type' => "turmas",
@@ -43,6 +59,9 @@ class TurmasController extends Controller
             'arquivo' => ['required', 'mimes:xlsx,xls'],
         ]);
         $file = $request->file('arquivo');
+        $data= [
+            ''
+        ];
 
         $import = new PessoaImport;
 

@@ -78,7 +78,7 @@ use App\Http\Controllers\ControladorStatic;
                                                                     <a href="#" type="button" class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Estatística">
                                                                         <i class="icofont icofont-chart-bar-graph"></i>
                                                                     </a>&nbsp;
-                                                                    <a href="/turmas/import/create" type="button" class="btn btn-danger btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Importar">
+                                                                    <a href="/turmas/import/create/{{$turmas->id}}/{{$getAno}}" type="button" class="btn btn-danger btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Importar">
                                                                         <i class="ti-upload"></i>
                                                                     </a>&nbsp;
                                                                 </div>

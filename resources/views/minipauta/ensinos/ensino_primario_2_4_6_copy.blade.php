@@ -61,7 +61,7 @@ use App\Http\Controllers\ControladorNotas;
                                       <th colspan="4">1º TRIMESTRE</th>
                                       <th colspan="4">2º TRIMESTRE</th>
                                       <th colspan="4">3º TRIMESTRE</th>
-                                      <th colspan="2">-</th>
+                                      <th colspan="2">DADOS FINAIS</th>
                                       <th rowspan="2">OBS.</th>
                                   </tr>
                                   <tr>

@@ -61,7 +61,7 @@ use App\Http\Controllers\ControladorNotas;
                                       <th colspan="4">1º TRIMESTRE</th>
                                       <th colspan="4">2º TRIMESTRE</th>
                                       <th colspan="4">3º TRIMESTRE</th>
-                                      <th colspan="2">-</th>
+                                      <th colspan="3">DADOS FINAIS</th>
                                       <th rowspan="2">OBS.</th>
                                   </tr>
                                   <tr>
@@ -81,6 +81,7 @@ use App\Http\Controllers\ControladorNotas;
                                       <th>MT3</th>
 
                                       <th>MFD</th>
+                                      <th>NPE</th>
                                       <th>MF</th>
                                   </tr>
                               </thead>
@@ -177,10 +178,12 @@ use App\Http\Controllers\ControladorNotas;
                                     else{
                                         foreach ($final as $valorf){
                                         $v1_estilo = ControladorNotas::nota_20($valorf->mfd);
-                                        $v2_estilo = ControladorNotas::nota_20($valorf->mf);
+                                        $v2_estilo = ControladorNotas::nota_20($valorf->npe);
+                                        $v3_estilo = ControladorNotas::nota_20($valorf->mf);
                                 ?>
                                     <td class="{{$v1_estilo}}">@if($valorf->mfd==null) --- @else {{$valorf->mfd}} @endif</td>
-                                    <td class="{{$v2_estilo}}">@if($valorf->mf==null) --- @else {{$valorf->mf}} @endif</td>
+                                    <td class="{{$v2_estilo}}">@if($valorf->npe==null) --- @else {{$valorf->npe}} @endif</td>
+                                    <td class="{{$v3_estilo}}">@if($valorf->mf==null) --- @else {{$valorf->mf}} @endif</td>
                                 <?php }}?>
                                 <!-- fim dados finais-->
 

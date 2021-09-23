@@ -10,7 +10,7 @@ class ImportController extends Controller
 {
     public function index(){
         $data = [
-            'title'=>"Okussoleka - Sistema de Gestão Escolar",
+            'title'=>"Importar EXCEL(.xls)",
             'type'=>"home",
             'menu'=>"Home",
             'submenu'=>"",
@@ -19,10 +19,10 @@ class ImportController extends Controller
         return view('import.new', $data);
     }
 
-   
+
     public function store(Request $request){
         $file = $request->file('arquivo');
-        
+
         Excel::import(new EstudanteImport, $file);
         return back()->with(['success'=>"Feito com sucesso"]);
     }

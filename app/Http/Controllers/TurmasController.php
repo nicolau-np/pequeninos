@@ -26,4 +26,14 @@ class TurmasController extends Controller
         ];
         return view('turmas.list', $data);
     }
+
+    public function import_create(){
+        $data = [
+            'title' => "Turmas",
+            'type' => "turmas",
+            'menu' => "Turma",
+            'submenu' => "Importar",
+        ];
+        return view('turmas.import', $data);
+    }
 }

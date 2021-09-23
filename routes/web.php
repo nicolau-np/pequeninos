@@ -101,10 +101,10 @@ Route::group(['prefix' => 'institucional', 'middleware' => "auth"], function () 
         Route::put('/update/{id}', "InstitucionalController@ano_lectivo_update");
     });
 
-    Route::group(['prefix' => 'import',], function () {
+    /*Route::group(['prefix' => 'import',], function () {
         Route::get('/', "ImportController@index");
         Route::post('/store', "ImportController@store");
-    });
+    });*/
 
     Route::group(['prefix' => "observacoes"], function () {
         Route::get('/', "InstitucionalController@observacoes");
@@ -173,6 +173,7 @@ Route::group(['prefix' => 'estudantes', 'middleware' => "auth"], function () {
 
 Route::group(['prefix'=>"turmas", 'middleware'=>"auth"], function(){
     Route::get('/list/{ano}', "TurmasController@index");
+    Route::get('/import/create', "TurmasController@import_create");
 });
 
 Route::group(['prefix' => 'pagamentos', 'middleware' => "auth"], function () {

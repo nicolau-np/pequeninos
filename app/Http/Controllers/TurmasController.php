@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AnoLectivo;
 use App\Ensino;
+use App\Imports\PessoaImport;
 use Illuminate\Http\Request;
 
 class TurmasController extends Controller
@@ -37,7 +38,16 @@ class TurmasController extends Controller
         return view('turmas.import', $data);
     }
 
-    public function import_store(){
-        
+    public function import_store(Request $request){
+        $request->validate([
+            'arquivo' => ['required', 'mimes:xlsx,xls'],
+        ]);
+        $file = $request->file('arquivo');
+
+        $import = new PessoaImport;
+
+        if($import->import($file)){
+            return back()->with(['success'=>"Feito com sucesso"]);
+        }
     }
 }

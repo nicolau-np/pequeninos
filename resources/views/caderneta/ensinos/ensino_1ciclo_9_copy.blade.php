@@ -297,7 +297,7 @@
                                                             <td>{{$global->estudante->pessoa->genero}}</td>
 
                                                             <td>
-                                                                <input type="number" name="npe" data-id="{{$global->id}}" data-campo="npe" value="{{$global->mf}}" class="form-control npe" />
+                                                                <input type="number" name="npe" data-id="{{$global->id}}" data-campo="npe" value="{{$global->npe}}" class="form-control npe" />
                                                             </td>
 
                                                         </tr>

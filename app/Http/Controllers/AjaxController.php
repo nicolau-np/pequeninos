@@ -384,19 +384,20 @@ class AjaxController extends Controller
 
     public function updateProva(Request $request)
     {
-        if (Session::get('id_ensinoCAD') == 1) {
+        if(Session::get('id_ensinoCAD') == 1){
             $request->validate([
                 'valor' => ['required', 'numeric', 'min:0', 'max:10'],
-                'campo' => ['required', 'string', 'min:3', 'max:3'],
+                'campo' => ['required', 'string', 'min:2', 'max:3'],
                 'id_trimestral' => ['required', 'integer', 'min:1'],
             ]);
-        } else {
+        }else{
             $request->validate([
-                'valor' => ['required', 'numeric', 'min:0', 'max:20'],
-                'campo' => ['required', 'string', 'min:3', 'max:3'],
-                'id_trimestral' => ['required', 'integer', 'min:1'],
-            ]);
+            'valor' => ['required', 'numeric', 'min:0', 'max:20'],
+            'campo' => ['required', 'string', 'min:2', 'max:3'],
+            'id_trimestral' => ['required', 'integer', 'min:1'],
+        ]);
         }
+
 
         //verificar se mudou os campos
         if (($request->campo != "npp") or ($request->campo != "pt")) {

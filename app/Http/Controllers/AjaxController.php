@@ -368,8 +368,15 @@ class AjaxController extends Controller
             }
         }
 
+        $final = Finals::where($data['where_mts'])->first();
+        $mf = 0;
         $mfd = Finals::mfd($soma_mts);
-        $mf = Finals::mf($soma_mts);
+        if ($final->npe_data == null) {
+            $mf = Finals::mf($soma_mts);
+        }else{
+            $mf = Finals::mf_exame($mfd, $final->npe);
+        }
+
         $data['calculo_final'] = [
             'mf' => $mf,
             'mfd' => $mfd,
@@ -493,14 +500,21 @@ class AjaxController extends Controller
             }
         }
 
+        $final = Finals::where($data['where_mts'])->first();
+        $mf = 0;
         $mfd = Finals::mfd($soma_mts);
-        $mf = Finals::mf($soma_mts);
+        if ($final->npe_data == null) {
+            $mf = Finals::mf($soma_mts);
+        }else{
+            $mf = Finals::mf_exame($mfd, $final->npe);
+        }
+
         $data['calculo_final'] = [
             'mf' => $mf,
             'mfd' => $mfd,
         ];
         if (Finals::where($data['where_mts'])->update($data['calculo_final'])) {
-            echo " \\lancou o mfd e mf\\ ";
+            echo " \\lancou o mfd e mf \\ ";
         }
         //fim mfd e mf
     }
@@ -583,7 +597,7 @@ class AjaxController extends Controller
             'mf' => $mf
         ];
         if (Finals::find($request->id_final)->update($data['calculo_final'])) {
-            echo " \\lancou o mfd e mf\\ ";
+            echo " \\lancou o mf\\ ";
         }
         //fim mfd e mf
     }

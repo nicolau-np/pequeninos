@@ -112,7 +112,12 @@ class EstatisticaController extends Controller
             }
 
         } elseif ($id_ensino == 2) {
-            return view('estatistica.mini_pauta.ensino_1ciclo_7_9_copy', $data);
+            if($classe == "9ª classe"){
+                return view('estatistica.mini_pauta.ensino_1ciclo_9_copy', $data);
+            }else{
+                return view('estatistica.mini_pauta.ensino_1ciclo_7_8_copy', $data);
+            }
+
         }
 
     }

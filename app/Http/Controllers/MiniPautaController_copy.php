@@ -80,7 +80,12 @@ class MiniPautaController_copy extends Controller
             }
 
         } elseif ($id_ensino == 2) {
-            return view('minipauta.ensinos.ensino_1ciclo_7_9_copy', $data);
+            if($classe == "9ª classe"){
+                return view('minipauta.ensinos.ensino_1ciclo_9_copy', $data);
+            }else{
+                return view('minipauta.ensinos.ensino_1ciclo_7_8_copy', $data);
+            }
+
         }
     }
 }

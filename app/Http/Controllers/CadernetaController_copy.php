@@ -158,7 +158,11 @@ class CadernetaController_copy extends Controller
                 return view('caderneta.ensinos.ensino_primario_Ini_1_3_5_copy', $data);
             }
         } elseif ($id_ensino == 2) {//7 classe ate 9 ensino geral
-            return view('caderneta.ensinos.ensino_1ciclo_7_9_copy', $data);
+            if($classe == "9ª classe"){
+                return view('caderneta.ensinos.ensino_1ciclo_9_copy', $data);
+            }else{
+                return view('caderneta.ensinos.ensino_1ciclo_7_8_copy', $data);
+            }
         }
     }
 

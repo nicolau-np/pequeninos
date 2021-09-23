@@ -44,7 +44,7 @@ class TurmasController extends Controller
             'id_turmaIMP'=>$id_turma,
             'ano_lectivoIMP' =>$ano_lectivo,
         ]);
-        
+
         $data = [
             'title' => "Turmas",
             'type' => "turmas",
@@ -59,10 +59,7 @@ class TurmasController extends Controller
             'arquivo' => ['required', 'mimes:xlsx,xls'],
         ]);
         $file = $request->file('arquivo');
-        $data= [
-            ''
-        ];
-
+ 
         $import = new PessoaImport;
 
         if($import->import($file)){

@@ -7,6 +7,7 @@ use App\HistoricEstudante;
 use App\Pessoa;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsOnError;
@@ -30,24 +31,24 @@ class PessoaImport implements
         $data['pessoa'] = [
             'nome' => null,
             'genero' => null,
-            'data_nascimento' => "1996-08-29",
+            'data_nascimento' => date('Y-m-d'),
             'id_municipio' => 1,
         ];
 
         $data['estudante'] = [
             'id_pessoa' => null,
-            'id_turma' => null,
+            'id_turma' => Session::get('id_turmaIMP'),
             'id_encarregado' => 1,
             'estado' => "on",
-            'ano_lectivo' => null,
+            'ano_lectivo' => Session::get('ano_lectivoIMP'),
         ];
 
         $data['historico'] = [
             'id_estudante' => null,
-            'id_turma' => null,
+            'id_turma' => Session::get('id_turmaIMP'),
             'estado' => "on",
             'observacao_final' => null,
-            'ano_lectivo' => null,
+            'ano_lectivo' => Session::get('ano_lectivoIMP'),
         ];
         foreach ($rows as $row) {
 
@@ -57,13 +58,9 @@ class PessoaImport implements
                 $pessoa = Pessoa::create($data['pessoa']);
 
                 $data['estudante']['id_pessoa'] = $pessoa->id;
-                $data['estudante']['ano_lectivo'] = $row['ano_lectivo'];
-                $data['estudante']['id_turma'] = $row['id_turma'];
                 $estudante = Estudante::create($data['estudante']);
 
                 $data['historico']['id_estudante'] = $estudante->id;
-                $data['historico']['id_turma'] = $row['id_turma'];
-                $data['historico']['ano_lectivo'] = $row['ano_lectivo'];
                 $historico = HistoricEstudante::create($data['historico']);
             }
         }

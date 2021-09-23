@@ -34,8 +34,10 @@ use App\Http\Controllers\ControladorStatic;
                     </div>
 
 
-                        @if($getHorario->count()==0)
-                    Nenhuma turma encontrada
+                    @if($getHorario->count()==0)
+                        <div class="col-md-12 col-xl-12">
+                            Nenhuma turma encontrada
+                        </div>
                     @else
                     @foreach ($getHorario as $horario)
                     <?php
@@ -48,7 +50,7 @@ use App\Http\Controllers\ControladorStatic;
                             <div class="card-block-small">
                                 <i class="icofont icofont-file-alt bg-c-blue card1-icon"></i>
                             <span class="text-c-blue f-w-600">{{$horario->disciplina->disciplina}}</span>
-                            <h4 style="font-size:20px;">Turma: {{$horario->turma->turma}}</h4>
+                            <h4 style="font-size:20px;">{{$horario->turma->turma}}&nbsp;{{$horario->turma->turno->turno}}</h4>
                                 <div>
                                     <span class="f-left m-t-10 text-muted">
                                         Ano: {{$horario->ano_lectivo}} &nbsp;&nbsp; <b>[ {{$numero_estudantes}} ]</b>

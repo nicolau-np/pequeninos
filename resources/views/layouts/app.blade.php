@@ -448,7 +448,7 @@ $lastYear = ControladorStatic::getLastYear();
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="@if($menu=="Caderneta") active @endif">
                                     <a href="/cadernetas/">
-                                        <span class="pcoded-micon"><i class="ti-file"></i><b>H</b></span>
+                                        <span class="pcoded-micon"><i class="icofont icofont-file-alt"></i><b>H</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Caderneta</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>

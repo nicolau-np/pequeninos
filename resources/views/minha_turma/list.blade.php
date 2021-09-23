@@ -37,7 +37,7 @@ use App\Http\Controllers\ControladorStatic;
                         <div class="card-block-small">
                             <i class="ti-folder bg-c-blue card1-icon"></i>
                         <span class="text-c-blue f-w-600">{{$turmas->turma->curso->curso}}</span>
-                        <h4 style="font-size:20px;">{{$turmas->turma->turma}}&nbsp;&nbsp;{{$turmas->turma->turno->turno}}</h4>
+                        <h4 style="font-size:20px;">{{$turmas->turma->turma}}&nbsp;{{$turmas->turma->turno->turno}}</h4>
                             <div>
                                 <span class="f-left m-t-10 text-muted">
                                     Ano: {{$turmas->ano_lectivo}}&nbsp;&nbsp;<b>[ {{$numero_estudantes}} ]</b>

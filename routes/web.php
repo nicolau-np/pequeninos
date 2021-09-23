@@ -174,6 +174,7 @@ Route::group(['prefix' => 'estudantes', 'middleware' => "auth"], function () {
 Route::group(['prefix'=>"turmas", 'middleware'=>"auth"], function(){
     Route::get('/list/{ano}', "TurmasController@index");
     Route::get('/import/create', "TurmasController@import_create");
+    Route::post('/import/store', "TurmasController@import_store");
 });
 
 Route::group(['prefix' => 'pagamentos', 'middleware' => "auth"], function () {

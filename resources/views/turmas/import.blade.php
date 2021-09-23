@@ -27,13 +27,13 @@
                     @if(session('success'))
                     <div class="alert alert-success">{{session('success')}}</div>
                     @endif
-                        {{Form::open(['method'=>"post", 'name'=>"import_estudantes", 'url'=>"/institucional/import/store", 'enctype'=>"multipart/form-data"])}}
+                        {{Form::open(['method'=>"post", 'url'=>"/turmas/import/store", 'enctype'=>"multipart/form-data"])}}
                         @csrf
                         <fieldset>
-                            <legend><i class="ti-list"></i> Importar (.xlsx)</legend>
+                            <legend><i class="ti-list"></i> Dados</legend>
                             <div class="row">
                                 <div class="col-md-5">
-                                    {{Form::label('arquivo', "Arquivo")}} <span class="text-danger">*</span>
+                                    {{Form::label('arquivo', "Arquivo (.xls, .xlsx)")}} <span class="text-danger">*</span>
                                     {{Form::file('arquivo', null, ['class'=>"form-control", 'placeholder'=>"Arquivo"])}}
                                 <div class="erro">
                                     @if($errors->has('arquivo'))

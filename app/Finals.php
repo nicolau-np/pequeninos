@@ -40,6 +40,13 @@ class Finals extends Model
         return $mf;
     }
 
+    public static function mf_exame($mfd, $npe)
+    {
+        $mf = (($mfd * 0.4) + ($npe * 0.6));
+
+        return $mf;
+    }
+
     public static function getNotasEstudantes($data2, $ano_lectivo)
     {
         $data = [

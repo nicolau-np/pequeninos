@@ -12,6 +12,8 @@ class Finals extends Model
         'id_estudante',
         'id_disciplina',
         'mfd',
+        'npe',
+        'npe_data',
         'mf',
         'estado',
         'ano_lectivo',

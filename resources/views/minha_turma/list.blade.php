@@ -35,7 +35,7 @@ use App\Http\Controllers\ControladorStatic;
                 <div class="col-md-4 col-xl-4">
                     <div class="card widget-card-1">
                         <div class="card-block-small">
-                            <i class="icofont icofont-pie-chart bg-c-blue card1-icon"></i>
+                            <i class="ti-folder bg-c-blue card1-icon"></i>
                         <span class="text-c-blue f-w-600">{{$turmas->turma->curso->curso}}</span>
                         <h4 style="font-size:20px;">{{$turmas->turma->turma}}&nbsp;&nbsp;{{$turmas->turma->turno->turno}}</h4>
                             <div>

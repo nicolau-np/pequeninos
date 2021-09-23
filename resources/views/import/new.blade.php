@@ -9,7 +9,7 @@
                     <h5>{{$submenu}}</h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -32,18 +32,18 @@
                         <fieldset>
                             <legend><i class="ti-list"></i> Importar Estudantes</legend>
                             <div class="row">
-                                <div class="col-md-3">
+                                <div class="col-md-5">
                                     {{Form::label('arquivo', "Arquivo")}} <span class="text-danger">*</span>
                                     {{Form::file('arquivo', null, ['class'=>"form-control", 'placeholder'=>"Arquivo"])}}
                                 <div class="erro">
                                     @if($errors->has('arquivo'))
                                     <div class="text-danger">{{$errors->first('arquivo')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
                             </div>
-                        
+
                         </fieldset>
                         <br/>
                             <div class="row">
@@ -51,15 +51,15 @@
                                     {{Form::submit('Salvar', ['class'=>"btn btn-primary"])}}
                                 </div>
                             </div>
-                      
+
                         {{Form::close()}}
                    </div>
-              
+
                 </div>
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- hidden-sm-up -->
@@ -86,7 +86,7 @@
                 }
             });
             }
-         
+
         });
 
     });

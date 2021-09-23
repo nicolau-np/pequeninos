@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Imports\EstudanteImport;
+use App\Imports\PessoaImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -21,9 +21,16 @@ class ImportController extends Controller
 
 
     public function store(Request $request){
+        $request->validate([
+            'arquivo' => ['required', 'mimes:xlsx,xls'],
+        ]);
         $file = $request->file('arquivo');
 
-        Excel::import(new EstudanteImport, $file);
+        $import = new PessoaImport;
+        $import->import($file);
+
         return back()->with(['success'=>"Feito com sucesso"]);
     }
+
+
 }

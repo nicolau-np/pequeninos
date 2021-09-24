@@ -231,6 +231,6 @@ class RelatorioController extends Controller
             }
         }
 
-        return $pdf->stream('MINI PAUTA '.$ano_lectivo.'[' . strtoupper($turma->turma) . ' ' . strtoupper($turma->turno->turno) .'-'.strtoupper($turma->curso->curso).'-'.strtoupper($horario->disciplina->disciplina). '].pdf');
+        return $pdf->stream('MINI-PAUTA '.$ano_lectivo.'[' . strtoupper($turma->turma) . ' ' . strtoupper($turma->turno->turno) .'-'.strtoupper($turma->curso->curso).'-'.strtoupper($horario->disciplina->disciplina). '].pdf');
     }
 }

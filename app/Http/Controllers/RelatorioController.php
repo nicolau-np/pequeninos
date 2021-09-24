@@ -161,7 +161,7 @@ class RelatorioController extends Controller
         $id_pessoa = Auth::user()->pessoa->id;
         $funcionario = Funcionario::where('id_pessoa', $id_pessoa)->first();
 
-        Session::put('id_funcionarioMIN', $funcionario->id);
+        Session::put('id_funcionarioPDF', $funcionario->id);
 
         $turma = Turma::find($id_turma);
         if(!$turma){
@@ -179,10 +179,10 @@ class RelatorioController extends Controller
         }
 
         //verificando se o professor e dono desta turma
-        if (Session::has('id_funcionarioMIN')) {
+        if (Session::has('id_funcionarioPDF')) {
             //verificando horario e funcionario
             $data['where_horario'] = [
-                'id_funcionario' => Session::get('id_funcionarioMIN'),
+                'id_funcionario' => Session::get('id_funcionarioPDF'),
                 'id_turma' => $id_turma,
                 'id_disciplina' => $id_disciplina,
                 'ano_lectivo' => $ano_lectivo,
@@ -205,28 +205,28 @@ class RelatorioController extends Controller
         $id_ensino = $turma->classe->id_ensino;
         $classe = $turma->classe->classe;
 
-        $data = [
-            'getHorario' => $horario,
-            'getHistorico' => $historico,
+        $data['view'] = [
+            'getHorarioPDF' => $horario,
+            'getHistoricoPDF' => $historico,
         ];
 
 
         if ($id_ensino == 1) {//iniciacao ate 6
             //se for classificacao quantitativa
             if(($classe=="2ª classe") || ($classe=="4ª classe") || ($classe=="6ª classe")){
-                $pdf = PDF::loadView('minipauta.pdf.ensino_primario_2_4_6_copy', $data)->setPaper('A4', 'normal');
+                $pdf = PDF::loadView('minipauta.pdf.ensino_primario_2_4_6_copy', $data['view'])->setPaper('A4', 'normal');
 
             }//se for classificacao quantitativa
             elseif(($classe=="Iniciação") || ($classe=="1ª classe") || ($classe=="3ª classe") || ($classe=="5ª classe")){
-                $pdf = PDF::loadView('minipauta.pdf.ensino_primario_Ini_1_3_5_copy', $data)->setPaper('A4', 'normal');
+                $pdf = PDF::loadView('minipauta.pdf.ensino_primario_Ini_1_3_5_copy', $data['view'])->setPaper('A4', 'normal');
 
             }
         } elseif ($id_ensino == 2) {//7 classe ate 9 ensino geral
             if($classe == "9ª classe"){
-                $pdf = PDF::loadView('minipauta.pdf.ensino_1ciclo_9_copy', $data)->setPaper('A4', 'normal');
+                $pdf = PDF::loadView('minipauta.pdf.ensino_1ciclo_9_copy', $data['view'])->setPaper('A4', 'normal');
 
             }else{
-                $pdf = PDF::loadView('minipauta.pdf.ensino_1ciclo_7_8_copy', $data)->setPaper('A4', 'normal');
+                $pdf = PDF::loadView('minipauta.pdf.ensino_1ciclo_7_8_copy', $data['view'])->setPaper('A4', 'normal');
 
             }
         }

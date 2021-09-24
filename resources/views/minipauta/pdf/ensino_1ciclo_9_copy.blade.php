@@ -1,6 +1,8 @@
 <?php
 use App\Http\Controllers\ControladorNotas;
-
+$trimestre1=null;
+$trimestre2=null;
+$trimestre3=null;
 $count_avaliados1 = [
     'mac'=>0,
     'npp'=>0,
@@ -142,7 +144,7 @@ $percent_negativasf = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>MINI-PAUTA {{$getHorario->ano_lectivo}} [{{strtoupper($getHorario->turma->turma)}}-{{strtoupper($getHorario->turma->turno->turno)}}-{{strtoupper($getHorario->turma->curso->curso)}}-{{strtoupper($getHorario->disciplina->disciplina)}} ]</title>
+<title>MINI-PAUTA {{$getHorarioPDF->ano_lectivo}} [{{strtoupper($getHorarioPDF->turma->turma)}}-{{strtoupper($getHorarioPDF->turma->turno->turno)}}-{{strtoupper($getHorarioPDF->turma->curso->curso)}}-{{strtoupper($getHorarioPDF->disciplina->disciplina)}} ]</title>
 <style>
     .page-break{
         page-break-before: always;
@@ -200,10 +202,10 @@ $percent_negativasf = [
          </div>
         <div class="mini-cabecalho">
             <div class="ano_curso">
-                &nbsp;&nbsp;{{$getHorario->ano_lectivo}} - [ {{strtoupper($getHorario->turma->turma)}} - {{strtoupper($getHorario->turma->curso->curso)}} ] - DISCIPLINA: {{strtoupper($getHorario->disciplina->disciplina)}}
+                &nbsp;&nbsp;{{$getHorarioPDF->ano_lectivo}} - [ {{strtoupper($getHorarioPDF->turma->turma)}} - {{strtoupper($getHorarioPDF->turma->curso->curso)}} ] - DISCIPLINA: {{strtoupper($getHorarioPDF->disciplina->disciplina)}}
             </div>
             <div class="periodo">
-                PERÍODO: {{strtoupper($getHorario->turma->turno->turno)}}
+                PERÍODO: {{strtoupper($getHorarioPDF->turma->turno->turno)}}
                 &nbsp;&nbsp;
                 <br/>
 
@@ -245,7 +247,7 @@ $percent_negativasf = [
                        </tr>
                    </thead>
                    <tbody>
-                     @foreach ($getHistorico as $historico)
+                     @foreach ($getHistoricoPDF as $historico)
                      <tr>
                          <td>{{$loop->iteration}}</td>
                          <td>{{$historico->estudante->pessoa->nome}}</td>
@@ -360,7 +362,7 @@ $percent_negativasf = [
             <div class="teacher_name">
                 O(A) PROFESSOR(A)<br/>
                 _____________________<br/>
-                //{{$getHorario->funcionario->pessoa->nome}}//
+                //{{$getHorarioPDF->funcionario->pessoa->nome}}//
             </div>
          </div>
 
@@ -377,10 +379,10 @@ $percent_negativasf = [
          </div>
         <div class="mini-cabecalho">
             <div class="ano_curso">
-                &nbsp;&nbsp;{{$getHorario->ano_lectivo}} - [ {{strtoupper($getHorario->turma->turma)}} - {{strtoupper($getHorario->turma->curso->curso)}} ] - DISCIPLINA: {{strtoupper($getHorario->disciplina->disciplina)}}
+                &nbsp;&nbsp;{{$getHorarioPDF->ano_lectivo}} - [ {{strtoupper($getHorarioPDF->turma->turma)}} - {{strtoupper($getHorarioPDF->turma->curso->curso)}} ] - DISCIPLINA: {{strtoupper($getHorarioPDF->disciplina->disciplina)}}
             </div>
             <div class="periodo">
-                PERÍODO: {{strtoupper($getHorario->turma->turno->turno)}}
+                PERÍODO: {{strtoupper($getHorarioPDF->turma->turno->turno)}}
                 &nbsp;&nbsp;
                 <br/>
         </div>
@@ -428,7 +430,7 @@ $percent_negativasf = [
 
                                 <!-- primeiro trimeste-->
                                 <?php
-                                $trimestre1 = ControladorNotas::getNotasEstudantes($getHorario->ano_lectivo, 1);
+                                $trimestre1 = ControladorNotas::getNotasEstudantes($getHorarioPDF->ano_lectivo, 1);
                                 foreach ($trimestre1 as $valor1){
                                 //lancados
                                 if($valor1->mac !=null){
@@ -488,7 +490,7 @@ $percent_negativasf = [
 
                                                             <!-- segundo trimeste-->
                                                             <?php
-                                                                $trimestre2 = ControladorNotas::getNotasEstudantes($getHorario->ano_lectivo, 2);
+                                                                $trimestre2 = ControladorNotas::getNotasEstudantes($getHorarioPDF->ano_lectivo, 2);
                                                                 foreach ($trimestre2 as $valor2){
                                                                     //lancados
                                                                     if($valor2->mac !=null){
@@ -551,7 +553,7 @@ $percent_negativasf = [
 
                                                            <!-- terceiro trimeste-->
                                                            <?php
-                                                           $trimestre3 = ControladorNotas::getNotasEstudantes($getHorario->ano_lectivo, 3);
+                                                           $trimestre3 = ControladorNotas::getNotasEstudantes($getHorarioPDF->ano_lectivo, 3);
                                                            foreach ($trimestre3 as $valor3){
                                                                //lancados
                                                                if($valor3->mac !=null){
@@ -614,7 +616,7 @@ $percent_negativasf = [
 
                                                        <!-- finals -->
                                                        <?php
-                                                           $finals = ControladorNotas::getNotasEstudantesFinal($getHorario->ano_lectivo);
+                                                           $finals = ControladorNotas::getNotasEstudantesFinal($getHorarioPDF->ano_lectivo);
                                                            foreach ($finals as $valorf){
                                                                //lancados
                                                                if($valorf->mfd !=null){
@@ -953,7 +955,7 @@ $percent_negativasf = [
             <div class="teacher_name">
                 O(A) PROFESSOR(A)<br/>
                 _____________________<br/>
-                //{{$getHorario->funcionario->pessoa->nome}}//
+                //{{$getHorarioPDF->funcionario->pessoa->nome}}//
             </div>
          </div>
     </div>
@@ -969,10 +971,10 @@ $percent_negativasf = [
          </div>
         <div class="mini-cabecalho">
             <div class="ano_curso">
-                &nbsp;&nbsp;{{$getHorario->ano_lectivo}} - [ {{strtoupper($getHorario->turma->turma)}} - {{strtoupper($getHorario->turma->curso->curso)}} ] - DISCIPLINA: {{strtoupper($getHorario->disciplina->disciplina)}}
+                &nbsp;&nbsp;{{$getHorarioPDF->ano_lectivo}} - [ {{strtoupper($getHorarioPDF->turma->turma)}} - {{strtoupper($getHorarioPDF->turma->curso->curso)}} ] - DISCIPLINA: {{strtoupper($getHorarioPDF->disciplina->disciplina)}}
             </div>
             <div class="periodo">
-                PERÍODO: {{strtoupper($getHorario->turma->turno->turno)}}
+                PERÍODO: {{strtoupper($getHorarioPDF->turma->turno->turno)}}
                 &nbsp;&nbsp;
                 <br/>
         </div>
@@ -997,7 +999,7 @@ $percent_negativasf = [
                         </tr>
                     </thead>
                     <tbody>
-                      @foreach ($getHistorico as $historico)
+                      @foreach ($getHistoricoPDF as $historico)
                       <tr>
                           <td>{{$loop->iteration}}</td>
                           <td>{{$historico->estudante->pessoa->nome}}</td>
@@ -1052,7 +1054,7 @@ $percent_negativasf = [
             <div class="teacher_name">
                 O(A) PROFESSOR(A)<br/>
                 _____________________<br/>
-                //{{$getHorario->funcionario->pessoa->nome}}//
+                //{{$getHorarioPDF->funcionario->pessoa->nome}}//
             </div>
          </div>
     </div>
@@ -1068,10 +1070,10 @@ $percent_negativasf = [
          </div>
         <div class="mini-cabecalho">
             <div class="ano_curso">
-                &nbsp;&nbsp;{{$getHorario->ano_lectivo}} - [ {{strtoupper($getHorario->turma->turma)}} - {{strtoupper($getHorario->turma->curso->curso)}} ] - DISCIPLINA: {{strtoupper($getHorario->disciplina->disciplina)}}
+                &nbsp;&nbsp;{{$getHorarioPDF->ano_lectivo}} - [ {{strtoupper($getHorarioPDF->turma->turma)}} - {{strtoupper($getHorarioPDF->turma->curso->curso)}} ] - DISCIPLINA: {{strtoupper($getHorarioPDF->disciplina->disciplina)}}
             </div>
             <div class="periodo">
-                PERÍODO: {{strtoupper($getHorario->turma->turno->turno)}}
+                PERÍODO: {{strtoupper($getHorarioPDF->turma->turno->turno)}}
                 &nbsp;&nbsp;
                 <br/>
             </div>
@@ -1096,7 +1098,7 @@ $percent_negativasf = [
                         </tr>
                     </thead>
                     <tbody>
-                      @foreach ($getHistorico as $historico)
+                      @foreach ($getHistoricoPDF as $historico)
                       <tr>
                           <td>{{$loop->iteration}}</td>
                           <td>{{$historico->estudante->pessoa->nome}}</td>
@@ -1151,7 +1153,7 @@ $percent_negativasf = [
             <div class="teacher_name">
                 O(A) PROFESSOR(A)<br/>
                 _____________________<br/>
-                //{{$getHorario->funcionario->pessoa->nome}}//
+                //{{$getHorarioPDF->funcionario->pessoa->nome}}//
             </div>
          </div>
      </div>
@@ -1168,10 +1170,10 @@ $percent_negativasf = [
      </div>
     <div class="mini-cabecalho">
         <div class="ano_curso">
-            &nbsp;&nbsp;{{$getHorario->ano_lectivo}} - [ {{strtoupper($getHorario->turma->turma)}} - {{strtoupper($getHorario->turma->curso->curso)}} ] - DISCIPLINA: {{strtoupper($getHorario->disciplina->disciplina)}}
+            &nbsp;&nbsp;{{$getHorarioPDF->ano_lectivo}} - [ {{strtoupper($getHorarioPDF->turma->turma)}} - {{strtoupper($getHorarioPDF->turma->curso->curso)}} ] - DISCIPLINA: {{strtoupper($getHorarioPDF->disciplina->disciplina)}}
         </div>
         <div class="periodo">
-            PERÍODO: {{strtoupper($getHorario->turma->turno->turno)}}
+            PERÍODO: {{strtoupper($getHorarioPDF->turma->turno->turno)}}
             &nbsp;&nbsp;
             <br/>
         </div>
@@ -1196,7 +1198,7 @@ $percent_negativasf = [
                     </tr>
                 </thead>
                 <tbody>
-                  @foreach ($getHistorico as $historico)
+                  @foreach ($getHistoricoPDF as $historico)
                   <tr>
                       <td>{{$loop->iteration}}</td>
                       <td>{{$historico->estudante->pessoa->nome}}</td>
@@ -1251,7 +1253,7 @@ $percent_negativasf = [
         <div class="teacher_name">
             O(A) PROFESSOR(A)<br/>
             _____________________<br/>
-            //{{$getHorario->funcionario->pessoa->nome}}//
+            //{{$getHorarioPDF->funcionario->pessoa->nome}}//
         </div>
      </div>
  </div>

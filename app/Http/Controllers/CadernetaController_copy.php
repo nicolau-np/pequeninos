@@ -17,15 +17,21 @@ use Illuminate\Support\Facades\Session;
 
 class CadernetaController_copy extends Controller
 {
-    public function index()
+    public function list($ano_lectivo)
     {
+        $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
+        if (!$ano_lectivos) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+        $anos = AnoLectivo::orderBy('id', 'desc')->get();
         $id_pessoa = Auth::user()->pessoa->id;
         $funcionario = Funcionario::where('id_pessoa', $id_pessoa)->first();
         $data['where'] = [
             'id_funcionario' => $funcionario->id,
+            'ano_lectivo' =>$ano_lectivo,
             'estado' => "visivel",
         ];
-        $horarios = Horario::where($data['where'])->orderBy('ano_lectivo', 'desc')->paginate(8);
+        $horarios = Horario::where($data['where'])->paginate(8);
         Session::put('id_funcionario', $funcionario->id);
         $data = [
             'title' => "Caderneta",
@@ -33,6 +39,7 @@ class CadernetaController_copy extends Controller
             'menu' => "Caderneta",
             'submenu' => "Listar",
             'getHorario' => $horarios,
+            'getAnos'=>$anos,
         ];
         return view('caderneta.list', $data);
     }
@@ -47,8 +54,8 @@ class CadernetaController_copy extends Controller
         }
 
         //verificando se a epoca está bloqueada
-        $bloqueios = BloqueioEpoca::where(['epoca' =>$epoca])->first();
-        if($bloqueios->estado=="off"){
+        $bloqueios = BloqueioEpoca::where(['epoca' => $epoca])->first();
+        if ($bloqueios->estado == "off") {
             return back()->with(['error' => "Epoca bloqueiada"]);
         }
 
@@ -98,8 +105,8 @@ class CadernetaController_copy extends Controller
             'id_turmaCAD' => $id_turma,
             'ano_lectivoCAD' => $ano_lectivo,
             'epocaCAD' => $epoca,
-            'id_ensinoCAD'=>$id_ensino,
-            'classeCAD'=>$classe,
+            'id_ensinoCAD' => $id_ensino,
+            'classeCAD' => $classe,
         ];
         //guardando valores na secao
         Session::put($data2);
@@ -149,18 +156,18 @@ class CadernetaController_copy extends Controller
             'getEpoca4' => $estado_epoca4,
         ];
 
-        if ($id_ensino == 1) {//iniciacao ate 6
+        if ($id_ensino == 1) { //iniciacao ate 6
             //se for classificacao quantitativa
-            if(($classe=="2ª classe") || ($classe=="4ª classe") || ($classe=="6ª classe")){
+            if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "6ª classe")) {
                 return view('caderneta.ensinos.ensino_primario_2_4_6_copy', $data);
-            }//se for classificacao quantitativa
-            elseif(($classe=="Iniciação") || ($classe=="1ª classe") || ($classe=="3ª classe") || ($classe=="5ª classe")){
+            } //se for classificacao quantitativa
+            elseif (($classe == "Iniciação") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
                 return view('caderneta.ensinos.ensino_primario_Ini_1_3_5_copy', $data);
             }
-        } elseif ($id_ensino == 2) {//7 classe ate 9 ensino geral
-            if($classe == "9ª classe"){
+        } elseif ($id_ensino == 2) { //7 classe ate 9 ensino geral
+            if ($classe == "9ª classe") {
                 return view('caderneta.ensinos.ensino_1ciclo_9_copy', $data);
-            }else{
+            } else {
                 return view('caderneta.ensinos.ensino_1ciclo_7_8_copy', $data);
             }
         }
@@ -207,14 +214,14 @@ class CadernetaController_copy extends Controller
                 'id_estudante' => null,
                 'id_disciplina' => $id_disciplina,
                 'epoca' => $epoca,
-                'estado'=>"on",
+                'estado' => "on",
                 'ano_lectivo' => $ano_lectivo,
             ];
 
             $data['final'] = [
                 'id_estudante' => null,
                 'id_disciplina' => $id_disciplina,
-                'estado'=>"on",
+                'estado' => "on",
                 'ano_lectivo' => $ano_lectivo,
             ];
 

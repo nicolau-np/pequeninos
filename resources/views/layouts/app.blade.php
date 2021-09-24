@@ -354,7 +354,7 @@ $lastYear = ControladorStatic::getLastYear();
                                             </a>
                                         </li>
 
-                                
+
                                     </ul>
                                 </li>
                                 @endif
@@ -441,7 +441,7 @@ $lastYear = ControladorStatic::getLastYear();
                             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Professor</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li class="@if($menu=="Caderneta") active @endif">
-                                    <a href="/cadernetas/">
+                                    <a href="/cadernetas/list/{{$lastYear}}">
                                         <span class="pcoded-micon"><i class="icofont icofont-file-alt"></i><b>H</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Caderneta</span>
                                         <span class="pcoded-mcaret"></span>

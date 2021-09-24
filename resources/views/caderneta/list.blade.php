@@ -9,7 +9,13 @@ use App\Http\Controllers\ControladorStatic;
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>{{$submenu}}</h5>
+                    <h5>{{$submenu}}
+
+                    @foreach ($getAnos as $anos)
+                    <i class="ti-angle-right"></i>
+                        <a href="/cadernetas/list/{{$anos->ano_lectivo}}">{{$anos->ano_lectivo}}</a>
+                    @endforeach
+                    </h5>
                     <span></span>
                     <div class="card-header-right">
 
@@ -65,7 +71,7 @@ use App\Http\Controllers\ControladorStatic;
                                         <a href="/estatisticas/minipautas/list/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}" type="button" class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Estatística">
                                             <i class="icofont icofont-chart-bar-graph"></i>
                                         </a>&nbsp;
-                                        <a href="/cadernetas/print/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}" type="button" class="btn btn-warning btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Imprimir">
+                                        <a href="/cadernetas/printer/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}" type="button" class="btn btn-warning btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Imprimir">
                                             <i class="ti-printer"></i>
                                         </a>&nbsp;
                                         <!--<a href="/cadernetas/store/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}" type="button" class="btn btn-info btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Actualizar">

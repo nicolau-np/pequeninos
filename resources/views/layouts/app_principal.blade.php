@@ -131,7 +131,7 @@
 					<div class="col-sm-6">
 						<div class="about-text wow fadeInRight">
 							<h3>Sobre SIGE</h3>
-							<p>O Melhor Sistema de Gestão e Estatística Escolar. Aulas, pautas, estatísticas, provas em online e muito mais...
+							<p style="text-align: justify;">O Melhor Sistema de Gestão Escola, com Propinas, Notas e Estatística Escolar. Aulas, pautas, estatísticas, provas em online e muito mais...
                                 Cadastre urgentemente a sua escola, e seja um dos bem sucedidos no que tem haver ao gerenciamento da sua escola.<br/> Basta entrar em contacto connosco  </p>
 							<a href="#" class="btn btn-read-more">Ler Mais</a>
 						</div>
@@ -373,9 +373,11 @@
 					<div class="col-sm-3">
 						<div class="single-footer">
 							<div class="footer-logo">
-								<img src="{{asset('assets/template2/img/footer-logo.png')}}" alt="Footer Logo" />
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut .</p>
+								<div style="font-weight: bold; font-size:26px;">
+                                    <span style="color:#3ea0e6;">SI</span>GE
+                                 </div>
+								<p style="text-align: justify;">O Melhor Sistema de Gestão Escola, com Propinas, Notas e Estatística Escolar. Aulas, pautas, estatísticas.</p>
+								<p style="text-align: justify;">Cadastre urgentemente a sua escola, e seja um dos bem sucedidos no que tem haver ao gerenciamento da sua escola.<br/> Basta entrar em contacto connosco.</p>
 							</div>
 						</div>
 					</div>

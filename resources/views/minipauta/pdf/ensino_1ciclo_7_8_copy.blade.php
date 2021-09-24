@@ -152,7 +152,7 @@ $percent_negativasf = [
 
     @page{
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 11px;
+        font-size: 9px;
         margin-left: 10px;
         margin-right: 10px;
         margin-top: 10px;
@@ -182,7 +182,7 @@ $percent_negativasf = [
             color: #fff;
     }
     .tabela{
-        font-size: 11px;
+        font-size: 9px;
     }
     .teacher_name{
         text-align: center;

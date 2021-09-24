@@ -197,9 +197,19 @@ class RelatorioController extends Controller
             return back()->with(['error' => "Deve iniciar sessão"]);
         }
 
+        //pegar dados dos alunos na tabela historico, formando a lista dos alunos
+        $historico = HistoricEstudante::where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])
+            ->get()->sortBy('estudante.pessoa.nome');
+
         //buscando ensino atraves de turma
         $id_ensino = $turma->classe->id_ensino;
         $classe = $turma->classe->classe;
+
+        $data = [
+            'getHorario' => $horario,
+            'getHistorico' => $historico,
+        ];
+        $pdf = PDF::loadView('relatorios.lista_nominal', $data)->setPaper('A4', 'normal');
 
         if ($id_ensino == 1) {//iniciacao ate 6
             //se for classificacao quantitativa
@@ -216,5 +226,7 @@ class RelatorioController extends Controller
                 return view('minipauta.pdf.ensino_1ciclo_7_8_copy', $data);
             }
         }
+
+        return $pdf->stream('Lista Nominal ' . $turma->turma . '' . $ano_lectivo . '.pdf');
     }
 }

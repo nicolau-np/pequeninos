@@ -3,19 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\AnoLectivo;
+use App\Disciplina;
 use App\Encarregado;
 use App\EpocaPagamento;
 use App\Estudante;
-use App\Exports\EstudanteExport;
 use App\Fatura;
 use App\FormaPagamento;
+use App\Funcionario;
 use App\HistoricEstudante;
+use App\Horario;
 use App\Pagamento;
 use App\PagamentoPai;
 use App\TabelaPreco;
 use App\TipoPagamento;
 use App\Turma;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
@@ -151,5 +154,67 @@ class RelatorioController extends Controller
         $pdf = PDF::loadView('relatorios.lista_nominal', $data)->setPaper('A4', 'normal');
 
         return $pdf->stream('Lista Nominal ' . $turma->turma . '' . $ano_lectivo . '.pdf');
+    }
+
+    public function minipauta($id_turma, $id_disciplina, $ano_lectivo){
+
+        $id_pessoa = Auth::user()->pessoa->id;
+        $funcionario = Funcionario::where('id_pessoa', $id_pessoa)->first();
+
+        Session::put('id_funcionarioMIN', $funcionario->id);
+
+        $turma = Turma::find($id_turma);
+        if(!$turma){
+            return back()->with(['error'=>"Turma não encontrada"]);
+        }
+
+        $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
+        if(!$ano_lectivos){
+            return back()->with(['error'=>"Não encontrou ano lectivo"]);
+        }
+
+        $disciplina = Disciplina::find($id_disciplina);
+        if(!$disciplina){
+            return back()->with(['error' => "Não encontrou disciplina"]);
+        }
+
+        //verificando se o professor e dono desta turma
+        if (Session::has('id_funcionarioMIN')) {
+            //verificando horario e funcionario
+            $data['where_horario'] = [
+                'id_funcionario' => Session::get('id_funcionarioMIN'),
+                'id_turma' => $id_turma,
+                'id_disciplina' => $id_disciplina,
+                'ano_lectivo' => $ano_lectivo,
+                'estado' => "visivel"
+            ];
+
+            $horario = Horario::where($data['where_horario'])->first();
+            if (!$horario) {
+                return back()->with(['error' => "Não é professor desta turma"]);
+            }
+        } else {
+            return back()->with(['error' => "Deve iniciar sessão"]);
+        }
+
+        //buscando ensino atraves de turma
+        $id_ensino = $turma->classe->id_ensino;
+        $classe = $turma->classe->classe;
+
+        if ($id_ensino == 1) {//iniciacao ate 6
+            //se for classificacao quantitativa
+            if(($classe=="2ª classe") || ($classe=="4ª classe") || ($classe=="6ª classe")){
+                return view('minipauta.pdf.ensino_primario_2_4_6_copy', $data);
+            }//se for classificacao quantitativa
+            elseif(($classe=="Iniciação") || ($classe=="1ª classe") || ($classe=="3ª classe") || ($classe=="5ª classe")){
+                return view('minipauta.pdf.ensino_primario_Ini_1_3_5_copy', $data);
+            }
+        } elseif ($id_ensino == 2) {//7 classe ate 9 ensino geral
+            if($classe == "9ª classe"){
+                return view('minipauta.pdf.ensino_1ciclo_9_copy', $data);
+            }else{
+                return view('minipauta.pdf.ensino_1ciclo_7_8_copy', $data);
+            }
+        }
     }
 }

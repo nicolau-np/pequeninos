@@ -37,12 +37,15 @@ use App\Http\Controllers\ControladorNotas;
         color: #333;
     }
     table thead{
-            border:1px solid #000;
+            border:1px solid #ccc;
             background-color: #4680ff;
             color: #fff;
     }
     .tabela{
         font-size: 12px;
+    }
+    .teacher_name{
+        text-align: center;
     }
 </style>
 </head>
@@ -59,7 +62,7 @@ use App\Http\Controllers\ControladorNotas;
          </div>
         <div class="mini-cabecalho">
             <div class="ano_curso">
-                {{$getHorario->ano_lectivo}} - [ {{strtoupper($getHorario->turma->turma)}} - {{strtoupper($getHorario->turma->curso->curso)}} ]
+                {{$getHorario->ano_lectivo}} - [ {{strtoupper($getHorario->turma->turma)}} - {{strtoupper($getHorario->turma->curso->curso)}} ] - DISCIPLINA: {{strtoupper($getHorario->disciplina->disciplina)}}
             </div>
             <div class="periodo">
                 PERÍODO: {{strtoupper($getHorario->turma->turno->turno)}}<br/>
@@ -212,7 +215,11 @@ use App\Http\Controllers\ControladorNotas;
          </div>
          <br/><br/>
          <div class="rodape">
-            rodape
+            <div class="teacher_name">
+                O(A) PROFESSOR(A)<br/>
+                _____________________<br/>
+                //{{$getHorario->funcionario->pessoa->nome}}//
+            </div>
          </div>
 
     </div>
@@ -242,7 +249,11 @@ use App\Http\Controllers\ControladorNotas;
          </div>
          <br/><br/>
          <div class="rodape">
-            rodape
+            <div class="teacher_name">
+                O(A) PROFESSOR(A)<br/>
+                _____________________<br/>
+                //{{$getHorario->funcionario->pessoa->nome}}//
+            </div>
          </div>
     </div>
 <!-- end segunda pagina -->
@@ -269,7 +280,11 @@ use App\Http\Controllers\ControladorNotas;
          </div>
          <br/><br/>
          <div class="rodape">
-            rodape
+            <div class="teacher_name">
+                O(A) PROFESSOR(A)<br/>
+                _____________________<br/>
+                //{{$getHorario->funcionario->pessoa->nome}}//
+            </div>
          </div>
      </div>
 <!-- end pagina -->

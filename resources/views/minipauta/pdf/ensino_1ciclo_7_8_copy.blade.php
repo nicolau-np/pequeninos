@@ -26,7 +26,7 @@ $count_avaliados3 = [
 
 $count_avaliadosf = [
     'mfd'=>0,
-    'npe'=>0,
+
     'mf'=>0,
 ];
 
@@ -53,7 +53,7 @@ $count_positivas3 = [
 
 $count_positivasf = [
     'mfd'=>0,
-    'npe'=>0,
+
     'mf'=>0,
 ];
 
@@ -80,7 +80,7 @@ $percent_positivas3 = [
 
 $percent_positivasf = [
     'mfd'=>0,
-    'npe'=>0,
+
     'mf'=>0,
 ];
 
@@ -107,7 +107,7 @@ $count_negativas3 = [
 
 $count_negativasf = [
     'mfd'=>0,
-    'npe'=>0,
+
     'mf'=>0,
 ];
 
@@ -134,7 +134,7 @@ $percent_negativas3 = [
 
 $percent_negativasf = [
     'mfd'=>0,
-    'npe'=>0,
+
     'mf'=>0,
 ];
 ?>
@@ -223,7 +223,7 @@ $percent_negativasf = [
                            <th colspan="4">1º TRIMESTRE</th>
                            <th colspan="4">2º TRIMESTRE</th>
                            <th colspan="4">3º TRIMESTRE</th>
-                           <th colspan="3">DADOS FINAIS</th>
+                           <th colspan="2">DADOS FINAIS</th>
                        </tr>
                        <tr>
                            <th>MAC1</th>
@@ -242,7 +242,6 @@ $percent_negativasf = [
                            <th>MT3</th>
 
                            <th>MFD</th>
-                           <th>NPE</th>
                            <th>MF</th>
                        </tr>
                    </thead>
@@ -335,16 +334,13 @@ $percent_negativasf = [
                       ?>
                          <td>---</td>
                          <td>---</td>
-                         <td>---</td>
                      <?php }
                          else{
                              foreach ($final as $valorf){
                              $v1_estilo = ControladorNotas::nota_20($valorf->mfd);
-                             $v2_estilo = ControladorNotas::nota_20($valorf->npe);
                              $v3_estilo = ControladorNotas::nota_20($valorf->mf);
                      ?>
                          <td class="{{$v1_estilo}}">@if($valorf->mfd==null) --- @else {{$valorf->mfd}} @endif</td>
-                         <td class="{{$v2_estilo}}">@if($valorf->npe==null) --- @else {{$valorf->npe}} @endif</td>
                          <td class="{{$v3_estilo}}">@if($valorf->mf==null) --- @else {{$valorf->mf}} @endif</td>
                      <?php }}?>
                      <!-- fim dados finais-->
@@ -398,7 +394,7 @@ $percent_negativasf = [
                             <th colspan="4">1º TRIMESTRE</th>
                             <th colspan="4">2º TRIMESTRE</th>
                             <th colspan="4">3º TRIMESTRE</th>
-                            <th colspan="3">DADOS FINAIS</th>
+                            <th colspan="2">DADOS FINAIS</th>
                         </tr>
                         <tr>
                             <th>MAC1</th>
@@ -417,7 +413,6 @@ $percent_negativasf = [
                             <th>MT3</th>
 
                             <th>MFD</th>
-                            <th>NPE</th>
                             <th>MF</th>
 
                         </tr>
@@ -622,9 +617,7 @@ $percent_negativasf = [
                                                                if($valorf->mfd !=null){
                                                                    $count_avaliadosf['mfd']=$count_avaliadosf['mfd']+1;
                                                                }
-                                                               if($valorf->npe !=null){
-                                                                   $count_avaliadosf['npe']=$count_avaliadosf['npe']+1;
-                                                               }
+
                                                                if($valorf->mf !=null){
                                                                    $count_avaliadosf['mf']=$count_avaliadosf['mf']+1;
                                                                }
@@ -634,9 +627,7 @@ $percent_negativasf = [
                                                                if($valorf->mfd >=10){
                                                                    $count_positivasf['mfd']=$count_positivasf['mfd']+1;
                                                                }
-                                                               if($valorf->npe >=10){
-                                                                   $count_positivasf['npe']=$count_positivasf['npe']+1;
-                                                               }
+
                                                                if($valorf->mf >=10){
                                                                    $count_positivasf['mf']=$count_positivasf['mf']+1;
                                                                }
@@ -646,9 +637,7 @@ $percent_negativasf = [
                                                                if($valorf->mfd <=9.99 && $valorf->mfd !=null){
                                                                    $count_negativasf['mfd']=$count_negativasf['mfd']+1;
                                                                }
-                                                               if($valorf->npe <=9.99 && $valorf->npe !=null){
-                                                                   $count_negativasf['npe']=$count_negativasf['npe']+1;
-                                                               }
+
                                                                if($valorf->mf <=9.99 && $valorf->mf !=null){
                                                                    $count_negativasf['mf']=$count_negativasf['mf']+1;
                                                                }
@@ -656,7 +645,7 @@ $percent_negativasf = [
                                                            }
                                                            ?>
                                                         <td>{{$count_avaliadosf['mfd']}}</td>
-                                                        <td>{{$count_avaliadosf['npe']}}</td>
+
                                                         <td>{{$count_avaliadosf['mf']}}</td>
                                                         <!-- end finals-->
                             </tr>
@@ -680,7 +669,6 @@ $percent_negativasf = [
                                 <td>{{$count_positivas3['mt']}}</td>
 
                                 <td>{{$count_positivasf['mfd']}}</td>
-                                <td>{{$count_positivasf['npe']}}</td>
                                 <td>{{$count_positivasf['mf']}}</td>
                             </tr>
 
@@ -703,7 +691,6 @@ $percent_negativasf = [
                                 <td>{{$count_negativas3['mt']}}</td>
 
                                 <td>{{$count_negativasf['mfd']}}</td>
-                                <td>{{$count_negativasf['npe']}}</td>
                                 <td>{{$count_negativasf['mf']}}</td>
                             </tr>
 
@@ -788,11 +775,6 @@ $percent_negativasf = [
                                     $percent_positivasf['mfd'] = ($count_positivasf['mfd']*100)/$count_avaliadosf['mfd'];
                                 }
 
-                                if($count_avaliadosf['npe']==0){
-                                    $percent_positivasf['npe'] = 0;
-                                }else{
-                                    $percent_positivasf['npe'] = ($count_positivasf['npe']*100)/$count_avaliadosf['npe'];
-                                }
 
                                 if($count_avaliadosf['mf']==0){
                                     $percent_positivasf['mf'] = 0;
@@ -821,7 +803,6 @@ $percent_negativasf = [
                                 <td>{{round($percent_positivas3['mt'],2)}}%</td>
 
                                 <td>{{round($percent_positivasf['mfd'],2)}}%</td>
-                                <td>{{round($percent_positivasf['npe'],2)}}%</td>
                                 <td>{{round($percent_positivasf['mf'],2)}}%</td>
                             </tr>
 
@@ -906,12 +887,6 @@ $percent_negativasf = [
                                     $percent_negativasf['mfd'] = ($count_negativasf['mfd']*100)/$count_avaliadosf['mfd'];
                                 }
 
-                                if($count_avaliadosf['npe']==0){
-                                    $percent_negativasf['npe'] = 0;
-                                }else{
-                                    $percent_negativasf['npe'] = ($count_negativasf['npe']*100)/$count_avaliadosf['npe'];
-                                }
-
                                 if($count_avaliadosf['mf']==0){
                                     $percent_negativasf['mf'] = 0;
                                 }else{
@@ -939,7 +914,6 @@ $percent_negativasf = [
                                 <td>{{round($percent_negativas3['mt'],2)}}%</td>
 
                                 <td>{{round($percent_negativasf['mfd'],2)}}%</td>
-                                <td>{{round($percent_negativasf['npe'],2)}}%</td>
                                 <td>{{round($percent_negativasf['mf'],2)}}%</td>
                             </tr>
 

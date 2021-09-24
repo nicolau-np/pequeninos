@@ -469,14 +469,14 @@ $lastYear = ControladorStatic::getLastYear();
                             <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Acerca</div>
                             <ul class="pcoded-item pcoded-left-item">
                                 <li>
-                                    <a href="chart.html">
+                                    <a href="/about/sistema">
                                         <span class="pcoded-micon"><i class="ti-bookmark-alt"></i><b>S</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Sistema</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>
                                 <li>
-                                    <a href="map-google.html">
+                                    <a href="/about/instituicao">
                                         <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>I</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Instituição</span>
                                         <span class="pcoded-mcaret"></span>

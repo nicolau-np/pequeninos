@@ -256,6 +256,11 @@ Route::group(['prefix' => 'usuarios', 'middleware' => "AdminUser"], function () 
     Route::get('/', "UserController@index");
 });
 
+Route::group(['prefix' =>"about"], function(){
+    Route::get('/sistema', "AboutController@sistema");
+    Route::get('/instituicao', "AboutController@instituicao");
+});
+
 /*rota de test*/
 Route::get('test', function(){
     $retorno = null;

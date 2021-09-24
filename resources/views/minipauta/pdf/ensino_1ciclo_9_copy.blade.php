@@ -54,7 +54,7 @@ use App\Http\Controllers\ControladorNotas;
 </head>
 <body>
 
-    <!-- primeira pagina -->
+<!-- primeira pagina -->
     <div class="default-page">
 
         <div class="cabecalho">
@@ -232,6 +232,43 @@ use App\Http\Controllers\ControladorNotas;
     </div>
 <!-- end primeira pagina -->
 
+<!-- estatistica pagina -->
+    <div class="page-break">
+        <div class="cabecalho">
+            @include('include.header_docs')
+        </div>
+        <div class="titulo">
+            <p style="text-align: center; font-weight:bold;">MINI-PAUTA INFORMAÇÃO ESTATÍSTICA</p>
+         </div>
+        <div class="mini-cabecalho">
+            <div class="ano_curso">
+                &nbsp;&nbsp;{{$getHorario->ano_lectivo}} - [ {{strtoupper($getHorario->turma->turma)}} - {{strtoupper($getHorario->turma->curso->curso)}} ]
+            </div>
+            <div class="periodo">
+                PERÍODO: {{strtoupper($getHorario->turma->turno->turno)}}
+                &nbsp;&nbsp;
+                <br/>
+        </div>
+         </div>
+         <br/><br/>
+         <div class="corpo">
+
+            <div class="table-responsive tabela">
+
+            </div>
+
+         </div>
+         <br/><br/>
+         <div class="rodape">
+            <div class="teacher_name">
+                O(A) PROFESSOR(A)<br/>
+                _____________________<br/>
+                //{{$getHorario->funcionario->pessoa->nome}}//
+            </div>
+         </div>
+    </div>
+<!-- end estatistica-->
+
 <!-- segunda pagina -->
     <div class="page-break">
         <div class="cabecalho">
@@ -337,7 +374,7 @@ use App\Http\Controllers\ControladorNotas;
             @include('include.header_docs')
         </div>
         <div class="titulo">
-            <p style="text-align: center; font-weight:bold;">MINI-PAUTA DE AVALIAÇÃO ANUAL</p>
+            <p style="text-align: center; font-weight:bold;">MINI-PAUTA 2º TRIMESTRE</p>
          </div>
         <div class="mini-cabecalho">
             <div class="ano_curso">
@@ -359,13 +396,13 @@ use App\Http\Controllers\ControladorNotas;
                             <th>Nº</th>
                             <th>NOME COMPLETO</th>
                             <th>G</th>
-                            <th>SET</th>
-                            <th>OUT</th>
-                            <th>NOV</th>
-                            <th>MAC1</th>
-                            <th>NPP1</th>
-                            <th>PT1</th>
-                            <th>MT1</th>
+                            <th>JAN</th>
+                            <th>FEV</th>
+                            <th>MAR</th>
+                            <th>MAC2</th>
+                            <th>NPP2</th>
+                            <th>PT2</th>
+                            <th>MT2</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -428,6 +465,106 @@ use App\Http\Controllers\ControladorNotas;
             </div>
          </div>
      </div>
+<!-- end pagina -->
+
+
+<!-- terceira pagina -->
+<div class="page-break">
+    <div class="cabecalho">
+        @include('include.header_docs')
+    </div>
+    <div class="titulo">
+        <p style="text-align: center; font-weight:bold;">MINI-PAUTA 3º TRIMESTRE</p>
+     </div>
+    <div class="mini-cabecalho">
+        <div class="ano_curso">
+            &nbsp;&nbsp;{{$getHorario->ano_lectivo}} - [ {{strtoupper($getHorario->turma->turma)}} - {{strtoupper($getHorario->turma->curso->curso)}} ]
+        </div>
+        <div class="periodo">
+            PERÍODO: {{strtoupper($getHorario->turma->turno->turno)}}
+            &nbsp;&nbsp;
+            <br/>
+        </div>
+     </div>
+     <br/><br/>
+     <div class="corpo">
+
+        <div class="table-responsive tabela">
+            <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;" bordercolor="red">
+                <thead>
+                    <tr>
+                        <th>Nº</th>
+                        <th>NOME COMPLETO</th>
+                        <th>G</th>
+                        <th>ABR</th>
+                        <th>MAI</th>
+                        <th>JUN</th>
+                        <th>MAC3</th>
+                        <th>NPP3</th>
+                        <th>PT3</th>
+                        <th>MT3</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  @foreach ($getHistorico as $historico)
+                  <tr>
+                      <td>{{$loop->iteration}}</td>
+                      <td>{{$historico->estudante->pessoa->nome}}</td>
+                      <td>{{$historico->estudante->pessoa->genero}}</td>
+
+                      <!-- primeiro trimestre-->
+                      <?php
+                          $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestral($historico->id_estudante, 3);
+                          if($trimestre3->count()==0){
+                      ?>
+                      <td>---</td>
+                      <td>---</td>
+                      <td>---</td>
+                      <td>---</td>
+                      <td>---</td>
+                      <td>---</td>
+                      <td>---</td>
+                          <?php }
+                          else{
+                              foreach($trimestre3 as $valor3){
+                                  $v01_estilo = ControladorNotas::nota_20($valor3->av1);
+                                  $v02_estilo = ControladorNotas::nota_20($valor3->av2);
+                                  $v03_estilo = ControladorNotas::nota_20($valor3->av3);
+
+                                  $v1_estilo = ControladorNotas::nota_20($valor3->mac);
+                                  $v2_estilo = ControladorNotas::nota_20($valor3->npp);
+                                  $v3_estilo = ControladorNotas::nota_20($valor3->pt);
+                                  $v4_estilo = ControladorNotas::nota_20($valor3->mt);
+                              ?>
+                      <td class="{{$v01_estilo}}">@if($valor3->av1==null) --- @else {{$valor3->av1}} @endif</td>
+                      <td class="{{$v02_estilo}}">@if($valor3->av2==null) --- @else {{$valor3->av2}} @endif</td>
+                      <td class="{{$v03_estilo}}">@if($valor3->av3==null) --- @else {{$valor3->av3}} @endif</td>
+                      <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$valor3->mac}} @endif</td>
+                      <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{$valor3->npp}} @endif</td>
+                      <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{$valor3->pt}} @endif</td>
+                      <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{$valor3->mt}} @endif</td>
+                              <?php }}?>
+                      <!-- fim primeiro trimestre-->
+
+
+                  </tr>
+                  @endforeach
+                </tbody>
+             </table>
+
+
+        </div>
+
+     </div>
+     <br/><br/>
+     <div class="rodape">
+        <div class="teacher_name">
+            O(A) PROFESSOR(A)<br/>
+            _____________________<br/>
+            //{{$getHorario->funcionario->pessoa->nome}}//
+        </div>
+     </div>
+ </div>
 <!-- end pagina -->
 
 </body>

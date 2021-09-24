@@ -15,7 +15,9 @@ use App\Http\Controllers\ControladorNotas;
 
     @page{
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 12px;
+        font-size: 11px;
+        margin-left: 10px;
+        margin-right: 10px;
     }
     .mini-cabecalho{
         display: block;
@@ -37,12 +39,11 @@ use App\Http\Controllers\ControladorNotas;
         color: #333;
     }
     table thead{
-            border:1px solid #ccc;
             background-color: #4680ff;
             color: #fff;
     }
     .tabela{
-        font-size: 12px;
+        font-size: 11px;
     }
     .teacher_name{
         text-align: center;
@@ -62,16 +63,19 @@ use App\Http\Controllers\ControladorNotas;
          </div>
         <div class="mini-cabecalho">
             <div class="ano_curso">
-                {{$getHorario->ano_lectivo}} - [ {{strtoupper($getHorario->turma->turma)}} - {{strtoupper($getHorario->turma->curso->curso)}} ] - DISCIPLINA: {{strtoupper($getHorario->disciplina->disciplina)}}
+                &nbsp;&nbsp;{{$getHorario->ano_lectivo}} - [ {{strtoupper($getHorario->turma->turma)}} - {{strtoupper($getHorario->turma->curso->curso)}} ] - DISCIPLINA: {{strtoupper($getHorario->disciplina->disciplina)}}
             </div>
             <div class="periodo">
-                PERÍODO: {{strtoupper($getHorario->turma->turno->turno)}}<br/>
+                PERÍODO: {{strtoupper($getHorario->turma->turno->turno)}}
+                &nbsp;&nbsp;
+                <br/>
+
             </div>
          </div>
-         <br/><br/>
+         <br/>
          <div class="corpo">
-
-             <table class="border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
+            <div class="table-responsive tabela">
+             <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;" bordercolor="red">
                    <thead>
                        <tr>
                            <th rowspan="2">Nº</th>
@@ -212,7 +216,8 @@ use App\Http\Controllers\ControladorNotas;
                    </tbody>
                 </table>
 
-         </div>
+            </div>
+        </div>
          <br/><br/>
          <div class="rodape">
             <div class="teacher_name">
@@ -235,11 +240,13 @@ use App\Http\Controllers\ControladorNotas;
          </div>
         <div class="mini-cabecalho">
             <div class="ano_curso">
-                {{$getHorario->ano_lectivo}} - [ {{strtoupper($getHorario->turma->turma)}} - {{strtoupper($getHorario->turma->curso->curso)}} ]
+                &nbsp;&nbsp;{{$getHorario->ano_lectivo}} - [ {{strtoupper($getHorario->turma->turma)}} - {{strtoupper($getHorario->turma->curso->curso)}} ]
             </div>
             <div class="periodo">
-                PERÍODO: {{strtoupper($getHorario->turma->turno->turno)}}<br/>
-            </div>
+                PERÍODO: {{strtoupper($getHorario->turma->turno->turno)}}
+                &nbsp;&nbsp;
+                <br/>
+        </div>
          </div>
          <br/><br/>
          <div class="corpo">
@@ -268,10 +275,12 @@ use App\Http\Controllers\ControladorNotas;
          </div>
         <div class="mini-cabecalho">
             <div class="ano_curso">
-                {{$getHorario->ano_lectivo}} - [ {{strtoupper($getHorario->turma->turma)}} - {{strtoupper($getHorario->turma->curso->curso)}} ]
+                &nbsp;&nbsp;{{$getHorario->ano_lectivo}} - [ {{strtoupper($getHorario->turma->turma)}} - {{strtoupper($getHorario->turma->curso->curso)}} ]
             </div>
             <div class="periodo">
-                PERÍODO: {{strtoupper($getHorario->turma->turno->turno)}}<br/>
+                PERÍODO: {{strtoupper($getHorario->turma->turno->turno)}}
+                &nbsp;&nbsp;
+                <br/>
             </div>
          </div>
          <br/><br/>

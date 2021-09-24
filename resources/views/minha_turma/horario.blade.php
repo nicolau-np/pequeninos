@@ -23,6 +23,8 @@ use \App\Http\Controllers\ControladorStatic;
                         <i class="ti-angle-right"></i>
                         {{$getTurma->turma}}
                         <i class="ti-angle-right"></i>
+                        {{$getTurma->turno->turno}}
+                        <i class="ti-angle-right"></i>
                         {{$getTurma->curso->curso}}
                         <i class="ti-angle-right"></i>
                         {{$getAno}}

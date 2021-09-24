@@ -9,9 +9,9 @@ class AboutController extends Controller
     public function sistema(){
         $data = [
             'title' => "Sistema",
-            'type' => "sistema",
+            'type' => "acerca",
             'menu' => "Sistema",
-            'submenu' => "Sobre",
+            'submenu' => "Acerca",
 
        ];
         return view('about.sistema', $data);
@@ -19,10 +19,10 @@ class AboutController extends Controller
 
     public function instituicao(){
         $data = [
-            'title' => "Sistema",
-            'type' => "sistema",
+            'title' => "Instituição",
+            'type' => "acerca",
             'menu' => "Instituição",
-            'submenu' => "Sobre",
+            'submenu' => "Acerca",
 
        ];
         return view('about.instituicao', $data);

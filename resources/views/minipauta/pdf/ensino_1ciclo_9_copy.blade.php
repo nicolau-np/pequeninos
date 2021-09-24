@@ -1,3 +1,6 @@
+<?php
+use App\Http\Controllers\ControladorNotas;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,8 +37,12 @@
         color: #333;
     }
     table thead{
+            border:1px solid #000;
             background-color: #4680ff;
             color: #fff;
+    }
+    .tabela{
+        font-size: 12px;
     }
 </style>
 </head>
@@ -61,8 +68,7 @@
          <br/><br/>
          <div class="corpo">
 
-            <div class="table-responsive tabela">
-                <table class="table table-bordered table-striped">
+             <table class="border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
                    <thead>
                        <tr>
                            <th rowspan="2">Nº</th>
@@ -72,7 +78,6 @@
                            <th colspan="4">2º TRIMESTRE</th>
                            <th colspan="4">3º TRIMESTRE</th>
                            <th colspan="3">DADOS FINAIS</th>
-                           <th rowspan="2">OBS.</th>
                        </tr>
                        <tr>
                            <th>MAC1</th>
@@ -198,25 +203,11 @@
                      <?php }}?>
                      <!-- fim dados finais-->
 
-                     <!-- obs -->
-                     @if($final->count()==0)
-                             <td>---</td>
-                     @else
-                     @if($valorf->mf==null)
-                     <td>---</td>
-                     @else
-                     <td class="@if($valorf->mf<=9.99 && $valorf->mf!=null) negativo @else positivo @endif">
-                                 @if($valorf->mf<=9.99 && $valorf->mf!=null) NÃO TRANSITA @else TRANSITA @endif
-                     </td>
-                     @endif
 
-                     @endif
-                     <!-- fim obs -->
                      </tr>
                      @endforeach
                    </tbody>
                 </table>
-            </div>
 
          </div>
          <br/><br/>

@@ -477,8 +477,8 @@ $lastYear = ControladorStatic::getLastYear();
                                 </li>
                                 <li>
                                     <a href="map-google.html">
-                                        <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>C</b></span>
-                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Colégio</span>
+                                        <span class="pcoded-micon"><i class="ti-direction-alt"></i><b>I</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Instituição</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>

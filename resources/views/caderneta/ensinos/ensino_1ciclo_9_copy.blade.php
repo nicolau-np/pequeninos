@@ -15,6 +15,10 @@
                     <i class="ti-angle-right"></i>
                     {{$getHorario->turma->turma}}
                     <i class="ti-angle-right"></i>
+                    {{$getHorario->turma->turno->turno}}
+                    <i class="ti-angle-right"></i>
+                    {{$getHorario->turma->curso->curso}}
+                    <i class="ti-angle-right"></i>
                     {{$getHorario->disciplina->disciplina}}
                     <i class="ti-angle-right"></i>
                     {{$getHorario->ano_lectivo}}

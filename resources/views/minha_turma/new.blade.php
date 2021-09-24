@@ -10,6 +10,8 @@
                     <i class="ti-angle-right"></i>
                     {{$getDirector->turma->turma}}
                     <i class="ti-angle-right"></i>
+                    {{$getDirector->turma->turno->turno}}
+                    <i class="ti-angle-right"></i>
                     {{$getDirector->turma->curso->curso}}
                     <i class="ti-angle-right"></i>
                     {{$getDirector->ano_lectivo}}

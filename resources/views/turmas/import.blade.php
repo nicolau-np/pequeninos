@@ -12,6 +12,8 @@
                         <i class="ti-angle-right"></i>
                         {{$getTurma->turno->turno}}
                         <i class="ti-angle-right"></i>
+                        {{$getTurma->curso->curso}}
+                        <i class="ti-angle-right"></i>
                         {{$getAno}}
                     </h5>
                     <span></span>

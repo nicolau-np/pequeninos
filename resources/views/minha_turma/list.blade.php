@@ -46,13 +46,13 @@ use App\Http\Controllers\ControladorStatic;
                                     <a href="/pautas/create/{{$turmas->id_turma}}/{{$turmas->ano_lectivo}}" type="button" class="btn btn-danger btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pauta">
                                         <i class="icofont icofont-clip-board"></i>
                                     </a>&nbsp;
-                                    <a href="#" type="button" class="btn btn-warning btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Baixar Excel">
-                                        <i class="icofont icofont-download-alt"></i>
+                                    <a href="#" type="button" class="btn btn-warning btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Imprimir">
+                                        <i class="ti-printer"></i>
                                     </a>&nbsp;
                                     <a href="/minha_turma/horario/{{$turmas->id_turma}}/{{$turmas->ano_lectivo}}" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Horário">
                                         <i class="icofont icofont-time"></i>
                                     </a>&nbsp;
-                                    <a href="#" type="button" class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Lista Nominal">
+                                    <a href="/relatorios/lista_nominal/{{$turmas->id_turma}}/{{$turmas->ano_lectivo}}" type="button" class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Lista Nominal">
                                         <i class="icofont icofont-list"></i>
                                     </a>&nbsp;
                                    </div>

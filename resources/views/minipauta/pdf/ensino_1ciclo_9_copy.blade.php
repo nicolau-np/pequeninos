@@ -18,6 +18,8 @@ use App\Http\Controllers\ControladorNotas;
         font-size: 11px;
         margin-left: 10px;
         margin-right: 10px;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
     .mini-cabecalho{
         display: block;
@@ -74,12 +76,12 @@ use App\Http\Controllers\ControladorNotas;
          </div>
          <br/>
          <div class="corpo">
-            <div class="table-responsive tabela">
+            <div class="table-responsive">
              <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;" bordercolor="red">
                    <thead>
                        <tr>
                            <th rowspan="2">Nº</th>
-                           <th rowspan="2">NOME COMPLETO</th>
+                           <th rowspan="2" width="140px;">NOME COMPLETO</th>
                            <th rowspan="2">G</th>
                            <th colspan="4">1º TRIMESTRE</th>
                            <th colspan="4">2º TRIMESTRE</th>
@@ -236,7 +238,7 @@ use App\Http\Controllers\ControladorNotas;
             @include('include.header_docs')
         </div>
         <div class="titulo">
-            <p style="text-align: center; font-weight:bold;">MINI-PAUTA DE AVALIAÇÃO ANUAL</p>
+            <p style="text-align: center; font-weight:bold;">MINI-PAUTA 1º TRIMESTRE</p>
          </div>
         <div class="mini-cabecalho">
             <div class="ano_curso">
@@ -251,7 +253,71 @@ use App\Http\Controllers\ControladorNotas;
          <br/><br/>
          <div class="corpo">
 
+            <div class="table-responsive tabela">
+                <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;" bordercolor="red">
+                    <thead>
+                        <tr>
+                            <th>Nº</th>
+                            <th>NOME COMPLETO</th>
+                            <th>G</th>
+                            <th>SET</th>
+                            <th>OUT</th>
+                            <th>NOV</th>
+                            <th>MAC1</th>
+                            <th>NPP1</th>
+                            <th>PT1</th>
+                            <th>MT1</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      @foreach ($getHistorico as $historico)
+                      <tr>
+                          <td>{{$loop->iteration}}</td>
+                          <td>{{$historico->estudante->pessoa->nome}}</td>
+                          <td>{{$historico->estudante->pessoa->genero}}</td>
 
+                          <!-- primeiro trimestre-->
+                          <?php
+                              $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestral($historico->id_estudante, 1);
+                              if($trimestre1->count()==0){
+                          ?>
+                          <td>---</td>
+                          <td>---</td>
+                          <td>---</td>
+                          <td>---</td>
+                          <td>---</td>
+                          <td>---</td>
+                          <td>---</td>
+                              <?php }
+                              else{
+                                  foreach($trimestre1 as $valor1){
+                                      $v01_estilo = ControladorNotas::nota_20($valor1->av1);
+                                      $v02_estilo = ControladorNotas::nota_20($valor1->av2);
+                                      $v03_estilo = ControladorNotas::nota_20($valor1->av3);
+
+                                      $v1_estilo = ControladorNotas::nota_20($valor1->mac);
+                                      $v2_estilo = ControladorNotas::nota_20($valor1->npp);
+                                      $v3_estilo = ControladorNotas::nota_20($valor1->pt);
+                                      $v4_estilo = ControladorNotas::nota_20($valor1->mt);
+                                  ?>
+                          <td class="{{$v01_estilo}}">@if($valor1->av1==null) --- @else {{$valor1->av1}} @endif</td>
+                          <td class="{{$v02_estilo}}">@if($valor1->av2==null) --- @else {{$valor1->av2}} @endif</td>
+                          <td class="{{$v03_estilo}}">@if($valor1->av3==null) --- @else {{$valor1->av3}} @endif</td>
+                          <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$valor1->mac}} @endif</td>
+                          <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$valor1->npp}} @endif</td>
+                          <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$valor1->pt}} @endif</td>
+                          <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$valor1->mt}} @endif</td>
+                                  <?php }}?>
+                          <!-- fim primeiro trimestre-->
+
+
+                      </tr>
+                      @endforeach
+                    </tbody>
+                 </table>
+
+
+            </div>
 
          </div>
          <br/><br/>

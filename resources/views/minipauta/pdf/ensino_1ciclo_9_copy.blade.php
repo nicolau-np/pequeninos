@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\ControladorNotas;
+use App\Http\Controllers\ControladorStatic;
 $trimestre1=null;
 $trimestre2=null;
 $trimestre3=null;
@@ -1257,7 +1258,8 @@ $percent_negativasf = [
         </div>
      </div>
  </div>
-<!-- end pagina -->
+
+ <!-- end pagina -->
 
 </body>
 </html>

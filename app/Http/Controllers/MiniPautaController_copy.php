@@ -18,7 +18,7 @@ class MiniPautaController_copy extends Controller
         if (!$anos) {
             return back()->with(['error' => "Ano Lectivo não encontrado"]);
         }
-        $turma = Turma::find($id_turma)->first();
+        $turma = Turma::find($id_turma);
         if (!$turma) {
             return back()->with(['error' => "Turma não encontrada"]);
         }

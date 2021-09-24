@@ -100,13 +100,13 @@ class ControladorNotas extends Controller
     {
         $retorno = null;
         if ($nota >= 8 && $nota <= 10) {
-            $retorno = "MUITO BOM";
+            $retorno = "M BOM";
         } elseif ($nota >= 7 && $nota <= 7.99) {
             $retorno = "BOM";
         } elseif ($nota >= 5 && $nota <= 6.99) {
-            $retorno = "SÚFICE";
+            $retorno = "SUF";
         } elseif ($nota >= 3 && $nota <= 4.99) {
-            $retorno = "MEDÍUCRE";
+            $retorno = "MED";
         } elseif ($nota >= 0 && $nota <= 2.99) {
             $retorno = "MAU";
         } elseif ($nota == "") {

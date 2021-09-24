@@ -9,7 +9,12 @@ use App\Http\Controllers\ControladorStatic;
         <div class="col-sm-12">
             <div class="card">
                 <div class="card-header">
-                    <h5>{{$submenu}}</h5>
+                    <h5>{{$submenu}}
+                    @foreach ($getAnos as $anos)
+                    <i class="ti-angle-right"></i>
+                        <a href="/minha_turma/list/{{$anos->ano_lectivo}}" style="color:#4680ff;">{{$anos->ano_lectivo}}</a>
+                    @endforeach
+                    </h5>
                     <span></span>
                     <div class="card-header-right">
 
@@ -46,7 +51,7 @@ use App\Http\Controllers\ControladorStatic;
                                     <a href="/pautas/create/{{$turmas->id_turma}}/{{$turmas->ano_lectivo}}" type="button" class="btn btn-danger btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pauta">
                                         <i class="icofont icofont-clip-board"></i>
                                     </a>&nbsp;
-                                    
+
                                     <a href="/minha_turma/horario/{{$turmas->id_turma}}/{{$turmas->ano_lectivo}}" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Horário">
                                         <i class="icofont icofont-time"></i>
                                     </a>&nbsp;

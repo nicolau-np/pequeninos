@@ -449,7 +449,7 @@ $lastYear = ControladorStatic::getLastYear();
                                 </li>
 
                                 <li class="@if($menu=="Minha Turma") active @endif">
-                                    <a href="/minha_turma/">
+                                    <a href="/minha_turma/list/{{$lastYear}}">
                                         <span class="pcoded-micon"><i class="ti-folder"></i><b>U</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.dash.main">Minha Turma</span>
                                         <span class="pcoded-mcaret"></span>

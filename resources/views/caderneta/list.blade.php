@@ -13,7 +13,7 @@ use App\Http\Controllers\ControladorStatic;
 
                     @foreach ($getAnos as $anos)
                     <i class="ti-angle-right"></i>
-                        <a href="/cadernetas/list/{{$anos->ano_lectivo}}">{{$anos->ano_lectivo}}</a>
+                        <a href="/cadernetas/list/{{$anos->ano_lectivo}}" style="color:#4680ff;">{{$anos->ano_lectivo}}</a>
                     @endforeach
                     </h5>
                     <span></span>

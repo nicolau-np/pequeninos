@@ -23,20 +23,26 @@ class MinhaTurmaController extends Controller
         $this->middleware('prof');
    }
 
-    public function index()
+    public function list($ano_lectivo)
     {
+        $ano_lectivos = AnoLectivo::where(['ano_lectivo'=>$ano_lectivo])->first();
+        if(!$ano_lectivos){
+            return back()->with(['error' => "Não encontrou"]);
+        }
+        $anos = AnoLectivo::orderBy('id', 'desc')->get();
         $id_pessoa = Auth::user()->pessoa->id;
         $funcionario = Funcionario::where('id_pessoa', $id_pessoa)->first();
         if(!$funcionario){
             return back()->with(['error'=>"Não encontrou"]);
         }
-        $minha_turmas = DirectorTurma::orderBy('id', 'desc')->where('id_funcionario', $funcionario->id)->paginate('8');
+        $minha_turmas = DirectorTurma::orderBy('id', 'desc')->where(['id_funcionario'=>$funcionario->id, 'ano_lectivo'=>$ano_lectivo])->paginate('8');
         $data = [
             'title' => "Minha Turma",
             'type' => "minha turma",
             'menu' => "Minha Turma",
             'submenu' => "Listar",
             'getTurmas'=>$minha_turmas,
+            'getAnos'=>$anos,
         ];
         return view('minha_turma.list', $data);
     }

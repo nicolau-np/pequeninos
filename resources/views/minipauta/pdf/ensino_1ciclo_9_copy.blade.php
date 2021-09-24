@@ -385,7 +385,7 @@ $percent_negativasf = [
                 <br/>
         </div>
          </div>
-         <br/><br/>
+         <br/>
          <div class="corpo">
 
             <div class="table-responsive tabela">
@@ -977,7 +977,7 @@ $percent_negativasf = [
                 <br/>
         </div>
          </div>
-         <br/><br/>
+         <br/>
          <div class="corpo">
 
             <div class="table-responsive tabela">
@@ -1076,7 +1076,7 @@ $percent_negativasf = [
                 <br/>
             </div>
          </div>
-         <br/><br/>
+         <br/>
          <div class="corpo">
 
             <div class="table-responsive tabela">
@@ -1176,7 +1176,7 @@ $percent_negativasf = [
             <br/>
         </div>
      </div>
-     <br/><br/>
+     <br/>
      <div class="corpo">
 
         <div class="table-responsive tabela">

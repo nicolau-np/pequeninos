@@ -351,7 +351,73 @@ use App\Http\Controllers\ControladorNotas;
          </div>
          <br/><br/>
          <div class="corpo">
-            corpo
+
+            <div class="table-responsive tabela">
+                <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;" bordercolor="red">
+                    <thead>
+                        <tr>
+                            <th>Nº</th>
+                            <th>NOME COMPLETO</th>
+                            <th>G</th>
+                            <th>SET</th>
+                            <th>OUT</th>
+                            <th>NOV</th>
+                            <th>MAC1</th>
+                            <th>NPP1</th>
+                            <th>PT1</th>
+                            <th>MT1</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      @foreach ($getHistorico as $historico)
+                      <tr>
+                          <td>{{$loop->iteration}}</td>
+                          <td>{{$historico->estudante->pessoa->nome}}</td>
+                          <td>{{$historico->estudante->pessoa->genero}}</td>
+
+                          <!-- primeiro trimestre-->
+                          <?php
+                              $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestral($historico->id_estudante, 2);
+                              if($trimestre2->count()==0){
+                          ?>
+                          <td>---</td>
+                          <td>---</td>
+                          <td>---</td>
+                          <td>---</td>
+                          <td>---</td>
+                          <td>---</td>
+                          <td>---</td>
+                              <?php }
+                              else{
+                                  foreach($trimestre2 as $valor2){
+                                      $v01_estilo = ControladorNotas::nota_20($valor2->av1);
+                                      $v02_estilo = ControladorNotas::nota_20($valor2->av2);
+                                      $v03_estilo = ControladorNotas::nota_20($valor2->av3);
+
+                                      $v1_estilo = ControladorNotas::nota_20($valor2->mac);
+                                      $v2_estilo = ControladorNotas::nota_20($valor2->npp);
+                                      $v3_estilo = ControladorNotas::nota_20($valor2->pt);
+                                      $v4_estilo = ControladorNotas::nota_20($valor2->mt);
+                                  ?>
+                          <td class="{{$v01_estilo}}">@if($valor2->av1==null) --- @else {{$valor2->av1}} @endif</td>
+                          <td class="{{$v02_estilo}}">@if($valor2->av2==null) --- @else {{$valor2->av2}} @endif</td>
+                          <td class="{{$v03_estilo}}">@if($valor2->av3==null) --- @else {{$valor2->av3}} @endif</td>
+                          <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{$valor2->mac}} @endif</td>
+                          <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{$valor2->npp}} @endif</td>
+                          <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{$valor2->pt}} @endif</td>
+                          <td class="{{$v4_estilo}}">@if($valor2->mt==null) --- @else {{$valor2->mt}} @endif</td>
+                                  <?php }}?>
+                          <!-- fim primeiro trimestre-->
+
+
+                      </tr>
+                      @endforeach
+                    </tbody>
+                 </table>
+
+
+            </div>
+
          </div>
          <br/><br/>
          <div class="rodape">

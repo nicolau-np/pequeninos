@@ -103,9 +103,9 @@
                                                     <th>Nº</th>
                                                     <th>NOME</th>
                                                     <th>G</th>
-                                                    <th>SET</th>
                                                     <th>OUT</th>
                                                     <th>NOV</th>
+                                                    <th>DEZ</th>
                                                     <th>NPP</th>
                                                     <th>PT</th>
                                                 </tr>

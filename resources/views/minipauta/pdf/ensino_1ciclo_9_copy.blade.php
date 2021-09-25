@@ -1,9 +1,7 @@
 @php
 use App\Http\Controllers\ControladorNotas;
 use App\Http\Controllers\ControladorStatic;
-$trimestre1=null;
-$trimestre2=null;
-$trimestre3=null;
+
 $count_avaliados1 = [
     'mac'=>0,
     'npp'=>0,
@@ -256,8 +254,8 @@ $percent_negativasf = [
 
                          <!-- primeiro trimestre-->
                          <?php
-                             $t1= ControladorNotas::getValoresMiniPautaTrimestral($historico->id_estudante, 1);
-                             if($t1->count()==0){
+                             $trimestre1= ControladorNotas::getValoresMiniPautaTrimestral($historico->id_estudante, 1);
+                             if($trimestre1->count()==0){
                          ?>
                          <td>---</td>
                          <td>---</td>
@@ -265,7 +263,7 @@ $percent_negativasf = [
                          <td>---</td>
                              <?php }
                              else{
-                                 foreach($t1 as $valor1){
+                                 foreach($trimestre1 as $valor1){
                                      $v1_estilo = ControladorNotas::nota_20($valor1->mac);
                                      $v2_estilo = ControladorNotas::nota_20($valor1->npp);
                                      $v3_estilo = ControladorNotas::nota_20($valor1->pt);

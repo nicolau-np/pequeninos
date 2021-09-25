@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Facades\Excel;
 use PDF;
 
+
 class RelatorioController extends Controller
 {
 

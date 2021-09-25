@@ -153,4 +153,67 @@ class ControladorNotas extends Controller
         $observacao = ObservacaoUnica::where(['id_classe' => $classe, 'id_curso' => $curso, 'id_disciplina' => $disciplina])->first();
         return $observacao;
     }
+
+
+    /*carregar para os PDFs*/
+    
+    public static function getValoresPautaFinalPDF($id_estudante, $id_disciplina, $ano_lectivo)
+    {
+        $data = [
+            'id_estudante' => $id_estudante,
+            'id_disciplina' => $id_disciplina,
+            'ano_lectivo' => $ano_lectivo,
+        ];
+        $final = Finals::where($data)->get();
+        return $final;
+    }
+
+    public static function getNotasEstudantesFinalPDF($id_turma, $id_disciplina, $ano_lectivo)
+    {
+        $data2 = [
+            'id_disciplina' => $id_disciplina,
+            'id_turma' => $id_turma,
+        ];
+
+        $finals = Finals::getNotasEstudantes($data2, $ano_lectivo);
+
+        return $finals;
+    }
+
+    public static function getNotasEstudantesPDF($id_turma, $id_disciplina, $ano_lectivo, $epoca)
+    {
+        $data2 = [
+            'id_disciplina' => $id_disciplina,
+            'id_turma' => $id_turma,
+        ];
+
+        $trimestral = Trimestral::getNotasEstudantes($data2, $ano_lectivo, $epoca);
+
+        return $trimestral;
+    }
+
+    public static function getValoresMiniPautaTrimestralPDF($id_disciplina, $id_estudante, $epoca, $ano_lectivo)
+    {
+        $data = [
+            'id_estudante' => $id_estudante,
+            'epoca' => $epoca,
+            'id_disciplina' => $id_disciplina,
+            'ano_lectivo' => $ano_lectivo,
+        ];
+        $trimestral = Trimestral::where($data)->get();
+        return $trimestral;
+    }
+
+    public static function getValoresMiniPautaFinalPDF($ano_lectivo, $id_disciplina, $id_estudante)
+    {
+        $data = [
+            'id_estudante' => $id_estudante,
+            'id_disciplina' => $id_disciplina,
+            'ano_lectivo' => $ano_lectivo,
+        ];
+        $final = Finals::where($data)->get();
+        return $final;
+    }
+
+    /*fim carregar para PDF*/
 }

@@ -254,7 +254,7 @@ $percent_negativasf = [
 
                          <!-- primeiro trimestre-->
                          <?php
-                             $trimestre1= ControladorNotas::getValoresMiniPautaTrimestral($historico->id_estudante, 1);
+                             $trimestre1= ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 1, $getHorario->ano_lectivo);
                              if($trimestre1->count()==0){
                          ?>
                          <td>---</td>
@@ -279,7 +279,7 @@ $percent_negativasf = [
 
                          <!-- segundo trimestre-->
                          <?php
-                             $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestral($historico->id_estudante, 2);
+                             $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 2, $getHorario->ano_lectivo);
                              if($trimestre2->count()==0){
                          ?>
                          <td>---</td>
@@ -304,7 +304,7 @@ $percent_negativasf = [
 
                           <!-- terceiro trimestre-->
                           <?php
-                          $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestral($historico->id_estudante, 3);
+                          $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 3, $getHorario->ano_lectivo);
                           if($trimestre3->count()==0){
                       ?>
                       <td>---</td>
@@ -329,7 +329,7 @@ $percent_negativasf = [
 
                       <!-- dados finais-->
                       <?php
-                         $final = ControladorNotas::getValoresMiniPautaFinal($historico->id_estudante);
+                         $final = ControladorNotas::getValoresMiniPautaFinalPDF($getHorario->ano_lectivo, $getHorario->id_disciplina, $historico->id_estudante);
                          if($final->count() == 0){
                       ?>
                          <td>---</td>
@@ -429,7 +429,7 @@ $percent_negativasf = [
 
                                 <!-- primeiro trimeste-->
                                 <?php
-                                $trimestre1 = ControladorNotas::getNotasEstudantes($getHorario->ano_lectivo, 1);
+                                $trimestre1 = ControladorNotas::getNotasEstudantesPDF($getHorario->id_turma, $getHorario->id_disciplina, $getHorario->ano_lectivo, 1);
                                 foreach ($trimestre1 as $valor1){
                                 //lancados
                                 if($valor1->mac !=null){
@@ -489,7 +489,7 @@ $percent_negativasf = [
 
                                                             <!-- segundo trimeste-->
                                                             <?php
-                                                                $trimestre2 = ControladorNotas::getNotasEstudantes($getHorario->ano_lectivo, 2);
+                                                                $trimestre2 = ControladorNotas::getNotasEstudantesPDF($getHorario->id_turma, $getHorario->id_disciplina, $getHorario->ano_lectivo, 2);
                                                                 foreach ($trimestre2 as $valor2){
                                                                     //lancados
                                                                     if($valor2->mac !=null){
@@ -552,7 +552,7 @@ $percent_negativasf = [
 
                                                            <!-- terceiro trimeste-->
                                                            <?php
-                                                           $trimestre3 = ControladorNotas::getNotasEstudantes($getHorario->ano_lectivo, 3);
+                                                           $trimestre3 = ControladorNotas::getNotasEstudantesPDF($getHorario->id_turma, $getHorario->id_disciplina, $getHorario->ano_lectivo, 3);
                                                            foreach ($trimestre3 as $valor3){
                                                                //lancados
                                                                if($valor3->mac !=null){
@@ -615,7 +615,7 @@ $percent_negativasf = [
 
                                                        <!-- finals -->
                                                        <?php
-                                                           $finals = ControladorNotas::getNotasEstudantesFinal($getHorario->ano_lectivo);
+                                                           $finals = ControladorNotas::getNotasEstudantesFinalPDF($getHorario->id_turma, $getHorario->id_disciplina, $getHorario->ano_lectivo);
                                                            foreach ($finals as $valorf){
                                                                //lancados
                                                                if($valorf->mfd !=null){
@@ -1006,7 +1006,7 @@ $percent_negativasf = [
 
                           <!-- primeiro trimestre-->
                           <?php
-                              $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestral($historico->id_estudante, 1);
+                              $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestralPDF($historico->id_estudante, 1);
                               if($trimestre1->count()==0){
                           ?>
                           <td>---</td>
@@ -1105,7 +1105,7 @@ $percent_negativasf = [
 
                           <!-- primeiro trimestre-->
                           <?php
-                              $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestral($historico->id_estudante, 2);
+                              $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($historico->id_estudante, 2);
                               if($trimestre2->count()==0){
                           ?>
                           <td>---</td>
@@ -1205,7 +1205,7 @@ $percent_negativasf = [
 
                       <!-- primeiro trimestre-->
                       <?php
-                          $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestral($historico->id_estudante, 3);
+                          $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestralPDF($historico->id_estudante, 3);
                           if($trimestre3->count()==0){
                       ?>
                       <td>---</td>

@@ -173,6 +173,9 @@ $percent_negativasf = [
     .negativo{
         color: red;
     }
+    .neutro{
+        color: #FFB64D;
+    }
     .nenhum{
         color: #333;
     }
@@ -213,144 +216,159 @@ $percent_negativasf = [
          <br/>
          <div class="corpo">
             <div class="table-responsive">
-             <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
-                   <thead>
-                       <tr>
-                           <th rowspan="2">Nº</th>
-                           <th rowspan="2" width="140px;">NOME COMPLETO</th>
-                           <th rowspan="2">G</th>
-                           <th colspan="4">1º TRIMESTRE</th>
-                           <th colspan="4">2º TRIMESTRE</th>
-                           <th colspan="4">3º TRIMESTRE</th>
-                           <th colspan="2">DADOS FINAIS</th>
-                       </tr>
-                       <tr>
-                           <th>MAC1</th>
-                           <th>NPP1</th>
-                           <th>PT1</th>
-                           <th>MT1</th>
+                <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">Nº</th>
+                            <th rowspan="2" width="140px;">NOME COMPLETO</th>
+                            <th rowspan="2">G</th>
+                            <th colspan="4">1º TRIMESTRE</th>
+                            <th colspan="4">2º TRIMESTRE</th>
+                            <th colspan="4">3º TRIMESTRE</th>
+                            <th colspan="2">DADOS FINAIS</th>
+                        </tr>
+                        <tr>
+                            <th>MAC1</th>
+                            <th>NPP1</th>
+                            <th>PT1</th>
+                            <th>MT1</th>
 
-                           <th>MAC2</th>
-                           <th>NPP2</th>
-                           <th>PT2</th>
-                           <th>MT2</th>
+                            <th>MAC2</th>
+                            <th>NPP2</th>
+                            <th>PT2</th>
+                            <th>MT2</th>
 
-                           <th>MAC3</th>
-                           <th>NPP3</th>
-                           <th>PT3</th>
-                           <th>MT3</th>
+                            <th>MAC3</th>
+                            <th>NPP3</th>
+                            <th>PT3</th>
+                            <th>MT3</th>
 
-                           <th>MFD</th>
-                           <th>MF</th>
-                       </tr>
-                   </thead>
-                   <tbody>
-                     @foreach ($getHistorico as $historico)
-                     <tr>
-                         <td>{{$loop->iteration}}</td>
-                         <td>{{$historico->estudante->pessoa->nome}}</td>
-                         <td>{{$historico->estudante->pessoa->genero}}</td>
+                            <th>MFD</th>
+                            <th>MF</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      @foreach ($getHistorico as $historico)
+                      <tr>
+                          <td>{{$loop->iteration}}</td>
+                          <td>{{$historico->estudante->pessoa->nome}}</td>
+                          <td>{{$historico->estudante->pessoa->genero}}</td>
 
-                         <!-- primeiro trimestre-->
-                         <?php
-                             $trimestre1= ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 1, $getHorario->ano_lectivo);
-                             if($trimestre1->count()==0){
-                         ?>
-                         <td>---</td>
-                         <td>---</td>
-                         <td>---</td>
-                         <td>---</td>
-                             <?php }
-                             else{
-                                 foreach($trimestre1 as $valor1){
-                                     $v1_estilo = ControladorNotas::nota_20($valor1->mac);
-                                     $v2_estilo = ControladorNotas::nota_20($valor1->npp);
-                                     $v3_estilo = ControladorNotas::nota_20($valor1->pt);
-                                     $v4_estilo = ControladorNotas::nota_20($valor1->mt);
-                                 ?>
-
-                         <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$valor1->mac}} @endif</td>
-                         <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$valor1->npp}} @endif</td>
-                         <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$valor1->pt}} @endif</td>
-                         <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$valor1->mt}} @endif</td>
-                                 <?php }}?>
-                         <!-- fim primeiro trimestre-->
-
-                         <!-- segundo trimestre-->
-                         <?php
-                             $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 2, $getHorario->ano_lectivo);
-                             if($trimestre2->count()==0){
-                         ?>
-                         <td>---</td>
-                         <td>---</td>
-                         <td>---</td>
-                         <td>---</td>
-                             <?php }
-                             else{
-                                 foreach($trimestre2 as $valor2){
-                                     $v1_estilo = ControladorNotas::nota_20($valor2->mac);
-                                     $v2_estilo = ControladorNotas::nota_20($valor2->npp);
-                                     $v3_estilo = ControladorNotas::nota_20($valor2->pt);
-                                     $v4_estilo = ControladorNotas::nota_20($valor2->mt);
-                                 ?>
-
-                         <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{$valor2->mac}} @endif</td>
-                         <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{$valor2->npp}} @endif</td>
-                         <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{$valor2->pt}} @endif</td>
-                         <td class="{{$v4_estilo}}">@if($valor2->mt==null) --- @else {{$valor2->mt}} @endif</td>
-                                 <?php }}?>
-                         <!-- fim segundo trimestre-->
-
-                          <!-- terceiro trimestre-->
+                          <!-- primeiro trimestre-->
                           <?php
-                          $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 3, $getHorario->ano_lectivo);
-                          if($trimestre3->count()==0){
-                      ?>
-                      <td>---</td>
-                      <td>---</td>
-                      <td>---</td>
-                      <td>---</td>
-                          <?php }
+                              $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 1, $getHorario->ano_lectivo);
+                              if($trimestre1->count()==0){
+                          ?>
+                          <td>---</td>
+                          <td>---</td>
+                          <td>---</td>
+                          <td>---</td>
+                              <?php }
+                              else{
+                                  foreach($trimestre1 as $valor1){
+                                      $v1_estilo = ControladorNotas::nota_10Qualitativa($valor1->mac);
+                                      $v2_estilo = ControladorNotas::nota_10Qualitativa($valor1->npp);
+                                      $v3_estilo = ControladorNotas::nota_10Qualitativa($valor1->pt);
+                                      $v4_estilo = ControladorNotas::nota_10Qualitativa($valor1->mt);
+
+                                      $v1_valor = ControladorNotas::estado_nota_qualitativa($valor1->mac);
+                                      $v2_valor = ControladorNotas::estado_nota_qualitativa($valor1->npp);
+                                      $v3_valor = ControladorNotas::estado_nota_qualitativa($valor1->pt);
+                                      $v4_valor = ControladorNotas::estado_nota_qualitativa($valor1->mt);
+                                  ?>
+
+                                      <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$v1_valor}} @endif</td>
+                                      <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$v2_valor}} @endif</td>
+                                      <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$v3_valor}} @endif</td>
+                                      <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$v4_valor}} @endif</td>
+                                  <?php }}?>
+                          <!-- fim primeiro trimestre-->
+
+                          <!-- segundo trimestre-->
+                          <?php
+                              $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 2, $getHorario->ano_lectivo);
+                              if($trimestre2->count()==0){
+                          ?>
+                          <td>---</td>
+                          <td>---</td>
+                          <td>---</td>
+                          <td>---</td>
+                              <?php }
+                              else{
+                                  foreach($trimestre2 as $valor2){
+                                      $v1_estilo = ControladorNotas::nota_10Qualitativa($valor2->mac);
+                                      $v2_estilo = ControladorNotas::nota_10Qualitativa($valor2->npp);
+                                      $v3_estilo = ControladorNotas::nota_10Qualitativa($valor2->pt);
+                                      $v4_estilo = ControladorNotas::nota_10Qualitativa($valor2->mt);
+
+                                      $v1_valor = ControladorNotas::estado_nota_qualitativa($valor2->mac);
+                                      $v2_valor = ControladorNotas::estado_nota_qualitativa($valor2->npp);
+                                      $v3_valor = ControladorNotas::estado_nota_qualitativa($valor2->pt);
+                                      $v4_valor = ControladorNotas::estado_nota_qualitativa($valor2->mt);
+                                  ?>
+
+                                      <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{$v1_valor}} @endif</td>
+                                      <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{$v2_valor}} @endif</td>
+                                      <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{$v3_valor}} @endif</td>
+                                      <td class="{{$v4_estilo}}">@if($valor2->mt==null) --- @else {{$v4_valor}} @endif</td>
+                                  <?php }}?>
+                          <!-- fim segundo trimestre-->
+
+                           <!-- terceiro trimestre-->
+                           <?php
+                           $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 3, $getHorario->ano_lectivo);
+                           if($trimestre3->count()==0){
+                       ?>
+                       <td>---</td>
+                       <td>---</td>
+                       <td>---</td>
+                       <td>---</td>
+                           <?php }
+                           else{
+                               foreach($trimestre3 as $valor3){
+                                   $v1_estilo = ControladorNotas::nota_10Qualitativa($valor3->mac);
+                                   $v2_estilo = ControladorNotas::nota_10Qualitativa($valor3->npp);
+                                   $v3_estilo = ControladorNotas::nota_10Qualitativa($valor3->pt);
+                                   $v4_estilo = ControladorNotas::nota_10Qualitativa($valor3->mt);
+
+                                   $v1_valor = ControladorNotas::estado_nota_qualitativa($valor3->mac);
+                                   $v2_valor = ControladorNotas::estado_nota_qualitativa($valor3->npp);
+                                   $v3_valor = ControladorNotas::estado_nota_qualitativa($valor3->pt);
+                                   $v4_valor = ControladorNotas::estado_nota_qualitativa($valor3->mt);
+                               ?>
+
+                       <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$v1_valor}} @endif</td>
+                       <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{$v2_valor}} @endif</td>
+                       <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{$v3_valor}} @endif</td>
+                       <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{$v4_valor}} @endif</td>
+                               <?php }}?>
+                       <!-- fim terceiro trimestre-->
+
+                       <!-- dados finais-->
+                       <?php
+                          $final = ControladorNotas::getValoresMiniPautaFinalPDF($getHorario->ano_lectivo, $getHorario->id_disciplina, $historico->id_estudante);
+                          if($final->count() == 0){
+                       ?>
+                          <td>---</td>
+                          <td>---</td>
+                      <?php }
                           else{
-                              foreach($trimestre3 as $valor3){
-                                  $v1_estilo = ControladorNotas::nota_20($valor3->mac);
-                                  $v2_estilo = ControladorNotas::nota_20($valor3->npp);
-                                  $v3_estilo = ControladorNotas::nota_20($valor3->pt);
-                                  $v4_estilo = ControladorNotas::nota_20($valor3->mt);
-                              ?>
+                              foreach ($final as $valorf){
+                              $v1_estilo = ControladorNotas::nota_10Qualitativa($valorf->mfd);
+                              $v2_estilo = ControladorNotas::nota_10Qualitativa($valorf->mf);
 
-                      <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$valor3->mac}} @endif</td>
-                      <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{$valor3->npp}} @endif</td>
-                      <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{$valor3->pt}} @endif</td>
-                      <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{$valor3->mt}} @endif</td>
-                              <?php }}?>
-                      <!-- fim terceiro trimestre-->
-
-                      <!-- dados finais-->
-                      <?php
-                         $final = ControladorNotas::getValoresMiniPautaFinalPDF($getHorario->ano_lectivo, $getHorario->id_disciplina, $historico->id_estudante);
-                         if($final->count() == 0){
+                              $v1_valor = ControladorNotas::estado_nota_qualitativa($valorf->mfd);
+                              $v2_valor = ControladorNotas::estado_nota_qualitativa($valorf->mf);
                       ?>
-                         <td>---</td>
-                         <td>---</td>
-                     <?php }
-                         else{
-                             foreach ($final as $valorf){
-                             $v1_estilo = ControladorNotas::nota_20($valorf->mfd);
-                             $v2_estilo = ControladorNotas::nota_20($valorf->npe);
-                             $v3_estilo = ControladorNotas::nota_20($valorf->mf);
-                     ?>
-                         <td class="{{$v1_estilo}}">@if($valorf->mfd==null) --- @else {{$valorf->mfd}} @endif</td>
-                         <td class="{{$v3_estilo}}">@if($valorf->mf==null) --- @else {{$valorf->mf}} @endif</td>
-                     <?php }}?>
-                     <!-- fim dados finais-->
+                          <td class="{{$v1_estilo}}">@if($valorf->mfd==null) --- @else {{$v1_valor}} @endif</td>
+                          <td class="{{$v2_estilo}}">@if($valorf->mf==null) --- @else {{$v2_valor}} @endif</td>
+                      <?php }}?>
+                      <!-- fim dados finais-->
 
-
-                     </tr>
-                     @endforeach
-                   </tbody>
-                </table>
-
+                      </tr>
+                      @endforeach
+                    </tbody>
+                 </table>
             </div>
         </div>
          <br/><br/>
@@ -445,31 +463,31 @@ $percent_negativasf = [
                                //end
 
                             //positivas
-                             if($valor1->mac >=10){
+                             if($valor1->mac >=5){
                               $count_positivas1['mac']=$count_positivas1['mac']+1;
                               }
-                              if($valor1->npp >=10){
+                              if($valor1->npp >=5){
                              $count_positivas1['npp']=$count_positivas1['npp']+1;
                              }
-                             if($valor1->pt >=10){
+                             if($valor1->pt >=5){
                              $count_positivas1['pt']=$count_positivas1['pt']+1;
                              }
-                            if($valor1->mt >=10){
+                            if($valor1->mt >=5){
                              $count_positivas1['mt']=$count_positivas1['mt']+1;
                             }
                            //end
 
                            //negativas
-                           if($valor1->mac <=9.99 && $valor1->mac !=null){
+                           if($valor1->mac <=4.99 && $valor1->mac !=null){
                               $count_negativas1['mac']=$count_negativas1['mac']+1;
                               }
-                              if($valor1->npp <=9.99 && $valor1->npp !=null){
+                              if($valor1->npp <=4.99 && $valor1->npp !=null){
                              $count_negativas1['npp']=$count_negativas1['npp']+1;
                              }
-                             if($valor1->pt <=9.99 && $valor1->pt !=null){
+                             if($valor1->pt <=4.99 && $valor1->pt !=null){
                              $count_negativas1['pt']=$count_negativas1['pt']+1;
                              }
-                            if($valor1->mt <=9.99 && $valor1->mt !=null){
+                            if($valor1->mt <=4.99 && $valor1->mt !=null){
                              $count_negativas1['mt']=$count_negativas1['mt']+1;
                             }
                            //end
@@ -506,34 +524,34 @@ $percent_negativasf = [
                                                                     //end
 
                                                                     //positivas
-                                                                    if($valor2->mac >=10){
+                                                                    if($valor2->mac >=5){
                                                                         $count_positivas2['mac']=$count_positivas2['mac']+1;
                                                                     }
 
-                                                                    if($valor2->npp >=10){
+                                                                    if($valor2->npp >=5){
                                                                         $count_positivas2['npp']=$count_positivas2['npp']+1;
                                                                     }
 
-                                                                    if($valor2->pt >=10){
+                                                                    if($valor2->pt >=5){
                                                                         $count_positivas2['pt']=$count_positivas2['pt']+1;
                                                                     }
 
-                                                                    if($valor2->mt >=10){
+                                                                    if($valor2->mt >=5){
                                                                         $count_positivas2['mt']=$count_positivas2['mt']+1;
                                                                     }
                                                                     //end
 
                             //negativas
-                           if($valor2->mac <=9.99 && $valor2->mac !=null){
+                           if($valor2->mac <=4.99 && $valor2->mac !=null){
                               $count_negativas2['mac']=$count_negativas2['mac']+1;
                               }
-                              if($valor2->npp <=9.99 && $valor2->npp !=null){
+                              if($valor2->npp <=4.99 && $valor2->npp !=null){
                              $count_negativas2['npp']=$count_negativas2['npp']+1;
                              }
-                             if($valor2->pt <=9.99 && $valor2->pt !=null){
+                             if($valor2->pt <=4.99 && $valor2->pt !=null){
                              $count_negativas2['pt']=$count_negativas2['pt']+1;
                              }
-                            if($valor2->mt <=9.99 && $valor2->mt !=null){
+                            if($valor2->mt <=4.99 && $valor2->mt !=null){
                              $count_negativas2['mt']=$count_negativas2['mt']+1;
                             }
                            //end
@@ -570,33 +588,33 @@ $percent_negativasf = [
 
 
                                                                     //positivas
-                                                                    if($valor3->mac >=10){
+                                                                    if($valor3->mac >=5){
                                                                         $count_positivas3['mac']=$count_positivas3['mac']+1;
                                                                     }
 
-                                                                    if($valor3->npp >=10){
+                                                                    if($valor3->npp >=5){
                                                                         $count_positivas3['npp']=$count_positivas3['npp']+1;
                                                                     }
 
-                                                                    if($valor3->pt >=10){
+                                                                    if($valor3->pt >=5){
                                                                         $count_positivas3['pt']=$count_positivas3['pt']+1;
                                                                     }
 
-                                                                    if($valor3->mt >=10){
+                                                                    if($valor3->mt >=5){
                                                                         $count_positivas3['mt']=$count_positivas3['mt']+1;
                                                                     }
                                                                     //end
                             //negativas
-                           if($valor3->mac <=9.99 && $valor3->mac !=null){
+                           if($valor3->mac <=4.99 && $valor3->mac !=null){
                               $count_negativas3['mac']=$count_negativas3['mac']+1;
                               }
-                              if($valor3->npp <=9.99 && $valor3->npp !=null){
+                              if($valor3->npp <=4.99 && $valor3->npp !=null){
                              $count_negativas3['npp']=$count_negativas3['npp']+1;
                              }
-                             if($valor3->pt <=9.99 && $valor3->pt !=null){
+                             if($valor3->pt <=4.99 && $valor3->pt !=null){
                              $count_negativas3['pt']=$count_negativas3['pt']+1;
                              }
-                            if($valor3->mt <=9.99 && $valor3->mt !=null){
+                            if($valor3->mt <=4.99 && $valor3->mt !=null){
                              $count_negativas3['mt']=$count_negativas3['mt']+1;
                             }
                            //end
@@ -617,34 +635,28 @@ $percent_negativasf = [
                                                                if($valorf->mfd !=null){
                                                                    $count_avaliadosf['mfd']=$count_avaliadosf['mfd']+1;
                                                                }
-                                                               if($valorf->npe !=null){
-                                                                   $count_avaliadosf['npe']=$count_avaliadosf['npe']+1;
-                                                               }
+
                                                                if($valorf->mf !=null){
                                                                    $count_avaliadosf['mf']=$count_avaliadosf['mf']+1;
                                                                }
                                                                //end
 
                                                             //positivas
-                                                               if($valorf->mfd >=10){
+                                                               if($valorf->mfd >=5){
                                                                    $count_positivasf['mfd']=$count_positivasf['mfd']+1;
                                                                }
-                                                               if($valorf->npe >=10){
-                                                                   $count_positivasf['npe']=$count_positivasf['npe']+1;
-                                                               }
-                                                               if($valorf->mf >=10){
+
+                                                               if($valorf->mf >=5){
                                                                    $count_positivasf['mf']=$count_positivasf['mf']+1;
                                                                }
                                                                //end
 
                                                                //negativas
-                                                               if($valorf->mfd <=9.99 && $valorf->mfd !=null){
+                                                               if($valorf->mfd <=4.99 && $valorf->mfd !=null){
                                                                    $count_negativasf['mfd']=$count_negativasf['mfd']+1;
                                                                }
-                                                               if($valorf->npe <=9.99 && $valorf->npe !=null){
-                                                                   $count_negativasf['npe']=$count_negativasf['npe']+1;
-                                                               }
-                                                               if($valorf->mf <=9.99 && $valorf->mf !=null){
+
+                                                               if($valorf->mf <=4.99 && $valorf->mf !=null){
                                                                    $count_negativasf['mf']=$count_negativasf['mf']+1;
                                                                }
                                                                //end
@@ -773,17 +785,11 @@ $percent_negativasf = [
 
                                 //end terceiro trimestre
 
-                                //final
+                                //terceiro trimestre
                                 if($count_avaliadosf['mfd']==0){
                                     $percent_positivasf['mfd'] = 0;
                                 }else{
                                     $percent_positivasf['mfd'] = ($count_positivasf['mfd']*100)/$count_avaliadosf['mfd'];
-                                }
-
-                                if($count_avaliadosf['npe']==0){
-                                    $percent_positivasf['npe'] = 0;
-                                }else{
-                                    $percent_positivasf['npe'] = ($count_positivasf['npe']*100)/$count_avaliadosf['npe'];
                                 }
 
                                 if($count_avaliadosf['mf']==0){
@@ -793,7 +799,7 @@ $percent_negativasf = [
                                 }
 
 
-                                //end final
+                                //end terceiro trimestre
                                     ?>
                                 <td>% POSITIVAS</td>
 
@@ -890,17 +896,11 @@ $percent_negativasf = [
 
                                 //end terceiro trimestre
 
-                                //final trimestre
+                                //terceiro trimestre
                                 if($count_avaliadosf['mfd']==0){
                                     $percent_negativasf['mfd'] = 0;
                                 }else{
                                     $percent_negativasf['mfd'] = ($count_negativasf['mfd']*100)/$count_avaliadosf['mfd'];
-                                }
-
-                                if($count_avaliadosf['npe']==0){
-                                    $percent_negativasf['npe'] = 0;
-                                }else{
-                                    $percent_negativasf['npe'] = ($count_negativasf['npe']*100)/$count_avaliadosf['npe'];
                                 }
 
                                 if($count_avaliadosf['mf']==0){
@@ -910,7 +910,7 @@ $percent_negativasf = [
                                 }
 
 
-                                //end final trimestre
+                                //end terceiro trimestre
                                     ?>
                                 <td>% NEGATIVAS</td>
 
@@ -973,15 +973,15 @@ $percent_negativasf = [
          <div class="corpo">
 
             <div class="table-responsive tabela">
-                <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;" bordercolor="red">
+                <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
                     <thead>
                         <tr>
                             <th>Nº</th>
                             <th>NOME COMPLETO</th>
                             <th>G</th>
-                            <th>SET</th>
                             <th>OUT</th>
                             <th>NOV</th>
+                            <th>DEZ</th>
                             <th>MAC1</th>
                             <th>NPP1</th>
                             <th>PT1</th>
@@ -1010,31 +1010,40 @@ $percent_negativasf = [
                               <?php }
                               else{
                                   foreach($trimestre1 as $valor1){
-                                      $v01_estilo = ControladorNotas::nota_20($valor1->av1);
-                                      $v02_estilo = ControladorNotas::nota_20($valor1->av2);
-                                      $v03_estilo = ControladorNotas::nota_20($valor1->av3);
+                                      $v01_estilo = ControladorNotas::nota_10Qualitativa($valor1->av1);
+                                      $v02_estilo = ControladorNotas::nota_10Qualitativa($valor1->av2);
+                                      $v03_estilo = ControladorNotas::nota_10Qualitativa($valor1->av3);
 
-                                      $v1_estilo = ControladorNotas::nota_20($valor1->mac);
-                                      $v2_estilo = ControladorNotas::nota_20($valor1->npp);
-                                      $v3_estilo = ControladorNotas::nota_20($valor1->pt);
-                                      $v4_estilo = ControladorNotas::nota_20($valor1->mt);
+                                      $v1_estilo = ControladorNotas::nota_10Qualitativa($valor1->mac);
+                                      $v2_estilo = ControladorNotas::nota_10Qualitativa($valor1->npp);
+                                      $v3_estilo = ControladorNotas::nota_10Qualitativa($valor1->pt);
+                                      $v4_estilo = ControladorNotas::nota_10Qualitativa($valor1->mt);
+
+
+                                      $v01_valor = ControladorNotas::estado_nota_qualitativa($valor1->av1);
+                                      $v02_valor = ControladorNotas::estado_nota_qualitativa($valor1->av2);
+                                      $v03_valor = ControladorNotas::estado_nota_qualitativa($valor1->av3);
+
+                                      $v1_valor = ControladorNotas::estado_nota_qualitativa($valor1->mac);
+                                      $v2_valor = ControladorNotas::estado_nota_qualitativa($valor1->npp);
+                                      $v3_valor = ControladorNotas::estado_nota_qualitativa($valor1->pt);
+                                      $v4_valor = ControladorNotas::estado_nota_qualitativa($valor1->mt);
                                   ?>
-                          <td class="{{$v01_estilo}}">@if($valor1->av1==null) --- @else {{$valor1->av1}} @endif</td>
-                          <td class="{{$v02_estilo}}">@if($valor1->av2==null) --- @else {{$valor1->av2}} @endif</td>
-                          <td class="{{$v03_estilo}}">@if($valor1->av3==null) --- @else {{$valor1->av3}} @endif</td>
-                          <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$valor1->mac}} @endif</td>
-                          <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$valor1->npp}} @endif</td>
-                          <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$valor1->pt}} @endif</td>
-                          <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$valor1->mt}} @endif</td>
+
+                                      <td class="{{$v01_estilo}}">@if($valor1->av1==null) --- @else {{$v01_valor}} @endif</td>
+                                      <td class="{{$v02_estilo}}">@if($valor1->av2==null) --- @else {{$v02_valor}} @endif</td>
+                                      <td class="{{$v03_estilo}}">@if($valor1->av3==null) --- @else {{$v03_valor}} @endif</td>
+                                      <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$v1_valor}} @endif</td>
+                                      <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$v2_valor}} @endif</td>
+                                      <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$v3_valor}} @endif</td>
+                                      <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$v4_valor}} @endif</td>
                                   <?php }}?>
                           <!-- fim primeiro trimestre-->
-
 
                       </tr>
                       @endforeach
                     </tbody>
                  </table>
-
 
             </div>
 
@@ -1072,68 +1081,81 @@ $percent_negativasf = [
          <div class="corpo">
 
             <div class="table-responsive tabela">
-                <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;" bordercolor="red">
-                    <thead>
-                        <tr>
-                            <th>Nº</th>
-                            <th>NOME COMPLETO</th>
-                            <th>G</th>
-                            <th>JAN</th>
-                            <th>FEV</th>
-                            <th>MAR</th>
-                            <th>MAC2</th>
-                            <th>NPP2</th>
-                            <th>PT2</th>
-                            <th>MT2</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                      @foreach ($getHistorico as $historico)
-                      <tr>
-                          <td>{{$loop->iteration}}</td>
-                          <td>{{$historico->estudante->pessoa->nome}}</td>
-                          <td>{{$historico->estudante->pessoa->genero}}</td>
 
-                          <!-- primeiro trimestre-->
-                          <?php
-                              $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 2, $getHorario->ano_lectivo);
-                              if($trimestre2->count()==0){
-                          ?>
-                          <td>---</td>
-                          <td>---</td>
-                          <td>---</td>
-                          <td>---</td>
-                          <td>---</td>
-                          <td>---</td>
-                          <td>---</td>
-                              <?php }
-                              else{
-                                  foreach($trimestre2 as $valor2){
-                                      $v01_estilo = ControladorNotas::nota_20($valor2->av1);
-                                      $v02_estilo = ControladorNotas::nota_20($valor2->av2);
-                                      $v03_estilo = ControladorNotas::nota_20($valor2->av3);
+                <div class="table-responsive tabela">
+                    <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Nº</th>
+                                <th>NOME COMPLETO</th>
+                                <th>G</th>
+                                <th>JAN</th>
+                                <th>FEV</th>
+                                <th>MAR</th>
+                                <th>MAC2</th>
+                                <th>NPP2</th>
+                                <th>PT2</th>
+                                <th>MT2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          @foreach ($getHistorico as $historico)
+                          <tr>
+                              <td>{{$loop->iteration}}</td>
+                              <td>{{$historico->estudante->pessoa->nome}}</td>
+                              <td>{{$historico->estudante->pessoa->genero}}</td>
 
-                                      $v1_estilo = ControladorNotas::nota_20($valor2->mac);
-                                      $v2_estilo = ControladorNotas::nota_20($valor2->npp);
-                                      $v3_estilo = ControladorNotas::nota_20($valor2->pt);
-                                      $v4_estilo = ControladorNotas::nota_20($valor2->mt);
-                                  ?>
-                          <td class="{{$v01_estilo}}">@if($valor2->av1==null) --- @else {{$valor2->av1}} @endif</td>
-                          <td class="{{$v02_estilo}}">@if($valor2->av2==null) --- @else {{$valor2->av2}} @endif</td>
-                          <td class="{{$v03_estilo}}">@if($valor2->av3==null) --- @else {{$valor2->av3}} @endif</td>
-                          <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{$valor2->mac}} @endif</td>
-                          <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{$valor2->npp}} @endif</td>
-                          <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{$valor2->pt}} @endif</td>
-                          <td class="{{$v4_estilo}}">@if($valor2->mt==null) --- @else {{$valor2->mt}} @endif</td>
-                                  <?php }}?>
-                          <!-- fim primeiro trimestre-->
+                              <!-- primeiro trimestre-->
+                              <?php
+                                  $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 2, $getHorario->ano_lectivo);
+                                  if($trimestre2->count()==0){
+                              ?>
+                              <td>---</td>
+                              <td>---</td>
+                              <td>---</td>
+                              <td>---</td>
+                              <td>---</td>
+                              <td>---</td>
+                              <td>---</td>
+                                  <?php }
+                                  else{
+                                      foreach($trimestre2 as $valor2){
+                                          $v01_estilo = ControladorNotas::nota_10Qualitativa($valor2->av1);
+                                          $v02_estilo = ControladorNotas::nota_10Qualitativa($valor2->av2);
+                                          $v03_estilo = ControladorNotas::nota_10Qualitativa($valor2->av3);
+
+                                          $v1_estilo = ControladorNotas::nota_10Qualitativa($valor2->mac);
+                                          $v2_estilo = ControladorNotas::nota_10Qualitativa($valor2->npp);
+                                          $v3_estilo = ControladorNotas::nota_10Qualitativa($valor2->pt);
+                                          $v4_estilo = ControladorNotas::nota_10Qualitativa($valor2->mt);
 
 
-                      </tr>
-                      @endforeach
-                    </tbody>
-                 </table>
+                                          $v01_valor = ControladorNotas::estado_nota_qualitativa($valor2->av1);
+                                          $v02_valor = ControladorNotas::estado_nota_qualitativa($valor2->av2);
+                                          $v03_valor = ControladorNotas::estado_nota_qualitativa($valor2->av3);
 
+                                          $v1_valor = ControladorNotas::estado_nota_qualitativa($valor2->mac);
+                                          $v2_valor = ControladorNotas::estado_nota_qualitativa($valor2->npp);
+                                          $v3_valor = ControladorNotas::estado_nota_qualitativa($valor2->pt);
+                                          $v4_valor = ControladorNotas::estado_nota_qualitativa($valor2->mt);
+                                      ?>
+
+                                          <td class="{{$v01_estilo}}">@if($valor2->av1==null) --- @else {{$v01_valor}} @endif</td>
+                                          <td class="{{$v02_estilo}}">@if($valor2->av2==null) --- @else {{$v02_valor}} @endif</td>
+                                          <td class="{{$v03_estilo}}">@if($valor2->av3==null) --- @else {{$v03_valor}} @endif</td>
+                                          <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{$v1_valor}} @endif</td>
+                                          <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{$v2_valor}} @endif</td>
+                                          <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{$v3_valor}} @endif</td>
+                                          <td class="{{$v4_estilo}}">@if($valor2->mt==null) --- @else {{$v4_valor}} @endif</td>
+                                      <?php }}?>
+                              <!-- fim primeiro trimestre-->
+
+                          </tr>
+                          @endforeach
+                        </tbody>
+                     </table>
+
+                </div>
 
             </div>
 
@@ -1172,7 +1194,7 @@ $percent_negativasf = [
      <div class="corpo">
 
         <div class="table-responsive tabela">
-            <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;" bordercolor="red">
+            <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
                 <thead>
                     <tr>
                         <th>Nº</th>
@@ -1209,25 +1231,35 @@ $percent_negativasf = [
                           <?php }
                           else{
                               foreach($trimestre3 as $valor3){
-                                  $v01_estilo = ControladorNotas::nota_20($valor3->av1);
-                                  $v02_estilo = ControladorNotas::nota_20($valor3->av2);
-                                  $v03_estilo = ControladorNotas::nota_20($valor3->av3);
+                                  $v01_estilo = ControladorNotas::nota_10Qualitativa($valor3->av1);
+                                  $v02_estilo = ControladorNotas::nota_10Qualitativa($valor3->av2);
+                                  $v03_estilo = ControladorNotas::nota_10Qualitativa($valor3->av3);
 
-                                  $v1_estilo = ControladorNotas::nota_20($valor3->mac);
-                                  $v2_estilo = ControladorNotas::nota_20($valor3->npp);
-                                  $v3_estilo = ControladorNotas::nota_20($valor3->pt);
-                                  $v4_estilo = ControladorNotas::nota_20($valor3->mt);
+                                  $v1_estilo = ControladorNotas::nota_10Qualitativa($valor3->mac);
+                                  $v2_estilo = ControladorNotas::nota_10Qualitativa($valor3->npp);
+                                  $v3_estilo = ControladorNotas::nota_10Qualitativa($valor3->pt);
+                                  $v4_estilo = ControladorNotas::nota_10Qualitativa($valor3->mt);
+
+
+                                  $v01_valor = ControladorNotas::estado_nota_qualitativa($valor3->av1);
+                                  $v02_valor = ControladorNotas::estado_nota_qualitativa($valor3->av2);
+                                  $v03_valor = ControladorNotas::estado_nota_qualitativa($valor3->av3);
+
+                                  $v1_valor = ControladorNotas::estado_nota_qualitativa($valor3->mac);
+                                  $v2_valor = ControladorNotas::estado_nota_qualitativa($valor3->npp);
+                                  $v3_valor = ControladorNotas::estado_nota_qualitativa($valor3->pt);
+                                  $v4_valor = ControladorNotas::estado_nota_qualitativa($valor3->mt);
                               ?>
-                      <td class="{{$v01_estilo}}">@if($valor3->av1==null) --- @else {{$valor3->av1}} @endif</td>
-                      <td class="{{$v02_estilo}}">@if($valor3->av2==null) --- @else {{$valor3->av2}} @endif</td>
-                      <td class="{{$v03_estilo}}">@if($valor3->av3==null) --- @else {{$valor3->av3}} @endif</td>
-                      <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$valor3->mac}} @endif</td>
-                      <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{$valor3->npp}} @endif</td>
-                      <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{$valor3->pt}} @endif</td>
-                      <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{$valor3->mt}} @endif</td>
+
+                                  <td class="{{$v01_estilo}}">@if($valor3->av1==null) --- @else {{$v01_valor}} @endif</td>
+                                  <td class="{{$v02_estilo}}">@if($valor3->av2==null) --- @else {{$v02_valor}} @endif</td>
+                                  <td class="{{$v03_estilo}}">@if($valor3->av3==null) --- @else {{$v03_valor}} @endif</td>
+                                  <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$v1_valor}} @endif</td>
+                                  <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{$v2_valor}} @endif</td>
+                                  <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{$v3_valor}} @endif</td>
+                                  <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{$v4_valor}} @endif</td>
                               <?php }}?>
                       <!-- fim primeiro trimestre-->
-
 
                   </tr>
                   @endforeach

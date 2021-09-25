@@ -208,7 +208,7 @@ table{
 
                                     <!-- primeiro trimeste-->
                                     <?php
-                                    $trimestre1 = ControladorNotas::getNotasEstudantes($getAno, 1);
+                                    $trimestre1 = ControladorNotas::getNotasEstudantesPDF($getHorario->id_turma, $getHorario->id_disciplina, $getHorario->ano_lectivo, 1);
                                     foreach ($trimestre1 as $valor1){
                                     //lancados
                                     if($valor1->mac !=null){
@@ -268,7 +268,7 @@ table{
 
                                                                 <!-- segundo trimeste-->
                                                                 <?php
-                                                                    $trimestre2 = ControladorNotas::getNotasEstudantes($getAno, 2);
+                                                                    $trimestre2 = ControladorNotas::getNotasEstudantesPDF($getHorario->id_turma, $getHorario->id_disciplina, $getHorario->ano_lectivo, 2);
                                                                     foreach ($trimestre2 as $valor2){
                                                                         //lancados
                                                                         if($valor2->mac !=null){
@@ -331,7 +331,7 @@ table{
 
                                                                <!-- terceiro trimeste-->
                                                                <?php
-                                                               $trimestre3 = ControladorNotas::getNotasEstudantes($getAno, 3);
+                                                               $trimestre3 = ControladorNotas::getNotasEstudantesPDF($getHorario->id_turma, $getHorario->id_disciplina, $getHorario->ano_lectivo, 3);
                                                                foreach ($trimestre3 as $valor3){
                                                                    //lancados
                                                                    if($valor3->mac !=null){
@@ -394,7 +394,7 @@ table{
 
                                                            <!-- finals -->
                                                            <?php
-                                                               $finals = ControladorNotas::getNotasEstudantesFinal($getAno);
+                                                               $finals = ControladorNotas::getNotasEstudantesFinalPDF($getHorario->id_turma, $getHorario->id_disciplina, $getHorario->ano_lectivo);
                                                                foreach ($finals as $valorf){
                                                                    //lancados
                                                                    if($valorf->mfd !=null){

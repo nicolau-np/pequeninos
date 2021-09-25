@@ -8,7 +8,6 @@ use App\Disciplina;
 use App\Estudante;
 use App\Finals;
 use App\Funcionario;
-use App\HistoricEstudante;
 use App\Horario;
 use App\Trimestral;
 use App\Turma;
@@ -251,6 +250,6 @@ class CadernetaController_copy extends Controller
         }
     }
 
-    
+
 
 }

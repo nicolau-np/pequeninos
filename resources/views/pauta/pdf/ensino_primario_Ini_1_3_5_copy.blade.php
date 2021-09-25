@@ -50,6 +50,9 @@ if(!$observacao_geral){
     .nenhum{
         color: #333;
     }
+    .neutro{
+        color: #FFB64D;
+    }
     table thead{
             background-color: #4680ff;
             color: #fff;
@@ -156,12 +159,15 @@ if(!$observacao_geral){
                               <td>---</td>
                               <td>---</td>
                           <?php } else {
-                              foreach ($final as $valorf) {
-                              $v1_estilo = ControladorNotas::nota_10($valorf->mfd);
-                              $v3_estilo = ControladorNotas::nota_10($valorf->mf);
-                              ?>
-                              <td class="{{$v1_estilo}}">@if($valorf->mfd == null) --- @else {{$valorf->mfd}} @endif</td>
-                              <td class="{{$v3_estilo}}">@if($valorf->mf == null) --- @else {{$valorf->mf}} @endif</td>
+                             foreach ($final as $valorf) {
+                                        $v1_estilo = ControladorNotas::nota_10Qualitativa($valorf->mfd);
+                                        $v2_estilo = ControladorNotas::nota_10Qualitativa($valorf->mf);
+
+                                        $v1_valor = ControladorNotas::estado_nota_qualitativa($valorf->mfd);
+                                        $v2_valor = ControladorNotas::estado_nota_qualitativa($valorf->mf);
+                                        ?>
+                                        <td class="{{$v1_estilo}}">@if($valorf->mfd == null) --- @else {{$v1_valor}} @endif</td>
+                                        <td class="{{$v2_estilo}}">@if($valorf->mf == null) --- @else {{$v2_valor}} @endif</td>
 
                           <?php }
                                   if($valorf->mf<=4.99 && $valorf->mf!=null){

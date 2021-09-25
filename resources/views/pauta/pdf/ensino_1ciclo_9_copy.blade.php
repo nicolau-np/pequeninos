@@ -225,21 +225,14 @@ if(!$observacao_geral){
             <div class="teacher_name">
                 <div class="subdirector">
                     O(A) SUBDIRECTOR(A) PEDAGÓGICO<br/>
-                ________________________<br/>
-                // BACH. PASCOAL VITA TCHINGALULE //
-                </div>
-&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                <div class="directorTurma">
-                    O(A) SUBDIRECTOR(A) PEDAGÓGICO<br/>
-                ________________________<br/>
+                __________________________________<br/>
                 // BACH. PASCOAL VITA TCHINGALULE //
                 </div>
 
+
                 <div class="director">
                     O(A) DIRECTOR(A)<br/>
-                    __________________________<br/>
+                    _____________________________<br/>
                     // LIC. ANTÓNIO KANUTULA BANGO //
                 </div>
             </div>

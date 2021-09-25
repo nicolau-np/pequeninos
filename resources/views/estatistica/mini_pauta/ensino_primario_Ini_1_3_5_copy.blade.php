@@ -228,16 +228,16 @@ table{
                                    //end
 
                                 //positivas
-                                 if($valor1->mac >=10){
+                                 if($valor1->mac >=5){
                                   $count_positivas1['mac']=$count_positivas1['mac']+1;
                                   }
-                                  if($valor1->npp >=10){
+                                  if($valor1->npp >=5){
                                  $count_positivas1['npp']=$count_positivas1['npp']+1;
                                  }
-                                 if($valor1->pt >=10){
+                                 if($valor1->pt >=5){
                                  $count_positivas1['pt']=$count_positivas1['pt']+1;
                                  }
-                                if($valor1->mt >=10){
+                                if($valor1->mt >=5){
                                  $count_positivas1['mt']=$count_positivas1['mt']+1;
                                 }
                                //end
@@ -289,19 +289,19 @@ table{
                                                                         //end
 
                                                                         //positivas
-                                                                        if($valor2->mac >=10){
+                                                                        if($valor2->mac >=5){
                                                                             $count_positivas2['mac']=$count_positivas2['mac']+1;
                                                                         }
 
-                                                                        if($valor2->npp >=10){
+                                                                        if($valor2->npp >=5){
                                                                             $count_positivas2['npp']=$count_positivas2['npp']+1;
                                                                         }
 
-                                                                        if($valor2->pt >=10){
+                                                                        if($valor2->pt >=5){
                                                                             $count_positivas2['pt']=$count_positivas2['pt']+1;
                                                                         }
 
-                                                                        if($valor2->mt >=10){
+                                                                        if($valor2->mt >=5){
                                                                             $count_positivas2['mt']=$count_positivas2['mt']+1;
                                                                         }
                                                                         //end
@@ -353,19 +353,19 @@ table{
 
 
                                                                         //positivas
-                                                                        if($valor3->mac >=10){
+                                                                        if($valor3->mac >=5){
                                                                             $count_positivas3['mac']=$count_positivas3['mac']+1;
                                                                         }
 
-                                                                        if($valor3->npp >=10){
+                                                                        if($valor3->npp >=5){
                                                                             $count_positivas3['npp']=$count_positivas3['npp']+1;
                                                                         }
 
-                                                                        if($valor3->pt >=10){
+                                                                        if($valor3->pt >=5){
                                                                             $count_positivas3['pt']=$count_positivas3['pt']+1;
                                                                         }
 
-                                                                        if($valor3->mt >=10){
+                                                                        if($valor3->mt >=5){
                                                                             $count_positivas3['mt']=$count_positivas3['mt']+1;
                                                                         }
                                                                         //end
@@ -407,11 +407,11 @@ table{
                                                                    //end
 
                                                                 //positivas
-                                                                   if($valorf->mfd >=10){
+                                                                   if($valorf->mfd >=5){
                                                                        $count_positivasf['mfd']=$count_positivasf['mfd']+1;
                                                                    }
 
-                                                                   if($valorf->mf >=10){
+                                                                   if($valorf->mf >=5){
                                                                        $count_positivasf['mf']=$count_positivasf['mf']+1;
                                                                    }
                                                                    //end

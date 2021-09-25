@@ -90,7 +90,7 @@ class PautaController_copy extends Controller
             }
         }
 
-        Session::put('ano_lectivoP', $ano_lectivo);
+        
 
         $id_ensino = $turma->classe->id_ensino;
 

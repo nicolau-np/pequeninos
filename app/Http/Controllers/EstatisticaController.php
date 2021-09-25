@@ -7,7 +7,6 @@ use App\Curso;
 use App\Disciplina;
 use App\HistoricEstudante;
 use App\Horario;
-use App\NotaTrimestral;
 use App\TipoPagamento;
 use App\Turma;
 use Illuminate\Support\Facades\Session;

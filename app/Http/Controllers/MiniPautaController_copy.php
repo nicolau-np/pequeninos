@@ -9,7 +9,7 @@ use App\Horario;
 use App\Turma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use PDF;
+
 
 class MiniPautaController_copy extends Controller
 {
@@ -53,12 +53,12 @@ class MiniPautaController_copy extends Controller
         $historico = HistoricEstudante::where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])
             ->get()->sortBy('estudante.pessoa.nome');
 
-        $data2 = [
+        /*$data2 = [
             'id_disciplinaMIN' => $id_disciplina,
             'ano_lectivoMIN' => $ano_lectivo,
         ];
 
-        Session::put($data2);
+        Session::put($data2);*/
 
         $data = [
             'title' => "Mini Pauta",
@@ -90,6 +90,6 @@ class MiniPautaController_copy extends Controller
         }
     }
 
-   
+
 
     }

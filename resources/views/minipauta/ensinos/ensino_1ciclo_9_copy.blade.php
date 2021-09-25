@@ -98,7 +98,7 @@ use App\Http\Controllers\ControladorNotas;
 
                                     <!-- primeiro trimestre-->
                                     <?php
-                                        $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestral($historico->id_estudante, 1);
+                                        $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 1, $getHorario->ano_lectivo);
                                         if($trimestre1->count()==0){
                                     ?>
                                     <td>---</td>
@@ -123,7 +123,7 @@ use App\Http\Controllers\ControladorNotas;
 
                                     <!-- segundo trimestre-->
                                     <?php
-                                        $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestral($historico->id_estudante, 2);
+                                        $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 2, $getHorario->ano_lectivo);
                                         if($trimestre2->count()==0){
                                     ?>
                                     <td>---</td>
@@ -148,7 +148,7 @@ use App\Http\Controllers\ControladorNotas;
 
                                      <!-- terceiro trimestre-->
                                      <?php
-                                     $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestral($historico->id_estudante, 3);
+                                     $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 3, $getHorario->ano_lectivo);
                                      if($trimestre3->count()==0){
                                  ?>
                                  <td>---</td>
@@ -173,7 +173,7 @@ use App\Http\Controllers\ControladorNotas;
 
                                  <!-- dados finais-->
                                  <?php
-                                    $final = ControladorNotas::getValoresMiniPautaFinal($historico->id_estudante);
+                                    $final = ControladorNotas::getValoresMiniPautaFinalPDF($getHorario->ano_lectivo, $getHorario->id_disciplina, $historico->id_estudante);
                                     if($final->count() == 0){
                                  ?>
                                     <td>---</td>

@@ -26,8 +26,6 @@ aspectos ligados as finanças, propinas.
 
 - professor: constituído pelos seguintes cargos, Professor Efectivo, Professor Colaborador e Professor Eventual.
 
-- director: é nada mais nada menos que o Director de Turma, que terá alguns privilégios a mais do que um professor, podendo o mesmo gerir a sua própria turma. 
-
 
 ## License
 

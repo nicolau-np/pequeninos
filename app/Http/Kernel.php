@@ -58,6 +58,7 @@ class Kernel extends HttpKernel
         'user' => \App\Http\Middleware\UserAuth::class,
         'prof' => \App\Http\Middleware\ProfAuth::class,
         'AdminUser' => \App\Http\Middleware\AdminUserAuth::class,
+        'AdminProf' => \App\Http\Middleware\AdminProfessorAuth::class,
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,

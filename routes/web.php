@@ -222,7 +222,7 @@ Route::group(['prefix' => 'relatorios', 'middleware' => "auth"], function () {
     Route::get('/fatura/{id_fatura}', "RelatorioController@fatura");
     Route::get('/lista_pagamentos', "RelatorioController@lista_pagamentos");
     Route::get('/lista_comparticicacao', "RelatorioController@lista_comparticipacao");
-    Route::get('/lista_nominal/{id_turma}/{ano_lectivo}', "RelatorioController@lista_nominal");
+    Route::get('/lista_nominal/{id_turma}/{ano_lectivo}', "RelatorioController@lista_nominal")->middleware('AdminProf');
 });
 
 

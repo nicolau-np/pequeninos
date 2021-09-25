@@ -53,13 +53,6 @@ class MiniPautaController_copy extends Controller
         $historico = HistoricEstudante::where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])
             ->get()->sortBy('estudante.pessoa.nome');
 
-        /*$data2 = [
-            'id_disciplinaMIN' => $id_disciplina,
-            'ano_lectivoMIN' => $ano_lectivo,
-        ];
-
-        Session::put($data2);*/
-
         $data = [
             'title' => "Mini Pauta",
             'type' => "minipauta",

@@ -48,6 +48,8 @@ class PautaController_copy extends Controller
             'id_classe' => $turma->id_classe,
         ])->get();
 
+        Session::forget('disciplinas');
+
         $data = [
             'title' => "Pauta",
             'type' => "pauta",
@@ -90,7 +92,7 @@ class PautaController_copy extends Controller
             }
         }
 
-        
+
 
         $id_ensino = $turma->classe->id_ensino;
 

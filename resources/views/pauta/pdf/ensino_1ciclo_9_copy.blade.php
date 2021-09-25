@@ -58,6 +58,24 @@ if(!$observacao_geral){
         font-size: 9px;
     }
 
+    .teacher_name{
+        display: block;
+    }
+
+    .subdirector{
+        float: left;
+        text-align: center;
+    }
+
+    .director{
+        float: right;
+        text-align: center;
+    }
+
+    .directorTurma{
+        text-align: center;
+        float:center;
+    }
 </style>
 
 <body>
@@ -205,9 +223,25 @@ if(!$observacao_geral){
          <br/><br/>
          <div class="rodape">
             <div class="teacher_name">
-                O(A) PROFESSOR(A)<br/>
-                _____________________<br/>
-                ////
+                <div class="subdirector">
+                    O(A) SUBDIRECTOR(A) PEDAGÓGICO<br/>
+                ________________________<br/>
+                // BACH. PASCOAL VITA TCHINGALULE //
+                </div>
+&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                <div class="directorTurma">
+                    O(A) SUBDIRECTOR(A) PEDAGÓGICO<br/>
+                ________________________<br/>
+                // BACH. PASCOAL VITA TCHINGALULE //
+                </div>
+
+                <div class="director">
+                    O(A) DIRECTOR(A)<br/>
+                    __________________________<br/>
+                    // LIC. ANTÓNIO KANUTULA BANGO //
+                </div>
             </div>
          </div>
     </div>

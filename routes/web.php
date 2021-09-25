@@ -41,7 +41,6 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/updateAvaliacao', "AjaxController@updateAvaliacao")->name('updateAvaliacao');
     Route::post('/updateProva', "AjaxController@updateProva")->name('updateProva');
     Route::post('/updateGlobal', "AjaxController@updateGlobal")->name('updateGlobal');
-
 });
 
 Route::group(['prefix' => 'institucional', 'middleware' => "auth"], function () {
@@ -117,7 +116,7 @@ Route::group(['prefix' => 'institucional', 'middleware' => "auth"], function () 
             Route::put('/update/{id_observacao}', "InstitucionalController@geral_update");
         });
 
-        Route::group(['prefix' =>"especifica"], function(){
+        Route::group(['prefix' => "especifica"], function () {
             Route::get('/', "InstitucionalController@especifica_list");
             Route::get('/create', "InstitucionalController@especifica_create");
             Route::post('/store', "InstitucionalController@especifica_store");
@@ -171,7 +170,7 @@ Route::group(['prefix' => 'estudantes', 'middleware' => "auth"], function () {
     Route::put('/store_declaracao/{id_estudante}', "EstudanteController@store_declaracao");
 });
 
-Route::group(['prefix'=>"turmas", 'middleware'=>"auth"], function(){
+Route::group(['prefix' => "turmas", 'middleware' => "auth"], function () {
     Route::get('/list/{ano}', "TurmasController@index");
     Route::get('/import/create/{id_turma}/{ano_lectivo}', "TurmasController@import_create");
     Route::post('/import/store', "TurmasController@import_store");
@@ -249,26 +248,26 @@ Route::group(['prefix' => 'pautas', 'middleware' => "auth"], function () {
     Route::get('/create/{id_turma}/{ano_lectivo}', "PautaController_copy@create");
     Route::put('/show/{id_turma}/{ano_lectivo}', "PautaController_copy@show");
 
-    Route::get('/exports/{id_turma}/{ano_lectivo}', "ExportController@pauta");
+    Route::get('/pdf/{id_turma}/{ano_lectivo}', "RelatorioController@pauta");
 });
 
 Route::group(['prefix' => 'usuarios', 'middleware' => "AdminUser"], function () {
     Route::get('/', "UserController@index");
 });
 
-Route::group(['prefix' =>"about"], function(){
+Route::group(['prefix' => "about"], function () {
     Route::get('/sistema', "AboutController@sistema");
     Route::get('/instituicao', "AboutController@instituicao");
 });
 
 /*rota de test*/
-Route::get('test', function(){
+Route::get('test', function () {
     $retorno = null;
     $ano_lectivo = AnoLectivo::orderBy('id', 'desc')->limit(1)->get();
-    foreach ($ano_lectivo as $ano){
+    foreach ($ano_lectivo as $ano) {
         $retorno = $ano->ano_lectivo;
     }
 
-echo $retorno;
+    echo $retorno;
 });
 /*fim*/

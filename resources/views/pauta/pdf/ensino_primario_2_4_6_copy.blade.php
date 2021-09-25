@@ -157,8 +157,8 @@ if(!$observacao_geral){
                               <td>---</td>
                           <?php } else {
                               foreach ($final as $valorf) {
-                              $v1_estilo = ControladorNotas::nota_20($valorf->mfd);
-                              $v3_estilo = ControladorNotas::nota_20($valorf->mf);
+                              $v1_estilo = ControladorNotas::nota_10($valorf->mfd);
+                              $v3_estilo = ControladorNotas::nota_10($valorf->mf);
                               ?>
                               <td class="{{$v1_estilo}}">@if($valorf->mfd == null) --- @else {{$valorf->mfd}} @endif</td>
                               <td class="{{$v3_estilo}}">@if($valorf->mf == null) --- @else {{$valorf->mf}} @endif</td>

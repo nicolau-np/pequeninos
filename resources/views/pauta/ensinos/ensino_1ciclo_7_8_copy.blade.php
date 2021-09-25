@@ -111,7 +111,7 @@ if(!$observacao_geral){
                                     <?php
                                     foreach (Session::get('disciplinas') as $disciplina) {
                                         $numero_cadeiras = $numero_cadeiras + 1;
-                                        $final = ControladorNotas::getValoresPautaFinal($historico->id_estudante, $disciplina["id_disciplina"]);
+                                        $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina["id_disciplina"], $getDirector->ano_lectivo);
                                         if($final->count() == 0){
                                         ?>
                                         <td>---</td>

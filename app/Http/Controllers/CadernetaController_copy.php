@@ -8,12 +8,14 @@ use App\Disciplina;
 use App\Estudante;
 use App\Finals;
 use App\Funcionario;
+use App\HistoricEstudante;
 use App\Horario;
 use App\Trimestral;
 use App\Turma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+
 
 class CadernetaController_copy extends Controller
 {
@@ -248,4 +250,7 @@ class CadernetaController_copy extends Controller
             return back(['success' => "Actualizado com sucesso"]);
         }
     }
+
+    
+
 }

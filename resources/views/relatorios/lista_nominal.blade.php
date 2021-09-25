@@ -4,11 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Lista Nominal {{$getTurma->turma}} {{$getAno}}</title>
+<title>LISTA NOMINAL {{$getAno}} [ {{strtoupper($getTurma->turma)}} - {{strtoupper($getTurma->turno->turno)}} - {{strtoupper($getTurma->curso->curso)}} ] </title>
 <style>
     @page{
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 12px;
+        font-size: 10px;
+        margin:10px;
     }
     .mini-cabecalho{
         display: block;
@@ -23,6 +24,10 @@
     table thead{
             background-color: #4680ff;
             color: #fff;
+    }
+
+    .tabela{
+        font-size: 10px;
     }
 </style>
 </head>
@@ -41,10 +46,10 @@
             PERÍODO: {{strtoupper($getTurma->turno->turno)}}<br/>
         </div>
      </div>
-    <br/><br/>
+    <br/>
      <div class="corpo">
          <div class="table-resposive">
-             <table border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
+             <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
                 <thead>
                     <tr>
                         <th>Nº</th>

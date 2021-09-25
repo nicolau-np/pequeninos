@@ -153,10 +153,10 @@ class RelatorioController extends Controller
         ];
         $pdf = PDF::loadView('relatorios.lista_nominal', $data)->setPaper('A4', 'normal');
 
-        return $pdf->stream('Lista Nominal ' . $turma->turma . '' . $ano_lectivo . '.pdf');
+        return $pdf->stream('LISTA NOMINAL '.$ano_lectivo. '[ '. strtoupper($turma->turma) . ' - ' . strtoupper($turma->turno->turno).' - ' .strtoupper($turma->curso->curso). ' ].pdf');
     }
 
-    public function pdfmini($id_turma, $id_disciplina, $ano_lectivo){
+    public function minipauta($id_turma, $id_disciplina, $ano_lectivo){
 
         $anos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
         if(!$anos){
@@ -173,7 +173,23 @@ class RelatorioController extends Controller
             return back()->with(['error'=>"Não encontrou disciplina"]);
         }
 
-        $horario = Horario::where(['id_turma'=>$id_turma, 'ano_lectivo'=>$ano_lectivo, 'id_disciplina'=>$id_disciplina, 'estado'=>"visivel"])->first();
+        if (Session::has('id_funcionario')) {
+            //verificando horario e funcionario
+            $data['where_horario'] = [
+                'id_funcionario' => Session::get('id_funcionario'),
+                'id_turma' => $id_turma,
+                'id_disciplina' => $id_disciplina,
+                'ano_lectivo' => $ano_lectivo,
+                'estado' => "visivel"
+            ];
+
+            $horario = Horario::where($data['where_horario'])->first();
+            if (!$horario) {
+                return back()->with(['error' => "Não é professor desta turma"]);
+            }
+        } else {
+            return back()->with(['error' => "Deve iniciar sessão"]);
+        }
 
         $historico = HistoricEstudante::where(['id_turma'=>$id_turma, 'ano_lectivo'=>$ano_lectivo])
         ->get()->sortBy('estudante.pessoa.nome');
@@ -183,13 +199,11 @@ class RelatorioController extends Controller
             'getHistorico' => $historico,
         ];
 
-        return view('minipauta.pdf.ensino_1ciclo_9_copy', $data['view']);
-
         //buscando ensino atraves de turma
         $id_ensino = $turma->classe->id_ensino;
         $classe = $turma->classe->classe;
 
-        /*if ($id_ensino == 1) {//iniciacao ate 6
+        if ($id_ensino == 1) {//iniciacao ate 6
             //se for classificacao quantitativa
             if(($classe=="2ª classe") || ($classe=="4ª classe") || ($classe=="6ª classe")){
                 $pdf = PDF::loadView('minipauta.pdf.ensino_primario_2_4_6_copy', $data['view'])->setPaper('A4', 'normal');
@@ -203,14 +217,14 @@ class RelatorioController extends Controller
             }
         } elseif ($id_ensino == 2) {//7 classe ate 9 ensino geral
             if($classe == "9ª classe"){
-                //$pdf = PDF::loadView('minipauta.pdf.ensino_1ciclo_9_copy', $data['view'])->setPaper('A4', 'normal');
+                $pdf = PDF::loadView('minipauta.pdf.ensino_1ciclo_9_copy', $data['view'])->setPaper('A4', 'normal');
 
-                return view('minipauta.pdf.ensino_1ciclo_9_copy', $data['view']);
+
             }else{
                 $pdf = PDF::loadView('minipauta.pdf.ensino_1ciclo_7_8_copy', $data['view'])->setPaper('A4', 'normal');
 
             }
-        }*/
-        //return $pdf->stream('MINI-PAUTA '.$ano_lectivo.'[' . strtoupper($turma->turma) . ' ' . strtoupper($turma->turno->turno) .'-'.strtoupper($turma->curso->curso).'-'.strtoupper($horario->disciplina->disciplina). '].pdf');
+        }
+        return $pdf->stream('MINI-PAUTA '.$ano_lectivo.'[' . strtoupper($turma->turma) . ' ' . strtoupper($turma->turno->turno) .'-'.strtoupper($turma->curso->curso).'-'.strtoupper($horario->disciplina->disciplina). '].pdf');
     }
 }

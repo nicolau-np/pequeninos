@@ -9,6 +9,7 @@ use App\Horario;
 use App\Turma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use PDF;
 
 class MiniPautaController_copy extends Controller
 {
@@ -88,4 +89,7 @@ class MiniPautaController_copy extends Controller
 
         }
     }
-}
+
+   
+
+    }

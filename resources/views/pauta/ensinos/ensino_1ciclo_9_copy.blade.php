@@ -130,7 +130,7 @@ if(!$observacao_geral){
                                         <td class="{{$v3_estilo}}">@if($valorf->mf == null) --- @else {{$valorf->mf}} @endif</td>
 
                                     <?php }
-                                            if($valorf->mf<=9.9 && $valorf->mf!=null){
+                                            if($valorf->mf<=9.99 && $valorf->mf!=null){
                                             //conta disciplinas com negativa
                                             $count_obs ++;
                                             //adiciona disciplinas com defices no array

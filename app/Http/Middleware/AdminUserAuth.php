@@ -16,7 +16,7 @@ class AminUserAuth
      */
     public function handle($request, Closure $next)
     {
-        if(Auth::user()->nivel_acesso =="admin" || Auth::user()->nivel_acesso =="user"){
+        if ((Auth::check()) && ((Auth::user()->nivel_acesso == "admin") || (Auth::user()->nivel_acesso == "user"))) {
             return $next($request);
         }
         return redirect()->route('home');

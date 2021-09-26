@@ -222,7 +222,7 @@ class AjaxController extends Controller
             ]);
         }
         //verificar se mudou os campos
-        if (($request->campo != "av1") or ($request->campo != "av2") or ($request->campo != "av3")) {
+        if (($request->campo != "av1") && ($request->campo != "av2") && ($request->campo != "av3")) {
             echo " \\mudou campos\\ ";
         }
         //verificar se mudou o id do trimestre
@@ -407,7 +407,7 @@ class AjaxController extends Controller
 
 
         //verificar se mudou os campos
-        if (($request->campo != "npp") or ($request->campo != "pt")) {
+        if (($request->campo != "npp") && ($request->campo != "pt")) {
             echo " \\mudou campos\\ ";
         }
         //verificar se mudou o id do trimestre

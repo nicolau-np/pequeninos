@@ -106,9 +106,9 @@ class RelatorioController extends Controller
             'getHistoricoEstudante' => $historico,
 
         ];
-        $pdf = PDF::loadView('relatorios.lista_pagamento', $data)->setPaper('A4', 'normal');
+        $pdf = PDF::loadView('relatorios.lista_pagamento', $data)->setPaper('A4', 'landscape');
 
-        return $pdf->stream('Lista de ' . $tipo_pagamento->tipo . '-' . $turma->turma . ' ' . $request->ano_lectivo . '.pdf');
+        return $pdf->stream('LISTA DE ' . strtoupper($tipo_pagamento->tipo) . '-'.$request->ano_lectivo.'[ ' . strtoupper($turma->turma) . ' - '.$turma->turno->turno.' - ' . $turma->curso->curso . ' ].pdf');
     }
 
     public function lista_comparticipacao(Request $request)

@@ -7,21 +7,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>{{$getTipoPagamento->tipo}} {{$getTurma->turma}} {{$getAno}}</title>
+<title>LISTA DE {{strtoupper($getTipoPagamento->tipo)}} - {{$getAno}} [ {{$getTurma->turma}} - {{$getTurma->turno->turno}} - {{$getTurma->curso->curso}} ] </title>
 <style>
     @page{
         font-family: Arial, Helvetica, sans-serif;
         font-size: 12px;
+        margin: 10px;
     }
 
-    /*.tr_especial{
-            background-color: #f5f5f5;
-            font-weight: bold;
-        }*/
-        .header{
-            text-align: center;
-            font-weight: bold;
-        }
         table thead{
             background-color: #4680ff;
             color: #fff;
@@ -54,7 +47,7 @@
             PERÍODO: {{strtoupper($getTurma->turno->turno)}}<br/>
         </div>
      </div>
-    <br/><br/>
+    <br/>
 
     <div class="body">
         @if($getTipoPagamento->id == 3)

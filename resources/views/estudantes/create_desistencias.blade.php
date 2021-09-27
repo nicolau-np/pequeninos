@@ -87,23 +87,23 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Descrição</th>
-                                    <th>Data de Emissão</th>
+                                    <th>Motivo</th>
+                                    <th>Data de Saída</th>
                                     <th>Ano Lectivo</th>
                                     <th>Operações</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if($getTransferencias->count()==0)
-                                <span class="not_found">Nenhuma guia de transferencia criada</span>
+                                @if($getDesistencias->count()==0)
+                                <span class="not_found">Nenhuma desistencia criada</span>
                                 @else
-                                @foreach ($getTransferencias as $transferencias)
+                                @foreach ($getDesistencias as $desistencia)
 
                                 <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$transferencias->motivo}}</td>
-                                    <td>{{$transferencias->data_emissao}}</td>
-                                    <td>{{$transferencias->ano_lectivo}}</td>
+                                    <td>{{$desistencia->motivo}}</td>
+                                    <td>{{$desistencia->data_saida}}</td>
+                                    <td>{{$desistencia->ano_lectivo}}</td>
                                     <td>
                                         <a href="#" class="btn btn-primary btn-sm"><i class="ti-print"></i> Imprimir</a>
                                     </td>

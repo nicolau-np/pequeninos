@@ -14,20 +14,15 @@ $trimestre_totais = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>Comparticipação de Pais {{$getAno->ano_lectivo}}</title>
+<title>LISTA DE COMPARTICIPAÇÃO - {{$getAno->ano_lectivo}}</title>
 <style>
     @page{
         font-family: Arial, Helvetica, sans-serif;
         font-size: 12px;
+        margin: 10px;
     }
-    /*.tr_especial{
-            background-color: #f5f5f5;
-            font-weight: bold;
-        }*/
-        .header{
-            text-align: center;
-            font-weight: bold;
-        }
+
+       
         table thead{
             background-color: #4680ff;
             color: #fff;
@@ -43,7 +38,7 @@ $trimestre_totais = [
     <div class="body-header">
         <p style="text-align: center; font-weight: bold;">LISTA DE COMPARTICIPAÇÃO DE ENCARREGADOS</p>
         <br/>
-        ANO LECTIVO: [ {{$getAno->ano_lectivo}} ]<br/><br/>
+        ANO LECTIVO: [ {{$getAno->ano_lectivo}} ]<br/>
     </div>
 
     <div class="tabela">
@@ -61,6 +56,10 @@ $trimestre_totais = [
             </thead>
             <tbody>
                 @foreach ($getEncarregados as $encarregados)
+                @if ($encarregados->pessoa->nome=="Encarregado Exemplo")
+                    Encarregado nao informado
+                @else
+
                 <tr>
                     <td>{{$loop->iteration}}</td>
                     <td>{{$encarregados->pessoa->nome}}</td>
@@ -90,6 +89,7 @@ $trimestre_totais = [
                     </td>
                     @endforeach
                 </tr>
+                @endif
                 @endforeach
 
             </tbody>

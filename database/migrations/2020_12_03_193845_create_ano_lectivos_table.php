@@ -17,6 +17,7 @@ class CreateAnoLectivosTable extends Migration
             $table->engine = "InnoDB";
             $table->bigIncrements('id');
             $table->string('ano_lectivo');
+            $table->string('estado');
             $table->timestamps();
         });
     }

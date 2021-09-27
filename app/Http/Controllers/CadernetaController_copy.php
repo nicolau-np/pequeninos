@@ -47,6 +47,7 @@ class CadernetaController_copy extends Controller
 
     public function create($id_turma, $id_disciplina, $ano_lectivo, $epoca)
     {
+
         //verificar se a epoca existe
         if (($epoca != 1) && ($epoca != 2) && ($epoca != 3) && ($epoca != 4)) {
             return back()->with(['error' => "Não encontrou epoca"]);
@@ -74,6 +75,10 @@ class CadernetaController_copy extends Controller
         $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
         if (!$ano_lectivos) {
             return back()->with(['error' => "Não encontrou ano lectivo"]);
+        }
+
+        if($ano_lectivos->estado == "off"){
+            return back()->with(['error'=>"Sem permissão de fazer lançamentos para esta turma"]);
         }
 
         //verificando disciplina
@@ -249,7 +254,5 @@ class CadernetaController_copy extends Controller
             return back(['success' => "Actualizado com sucesso"]);
         }
     }
-
-
 
 }

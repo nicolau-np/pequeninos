@@ -517,27 +517,7 @@ class EstudanteController extends Controller
         $data = [
             'id_estudante' => $id_estudante,
             'motivo' => $request->descricao,
-            'd$estudante = Estudante::find($id_estudante);
-            if (!$estudante) {
-                return back()->with(['error' => "Não encontrou"]);
-            }
-
-            $request->validate([
-                'data' => ['required', 'date'],
-                'descricao' => ['required', 'string', 'min:5'],
-                'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
-            ]);
-
-            $data = [
-                'id_estudante' => $id_estudante,
-                'motivo' => $request->descricao,
-                'data_emissao' => $request->data,
-                'ano_lectivo' => $request->ano_lectivo,
-            ];
-
-            if(Transferencia::create($data)){
-                return back()->with(['success' => "Feito com sucesso"]);
-            }ata_emissao' => $request->data,
+            'data_emissao' => $request->data,
             'ano_lectivo' => $request->ano_lectivo,
         ];
 
@@ -588,7 +568,7 @@ class EstudanteController extends Controller
 
         $data = [
             'id_estudante' => $id_estudante,
-            'motivo' => $request->descricao,
+            'motivo' => $request->motivo,
             'data_saida' => $request->data,
             'ano_lectivo' => $request->ano_lectivo,
         ];

@@ -239,7 +239,7 @@ Route::group(['prefix' => 'minipautas', 'middleware' => "auth"], function () {
 });
 
 
-Route::group(['prefix' => 'minha_turma', 'middleware' => "auth"], function () {
+Route::group(['prefix' => 'minha_turma', 'middleware' => "AdminProfUser"], function () {
     Route::get('/list/{lastYear}', "MinhaTurmaController@list");
     Route::get('/horario/{id_turma}/{ano_lectivo}', "MinhaTurmaController@horario");
 });

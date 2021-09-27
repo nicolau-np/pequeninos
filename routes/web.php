@@ -244,7 +244,7 @@ Route::group(['prefix' => 'minha_turma', 'middleware' => "auth"], function () {
     Route::get('/horario/{id_turma}/{ano_lectivo}', "MinhaTurmaController@horario");
 });
 
-Route::group(['prefix' => 'pautas', 'middleware' => "auth"], function () {
+Route::group(['prefix' => 'pautas', 'middleware' => "AdminProfUser"], function () {
     Route::get('/create/{id_turma}/{ano_lectivo}', "PautaController_copy@create");
     Route::put('/show/{id_turma}/{ano_lectivo}', "PautaController_copy@show");
 

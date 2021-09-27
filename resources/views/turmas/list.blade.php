@@ -75,11 +75,17 @@ use App\Http\Controllers\ControladorStatic;
                                                                     <a href="/relatorios/lista_nominal/{{$turmas->id}}/{{$getAno}}" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="" data-original-title="Lista Nominal">
                                                                         <i class="ti-printer"></i>
                                                                     </a>&nbsp;
-                                                                    <a href="#" type="button" class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Estatística">
-                                                                        <i class="icofont icofont-chart-bar-graph"></i>
-                                                                    </a>&nbsp;
+
                                                                     <a href="/turmas/import/create/{{$turmas->id}}/{{$getAno}}" type="button" class="btn btn-danger btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Importar">
                                                                         <i class="ti-upload"></i>
+                                                                    </a>&nbsp;
+
+                                                                    <a href="/pautas/create/{{$turmas->id}}/{{$getAno}}" type="button" class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pauta">
+                                                                        <i class="icofont icofont-clip-board"></i>
+                                                                    </a>&nbsp;
+
+                                                                    <a href="/minha_turma/horario/{{$turmas->id}}/{{$getAno}}" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Horário">
+                                                                        <i class="icofont icofont-time"></i>
                                                                     </a>&nbsp;
                                                                 </div>
                                                                 </span>

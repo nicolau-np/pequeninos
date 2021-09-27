@@ -471,7 +471,8 @@ class EstudanteController extends Controller
         }
     }
 
-    public function guiatransferencia($id_estudante, $ano_lectivo){
+    public function guiatransferencia($id_estudante, $ano_lectivo)
+    {
         $estudante = Estudante::find($id_estudante);
         if (!$estudante) {
             return back()->with(['error' => "Não encontrou"]);
@@ -497,6 +498,21 @@ class EstudanteController extends Controller
             'getTransferencias' => $transferencias,
         ];
         return view('estudantes.create_transferencia', $data);
+    }
 
+    public function store_guiatransferencia(Request $request, $id_estudante)
+    {
+        $estudante = Estudante::find($id_estudante);
+        if (!$estudante) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+
+        $request->validate([
+            'data' => ['required', 'date'],
+            'descricao' => ['required', 'string', 'min:5'],
+            'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
+        ]);
+
+        
     }
 }

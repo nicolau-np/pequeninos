@@ -94,7 +94,7 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if($getDeclaracaos->count()==0)
+                                @if($getTransferencias->count()==0)
                                 <span class="not_found">Nenhuma guia de transferencia criada</span>
                                 @else
                                 @foreach ($getTransferencias as $transferencias)

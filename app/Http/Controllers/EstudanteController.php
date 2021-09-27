@@ -393,11 +393,11 @@ class EstudanteController extends Controller
             return back()->with(['error' => "Não encontrou"]);
         }
         $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
-        if(!$ano_lectivos){
+        if (!$ano_lectivos) {
             return back()->with(['error' => "Não encontrou ano lectivo"]);
         }
         $historicoAnos = HistoricEstudante::where(['id_estudante' => $id_estudante])->orderBy('id', 'desc')->get();
-        $historico = HistoricEstudante::where(['id_estudante'=> $id_estudante, 'ano_lectivo'=>$ano_lectivo])->first();
+        $historico = HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])->first();
         $data = [
             'title' => "Estudantes",
             'type' => "estudantes",
@@ -405,23 +405,24 @@ class EstudanteController extends Controller
             'submenu' => "Ficha",
             'getEstudante' => $estudante,
             'getHistoricoEstudanteAnos' => $historicoAnos,
-            'getHistoricoEstudante'=>$historico,
+            'getHistoricoEstudante' => $historico,
         ];
         return view('estudantes.ficha', $data);
     }
 
-    public function declaracao($id_estudante, $ano_lectivo){
-        $estudante= Estudante::find($id_estudante);
+    public function declaracao($id_estudante, $ano_lectivo)
+    {
+        $estudante = Estudante::find($id_estudante);
         if (!$estudante) {
             return back()->with(['error' => "Não encontrou"]);
         }
 
-        $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
-        if(!$ano_lectivos){
-            return back()->with(['error' => "Não encontrou"]);
+        $historico = HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])->first();
+        if (!$historico) {
+            return back()->with(['error' => "Estudante nao matriculado neste ano lectivo"]);
         }
 
-        $anos = AnoLectivo::pluck('ano_lectivo','ano_lectivo');
+        $anos = AnoLectivo::pluck('ano_lectivo', 'ano_lectivo');
 
         $declaracaos = Declaracao::where(['id_estudante' => $id_estudante,])->orderBy('id', 'desc')->get();
 
@@ -431,39 +432,40 @@ class EstudanteController extends Controller
             'menu' => "Estudantes",
             'submenu' => "Declaração",
             'getEstudante' => $estudante,
-            'getAno'=>$ano_lectivo,
-            'getAnos'=>$anos,
-            'getDeclaracaos'=>$declaracaos,
+            'getAno' => $ano_lectivo,
+            'getAnos' => $anos,
+            'getDeclaracaos' => $declaracaos,
         ];
         return view('estudantes.create_declaracao', $data);
     }
 
-    public function store_declaracao(Request $request, $id_estudante){
-        $estudante= Estudante::find($id_estudante);
+    public function store_declaracao(Request $request, $id_estudante)
+    {
+        $estudante = Estudante::find($id_estudante);
         if (!$estudante) {
             return back()->with(['error' => "Não encontrou"]);
         }
         $request->validate([
-            'tipo'=> ['required', 'string', 'min:3', 'max:255'],
-            'data'=> ['required', 'date'],
-            'motivo'=> ['required', 'string', 'min:5'],
+            'tipo' => ['required', 'string', 'min:3', 'max:255'],
+            'data' => ['required', 'date'],
+            'motivo' => ['required', 'string', 'min:5'],
             'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
         ]);
 
-        $ano_lectivos = AnoLectivo::where('ano_lectivo', $request->ano_lectivo)->first();
-        if(!$ano_lectivos){
-            return back()->with(['error' => "Não encontrou"]);
+        $historico = HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $request->ano_lectivo])->first();
+        if (!$historico) {
+            return back()->with(['error' => "Estudante nao matriculado neste ano lectivo"]);
         }
 
         $data = [
-            'id_estudante'=> $id_estudante,
-            'tipo'=>$request->tipo,
-            'motivo'=> $request->motivo,
-            'data_emissao'=> $request->data,
-            'ano_lectivo'=> $request->ano_lectivo,
+            'id_estudante' => $id_estudante,
+            'tipo' => $request->tipo,
+            'motivo' => $request->motivo,
+            'data_emissao' => $request->data,
+            'ano_lectivo' => $request->ano_lectivo,
         ];
 
-        if(Declaracao::create($data)){
+        if (Declaracao::create($data)) {
             return back()->with(['success' => "Feito com sucesso"]);
         }
     }

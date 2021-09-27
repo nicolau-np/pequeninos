@@ -18,50 +18,51 @@ class MinhaTurmaController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-   public function __construct()
-   {
-        $this->middleware('prof');
-   }
 
     public function list($ano_lectivo)
     {
-        $ano_lectivos = AnoLectivo::where(['ano_lectivo'=>$ano_lectivo])->first();
-        if(!$ano_lectivos){
+        $ano_lectivos = AnoLectivo::where(['ano_lectivo' => $ano_lectivo])->first();
+        if (!$ano_lectivos) {
             return back()->with(['error' => "Não encontrou"]);
         }
         $anos = AnoLectivo::orderBy('id', 'desc')->get();
         $id_pessoa = Auth::user()->pessoa->id;
         $funcionario = Funcionario::where('id_pessoa', $id_pessoa)->first();
-        if(!$funcionario){
-            return back()->with(['error'=>"Não encontrou"]);
+        if (!$funcionario) {
+            return back()->with(['error' => "Não encontrou"]);
         }
-        $minha_turmas = DirectorTurma::orderBy('id', 'desc')->where(['id_funcionario'=>$funcionario->id, 'ano_lectivo'=>$ano_lectivo])->paginate('8');
+        $minha_turmas = DirectorTurma::orderBy('id', 'desc')->where(['id_funcionario' => $funcionario->id, 'ano_lectivo' => $ano_lectivo])->paginate('8');
         $data = [
             'title' => "Minha Turma",
             'type' => "minha turma",
             'menu' => "Minha Turma",
             'submenu' => "Listar",
-            'getTurmas'=>$minha_turmas,
-            'getAnos'=>$anos,
+            'getTurmas' => $minha_turmas,
+            'getAnos' => $anos,
         ];
         return view('minha_turma.list', $data);
     }
 
-    public function horario($id_turma, $ano_lectivo){
-        $turma = Turma::find($id_turma);
-        if(!$turma){
-            return back()->with(['error' => "Não encontrou"]);
-        }
-
-        $ano = AnoLectivo::where(['ano_lectivo'=>$ano_lectivo])->first();
-        if(!$ano){
-            return back()->with(['error' => "Não encontrou"]);
-        }
-
+    public function horario($id_turma, $ano_lectivo)
+    {
         $id_pessoa = Auth::user()->pessoa->id;
-        $funcionario = Funcionario::where('id_pessoa', $id_pessoa)->first();
-        if(!$funcionario){
-            return back()->with(['error'=>"Não encontrou"]);
+
+        $turma = Turma::find($id_turma);
+        if (!$turma) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+
+        $ano = AnoLectivo::where(['ano_lectivo' => $ano_lectivo])->first();
+        if (!$ano) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+
+        if ((Auth::user()->nivel_acesso == "user") || (Auth::user()->nivel_acesso == "admin")) {
+        } else {
+            $funcionario = Funcionario::where('id_pessoa', $id_pessoa)->first();
+            if (!$funcionario) {
+                return back()->with(['error' => "Não encontrou funcionario"]);
+            }
         }
 
         $hora = Hora::orderBy('hora_entrada', 'asc')->get();
@@ -71,13 +72,12 @@ class MinhaTurmaController extends Controller
             'type' => "Horário",
             'menu' => "Minha Turma",
             'submenu' => "Horário",
-            'getTurma'=>$turma,
-            'getAno'=>$ano_lectivo,
-            'getHora'=>$hora,
+            'getTurma' => $turma,
+            'getAno' => $ano_lectivo,
+            'getHora' => $hora,
         ];
 
 
         return view('minha_turma.horario', $data);
-
     }
 }

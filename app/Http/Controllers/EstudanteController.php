@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AnoLectivo;
 use App\Curso;
 use App\Declaracao;
+use App\Desistencia;
 use App\Estudante;
 use App\HistoricEstudante;
 use App\Pessoa;
@@ -525,5 +526,33 @@ class EstudanteController extends Controller
         }
     }
 
-    
+    public function desistencia($id_estudante, $ano_lectivo){
+        $estudante = Estudante::find($id_estudante);
+        if (!$estudante) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+
+        $historico = HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])->first();
+        if (!$historico) {
+            return back()->with(['error' => "Estudante nao matriculado neste ano lectivo"]);
+        }
+
+        $anos = AnoLectivo::pluck('ano_lectivo', 'ano_lectivo');
+
+        $desistencias = Desistencia::where(['id_estudante' => $id_estudante,])->orderBy('id', 'desc')->get();
+
+        $data = [
+            'title' => "Estudantes",
+            'type' => "estudantes",
+            'menu' => "Estudantes",
+            'submenu' => "Desistencias",
+            'getEstudante' => $estudante,
+            'getAno' => $ano_lectivo,
+            'getAnos' => $anos,
+            'getDesistencias' => $desistencias,
+        ];
+        return view('estudantes.create_desistencias', $data);
+    }
+
+
 }

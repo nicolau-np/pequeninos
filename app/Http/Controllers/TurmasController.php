@@ -40,6 +40,10 @@ class TurmasController extends Controller
             return back()->with(['error' => "Não encontrou"]);
         }
 
+        if($ano_lectivos->estado == "off"){
+            return back()->with(['error' => "Já não pode importar para este ano lectivo"]);
+        }
+
         Session::put([
             'id_turmaIMP'=>$id_turma,
             'ano_lectivoIMP' =>$ano_lectivo,

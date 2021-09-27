@@ -9,6 +9,7 @@ use App\Estudante;
 use App\HistoricEstudante;
 use App\Pessoa;
 use App\Provincia;
+use App\Transferencia;
 use Illuminate\Http\Request;
 
 use function PHPSTORM_META\map;
@@ -468,5 +469,34 @@ class EstudanteController extends Controller
         if (Declaracao::create($data)) {
             return back()->with(['success' => "Feito com sucesso"]);
         }
+    }
+
+    public function guiatransferencia($id_estudante, $ano_lectivo){
+        $estudante = Estudante::find($id_estudante);
+        if (!$estudante) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+
+        $historico = HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])->first();
+        if (!$historico) {
+            return back()->with(['error' => "Estudante nao matriculado neste ano lectivo"]);
+        }
+
+        $anos = AnoLectivo::pluck('ano_lectivo', 'ano_lectivo');
+
+        $transferencias = Transferencia::where(['id_estudante' => $id_estudante,])->orderBy('id', 'desc')->get();
+
+        $data = [
+            'title' => "Estudantes",
+            'type' => "estudantes",
+            'menu' => "Estudantes",
+            'submenu' => "Guia de Transferencia",
+            'getEstudante' => $estudante,
+            'getAno' => $ano_lectivo,
+            'getAnos' => $anos,
+            'getTransferencias' => $transferencias,
+        ];
+        return view('estudantes.create_transferencia', $data);
+
     }
 }

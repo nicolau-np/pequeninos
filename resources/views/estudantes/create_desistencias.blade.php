@@ -90,7 +90,6 @@
                                     <th>Motivo</th>
                                     <th>Data de Saída</th>
                                     <th>Ano Lectivo</th>
-                                    <th>Operações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -104,9 +103,7 @@
                                     <td>{{$desistencia->motivo}}</td>
                                     <td>{{$desistencia->data_saida}}</td>
                                     <td>{{$desistencia->ano_lectivo}}</td>
-                                    <td>
-                                        <a href="#" class="btn btn-primary btn-sm"><i class="ti-print"></i> Imprimir</a>
-                                    </td>
+                                    
                                 </tr>
 
                                 @endforeach

@@ -513,6 +513,15 @@ class EstudanteController extends Controller
             'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
         ]);
 
-        
+        $data = [
+            'id_estudante' => $id_estudante,
+            'motivo' => $request->descricao,
+            'data_emissao' => $request->data,
+            'ano_lectivo' => $request->ano_lectivo,
+        ];
+
+        if(Estudante::create($data)){
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
     }
 }

@@ -29,7 +29,7 @@ class CadernetaController_copy extends Controller
         $funcionario = Funcionario::where('id_pessoa', $id_pessoa)->first();
         $data['where'] = [
             'id_funcionario' => $funcionario->id,
-            'ano_lectivo' =>$ano_lectivo,
+            'ano_lectivo' => $ano_lectivo,
             'estado' => "visivel",
         ];
         $horarios = Horario::where($data['where'])->paginate(8);
@@ -40,7 +40,7 @@ class CadernetaController_copy extends Controller
             'menu' => "Caderneta",
             'submenu' => "Listar",
             'getHorario' => $horarios,
-            'getAnos'=>$anos,
+            'getAnos' => $anos,
         ];
         return view('caderneta.list', $data);
     }
@@ -78,8 +78,8 @@ class CadernetaController_copy extends Controller
         }
 
         //negar se o ano lectivo ja estiver bloqueado
-        if($ano_lectivos->estado == "off"){
-            return back()->with(['error'=>"Sem permissão de fazer lançamentos para esta turma"]);
+        if ($ano_lectivos->estado == "off") {
+            return back()->with(['error' => "Sem permissão de fazer lançamentos para esta turma"]);
         }
 
         //verificando disciplina
@@ -194,6 +194,11 @@ class CadernetaController_copy extends Controller
                 return back()->with(['error' => "Não encontrou ano lectivo"]);
             }
 
+            //negar se o ano lectivo ja estiver bloqueado
+            if ($ano_lectivos->estado == "off") {
+                return back()->with(['error' => "Sem permissão de fazer lançamentos para esta turma"]);
+            }
+
             $disciplina = Disciplina::find($id_disciplina);
             if (!$disciplina) {
                 return back()->with(['error' => "Não encontrou disciplina"]);
@@ -255,5 +260,4 @@ class CadernetaController_copy extends Controller
             return back(['success' => "Actualizado com sucesso"]);
         }
     }
-
 }

@@ -627,10 +627,12 @@ class InstitucionalController extends Controller
     {
         $request->validate([
             'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
+            'estado' => ['required', 'string', 'min:2'],
         ]);
 
         $data['ano'] = [
             'ano_lectivo' => $request->ano_lectivo,
+            'estado'=>$request->estado,
         ];
         if (AnoLectivo::where($data['ano'])->first()) {
             return back()->with(['error' => "Já cadastrou este ano lectivo"]);
@@ -664,10 +666,12 @@ class InstitucionalController extends Controller
         }
         $request->validate([
             'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
+            'estado' => ['required', 'string', 'min:2'],
         ]);
 
         $data['ano'] = [
             'ano_lectivo' => $request->ano_lectivo,
+            'estado'=>$request->estado,
         ];
 
         if ($request->ano_lectivo != $ano_lectivo->ano_lectivo) {

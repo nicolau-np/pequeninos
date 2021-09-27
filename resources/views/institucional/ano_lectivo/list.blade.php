@@ -9,7 +9,7 @@
                     <h5>{{$submenu}}</h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -31,7 +31,7 @@
                         </div>
                         {{Form::close()}}
                     </div>
-                    
+
                     <div class="table-responsive">
                         <br/>
                         <table class="table table-bordered">
@@ -39,6 +39,7 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Ano Lectivo</th>
+                                    <th>Estado</th>
                                     <th>Operações</th>
                                 </tr>
                             </thead>
@@ -47,10 +48,11 @@
                                 <span class="not_found">Nenhum ano lectivo cadastrado</span>
                                 @else
                                 @foreach ($getAnoLectivos as $ano_lectivos)
-                                    
+
                                 <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$ano_lectivos->ano_lectivo}}</td>
+                                    <td>{{$ano_lectivos->estado}}</td>
                                     <td>
                                         <a href="/institucional/ano_lectivos/edit/{{$ano_lectivos->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
                                         <a href="http://" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
@@ -59,7 +61,7 @@
 
                                 @endforeach
                                 @endif
-                             
+
                             </tbody>
                         </table>
                     </div>
@@ -72,7 +74,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- hidden-sm-up -->

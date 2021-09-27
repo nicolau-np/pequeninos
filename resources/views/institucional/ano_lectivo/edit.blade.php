@@ -9,7 +9,7 @@
                     <h5>{{$submenu}}</h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -32,16 +32,30 @@
                         <fieldset>
                             <legend><i class="ti-list"></i> Dados do Ano Lectivo</legend>
                             <div class="row">
-                               
+
                                 <div class="col-md-3">
                                     {{Form::label('ano_lectivo', "Ano Lectivo")}} <span class="text-danger">*</span>
                                     {{Form::text('ano_lectivo', $getAnoLectivo->ano_lectivo, ['class'=>"form-control", 'placeholder'=>"Ano Lectivo"])}}
                                     <div class="erro">
                                         @if($errors->has('ano_lectivo'))
                                         <div class="text-danger">{{$errors->first('ano_lectivo')}}</div>
-                                        @endif 
+                                        @endif
                                     </div>
                                 </div>
+
+                                <div class="col-md-3">
+                                    {{Form::label('estado', "Estado")}} <span class="text-danger">*</span>
+                                    {{Form::select('estado', [
+                                        'on'=>"on",
+                                        'off'=>"off"
+                                    ], $getAnoLectivo->estado, ['class'=>"form-control", 'placeholder'=>"Estado"])}}
+                                    <div class="erro">
+                                        @if($errors->has('estado'))
+                                        <div class="text-danger">{{$errors->first('estado')}}</div>
+                                        @endif
+                                    </div>
+                                </div>
+
                             </div>
                             <br/>
                         </fieldset>
@@ -52,14 +66,14 @@
                                  </div>
 
                             </div>
-                        
+
                         {{Form::close()}}
                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- hidden-sm-up -->

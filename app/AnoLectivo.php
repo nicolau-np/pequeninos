@@ -10,6 +10,6 @@ class AnoLectivo extends Model
 
     protected $fillable = [
         'ano_lectivo',
+        'estado',
     ];
-
 }

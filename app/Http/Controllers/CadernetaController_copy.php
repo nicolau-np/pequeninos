@@ -77,6 +77,7 @@ class CadernetaController_copy extends Controller
             return back()->with(['error' => "Não encontrou ano lectivo"]);
         }
 
+        //negar se o ano lectivo ja estiver bloqueado
         if($ano_lectivos->estado == "off"){
             return back()->with(['error'=>"Sem permissão de fazer lançamentos para esta turma"]);
         }

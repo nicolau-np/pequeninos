@@ -557,7 +557,7 @@ class EstudanteController extends Controller
     public function store_desistencias(Request $request, $id_estudante){
         $estudante = Estudante::find($id_estudante);
         if (!$estudante) {
-            return back()->with(['error' => "Não encontrou"]);
+            return back()->with(['error' => "Não encontrou estudante"]);
         }
 
         $request->validate([
@@ -577,6 +577,5 @@ class EstudanteController extends Controller
             return back()->with(['success' => "Feito com sucesso"]);
         }
     }
-
 
 }

@@ -102,8 +102,8 @@
                                 <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$transferencias->motivo}}</td>
-                                    <td>{{$declaracaos->data_emissao}}</td>
-                                    <td>{{$declaracaos->ano_lectivo}}</td>
+                                    <td>{{$transferencias->data_emissao}}</td>
+                                    <td>{{$transferencias->ano_lectivo}}</td>
                                     <td>
                                         <a href="#" class="btn btn-primary btn-sm"><i class="ti-print"></i> Imprimir</a>
                                     </td>

@@ -277,16 +277,6 @@ class EstudanteController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
     public function confirmar($id_estudante)
     {
@@ -522,7 +512,9 @@ class EstudanteController extends Controller
         ];
 
         if(Transferencia::create($data)){
-            return back()->with(['success' => "Feito com sucesso"]);
+            if(HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo'=>$request->ano_lectivo])->update(['observacao_final'=>"transferido"])){
+                return back()->with(['success' => "Feito com sucesso"]);
+            }
         }
     }
 
@@ -574,7 +566,9 @@ class EstudanteController extends Controller
         ];
 
         if(Desistencia::create($data)){
-            return back()->with(['success' => "Feito com sucesso"]);
+            if(HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo'=>$request->ano_lectivo])->update(['observacao_final'=>"desistencia"])){
+                return back()->with(['success' => "Feito com sucesso"]);
+            }
         }
     }
 

@@ -524,4 +524,6 @@ class EstudanteController extends Controller
             return back()->with(['success' => "Feito com sucesso"]);
         }
     }
+
+    
 }

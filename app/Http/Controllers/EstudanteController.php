@@ -520,7 +520,7 @@ class EstudanteController extends Controller
             'ano_lectivo' => $request->ano_lectivo,
         ];
 
-        if(Estudante::create($data)){
+        if(Transferencia::create($data)){
             return back()->with(['success' => "Feito com sucesso"]);
         }
     }

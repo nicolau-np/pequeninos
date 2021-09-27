@@ -171,6 +171,7 @@ Route::group(['prefix' => 'estudantes', 'middleware' => "auth"], function () {
     Route::get('/guiatransferencia/{id_estudante}/{ano_lectivo}', "EstudanteController@guiatransferencia");
     Route::put('/store_guiatransferencia/{id_estudante}', "EstudanteController@store_guiatransferencia");
     Route::get('/desistencia/{id_estudante}/{ano_lectivo}', "EstudanteController@desistencia");
+    Route::put('/store_desistencias/{id_estudante}', "EstudanteController@store_desistencias");
 });
 
 Route::group(['prefix' => "turmas", 'middleware' => "auth"], function () {

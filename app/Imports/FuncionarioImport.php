@@ -72,7 +72,7 @@ class FuncionarioImport implements
                 $data['user']['username'] = $nome_converte;
                 $data['user']['id_pessoa'] = $pessoa->id;
 
-                User::create($data['user']);
+                $user = User::create($data['user']);
             }
         }
     }

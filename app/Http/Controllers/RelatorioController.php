@@ -326,6 +326,6 @@ class RelatorioController extends Controller
             'getTransferencia'=>$transferencia,
         ];
         $pdf = PDF::loadView('relatorios.ensinos.transferencias.geral', $data)->setPaper('A4', 'normal');
-        return $pdf->stream('DECLARAÇÃO SEM NOTAS ' . $transferencia->ano_lectivo . ' - [ ' . strtoupper($transferencia->estudante->pessoa->nome). ' ].pdf');
+        return $pdf->stream('GUIA DE TRANSFERÊNCIA ' . $transferencia->ano_lectivo . ' - [ ' . strtoupper($transferencia->estudante->pessoa->nome). ' ].pdf');
     }
 }

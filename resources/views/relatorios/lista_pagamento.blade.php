@@ -81,7 +81,14 @@
                     <tr class="{{$histoEstudantes->observacao_final}}">
                         <td>{{$loop->iteration}}</td>
                         <td>{{$histoEstudantes->estudante->pessoa->nome}}</td>
-                        <td>{{$histoEstudantes->estudante->encarregado->pessoa->nome}}</td>
+                        <td>
+                            @if ($histoEstudantes->estudante->encarregado->pessoa->nome=="Encarregado Exemplo")
+                                Não informou
+                            @else
+                            {{$histoEstudantes->estudante->encarregado->pessoa->nome}}
+                            @endif
+
+                        </td>
                         <td>{{$histoEstudantes->estudante->encarregado->pessoa->telefone}}</td>
                         <?php
 

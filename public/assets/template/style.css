@@ -13,7 +13,7 @@
 
 .btnCircular{
 	border-radius: 50%;
-    
+
 }
 
 .btnPrincipal{
@@ -66,7 +66,7 @@ fieldset legend{
         padding: 10px;
         box-shadow: 0 1px 11px 0 rgba(0, 0, 0, 0.12);
     }
-    
+
     fieldset legend{
         padding: 10px;
         background:#4680ff;
@@ -81,4 +81,15 @@ fieldset legend{
     .page-header{
         display:none;
     }
+}
+
+.transferido{
+    background-color:#FFB64D;
+    color:#fff;
+    font-weight: bold;
+}
+.desistencia{
+    background-color:#FC6180;
+    color:#fff;
+    font-weight: bold;
 }

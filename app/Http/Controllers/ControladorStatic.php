@@ -213,4 +213,9 @@ class ControladorStatic extends Controller
 
         return $retorno;
     }
+
+    public static function getObservacaofinal($id_estudante, $ano_lectivo){
+        $observacao_final = HistoricEstudante::where(['id_estudante'=>$id_estudante, 'ano_lectivo'=> $ano_lectivo])->first();
+        return $observacao_final;
+    }
 }

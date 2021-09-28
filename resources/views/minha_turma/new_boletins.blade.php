@@ -46,6 +46,11 @@
                                 '2'=>"2 Trimestre",
                                 '3'=>"3 Trimestre",
                             ], null, ['class'=>"form-control", 'placeholder'=>"Epoca"])}}
+                            <div class="erro">
+                                @if($errors->has('epoca'))
+                                <div class="text-danger">{{$errors->first('epoca')}}</div>
+                                @endif
+                            </div>
                         </div>
                         <div class="col-md-4">
                             <button type="submit" class="btn btn-warning btn-sm float-left"><i class="ti-printer"></i>PDF</button>&nbsp;&nbsp;&nbsp;

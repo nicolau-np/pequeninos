@@ -246,7 +246,7 @@ $percent_negativasf = [
                    </thead>
                    <tbody>
                      @foreach ($getHistorico as $historico)
-                     <tr>
+                     <tr class="{{$historico->observacao_final}}">
                          <td>{{$loop->iteration}}</td>
                          <td>{{$historico->estudante->pessoa->nome}}</td>
                          <td>{{$historico->estudante->pessoa->genero}}</td>
@@ -990,7 +990,7 @@ $percent_negativasf = [
                     </thead>
                     <tbody>
                       @foreach ($getHistorico as $historico)
-                      <tr>
+                      <tr class="{{$historico->observacao_final}}">
                           <td>{{$loop->iteration}}</td>
                           <td>{{$historico->estudante->pessoa->nome}}</td>
                           <td>{{$historico->estudante->pessoa->genero}}</td>
@@ -1089,7 +1089,7 @@ $percent_negativasf = [
                     </thead>
                     <tbody>
                       @foreach ($getHistorico as $historico)
-                      <tr>
+                      <tr class="{{$historico->observacao_final}}">
                           <td>{{$loop->iteration}}</td>
                           <td>{{$historico->estudante->pessoa->nome}}</td>
                           <td>{{$historico->estudante->pessoa->genero}}</td>
@@ -1189,7 +1189,7 @@ $percent_negativasf = [
                 </thead>
                 <tbody>
                   @foreach ($getHistorico as $historico)
-                  <tr>
+                  <tr class="{{$historico->observacao_final}}">
                       <td>{{$loop->iteration}}</td>
                       <td>{{$historico->estudante->pessoa->nome}}</td>
                       <td>{{$historico->estudante->pessoa->genero}}</td>

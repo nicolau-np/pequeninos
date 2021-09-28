@@ -189,6 +189,17 @@ $percent_negativasf = [
     .teacher_name{
         text-align: center;
     }
+
+    .transferido{
+    background-color:#FFB64D;
+    color:#fff;
+    font-weight: bold;
+}
+.desistencia{
+    background-color:#FC6180;
+    color:#fff;
+    font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -249,7 +260,7 @@ $percent_negativasf = [
                     </thead>
                     <tbody>
                       @foreach ($getHistorico as $historico)
-                      <tr>
+                      <tr class="{{$historico->observacao_final}}">
                           <td>{{$loop->iteration}}</td>
                           <td>{{$historico->estudante->pessoa->nome}}</td>
                           <td>{{$historico->estudante->pessoa->genero}}</td>
@@ -990,7 +1001,7 @@ $percent_negativasf = [
                     </thead>
                     <tbody>
                       @foreach ($getHistorico as $historico)
-                      <tr>
+                      <tr class="{{$historico->observacao_final}}">
                           <td>{{$loop->iteration}}</td>
                           <td>{{$historico->estudante->pessoa->nome}}</td>
                           <td>{{$historico->estudante->pessoa->genero}}</td>
@@ -1100,7 +1111,7 @@ $percent_negativasf = [
                         </thead>
                         <tbody>
                           @foreach ($getHistorico as $historico)
-                          <tr>
+                          <tr class="{{$historico->observacao_final}}">
                               <td>{{$loop->iteration}}</td>
                               <td>{{$historico->estudante->pessoa->nome}}</td>
                               <td>{{$historico->estudante->pessoa->genero}}</td>
@@ -1211,7 +1222,7 @@ $percent_negativasf = [
                 </thead>
                 <tbody>
                   @foreach ($getHistorico as $historico)
-                  <tr>
+                  <tr class="{{$historico->observacao_final}}">
                       <td>{{$loop->iteration}}</td>
                       <td>{{$historico->estudante->pessoa->nome}}</td>
                       <td>{{$historico->estudante->pessoa->genero}}</td>

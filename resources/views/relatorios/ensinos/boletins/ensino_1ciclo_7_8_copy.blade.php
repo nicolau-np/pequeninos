@@ -125,34 +125,35 @@ use App\Http\Controllers\ControladorNotas;
                             <th>MT{{$getEpoca}}</th>
                           @endforeach
                         </tr>
-
-                        <tr>
-                        @foreach (Session::get('disciplinas') as $disciplina)
-                        <?php
-                        $trimestrel = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'], $historico->id_estudante, $getEpoca, $getDirector->ano_lectivo);
-                        if($trimestrel->count()==0){
-                    ?>
-                    <td>---</td>
-                    <td>---</td>
-                    <td>---</td>
-                    <td>---</td>
-                        <?php }
-                        else{
-                            foreach($trimestrel as $valor1){
-                                $v1_estilo = ControladorNotas::nota_20($valor1->mac);
-                                $v2_estilo = ControladorNotas::nota_20($valor1->npp);
-                                $v3_estilo = ControladorNotas::nota_20($valor1->pt);
-                                $v4_estilo = ControladorNotas::nota_20($valor1->mt);
-                            ?>
-
-                    <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$valor1->mac}} @endif</td>
-                    <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$valor1->npp}} @endif</td>
-                    <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$valor1->pt}} @endif</td>
-                    <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$valor1->mt}} @endif</td>
-                            <?php }}?>
-                                @endforeach
-                        </tr>
                     </thead>
+                    <tbody>
+                        <tr>
+                            @foreach (Session::get('disciplinas') as $disciplina)
+                            <?php
+                            $trimestrel = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'], $historico->id_estudante, $getEpoca, $getDirector->ano_lectivo);
+                            if($trimestrel->count()==0){
+                        ?>
+                        <td>---</td>
+                        <td>---</td>
+                        <td>---</td>
+                        <td>---</td>
+                            <?php }
+                            else{
+                                foreach($trimestrel as $valor1){
+                                    $v1_estilo = ControladorNotas::nota_20($valor1->mac);
+                                    $v2_estilo = ControladorNotas::nota_20($valor1->npp);
+                                    $v3_estilo = ControladorNotas::nota_20($valor1->pt);
+                                    $v4_estilo = ControladorNotas::nota_20($valor1->mt);
+                                ?>
+
+                        <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$valor1->mac}} @endif</td>
+                        <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$valor1->npp}} @endif</td>
+                        <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$valor1->pt}} @endif</td>
+                        <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$valor1->mt}} @endif</td>
+                                <?php }}?>
+                                    @endforeach
+                            </tr>
+                    </tbody>
                 </table>
              </div>
             </div>

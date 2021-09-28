@@ -29,6 +29,17 @@
         .periodo{
             float: right;
         }
+
+        .transferido{
+        background-color:#FFB64D;
+        color:#fff;
+        font-weight: bold;
+    }
+    .desistencia{
+        background-color:#FC6180;
+        color:#fff;
+        font-weight: bold;
+    }
 </style>
 </head>
 <body>
@@ -67,7 +78,7 @@
                 <tbody>
 
                     @foreach ($getHistoricoEstudante as $histoEstudantes)
-                        <tr>
+                    <tr class="{{$histoEstudantes->observacao_final}}">
                         <td>{{$loop->iteration}}</td>
                         <td>{{$histoEstudantes->estudante->pessoa->nome}}</td>
                         <td>{{$histoEstudantes->estudante->encarregado->pessoa->nome}}</td>
@@ -107,7 +118,7 @@
                 </thead>
                 <tbody>
                     @foreach ($getHistoricoEstudante as $histoEstudantes)
-                        <tr>
+                        <tr class="{{$histoEstudantes->observacao_final}}">
                         <td>{{$loop->iteration}}</td>
                         <td>{{$histoEstudantes->estudante->pessoa->nome}}</td>
                         @foreach ($getEpocasPagamento as $epocas)

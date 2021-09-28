@@ -29,6 +29,17 @@
     .tabela{
         font-size: 10px;
     }
+
+    .transferido{
+        background-color:#FFB64D;
+        color:#fff;
+        font-weight: bold;
+    }
+    .desistencia{
+        background-color:#FC6180;
+        color:#fff;
+        font-weight: bold;
+    }
 </style>
 </head>
 <body>
@@ -56,12 +67,13 @@
                         <th>NOME COMPLETO</th>
                         <th>GÊNERO</th>
                         <th>IDADE</th>
+                        <th>OBS.</th>
                     </tr>
 
                 </thead>
                 <tbody>
                     @foreach ($getHistorico as $historico)
-                    <tr>
+                <tr class="{{$historico->observacao_final}}">
                     <td>{{$loop->iteration}}</td>
                     <td>{{$historico->estudante->pessoa->nome}}</td>
                     <td>{{$historico->estudante->pessoa->genero}}</td>
@@ -76,6 +88,13 @@
                         {{$idade}}
                         @endif
 
+                    </td>
+                    <td>
+                        @if ($historico->observacao_final == "transferido")
+                            Transferência
+                        @elseif($historico->observacao_final == "desistencia")
+                            Desistência
+                        @endif
                     </td>
                     </tr>
                     @endforeach

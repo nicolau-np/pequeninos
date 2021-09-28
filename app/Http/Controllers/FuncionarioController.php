@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cargo;
 use App\Escalao;
 use App\Funcionario;
+use App\Imports\FuncionarioImport;
 use App\Pessoa;
 use App\Provincia;
 use App\User;
@@ -316,10 +317,10 @@ class FuncionarioController extends Controller
         ]);
         $file = $request->file('arquivo');
 
-        //$import = new PessoaImport;
+        $import = new FuncionarioImport;
 
-        /*if($import->import($file)){
+        if($import->import($file)){
             return back()->with(['success'=>"Feito com sucesso"]);
-        }*/
+        }
     }
 }

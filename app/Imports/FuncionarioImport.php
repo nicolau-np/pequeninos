@@ -77,7 +77,7 @@ class FuncionarioImport implements
         }
     }
 
-    public function converter_acentos()
+    public function converter_acentos($string)
     {
         return preg_replace(
             array(
@@ -87,8 +87,7 @@ class FuncionarioImport implements
                 "/(ñ)/", "/(Ñ)/", "/(ç)/", "/(Ç)/"
             ),
             explode(" ", "a A e E i I o O u U n N c C"),
-            $string
-        );
+            $string);
     }
 
     public function rules(): array

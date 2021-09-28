@@ -171,7 +171,7 @@ $percent_negativasf = [
         color: #4680ff;
     }
     .negativo{
-        color: red;
+        color: #FC6180;
     }
     .neutro{
         color: #FFB64D;

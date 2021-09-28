@@ -13,7 +13,7 @@ if(!$observacao_geral){
 }
 ?>
 <style>
-    
+  
     .tabela{
         font-size: 12px;
     }

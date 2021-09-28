@@ -13,7 +13,7 @@ if(!$observacao_geral){
 }
 ?>
 <style>
-    
+  
     table thead{
         background-color: #4680ff;
         color: #fff;

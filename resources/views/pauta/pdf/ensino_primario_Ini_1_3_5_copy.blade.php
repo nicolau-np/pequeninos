@@ -45,11 +45,21 @@ if(!$observacao_geral){
         color: #4680ff;
     }
     .negativo{
-        color: red;
+        color: #FC6180;
     }
     .nenhum{
         color: #333;
     }
+    .transferido{
+    background-color:#FFB64D;
+    color:#fff;
+    font-weight: bold;
+}
+.desistencia{
+    background-color:#FC6180;
+    color:#fff;
+    font-weight: bold;
+}
     .neutro{
         color: #FFB64D;
     }
@@ -145,7 +155,7 @@ if(!$observacao_geral){
 
                                   $defice_disciplinas = [];
                           ?>
-                        <tr>
+                        <tr class="{{$historico->observacao_final}}">
                           <td>{{$loop->iteration}}</td>
                           <td>{{$historico->estudante->pessoa->nome}}</td>
                           <td>{{$historico->estudante->pessoa->genero}}</td>

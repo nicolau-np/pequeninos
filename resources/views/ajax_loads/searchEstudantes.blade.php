@@ -1,6 +1,13 @@
+<?php
+use App\Http\Controllers\ControladorStatic;
+?>
+
 @foreach ($getEstudantes as $estudantes)
 
-                                <tr>
+                                <?php
+                                $observacao_final = ControladorStatic::getObservacaofinal($estudantes->id, $estudantes->ano_lectivo);
+                                ?>
+                                <tr class="{{$observacao_final->observacao_final}}">
                                 <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$estudantes->pessoa->nome}}</td>
                                     <td>{{$estudantes->turma->curso->curso}}</td>

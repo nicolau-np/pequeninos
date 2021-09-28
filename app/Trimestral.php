@@ -61,4 +61,5 @@ class Trimestral extends Model
             $query->where('id_disciplina', $data2['id_disciplina']);
         })->where($data)->get();
     }
+
 }

@@ -29,7 +29,7 @@
                 </div>
                 <div class="card-block">
 
-                    {{Form::open(['method'=>"put", 'url'=>"/pautas/show/{$getDirector->id_turma}/{$getDirector->ano_lectivo}"])}}
+                    {{Form::open(['method'=>"put", 'url'=>"/relatorios/boletins/{$getDirector->id_turma}/{$getDirector->ano_lectivo}"])}}
 
                     @if(session('error'))
                     <div class="alert alert-danger">{{session('error')}}</div>
@@ -40,12 +40,22 @@
                     @endif
 
                     <div class="row">
-                        <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary btn-sm float-left"><i class="ti-eye"></i>Visualizar</button>&nbsp;&nbsp;&nbsp;
-
-                            <a href="/pautas/pdf/{{$getDirector->id_turma}}/{{$getDirector->ano_lectivo}}" class="btn btn-warning btn-sm"><i class="ti-printer"></i> PDF</a>
+                        <div class="col-md-2">
+                            {{Form::select('epoca', [
+                                '1'=>"1 Trimestre",
+                                '2'=>"2 Trimestre",
+                                '3'=>"3 Trimestre",
+                            ], null, ['class'=>"form-control", 'placeholder'=>"Epoca"])}}
+                        </div>
+                        <div class="col-md-4">
+                            <button type="submit" class="btn btn-warning btn-sm float-left"><i class="ti-printer"></i>PDF</button>&nbsp;&nbsp;&nbsp;
 
                             <a href="#" class="btn btn-danger btn-sm float-right remover_todas"><i class="ti-trash" aria-hidden="true"></i></a>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-6">
                            <table class="table table-bordered">
                             <thead>
                                 <tr>

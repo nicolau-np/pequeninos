@@ -132,10 +132,10 @@ class MinhaTurmaController extends Controller
         Session::forget('disciplinas');
 
         $data = [
-            'title' => "Pauta",
-            'type' => "pauta",
-            'menu' => "pauta",
-            'submenu' => "Visualizar",
+            'title' => "Boletins de Notas",
+            'type' => "boletins",
+            'menu' => "Minha Turma",
+            'submenu' => "Boletins de Notas",
             'getDirector' => $directorTurma,
             'getGrade' => $grade_disciplinas,
         ];

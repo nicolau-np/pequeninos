@@ -310,22 +310,44 @@ class RelatorioController extends Controller
             return back()->with(['error' => "Não encontrou declaração"]);
         }
         $data  = [
-            'getDeclaracao'=>$declaracao,
+            'getDeclaracao' => $declaracao,
         ];
         $pdf = PDF::loadView('relatorios.declaracaosem', $data)->setPaper('A4', 'normal');
-        return $pdf->stream('DECLARAÇÃO SEM NOTAS ' . $declaracao->ano_lectivo . ' - [ ' . strtoupper($declaracao->estudante->pessoa->nome). ' ].pdf');
+        return $pdf->stream('DECLARAÇÃO SEM NOTAS ' . $declaracao->ano_lectivo . ' - [ ' . strtoupper($declaracao->estudante->pessoa->nome) . ' ].pdf');
     }
 
-    public function guiatransferencia($id_transferencia){
+    public function guiatransferencia($id_transferencia)
+    {
         $transferencia = Transferencia::find($id_transferencia);
-        if(!$transferencia){
+        if (!$transferencia) {
             return back()->with(['error' => "Não encontrou guia de transferencia"]);
         }
 
         $data  = [
-            'getTransferencia'=>$transferencia,
+            'getTransferencia' => $transferencia,
         ];
         $pdf = PDF::loadView('relatorios.ensinos.transferencias.geral', $data)->setPaper('A4', 'normal');
-        return $pdf->stream('GUIA DE TRANSFERÊNCIA ' . $transferencia->ano_lectivo . ' - [ ' . strtoupper($transferencia->estudante->pessoa->nome). ' ].pdf');
+        return $pdf->stream('GUIA DE TRANSFERÊNCIA ' . $transferencia->ano_lectivo . ' - [ ' . strtoupper($transferencia->estudante->pessoa->nome) . ' ].pdf');
+    }
+
+    public function boletins(Request $request, $id_turma, $ano_lectivo)
+    {
+        $request->validate([
+            'epoca' => ['required', 'integer', 'min:1',],
+        ]);
+
+        $turma = Turma::find($id_turma);
+        if(!$turma){
+            return back()->with(['error' => "Não encontrou turma"]);
+        }
+
+        $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
+        if (!$ano_lectivos) {
+            return back()->with(['error' => "Não encontrou ano lectivo"]);
+        }
+
+        
+
+
     }
 }

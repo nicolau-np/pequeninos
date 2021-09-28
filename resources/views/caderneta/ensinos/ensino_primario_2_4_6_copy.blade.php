@@ -109,7 +109,10 @@
                                                             Nenhum estudante encontrado
                                                         @else
                                                             @foreach ($getTrimestral as $trimestral)
-                                                            <tr>
+                                                            <?php
+                                                                $observacao = ControladorStatic::getObservacaofinal($trimestral->id_estudante, $trimestral->ano_lectivo);
+                                                            ?>
+                                                                <tr class="{{$observacao->observacao_final}}">
                                                                 <td>{{$loop->iteration}}</td>
                                                                 <td>{{$trimestral->estudante->pessoa->nome}}</td>
                                                                 <td>{{$trimestral->estudante->pessoa->genero}}</td>

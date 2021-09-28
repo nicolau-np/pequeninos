@@ -18,6 +18,7 @@ use App\Pagamento;
 use App\PagamentoPai;
 use App\TabelaPreco;
 use App\TipoPagamento;
+use App\Transferencia;
 use App\Turma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -313,5 +314,18 @@ class RelatorioController extends Controller
         ];
         $pdf = PDF::loadView('relatorios.declaracaosem', $data)->setPaper('A4', 'normal');
         return $pdf->stream('DECLARAÇÃO SEM NOTAS ' . $declaracao->ano_lectivo . ' - [ ' . strtoupper($declaracao->estudante->pessoa->nome). ' ].pdf');
+    }
+
+    public function guiatransferencia($id_transferencia){
+        $transferencia = Transferencia::find($id_transferencia);
+        if(!$transferencia){
+            return back()->with(['error' => "Não encontrou guia de transferencia"]);
+        }
+
+        $data  = [
+            'getTransferencia'=>$transferencia,
+        ];
+        $pdf = PDF::loadView('relatorios.ensinos.transferencias.geral', $data)->setPaper('A4', 'normal');
+        return $pdf->stream('DECLARAÇÃO SEM NOTAS ' . $transferencia->ano_lectivo . ' - [ ' . strtoupper($transferencia->estudante->pessoa->nome). ' ].pdf');
     }
 }

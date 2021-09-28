@@ -105,7 +105,7 @@
                                     <td>{{$transferencias->data_emissao}}</td>
                                     <td>{{$transferencias->ano_lectivo}}</td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-sm"><i class="ti-print"></i> Imprimir</a>
+                                        <a href="/relatorios/guiatransferencia/{{$transferencias->id}}" class="btn btn-primary btn-sm"><i class="ti-print"></i> Imprimir</a>
                                     </td>
                                 </tr>
 

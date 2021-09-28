@@ -100,10 +100,6 @@ Route::group(['prefix' => 'institucional', 'middleware' => "AdminUser"], functio
         Route::put('/update/{id}', "InstitucionalController@ano_lectivo_update");
     });
 
-    /*Route::group(['prefix' => 'import',], function () {
-        Route::get('/', "ImportController@index");
-        Route::post('/store', "ImportController@store");
-    });*/
 
     Route::group(['prefix' => "observacoes", 'middleware'=>"admin"], function () {
         Route::get('/', "InstitucionalController@observacoes");
@@ -193,7 +189,7 @@ Route::group(['prefix' => 'funcionarios', 'middleware' => "AdminUser"], function
     Route::post('/store', "FuncionarioController@store");
     Route::get('/edit/{id}', "FuncionarioController@edit");
     Route::put('/update/{id}', "FuncionarioController@update");
-    Route::get('/import', "FuncionarioController@import")
+    Route::get('/import', "FuncionarioController@import");
 });
 
 Route::group(['prefix' => 'directores', 'middleware' => "auth"], function () {

@@ -301,6 +301,12 @@ class FuncionarioController extends Controller
     }
 
     public function import(){
-        
+        $data = [
+            'title' => "Funcionários",
+            'type' => "funcionarios",
+            'menu' => "Funcionários",
+            'submenu' => "Importar",
+        ];
+        return view('funcionarios.import', $data);
     }
 }

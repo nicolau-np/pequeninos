@@ -34,6 +34,10 @@ if(($getEpoca1->estado=="off") && ($getEpoca2->estado=="off") && ($getEpoca3->es
     $epoca_usar = 1;
 }
 
+if(($getEpoca1->estado=="on") && ($getEpoca2->estado=="on") && ($getEpoca3->estado=="on") && ($getEpoca4->estado=="on")){
+    $epoca_usar = 1;
+}
+
 
 ?>
 @extends('layouts.app')

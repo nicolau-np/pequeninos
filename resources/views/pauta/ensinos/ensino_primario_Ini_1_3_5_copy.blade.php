@@ -115,7 +115,7 @@ if(!$observacao_geral){
 
                                             $defice_disciplinas = [];
                                     ?>
-                                  <tr>
+                                  <tr class="{{$historico->observacao_final}}">
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$historico->estudante->pessoa->nome}}</td>
                                     <td>{{$historico->estudante->pessoa->genero}}</td>

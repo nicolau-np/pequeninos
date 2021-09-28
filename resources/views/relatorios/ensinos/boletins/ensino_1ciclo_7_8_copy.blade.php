@@ -12,7 +12,7 @@ use App\Http\Controllers\ControladorNotas;
 <style>
     @page{
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 11px;
+        font-size: 9px;
         margin-left: 10px;
         margin-right: 10px;
         margin-top: 10px;
@@ -55,7 +55,7 @@ use App\Http\Controllers\ControladorNotas;
             color: #fff;
     }
     .tabela{
-        font-size: 11px;
+        font-size: 9px;
     }
 
     .title{

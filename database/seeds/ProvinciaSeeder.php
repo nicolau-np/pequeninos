@@ -23,13 +23,28 @@ class ProvinciaSeeder extends Seeder
         ],
         [
             'id_pais' => 1,
+            'provincia' => "Malanje",
+            'cidade_cede' => "Malanje"
+        ],
+        [
+            'id_pais' => 1,
             'provincia' => "Cabinda",
             'cidade_cede' => "Cabinda"
         ],
         [
             'id_pais' => 1,
-            'provincia' => "Malanje",
-            'cidade_cede' => "Malanje"
+            'provincia' => "Zaire",
+            'cidade_cede' => "MBanza Congo"
+        ],
+        [
+            'id_pais' => 1,
+            'provincia' => "Uíge",
+            'cidade_cede' => "Uíge"
+        ],
+        [
+            'id_pais' => 1,
+            'provincia' => "Bengo",
+            'cidade_cede' => "Caxito"
         ],
         [
             'id_pais' => 1,
@@ -53,18 +68,23 @@ class ProvinciaSeeder extends Seeder
         ],
         [
             'id_pais' => 1,
-            'provincia' => "Uíge",
-            'cidade_cede' => "Uíge"
-        ],
-        [
-            'id_pais' => 1,
-            'provincia' => "Zaire",
-            'cidade_cede' => "MBanza Congo"
-        ],
-        [
-            'id_pais' => 1,
             'provincia' => "Luanda",
             'cidade_cede' => "Luanda"
+        ],
+        [
+            'id_pais' => 1,
+            'provincia' => "Cunene",
+            'cidade_cede' => "Cunene"
+        ],
+        [
+            'id_pais' => 1,
+            'provincia' => "Moxico",
+            'cidade_cede' => "Luena"
+        ],
+        [
+            'id_pais' => 1,
+            'provincia' => "Cuando Cubango",
+            'cidade_cede' => "Menongue"
         ],
         [
             'id_pais' => 1,
@@ -75,26 +95,6 @@ class ProvinciaSeeder extends Seeder
             'id_pais' => 1,
             'provincia' => "Bié",
             'cidade_cede' => "Cuito"
-        ],
-        [
-            'id_pais' => 1,
-            'provincia' => "Cunene",
-            'cidade_cede' => "Cunene"
-        ],
-        [
-            'id_pais' => 1,
-            'provincia' => "Cuando Cubango",
-            'cidade_cede' => "Menongue"
-        ],
-        [
-            'id_pais' => 1,
-            'provincia' => "Moxico",
-            'cidade_cede' => "Luena"
-        ],
-        [
-            'id_pais' => 1,
-            'provincia' => "Bengo",
-            'cidade_cede' => "Caxito"
         ],
 
     ];

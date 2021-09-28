@@ -119,7 +119,12 @@
                                     <td>{{$declaracaos->data_emissao}}</td>
                                     <td>{{$declaracaos->ano_lectivo}}</td>
                                     <td>
-                                        <a href="#" class="btn btn-primary btn-sm"><i class="ti-print"></i> Imprimir</a>
+                                        @if ($declaracaos->tipo=="sem nota")
+                                            <a href="/relatorios/declaracaosem/{{$declaracaos->id}}" class="btn btn-primary btn-sm"><i class="ti-print"></i> Imprimir</a>
+                                        @else
+                                            <a href="/estudantes/declaracao/choose/{{$declaracaos->id}}" class="btn btn-primary btn-sm"><i class="ti-print"></i> Imprimir</a>
+                                        @endif
+
                                     </td>
                                 </tr>
 

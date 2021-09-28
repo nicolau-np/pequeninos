@@ -76,6 +76,13 @@
                                                 <div class="data">
                                                     <span class="title">Encarregado:</span> {{$getHistoricoEstudante->estudante->encarregado->pessoa->nome}}<br/>
                                                     <span class="title">Telefone:</span> {{$getHistoricoEstudante->estudante->encarregado->pessoa->telefone}}<br/>
+                                                    <span class="title">OBS.:</span>
+                                                    @if ($getHistoricoEstudante->observacao_final == "transferido")
+                                                        <span class="{{$getHistoricoEstudante->observacao_final}}">Transferência</span>
+                                                    @elseif($getHistoricoEstudante->observacao_final == "desistencia")
+                                                        <span class="{{$getHistoricoEstudante->observacao_final}}">Desistência</span>
+                                                    @endif
+                                                    <br/>
                                                 </div>
                                             </div>
                                         </div>

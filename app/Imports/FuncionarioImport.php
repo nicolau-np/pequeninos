@@ -16,17 +16,31 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 
 
-class FuncionarioImport implements ToModel
+class FuncionarioImport implements
+    ToCollection,
+    WithHeadingRow,
+    SkipsOnError,
+    WithValidation,
+    WithChunkReading,
+    ShouldQueue
 {
-    /**
-    * @param array $row
-    *
-    * @return \Illuminate\Database\Eloquent\Model|null
-    */
-    public function model(array $row)
+    use Importable, SkipsErrors;
+
+    public function collection(Collection $rows)
     {
-        return new Funcionario([
-            //
-        ]);
+         foreach ($rows as $row) {
+
+
+        }
+    }
+
+    public function rules(): array
+    {
+        return [];
+    }
+
+    public function chunkSize(): int
+    {
+        return 1000;
     }
 }

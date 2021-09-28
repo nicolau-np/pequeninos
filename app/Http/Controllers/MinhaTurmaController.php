@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\AnoLectivo;
 use App\DirectorTurma;
 use App\Funcionario;
+use App\Grade;
 use App\Hora;
 use App\Horario;
 use App\Turma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class MinhaTurmaController extends Controller
 {
@@ -79,5 +81,65 @@ class MinhaTurmaController extends Controller
 
 
         return view('minha_turma.horario', $data);
+    }
+
+    public function boletins_notas($id_turma, $ano_lectivo){
+        $turma = Turma::find($id_turma);
+        if (!$turma) {
+            return back()->with(['error' => "Não encontrou turma"]);
+        }
+
+        $ano_lecti = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
+        if (!$ano_lecti) {
+            return back()->with(['error' => "Não encontrou ano lectivo"]);
+        }
+
+        $id_pessoa = Auth::user()->pessoa->id;
+        //se for administrador
+        if ((Auth::user()->nivel_acesso == "admin") || (Auth::user()->nivel_acesso == "user")) {
+            $directorTurma = DirectorTurma::where([
+                'id_turma' => $id_turma,
+                'ano_lectivo' => $ano_lectivo,
+            ])->first();
+
+            if (!$directorTurma) {
+                return back()->with(['error' => "Não é Director desta turma"]);
+            }
+        } else {
+            $funcionario = Funcionario::where('id_pessoa', $id_pessoa)->first();
+            if (!$funcionario) {
+                return back()->with(['error' => "Não encontrou funcionario"]);
+            }
+
+            if (Auth::user()->nivel_acesso == "professor") {
+                $directorTurma = DirectorTurma::where([
+                    'id_funcionario' => $funcionario->id,
+                    'id_turma' => $id_turma,
+                    'ano_lectivo' => $ano_lectivo,
+                ])->first();
+
+                if (!$directorTurma) {
+                    return back()->with(['error' => "Não é Director desta turma"]);
+                }
+            }
+        }
+
+        $grade_disciplinas = Grade::where([
+            'id_curso' => $turma->id_curso,
+            'id_classe' => $turma->id_classe,
+        ])->get();
+
+        Session::forget('disciplinas');
+
+        $data = [
+            'title' => "Pauta",
+            'type' => "pauta",
+            'menu' => "pauta",
+            'submenu' => "Visualizar",
+            'getDirector' => $directorTurma,
+            'getGrade' => $grade_disciplinas,
+        ];
+
+        return view('minha_turma.new_boletins', $data);
     }
 }

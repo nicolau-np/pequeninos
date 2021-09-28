@@ -28,8 +28,33 @@
                     <div class="alert alert-success">{{session('success')}}</div>
                     @endif
 
+                    {{Form::open(['method'=>"post", 'url'=>"/funcionarios/import/store", 'enctype'=>"multipart/form-data"])}}
+                    @csrf
+                    <fieldset>
+                        <legend><i class="ti-list"></i> Dados</legend>
+                        <div class="row">
+                            <div class="col-md-5">
+                                {{Form::label('arquivo', "Arquivo (.xls, .xlsx)")}} <span class="text-danger">*</span>
+                                {{Form::file('arquivo', null, ['class'=>"form-control", 'placeholder'=>"Arquivo"])}}
+                            <div class="erro">
+                                @if($errors->has('arquivo'))
+                                <div class="text-danger">{{$errors->first('arquivo')}}</div>
+                                @endif
+                            </div>
+                            </div>
 
-                        
+                        </div>
+
+                    </fieldset>
+                    <br/>
+                        <div class="row">
+                            <div class="col-md-4">
+                                {{Form::submit('Salvar', ['class'=>"btn btn-primary"])}}
+                            </div>
+                        </div>
+
+                    {{Form::close()}}
+
                    </div>
                 </div>
             </div>

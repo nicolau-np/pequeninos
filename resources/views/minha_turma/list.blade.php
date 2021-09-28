@@ -58,6 +58,9 @@ use App\Http\Controllers\ControladorStatic;
                                     <a href="/relatorios/lista_nominal/{{$turmas->id_turma}}/{{$turmas->ano_lectivo}}" type="button" class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Lista Nominal">
                                         <i class="icofont icofont-list"></i>
                                     </a>&nbsp;
+                                    <a href="/minha_turma/boletins_notas/{{$turmas->id_turma}}/{{$turmas->ano_lectivo}}" type="button" class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Boletins de Notas">
+                                        <i class="icofont icofont-list"></i>
+                                    </a>&nbsp;
                                    </div>
                                 </span>
                             </div>

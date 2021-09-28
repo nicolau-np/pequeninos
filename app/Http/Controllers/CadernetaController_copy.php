@@ -34,6 +34,13 @@ class CadernetaController_copy extends Controller
         ];
         $horarios = Horario::where($data['where'])->paginate(8);
         Session::put('id_funcionario', $funcionario->id);
+
+        //pegando todos os valores dos bloqueios dos trimestres
+        $estado_epoca1 = BloqueioEpoca::where(['epoca' => 1])->first();
+        $estado_epoca2 = BloqueioEpoca::where(['epoca' => 2])->first();
+        $estado_epoca3 = BloqueioEpoca::where(['epoca' => 3])->first();
+        $estado_epoca4 = BloqueioEpoca::where(['epoca' => 4])->first();
+
         $data = [
             'title' => "Caderneta",
             'type' => "caderneta",
@@ -41,6 +48,11 @@ class CadernetaController_copy extends Controller
             'submenu' => "Listar",
             'getHorario' => $horarios,
             'getAnos' => $anos,
+
+            'getEpoca1' => $estado_epoca1,
+            'getEpoca2' => $estado_epoca2,
+            'getEpoca3' => $estado_epoca3,
+            'getEpoca4' => $estado_epoca4,
         ];
         return view('caderneta.list', $data);
     }

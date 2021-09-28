@@ -1,5 +1,36 @@
 <?php
 use App\Http\Controllers\ControladorStatic;
+
+$epoca_usar = 0;
+if(($getEpoca1->estado=="on")){
+    $epoca_usar = 1;
+}
+
+if(($getEpoca2->estado=="on")){
+    $epoca_usar = 2;
+}
+
+if(($getEpoca3->estado=="on")){
+    $epoca_usar = 3;
+}
+
+if(($getEpoca4->estado=="on")){
+    $epoca_usar = 4;
+}
+
+if(($getEpoca1->estado=="off")){
+$epoca_usar = 2;
+}
+
+if(($getEpoca1->estado=="off") && ($getEpoca2->estado=="off")){
+    $epoca_usar = 3;
+}
+
+if(($getEpoca1->estado=="off") && ($getEpoca2->estado=="off") && ($getEpoca3->estado=="off")){
+    $epoca_usar = 4;
+}
+
+
 ?>
 @extends('layouts.app')
 @section('content')
@@ -62,7 +93,7 @@ use App\Http\Controllers\ControladorStatic;
                                         Ano: {{$horario->ano_lectivo}} &nbsp;&nbsp; <b>[ {{$numero_estudantes}} ]</b>
                                         <hr/>
                                        <div class="operacoes">
-                                        <a href="/cadernetas/create/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}/1" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="" data-original-title="Inserir Notas">
+                                       <a href="/cadernetas/create/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}/{{$epoca_usar}}" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="" data-original-title="Inserir Notas">
                                             <i class="icofont icofont-edit-alt"></i>
                                         </a>&nbsp;
                                         <a href="/minipautas/show/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}" type="button" class="btn btn-danger btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" data-original-title="Mini Pauta">

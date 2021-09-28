@@ -9,7 +9,7 @@
                     <h5>{{$submenu}}</h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -31,7 +31,7 @@
                         </div>
                         {{Form::close()}}
                     </div>
-                    
+
                     <div class="table-responsive">
                         <br/>
                         <table class="table table-bordered">
@@ -50,7 +50,7 @@
                                 <span class="not_found">Nenhum funcionário cadastrado</span>
                                 @else
                                 @foreach ($getFuncionarios as $funcionarios)
-                                    
+
                                 <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$funcionarios->pessoa->nome}}</td>
@@ -66,7 +66,7 @@
 
                                 @endforeach
                                 @endif
-                             
+
                             </tbody>
                         </table>
                     </div>
@@ -78,13 +78,16 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- hidden-sm-up -->
 
 <!-- botão pesquisar -->
 <div class="btnPesquisar">
+    <div class="btnPesquisarBtn">
+		<a href="/funcionarios/import" class="btn btn-success btnCircular btnPrincipal" title="Importar"><i class="ti-upload"></i></a>
+	</div>&nbsp;
 	<div class="btnPesquisarBtn">
 		<a href="/funcionarios/create" class="btn btn-primary btnCircular btnPrincipal" title="Novo"><i class="ti-plus"></i></a>
 	</div>
@@ -97,7 +100,7 @@
             e.preventDefault();
             var data = {
                 search_text: $(this).val(),
-                _token: "{{ csrf_token() }}" 
+                _token: "{{ csrf_token() }}"
             };
             $.ajax({
                 type: "post",

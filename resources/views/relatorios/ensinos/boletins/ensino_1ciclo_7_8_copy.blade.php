@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\ControladorStatic;
+use App\Http\Controllers\ControladorNotas;
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -11,7 +12,7 @@ use App\Http\Controllers\ControladorStatic;
 <style>
     @page{
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 9px;
+        font-size: 11px;
         margin-left: 10px;
         margin-right: 10px;
         margin-top: 10px;
@@ -54,10 +55,24 @@ use App\Http\Controllers\ControladorStatic;
             color: #fff;
     }
     .tabela{
-        font-size: 9px;
+        font-size: 11px;
     }
 
+    .title{
+        font-weight: bold;
+    }
 
+    .boletim{
+        padding-bottom: 15px;
+        border: 1px #ccc dashed;
+    }
+
+    .data{
+        padding: 4px;
+    }
+    .table-responsive{
+        padding: 4px;
+    }
 </style>
 </head>
 <body>
@@ -79,12 +94,14 @@ use App\Http\Controllers\ControladorStatic;
                 <br/>
 
             </div>
-         </div><br/>
+         </div><br/><br/>
 
          <div class="corpo">
 
              @foreach ($getHistorico as $historico)
+             <div class="boletim">
              <div class="data">
+                 <span class="title">Nº {{$loop->iteration}}</span><br/>
                  <span class="title">Nome completo:</span> {{$historico->estudante->pessoa->nome}}
              </div>
              <div class="table-responsive">
@@ -102,24 +119,49 @@ use App\Http\Controllers\ControladorStatic;
 
                         <tr>
                           @foreach (Session::get('disciplinas') as $disciplina)
-                            <th>MAC</th>
-                            <th>NPP</th>
-                            <th>PT</th>
-                            <th>MT</th>
+                            <th>MAC{{$getEpoca}}</th>
+                            <th>NPP{{$getEpoca}}</th>
+                            <th>PT{{$getEpoca}}</th>
+                            <th>MT{{$getEpoca}}</th>
                           @endforeach
+                        </tr>
+
+                        <tr>
+                        @foreach (Session::get('disciplinas') as $disciplina)
+                        <?php
+                        $trimestrel = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'], $historico->id_estudante, $getEpoca, $getDirector->ano_lectivo);
+                        if($trimestrel->count()==0){
+                    ?>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                    <td>---</td>
+                        <?php }
+                        else{
+                            foreach($trimestrel as $valor1){
+                                $v1_estilo = ControladorNotas::nota_20($valor1->mac);
+                                $v2_estilo = ControladorNotas::nota_20($valor1->npp);
+                                $v3_estilo = ControladorNotas::nota_20($valor1->pt);
+                                $v4_estilo = ControladorNotas::nota_20($valor1->mt);
+                            ?>
+
+                    <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$valor1->mac}} @endif</td>
+                    <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$valor1->npp}} @endif</td>
+                    <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$valor1->pt}} @endif</td>
+                    <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$valor1->mt}} @endif</td>
+                            <?php }}?>
+                                @endforeach
                         </tr>
                     </thead>
                 </table>
              </div>
-             <hr/>
+            </div>
              @endforeach
 
          </div>
          <br/><br/>
 
-         <div class="rodape">
-             rodape
-         </div>
+
     </div>
 
 </body>

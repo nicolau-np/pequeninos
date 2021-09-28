@@ -161,19 +161,9 @@ class FuncionarioController extends Controller
             }
         }
 
-        
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
     /**
      * Show the form for editing the specified resource.
@@ -287,7 +277,7 @@ class FuncionarioController extends Controller
                 return back()->with(['error' => "Já cadasrou este funcionario"]);
             }
         }
- 
+
         if (Pessoa::find($funcionario->id_pessoa)->update($data['pessoa'])) {
             if (Funcionario::find($funcionario->id)->update($data['funcionario'])) {
                 if ($isUser) {
@@ -301,23 +291,16 @@ class FuncionarioController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
+     public function converter_acentos($string) {
 
-    public function converter_acentos($string) {
-    
-        return preg_replace(array("/(á|â|ã|à)/", "/(Á|Â|Ã|À)/", 
+        return preg_replace(array("/(á|â|ã|à)/", "/(Á|Â|Ã|À)/",
                 "/(é|è|ê)/", "/(É|È|Ê)/", "/(í|ì|î)/", "/(Í|Ì|Î)/",
                 "/(ó|ò|õ|ô)/", "/(Ó|Ò|Õ|Ô)/", "/(ú|ù|û)/", "/(Ú|Ù|Û)/",
-                "/(ñ)/", "/(Ñ)/", "/(ç)/", "/(Ç)/"), 
+                "/(ñ)/", "/(Ñ)/", "/(ç)/", "/(Ç)/"),
                 explode(" ","a A e E i I o O u U n N c C"), $string);
+    }
+
+    public function import(){
+        
     }
 }

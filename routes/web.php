@@ -193,7 +193,7 @@ Route::group(['prefix' => 'funcionarios', 'middleware' => "AdminUser"], function
     Route::post('/store', "FuncionarioController@store");
     Route::get('/edit/{id}', "FuncionarioController@edit");
     Route::put('/update/{id}', "FuncionarioController@update");
-    Route::get('/import/')
+    Route::get('/import', "FuncionarioController@import")
 });
 
 Route::group(['prefix' => 'directores', 'middleware' => "auth"], function () {

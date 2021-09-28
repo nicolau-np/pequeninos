@@ -4,18 +4,6 @@ use App\Http\Controllers\ControladorNotas;
 @extends('layouts.app')
 @section('content')
 <style>
-    .positivo{
-        color: #4680ff;
-    }
-    .negativo{
-        color: red;
-    }
-    .nenhum{
-        color: #333;
-    }
-    .tabela{
-        font-size: 12px;
-    }
     table thead{
         background-color: #4680ff;
         color: #fff;
@@ -91,7 +79,7 @@ use App\Http\Controllers\ControladorNotas;
                               </thead>
                               <tbody>
                                 @foreach ($getHistorico as $historico)
-                                <tr>
+                                <tr class="{{$historico->observacao_final}}">
                                     <td>{{$loop->iteration}}</td>
                                     <td>{{$historico->estudante->pessoa->nome}}</td>
                                     <td>{{$historico->estudante->pessoa->genero}}</td>

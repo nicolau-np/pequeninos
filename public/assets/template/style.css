@@ -93,3 +93,20 @@ fieldset legend{
     color:#fff;
     font-weight: bold;
 }
+
+
+.positivo{
+    color: #4680ff;
+}
+.negativo{
+    color: #FC6180;
+}
+.nenhum{
+    color: #333;
+}
+.neutro{
+    color: #FFB64D;
+}
+.tabela{
+    font-size: 12px;
+}

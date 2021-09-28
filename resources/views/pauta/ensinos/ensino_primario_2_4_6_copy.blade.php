@@ -13,15 +13,7 @@ if(!$observacao_geral){
 }
 ?>
 <style>
-    .positivo{
-        color: #4680ff;
-    }
-    .negativo{
-        color: red;
-    }
-    .nenhum{
-        color: #333;
-    }
+    
     .tabela{
         font-size: 12px;
     }

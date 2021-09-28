@@ -1,3 +1,6 @@
+<?php
+use App\Http\Controllers\ControladorStatic;
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -64,7 +67,7 @@
             @include('include.header_docs')
         </div>
         <div class="titulo">
-            <p style="text-align: center; font-weight:bold;">MAPA DE AVALIAÇÃO ANUAL</p>
+        <p style="text-align: center; font-weight:bold;">BOLETIM DE NOTAS {{$getEpoca}}º TRIMESTRE</p>
          </div>
         <div class="mini-cabecalho">
             <div class="ano_curso">
@@ -77,9 +80,43 @@
 
             </div>
          </div><br/>
+
          <div class="corpo">
-             corpo
-         </div><br/><br/>
+
+             @foreach ($getHistorico as $historico)
+             <div class="data">
+                 <span class="title">Nome completo:</span> {{$historico->estudante->pessoa->nome}}
+             </div>
+             <div class="table-responsive">
+                 <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
+                    <thead>
+
+                        <tr>
+                            @foreach (Session::get('disciplinas') as $disciplina)
+                            <?php
+                            $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
+                            ?>
+                           <th colspan="4">{{$getDisciplina->disciplina}}</th>
+                           @endforeach
+                        </tr>
+
+                        <tr>
+                          @foreach (Session::get('disciplinas') as $disciplina)
+                            <th>MAC</th>
+                            <th>NPP</th>
+                            <th>PT</th>
+                            <th>MT</th>
+                          @endforeach
+                        </tr>
+                    </thead>
+                </table>
+             </div>
+             <hr/>
+             @endforeach
+
+         </div>
+         <br/><br/>
+
          <div class="rodape">
              rodape
          </div>

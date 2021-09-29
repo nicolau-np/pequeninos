@@ -86,7 +86,7 @@
 <!-- botão pesquisar -->
 <div class="btnPesquisar">
     <div class="btnPesquisarBtn">
-		<a href="/funcionarios/import" class="btn btn-success btnCircular btnPrincipal" title="Importar"><i class="ti-upload"></i></a>
+		<a href="/funcionarios/import" class="btn btn-warning btnCircular btnPrincipal" title="Importar"><i class="ti-upload"></i></a>
 	</div>&nbsp;
 	<div class="btnPesquisarBtn">
 		<a href="/funcionarios/create" class="btn btn-primary btnCircular btnPrincipal" title="Novo"><i class="ti-plus"></i></a>

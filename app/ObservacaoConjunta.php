@@ -15,14 +15,14 @@ class ObservacaoConjunta extends Model
     ];
 
     public function curso(){
-
+        return $this->belongsTo(Curso::class, 'id_curso', 'id');
     }
 
     public function classe(){
-
+        return $this->belongsTo(Classe::class, 'id_classe', 'id');
     }
 
-    public function observacao_conjunta(){
-        
+    public function observacao_conjunta_regra(){
+        return $this->hasMany(ObservacaoConjuntaRegra::class, 'id_observacao_conjunta', 'id');
     }
 }

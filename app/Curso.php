@@ -32,4 +32,8 @@ class Curso extends Model
     public function observacao_unica(){
         return $this->hasMany(ObservacaoUnica::class, 'id_curso', 'id');
     }
+
+    public function observacao_conjunta(){
+        return $this->hasMany(ObservacaoConjunta::class, 'id_curso', 'id');
+    }
 }

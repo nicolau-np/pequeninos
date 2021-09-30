@@ -54,8 +54,8 @@ class PessoaImport implements
 
             if (!Pessoa::where(['nome' => $row['nome']])->first()) {
                 $data['pessoa']['nome'] = $row['nome'];
-                $data['pessoa']['data_nascimento'] = $row['data_nascimento'];
                 $data['pessoa']['genero'] = $row['genero'];
+                $data['pessoa']['data_nascimento'] = $row['data_nascimento'];
                 $pessoa = Pessoa::create($data['pessoa']);
 
                 $data['estudante']['id_pessoa'] = $pessoa->id;

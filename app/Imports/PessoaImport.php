@@ -31,7 +31,7 @@ class PessoaImport implements
         $data['pessoa'] = [
             'nome' => null,
             'genero' => null,
-            'data_nascimento' => date('Y-m-d'),
+            'data_nascimento' => null,
             'id_municipio' => 1,
         ];
 
@@ -54,6 +54,7 @@ class PessoaImport implements
 
             if (!Pessoa::where(['nome' => $row['nome']])->first()) {
                 $data['pessoa']['nome'] = $row['nome'];
+                $data['pessoa']['data_nascimento'] = $row['data_nascimento'];
                 $data['pessoa']['genero'] = $row['genero'];
                 $pessoa = Pessoa::create($data['pessoa']);
 

@@ -90,20 +90,32 @@
                                 </div>
                     </div>
 
+
                     <div class="col-md-4">
-                       <fieldset>
-                            <legend style="width:90%;"><b><i class="ti-settings"></i> Operações</b></legend>
-
-                            <div class="operacoes">
-                            <a href="/estudantes/declaracao/{{$getHistoricoEstudante->id_estudante}}/{{$getHistoricoEstudante->ano_lectivo}}" class="btn btn-primary">Declaração</a><hr/>
-                            <a href="/estudantes/guiatransferencia/{{$getHistoricoEstudante->id_estudante}}/{{$getHistoricoEstudante->ano_lectivo}}" class="btn btn-warning">Transferência</a><hr/>
-                            <a href="/estudantes/desistencia/{{$getHistoricoEstudante->id_estudante}}/{{$getHistoricoEstudante->ano_lectivo}}" class="btn btn-danger">Desistência</a><hr/>
-                            <a href="/estudantes/termo/{{$getHistoricoEstudante->id_estudante}}/{{$getHistoricoEstudante->ano_lectivo}}" class="btn btn-info">Termo</a><hr/>
-                            <a href="/estudantes/extrato/{{$getHistoricoEstudante->id_estudante}}/{{$getHistoricoEstudante->ano_lectivo}}" class="btn btn-success">Extrato de Pagamentos</a><hr/>
+                        <div class="row">
+                            <div class="col-md-12">
+                            <img src="{{$getHistoricoEstudante->estudante->pessoa->foto}}" alt="" style="width:60px; 70px;">
                             </div>
+                            <div class="col-md-12">
 
-                        </fieldset>
+                                <fieldset>
+                                    <legend style="width:90%;"><b><i class="ti-settings"></i> Operações</b></legend>
+
+                                    <div class="operacoes">
+                                    <a href="/estudantes/declaracao/{{$getHistoricoEstudante->id_estudante}}/{{$getHistoricoEstudante->ano_lectivo}}" class="btn btn-primary">Declaração</a><hr/>
+                                    <a href="/estudantes/guiatransferencia/{{$getHistoricoEstudante->id_estudante}}/{{$getHistoricoEstudante->ano_lectivo}}" class="btn btn-warning">Transferência</a><hr/>
+                                    <a href="/estudantes/desistencia/{{$getHistoricoEstudante->id_estudante}}/{{$getHistoricoEstudante->ano_lectivo}}" class="btn btn-danger">Desistência</a><hr/>
+                                    <a href="/estudantes/termo/{{$getHistoricoEstudante->id_estudante}}/{{$getHistoricoEstudante->ano_lectivo}}" class="btn btn-info">Termo</a><hr/>
+                                    <a href="/estudantes/extrato/{{$getHistoricoEstudante->id_estudante}}/{{$getHistoricoEstudante->ano_lectivo}}" class="btn btn-success">Extrato de Pagamentos</a><hr/>
+                                    </div>
+
+                                </fieldset>
+
+                            </div>
+                        </div>
                     </div>
+
+
                    </div>
                 </div>
             </div>

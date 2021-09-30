@@ -11,6 +11,7 @@ use App\HistoricEstudante;
 use App\Pessoa;
 use App\Provincia;
 use App\Transferencia;
+use App\Turma;
 use Illuminate\Http\Request;
 
 use function PHPSTORM_META\map;
@@ -83,17 +84,31 @@ class EstudanteController extends Controller
             'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
         ]);
 
+        $ano_lectivo = AnoLectivo::where('ano_lectivo', $request->ano_lectivo)->first();
+        if (!$ano_lectivo) {
+            return back()->with(['error' => "Não encontrou ano lectivo"]);
+        }
+
+        $turma = Turma::find($request->turma);
+        if(!$turma){
+            return back()->with(['error' => "Nao encontrou turma"]);
+        }
+        $nome_pasta = $turma->turma."-".$request->ano_lectivo;
+
         if ($request->bilhete != "") {
             $request->validate([
                 'bilhete' => ['required', 'string', 'unique:pessoas,bilhete']
             ]);
         }
 
-
-        $ano_lectivo = AnoLectivo::where('ano_lectivo', $request->ano_lectivo)->first();
-        if (!$ano_lectivo) {
-            return back()->with(['error' => "Não encontrou ano lectivo"]);
+        $path = null;
+        if ($request->foto) {
+            $request->validate([
+                'foto' => ['required', 'mimes:jpg,png', 'max:5000']
+            ]);
+            $path = $request->foto->store('fotos_estudantes/'.$nome_pasta);
         }
+
 
         $data['pessoa'] = [
             'id_municipio' => $request->municipio,
@@ -109,7 +124,7 @@ class EstudanteController extends Controller
             'pai' => $request->pai,
             'mae' => $request->mae,
             'comuna' => $request->comuna,
-            'foto' => null,
+            'foto' => $path,
         ];
 
         $data['estudante'] = [

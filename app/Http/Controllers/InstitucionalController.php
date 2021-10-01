@@ -10,6 +10,7 @@ use App\Ensino;
 use App\Grade;
 use App\Hora;
 use App\ObservacaoConjunta;
+use App\ObservacaoConjuntaRegra;
 use App\ObservacaoGeral;
 use App\ObservacaoUnica;
 use App\Sala;
@@ -952,22 +953,24 @@ class InstitucionalController extends Controller
             'estado'=>"on",
         ];
 
-        if(ObservacaoConjunta::where(['id_curso'=> $request->curso, 'id_classe' => $request->classe])){
+        if(ObservacaoConjunta::where(['id_curso'=> $request->curso, 'id_classe' => $request->classe])->first()){
             return back()->with(['error' => "Já cadastou"]);
         }
         $observacao =ObservacaoConjunta::create($data['observacao']);
         if($observacao){
+            $regras = false;
             $data['regras']['id_observacao_conjunta']= $observacao->id;
             foreach ($request->disciplinas as $disciplinas) {
                 $data['regras']['id_disciplina']= $disciplinas;
-                if (!ObservacaoGeral::where($data['create'])->first()) {
-                    if (!ObservacaoGeral::where($data['where'])->first()) {
-                        $observacao = ObservacaoGeral::create($data['create']);
-                    }
+                if (!ObservacaoConjuntaRegra::where($data['regras'])->first()) {
+                        $regras = ObservacaoConjuntaRegra::create($data['regras']);
                 }
 
             }
-            return back()->with(['success' => "Feito com sucesso"]);
+            if($regras){
+                return back()->with(['success' => "Feito com sucesso"]);
+            }
+
         }
 
     }

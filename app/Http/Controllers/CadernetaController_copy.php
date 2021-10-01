@@ -141,14 +141,14 @@ class CadernetaController_copy extends Controller
                 $query->where('id_turma', $data2['id_turmaCAD']);
                 $query->where('ano_lectivo', $data2['ano_lectivoCAD']);
             })->where(['epoca' => $data2['epocaCAD'], 'id_disciplina' => $data2['id_disciplinaCAD']])
-                ->get()->sortBy('estudante.pessoa.nome');
+                ->get()->sortBy('estudante.numero');
         } else {
             //pegando dados finais para exibir na view
             $global = Finals::whereHas('estudante', function ($query) use ($data2) {
                 $query->where('id_turma', $data2['id_turmaCAD']);
                 $query->where('ano_lectivo', $data2['ano_lectivoCAD']);
             })->where(['id_disciplina' => $data2['id_disciplinaCAD']])
-                ->get()->sortBy('estudante.pessoa.nome');
+                ->get()->sortBy('estudante.numero');
         }
 
         //pegando todos os valores dos bloqueios dos trimestres

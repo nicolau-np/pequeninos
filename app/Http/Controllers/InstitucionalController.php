@@ -903,7 +903,7 @@ class InstitucionalController extends Controller
     }
 
     public function conjunta_list(){
-
+        
     }
 
     public function conjunta_create(){
@@ -919,6 +919,6 @@ class InstitucionalController extends Controller
     }
 
     public function conjunta_update(Request $request, $id_observacao){
-        
+
     }
 }

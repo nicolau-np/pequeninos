@@ -193,7 +193,7 @@ Route::group(['prefix' => 'funcionarios', 'middleware' => "AdminUser"], function
     Route::post('/import/store', "FuncionarioController@store_import");
 });
 
-Route::group(['prefix' => 'directores', 'middleware' => "auth"], function () {
+Route::group(['prefix' => 'directores', 'middleware' => "AdminUser"], function () {
     Route::get('/', "DirectorTurmaController@index");
     Route::get('/create', "DirectorTurmaController@create");
     Route::post('/store', "DirectorTurmaController@store");
@@ -201,7 +201,7 @@ Route::group(['prefix' => 'directores', 'middleware' => "auth"], function () {
     Route::put('/update/{id}', "DirectorTurmaController@update");
 });
 
-Route::group(['prefix' => "horarios", 'middleware' => "auth"], function () {
+Route::group(['prefix' => "horarios", 'middleware' => "AdminUser"], function () {
     Route::get('/create/{id_funcionario}', "HorarioController@create");
     Route::put('/store/{id_funcionario}', "HorarioController@store");
 });

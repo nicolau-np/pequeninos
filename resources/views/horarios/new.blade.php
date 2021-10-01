@@ -9,7 +9,7 @@
                     <h5>{{$submenu}}</h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -38,7 +38,7 @@
                                 <div class="erro">
                                     @if($errors->has('curso'))
                                     <div class="text-danger">{{$errors->first('curso')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
@@ -50,7 +50,7 @@
                                 <div class="erro">
                                     @if($errors->has('classe'))
                                     <div class="text-danger">{{$errors->first('classe')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
@@ -62,7 +62,7 @@
                                 <div class="erro">
                                     @if($errors->has('disciplina'))
                                     <div class="text-danger">{{$errors->first('disciplina')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
@@ -74,64 +74,22 @@
                                 <div class="erro">
                                     @if($errors->has('turma'))
                                     <div class="text-danger">{{$errors->first('turma')}}</div>
-                                    @endif 
-                                </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    {{Form::label('hora', "Hora")}} <span class="text-danger">*</span>
-                                    <span class="load_horas">
-                                    {{Form::select('hora', [], null, ['class'=>"form-control", 'placeholder'=>"Hora"])}}
-                                </span>
-                                <div class="erro">
-                                    @if($errors->has('hora'))
-                                    <div class="text-danger">{{$errors->first('hora')}}</div>
-                                    @endif 
-                                </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    {{Form::label('sala', "Sala")}} <span class="text-danger">*</span>
-                                    
-                                    {{Form::select('sala', $getSalas, null, ['class'=>"form-control", 'placeholder'=>"Sala"])}}
-                                
-                                <div class="erro">
-                                    @if($errors->has('sala'))
-                                    <div class="text-danger">{{$errors->first('sala')}}</div>
-                                    @endif 
-                                </div>
-                                </div>
-
-                                <div class="col-md-3">
-                                    {{Form::label('semana', "Semana")}} <span class="text-danger">*</span>
-                                    
-                                    {{Form::select('semana', [
-                                        'Segunda'=>"Segunda",
-                                        'Terça'=>"Terça",
-                                        'Quarta'=>"Quarta",
-                                        'Quinta'=>"Quinta",
-                                        'Sexta'=>"Sexta"
-                                    ], null, ['class'=>"form-control", 'placeholder'=>"Semana"])}}
-                                
-                                <div class="erro">
-                                    @if($errors->has('semana'))
-                                    <div class="text-danger">{{$errors->first('semana')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     {{Form::label('ano_lectivo', "Ano Lectivo")}} <span class="text-danger">*</span>
                                     {{Form::select('ano_lectivo', $getAnoLectivo, null, ['class'=>"form-control", 'placeholder'=>"Ano Lectivo"])}}
-                                
+
                                 <div class="erro">
                                     @if($errors->has('ano_lectivo'))
                                     <div class="text-danger">{{$errors->first('ano_lectivo')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
                             </div>
-                        
+
                         </fieldset>
                         <br/>
                             <div class="row">
@@ -140,9 +98,9 @@
                                  </div>
 
                             </div>
-                        
-                       
-                        
+
+
+
                         {{Form::close()}}
                    </div>
                    <hr/>
@@ -153,10 +111,7 @@
                         <thead>
                             <tr>
                                 <th>Disciplina</th>
-                                <th>Sala</th>
                                 <th>Turma</th>
-                                <th>Semana</th>
-                                <th>Horas</th>
                                 <th>Estado</th>
                                 <th>Operações</th>
                             </tr>
@@ -165,21 +120,18 @@
                             @foreach ($getHorarios as $horarios)
                              <tr>
                              <td>{{$horarios->disciplina->disciplina}}</td>
-                             <td>{{$horarios->sala->sala}}</td>
                              <td>{{$horarios->turma->turma}}</td>
-                             <td>{{$horarios->semana}}</td>
-                             <td>{{$horarios->hora->hora_entrada}} - {{$horarios->hora->hora_saida}}</td>
                              <td>{{$horarios->estado}}</td>
                              <td>
                                 <a href="http://" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
                              </td>
-                            </tr>   
-                            
+                            </tr>
+
                             @endforeach
                         </tbody>
-                   </table>   
+                   </table>
                     </fieldset>
-                     
+
                    </div>
                    <div class="pagination">
                     {{$getHorarios->links()}}
@@ -188,7 +140,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- hidden-sm-up -->
@@ -220,7 +172,7 @@
                 }
             });
             }
-         
+
         });
 
     });

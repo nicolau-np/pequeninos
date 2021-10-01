@@ -17,11 +17,7 @@ class HorarioController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
-    
+
     public function index()
     {
         //
@@ -41,7 +37,7 @@ class HorarioController extends Controller
         $cursos = Curso::pluck('curso', 'id');
         $ano_lectivos = AnoLectivo::pluck('ano_lectivo', 'id');
         $horarios = Horario::orderBy('id', 'desc')->where('id_funcionario', $id_funcionario)->paginate('8');
-        $salas = Sala::pluck('sala', 'id');
+
         $data = [
             'title' => "Horários",
             'type' => "funcionarios",
@@ -51,7 +47,6 @@ class HorarioController extends Controller
             'getAnoLectivo' => $ano_lectivos,
             'getFuncionario' => $funcionario,
             'getHorarios'=>$horarios,
-            'getSalas'=>$salas,
         ];
         return view('horarios.new', $data);
     }
@@ -73,18 +68,15 @@ class HorarioController extends Controller
         if (!$ano_lectivo) {
             return back()->with(['error' => "Não encontrou ano lectivo"]);
         }
-        
+
         $request->validate([
-            'curso'=>['required', 'Integer'],
-            'classe'=>['required', 'Integer'],
-            'disciplina'=>['required', 'Integer'],
-            'sala'=>['required', 'Integer'],
-            'hora'=>['required', 'Integer'],
-            'turma'=>['required', 'Integer'],
-            'semana'=>['required', 'string'],
-            'ano_lectivo'=>['required', 'Integer'], 
+            'curso'=>['required', 'integer'],
+            'classe'=>['required', 'integer'],
+            'disciplina'=>['required', 'integer'],
+            'turma'=>['required', 'integer'],
+            'ano_lectivo'=>['required', 'integer'],
         ]);
-        
+
         $data ['store'] = [
         'id_funcionario'=>$id_funcionario,
         'id_turma'=>$request->turma,
@@ -94,7 +86,7 @@ class HorarioController extends Controller
         'semana'=>$request->semana,
         'estado'=>null,
         'ano_lectivo'=>$ano_lectivo->ano_lectivo,
-       
+
         ];
         $data['where1']=[
             'id_funcionario'=>$id_funcionario,
@@ -103,27 +95,27 @@ class HorarioController extends Controller
             'id_sala'=>$request->sala,
             'id_hora'=>$request->hora,
             'semana'=>$request->semana,
-            'ano_lectivo'=>$ano_lectivo->ano_lectivo,  
+            'ano_lectivo'=>$ano_lectivo->ano_lectivo,
         ];
 
         $data['where2']=[
             'id_turma'=>$request->turma,
             'semana'=>$request->semana,
             'id_hora'=>$request->hora,
-            'ano_lectivo'=>$ano_lectivo->ano_lectivo,  
+            'ano_lectivo'=>$ano_lectivo->ano_lectivo,
         ];
 
         $data['where3']=[
             'id_funcionario'=>$id_funcionario,
             'semana'=>$request->semana,
             'id_hora'=>$request->hora,
-            'ano_lectivo'=>$ano_lectivo->ano_lectivo,  
+            'ano_lectivo'=>$ano_lectivo->ano_lectivo,
         ];
 
         $data['where4']=[
             'id_disciplina'=>$request->disciplina,
             'id_turma'=>$request->turma,
-            'ano_lectivo'=>$ano_lectivo->ano_lectivo,  
+            'ano_lectivo'=>$ano_lectivo->ano_lectivo,
         ];
 
         //existencia de horario
@@ -133,12 +125,12 @@ class HorarioController extends Controller
 
         //disponibilidade da turma
         if(Horario::where($data['where2'])->first()){
-            return back()->with(['error'=>"Turma indisponível nesta hora"]); 
+            return back()->with(['error'=>"Turma indisponível nesta hora"]);
         }
 
         //disponibilidade do prof
         if(Horario::where($data['where3'])->first()){
-            return back()->with(['error'=>"Professor indisponível nesta hora"]); 
+            return back()->with(['error'=>"Professor indisponível nesta hora"]);
         }
 
         $horario = Horario::where($data['where4'])->first();
@@ -148,7 +140,7 @@ class HorarioController extends Controller
             if($horario->id_funcionario!=$id_funcionario){
                 return back()->with(['error'=>"Para esta turma e nesta disciplina já exite professor"]);
             }else{
-                $data['store']['estado'] = "nao"; 
+                $data['store']['estado'] = "nao";
             }
         }
 

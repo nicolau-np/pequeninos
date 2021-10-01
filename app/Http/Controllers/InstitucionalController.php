@@ -21,10 +21,6 @@ use Svg\Tag\Rect;
 
 class InstitucionalController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
 
     public function curso_list()
     {

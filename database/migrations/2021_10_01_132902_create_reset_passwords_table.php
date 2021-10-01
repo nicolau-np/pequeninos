@@ -17,7 +17,7 @@ class CreateResetPasswordsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('id_user')->unsigned()->index();
             $table->text('hash_code')->nullable();
-            $table->bigInteger('verify_code');
+            $table->string('verify_code');
             $table->string('estado');
             $table->timestamps();
         });

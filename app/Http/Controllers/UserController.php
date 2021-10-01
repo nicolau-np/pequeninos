@@ -232,7 +232,7 @@ class UserController extends Controller
     }
 
     $request->validate([
-        'code'=>['required', 'integer', 'min:1'],
+        'code'=>['required', 'numeric', 'min:1'],
     ]);
 
     //verificar codigo incripetado com email

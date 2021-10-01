@@ -39,33 +39,49 @@
                         <!-- Tab panes -->
                         <div class="tab-content card-block">
                             <div class="tab-pane active" id="home8" role="tabpanel">
-                                @if(session('error'))
-                                <div class="alert alert-danger">{{session('error')}}</div>
-                                @endif
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        @if(session('error'))
+                                        <div class="alert alert-danger">{{session('error')}}</div>
+                                        @endif
 
-                                @if(session('success'))
-                                <div class="alert alert-success">{{session('success')}}</div>
-                                @endif
-                               <div class="form">
-                                   {{Form::open([])}}
-                                   @csrf
-                                   <fieldset>
-                                   <legend><i class="ti-list"></i> Dados pessoais</legend>
-                                   <div class="row">
+                                        @if(session('success'))
+                                        <div class="alert alert-success">{{session('success')}}</div>
+                                        @endif
+                                    </div>
+                                    <div class="col-md-8">
 
-                                       <div class="col-md-4">
-                                           {{Form::label('nome', "Nome completo")}} <span class="text-danger">*</span>
-                                           {{Form::text('nome', null, ['class'=>"form-control", 'placeholder'=>"Nome completo"])}}
-                                           <div class="erro">
-                                               @if($errors->has('nome'))
-                                               <div class="text-danger">{{$errors->first('nome')}}</div>
-                                               @endif
-                                           </div>
-                                       </div>
-                                   </div>
-                                   </fieldset>
-                                   {{Form::close()}}
-                               </div>
+                                        <div class="form">
+                                            {{Form::open([])}}
+                                            @csrf
+                                            <fieldset>
+                                            <legend><i class="ti-list"></i> Palavra Passe</legend>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    {{Form::label('nome', "Nome completo")}} <span class="text-danger">*</span>
+                                                    {{Form::text('nome', null, ['class'=>"form-control", 'placeholder'=>"Nome completo"])}}
+                                                    <div class="erro">
+                                                        @if($errors->has('nome'))
+                                                        <div class="text-danger">{{$errors->first('nome')}}</div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            </fieldset>
+                                            {{Form::close()}}
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <fieldset>
+                                            <legend>Perfil</legend>
+                                            <span class="title">Nome</span>: {{$getPessoa->nome}}<br/>
+                                            <span class="title">Data de Nascimento</span>: {{date('d-m-Y', strtotime($getPessoa->data_nascimento))}}<br/>
+                                            <span class="title">Nº B.I.</span>: {{$getPessoa->bilhete}}<br/>
+                                            <span class="title">Telf.</span>: {{$getPessoa->telefone}}<br/>
+                                        </fieldset>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>

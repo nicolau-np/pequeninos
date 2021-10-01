@@ -264,10 +264,10 @@ $percent_negativasf = [
                              <?php }
                              else{
                                  foreach($trimestre1 as $valor1){
-                                     $v1_estilo = ControladorNotas::nota_20($valor1->mac);
-                                     $v2_estilo = ControladorNotas::nota_20($valor1->npp);
-                                     $v3_estilo = ControladorNotas::nota_20($valor1->pt);
-                                     $v4_estilo = ControladorNotas::nota_20($valor1->mt);
+                                     $v1_estilo = ControladorNotas::nota_10($valor1->mac);
+                                     $v2_estilo = ControladorNotas::nota_10($valor1->npp);
+                                     $v3_estilo = ControladorNotas::nota_10($valor1->pt);
+                                     $v4_estilo = ControladorNotas::nota_10($valor1->mt);
                                  ?>
 
                          <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$valor1->mac}} @endif</td>
@@ -289,10 +289,10 @@ $percent_negativasf = [
                              <?php }
                              else{
                                  foreach($trimestre2 as $valor2){
-                                     $v1_estilo = ControladorNotas::nota_20($valor2->mac);
-                                     $v2_estilo = ControladorNotas::nota_20($valor2->npp);
-                                     $v3_estilo = ControladorNotas::nota_20($valor2->pt);
-                                     $v4_estilo = ControladorNotas::nota_20($valor2->mt);
+                                     $v1_estilo = ControladorNotas::nota_10($valor2->mac);
+                                     $v2_estilo = ControladorNotas::nota_10($valor2->npp);
+                                     $v3_estilo = ControladorNotas::nota_10($valor2->pt);
+                                     $v4_estilo = ControladorNotas::nota_10($valor2->mt);
                                  ?>
 
                          <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{$valor2->mac}} @endif</td>
@@ -314,10 +314,10 @@ $percent_negativasf = [
                           <?php }
                           else{
                               foreach($trimestre3 as $valor3){
-                                  $v1_estilo = ControladorNotas::nota_20($valor3->mac);
-                                  $v2_estilo = ControladorNotas::nota_20($valor3->npp);
-                                  $v3_estilo = ControladorNotas::nota_20($valor3->pt);
-                                  $v4_estilo = ControladorNotas::nota_20($valor3->mt);
+                                  $v1_estilo = ControladorNotas::nota_10($valor3->mac);
+                                  $v2_estilo = ControladorNotas::nota_10($valor3->npp);
+                                  $v3_estilo = ControladorNotas::nota_10($valor3->pt);
+                                  $v4_estilo = ControladorNotas::nota_10($valor3->mt);
                               ?>
 
                       <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$valor3->mac}} @endif</td>
@@ -338,9 +338,9 @@ $percent_negativasf = [
                      <?php }
                          else{
                              foreach ($final as $valorf){
-                             $v1_estilo = ControladorNotas::nota_20($valorf->mfd);
-                             $v2_estilo = ControladorNotas::nota_20($valorf->npe);
-                             $v3_estilo = ControladorNotas::nota_20($valorf->mf);
+                             $v1_estilo = ControladorNotas::nota_10($valorf->mfd);
+                             $v2_estilo = ControladorNotas::nota_10($valorf->npe);
+                             $v3_estilo = ControladorNotas::nota_10($valorf->mf);
                      ?>
                          <td class="{{$v1_estilo}}">@if($valorf->mfd==null) --- @else {{$valorf->mfd}} @endif</td>
                          <td class="{{$v2_estilo}}">@if($valorf->npe==null) --- @else {{$valorf->npe}} @endif</td>
@@ -1019,14 +1019,14 @@ $percent_negativasf = [
                               <?php }
                               else{
                                   foreach($trimestre1 as $valor1){
-                                      $v01_estilo = ControladorNotas::nota_20($valor1->av1);
-                                      $v02_estilo = ControladorNotas::nota_20($valor1->av2);
-                                      $v03_estilo = ControladorNotas::nota_20($valor1->av3);
+                                      $v01_estilo = ControladorNotas::nota_10($valor1->av1);
+                                      $v02_estilo = ControladorNotas::nota_10($valor1->av2);
+                                      $v03_estilo = ControladorNotas::nota_10($valor1->av3);
 
-                                      $v1_estilo = ControladorNotas::nota_20($valor1->mac);
-                                      $v2_estilo = ControladorNotas::nota_20($valor1->npp);
-                                      $v3_estilo = ControladorNotas::nota_20($valor1->pt);
-                                      $v4_estilo = ControladorNotas::nota_20($valor1->mt);
+                                      $v1_estilo = ControladorNotas::nota_10($valor1->mac);
+                                      $v2_estilo = ControladorNotas::nota_10($valor1->npp);
+                                      $v3_estilo = ControladorNotas::nota_10($valor1->pt);
+                                      $v4_estilo = ControladorNotas::nota_10($valor1->mt);
                                   ?>
                           <td class="{{$v01_estilo}}">@if($valor1->av1==null) --- @else {{$valor1->av1}} @endif</td>
                           <td class="{{$v02_estilo}}">@if($valor1->av2==null) --- @else {{$valor1->av2}} @endif</td>
@@ -1118,14 +1118,14 @@ $percent_negativasf = [
                               <?php }
                               else{
                                   foreach($trimestre2 as $valor2){
-                                      $v01_estilo = ControladorNotas::nota_20($valor2->av1);
-                                      $v02_estilo = ControladorNotas::nota_20($valor2->av2);
-                                      $v03_estilo = ControladorNotas::nota_20($valor2->av3);
+                                      $v01_estilo = ControladorNotas::nota_10($valor2->av1);
+                                      $v02_estilo = ControladorNotas::nota_10($valor2->av2);
+                                      $v03_estilo = ControladorNotas::nota_10($valor2->av3);
 
-                                      $v1_estilo = ControladorNotas::nota_20($valor2->mac);
-                                      $v2_estilo = ControladorNotas::nota_20($valor2->npp);
-                                      $v3_estilo = ControladorNotas::nota_20($valor2->pt);
-                                      $v4_estilo = ControladorNotas::nota_20($valor2->mt);
+                                      $v1_estilo = ControladorNotas::nota_10($valor2->mac);
+                                      $v2_estilo = ControladorNotas::nota_10($valor2->npp);
+                                      $v3_estilo = ControladorNotas::nota_10($valor2->pt);
+                                      $v4_estilo = ControladorNotas::nota_10($valor2->mt);
                                   ?>
                           <td class="{{$v01_estilo}}">@if($valor2->av1==null) --- @else {{$valor2->av1}} @endif</td>
                           <td class="{{$v02_estilo}}">@if($valor2->av2==null) --- @else {{$valor2->av2}} @endif</td>
@@ -1218,14 +1218,14 @@ $percent_negativasf = [
                           <?php }
                           else{
                               foreach($trimestre3 as $valor3){
-                                  $v01_estilo = ControladorNotas::nota_20($valor3->av1);
-                                  $v02_estilo = ControladorNotas::nota_20($valor3->av2);
-                                  $v03_estilo = ControladorNotas::nota_20($valor3->av3);
+                                  $v01_estilo = ControladorNotas::nota_10($valor3->av1);
+                                  $v02_estilo = ControladorNotas::nota_10($valor3->av2);
+                                  $v03_estilo = ControladorNotas::nota_10($valor3->av3);
 
-                                  $v1_estilo = ControladorNotas::nota_20($valor3->mac);
-                                  $v2_estilo = ControladorNotas::nota_20($valor3->npp);
-                                  $v3_estilo = ControladorNotas::nota_20($valor3->pt);
-                                  $v4_estilo = ControladorNotas::nota_20($valor3->mt);
+                                  $v1_estilo = ControladorNotas::nota_10($valor3->mac);
+                                  $v2_estilo = ControladorNotas::nota_10($valor3->npp);
+                                  $v3_estilo = ControladorNotas::nota_10($valor3->pt);
+                                  $v4_estilo = ControladorNotas::nota_10($valor3->mt);
                               ?>
                       <td class="{{$v01_estilo}}">@if($valor3->av1==null) --- @else {{$valor3->av1}} @endif</td>
                       <td class="{{$v02_estilo}}">@if($valor3->av2==null) --- @else {{$valor3->av2}} @endif</td>

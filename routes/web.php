@@ -30,6 +30,7 @@ Route::group(['prefix' =>"user", 'middleware'=>"auth"], function(){
 Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/getClasses', "AjaxController@getClasses")->name('getClasses');
     Route::post('/getClasses2', "AjaxController@getClasses2")->name('getClasses2');
+    Route::post('/getClasses3', "AjaxController@getClasses3")->name('getClasses3');
     Route::post('/getMunicipios', "AjaxController@getMunicipios")->name('getMunicipios');
     Route::post('/getTurmas', "AjaxController@getTurmas")->name('getTurmas');
     Route::post('/getEncarregados', "AjaxController@getEncarregados")->name('getEncarregados');
@@ -42,6 +43,7 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/searchFuncionarios', "AjaxController@searchFuncionarios")->name('searchFuncionarios');
     Route::post('/searchEncarregados', "AjaxController@searchEncarregados")->name('searchEncarregados');
     Route::post('/getDisciplinasCad', "AjaxController@getDisciplinasCad")->name('getDisciplinasCad');
+    Route::post('/getDisciplinasCad2', "AjaxController@getDisciplinasCad2")->name('getDisciplinasCad2');
     Route::post('/getHoras', "AjaxController@getHoras")->name('getHoras');
     Route::post('/getFuncionarios', "AjaxController@getFuncionarios")->name('getFuncionarios');
 

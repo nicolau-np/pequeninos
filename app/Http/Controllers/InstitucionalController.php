@@ -916,7 +916,15 @@ class InstitucionalController extends Controller
     }
 
     public function conjunta_create(){
-
+        $cursos = Curso::pluck('curso', 'id');
+        $data = [
+            'title' => "Observações",
+            'type' => "institucional",
+            'menu' => "Observações",
+            'submenu' => "Conjunta",
+            'getCursos' => $cursos,
+        ];
+        return view('institucional.observacaoes.observacao_conjunta.new', $data);
     }
 
     public function conjunta_store(Request $request){

@@ -40,8 +40,7 @@
                                     <th>#</th>
                                     <th>Curso</th>
                                     <th>Classe</th>
-                                    <th>Disciplina</th>
-                                    <th>Q. Negativa</th>
+                                    <th>Estado</th>
                                     <th>Operações</th>
                                 </tr>
                             </thead>
@@ -54,10 +53,10 @@
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$observacoes->curso->curso}}</td>
                                         <td>{{$observacoes->classe->classe}}</td>
-                                        <td>{{$observacoes->disciplina->disciplina}}</td>
-                                        <td>{{$observacoes->quantidade_negativas}}</td>
+                                        <td>{{$observacoes->estado}}</td>
                                         <td>
-                                            <a href="/institucional/observacoes/especifica/edit/{{$observacoes->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
+                                            <a href="/institucional/observacoes/conjunta/regras/{{$observacoes->id}}" class="btn btn-success btn-sm"><i class="ti-file-alt"></i> Regras</a>
+                                            <a href="/institucional/observacoes/conjunta/edit/{{$observacoes->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
                                             <a href="#" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
                                         </td>
                                     </tr>
@@ -82,7 +81,7 @@
 <!-- botão pesquisar -->
 <div class="btnPesquisar">
 	<div class="btnPesquisarBtn">
-		<a href="/institucional/observacoes/especifica/create" class="btn btn-primary btnCircular btnPrincipal" title="Novo"><i class="ti-plus"></i></a>
+		<a href="/institucional/observacoes/conjunta/create" class="btn btn-primary btnCircular btnPrincipal" title="Novo"><i class="ti-plus"></i></a>
 	</div>
 </div>
 @endsection

@@ -39,6 +39,22 @@ class AjaxController extends Controller
         return view('ajax_loads.getClasses', $data);
     }
 
+    public function getClasses3(Request $request)
+    {
+        $request->validate([
+            'id_curso' => ['required', 'Integer'],
+        ]);
+        $curso = Curso::find($request->id_curso);
+        if (!$curso) {
+            return response()->json(['error' => "Não encontrou curso"]);
+        }
+        $classes = Classe::where('id_ensino', $curso->id_ensino)->pluck('classe', 'id');
+        $data = [
+            'getClasses' => $classes,
+        ];
+        return view('ajax_loads.getClasses3', $data);
+    }
+
     public function getMunicipios(Request $request)
     {
         $request->validate([
@@ -165,6 +181,15 @@ class AjaxController extends Controller
             'getGrade' => $disciplinas,
         ];
         return view('ajax_loads.getDisciplinasCad', $data);
+    }
+
+    public function getDisciplinasCad2(Request $request)
+    {
+        $disciplinas = Grade::where(['id_curso' => $request->id_curso, 'id_classe' => $request->id_classe])->get();
+        $data = [
+            'getGrade' => $disciplinas,
+        ];
+        return view('ajax_loads.getDisciplinasCad2', $data);
     }
 
     public function getHoras(Request $request)

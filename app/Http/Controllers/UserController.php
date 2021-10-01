@@ -214,7 +214,37 @@ class UserController extends Controller
             'getUser'=> $user,
         ];
         return view('user.verifycode', $data);
-        //$hash_code = $verify_code . "" . $user->email;
 
+   }
+
+   public function verifycode_put(Request $request, $id_reset){
+    $reset_password = ResetPassword::find($id_reset);
+    if(!$reset_password){
+        return back()->with(['error' => "Nao encontrou"]);
+    }
+    $user = User::find($reset_password->id_user);
+    if(!$user){
+        return back()->with(['error' => "Nao encontrou"]);
+    }
+
+    if($reset_password->estado=="off"){
+        return back()->with(['error' => "Código sem validade"]);
+    }
+
+    $request->validate([
+        'code'=>['required', 'integer', 'min:1'],
+    ]);
+
+    //verificar codigo incripetado com email
+    $hash_code = $request->code . "" . $user->email;
+    $verify_code = Hash::check($hash_code, $reset_password->hash_code);
+    if(!$verify_code){
+        return back()->with(['error' => "Código de verificação incorrecto"]);
+    }
+    //verificar codigo simples
+    if($request->code!=$reset_password->verify_code){
+        return back()->with(['error' => "Código de verificação incorrecto"]);
+    }
+    
    }
 }

@@ -48,6 +48,7 @@ use App\Http\Controllers\ControladorNotas;
                               <thead>
                                   <tr>
                                       <th rowspan="2">Nº</th>
+                                      <th rowspan="2" style="width:47px;">FOTO</th>
                                       <th rowspan="2">NOME COMPLETO</th>
                                       <th rowspan="2">G</th>
                                       <th colspan="4">1º TRIMESTRE</th>
@@ -80,6 +81,15 @@ use App\Http\Controllers\ControladorNotas;
                                 @foreach ($getHistorico as $historico)
                                 <tr class="{{$historico->observacao_final}}">
                                     <td>{{$loop->iteration}}</td>
+                                    <td>
+                                        <img src="
+                                            @if($historico->estudante->pessoa->foto)
+                                            {{asset($historico->estudante->pessoa->foto)}}
+                                            @else
+                                            {{asset('assets/template/images/profile.png')}}
+                                            @endif
+                                            " alt="" style="width:47px; height:47px; border-radius:4px;">
+                                    </td>
                                     <td>{{$historico->estudante->pessoa->nome}}</td>
                                     <td>{{$historico->estudante->pessoa->genero}}</td>
 

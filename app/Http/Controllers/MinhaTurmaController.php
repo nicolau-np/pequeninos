@@ -184,7 +184,7 @@ class MinhaTurmaController extends Controller
         if (!$pessoa) {
             return back()->with(['error' => "Não encontrou estudante"]);
         }
-        $ano_lectivos = AnoLectivo::find($ano_lectivo);
+        $ano_lectivos = AnoLectivo::where(['ano_lectivo' => $ano_lectivo])->first();
         if (!$ano_lectivos) {
             return back()->with(['error' => "Não encontrou ano lectivo"]);
         }

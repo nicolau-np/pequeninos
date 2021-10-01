@@ -81,35 +81,9 @@ class HorarioController extends Controller
         'id_funcionario'=>$id_funcionario,
         'id_turma'=>$request->turma,
         'id_disciplina'=>$request->disciplina,
-        'id_sala'=>$request->sala,
-        'id_hora'=>$request->hora,
-        'semana'=>$request->semana,
-        'estado'=>null,
+        'estado'=>"visivel",
         'ano_lectivo'=>$ano_lectivo->ano_lectivo,
 
-        ];
-        $data['where1']=[
-            'id_funcionario'=>$id_funcionario,
-            'id_turma'=>$request->turma,
-            'id_disciplina'=>$request->disciplina,
-            'id_sala'=>$request->sala,
-            'id_hora'=>$request->hora,
-            'semana'=>$request->semana,
-            'ano_lectivo'=>$ano_lectivo->ano_lectivo,
-        ];
-
-        $data['where2']=[
-            'id_turma'=>$request->turma,
-            'semana'=>$request->semana,
-            'id_hora'=>$request->hora,
-            'ano_lectivo'=>$ano_lectivo->ano_lectivo,
-        ];
-
-        $data['where3']=[
-            'id_funcionario'=>$id_funcionario,
-            'semana'=>$request->semana,
-            'id_hora'=>$request->hora,
-            'ano_lectivo'=>$ano_lectivo->ano_lectivo,
         ];
 
         $data['where4']=[
@@ -119,29 +93,8 @@ class HorarioController extends Controller
         ];
 
         //existencia de horario
-        if(Horario::where($data['where1'])->first()){
+        if(Horario::where($data['where4'])->first()){
             return back()->with(['error'=>"Já cadastrou este horário"]);
-        }
-
-        //disponibilidade da turma
-        if(Horario::where($data['where2'])->first()){
-            return back()->with(['error'=>"Turma indisponível nesta hora"]);
-        }
-
-        //disponibilidade do prof
-        if(Horario::where($data['where3'])->first()){
-            return back()->with(['error'=>"Professor indisponível nesta hora"]);
-        }
-
-        $horario = Horario::where($data['where4'])->first();
-        if(!$horario){
-            $data['store']['estado'] = "visivel";
-        }else{
-            if($horario->id_funcionario!=$id_funcionario){
-                return back()->with(['error'=>"Para esta turma e nesta disciplina já exite professor"]);
-            }else{
-                $data['store']['estado'] = "nao";
-            }
         }
 
         if(Horario::create($data['store'])){

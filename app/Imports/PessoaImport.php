@@ -39,6 +39,7 @@ class PessoaImport implements
         $data['estudante'] = [
             'id_pessoa' => null,
             'id_turma' => Session::get('id_turmaIMP'),
+            'numero'=>null,
             'id_encarregado' => 1,
             'estado' => "on",
             'ano_lectivo' => Session::get('ano_lectivoIMP'),
@@ -47,6 +48,7 @@ class PessoaImport implements
         $data['historico'] = [
             'id_estudante' => null,
             'id_turma' => Session::get('id_turmaIMP'),
+            'numero'=>null,
             'estado' => "on",
             'observacao_final' => null,
             'ano_lectivo' => Session::get('ano_lectivoIMP'),
@@ -61,10 +63,12 @@ class PessoaImport implements
                 $data['pessoa']['data_nascimento'] = $data_nascimento;
                 $pessoa = Pessoa::create($data['pessoa']);
 
+                $data['estudante']['numero'] = $row['n'];
                 $data['estudante']['id_pessoa'] = $pessoa->id;
                 $estudante = Estudante::create($data['estudante']);
 
                 $data['historico']['id_estudante'] = $estudante->id;
+                $data['historico']['numero'] = $row['n'];
                 $historico = HistoricEstudante::create($data['historico']);
             }
 

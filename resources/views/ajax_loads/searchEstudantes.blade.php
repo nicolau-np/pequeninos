@@ -9,6 +9,15 @@ use App\Http\Controllers\ControladorStatic;
                                 ?>
                                 <tr class="{{$observacao_final->observacao_final}}">
                                 <th scope="row">{{$loop->iteration}}</th>
+                                <td>
+                                    <img src="
+                                        @if($estudantes->pessoa->foto)
+                                        {{asset($estudantes->pessoa->foto)}}
+                                        @else
+                                        {{asset('assets/template/images/profile.png')}}
+                                        @endif
+                                        " alt="" style="width:47px; height:47px; border-radius:4px;">
+                                </td>
                                     <td>{{$estudantes->pessoa->nome}}</td>
                                     <td>{{$estudantes->turma->curso->curso}}</td>
                                     <td>{{$estudantes->turma->classe->classe}}</td>

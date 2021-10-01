@@ -22,6 +22,7 @@ Route::get('/logout', "UserController@logout")->name('logout');
 Route::get('/resetpassword', "UserController@resetpassword")->name('resetpassword');
 Route::post('/resetpassword', "UserController@resetpassword_req");
 Route::get('/verify_code/{id_reset}', "UserController@verifycode");
+Route::put('/verifycode/{id_reset}', "UserController@verifycode_put");
 
 Route::group(['prefix' =>"user", 'middleware'=>"auth"], function(){
     Route::get('/profile', "UserController@profile");

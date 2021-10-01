@@ -201,6 +201,10 @@ class UserController extends Controller
             return back()->with(['error' => "Nao encontrou"]);
         }
 
+        if($reset_password->estado=="off"){
+            return back()->with(['error' => "Código sem validade"]);
+        }
+
         $data = [
             'title' => "Código de Verificação",
             'type' => "login",

@@ -9,7 +9,7 @@
                     <h5>{{$submenu}}</h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -39,7 +39,7 @@
                                     <div class="erro">
                                         @if($errors->has('nome'))
                                         <div class="text-danger">{{$errors->first('nome')}}</div>
-                                        @endif 
+                                        @endif
                                     </div>
                                 </div>
 
@@ -50,22 +50,22 @@
                                         'M'=>"M",
                                         'F'=>"F"
                                     ], null, ['class'=>"form-control", 'placeholder'=>"Gênero"])}}
-                                
+
                                 <div class="erro">
                                     @if($errors->has('genero'))
                                     <div class="text-danger">{{$errors->first('genero')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     {{Form::label('provincia', "Provincia")}} <span class="text-danger">*</span>
                                     {{Form::select('provincia', $getProvincias, null, ['class'=>"form-control provincia", 'placeholder'=>"Província"])}}
-                                
+
                                 <div class="erro">
                                     @if($errors->has('provincia'))
                                     <div class="text-danger">{{$errors->first('provincia')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
@@ -78,7 +78,7 @@
                                 <div class="erro">
                                     @if($errors->has('municipio'))
                                     <div class="text-danger">{{$errors->first('municipio')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
@@ -88,7 +88,7 @@
                                     <div class="erro">
                                         @if($errors->has('naturalidade'))
                                         <div class="text-danger">{{$errors->first('naturalidade')}}</div>
-                                        @endif 
+                                        @endif
                                     </div>
                                 </div>
 
@@ -98,7 +98,7 @@
                                     <div class="erro">
                                         @if($errors->has('comuna'))
                                         <div class="text-danger">{{$errors->first('comuna')}}</div>
-                                        @endif 
+                                        @endif
                                     </div>
                                 </div>
 
@@ -109,21 +109,21 @@
                                     <div class="erro">
                                         @if($errors->has('data_nascimento'))
                                         <div class="text-danger">{{$errors->first('data_nascimento')}}</div>
-                                        @endif 
+                                        @endif
                                     </div>
                                 </div>
 
                                 <div class="col-md-3">
-                                    {{Form::label('estado_civil', "Estado Civíl")}} 
+                                    {{Form::label('estado_civil', "Estado Civíl")}}
                                     {{Form::select('estado_civil', [
                                         'Solteiro(a)'=>"Solteiro(a)",
                                         'Casado(a)'=>"Casado(a)",
                                     ], null, ['class'=>"form-control", 'placeholder'=>"Estado Civíl"])}}
-                                
+
                                 <div class="erro">
                                     @if($errors->has('estado_civil'))
                                     <div class="text-danger">{{$errors->first('estado_civil')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
@@ -133,7 +133,7 @@
                                     <div class="erro">
                                         @if($errors->has('telefone'))
                                         <div class="text-danger">{{$errors->first('telefone')}}</div>
-                                        @endif 
+                                        @endif
                                     </div>
                                 </div>
 
@@ -143,7 +143,7 @@
                                     <div class="erro">
                                         @if($errors->has('bilhete'))
                                         <div class="text-danger">{{$errors->first('bilhete')}}</div>
-                                        @endif 
+                                        @endif
                                     </div>
                                 </div>
 
@@ -153,7 +153,7 @@
                                     <div class="erro">
                                         @if($errors->has('local_emissao'))
                                         <div class="text-danger">{{$errors->first('local_emissao')}}</div>
-                                        @endif 
+                                        @endif
                                     </div>
                                 </div>
 
@@ -163,7 +163,7 @@
                                     <div class="erro">
                                         @if($errors->has('data_emissao'))
                                         <div class="text-danger">{{$errors->first('data_emissao')}}</div>
-                                        @endif 
+                                        @endif
                                     </div>
                                 </div>
 
@@ -173,7 +173,7 @@
                                     <div class="erro">
                                         @if($errors->has('pai'))
                                         <div class="text-danger">{{$errors->first('pai')}}</div>
-                                        @endif 
+                                        @endif
                                     </div>
                                 </div>
 
@@ -183,42 +183,52 @@
                                     <div class="erro">
                                         @if($errors->has('mae'))
                                         <div class="text-danger">{{$errors->first('mae')}}</div>
-                                        @endif 
+                                        @endif
                                     </div>
                                 </div>
 
                             </div>
-                         
+
                         </fieldset>
                         <br/>
                         <fieldset>
                             <legend><i class="ti-list"></i> Dados do funcionário</legend>
                             <div class="row">
                                 <div class="col-md-3">
+                                    {{Form::label('email', "E-mail")}}
+                                    {{Form::email('email', null, ['class'=>"form-control", 'placeholder'=>"E-mail"])}}
+                                <div class="erro">
+                                    @if($errors->has('email'))
+                                    <div class="text-danger">{{$errors->first('email')}}</div>
+                                    @endif
+                                </div>
+                                </div>
+
+                                <div class="col-md-3">
                                     {{Form::label('escalao', "Escalão")}} <span class="text-danger">*</span>
                                     {{Form::select('escalao', $getEscalaos, null, ['class'=>"form-control curso", 'placeholder'=>"Escalão"])}}
                                 <div class="erro">
                                     @if($errors->has('escalao'))
                                     <div class="text-danger">{{$errors->first('escalao')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
                                 <div class="col-md-3">
                                     {{Form::label('cargo', "Cargo")}} <span class="text-danger">*</span>
-                                    
+
                                     {{Form::select('cargo', $getCargos, null, ['class'=>"form-control classe", 'placeholder'=>"Cargo"])}}
-                                
+
                                 <div class="erro">
                                     @if($errors->has('cargo'))
                                     <div class="text-danger">{{$errors->first('cargo')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
-                   
+
                             </div>
-                        
+
                         </fieldset>
                         <br/>
                             <div class="row">
@@ -227,16 +237,16 @@
                                  </div>
 
                             </div>
-                        
-                       
-                        
+
+
+
                         {{Form::close()}}
                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- hidden-sm-up -->

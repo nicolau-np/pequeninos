@@ -12,9 +12,9 @@ class Horario extends Model
         'id_funcionario',
         'id_turma',
         'id_disciplina',
-        'id_sala',
+        /*'id_sala',
         'id_hora',
-        'semana',
+        'semana',*/
         'estado',
         'ano_lectivo',
     ];
@@ -27,16 +27,16 @@ class Horario extends Model
         return $this->belongsTo(Turma::class, 'id_turma', 'id');
     }
 
-    public function sala(){
+    /*public function sala(){
         return $this->belongsTo(Sala::class, 'id_sala', 'id');
     }
-    
+
     public function hora(){
         return $this->belongsTo(Hora::class, 'id_hora', 'id');
-    }
+    }*/
 
     public function disciplina(){
         return $this->belongsTo(Disciplina::class, 'id_disciplina', 'id');
-    } 
+    }
 
 }

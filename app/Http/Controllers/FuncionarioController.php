@@ -83,6 +83,12 @@ class FuncionarioController extends Controller
             ]);
         }
 
+        if ($request->email != "") {
+            $request->validate([
+                'email' => ['required', 'string', 'unique:usuarios,email']
+            ]);
+        }
+
         $data['pessoa'] = [
             'id_municipio' => $request->municipio,
             'nome' => $request->nome,
@@ -134,6 +140,7 @@ class FuncionarioController extends Controller
             'password' => $palavra_passe,
             'estado' => "on",
             'nivel_acesso' => $nivel_acesso,
+            'email' => $request->email,
         ];
 
         if (Pessoa::where([
@@ -147,7 +154,7 @@ class FuncionarioController extends Controller
         if ($pessoa) {
             $data['funcionario']['id_pessoa'] = $pessoa->id;
             $data['usuario']['id_pessoa'] = $pessoa->id;
-            $nome_completo = strtolower($primeiro_nome.".".$ultimo_nome)."".$pessoa->id;
+            $nome_completo = strtolower($primeiro_nome . "." . $ultimo_nome) . "" . $pessoa->id;
             $nome_converte = $this->converter_acentos($nome_completo);
             $data['usuario']['username'] = $nome_converte;
             $funcionario = Funcionario::create($data['funcionario']);
@@ -161,8 +168,6 @@ class FuncionarioController extends Controller
                 }
             }
         }
-
-
     }
 
 
@@ -209,6 +214,8 @@ class FuncionarioController extends Controller
             return back()->with(['error' => "Nao encontrou"]);
         }
 
+        $pessoa = Pessoa::find($funcionario->id_pessoa);
+
         $request->validate([
             'nome' => ['required', 'string', 'min:7', 'max:255'],
             'genero' => ['required', 'string'],
@@ -222,6 +229,12 @@ class FuncionarioController extends Controller
         if ($request->bilhete != "" || $request->bilhete != $funcionario->bilhete) {
             $request->validate([
                 'bilhete' => ['required', 'string', 'unique:pessoas,bilhete']
+            ]);
+        }
+
+        if ($request->email != "" && $request->email != $pessoa->email) {
+            $request->validate([
+                'email' => ['required', 'string', 'unique:usuarios,email']
             ]);
         }
 
@@ -292,16 +305,23 @@ class FuncionarioController extends Controller
         }
     }
 
-     public function converter_acentos($string) {
+    public function converter_acentos($string)
+    {
 
-        return preg_replace(array("/(á|â|ã|à)/", "/(Á|Â|Ã|À)/",
+        return preg_replace(
+            array(
+                "/(á|â|ã|à)/", "/(Á|Â|Ã|À)/",
                 "/(é|è|ê)/", "/(É|È|Ê)/", "/(í|ì|î)/", "/(Í|Ì|Î)/",
                 "/(ó|ò|õ|ô)/", "/(Ó|Ò|Õ|Ô)/", "/(ú|ù|û)/", "/(Ú|Ù|Û)/",
-                "/(ñ)/", "/(Ñ)/", "/(ç)/", "/(Ç)/"),
-                explode(" ","a A e E i I o O u U n N c C"), $string);
+                "/(ñ)/", "/(Ñ)/", "/(ç)/", "/(Ç)/"
+            ),
+            explode(" ", "a A e E i I o O u U n N c C"),
+            $string
+        );
     }
 
-    public function import(){
+    public function import()
+    {
         $data = [
             'title' => "Funcionários",
             'type' => "funcionarios",
@@ -311,7 +331,8 @@ class FuncionarioController extends Controller
         return view('funcionarios.import', $data);
     }
 
-    public function store_import(Request $request){
+    public function store_import(Request $request)
+    {
         $request->validate([
             'arquivo' => ['required', 'mimes:xlsx,xls'],
         ]);
@@ -319,8 +340,8 @@ class FuncionarioController extends Controller
 
         $import = new FuncionarioImport;
 
-        if($import->import($file)){
-            return back()->with(['success'=>"Feito com sucesso"]);
+        if ($import->import($file)) {
+            return back()->with(['success' => "Feito com sucesso"]);
         }
     }
 }

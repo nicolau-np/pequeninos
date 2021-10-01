@@ -19,6 +19,7 @@ class CreateUsuariosTable extends Migration
             $table->bigInteger('id_pessoa')->unsigned()->index();
             $table->string('username')->unique();
             $table->text('password');
+            $table->string('email')->unique()->nullable();
             $table->string('estado');
             $table->string('nivel_acesso');
             $table->string('provider')->nullable();

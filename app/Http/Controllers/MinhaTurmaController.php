@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AnoLectivo;
 use App\DirectorTurma;
+use App\Estudante;
 use App\Funcionario;
 use App\Grade;
 use App\Hora;
@@ -154,11 +155,17 @@ class MinhaTurmaController extends Controller
             return back()->with(['error' => "Não encontrou turma"]);
         }
 
+        $estudantes = Estudante::whereHas('pessoa', function($query){
+
+        })->where(['id_turma' => $id_turma, 'ano_lectivo'=>$ano_lectivo])->sortBy('pessoa.nome');
         $data = [
             'title' => "Fotografias",
             'type' => "fotografias",
             'menu' => "Minha Turma",
             'submenu' => "Fotografias",
+            'getEstudantes'=>$estudantes,
+            'getTurma'=>$turma,
+            'getAno'=>$ano_lectivo,
         ];
 
         return view('minha_turma.fotografias', $data);

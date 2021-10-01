@@ -10,10 +10,9 @@ use App\Http\Controllers\ControladorStatic;
             <div class="card">
                 <div class="card-header">
                     <h5>{{$submenu}}
-                    @foreach ($getAnos as $anos)
                     <i class="ti-angle-right"></i>
-                        <a href="/minha_turma/list/{{$anos->ano_lectivo}}" style="color:#4680ff;">{{$anos->ano_lectivo}}</a>
-                    @endforeach
+                    {{$getAno}}
+
                     </h5>
                     <span></span>
                     <div class="card-header-right">

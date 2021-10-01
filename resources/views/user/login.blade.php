@@ -88,7 +88,7 @@
                                         </div>
                                     </div>
                                     <div class="col-sm-5 col-xs-12 forgot-phone text-right">
-                                        <a href="/resetpassword" class="text-right f-w-600 text-inverse"> Esqueceu sua senha?</a>
+                                        <a href="/resetpassword" class="text-right f-w-600 text-inverse"> Esqueceu a sua Passe?</a>
                                     </div>
                                 </div>
                                 <div class="row m-t-30">

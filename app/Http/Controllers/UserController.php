@@ -105,7 +105,10 @@ class UserController extends Controller
         }
 
         /* deve verificar se a palavra_passe actual esta correcta */
-
+        $verifica_passe = Hash::check($request->password, $user->password);
+        if(!$verifica_passe){
+            return back()->with(['error' => "Palavra-Passe actual incorrecta"]);
+        }
         /*fim*/
 
         $password_nova = Hash::make($request->newpassword);

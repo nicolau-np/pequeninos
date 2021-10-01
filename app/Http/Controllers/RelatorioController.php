@@ -149,7 +149,8 @@ class RelatorioController extends Controller
             return back()->with(['error' => "Não encontrou"]);
         }
         $historico = HistoricEstudante::whereHas('estudante.pessoa', function () {
-        })->where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])->orderBy('numero', 'asc')->get();
+        })->where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])
+        ->orderBy('numero', 'asc')->get();
         $data = [
             'getHistorico' => $historico,
             'getAno' => $ano_lectivo,

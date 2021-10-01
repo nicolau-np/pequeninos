@@ -161,13 +161,21 @@ class UserController extends Controller
         $hash_code = $verify_code . "" . $user->email;
         //transformando em hash
         $verify_code_hash = Hash::make($hash_code);
-        $data = [
+        $data['create'] = [
             'id_user' => $user->id,
             'hash_code' => $verify_code_hash,
             'verify_code' => $verify_code,
             'estado' => "on",
         ];
-        if (ResetPassword::create($data)) {
+
+        $data['email'] = [
+            'verify_code' => $verify_code,
+        ];
+
+        if (ResetPassword::create($data['create'])) {
+            /*enviar email*/
+
+            /*fim*/
             return back()->with(['success' => "Feito com sucesso. Recebeu uma SMS no email com código e link"]);
         }
     }

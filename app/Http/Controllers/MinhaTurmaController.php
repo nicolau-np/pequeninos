@@ -10,6 +10,7 @@ use App\Grade;
 use App\HistoricEstudante;
 use App\Hora;
 use App\Horario;
+use App\Pessoa;
 use App\Turma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -170,5 +171,42 @@ class MinhaTurmaController extends Controller
         ];
 
         return view('minha_turma.fotografias', $data);
+    }
+
+    public function updateFoto(Request $request, $id_pessoa, $ano_lectivo, $id_turma){
+        $pessoa = Pessoa::find($id_pessoa);
+        if (!$pessoa) {
+            return back()->with(['error' => "Não encontrou estudante"]);
+        }
+        $ano_lectivos=AnoLectivo::find($ano_lectivo);
+        if (!$ano_lectivos) {
+            return back()->with(['error' => "Não encontrou ano lectivo"]);
+        }
+        $turma = Turma::find($id_turma);
+        if (!$turma) {
+            return back()->with(['error' => "Não encontrou turma"]);
+        }
+
+        $nome_pasta = $turma->turma."-".$ano_lectivo;
+
+        $path = null;
+        if ($request->hasFile('foto') && $request->foto->isValid()) {
+            $request->validate([
+                'foto' => ['required', 'mimes:jpg,png,jpeg,JPG,PNG,JPEG', 'max:5000']
+            ]);
+            if ($pessoa->foto != "" && file_exists($pessoa->foto)) {
+                unlink($pessoa->foto);
+            }
+            $path = $request->foto->store('fotos_estudantes/'.$nome_pasta);
+        }
+
+        $data['pessoa'] = [
+            'foto'=>$path
+        ];
+
+        if(Pessoa::find($id_pessoa)->update($data['pessoa'])){
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
+
     }
 }

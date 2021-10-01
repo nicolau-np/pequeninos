@@ -34,6 +34,14 @@ use App\Http\Controllers\ControladorStatic;
                 <div class="card-block">
                 <div class="row">
                     <div class="col-md-12">
+                        @if(session('error'))
+                        <div class="alert alert-danger">{{session('error')}}</div>
+                        @endif
+
+                        @if(session('success'))
+                        <div class="alert alert-success">{{session('success')}}</div>
+                        @endif
+
                         <div class="table-responsive">
                             <table class="table table-bordered">
 
@@ -48,7 +56,7 @@ use App\Http\Controllers\ControladorStatic;
                                 </thead>
                                 <tbody>
                                     @foreach ($getHistorico as $historicos)
-                                    {{Form::open(['method'=>"put", 'url'=>"/minha_turma/updateFoto/{$historicos->pessoa->id}/{$historicos->ano_lectivo}/{$historicos->id_turma}"])}}
+                                    {{Form::open(['method'=>"put", 'url'=>"/minha_turma/updateFoto/{$historicos->pessoa->id}/{$historicos->ano_lectivo}/{$historicos->id_turma}", 'enctype'=>"multipart/form-data"])}}
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
                                         <td>
@@ -65,6 +73,11 @@ use App\Http\Controllers\ControladorStatic;
                                         <td>{{$historicos->estudante->pessoa->genero}}</td>
                                         <td>
                                             {{Form::file('foto', null, ['class'=>"form-control", 'placeholder'=>"Fotografia"])}}
+                                            <div class="erro">
+                                                @if($errors->has('foto'))
+                                                <div class="text-danger">{{$errors->first('foto')}}</div>
+                                                @endif
+                                            </div>
                                            <button type="submit" class="btn btn-primary">Editar Foto</button>
                                         </td>
                                     </tr>

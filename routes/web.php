@@ -249,6 +249,7 @@ Route::group(['prefix' => 'minha_turma', 'middleware' => "AdminProfUser"], funct
     //Route::get('/horario/{id_turma}/{ano_lectivo}', "MinhaTurmaController@horario");
     Route::get('/boletins_notas/{id_turma}/{ano_lectivo}', "MinhaTurmaController@boletins_notas");
     Route::get('/fotografias/{id_turma}/{ano_lectivo}', "MinhaTurmaController@fotografias");
+    Route::put('/updateFoto/{id_pessoa}/{ano_lectivo}/{id_turma}', "MinhaTurmaController@updateFoto");
 });
 
 Route::group(['prefix' => 'pautas', 'middleware' => "AdminProfUser"], function () {

@@ -901,4 +901,24 @@ class InstitucionalController extends Controller
             return back()->with(['success' => "Feito com sucesso"]);
         }
     }
+
+    public function conjunta_list(){
+
+    }
+
+    public function conjunta_create(){
+
+    }
+
+    public function conjunta_store(Request $request){
+
+    }
+
+    public function conjunta_edit($id_observacao){
+
+    }
+
+    public function conjunta_update(Request $request, $id_observacao){
+        
+    }
 }

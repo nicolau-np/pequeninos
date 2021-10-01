@@ -982,4 +982,20 @@ class InstitucionalController extends Controller
     public function conjunta_update(Request $request, $id_observacao)
     {
     }
+
+    public function conjunta_regras($id_observacao){
+        $observacao = ObservacaoConjunta::find($id_observacao);
+        if(!$observacao){
+            return back()->with(['error' => "Não encontrou"]);
+        }
+
+        
+        $data = [
+            'title' => "Observações",
+            'type' => "institucional",
+            'menu' => "Observações",
+            'submenu' => "Conjunta",
+        ];
+        return view('institucional.observacaoes.observacao_conjunta.regras', $data);
+    }
 }

@@ -134,14 +134,17 @@ class EstudanteController extends Controller
         $data['estudante'] = [
             'id_turma' => $request->turma,
             'id_pessoa' => null,
+            'numero'=>$numero_estudante,
             'id_encarregado' => $request->encarregado,
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
+
         ];
 
         $data['historico'] = [
             'id_estudante' => null,
             'id_turma' => $request->turma,
+            'numero'=>$numero_estudante,
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
         ];

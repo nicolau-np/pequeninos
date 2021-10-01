@@ -235,7 +235,7 @@ class MinhaTurmaController extends Controller
         ];
 
         if (Pessoa::find($id_pessoa)->update($data['pessoa'])) {
-            if(Estudante::where(['id_estudante' => $estudante->id, 'ano_lectivo'=> $ano_lectivo])->update($data['estudante_historico'])){
+            if(Estudante::where(['id' => $estudante->id, 'ano_lectivo'=> $ano_lectivo])->update($data['estudante_historico'])){
                 if(HistoricEstudante::where(['id_estudante' => $estudante->id, 'ano_lectivo'=> $ano_lectivo])->update($data['estudante_historico'])){
                     return back()->with(['success' => "Feito com sucesso"]);
                 }

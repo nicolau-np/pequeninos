@@ -72,21 +72,31 @@ use App\Http\Controllers\ControladorStatic;
                                         <td>{{$historicos->estudante->pessoa->nome}}</td>
                                         <td>{{$historicos->estudante->pessoa->genero}}</td>
                                         <td>
-                                            {{Form::file('foto', null, ['class'=>"form-control", 'placeholder'=>"Fotografia"])}}
-                                            <div class="erro">
-                                                @if($errors->has('foto'))
-                                                <div class="text-danger">{{$errors->first('foto')}}</div>
-                                                @endif
+                                            <div class="row">
+                                                <div class="col-md-9">
+                                                    {{Form::file('foto', null, ['class'=>"form-control", 'placeholder'=>"Fotografia"])}}
+                                                    <div class="erro">
+                                                        @if($errors->has('foto'))
+                                                        <div class="text-danger">{{$errors->first('foto')}}</div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-3">
+                                                    {{Form::number('numero', $historicos->numero, ['class'=>"form-control", 'placeholder'=>"Nº"])}}
+                                                    <div class="erro">
+                                                        @if($errors->has('numero'))
+                                                        <div class="text-danger">{{$errors->first('numero')}}</div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <button type="submit" class="btn btn-primary">Salvar</button>
+                                                </div>
                                             </div>
 
-                                            {{Form::number('numero', $historicos->numero, ['class'=>"form-control", 'placeholder'=>"Numero"])}}
-                                            <div class="erro">
-                                                @if($errors->has('numero'))
-                                                <div class="text-danger">{{$errors->first('numero')}}</div>
-                                                @endif
-                                            </div>
-
-                                           <button type="submit" class="btn btn-primary">Salvar</button>
                                         </td>
                                     </tr>
                                     {{Form::close()}}

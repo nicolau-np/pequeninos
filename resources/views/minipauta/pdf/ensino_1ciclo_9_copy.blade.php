@@ -988,9 +988,9 @@ $percent_negativasf = [
                             <th>Nº</th>
                             <th>NOME COMPLETO</th>
                             <th>G</th>
-                            <th>SET</th>
                             <th>OUT</th>
                             <th>NOV</th>
+                            <th>DEZ</th>
                             <th>MAC1</th>
                             <th>NPP1</th>
                             <th>PT1</th>

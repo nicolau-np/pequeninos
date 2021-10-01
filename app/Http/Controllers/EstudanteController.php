@@ -109,6 +109,10 @@ class EstudanteController extends Controller
             $path = $request->foto->store('fotos_estudantes/'.$nome_pasta);
         }
 
+        /* criar numero do estudante*/
+            $estudantes = Estudante::where(['id_turma'=>$request->turma, 'ano_lectivo'=>$request->ano_lectivo])->get();
+            $numero_estudante = $estudantes->count()+1;
+        /*end*/
 
         $data['pessoa'] = [
             'id_municipio' => $request->municipio,

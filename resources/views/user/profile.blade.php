@@ -1,6 +1,11 @@
 @extends('layouts.app')
 @section('content')
-
+<style>
+.title{
+    font-weight: bold;
+    color: #4680ff;
+}
+</style>
 <div class="page-body">
     <div class="row">
         <div class="col-sm-12">
@@ -55,14 +60,38 @@
                                             {{Form::open([])}}
                                             @csrf
                                             <fieldset>
-                                            <legend><i class="ti-list"></i> Palavra Passe</legend>
+                                            <legend>Palavra Passe</legend>
                                             <div class="row">
-                                                <div class="col-md-4">
-                                                    {{Form::label('nome', "Nome completo")}} <span class="text-danger">*</span>
-                                                    {{Form::text('nome', null, ['class'=>"form-control", 'placeholder'=>"Nome completo"])}}
+                                                <div class="col-md-6">
+                                                    {{Form::label('password', "Palavra-Passe Actual")}} <span class="text-danger">*</span>
+                                                    <input type="password" name="password" class="form-control" placeholder="Palavra-Passe Actual" />
                                                     <div class="erro">
-                                                        @if($errors->has('nome'))
-                                                        <div class="text-danger">{{$errors->first('nome')}}</div>
+                                                        @if($errors->has('password'))
+                                                        <div class="text-danger">{{$errors->first('password')}}</div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    {{Form::label('newpassword', "Palavra-Passe Nova")}} <span class="text-danger">*</span>
+                                                    <input type="text" name="newpassword" class="form-control" placeholder="Palavra-Passe Nova" />
+                                                    <div class="erro">
+                                                        @if($errors->has('newpassword'))
+                                                        <div class="text-danger">{{$errors->first('newpassword')}}</div>
+                                                        @endif
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    {{Form::label('confirmpassword', "Confirmar Palavra-Passe")}} <span class="text-danger">*</span>
+                                                    <input type="text" name="confirmpassword" class="form-control" placeholder="Confirmar Palavra-Passe" />
+                                                    <div class="erro">
+                                                        @if($errors->has('confirmpassword'))
+                                                        <div class="text-danger">{{$errors->first('confirmpassword')}}</div>
                                                         @endif
                                                     </div>
                                                 </div>
@@ -78,7 +107,10 @@
                                             <span class="title">Nome</span>: {{$getPessoa->nome}}<br/>
                                             <span class="title">Data de Nascimento</span>: {{date('d-m-Y', strtotime($getPessoa->data_nascimento))}}<br/>
                                             <span class="title">Nº B.I.</span>: {{$getPessoa->bilhete}}<br/>
-                                            <span class="title">Telf.</span>: {{$getPessoa->telefone}}<br/>
+                                            <span class="title">Telf.</span>: {{$getPessoa->telefone}}
+                                            <hr/>
+                                            <span class="title">Nome de Usuário</span>: {{$getUser->username}}
+                                            <span class="title">Email</span>: {{$getUser->email}}
                                         </fieldset>
                                     </div>
                                 </div>

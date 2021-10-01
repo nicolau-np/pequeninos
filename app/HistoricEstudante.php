@@ -11,6 +11,7 @@ class HistoricEstudante extends Model
     protected $fillable = [
         'id_estudante',
         'id_turma',
+        'numero',
         'estado',
         'observacao_final',
         'ano_lectivo',

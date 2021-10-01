@@ -12,6 +12,7 @@ class Estudante extends Model
         'id_turma',
         'id_pessoa',
         'id_encarregado',
+        'numero',
         'estado',
         'ano_lectivo',
     ];

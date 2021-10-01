@@ -952,6 +952,20 @@ class InstitucionalController extends Controller
             'estado'=>"on",
         ];
 
+        $observacao =ObservacaoConjunta::create($data['observacao'])
+        if(){
+            foreach ($request->disciplinas as $disciplinas) {
+                /*$data['create']['id_classe'] = $classe;
+                $data['where']['id_classe'] = $classe;
+                if (!ObservacaoGeral::where($data['create'])->first()) {
+                    if (!ObservacaoGeral::where($data['where'])->first()) {
+                        $observacao = ObservacaoGeral::create($data['create']);
+                    }
+                }*/
+
+            }
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
 
     }
 

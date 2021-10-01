@@ -63,8 +63,8 @@
                                         <input type="checkbox" name="disciplinas[]" />
                                     </span>
                                 <div class="erro">
-                                    @if($errors->has('disciplina'))
-                                    <div class="text-danger">{{$errors->first('disciplina')}}</div>
+                                    @if($errors->has('disciplinas'))
+                                    <div class="text-danger">{{$errors->first('disciplinas')}}</div>
                                     @endif
                                 </div>
                                 </div>

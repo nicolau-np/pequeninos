@@ -142,4 +142,18 @@ class MinhaTurmaController extends Controller
 
         return view('minha_turma.new_boletins', $data);
     }
+
+    public function fotografias($id_turma, $ano_lectivo){
+        $ano_lectivos = AnoLectivo::where(['ano_lectivo'=>$ano_lectivo])->first();
+        if(!$ano_lectivos){
+            return back()->with(['error' => "Não encontrou ano lectivo"]);
+        }
+
+        $turma = Turma::find($id_turma);
+        if(!$turma){
+            return back()->with(['error' => "Não encontrou turma"]);
+        }
+
+        
+    }
 }

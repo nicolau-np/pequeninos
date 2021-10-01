@@ -66,7 +66,7 @@ use App\Http\Controllers\ControladorStatic;
                                             @else
                                             {{asset('assets/template/images/profile.png')}}
                                             @endif
-                                            " alt="" style="width:60px; height:60px;">
+                                            " alt="" style="width:60px; height:60px; border-radius:4px;">
 
                                         </td>
                                         <td>{{$historicos->estudante->pessoa->nome}}</td>

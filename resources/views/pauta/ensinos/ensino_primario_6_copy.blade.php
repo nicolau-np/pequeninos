@@ -105,7 +105,6 @@ if(!$observacao_geral){
                                             {{asset('assets/template/images/profile.png')}}
                                             @endif
                                             " alt="" style="width:47px; height:47px; border-radius:4px;">
-
                                     </td>
                                     <td>{{$historico->estudante->pessoa->nome}}</td>
                                     <td>{{$historico->estudante->pessoa->genero}}</td>

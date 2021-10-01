@@ -55,18 +55,19 @@
                                 </div>
                                 </div>
 
+                            </div>
+                            <div class="row">
                                 <div class="col-md-3">
                                     {{Form::label('disciplina', "Disciplina")}} <span class="text-danger">*</span>
                                     <span class="load_disciplinas">
-                                    {{Form::select('disciplina', [], null, ['class'=>"form-control", 'placeholder'=>"Disciplina"])}}
-                                </span>
+                                        <input type="checkbox" name="disciplinas[]" />
+                                    </span>
                                 <div class="erro">
                                     @if($errors->has('disciplina'))
                                     <div class="text-danger">{{$errors->first('disciplina')}}</div>
                                     @endif
                                 </div>
                                 </div>
-
                             </div>
                             <br/>
                         </fieldset>

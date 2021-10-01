@@ -68,11 +68,9 @@ class TurmasController extends Controller
 
         $import = new PessoaImport;
 
-        /*if($import->import($file)){
+        if($import->import($file)){
             return back()->with(['success'=>"Feito com sucesso"]);
-        }*/
+        }
 
-
-        dd($import->import($file));
     }
 }

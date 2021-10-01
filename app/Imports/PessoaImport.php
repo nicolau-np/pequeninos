@@ -53,10 +53,12 @@ class PessoaImport implements
         ];
         foreach ($rows as $row) {
 
-            /*if (!Pessoa::where(['nome' => $row['nome']])->first()) {
+            if (!Pessoa::where(['nome' => $row['nome']])->first()) {
                 $data['pessoa']['nome'] = $row['nome'];
                 $data['pessoa']['genero'] = $row['genero'];
-                $data['pessoa']['data_nascimento'] = $row['data_nascimento'];
+                 //convertendo data
+                $data = date('Y-m-d', strtotime($this->transformData(intval($row['data_nascimento']))));
+                $data['pessoa']['data_nascimento'] = $data;
                 $pessoa = Pessoa::create($data['pessoa']);
 
                 $data['estudante']['id_pessoa'] = $pessoa->id;
@@ -64,15 +66,14 @@ class PessoaImport implements
 
                 $data['historico']['id_estudante'] = $estudante->id;
                 $historico = HistoricEstudante::create($data['historico']);
-            }*/
+            }
 
-            $data = $this->transformData($row['data_nascimento']);
         }
     }
 
     public function transformData($value, $format="Y-m-d"){
         try{
-           return  \Carbon\Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value)->format($format));
+           return  \Carbon\Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value));
         }catch(\ErrorException $e){
             return \Carbon\Carbon::createFromFormat($format, $value);
         }

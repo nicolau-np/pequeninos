@@ -57,8 +57,8 @@ class PessoaImport implements
                 $data['pessoa']['nome'] = $row['nome'];
                 $data['pessoa']['genero'] = $row['genero'];
                  //convertendo data
-                $data = date('Y-m-d', strtotime($this->transformData(intval($row['data_nascimento']))));
-                $data['pessoa']['data_nascimento'] = $data;
+                $data_nascimento = date('Y-m-d', strtotime($this->transformData(intval($row['data_nascimento']))));
+                $data['pessoa']['data_nascimento'] = $data_nascimento;
                 $pessoa = Pessoa::create($data['pessoa']);
 
                 $data['estudante']['id_pessoa'] = $pessoa->id;

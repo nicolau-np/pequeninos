@@ -154,6 +154,13 @@ class MinhaTurmaController extends Controller
             return back()->with(['error' => "Não encontrou turma"]);
         }
 
-        
+        $data = [
+            'title' => "Fotografias",
+            'type' => "fotografias",
+            'menu' => "Minha Turma",
+            'submenu' => "Fotografias",
+        ];
+
+        return view('minha_turma.fotografias', $data);
     }
 }

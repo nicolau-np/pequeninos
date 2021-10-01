@@ -175,9 +175,11 @@ class UserController extends Controller
             'name'=>$user->username,
             'id_user'=>$user->id,
             'hash_code' => $verify_code_hash,
+            'id_reset'=>null,
         ];
-
-        if (ResetPassword::create($data)) {
+        $reset_password = ResetPassword::create($data);
+        if ($reset_password) {
+            $data2['id_reset'] = $reset_password->id;
             /*enviar email*/
             Mail::send('email.reset_password', $data2, function ($message) use ($data2) {
                 $message->from('mr1Normaliii@gmail.com', 'Escola-SOS');
@@ -187,5 +189,9 @@ class UserController extends Controller
             /*fim*/
             return back()->with(['success' => "Feito com sucesso. Recebeu uma SMS no email com código e link"]);
         }
+    }
+
+    public function verifycode($hash_code, $id_reset){
+        
     }
 }

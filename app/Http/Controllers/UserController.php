@@ -74,9 +74,11 @@ class UserController extends Controller
 
         $data = [
             'title' => "Perfil",
-            'type' => "profile",
-            'menu' => "Perfil",
-            'submenu' => ""
+            'type' => "perfil",
+            'menu' => $pessoa->nome,
+            'submenu' => "",
+            'getPessoa'=>$pessoa,
+            'getUser'=>$user,
         ];
         return view('user.profile', $data);
     }

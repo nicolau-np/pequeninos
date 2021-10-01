@@ -165,7 +165,7 @@ class MinhaTurmaController extends Controller
         }
 
         $historico = HistoricEstudante::whereHas('estudante.pessoa', function () {
-        })->where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])->get()->sortBy('estudante.numero');
+        })->where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])->orderBy('numero', 'asc')->get();
 
         $data = [
             'title' => "Fotografias",

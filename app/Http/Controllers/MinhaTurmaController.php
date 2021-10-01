@@ -185,6 +185,13 @@ class MinhaTurmaController extends Controller
         $request->validate([
             'foto' => ['required', 'mimes:jpg,png,jpeg,JPG,PNG,JPEG', 'max:5000']
         ]);
+
+        if($request->numero){
+            $request->validate([
+                'numero' => ['required', 'integer', 'min:1'],
+            ]);
+        }
+
         $pessoa = Pessoa::find($id_pessoa);
         if (!$pessoa) {
             return back()->with(['error' => "Não encontrou estudante"]);
@@ -196,6 +203,11 @@ class MinhaTurmaController extends Controller
         $turma = Turma::find($id_turma);
         if (!$turma) {
             return back()->with(['error' => "Não encontrou turma"]);
+        }
+
+        $estudante = Estudante::where(['id_pessoa'=> $id_pessoa])->first();
+        if(!$estudante){
+            return back()->with(['error' => "Não encontrou"]);
         }
 
         $nome_pasta = $turma->turma . "-" . $ano_lectivo;
@@ -215,8 +227,17 @@ class MinhaTurmaController extends Controller
             'foto' => $path
         ];
 
+        $data['estudante_historico'] =[
+            'numero'=>$request->numero,
+        ];
+
         if (Pessoa::find($id_pessoa)->update($data['pessoa'])) {
-            return back()->with(['success' => "Feito com sucesso"]);
+            if(Estudante::where(['id_estudante' => $estudante->id, 'ano_lectivo'=> $ano_lectivo])->update($data['estudante_historico'])){
+                if(HistoricEstudante::where(['id_estudante' => $estudante->id, 'ano_lectivo'=> $ano_lectivo])->update($data['estudante_historico'])){
+                    return back()->with(['success' => "Feito com sucesso"]);
+                }
+            }
+
         }
     }
 }

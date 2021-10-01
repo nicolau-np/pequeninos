@@ -78,7 +78,15 @@ use App\Http\Controllers\ControladorStatic;
                                                 <div class="text-danger">{{$errors->first('foto')}}</div>
                                                 @endif
                                             </div>
-                                           <button type="submit" class="btn btn-primary">Editar Foto</button>
+
+                                            {{Form::number('numero', $historicos->numero, ['class'=>"form-control", 'placeholder'=>"Numero"])}}
+                                            <div class="erro">
+                                                @if($errors->has('numero'))
+                                                <div class="text-danger">{{$errors->first('numero')}}</div>
+                                                @endif
+                                            </div>
+
+                                           <button type="submit" class="btn btn-primary">Salvar</button>
                                         </td>
                                     </tr>
                                     {{Form::close()}}

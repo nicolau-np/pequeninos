@@ -5,7 +5,6 @@ namespace App\Imports;
 use App\Estudante;
 use App\HistoricEstudante;
 use App\Pessoa;
-use Carbon\Carbon;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Session;

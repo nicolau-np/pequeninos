@@ -5,6 +5,7 @@ namespace App\Imports;
 use App\Estudante;
 use App\HistoricEstudante;
 use App\Pessoa;
+use Carbon\Carbon;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Session;
@@ -52,7 +53,7 @@ class PessoaImport implements
         ];
         foreach ($rows as $row) {
 
-            if (!Pessoa::where(['nome' => $row['nome']])->first()) {
+            /*if (!Pessoa::where(['nome' => $row['nome']])->first()) {
                 $data['pessoa']['nome'] = $row['nome'];
                 $data['pessoa']['genero'] = $row['genero'];
                 $data['pessoa']['data_nascimento'] = $row['data_nascimento'];
@@ -63,7 +64,17 @@ class PessoaImport implements
 
                 $data['historico']['id_estudante'] = $estudante->id;
                 $historico = HistoricEstudante::create($data['historico']);
-            }
+            }*/
+
+            $data = $this->transformData($row['data_nascimento']);
+        }
+    }
+
+    public function transformData($value, $format="Y-m-d"){
+        try{
+           return  \Carbon\Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value)->format($format));
+        }catch(\ErrorException $e){
+            return \Carbon\Carbon::createFromFormat($format, $value);
         }
     }
 

@@ -830,7 +830,7 @@ class InstitucionalController extends Controller
             'title' => "Observações",
             'type' => "institucional",
             'menu' => "Observações",
-            'submenu' => "Geral",
+            'submenu' => "Específica",
             'getCursos' => $cursos,
         ];
         return view('institucional.observacaoes.observacao_especifica.new', $data);
@@ -871,7 +871,7 @@ class InstitucionalController extends Controller
             'title' => "Observações",
             'type' => "institucional",
             'menu' => "Observações",
-            'submenu' => "Geral",
+            'submenu' => "Específica",
             'getCursos' => $cursos,
             'getObservacao' =>$observacao,
         ];
@@ -903,7 +903,13 @@ class InstitucionalController extends Controller
     }
 
     public function conjunta_list(){
-        
+        $data = [
+            'title' => "Observações",
+            'type' => "institucional",
+            'menu' => "Observações",
+            'submenu' => "Conjunta",
+        ];
+        return view('institucional.observacaoes.observacao_conjunta.new', $data);
     }
 
     public function conjunta_create(){

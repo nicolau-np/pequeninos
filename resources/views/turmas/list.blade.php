@@ -72,7 +72,7 @@ use App\Http\Controllers\ControladorStatic;
                                                                     Ano: {{$getAno}}&nbsp;&nbsp; <b>[ {{$numero_estudantes}} ]</b>
                                                                     <hr/>
                                                                 <div class="operacoes">
-                                                                    <a href="/relatorios/lista_nominal/{{$turmas->id}}/{{$getAno}}" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="" data-original-title="Lista Nominal">
+                                                                    <a href="/relatorios/lista_nominal/{{$turmas->id}}/{{$getAno}}" type="button" class="btn btn-warning btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="" data-original-title="Lista Nominal">
                                                                         <i class="ti-printer"></i>
                                                                     </a>&nbsp;
 
@@ -84,8 +84,8 @@ use App\Http\Controllers\ControladorStatic;
                                                                         <i class="icofont icofont-clip-board"></i>
                                                                     </a>&nbsp;
 
-                                                                    <a href="/minha_turma/horario/{{$turmas->id}}/{{$getAno}}" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Horário">
-                                                                        <i class="icofont icofont-time"></i>
+                                                                    <a href="/minha_turma/fotografias/{{$turmas->id}}/{{$getAno}}" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Fotografias">
+                                                                        <i class="ti-gallery"></i>
                                                                     </a>&nbsp;
                                                                 </div>
                                                                 </span>

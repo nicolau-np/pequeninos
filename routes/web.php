@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', "PrincipalController@index")->name('principal');
+Route::get('/', "PrincipalController@index")->name('principal')->middleware('guest');
 Route::get('/home', "HomeController@index")->name('home');
 Route::get('/login', "UserController@loginForm")->name('login')->middleware('guest');
 Route::post('/logar', "UserController@logar")->name('logar');

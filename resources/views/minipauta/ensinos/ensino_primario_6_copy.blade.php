@@ -96,10 +96,10 @@ use App\Http\Controllers\ControladorNotas;
                                         <?php }
                                         else{
                                             foreach($trimestre1 as $valor1){
-                                                $v1_estilo = ControladorNotas::nota_20($valor1->mac);
-                                                $v2_estilo = ControladorNotas::nota_20($valor1->npp);
-                                                $v3_estilo = ControladorNotas::nota_20($valor1->pt);
-                                                $v4_estilo = ControladorNotas::nota_20($valor1->mt);
+                                                $v1_estilo = ControladorNotas::nota_10($valor1->mac);
+                                                $v2_estilo = ControladorNotas::nota_10($valor1->npp);
+                                                $v3_estilo = ControladorNotas::nota_10($valor1->pt);
+                                                $v4_estilo = ControladorNotas::nota_10($valor1->mt);
                                             ?>
 
                                     <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$valor1->mac}} @endif</td>

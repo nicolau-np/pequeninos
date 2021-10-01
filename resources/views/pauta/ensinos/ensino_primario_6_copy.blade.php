@@ -57,7 +57,7 @@ if(!$observacao_geral){
 
                                   <tr>
                                       <th rowspan="2">Nº</th>
-                                      <th rowspan="2" style="width:47px;">Foto</th>
+                                      <th rowspan="2" style="width:47px;">FOTO</th>
                                       <th rowspan="2">NOME COMPLETO</th>
                                       <th rowspan="2">G</th>
                                       <?php

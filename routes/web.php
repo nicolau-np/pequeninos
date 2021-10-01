@@ -20,6 +20,10 @@ Route::get('/login', "UserController@loginForm")->name('login');
 Route::post('/logar', "UserController@logar")->name('logar');
 Route::get('/logout', "UserController@logout")->name('logout');
 
+Route::group(['prefix' =>"user", 'middleware'=>"auth"], function(){
+    Route::get('/profile', "UserController@profile");
+});
+
 Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/getClasses', "AjaxController@getClasses")->name('getClasses');
     Route::post('/getClasses2', "AjaxController@getClasses2")->name('getClasses2');
@@ -276,6 +280,7 @@ Route::get('test', function () {
         $retorno = $ano->ano_lectivo;
     }
 
-    echo $retorno;
+    ech
+o $retorno;
 });
 /*fim*/

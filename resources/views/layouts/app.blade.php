@@ -161,7 +161,7 @@ $lastYear = ControladorStatic::getLastYear();
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="#">
+                                        <a href="/user/profile">
                                             <i class="ti-user"></i> Perfil
                                         </a>
                                     </li>

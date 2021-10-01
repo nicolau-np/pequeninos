@@ -48,7 +48,7 @@ use App\Http\Controllers\ControladorStatic;
                                 <thead>
                                     <tr>
                                         <th style="width:10px;">Nº</th>
-                                        <th style="width:60px;">Fotografia</th>
+                                        <th style="width:47px;">Foto</th>
                                         <th>Nome Completo</th>
                                         <th>Gênero</th>
                                         <th>Operações</th>
@@ -66,7 +66,7 @@ use App\Http\Controllers\ControladorStatic;
                                             @else
                                             {{asset('assets/template/images/profile.png')}}
                                             @endif
-                                            " alt="" style="width:60px; height:60px; border-radius:4px;">
+                                            " alt="" style="width:47px; height:47px; border-radius:4px;">
 
                                         </td>
                                         <td>{{$historicos->estudante->pessoa->nome}}</td>

@@ -232,7 +232,7 @@ class FuncionarioController extends Controller
             ]);
         }
 
-        if ($request->email != "" && $request->email != $pessoa->email) {
+        if ($request->email != "" || $request->email != $pessoa->email) {
             $request->validate([
                 'email' => ['required', 'string', 'unique:usuarios,email']
             ]);
@@ -281,6 +281,7 @@ class FuncionarioController extends Controller
         $data['usuario'] = [
             'estado' => "on",
             'nivel_acesso' => $nivel_acesso,
+            'email' => $request->email,
         ];
 
         if ($request->nome != $data['pessoa']['nome'] || $request->data_nascimento != $data['pessoa']['data_nascimento']) {

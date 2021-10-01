@@ -94,7 +94,14 @@
                     <div class="col-md-4">
                         <div class="row">
                             <div class="col-md-12">
-                            <img src="{{asset($getHistoricoEstudante->estudante->pessoa->foto)}}" alt="" style="width:100%; height:28vh; border-radius: 5px;">
+                            <img src="
+                            @if ($getHistoricoEstudante->estudante->pessoa->foto)
+                            {{asset($getHistoricoEstudante->estudante->pessoa->foto)}}
+                            @else
+                            {{asset('assets/template/images/profile.png')}}
+                            @endif
+
+                            " alt="" style="width:100%; height:28vh; border-radius: 5px;">
                             <br/><br/>
                         </div>
 

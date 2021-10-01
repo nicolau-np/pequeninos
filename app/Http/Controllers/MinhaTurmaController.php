@@ -86,7 +86,8 @@ class MinhaTurmaController extends Controller
         return view('minha_turma.horario', $data);
     }
 
-    public function boletins_notas($id_turma, $ano_lectivo){
+    public function boletins_notas($id_turma, $ano_lectivo)
+    {
         $turma = Turma::find($id_turma);
         if (!$turma) {
             return back()->with(['error' => "Não encontrou turma"]);
@@ -146,14 +147,15 @@ class MinhaTurmaController extends Controller
         return view('minha_turma.new_boletins', $data);
     }
 
-    public function fotografias($id_turma, $ano_lectivo){
-        $ano_lectivos = AnoLectivo::where(['ano_lectivo'=>$ano_lectivo])->first();
-        if(!$ano_lectivos){
+    public function fotografias($id_turma, $ano_lectivo)
+    {
+        $ano_lectivos = AnoLectivo::where(['ano_lectivo' => $ano_lectivo])->first();
+        if (!$ano_lectivos) {
             return back()->with(['error' => "Não encontrou ano lectivo"]);
         }
 
         $turma = Turma::find($id_turma);
-        if(!$turma){
+        if (!$turma) {
             return back()->with(['error' => "Não encontrou turma"]);
         }
 
@@ -165,20 +167,24 @@ class MinhaTurmaController extends Controller
             'type' => "fotografias",
             'menu' => "Minha Turma",
             'submenu' => "Fotografias",
-            'getHistorico'=>$historico,
-            'getTurma'=>$turma,
-            'getAno'=>$ano_lectivo,
+            'getHistorico' => $historico,
+            'getTurma' => $turma,
+            'getAno' => $ano_lectivo,
         ];
 
         return view('minha_turma.fotografias', $data);
     }
 
-    public function updateFoto(Request $request, $id_pessoa, $ano_lectivo, $id_turma){
+    public function updateFoto(Request $request, $id_pessoa, $ano_lectivo, $id_turma)
+    {
+        $request->validate([
+            'foto' => ['required', 'mimes:jpg,png,jpeg,JPG,PNG,JPEG', 'max:5000']
+        ]);
         $pessoa = Pessoa::find($id_pessoa);
         if (!$pessoa) {
             return back()->with(['error' => "Não encontrou estudante"]);
         }
-        $ano_lectivos=AnoLectivo::find($ano_lectivo);
+        $ano_lectivos = AnoLectivo::find($ano_lectivo);
         if (!$ano_lectivos) {
             return back()->with(['error' => "Não encontrou ano lectivo"]);
         }
@@ -187,7 +193,7 @@ class MinhaTurmaController extends Controller
             return back()->with(['error' => "Não encontrou turma"]);
         }
 
-        $nome_pasta = $turma->turma."-".$ano_lectivo;
+        $nome_pasta = $turma->turma . "-" . $ano_lectivo;
 
         $path = null;
         if ($request->hasFile('foto') && $request->foto->isValid()) {
@@ -197,16 +203,15 @@ class MinhaTurmaController extends Controller
             if ($pessoa->foto != "" && file_exists($pessoa->foto)) {
                 unlink($pessoa->foto);
             }
-            $path = $request->foto->store('fotos_estudantes/'.$nome_pasta);
+            $path = $request->foto->store('fotos_estudantes/' . $nome_pasta);
         }
 
         $data['pessoa'] = [
-            'foto'=>$path
+            'foto' => $path
         ];
 
-        if(Pessoa::find($id_pessoa)->update($data['pessoa'])){
+        if (Pessoa::find($id_pessoa)->update($data['pessoa'])) {
             return back()->with(['success' => "Feito com sucesso"]);
         }
-
     }
 }

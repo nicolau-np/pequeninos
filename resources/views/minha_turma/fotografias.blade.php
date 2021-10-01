@@ -56,7 +56,7 @@ use App\Http\Controllers\ControladorStatic;
                                 </thead>
                                 <tbody>
                                     @foreach ($getHistorico as $historicos)
-                                    {{Form::open(['method'=>"put", 'url'=>"/minha_turma/updateFoto/{$historicos->pessoa->id}/{$historicos->ano_lectivo}/{$historicos->id_turma}", 'enctype'=>"multipart/form-data"])}}
+                                    {{Form::open(['method'=>"put", 'url'=>"/minha_turma/updateFoto/{$historicos->estudante->pessoa->id}/{$historicos->ano_lectivo}/{$historicos->id_turma}", 'enctype'=>"multipart/form-data"])}}
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
                                         <td>

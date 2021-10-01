@@ -26,7 +26,7 @@
                 <div class="col-sm-12">
                     <!-- Authentication card start -->
                     <div class="signup-card card-block auth-body mr-auto ml-auto">
-                        {{Form::open(['method'=>"post", 'url'=>"/verifycode/{$getReset->id}", 'class'=>"md-float-material"])}}
+                        {{Form::open(['method'=>"put", 'url'=>"/verifycode/{$getReset->id}", 'class'=>"md-float-material"])}}
                             <div class="text-center" style="font-size:30px; font-weight: bold;">
                                 SIGE
                             </div>

@@ -245,6 +245,21 @@ class UserController extends Controller
     if($request->code!=$reset_password->verify_code){
         return back()->with(['error' => "Código de verificação incorrecto"]);
     }
-    
-   }
+
+    $default_password = Hash::make('olamundo2015');
+    $data['user'] = [
+        'password' =>$default_password,
+    ];
+
+    $data['reset'] = [
+        'estado'=>"off",
+    ];
+
+    if(User::find($user->id)->update($data['user'])){
+        if(ResetPassword::find($id_reset)->update($data['reset'])){
+            return redirect()->route('login');
+        }
+    }
+
+  }
 }

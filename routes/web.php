@@ -19,10 +19,11 @@ Route::get('/home', "HomeController@index")->name('home');
 Route::get('/login', "UserController@loginForm")->name('login');
 Route::post('/logar', "UserController@logar")->name('logar');
 Route::get('/logout', "UserController@logout")->name('logout');
+Route::get('/resetpassword', "UserController@resetpassword")->name('resetpassword');
 
 Route::group(['prefix' =>"user", 'middleware'=>"auth"], function(){
     Route::get('/profile', "UserController@profile");
-    Route::get('/updateprofile', "UserController@updateprofile");
+    Route::post('/updateprofile', "UserController@updateprofile");
 });
 
 Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {

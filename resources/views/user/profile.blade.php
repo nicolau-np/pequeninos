@@ -96,6 +96,13 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            <br/>
+                                            <div class="row">
+                                                <div class="col-md-6">
+
+                                                    {{Form::submit("Salvar", ['class'=>"btn btn-primary"])}}
+                                                </div>
+                                            </div>
                                             </fieldset>
                                             {{Form::close()}}
                                         </div>

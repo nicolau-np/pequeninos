@@ -116,4 +116,8 @@ class UserController extends Controller
             return back()->with(['success' => "Feito com sucesso"]);
         }
     }
+
+    public function resetpassword(){
+        
+    }
 }

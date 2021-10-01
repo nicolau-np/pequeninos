@@ -989,12 +989,14 @@ class InstitucionalController extends Controller
             return back()->with(['error' => "Não encontrou"]);
         }
 
-        
+        $regras = ObservacaoConjuntaRegra::where(['id_observacao_conjunta' => $observacao->id])->get();
         $data = [
             'title' => "Observações",
             'type' => "institucional",
             'menu' => "Observações",
             'submenu' => "Conjunta",
+            'getObservacao' =>$observacao,
+            'getRegras'=>$regras,
         ];
         return view('institucional.observacaoes.observacao_conjunta.regras', $data);
     }

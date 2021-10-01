@@ -629,7 +629,7 @@ class InstitucionalController extends Controller
 
         $data['ano'] = [
             'ano_lectivo' => $request->ano_lectivo,
-            'estado'=>$request->estado,
+            'estado' => $request->estado,
         ];
         if (AnoLectivo::where($data['ano'])->first()) {
             return back()->with(['error' => "Já cadastrou este ano lectivo"]);
@@ -668,7 +668,7 @@ class InstitucionalController extends Controller
 
         $data['ano'] = [
             'ano_lectivo' => $request->ano_lectivo,
-            'estado'=>$request->estado,
+            'estado' => $request->estado,
         ];
 
         if ($request->ano_lectivo != $ano_lectivo->ano_lectivo) {
@@ -862,9 +862,10 @@ class InstitucionalController extends Controller
         }
     }
 
-    public function especifica_edit($id_observacao){
-        $observacao=ObservacaoUnica::find($id_observacao);
-        if(!$observacao){
+    public function especifica_edit($id_observacao)
+    {
+        $observacao = ObservacaoUnica::find($id_observacao);
+        if (!$observacao) {
             return back()->with(['error' => "Não encontrou"]);
         }
         $cursos = Curso::pluck('curso', 'id');
@@ -874,14 +875,15 @@ class InstitucionalController extends Controller
             'menu' => "Observações",
             'submenu' => "Específica",
             'getCursos' => $cursos,
-            'getObservacao' =>$observacao,
+            'getObservacao' => $observacao,
         ];
         return view('institucional.observacaoes.observacao_especifica.edit', $data);
     }
 
-    public function especifica_update(Request $request, $id_observacao){
-        $observacao=ObservacaoUnica::find($id_observacao);
-        if(!$observacao){
+    public function especifica_update(Request $request, $id_observacao)
+    {
+        $observacao = ObservacaoUnica::find($id_observacao);
+        if (!$observacao) {
             return back()->with(['error' => "Não encontrou"]);
         }
         $request->validate([
@@ -903,7 +905,8 @@ class InstitucionalController extends Controller
         }
     }
 
-    public function conjunta_list(){
+    public function conjunta_list()
+    {
         $observacaoes = ObservacaoConjunta::paginate(8);
         $data = [
             'title' => "Observações",
@@ -915,7 +918,8 @@ class InstitucionalController extends Controller
         return view('institucional.observacaoes.observacao_conjunta.list', $data);
     }
 
-    public function conjunta_create(){
+    public function conjunta_create()
+    {
         $cursos = Curso::pluck('curso', 'id');
         $data = [
             'title' => "Observações",
@@ -927,15 +931,35 @@ class InstitucionalController extends Controller
         return view('institucional.observacaoes.observacao_conjunta.new', $data);
     }
 
-    public function conjunta_store(Request $request){
+    public function conjunta_store(Request $request)
+    {
+        $request->validate([
+            'curso' => ['required', 'integer', 'min:1'],
+            'classe' => ['required', 'integer', 'min:1'],
+            'disciplinas' => ['required'],
+            'disciplinas.*' => ['string']
+        ]);
+
+        $data['observacao'] = [
+            'id_curso'=>$request->curso,
+            'id_classe'=>$request->classe,
+            'estado'=>"on",
+        ];
+
+        $data['regras']=[
+            'id_observacao_conjunta'=>null,
+            'id_disciplina'=>null,
+            'estado'=>"on",
+        ];
+
 
     }
 
-    public function conjunta_edit($id_observacao){
-
+    public function conjunta_edit($id_observacao)
+    {
     }
 
-    public function conjunta_update(Request $request, $id_observacao){
-
+    public function conjunta_update(Request $request, $id_observacao)
+    {
     }
 }

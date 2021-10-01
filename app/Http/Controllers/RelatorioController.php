@@ -275,7 +275,7 @@ class RelatorioController extends Controller
         }
 
         $historico = HistoricEstudante::where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])
-            ->get()->sortBy('estudante.pessoa.nome');
+            ->orderBy('numero', 'asc')->get();
 
         $data['view'] = [
             'getDirector' => $directorTurma,

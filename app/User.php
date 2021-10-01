@@ -52,4 +52,8 @@ class User extends Authenticatable
     public function pagamento_pai(){
         return $this->hasMany(PagamentoPai::class, 'id_usuario', 'id');
     }
+
+    public function reset_password(){
+        return $this->hasMany(ResetPassword::class, 'id_user', 'id');
+    }
 }

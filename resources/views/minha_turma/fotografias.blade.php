@@ -11,6 +11,12 @@ use App\Http\Controllers\ControladorStatic;
                 <div class="card-header">
                     <h5>{{$submenu}}
                     <i class="ti-angle-right"></i>
+                    {{$getTurma->turma}}
+                    <i class="ti-angle-right"></i>
+                    {{$getTurma->turno->turno}}
+                    <i class="ti-angle-right"></i>
+                    {{$getTurma->curso->curso}}
+                    <i class="ti-angle-right"></i>
                     {{$getAno}}
 
                     </h5>
@@ -27,49 +33,9 @@ use App\Http\Controllers\ControladorStatic;
                 </div>
                 <div class="card-block">
                 <div class="row">
-               @if ($getTurmas->count()==0)
-                    <div class="col-md-12">Nenhuma Turma</div>
-                @else
-                @foreach ($getTurmas as $turmas)
-                <?php
-                        $numero_estudantes = 0;
-                        $getEstudantes = ControladorStatic::getTotalEstudantesTurma($turmas->id_turma, $turmas->ano_lectivo);
-                        $numero_estudantes = $getEstudantes->count();
-                     ?>
-                <div class="col-md-4 col-xl-4">
-                    <div class="card widget-card-1">
-                        <div class="card-block-small">
-                            <i class="ti-folder bg-c-blue card1-icon"></i>
-                        <span class="text-c-blue f-w-600">{{$turmas->turma->curso->curso}}</span>
-                        <h4 style="font-size:20px;">{{$turmas->turma->turma}}&nbsp;{{$turmas->turma->turno->turno}}</h4>
-                            <div>
-                                <span class="f-left m-t-10 text-muted">
-                                    Ano: {{$turmas->ano_lectivo}}&nbsp;&nbsp;<b>[ {{$numero_estudantes}} ]</b>
-                                    <hr/>
-                                   <div class="operacoes">
-                                    <a href="/pautas/create/{{$turmas->id_turma}}/{{$turmas->ano_lectivo}}" type="button" class="btn btn-danger btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="top" title="" data-original-title="Pauta">
-                                        <i class="icofont icofont-clip-board"></i>
-                                    </a>&nbsp;
+                    <div class="col-md-12">
 
-                                    <a href="/minha_turma/fotografias/{{$turmas->id_turma}}/{{$turmas->ano_lectivo}}" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Fotografias">
-                                        <i class="ti-gallery"></i>
-                                    </a>&nbsp;
-                                    <a href="/relatorios/lista_nominal/{{$turmas->id_turma}}/{{$turmas->ano_lectivo}}" type="button" class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Lista Nominal">
-                                        <i class="icofont icofont-list"></i>
-                                    </a>&nbsp;
-                                    <a href="/minha_turma/boletins_notas/{{$turmas->id_turma}}/{{$turmas->ano_lectivo}}" type="button" class="btn btn-warning btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Boletins de Notas">
-                                        <i class="icofont icofont-file"></i>
-                                    </a>&nbsp;
-                                   </div>
-                                </span>
-                            </div>
-                        </div>
                     </div>
-                </div>
-
-                @endforeach
-
-                  @endif
                 </div>
                 </div>
             </div>

@@ -156,8 +156,8 @@ class MinhaTurmaController extends Controller
         }
 
         $estudantes = Estudante::whereHas('pessoa', function($query){
-
-        })->where(['id_turma' => $id_turma, 'ano_lectivo'=>$ano_lectivo])->sortBy('pessoa.nome');
+            $query->orderBy('nome', 'asc');
+        })->where(['id_turma' => $id_turma, 'ano_lectivo'=>$ano_lectivo]);
         $data = [
             'title' => "Fotografias",
             'type' => "fotografias",

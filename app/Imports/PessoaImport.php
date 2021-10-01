@@ -54,12 +54,13 @@ class PessoaImport implements
             'ano_lectivo' => Session::get('ano_lectivoIMP'),
         ];
         foreach ($rows as $row) {
+            //convertendo data
+            $data_nascimento = date('Y-m-d', strtotime($this->transformData(intval($row['data_nascimento']))));
 
-            if (!Pessoa::where(['nome' => $row['nome']])->first()) {
+            if (!Pessoa::where(['nome' => $row['nome'], 'data_nascimento'=>$data_nascimento])->first()) {
                 $data['pessoa']['nome'] = $row['nome'];
                 $data['pessoa']['genero'] = $row['genero'];
-                 //convertendo data
-                $data_nascimento = date('Y-m-d', strtotime($this->transformData(intval($row['data_nascimento']))));
+
                 $data['pessoa']['data_nascimento'] = $data_nascimento;
                 $pessoa = Pessoa::create($data['pessoa']);
 

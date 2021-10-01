@@ -994,7 +994,7 @@ class InstitucionalController extends Controller
             'title' => "Observações",
             'type' => "institucional",
             'menu' => "Observações",
-            'submenu' => "Conjunta",
+            'submenu' => "Regras",
             'getObservacao' =>$observacao,
             'getRegras'=>$regras,
         ];

@@ -139,11 +139,13 @@ class PautaController_copy extends Controller
         }
         if ($id_ensino == 1) {
             //se for classificacao quantitativa
-            if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "6ª classe")) {
-                return view('pauta.ensinos.ensino_primario_2_4_6_copy', $data);
+            if (($classe == "2ª classe") || ($classe == "4ª classe")) {
+                return view('pauta.ensinos.ensino_primario_2_4_copy', $data);
             } //se for classificacao quantitativa
             elseif (($classe == "Iniciação") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
                 return view('pauta.ensinos.ensino_primario_Ini_1_3_5_copy', $data);
+            }elseif(($classe == "6ª classe")){
+                return view('pauta.ensinos.ensino_primario_6_copy', $data);
             }
         } elseif ($id_ensino == 2) {
             if ($classe == "9ª classe") {

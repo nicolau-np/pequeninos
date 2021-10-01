@@ -9,6 +9,7 @@ use App\Disciplina;
 use App\Ensino;
 use App\Grade;
 use App\Hora;
+use App\ObservacaoConjunta;
 use App\ObservacaoGeral;
 use App\ObservacaoUnica;
 use App\Sala;
@@ -903,13 +904,15 @@ class InstitucionalController extends Controller
     }
 
     public function conjunta_list(){
+        $observacaoes = ObservacaoConjunta::paginate(8);
         $data = [
             'title' => "Observações",
             'type' => "institucional",
             'menu' => "Observações",
             'submenu' => "Conjunta",
+            'getObservacoes' => $observacaoes,
         ];
-        return view('institucional.observacaoes.observacao_conjunta.new', $data);
+        return view('institucional.observacaoes.observacao_conjunta.list', $data);
     }
 
     public function conjunta_create(){

@@ -25,10 +25,7 @@ class UserController extends Controller
 
     public function loginForm()
     {
-        if (Auth::check()) {
-            return redirect()->route('home');
-        }
-        $data = [
+       $data = [
             'title' => "Iniciar Sessão",
             'type' => "login",
             'menu' => "Login",
@@ -118,6 +115,12 @@ class UserController extends Controller
     }
 
     public function resetpassword(){
-        
+        $data = [
+            'title' => "Iniciar Sessão",
+            'type' => "login",
+            'menu' => "Login",
+            'submenu' => ""
+        ];
+        return view('user.login', $data);
     }
 }

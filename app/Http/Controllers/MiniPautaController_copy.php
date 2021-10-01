@@ -51,7 +51,7 @@ class MiniPautaController_copy extends Controller
 
         //pegar dados dos alunos na tabela historico, formando a lista dos alunos
         $historico = HistoricEstudante::where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])
-            ->get()->sortBy('estudante.pessoa.nome');
+            ->orderBy('numero', 'asc')->get();
 
         $data = [
             'title' => "Mini Pauta",

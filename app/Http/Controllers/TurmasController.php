@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AnoLectivo;
 use App\Ensino;
-use App\Imports\PessoaImport;
+use App\Imports\EstudanteImport;
 use App\Turma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -66,7 +66,7 @@ class TurmasController extends Controller
         ]);
         $file = $request->file('arquivo');
 
-        $import = new PessoaImport;
+        $import = new EstudanteImport;
 
         if($import->import($file)){
             return back()->with(['success'=>"Feito com sucesso"]);

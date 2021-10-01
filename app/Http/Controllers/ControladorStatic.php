@@ -168,7 +168,7 @@ class ControladorStatic extends Controller
         return $disciplina;
     }
 
-    public static function getHorario($id_hora, $id_turma, $ano_lectivo, $semana)
+    /*public static function getHorario($id_hora, $id_turma, $ano_lectivo, $semana)
     {
         $data = [
             'id_turma' => $id_turma,
@@ -178,7 +178,7 @@ class ControladorStatic extends Controller
         ];
         $horario = Horario::where($data)->get();
         return $horario;
-    }
+    }*/
 
 
     public static function getTurmaEnsino($ensino)
@@ -217,5 +217,14 @@ class ControladorStatic extends Controller
     public static function getObservacaofinal($id_estudante, $ano_lectivo){
         $observacao_final = HistoricEstudante::where(['id_estudante'=>$id_estudante, 'ano_lectivo'=> $ano_lectivo])->first();
         return $observacao_final;
+    }
+
+    public static function getProfDisciplina($id_turma, $id_disciplina, $ano_lectivo){
+        $horario = Horario::where([
+            'id_disciplina' =>$id_disciplina,
+            'id_turma'=> $id_turma,
+            'ano_lectivo' =>$ano_lectivo,
+        ])->first();
+        return $horario;
     }
 }

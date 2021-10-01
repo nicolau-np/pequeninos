@@ -45,97 +45,30 @@ use \App\Http\Controllers\ControladorStatic;
                       <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>Hora</th>
-                                    <th>Segunda</th>
-                                    <th>Terça</th>
-                                    <th>Quarta</th>
-                                    <th>Quinta</th>
-                                    <th>Sexta</th>
+                                    <th>Disciplinas</th>
+                                    <th>Professor</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($getGrades as $grades)
                                 <?php
-                                $semana = null;
-                                    foreach($getHora as $hora ){
-                                        if($hora->id_turno == $getTurma->id_turno){
-                                    ?>
+                                    $horario = ControladorStatic::getProfDisciplina($getTurma->id, $grades->id_disciplina, $getAno);
+                                ?>
                                 <tr>
-                                <td>{{$hora->hora_entrada}} - {{$hora->hora_saida}}</td>
+                                    <td>{{$grades->disciplina->disciplina}}</td>
                                     <td>
-                                        <?php
-                                          $semana = "Segunda";
-                                         $horario = ControladorStatic::getHorario($hora->id, $getTurma->id, $getAno, $semana);
-                                        ?>
-                                        @if ($horario->count()!=0)
-                                        <span class="disciplina">{{$horario[0]->disciplina->disciplina}}</span><br/>
-                                            <span class="prof">{{$horario[0]->funcionario->pessoa->nome}}</span><br/>
-                                            <span class="sala">{{$horario[0]->sala->sala}}</span>
+                                        @if(!$horario)
+                                        <span style="font-size:11px;">
+                                            sem professor
+                                        </span>
                                         @else
-                                        ---
-                                        @endif
-
-                                    </td>
-
-                                    <td>
-                                    <?php
-                                    $semana = "Terça";
-                                   $horario = ControladorStatic::getHorario($hora->id, $getTurma->id, $getAno, $semana);
-                                  ?>
-                                  @if ($horario->count()!=0)
-                                  <span class="disciplina">{{$horario[0]->disciplina->disciplina}}</span><br/>
-                                      <span class="prof">{{$horario[0]->funcionario->pessoa->nome}}</span><br/>
-                                      <span class="sala">{{$horario[0]->sala->sala}}</span>
-                                  @else
-                                  ---
-                                  @endif
-                                    </td>
-
-
-                                    <td>
-                                        <?php
-                                          $semana = "Quarta";
-                                         $horario = ControladorStatic::getHorario($hora->id, $getTurma->id, $getAno, $semana);
-                                        ?>
-                                        @if ($horario->count()!=0)
-                                        <span class="disciplina">{{$horario[0]->disciplina->disciplina}}</span><br/>
-                                            <span class="prof">{{$horario[0]->funcionario->pessoa->nome}}</span><br/>
-                                            <span class="sala">{{$horario[0]->sala->sala}}</span>
-                                        @else
-                                        ---
-                                        @endif
-                                    </td>
-
-
-                                    <td>
-                                        <?php
-                                          $semana = "Quinta";
-                                         $horario = ControladorStatic::getHorario($hora->id, $getTurma->id, $getAno, $semana);
-                                        ?>
-                                        @if ($horario->count()!=0)
-                                        <span class="disciplina">{{$horario[0]->disciplina->disciplina}}</span><br/>
-                                            <span class="prof">{{$horario[0]->funcionario->pessoa->nome}}</span><br/>
-                                            <span class="sala">{{$horario[0]->sala->sala}}</span>
-                                        @else
-                                        ---
-                                        @endif
-                                    </td>
-
-
-                                    <td>
-<?php
-                                          $semana = "Sexta";
-                                         $horario = ControladorStatic::getHorario($hora->id, $getTurma->id, $getAno, $semana);
-                                        ?>
-                                        @if ($horario->count()!=0)
-                                            <span class="disciplina">{{$horario[0]->disciplina->disciplina}}</span><br/>
-                                            <span class="prof">{{$horario[0]->funcionario->pessoa->nome}}</span><br/>
-                                            <span class="sala">{{$horario[0]->sala->sala}}</span>
-                                        @else
-                                        ---
+                                        <span style="font-size:12px; color: #4680ff;">
+                                        {{$horario->funcionario->pessoa->nome}}
+                                        </span>
                                         @endif
                                     </td>
                                 </tr>
-                            <?php }}?>
+                                @endforeach
                             </tbody>
                       </table>
                   </div>

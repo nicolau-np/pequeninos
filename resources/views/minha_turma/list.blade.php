@@ -61,6 +61,10 @@ use App\Http\Controllers\ControladorStatic;
                                     <a href="/minha_turma/boletins_notas/{{$turmas->id_turma}}/{{$turmas->ano_lectivo}}" type="button" class="btn btn-warning btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Boletins de Notas">
                                         <i class="icofont icofont-file"></i>
                                     </a>&nbsp;
+
+                                    <a href="/minha_turma/horario/{{$turmas->id_turma}}/{{$turmas->ano_lectivo}}" type="button" class="btn btn-info btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Horário">
+                                        <i class="ti-alarm-clock"></i>
+                                    </a>&nbsp;
                                    </div>
                                 </span>
                             </div>

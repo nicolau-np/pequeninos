@@ -70,7 +70,12 @@ class MinhaTurmaController extends Controller
             }
         }
 
-        $hora = Hora::orderBy('hora_entrada', 'asc')->get();
+        $data = [
+            'id_classe'=>$turma->id_classe,
+            'id_curso'=>$turma->id_curso,
+        ];
+
+        $grades = Grade::where($data)->get();
 
         $data = [
             'title' => "Horário",
@@ -79,7 +84,7 @@ class MinhaTurmaController extends Controller
             'submenu' => "Horário",
             'getTurma' => $turma,
             'getAno' => $ano_lectivo,
-            'getHora' => $hora,
+            'getGrades'=>$grades,
         ];
 
 

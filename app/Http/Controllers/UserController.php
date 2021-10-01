@@ -172,7 +172,9 @@ class UserController extends Controller
         $data2 = [
             'verify_code' => $verify_code,
             'email' =>$user->email,
-            'name'=>$user->pessoa->nome
+            'name'=>$user->username,
+            'id_user'=>$user->id,
+            'hash_code' => $verify_code_hash,
         ];
 
         if (ResetPassword::create($data)) {

@@ -64,6 +64,7 @@
                                     <a class="accordion-msg bg-dark-primary b-none">Dados Acadêmicos</a>
                                         <div class="accordion-desc">
                                             <div class="data">
+                                                <span class="title">Nº:</span> {{$getHistoricoEstudante->numero}}<br/>
                                                 <span class="title">Curso:</span> {{$getHistoricoEstudante->turma->curso->curso}}<br/>
                                                 <span class="title">Classe:</span> {{$getHistoricoEstudante->turma->classe->classe}}<br/>
                                                 <span class="title">Turma:</span> {{$getHistoricoEstudante->turma->turma}}<br/>

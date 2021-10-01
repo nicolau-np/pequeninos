@@ -102,9 +102,9 @@ class EstudanteController extends Controller
         }
 
         $path = null;
-        if ($request->foto) {
+        if ($request->hasFile('foto') && $request->foto->isValid()) {
             $request->validate([
-                'foto' => ['required', 'mimes:jpg,png', 'max:5000']
+                'foto' => ['required', 'mimes:jpg,jpeg,png,JPEG,JPG,PNG', 'max:5000']
             ]);
             $path = $request->foto->store('fotos_estudantes/'.$nome_pasta);
         }
@@ -249,7 +249,7 @@ class EstudanteController extends Controller
         }
 
         $path = null;
-        if ($request->foto) {
+        if ($request->hasFile('foto') && $request->foto->isValid()) {
             $request->validate([
                 'foto' => ['required', 'mimes:jpg,png,jpeg,JPG,PNG,JPEG', 'max:5000']
             ]);

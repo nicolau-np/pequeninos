@@ -27,7 +27,7 @@
                     @if(session('success'))
                     <div class="alert alert-success">{{session('success')}}</div>
                     @endif
-                        {{Form::open(['method'=>"put", 'url'=>"/estudantes/update/{$getEstudante->id}"])}}
+                        {{Form::open(['method'=>"put", 'url'=>"/estudantes/update/{$getEstudante->id}", 'enctype'=>"multipart/form-data"])}}
                         @csrf
                         <fieldset>
                             <legend><i class="ti-list"></i> Dados pessoais</legend>

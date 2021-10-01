@@ -191,7 +191,26 @@ class UserController extends Controller
         }
     }
 
-    public function verifycode($hash_code, $id_reset){
-        
-    }
+    public function verifycode($id_reset){
+        $reset_password = ResetPassword::find($id_reset);
+        if(!$reset_password){
+            return back()->with(['error' => "Nao encontrou"]);
+        }
+        $user = User::find($reset_password->id_user);
+        if(!$user){
+            return back()->with(['error' => "Nao encontrou"]);
+        }
+
+        $data = [
+            'title' => "Código de Verificação",
+            'type' => "login",
+            'menu' => "Código de Verificação",
+            'submenu' => "",
+            'getReset'=>$reset_password,
+            'getUser'=> $user,
+        ];
+        return view('user.verifycode', $data);
+        //$hash_code = $verify_code . "" . $user->email;
+
+   }
 }

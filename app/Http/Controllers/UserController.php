@@ -151,8 +151,11 @@ class UserController extends Controller
             return back()->with(['error' => "Email incorrecto"]);
         }
 
-        /* avancar */
-            
-        /*fim*/
+        //criar codigo de verificacao
+            $numero_aleatorio = str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
+        //fim
+        
+            echo $numero_aleatorio;
+
     }
 }

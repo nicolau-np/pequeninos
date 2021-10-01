@@ -34,7 +34,46 @@ use App\Http\Controllers\ControladorStatic;
                 <div class="card-block">
                 <div class="row">
                     <div class="col-md-12">
+                        <div class="table-responsive">
+                            <table class="table table-bordered">
 
+                                <thead>
+                                    <tr>
+                                        <th style="width:10px;">Nº</th>
+                                        <th style="width:60px;">Fotografia</th>
+                                        <th>Nome Completo</th>
+                                        <th>Gênero</th>
+                                        <th>Operações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($getHistorico as $historicos)
+                                    {{Form::open(['method'=>"put", 'url'=>"/minha_turma/updateFoto/{$historicos->pessoa->id}/{$historicos->ano_lectivo}/{$historicos->id_turma}"])}}
+                                    <tr>
+                                        <td>{{$loop->iteration}}</td>
+                                        <td>
+                                            <img src="
+                                            @if($historicos->estudante->pessoa->foto)
+                                            {{asset($historicos->estudante->pessoa->foto)}}
+                                            @else
+                                            {{asset('assets/template/images/profile.png')}}
+                                            @endif
+                                            " alt="" style="width:60px; height:60px;">
+
+                                        </td>
+                                        <td>{{$historicos->estudante->pessoa->nome}}</td>
+                                        <td>{{$historicos->estudante->pessoa->genero}}</td>
+                                        <td>
+                                            {{Form::file('foto', null, ['class'=>"form-control", 'placeholder'=>"Fotografia"])}}
+                                           <button type="submit" class="btn btn-primary">Editar Foto</button>
+                                        </td>
+                                    </tr>
+                                    {{Form::close()}}
+                                    @endforeach
+                                </tbody>
+
+                            </table>
+                        </div>
                     </div>
                 </div>
                 </div>

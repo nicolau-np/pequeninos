@@ -7,6 +7,7 @@ use App\DirectorTurma;
 use App\Estudante;
 use App\Funcionario;
 use App\Grade;
+use App\HistoricEstudante;
 use App\Hora;
 use App\Horario;
 use App\Turma;
@@ -155,15 +156,15 @@ class MinhaTurmaController extends Controller
             return back()->with(['error' => "Não encontrou turma"]);
         }
 
-        $estudantes = Estudante::whereHas('pessoa', function($query){
-            $query->orderBy('nome', 'asc');
-        })->where(['id_turma' => $id_turma, 'ano_lectivo'=>$ano_lectivo]);
+        $historico = HistoricEstudante::whereHas('estudante.pessoa', function () {
+        })->where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])->get()->sortBy('estudante.pessoa.nome');
+
         $data = [
             'title' => "Fotografias",
             'type' => "fotografias",
             'menu' => "Minha Turma",
             'submenu' => "Fotografias",
-            'getEstudantes'=>$estudantes,
+            'getHistorico'=>$historico,
             'getTurma'=>$turma,
             'getAno'=>$ano_lectivo,
         ];

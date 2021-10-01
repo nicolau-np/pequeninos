@@ -122,7 +122,7 @@ class PautaController_copy extends Controller
         $historico = HistoricEstudante::where([
             'id_turma' => $id_turma,
             'ano_lectivo' => $ano_lectivo
-        ])->get()->sortby('estudante.pessoa.nome');
+        ])->orderBy('numero', 'asc')->get();
 
         $data = [
             'title' => "Pauta",

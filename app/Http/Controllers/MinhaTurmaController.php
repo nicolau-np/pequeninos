@@ -182,9 +182,12 @@ class MinhaTurmaController extends Controller
 
     public function updateFoto(Request $request, $id_pessoa, $ano_lectivo, $id_turma)
     {
-        $request->validate([
-            'foto' => ['required', 'mimes:jpg,png,jpeg,JPG,PNG,JPEG', 'max:5000']
-        ]);
+        if($request->foto){
+            $request->validate([
+                'foto' => ['required', 'mimes:jpg,png,jpeg,JPG,PNG,JPEG', 'max:5000']
+            ]);
+        }
+
 
         if($request->numero){
             $request->validate([

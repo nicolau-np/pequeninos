@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pessoa;
+use App\ResetPassword;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -25,7 +26,7 @@ class UserController extends Controller
 
     public function loginForm()
     {
-       $data = [
+        $data = [
             'title' => "Iniciar Sessão",
             'type' => "login",
             'menu' => "Login",
@@ -106,22 +107,23 @@ class UserController extends Controller
 
         /* deve verificar se a palavra_passe actual esta correcta */
         $verifica_passe = Hash::check($request->password, $user->password);
-        if(!$verifica_passe){
+        if (!$verifica_passe) {
             return back()->with(['error' => "Palavra-Passe actual incorrecta"]);
         }
         /*fim*/
 
         $password_nova = Hash::make($request->newpassword);
         $data = [
-            'password'=>$password_nova,
+            'password' => $password_nova,
         ];
 
-        if(User::find($user->id)->update($data)){
+        if (User::find($user->id)->update($data)) {
             return back()->with(['success' => "Feito com sucesso"]);
         }
     }
 
-    public function resetpassword(){
+    public function resetpassword()
+    {
         $data = [
             'title' => "Recuperar Palavra-Passe",
             'type' => "login",
@@ -131,31 +133,42 @@ class UserController extends Controller
         return view('user.resetpassword', $data);
     }
 
-    public function resetpassword_req(Request $request){
+    public function resetpassword_req(Request $request)
+    {
         $request->validate([
-            'telefone'=> ['required', 'integer', 'min:1'],
-            'email'=>['required', 'string',],
-            'username'=>['required', 'string'],
+            'telefone' => ['required', 'integer', 'min:1'],
+            'email' => ['required', 'string',],
+            'username' => ['required', 'string'],
         ]);
 
-        $user = User::where(['username'=>$request->username])->first();
-        if(!$user){
+        $user = User::where(['username' => $request->username])->first();
+        if (!$user) {
             return back()->with(['error' => "Nome de usuário não existente"]);
         }
 
-        if(!$user->email){
-            return back()->with(['error'=> "Usuário sem email. Deve contactar o administrador do sistema e informar o seu email."]);
+        if (!$user->email) {
+            return back()->with(['error' => "Usuário sem email. Deve contactar o administrador do sistema e informar o seu email."]);
         }
 
-        if($user->email != $request->email){
+        if ($user->email != $request->email) {
             return back()->with(['error' => "Email incorrecto"]);
         }
 
         //criar codigo de verificacao
-            $numero_aleatorio = str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
-        //fim
-        
-            echo $numero_aleatorio;
+        $verify_code = str_pad(mt_rand(0, 999999), 6, '0', STR_PAD_LEFT);
 
+        //criando o hash code
+        $hash_code = $verify_code . "" . $user->email;
+        //transformando em hash
+        $verify_code_hash = Hash::make($hash_code);
+        $data = [
+            'id_user' => $user->id,
+            'hash_code' => $verify_code_hash,
+            'verify_code' => $verify_code,
+            'estado' => "on",
+        ];
+        if (ResetPassword::create($data)) {
+            return back()->with(['success' => "Feito com sucesso. Recebeu uma SMS no email com código e link"]);
+        }
     }
 }

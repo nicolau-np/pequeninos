@@ -22,6 +22,7 @@ Route::get('/logout', "UserController@logout")->name('logout');
 
 Route::group(['prefix' =>"user", 'middleware'=>"auth"], function(){
     Route::get('/profile', "UserController@profile");
+    Route::get('/updateprofile', "UserController@updateprofile");
 });
 
 Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {

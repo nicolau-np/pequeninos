@@ -57,7 +57,7 @@
                                     <div class="col-md-8">
 
                                         <div class="form">
-                                            {{Form::open([])}}
+                                            {{Form::open(['method'=>"post", 'url'=>"/user/updateprofile",])}}
                                             @csrf
                                             <fieldset>
                                             <legend>Palavra Passe</legend>

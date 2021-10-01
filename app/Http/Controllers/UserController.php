@@ -6,6 +6,7 @@ use App\Pessoa;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -77,9 +78,42 @@ class UserController extends Controller
             'type' => "perfil",
             'menu' => $pessoa->nome,
             'submenu' => "",
-            'getPessoa'=>$pessoa,
-            'getUser'=>$user,
+            'getPessoa' => $pessoa,
+            'getUser' => $user,
         ];
         return view('user.profile', $data);
+    }
+
+    public function updateprofile(Request $request)
+    {
+        $id_pessoa = Auth::user()->pessoa->id;
+        $pessoa = Pessoa::find($id_pessoa);
+        if (!$pessoa) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+
+        $user = User::where(['id_pessoa' => $id_pessoa])->first();
+        if (!$user) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+
+        $request->validate([
+            'password' => ['required', 'string',],
+            'newpassword' => ['required', 'string', 'min:6', 'max:255'],
+            'confirmpassword' => ['required', 'string', 'min:6', 'max:255'],
+        ]);
+
+        if ($request->newpassword != $request->confirmpassword) {
+            return back()->with(['error' => "Errou na confirmação da Palavra-Passe"]);
+        }
+
+        $password_nova = Hash::make($request->newpassword);
+        $data = [
+            'password'=>$password_nova,
+        ];
+
+        if(User::find($user->id)->update($data)){
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
     }
 }

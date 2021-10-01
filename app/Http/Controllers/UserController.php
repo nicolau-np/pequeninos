@@ -104,6 +104,10 @@ class UserController extends Controller
             return back()->with(['error' => "Errou na confirmação da Palavra-Passe"]);
         }
 
+        /* deve verificar se a palavra_passe actual esta correcta */
+
+        /*fim*/
+
         $password_nova = Hash::make($request->newpassword);
         $data = [
             'password'=>$password_nova,
@@ -143,5 +147,9 @@ class UserController extends Controller
         if($user->email != $request->email){
             return back()->with(['error' => "Email incorrecto"]);
         }
+
+        /* avancar */
+
+        /*fim*/
     }
 }

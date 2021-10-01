@@ -94,8 +94,10 @@
                     <div class="col-md-4">
                         <div class="row">
                             <div class="col-md-12">
-                            <img src="{{asset($getHistoricoEstudante->estudante->pessoa->foto)}}" alt="" style="width:100%; height:20vh;">
-                            </div>
+                            <img src="{{asset($getHistoricoEstudante->estudante->pessoa->foto)}}" alt="" style="width:100%; height:28vh; border-radius: 5px;">
+                            <br/><br/>
+                        </div>
+
                             <div class="col-md-12">
 
                                 <fieldset>

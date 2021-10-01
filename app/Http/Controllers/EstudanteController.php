@@ -231,16 +231,34 @@ class EstudanteController extends Controller
             'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
         ]);
 
+        $ano_lectivo = AnoLectivo::where('ano_lectivo', $request->ano_lectivo)->first();
+        if (!$ano_lectivo) {
+            return back()->with(['error' => "Não encontrou ano lectivo"]);
+        }
+
+        $turma = Turma::find($request->turma);
+        if(!$turma){
+            return back()->with(['error' => "Nao encontrou turma"]);
+        }
+        $nome_pasta = $turma->turma."-".$request->ano_lectivo;
+
         if ($request->bilhete != "" || $request->bilhete != $estudante->bilhete) {
             $request->validate([
                 'bilhete' => ['required', 'string', 'unique:pessoas,bilhete']
             ]);
         }
 
-        $ano_lectivo = AnoLectivo::where('ano_lectivo', $request->ano_lectivo)->first();
-        if (!$ano_lectivo) {
-            return back()->with(['error' => "Não encontrou ano lectivo"]);
+        $path = null;
+        if ($request->foto) {
+            $request->validate([
+                'foto' => ['required', 'mimes:jpg,png,jpeg,JPG,PNG,JPEG', 'max:5000']
+            ]);
+            if ($estudante->pessoa->foto != "" && file_exists($estudante->pessoa->foto)) {
+                unlink($estudante->pessoa->foto);
+            }
+            $path = $request->foto->store('fotos_estudantes/'.$nome_pasta);
         }
+
 
         $data['pessoa'] = [
             'id_municipio' => $request->municipio,
@@ -256,7 +274,7 @@ class EstudanteController extends Controller
             'pai' => $request->pai,
             'mae' => $request->mae,
             'comuna' => $request->comuna,
-            'foto' => null,
+            'foto' => $path,
         ];
 
         $data['estudante'] = [
@@ -585,6 +603,7 @@ class EstudanteController extends Controller
                 return back()->with(['success' => "Feito com sucesso"]);
             }
         }
-    }
+
+   }
 
 }

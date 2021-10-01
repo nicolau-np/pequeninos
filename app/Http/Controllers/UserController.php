@@ -131,6 +131,17 @@ class UserController extends Controller
             'username'=>['required', 'string'],
         ]);
 
-        
+        $user = User::where(['username'=>$request->username])->first();
+        if(!$user){
+            return back()->with(['error' => "Nome de usuário não existente"]);
+        }
+
+        if(!$user->email){
+            return back()->with(['error'=> "Usuário sem email. Deve contactar o administrador do sistema e informar o seu email."]);
+        }
+
+        if($user->email != $request->email){
+            return back()->with(['error' => "Email incorrecto"]);
+        }
     }
 }

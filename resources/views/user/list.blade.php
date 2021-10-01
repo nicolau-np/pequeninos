@@ -9,7 +9,7 @@
                     <h5>{{$submenu}}</h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -31,7 +31,7 @@
                         </div>
                         {{Form::close()}}
                     </div>
-                    
+
                     <div class="table-responsive">
                         <br/>
                         <table class="table table-bordered">
@@ -40,6 +40,7 @@
                                     <th>#</th>
                                     <th>Nome do Funcionário</th>
                                     <th>Nome de Usuário</th>
+                                    <th>Email</th>
                                     <th>Estado</th>
                                     <th>Nível de Acesso</th>
                                     <th>Operações</th>
@@ -50,11 +51,12 @@
                                 <span class="not_found">Nenhum usuário cadastrado</span>
                                 @else
                                 @foreach ($getUsuarios as $usuarios)
-                                    
+
                                 <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$usuarios->pessoa->nome}}</td>
                                     <td>{{$usuarios->username}}</td>
+                                    <td>{{$usuarios->email}}</td>
                                     <td>{{$usuarios->estado}}</td>
                                     <td>{{$usuarios->nivel_acesso}}</td>
                                     <td>
@@ -65,7 +67,7 @@
 
                                 @endforeach
                                 @endif
-                             
+
                             </tbody>
                         </table>
                     </div>
@@ -77,7 +79,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- hidden-sm-up -->

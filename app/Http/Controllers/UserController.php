@@ -116,11 +116,11 @@ class UserController extends Controller
 
     public function resetpassword(){
         $data = [
-            'title' => "Iniciar Sessão",
+            'title' => "Recuperar Palavra-Passe",
             'type' => "login",
-            'menu' => "Login",
+            'menu' => "Recuperar Palavra-Passe",
             'submenu' => ""
         ];
-        return view('user.login', $data);
+        return view('user.resetpassword', $data);
     }
 }

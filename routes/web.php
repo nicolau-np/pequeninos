@@ -20,6 +20,7 @@ Route::get('/login', "UserController@loginForm")->name('login')->middleware('gue
 Route::post('/logar', "UserController@logar")->name('logar');
 Route::get('/logout', "UserController@logout")->name('logout');
 Route::get('/resetpassword', "UserController@resetpassword")->name('resetpassword');
+Route::post('/resetpassword', "UserController@resetpassword_req");
 
 Route::group(['prefix' =>"user", 'middleware'=>"auth"], function(){
     Route::get('/profile', "UserController@profile");

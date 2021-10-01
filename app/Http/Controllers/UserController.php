@@ -123,4 +123,14 @@ class UserController extends Controller
         ];
         return view('user.resetpassword', $data);
     }
+
+    public function resetpassword_req(Request $request){
+        $request->validate([
+            'telefone'=> ['required', 'integer', 'min:1'],
+            'email'=>['required', 'string',],
+            'username'=>['required', 'string'],
+        ]);
+
+        
+    }
 }

@@ -26,70 +26,64 @@
                 <div class="col-sm-12">
                     <!-- Authentication card start -->
                     <div class="signup-card card-block auth-body mr-auto ml-auto">
-                        <form class="md-float-material">
-                            <div class="text-center">
-                                <img src="assets/images/auth/logo-dark.png" alt="logo.png">
+                        {{Form::open(['method'=>"post", 'url'=>"/resetpassword", 'class'=>"md-float-material"])}}
+                            <div class="text-center" style="font-size:30px; font-weight: bold;">
+                                SIGE
                             </div>
                             <div class="auth-box">
                                 <div class="row m-b-20">
                                     <div class="col-md-12">
-                                        <h3 class="text-center txt-primary">Sign up. It is fast and easy.</h3>
+                                        <h3 class="text-center txt-primary">Recuperação de Palavra-Passe</h3>
                                     </div>
                                 </div>
                                 <hr/>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Choose Username">
+                                    {{Form::text('username', null, ['class'=>"form-control", 'placeholder'=>"Nome de usuário"])}}
                                     <span class="md-line"></span>
                                 </div>
+                                <div class="erro">
+                                    @if($errors->has('username'))
+                                    <div class="text-danger">{{$errors->first('username')}}</div>
+                                    @endif
+                                </div>
+
                                 <div class="input-group">
-                                    <input type="text" class="form-control" placeholder="Your Email Address">
+                                    {{Form::email('email', null, ['class'=>"form-control", 'placeholder'=>"Email de registro"])}}
                                     <span class="md-line"></span>
                                 </div>
+                                <div class="erro">
+                                    @if($errors->has('email'))
+                                    <div class="text-danger">{{$errors->first('email')}}</div>
+                                    @endif
+                                </div>
+
                                 <div class="input-group">
-                                    <input type="password" class="form-control" placeholder="Choose Password">
+                                    {{Form::number('telefone', null, ['class'=>"form-control", 'placeholder'=>"Telefone"])}}
                                     <span class="md-line"></span>
                                 </div>
-                                <div class="input-group">
-                                    <input type="password" class="form-control" placeholder="Confirm Password">
-                                    <span class="md-line"></span>
+                                <div class="erro">
+                                    @if($errors->has('telefone'))
+                                    <div class="text-danger">{{$errors->first('telefone')}}</div>
+                                    @endif
                                 </div>
-                                <div class="row m-t-25 text-left">
-                                    <div class="col-md-12">
-                                        <div class="checkbox-fade fade-in-primary">
-                                            <label>
-                                                <input type="checkbox" value="">
-                                                <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
-                                                <span class="text-inverse">I read and accept <a href="#">Terms &amp; Conditions.</a></span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-12">
-                                        <div class="checkbox-fade fade-in-primary">
-                                            <label>
-                                                <input type="checkbox" value="">
-                                                <span class="cr"><i class="cr-icon icofont icofont-ui-check txt-primary"></i></span>
-                                                <span class="text-inverse">Send me the <a href="#!">Newsletter</a> weekly.</span>
-                                            </label>
-                                        </div>
-                                    </div>
-                                </div>
+
                                 <div class="row m-t-30">
                                     <div class="col-md-12">
-                                        <button type="button" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Sign up now.</button>
+                                        <button type="submit" class="btn btn-primary btn-md btn-block waves-effect text-center m-b-20">Recuperar</button>
                                     </div>
                                 </div>
                                 <hr/>
                                 <div class="row">
                                     <div class="col-md-10">
-                                        <p class="text-inverse text-left m-b-0">Thank you and enjoy our website.</p>
-                                        <p class="text-inverse text-left"><b>Your Authentication Team</b></p>
+                                        <p class="text-inverse text-left m-b-0">Após preencher o formulário receberá SMS em seu E-mail.</p>
+                                        <p class="text-inverse text-left"><b>Sua equipe de autenticação</b></p>
                                     </div>
                                     <div class="col-md-2">
-                                        <img src="assets/images/auth/Logo-small-bottom.png" alt="small-logo.png">
+                                        <a href="/" title="Voltar a Página Principal"><i class="ti-home"></i></a>
                                     </div>
                                 </div>
                             </div>
-                        </form>
+                        {{Form::close()}}
                         <!-- end of form -->
                     </div>
                     <!-- Authentication card end -->

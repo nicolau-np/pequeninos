@@ -280,7 +280,6 @@ Route::get('test', function () {
         $retorno = $ano->ano_lectivo;
     }
 
-    ech
-o $retorno;
+    echo $retorno;
 });
 /*fim*/

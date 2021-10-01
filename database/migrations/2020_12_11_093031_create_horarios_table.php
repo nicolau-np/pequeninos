@@ -31,8 +31,8 @@ class CreateHorariosTable extends Migration
             $table->foreign('id_funcionario')->references('id')->on('funcionarios')->onUpdate('cascade');
             $table->foreign('id_turma')->references('id')->on('turmas')->onUpdate('cascade');
             $table->foreign('id_disciplina')->references('id')->on('disciplinas')->onUpdate('cascade');
-            $table->foreign('id_sala')->references('id')->on('salas')->onUpdate('cascade');
-            $table->foreign('id_hora')->references('id')->on('horas')->onUpdate('cascade');
+            /*$table->foreign('id_sala')->references('id')->on('salas')->onUpdate('cascade');
+            $table->foreign('id_hora')->references('id')->on('horas')->onUpdate('cascade');*/
         });
     }
 

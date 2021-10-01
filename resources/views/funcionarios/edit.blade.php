@@ -198,14 +198,14 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     {{Form::label('email', "E-mail")}}
-                                    {{Form::email('email', null, ['class'=>"form-control", 'placeholder'=>"E-mail"])}}
+                                    {{Form::email('email', $getUser->email, ['class'=>"form-control", 'placeholder'=>"E-mail"])}}
                                 <div class="erro">
                                     @if($errors->has('email'))
                                     <div class="text-danger">{{$errors->first('email')}}</div>
                                     @endif
                                 </div>
                                 </div>
-                                
+
                                 <div class="col-md-3">
                                     {{Form::label('escalao', "Escalão")}} <span class="text-danger">*</span>
                                     {{Form::select('escalao', $getEscalaos, $getFuncionario->id_escalao, ['class'=>"form-control curso", 'placeholder'=>"Escalão"])}}

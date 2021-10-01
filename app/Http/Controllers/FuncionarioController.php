@@ -184,6 +184,8 @@ class FuncionarioController extends Controller
             return back()->with(['error' => "Nao encontrou"]);
         }
 
+        $user = User::where(['id_pessoa'=>$funcionario->id_pessoa])->first();
+
         $cargos = Cargo::pluck('cargo', 'id');
         $escalaos = Escalao::pluck('escalao', 'id');
         $provincias = Provincia::pluck('provincia', 'id');
@@ -192,6 +194,7 @@ class FuncionarioController extends Controller
             'type' => "funcionarios",
             'menu' => "Funcionários",
             'submenu' => "Editar",
+            'getUser'=>$user,
             'getCargos' => $cargos,
             'getEscalaos' => $escalaos,
             'getProvincias' => $provincias,

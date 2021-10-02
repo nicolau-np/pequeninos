@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\AnoLectivo;
+use App\CadeiraExame;
+use App\CadeiraRecurso;
 use App\Curso;
 use App\Disciplina;
 use App\HistoricEstudante;
@@ -82,6 +84,25 @@ class EstatisticaController extends Controller
         $historico = HistoricEstudante::where(['id_turma'=>$id_turma, 'ano_lectivo'=>$ano_lectivo])
         ->get()->sortBy('estudante.pessoa.nome');
 
+        //verificar se e uma cadeira de recursos
+        $cadeira_recurso = false;
+        $cadeira_recurso = CadeiraRecurso::where([
+            'id_curso' => $turma->id_curso,
+            'id_classe' => $turma->id_classe,
+            'id_disciplina' => $id_disciplina,
+            'estado' => "on",
+        ])->first();
+
+        //verificar cadeiras que tem exame
+        $cadeira_exame = false;
+        $cadeira_exame = CadeiraExame::where([
+            'id_curso' => $turma->id_curso,
+            'id_classe' => $turma->id_classe,
+            'id_disciplina' => $id_disciplina,
+            'estado' => "on",
+        ])->first();
+
+
         $data = [
             'title' => "Estatística",
             'type' => "estatisticas",
@@ -90,6 +111,8 @@ class EstatisticaController extends Controller
             'getAno'=>$ano_lectivo,
             'getHorario'=>$horario,
             'getHistorico'=>$historico,
+            'getCadeiraRecurso' => $cadeira_recurso,
+            'getCadeiraExame' => $cadeira_exame,
         ];
 
         $id_ensino = $horario->turma->classe->id_ensino;

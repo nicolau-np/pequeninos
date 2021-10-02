@@ -152,7 +152,7 @@ Route::group(['prefix' => 'institucional', 'middleware' => "AdminUser"], functio
         Route::get('/', "InstitucionalController@recursos_list");
         Route::get('/create', "InstitucionalController@recursos_create");
         Route::post('/store', "InstitucionalController@recursos_store");
-        Route::get('/edit/{id}', "InstitucionalController@recursos_store");
+        Route::get('/edit/{id}', "InstitucionalController@recursos_edit");
         Route::put('/update/{id}', "InstitucionalController@recursos_update");
     });
 });

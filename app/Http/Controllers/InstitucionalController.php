@@ -1080,4 +1080,25 @@ class InstitucionalController extends Controller
         ];
         return view('institucional.observacaoes.observacao_conjunta.regras', $data);
     }
+
+
+    public function recursos_list(){
+
+    }
+
+    public function recursos_create(){
+
+    }
+
+    public function recursos_store(Request $request){
+
+    }
+
+    public function recursos_edit($id){
+
+    }
+
+    public function recursos_update(Request $request, $id){
+
+    }
 }

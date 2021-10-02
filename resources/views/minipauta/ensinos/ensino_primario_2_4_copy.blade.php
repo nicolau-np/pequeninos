@@ -198,11 +198,11 @@ if($getCadeiraExame){
                                 <?php }
                                     else{
                                         foreach ($final as $valorf){
-                                        $v1_estilo = ControladorNotas::nota_20($valorf->mfd);
+                                        $v1_estilo = ControladorNotas::nota_10($valorf->mfd);
                                         if($getCadeiraExame){
-                                        $v2_estilo = ControladorNotas::nota_20($valorf->npe);
+                                        $v2_estilo = ControladorNotas::nota_10($valorf->npe);
                                         }
-                                        $v3_estilo = ControladorNotas::nota_20($valorf->mf);
+                                        $v3_estilo = ControladorNotas::nota_10($valorf->mf);
                                         if($getCadeiraRecurso){
                                         $v4_estilo = ControladorNotas::notaRec_5($valorf->rec);
                                         }

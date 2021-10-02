@@ -47,7 +47,7 @@
                             </thead>
                             <tbody>
                                 @if($getCadeiraRecursos->count()==0)
-                                <span class="not_found">Nenhum recurso cadastrado</span>
+                                <span class="not_found">Nenhum exame cadastrado</span>
                                 @else
                                 @foreach ($getCadeiraRecursos as $cadeira_recursos)
 

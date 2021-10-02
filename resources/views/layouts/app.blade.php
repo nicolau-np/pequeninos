@@ -362,6 +362,14 @@ $lastYear = ControladorStatic::getLastYear();
                                             </a>
                                         </li>
 
+                                        <li class="@if($menu=="Exames") active @endif">
+                                            <a href="/institucional/exames/">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Exames</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
+
                                     </ul>
                                 </li>
                                 @endif

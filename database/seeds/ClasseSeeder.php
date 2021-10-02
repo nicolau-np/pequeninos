@@ -42,6 +42,13 @@ class ClasseSeeder extends Seeder
             'classe'=>'9ª classe',
         ],
         //ensino 3
+        [
+            'id_ensino'=>3,
+            'classe'=>'1 ano',
+        ],[
+            'id_ensino'=>3,
+            'classe'=>'2 ano',
+        ],
 
         //ensino 4
         [

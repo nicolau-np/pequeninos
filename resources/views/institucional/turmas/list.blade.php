@@ -9,7 +9,7 @@
                     <h5>{{$submenu}}</h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -31,7 +31,7 @@
                         </div>
                         {{Form::close()}}
                     </div>
-                    
+
                     <div class="table-responsive">
                         <br/>
                         <table class="table table-bordered">
@@ -50,7 +50,7 @@
                                 <span class="not_found">Nenhuma turma cadastrada</span>
                                 @else
                                 @foreach ($getTurmas as $turmas)
-                                    
+
                                 <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$turmas->curso->ensino->ensino}}</td>
@@ -65,7 +65,7 @@
 
                                 @endforeach
                                 @endif
-                             
+
                             </tbody>
                         </table>
                     </div>
@@ -77,13 +77,16 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- hidden-sm-up -->
 
 <!-- botão pesquisar -->
 <div class="btnPesquisar">
+    <div class="btnPesquisarBtn">
+		<a href="/institucional/turmas/import" class="btn btn-warning btnCircular btnPrincipal" title="Importar"><i class="ti-upload"></i></a>
+	</div>&nbsp;
 	<div class="btnPesquisarBtn">
 		<a href="/institucional/turmas/create" class="btn btn-primary btnCircular btnPrincipal" title="Novo"><i class="ti-plus"></i></a>
 	</div>

@@ -116,6 +116,22 @@ class ControladorNotas extends Controller
         return $retorno;
     }
 
+    public static function estado_nota_qualitativaRec($nota)
+    {
+        $retorno = null;
+        if ($nota >= 3 && $nota <= 5) {
+            $retorno = "M BOM";
+        } elseif ($nota >= 0 && $nota <= 2.99) {
+            $retorno = "MAU";
+        } elseif ($nota == "") {
+            $retorno = "nenhum";
+        } else {
+            $retorno = "nenhum";
+        }
+
+        return $retorno;
+    }
+
     public static function observacao_geral($classe, $curso)
     {
         $observacao = ObservacaoGeral::where(['id_classe' => $classe, 'id_curso' => $curso])->first();

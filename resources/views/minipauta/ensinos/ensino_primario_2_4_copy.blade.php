@@ -218,32 +218,32 @@ if($getCadeiraExame){
                                 <?php }}?>
                                 <!-- fim dados finais-->
 
-             <!-- obs -->
-             @if($final->count()==0)
-             <td>---</td>
-     @else
-         @if($valorf->mf==null)
-         <td>---</td>
-         @else
-             @if ($getCadeiraRecurso)
-                 @if ($valorf->rec == null && $valorf->mf<=4.99 && $valorf->mf!=null)
-                     <td class="negativo">NÃO TRANSITA</td>
-                 @else
-                     <td class="@if($valorf->rec<=2.99 && $valorf->rec!=null) negativo @else positivo @endif">
-                         @if($valorf->rec<=2.99 && $valorf->rec!=null) NÃO TRANSITA @else TRANSITA @endif
-                     </td>
-                 @endif
+                                            <!-- obs -->
+                                            @if($final->count()==0)
+                                            <td>---</td>
+                                        @else
+                                        @if($valorf->mf==null)
+                                        <td>---</td>
+                                        @else
+                                            @if ($getCadeiraRecurso)
+                                                @if ($valorf->rec == null && $valorf->mf<=4.99 && $valorf->mf!=null)
+                                                    <td class="negativo">NÃO TRANSITA</td>
+                                                @else
+                                                    <td class="@if($valorf->rec<=2.99 && $valorf->rec!=null) negativo @else positivo @endif">
+                                                        @if($valorf->rec<=2.99 && $valorf->rec!=null) NÃO TRANSITA @else TRANSITA @endif
+                                                    </td>
+                                                @endif
 
-             @else
-                 <td class="@if($valorf->mf<=4.99 && $valorf->mf!=null) negativo @else positivo @endif">
-                     @if($valorf->mf<=4.99 && $valorf->mf!=null) NÃO TRANSITA @else TRANSITA @endif
-                 </td>
-             @endif
+                                            @else
+                                                <td class="@if($valorf->mf<=4.99 && $valorf->mf!=null) negativo @else positivo @endif">
+                                                    @if($valorf->mf<=4.99 && $valorf->mf!=null) NÃO TRANSITA @else TRANSITA @endif
+                                                </td>
+                                            @endif
 
-         @endif
+                                        @endif
 
-     @endif
-     <!-- fim obs -->
+                                    @endif
+                                    <!-- fim obs -->
                                 </tr>
                                 @endforeach
                               </tbody>

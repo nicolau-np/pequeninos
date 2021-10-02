@@ -15,6 +15,8 @@ class Finals extends Model
         'npe',
         'npe_data',
         'mf',
+        'rec_data',
+        'rec',
         'estado',
         'ano_lectivo',
     ];

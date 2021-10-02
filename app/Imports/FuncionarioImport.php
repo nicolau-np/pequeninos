@@ -31,7 +31,7 @@ class FuncionarioImport implements
 
     public function collection(Collection $rows)
     {
-        $password = Hash::make('olamundo2015');
+        $password = Hash::make('escola001');
         $data['person'] = [
             'nome' => null,
             'genero' => null,

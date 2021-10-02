@@ -109,7 +109,7 @@ class FuncionarioController extends Controller
             'estado' => "on",
         ];
 
-        $palavra_passe = Hash::make("olamundo2015");
+        $palavra_passe = Hash::make("escola001");
         $nivel_acesso = null;
         $string_nome = explode(" ", $request->nome);
         $primeiro_nome = $string_nome[0];

@@ -246,7 +246,7 @@ class UserController extends Controller
         return back()->with(['error' => "Código de verificação incorrecto"]);
     }
 
-    $default_password = Hash::make('olamundo2015');
+    $default_password = Hash::make('escola001');
     $data['user'] = [
         'password' =>$default_password,
     ];

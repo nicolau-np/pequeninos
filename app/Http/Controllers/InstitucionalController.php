@@ -159,7 +159,7 @@ class InstitucionalController extends Controller
             'id_classe' => $request->classe,
             'id_turno' => $request->turno,
             'turma' => $request->turma,
-            'sala'=>$request->sala,
+            'sala' => $request->sala,
         ];
         if (Turma::where($data)->first()) {
             return back()->with(['error' => "Já cadastrou esta turma"]);
@@ -208,7 +208,7 @@ class InstitucionalController extends Controller
             'id_classe' => $request->classe,
             'id_turno' => $request->turno,
             'turma' => $request->turma,
-            'sala'=>$request->sala,
+            'sala' => $request->sala,
         ];
 
         if (
@@ -225,7 +225,8 @@ class InstitucionalController extends Controller
         }
     }
 
-    public function turma_import(){
+    public function turma_import()
+    {
         $data = [
             'title' => "Turmas",
             'type' => "institucional",
@@ -235,7 +236,8 @@ class InstitucionalController extends Controller
         return view('institucional.turmas.import', $data);
     }
 
-    public function turma_importStore(Request $request){
+    public function turma_importStore(Request $request)
+    {
         $request->validate([
             'arquivo' => ['required', 'mimes:xlsx,xls'],
         ]);
@@ -349,7 +351,8 @@ class InstitucionalController extends Controller
         }
     }
 
-    public function diciplina_import(){
+    public function diciplina_import()
+    {
         $data = [
             'title' => "Disciplinas",
             'type' => "institucional",
@@ -359,7 +362,8 @@ class InstitucionalController extends Controller
         return view('institucional.disciplinas.import', $data);
     }
 
-    public function disciplina_importStore(Request $request){
+    public function disciplina_importStore(Request $request)
+    {
         $request->validate([
             'arquivo' => ['required', 'mimes:xlsx,xls'],
         ]);
@@ -452,12 +456,14 @@ class InstitucionalController extends Controller
     {
     }
 
-    public function grade_export(){
+    public function grade_export()
+    {
         $fileName = "grade_model.xlsx";
         return Excel::download(new GradeExport(), $fileName);
     }
 
-    public function grade_import(){
+    public function grade_import()
+    {
         $data = [
             'title' => "Grades Curricular",
             'type' => "institucional",
@@ -467,7 +473,8 @@ class InstitucionalController extends Controller
         return view('institucional.grades.import', $data);
     }
 
-    public function grade_importStore(Request $request){
+    public function grade_importStore(Request $request)
+    {
         $request->validate([
             'arquivo' => ['required', 'mimes:xlsx,xls'],
         ]);
@@ -1023,37 +1030,34 @@ class InstitucionalController extends Controller
         ]);
 
         $data['observacao'] = [
-            'id_curso'=>$request->curso,
-            'id_classe'=>$request->classe,
-            'estado'=>"on",
+            'id_curso' => $request->curso,
+            'id_classe' => $request->classe,
+            'estado' => "on",
         ];
 
-        $data['regras']=[
-            'id_observacao_conjunta'=>null,
-            'id_disciplina'=>null,
-            'estado'=>"on",
+        $data['regras'] = [
+            'id_observacao_conjunta' => null,
+            'id_disciplina' => null,
+            'estado' => "on",
         ];
 
-        if(ObservacaoConjunta::where(['id_curso'=> $request->curso, 'id_classe' => $request->classe])->first()){
+        if (ObservacaoConjunta::where(['id_curso' => $request->curso, 'id_classe' => $request->classe])->first()) {
             return back()->with(['error' => "Já cadastou"]);
         }
-        $observacao =ObservacaoConjunta::create($data['observacao']);
-        if($observacao){
+        $observacao = ObservacaoConjunta::create($data['observacao']);
+        if ($observacao) {
             $regras = false;
-            $data['regras']['id_observacao_conjunta']= $observacao->id;
+            $data['regras']['id_observacao_conjunta'] = $observacao->id;
             foreach ($request->disciplinas as $disciplinas) {
-                $data['regras']['id_disciplina']= $disciplinas;
+                $data['regras']['id_disciplina'] = $disciplinas;
                 if (!ObservacaoConjuntaRegra::where($data['regras'])->first()) {
-                        $regras = ObservacaoConjuntaRegra::create($data['regras']);
+                    $regras = ObservacaoConjuntaRegra::create($data['regras']);
                 }
-
             }
-            if($regras){
+            if ($regras) {
                 return back()->with(['success' => "Feito com sucesso"]);
             }
-
         }
-
     }
 
     public function conjunta_edit($id_observacao)
@@ -1064,9 +1068,10 @@ class InstitucionalController extends Controller
     {
     }
 
-    public function conjunta_regras($id_observacao){
+    public function conjunta_regras($id_observacao)
+    {
         $observacao = ObservacaoConjunta::find($id_observacao);
-        if(!$observacao){
+        if (!$observacao) {
             return back()->with(['error' => "Não encontrou"]);
         }
 
@@ -1076,46 +1081,61 @@ class InstitucionalController extends Controller
             'type' => "institucional",
             'menu' => "Observações",
             'submenu' => "Regras",
-            'getObservacao' =>$observacao,
-            'getRegras'=>$regras,
+            'getObservacao' => $observacao,
+            'getRegras' => $regras,
         ];
         return view('institucional.observacaoes.observacao_conjunta.regras', $data);
     }
 
 
-    public function recursos_list(){
+    public function recursos_list()
+    {
         $recursos = CadeiraRecurso::paginate(8);
         $data = [
             'title' => "Recursos",
             'type' => "institucional",
             'menu' => "Recursos",
             'submenu' => "Listar",
-            'getCadeiraRecursos'=>$recursos,
+            'getCadeiraRecursos' => $recursos,
         ];
         return view('institucional.recursos.list', $data);
     }
 
-    public function recursos_create(){
+    public function recursos_create()
+    {
         $cursos = Curso::pluck('curso', 'id');
         $data = [
             'title' => "Recursos",
             'type' => "institucional",
             'menu' => "Recursos",
             'submenu' => "Novo",
-            'getCursos'=>$cursos,
+            'getCursos' => $cursos,
         ];
         return view('institucional.recursos.new', $data);
     }
 
-    public function recursos_store(Request $request){
+    public function recursos_store(Request $request)
+    {
+        $request->validate([
+            'curso' => ['required', 'integer', 'min:1'],
+            'classe' => ['required', 'integer', 'min:1'],
+            'disciplinas' => ['required'],
+            'disciplinas.*' => ['string']
+        ]);
 
+        $data = [
+            'id_curso'=> $request->curso,
+            'id_classe'=> $request->classe,
+            'id_disciplina'=>null,
+            'estado'=>"on",
+        ];
     }
 
-    public function recursos_edit($id){
-
+    public function recursos_edit($id)
+    {
     }
 
-    public function recursos_update(Request $request, $id){
-
+    public function recursos_update(Request $request, $id)
+    {
     }
 }

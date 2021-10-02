@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AnoLectivo;
+use App\Classe;
 use App\CompoDisciplina;
 use App\Curso;
 use App\Disciplina;
@@ -370,13 +371,13 @@ class InstitucionalController extends Controller
 
     public function grade_list()
     {
-        $grade = Grade::paginate(5);
+        $cursos = Curso::oderBy('id', 'asc')->paginate(5);
         $data = [
             'title' => "Grades Curricular",
             'type' => "institucional",
             'menu' => "Grades Curricular",
             'submenu' => "Listar",
-            'getGrades' => $grade,
+            'getCursos' => $cursos,
         ];
         return view('institucional.grades.list', $data);
     }

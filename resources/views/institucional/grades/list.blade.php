@@ -9,7 +9,7 @@
                     <h5>{{$submenu}}</h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -31,30 +31,33 @@
                         </div>
                         {{Form::close()}}
                     </div>
-                    
+
                     <div class="table-responsive">
                         <br/>
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Disciplina</th>
                                     <th>Curso</th>
                                     <th>Classe</th>
+                                    <th>Disciplinas</th>
                                     <th>Operações</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @if($getGrades->count()==0)
+                                @if($getCursos->count()==0)
                                 <span class="not_found">Nenhum grade cadastrada</span>
                                 @else
-                                @foreach ($getGrades as $grades)
+                                @foreach ($getCursos as $cursos)
                                 <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$grades->disciplina->disciplina}}</td>
-                                    <td>{{$grades->curso->curso}}</td>
-                                    <td>{{$grades->classe->classe}}</td>
-                                   
+                                    <td>{{$cursos->curso}}</td>
+                                    <td>
+                                        
+                                    </td>
+                                    <td>
+
+                                    </td>
                                     <td>
                                         <a href="#" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
                                         <a href="#" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
@@ -63,19 +66,19 @@
 
                                 @endforeach
                                 @endif
-                             
+
                             </tbody>
                         </table>
                     </div>
 
                     <div class="pagination">
-                        {{$getGrades->links()}}
+                        {{$getCursos->links()}}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- hidden-sm-up -->

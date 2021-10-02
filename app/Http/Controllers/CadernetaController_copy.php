@@ -40,6 +40,7 @@ class CadernetaController_copy extends Controller
         $estado_epoca2 = BloqueioEpoca::where(['epoca' => 2])->first();
         $estado_epoca3 = BloqueioEpoca::where(['epoca' => 3])->first();
         $estado_epoca4 = BloqueioEpoca::where(['epoca' => 4])->first();
+        $estado_epoca5 = BloqueioEpoca::where(['epoca' => 5])->first();
 
         $data = [
             'title' => "Caderneta",
@@ -53,6 +54,7 @@ class CadernetaController_copy extends Controller
             'getEpoca2' => $estado_epoca2,
             'getEpoca3' => $estado_epoca3,
             'getEpoca4' => $estado_epoca4,
+            'getEpoca5' => $estado_epoca5,
         ];
         return view('caderneta.list', $data);
     }

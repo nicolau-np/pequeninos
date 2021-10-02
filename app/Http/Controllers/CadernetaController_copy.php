@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\AnoLectivo;
 use App\BloqueioEpoca;
+use App\CadeiraRecurso;
 use App\Disciplina;
 use App\Estudante;
 use App\Finals;
@@ -160,6 +161,15 @@ class CadernetaController_copy extends Controller
         $estado_epoca4 = BloqueioEpoca::where(['epoca' => 4])->first();
         $estado_epoca5 = BloqueioEpoca::where(['epoca' => 5])->first();
 
+        //verificar se e uma cadeira de recursos
+        $cadeira_recurso = false;
+        $cadeira_recurso = CadeiraRecurso::where([
+            'id_curso'=>$turma->id_curso,
+            'id_classe' =>$turma->id_classe,
+            'id_disciplina' =>$id_disciplina,
+            'estado'=>"on",
+        ])->first();
+
         $data = [
             'title' => "Caderneta",
             'type' => "caderneta",
@@ -177,6 +187,7 @@ class CadernetaController_copy extends Controller
             'getEpoca3' => $estado_epoca3,
             'getEpoca4' => $estado_epoca4,
             'getEpoca5' => $estado_epoca5,
+            'getCadeiraRecurso'=>$cadeira_recurso,
         ];
 
         if ($id_ensino == 1) { //iniciacao ate 6

@@ -74,7 +74,13 @@ use App\Http\Controllers\ControladorStatic;
                             @endif
                             @if ($getEpoca4->estado!="off")
                             <li class="nav-item">
-                                <a class="nav-link @if(session('epoca')=="4") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/4">Global</a>
+                                <a class="nav-link @if(session('epoca')=="4") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/4">EXAME</a>
+                                <div class="slide"></div>
+                            </li>
+                            @endif
+                            @if ($getEpoca5->estado!="off")
+                            <li class="nav-item">
+                                <a class="nav-link @if(session('epoca')=="5") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/5">REC</a>
                                 <div class="slide"></div>
                             </li>
                             @endif
@@ -317,6 +323,56 @@ use App\Http\Controllers\ControladorStatic;
 
                                                             <td>
                                                                 <input type="number" name="npe" data-id="{{$global->id}}" data-campo="npe" value="{{$global->npe}}" class="form-control npe" />
+                                                            </td>
+
+                                                        </tr>
+                                                        @endforeach
+                                                    @endif
+                                                @endif
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                {{Form::close()}}
+                                </p>
+                            </div>
+                            @endif
+
+                            @if ($getEpoca5->estado!="off")
+                            <div class="tab-pane @if(session('epoca')=="4") active @endif" role="tabpanel">
+                                <p class="m-0">
+                                    {{Form::open(['method'=>"post"])}}
+                                      <!-- provas-->
+
+                                      <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="3">DADOS PESSOAIS</th>
+                                                <th rowspan="2">NPE</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Nº</th>
+                                                <th>NOME</th>
+                                                <th>G</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @if (session('epoca')==5)
+                                                @if ($getGlobal!=null)
+                                                    @if ($getGlobal->count()==0)
+                                                        Nenhum estudante encontrado
+                                                    @else
+                                                        @foreach ($getGlobal as $global)
+                                                        <?php
+                                                                $observacao = ControladorStatic::getObservacaofinal($global->id_estudante, $global->ano_lectivo);
+                                                            ?>
+                                                                <tr class="{{$observacao->observacao_final}}">
+                                                            <td>{{$loop->iteration}}</td>
+                                                            <td>{{$global->estudante->pessoa->nome}}</td>
+                                                            <td>{{$global->estudante->pessoa->genero}}</td>
+
+                                                            <td>
+                                                                <input type="number" name="npe" data-id="{{$global->id}}" data-campo="rec" value="{{$global->rec}}" class="form-control rec" />
                                                             </td>
 
                                                         </tr>

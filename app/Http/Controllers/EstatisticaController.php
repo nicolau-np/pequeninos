@@ -53,7 +53,7 @@ class EstatisticaController extends Controller
             return back()->with(['error'=>"Ano Lectivo não encontrado"]);
         }
 
-        $turma = Turma::find($id_turma)->first();
+        $turma = Turma::find($id_turma);
         if(!$turma){
             return back()->with(['error'=>"Turma não encontrada"]);
         }
@@ -101,7 +101,6 @@ class EstatisticaController extends Controller
             'id_disciplina' => $id_disciplina,
             'estado' => "on",
         ])->first();
-
 
         $data = [
             'title' => "Estatística",

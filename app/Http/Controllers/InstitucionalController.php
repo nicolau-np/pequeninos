@@ -10,6 +10,7 @@ use App\Ensino;
 use App\Grade;
 use App\Hora;
 use App\Imports\DisciplinaImport;
+use App\Imports\TurmaImport;
 use App\ObservacaoConjunta;
 use App\ObservacaoConjuntaRegra;
 use App\ObservacaoGeral;
@@ -219,11 +220,26 @@ class InstitucionalController extends Controller
     }
 
     public function turma_import(){
-
+        $data = [
+            'title' => "Turmas",
+            'type' => "institucional",
+            'menu' => "Turmas",
+            'submenu' => "Importar",
+        ];
+        return view('institucional.turmas.import', $data);
     }
 
     public function turma_importStore(Request $request){
+        $request->validate([
+            'arquivo' => ['required', 'mimes:xlsx,xls'],
+        ]);
+        $file = $request->file('arquivo');
 
+        $import = new TurmaImport;
+
+        if ($import->import($file)) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
     }
 
     public function disciplina_list()

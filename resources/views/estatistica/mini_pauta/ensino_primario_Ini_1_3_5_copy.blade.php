@@ -1,5 +1,12 @@
-<?php
+@php
 use App\Http\Controllers\ControladorNotas;
+
+$numero_colspan = 2;
+
+if($getCadeiraExame){
+    $numero_colspan = $numero_colspan + 1;
+}
+
 $count_avaliados1 = [
     'mac'=>0,
     'npp'=>0,
@@ -23,6 +30,7 @@ $count_avaliados3 = [
 
 $count_avaliadosf = [
     'mfd'=>0,
+    'npe'=>0,
     'mf'=>0,
 ];
 
@@ -49,6 +57,7 @@ $count_positivas3 = [
 
 $count_positivasf = [
     'mfd'=>0,
+    'npe'=>0,
     'mf'=>0,
 ];
 
@@ -75,6 +84,7 @@ $percent_positivas3 = [
 
 $percent_positivasf = [
     'mfd'=>0,
+    'npe'=>0,
     'mf'=>0,
 ];
 
@@ -101,6 +111,7 @@ $count_negativas3 = [
 
 $count_negativasf = [
     'mfd'=>0,
+    'npe'=>0,
     'mf'=>0,
 ];
 
@@ -127,13 +138,15 @@ $percent_negativas3 = [
 
 $percent_negativasf = [
     'mfd'=>0,
+    'npe'=>0,
     'mf'=>0,
 ];
 
 
-?>
+@endphp
 @extends('layouts.app')
 @section('content')
+
 <style>
 table{
     font-size:12px;
@@ -177,7 +190,7 @@ table{
                                 <th colspan="4">1º TRIMESTRE</th>
                                 <th colspan="4">2º TRIMESTRE</th>
                                 <th colspan="4">3º TRIMESTRE</th>
-                                <th colspan="2">DADOS FINAIS</th>
+                                <th colspan="{{$numero_colspan}}">DADOS FINAIS</th>
                             </tr>
                             <tr>
                                 <th>MAC1</th>
@@ -196,6 +209,9 @@ table{
                                 <th>MT3</th>
 
                                 <th>MFD</th>
+                                @if($getCadeiraExame)
+                                <th>NPE</th>
+                                @endif
                                 <th>MF</th>
 
                             </tr>
@@ -400,7 +416,9 @@ table{
                                                                    if($valorf->mfd !=null){
                                                                        $count_avaliadosf['mfd']=$count_avaliadosf['mfd']+1;
                                                                    }
-
+                                                                   if($valorf->npe !=null){
+                                                                       $count_avaliadosf['npe']=$count_avaliadosf['npe']+1;
+                                                                   }
                                                                    if($valorf->mf !=null){
                                                                        $count_avaliadosf['mf']=$count_avaliadosf['mf']+1;
                                                                    }
@@ -410,7 +428,9 @@ table{
                                                                    if($valorf->mfd >=5){
                                                                        $count_positivasf['mfd']=$count_positivasf['mfd']+1;
                                                                    }
-
+                                                                   if($valorf->npe >=5){
+                                                                       $count_positivasf['npe']=$count_positivasf['npe']+1;
+                                                                   }
                                                                    if($valorf->mf >=5){
                                                                        $count_positivasf['mf']=$count_positivasf['mf']+1;
                                                                    }
@@ -420,7 +440,9 @@ table{
                                                                    if($valorf->mfd <=4.99 && $valorf->mfd !=null){
                                                                        $count_negativasf['mfd']=$count_negativasf['mfd']+1;
                                                                    }
-
+                                                                   if($valorf->npe <=4.99 && $valorf->npe !=null){
+                                                                       $count_negativasf['npe']=$count_negativasf['npe']+1;
+                                                                   }
                                                                    if($valorf->mf <=4.99 && $valorf->mf !=null){
                                                                        $count_negativasf['mf']=$count_negativasf['mf']+1;
                                                                    }
@@ -428,6 +450,9 @@ table{
                                                                }
                                                                ?>
                                                             <td>{{$count_avaliadosf['mfd']}}</td>
+                                                            @if($getCadeiraExame)
+                                                            <td>{{$count_avaliadosf['npe']}}</td>
+                                                            @endif
                                                             <td>{{$count_avaliadosf['mf']}}</td>
                                                             <!-- end finals-->
                                 </tr>
@@ -451,6 +476,9 @@ table{
                                     <td>{{$count_positivas3['mt']}}</td>
 
                                     <td>{{$count_positivasf['mfd']}}</td>
+                                    @if($getCadeiraExame)
+                                    <td>{{$count_positivasf['npe']}}</td>
+                                    @endif
                                     <td>{{$count_positivasf['mf']}}</td>
                                 </tr>
 
@@ -473,6 +501,9 @@ table{
                                     <td>{{$count_negativas3['mt']}}</td>
 
                                     <td>{{$count_negativasf['mfd']}}</td>
+                                    @if($getCadeiraExame)
+                                    <td>{{$count_negativasf['npe']}}</td>
+                                    @endif
                                     <td>{{$count_negativasf['mf']}}</td>
                                 </tr>
 
@@ -550,11 +581,17 @@ table{
 
                                     //end terceiro trimestre
 
-                                    //terceiro trimestre
+                                    //final
                                     if($count_avaliadosf['mfd']==0){
                                         $percent_positivasf['mfd'] = 0;
                                     }else{
                                         $percent_positivasf['mfd'] = ($count_positivasf['mfd']*100)/$count_avaliadosf['mfd'];
+                                    }
+
+                                    if($count_avaliadosf['npe']==0){
+                                        $percent_positivasf['npe'] = 0;
+                                    }else{
+                                        $percent_positivasf['npe'] = ($count_positivasf['npe']*100)/$count_avaliadosf['npe'];
                                     }
 
                                     if($count_avaliadosf['mf']==0){
@@ -564,7 +601,7 @@ table{
                                     }
 
 
-                                    //end terceiro trimestre
+                                    //end final
                                         ?>
                                     <td>% POSITIVAS</td>
 
@@ -584,6 +621,9 @@ table{
                                     <td>{{round($percent_positivas3['mt'],2)}}%</td>
 
                                     <td>{{round($percent_positivasf['mfd'],2)}}%</td>
+                                    @if($getCadeiraExame)
+                                    <td>{{round($percent_positivasf['npe'],2)}}%</td>
+                                    @endif
                                     <td>{{round($percent_positivasf['mf'],2)}}%</td>
                                 </tr>
 
@@ -661,11 +701,17 @@ table{
 
                                     //end terceiro trimestre
 
-                                    //terceiro trimestre
+                                    //final trimestre
                                     if($count_avaliadosf['mfd']==0){
                                         $percent_negativasf['mfd'] = 0;
                                     }else{
                                         $percent_negativasf['mfd'] = ($count_negativasf['mfd']*100)/$count_avaliadosf['mfd'];
+                                    }
+
+                                    if($count_avaliadosf['npe']==0){
+                                        $percent_negativasf['npe'] = 0;
+                                    }else{
+                                        $percent_negativasf['npe'] = ($count_negativasf['npe']*100)/$count_avaliadosf['npe'];
                                     }
 
                                     if($count_avaliadosf['mf']==0){
@@ -675,7 +721,7 @@ table{
                                     }
 
 
-                                    //end terceiro trimestre
+                                    //end final trimestre
                                         ?>
                                     <td>% NEGATIVAS</td>
 
@@ -695,6 +741,9 @@ table{
                                     <td>{{round($percent_negativas3['mt'],2)}}%</td>
 
                                     <td>{{round($percent_negativasf['mfd'],2)}}%</td>
+                                    @if($getCadeiraExame)
+                                    <td>{{round($percent_negativasf['npe'],2)}}%</td>
+                                    @endif
                                     <td>{{round($percent_negativasf['mf'],2)}}%</td>
                                 </tr>
 

@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\AnoLectivo;
+use App\CadeiraExame;
+use App\CadeiraRecurso;
 use App\Disciplina;
 use App\HistoricEstudante;
 use App\Horario;
@@ -53,6 +55,25 @@ class MiniPautaController_copy extends Controller
         $historico = HistoricEstudante::where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])
             ->orderBy('numero', 'asc')->get();
 
+        //verificar se e uma cadeira de recursos
+        $cadeira_recurso = false;
+        $cadeira_recurso = CadeiraRecurso::where([
+            'id_curso' => $turma->id_curso,
+            'id_classe' => $turma->id_classe,
+            'id_disciplina' => $id_disciplina,
+            'estado' => "on",
+        ])->first();
+
+        //verificar cadeiras que tem exame
+        $cadeira_exame = false;
+        $cadeira_exame = CadeiraExame::where([
+            'id_curso' => $turma->id_curso,
+            'id_classe' => $turma->id_classe,
+            'id_disciplina' => $id_disciplina,
+            'estado' => "on",
+        ])->first();
+
+
         $data = [
             'title' => "Mini Pauta",
             'type' => "minipauta",
@@ -60,31 +81,28 @@ class MiniPautaController_copy extends Controller
             'submenu' => "Listar",
             'getHorario' => $horario,
             'getHistorico' => $historico,
+            'getCadeiraRecurso' => $cadeira_recurso,
+            'getCadeiraExame' => $cadeira_exame,
         ];
         $classe = $horario->turma->classe->classe;
         $id_ensino = $horario->turma->classe->id_ensino;
 
         if ($id_ensino == 1) {
             //se for classificacao quantitativa
-            if(($classe=="2ª classe") || ($classe=="4ª classe")){
+            if (($classe == "2ª classe") || ($classe == "4ª classe")) {
                 return view('minipauta.ensinos.ensino_primario_2_4_copy', $data);
-            }//se for classificacao quantitativa
-            elseif(($classe=="Iniciação") || ($classe=="1ª classe") || ($classe=="3ª classe") || ($classe=="5ª classe")){
+            } //se for classificacao quantitativa
+            elseif (($classe == "Iniciação") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
                 return view('minipauta.ensinos.ensino_primario_Ini_1_3_5_copy', $data);
-            }elseif(($classe=="6ª classe")){
+            } elseif (($classe == "6ª classe")) {
                 return view('minipauta.ensinos.ensino_primario_6_copy', $data);
             }
-
         } elseif ($id_ensino == 2) {
-            if($classe == "9ª classe"){
+            if ($classe == "9ª classe") {
                 return view('minipauta.ensinos.ensino_1ciclo_9_copy', $data);
-            }else{
+            } else {
                 return view('minipauta.ensinos.ensino_1ciclo_7_8_copy', $data);
             }
-
         }
     }
-
-
-
-    }
+}

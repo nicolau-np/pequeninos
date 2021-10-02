@@ -58,7 +58,7 @@
                                     <td>{{$cadeira_recursos->disciplina->disciplina}}</td>
                                     <td>{{$cadeira_recursos->estado}}</td>
                                     <td>
-                                        <a href="/institucional/recursos/edit/{{$recursos->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
+                                        <a href="/institucional/recursos/edit/{{$cadeira_recursos->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
                                         <a href="#" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
                                     </td>
                                 </tr>

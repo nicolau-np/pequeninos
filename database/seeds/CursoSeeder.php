@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 class CursoSeeder extends Seeder
 {
     static $cursos = [
-        
+
         [
             'id_ensino'=>1,
             'curso'=>'Fundamental',
@@ -14,9 +14,13 @@ class CursoSeeder extends Seeder
         [
             'id_ensino'=>2,
             'curso'=>'Geral',
+        ],
+        [
+            'id_ensino'=>3,
+            'curso'=>'Geral(EJA)',
         ]
     ];
-    
+
     public function run()
     {
         foreach(Self::$cursos as $curso){

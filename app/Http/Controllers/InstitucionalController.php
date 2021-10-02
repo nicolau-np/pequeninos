@@ -1154,7 +1154,7 @@ class InstitucionalController extends Controller
 
     public function exames_list()
     {
-        $exames = CadeiraRecurso::paginate(8);
+        $exames = CadeiraExame::paginate(8);
         $data = [
             'title' => "Exames",
             'type' => "institucional",

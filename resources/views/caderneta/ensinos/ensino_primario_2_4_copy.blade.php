@@ -352,6 +352,48 @@ use App\Http\Controllers\ControladorStatic;
             }
         });
 
+        $('.npe').on('keypress', function(e){
+            if(e.which == 13){
+                var valor = $(this).val();
+                var id_final = $(this).data('id');
+                var campo = $(this).data('campo');
+
+                if((valor==="") || (valor<0) || (valor>10)){
+                    $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                }else{
+                    var update = updateGlobal(valor, id_final, campo);
+                    if(update){
+                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
+                    }else{
+                        $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                    }
+                }
+            }
+        });
+
+
+        function updateGlobal(valor, id_final, campo){
+            retorno = false;
+            var data = {
+                valor: valor,
+                id_final: id_final,
+                campo: campo,
+                _token: "{{ csrf_token() }}"
+            };
+
+            $.ajax({
+                type: "post",
+                url: "{{route('updateGlobal')}}",
+                data: data,
+                dataType: "html",
+                success: function (response) {
+
+                    console.log(response);
+                }
+            });
+            return true;
+        }
+
 
         function updateAvaliacao(valor, id_trimestral, campo){
             retorno = false;

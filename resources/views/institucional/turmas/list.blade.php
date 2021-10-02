@@ -42,6 +42,7 @@
                                     <th>Curso</th>
                                     <th>Classe</th>
                                     <th>Turma</th>
+                                    <th>Sala</th>
                                     <th>Operações</th>
                                 </tr>
                             </thead>
@@ -57,6 +58,7 @@
                                     <td>{{$turmas->curso->curso}}</td>
                                     <td>{{$turmas->classe->classe}}</td>
                                     <td>{{$turmas->turma}}</td>
+                                    <td>{{$turmas->sala}}</td>
                                     <td>
                                         <a href="/institucional/turmas/edit/{{$turmas->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
                                         <a href="http://" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>

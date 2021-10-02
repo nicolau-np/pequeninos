@@ -13,16 +13,17 @@ class Turma extends Model
         'id_classe',
         'id_turno',
         'turma',
+        'sala',
     ];
-    
+
     public function curso(){
         return $this->belongsTo(Curso::class, 'id_curso', 'id');
     }
-    
+
     public function classe(){
         return $this->belongsTo(Classe::class, 'id_classe', 'id');
     }
-    
+
     public function turno(){
         return $this->belongsTo(Turno::class, 'id_turno', 'id');
     }
@@ -42,5 +43,5 @@ class Turma extends Model
     public function director_turma(){
         return $this->hasMany(DirectorTurma::class, 'id_turma', 'id');
     }
-    
+
 }

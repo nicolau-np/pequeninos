@@ -74,6 +74,16 @@
                                         @endif
                                     </div>
                                 </div>
+
+                                <div class="col-md-3">
+                                    {{Form::label('sala', "Sala")}} <span class="text-danger">*</span>
+                                    {{Form::text('sala', null, ['class'=>"form-control", 'placeholder'=>"Sala"])}}
+                                    <div class="erro">
+                                        @if($errors->has('sala'))
+                                        <div class="text-danger">{{$errors->first('sala')}}</div>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
                             <br/>
                         </fieldset>
@@ -84,7 +94,7 @@
                                  </div>
 
                             </div>
-                     
+
                         {{Form::close()}}
                    </div>
                 </div>

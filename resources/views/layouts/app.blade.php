@@ -322,7 +322,7 @@ $lastYear = ControladorStatic::getLastYear();
                                             </a>
                                         </li>
 
-                                        <li class="@if($menu=="Salas") active @endif">
+                                      <!--  <li class="@if($menu=="Salas") active @endif">
                                             <a href="/institucional/salas/">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Salas</span>
@@ -336,7 +336,7 @@ $lastYear = ControladorStatic::getLastYear();
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Horas</span>
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
-                                        </li>
+                                        </li>-->
 
                                         <li class="@if($menu=="Ano Lectivo") active @endif">
                                             <a href="/institucional/ano_lectivos/">
@@ -354,6 +354,13 @@ $lastYear = ControladorStatic::getLastYear();
                                             </a>
                                         </li>
 
+                                        <li class="@if($menu=="Recursos") active @endif">
+                                            <a href="/institucional/recursos/">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Recursos</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
 
                                     </ul>
                                 </li>

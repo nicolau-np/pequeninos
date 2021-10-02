@@ -147,6 +147,14 @@ Route::group(['prefix' => 'institucional', 'middleware' => "AdminUser"], functio
             Route::get('/regras/{id_observacao}', "InstitucionalController@conjunta_regras");
         });
     });
+
+    Route::group(['prefix' =>"recursos"], function(){
+        Route::get('/', "InstitucionalController@recursos_list");
+        Route::get('/create', "InstitucionalController@recursos_create");
+        Route::post('/store', "InstitucionalController@recursos_store");
+        Route::get('/edit/{id}', "InstitucionalController@recursos_store");
+        Route::put('/update/{id}', "InstitucionalController@recursos_update");
+    });
 });
 
 Route::group(['prefix' => 'bloqueios', 'middleware' => "AdminUser"], function () {

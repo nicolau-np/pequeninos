@@ -162,9 +162,9 @@ class CadernetaController_copy extends Controller
         $estado_epoca4 = BloqueioEpoca::where(['epoca' => 4])->first();
         $estado_epoca5 = BloqueioEpoca::where(['epoca' => 5])->first();
 
-        //verificar se e uma cadeira de recursos
-        $cadeira_recurso = false;
-        $cadeira_recurso = CadeiraRecurso::where([
+        //verificar cadeiras que tem exame
+        $cadeira_exame = false;
+        $cadeira_exame = CadeiraExame::where([
             'id_curso' => $turma->id_curso,
             'id_classe' => $turma->id_classe,
             'id_disciplina' => $id_disciplina,

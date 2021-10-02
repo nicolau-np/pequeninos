@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\AnoLectivo;
+use App\CadeiraExame;
+use App\CadeiraRecurso;
 use App\Classe;
 use App\Disciplina;
 use App\Estudante;
@@ -241,5 +243,31 @@ class ControladorStatic extends Controller
     public static function getDisciplinasGrade($id_curso, $id_classe){
         $grades = Grade::where(['id_curso'=>$id_curso, 'id_classe'=>$id_classe])->get();
         return $grades;
+    }
+
+    public static function getExameStatus($id_curso, $id_classe, $id_disciplina){
+        //verificar cadeiras que tem exame
+        $cadeira_exame = false;
+        $cadeira_exame = CadeiraExame::where([
+            'id_curso' => $id_curso,
+            'id_classe' => $id_classe,
+            'id_disciplina' => $id_disciplina,
+            'estado' => "on",
+        ])->first();
+
+        return $cadeira_exame;
+    }
+
+    public static function getRecursoStatus($id_curso, $id_classe, $id_disciplina){
+        //verificar se e uma cadeira de recursos
+        $cadeira_recurso = false;
+        $cadeira_recurso = CadeiraRecurso::where([
+            'id_curso' => $id_curso,
+            'id_classe' => $id_classe,
+            'id_disciplina' => $id_disciplina,
+            'estado' => "on",
+        ])->first();
+
+        return $cadeira_recurso;
     }
 }

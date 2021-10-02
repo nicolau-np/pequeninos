@@ -1,5 +1,13 @@
 @php
 use App\Http\Controllers\ControladorNotas;
+$numero_colspan = 2;
+if($getCadeiraRecurso){
+    $numero_colspan = $numero_colspan + 1;
+}
+
+if($getCadeiraExame){
+    $numero_colspan = $numero_colspan + 1;
+}
 @endphp
 @extends('layouts.app')
 @section('content')

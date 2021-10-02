@@ -21,9 +21,9 @@ class CreateFinalsTable extends Migration
             $table->decimal('mfd', 4, 2)->nullable();
             $table->decimal('npe', 4, 2)->nullable();
             $table->date('npe_data')->nullable();
+            $table->decimal('mf', 4, 0)->nullable();
             $table->decimal('rec', 4, 2)->nullable();
             $table->date('rec_data')->nullable();
-            $table->decimal('mf', 4, 0)->nullable();
             $table->string('estado');
             $table->string('ano_lectivo');
             $table->timestamps();

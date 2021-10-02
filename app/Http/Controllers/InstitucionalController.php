@@ -1129,10 +1129,16 @@ class InstitucionalController extends Controller
             'id_disciplina'=>null,
             'estado'=>"on",
         ];
-
+        $cadeira = false;
         foreach($request->disciplinas as $disciplina){
             $data['id_disciplina'] = $disciplina;
-            
+            if(!CadeiraRecurso::where($data)->first()){
+              $cadeira = CadeiraRecurso::create($data);
+            }
+        }
+
+        if($cadeira){
+            return back()->with(['success' => "Feito com sucesso"]);
         }
     }
 

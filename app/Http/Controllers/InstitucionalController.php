@@ -449,6 +449,24 @@ class InstitucionalController extends Controller
     {
     }
 
+    public function grade_export(){
+
+    }
+
+    public function grade_import(){
+        $data = [
+            'title' => "Disciplinas",
+            'type' => "institucional",
+            'menu' => "Disciplinas",
+            'submenu' => "Importar",
+        ];
+        return view('institucional.grades.import', $data);
+    }
+
+    public function grade_importStore(Request $request){
+
+    }
+
     public function sala_list(Request $request)
     {
         $salas = Sala::paginate(5);

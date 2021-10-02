@@ -173,7 +173,7 @@ class CadernetaController_copy extends Controller
 
         //verificar cadeiras que tem exame
         $cadeira_exame = false;
-        $cadeira_recurso = CadeiraExame::where([
+        $cadeira_exame = CadeiraExame::where([
             'id_curso' => $turma->id_curso,
             'id_classe' => $turma->id_classe,
             'id_disciplina' => $id_disciplina,

@@ -371,7 +371,7 @@ class InstitucionalController extends Controller
 
     public function grade_list()
     {
-        $cursos = Curso::oderBy('id', 'asc')->paginate(5);
+        $cursos = Curso::orderBy('id', 'asc')->paginate(1);
         $data = [
             'title' => "Grades Curricular",
             'type' => "institucional",

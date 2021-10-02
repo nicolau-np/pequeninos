@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\AnoLectivo;
+use App\Classe;
 use App\Disciplina;
 use App\Estudante;
+use App\Grade;
 use App\HistoricEstudante;
 use App\Horario;
 use App\Pagamento;
@@ -214,17 +216,30 @@ class ControladorStatic extends Controller
         return $retorno;
     }
 
-    public static function getObservacaofinal($id_estudante, $ano_lectivo){
-        $observacao_final = HistoricEstudante::where(['id_estudante'=>$id_estudante, 'ano_lectivo'=> $ano_lectivo])->first();
+    public static function getObservacaofinal($id_estudante, $ano_lectivo)
+    {
+        $observacao_final = HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])->first();
         return $observacao_final;
     }
 
-    public static function getProfDisciplina($id_turma, $id_disciplina, $ano_lectivo){
+    public static function getProfDisciplina($id_turma, $id_disciplina, $ano_lectivo)
+    {
         $horario = Horario::where([
-            'id_disciplina' =>$id_disciplina,
-            'id_turma'=> $id_turma,
-            'ano_lectivo' =>$ano_lectivo,
+            'id_disciplina' => $id_disciplina,
+            'id_turma' => $id_turma,
+            'ano_lectivo' => $ano_lectivo,
         ])->first();
         return $horario;
+    }
+
+    public static function getClassesCurso($id_ensino)
+    {
+        $classes = Classe::where(['id_ensino' => $id_ensino])->get();
+        return $classes;
+    }
+
+    public static function getDisciplinasGrade($id_curso, $id_classe){
+        $grades = Grade::where(['id_curso'=>$id_curso, 'id_classe'=>$id_classe])->get();
+        return $grades;
     }
 }

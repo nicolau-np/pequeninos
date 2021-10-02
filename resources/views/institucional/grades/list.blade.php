@@ -1,3 +1,6 @@
+<?php
+use App\Http\Controllers\ControladorStatic;
+?>
 @extends('layouts.app')
 @section('content')
 
@@ -40,8 +43,6 @@
                                     <th>#</th>
                                     <th>Curso</th>
                                     <th>Classe</th>
-                                    <th>Disciplinas</th>
-                                    <th>Operações</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -51,17 +52,25 @@
                                 @foreach ($getCursos as $cursos)
                                 <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$cursos->curso}}</td>
                                     <td>
-                                        
+                                        <span style="font-weight: bold; font-size:18px; color:#4680ff;">{{$cursos->curso}}</span>
                                     </td>
                                     <td>
+                                        <?php
+                                           $getClasses = ControladorStatic::getClassesCurso($cursos->id_ensino);
+                                        ?>
+                                        @foreach($getClasses as $classes)
+                                        <?php
+                                        $getGrades = ControladorStatic::getDisciplinasGrade($cursos->id, $classes->id);
+                                        ?>
+                                        <b style="color:#4680ff;">{{$classes->classe}}</b><br/>
+                                            @foreach ($getGrades as $grades)
+                                                <span style="font-size:10px;">{{$grades->disciplina->disciplina}}</span><br/>
+                                            @endforeach
+                                        <hr/>
+                                        @endforeach
+                                    </td>
 
-                                    </td>
-                                    <td>
-                                        <a href="#" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
-                                        <a href="#" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
-                                    </td>
                                 </tr>
 
                                 @endforeach

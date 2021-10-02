@@ -3,11 +3,8 @@
 namespace App\Imports;
 
 use App\Disciplina;
-use Maatwebsite\Excel\Concerns\ToModel;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Session;
 use Maatwebsite\Excel\Concerns\Importable;
 use Maatwebsite\Excel\Concerns\SkipsErrors;
 use Maatwebsite\Excel\Concerns\SkipsOnError;
@@ -40,7 +37,7 @@ class DisciplinaImport implements
             if (!Disciplina::where(['disciplina' => $row['disciplina']])->first()) {
                 $data['disciplina'] = $row['disciplina'];
                 $data['sigla'] = $row['sigla'];
-                
+
                 $disciplina = Disciplina::create($data);
             }
         }

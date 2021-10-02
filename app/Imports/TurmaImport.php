@@ -31,6 +31,7 @@ class TurmaImport implements
             'id_classe'=>null,
             'id_turno'=>null,
             'turma'=>null,
+            'sala'=>null,
         ];
 
         foreach ($rows as $row) {
@@ -39,6 +40,7 @@ class TurmaImport implements
                 $data['id_classe'] = $row['id_classe'];
                 $data['id_turno'] = $row['id_turno'];
                 $data['turma'] = $row['turma'];
+                $data['sala'] = $row['sala'];
 
                 $turma = Turma::create($data);
             }

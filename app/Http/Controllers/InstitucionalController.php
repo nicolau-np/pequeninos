@@ -155,6 +155,7 @@ class InstitucionalController extends Controller
             'id_classe' => $request->classe,
             'id_turno' => $request->turno,
             'turma' => $request->turma,
+            'sala'=>$request->sala,
         ];
         if (Turma::where($data)->first()) {
             return back()->with(['error' => "Já cadastrou esta turma"]);
@@ -203,6 +204,7 @@ class InstitucionalController extends Controller
             'id_classe' => $request->classe,
             'id_turno' => $request->turno,
             'turma' => $request->turma,
+            'sala'=>$request->sala,
         ];
 
         if (

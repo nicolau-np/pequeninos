@@ -76,7 +76,7 @@
                                 </div>
 
                                 <div class="col-md-3">
-                                    {{Form::label('sala', "Sala")}} <span class="text-danger">*</span>
+                                    {{Form::label('sala', "Sala")}} 
                                     {{Form::text('sala', null, ['class'=>"form-control", 'placeholder'=>"Sala"])}}
                                     <div class="erro">
                                         @if($errors->has('sala'))

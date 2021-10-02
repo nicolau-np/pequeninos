@@ -8,7 +8,7 @@ class EnsinoSeeder extends Seeder
     static $ensinos = [
         ['ensino'=>'Primário (ini . 6)'],
         ['ensino'=>'Primário & I Cíclo (7 . 9)'],
-        ['ensino'=>'EJA (7 . 9)'],
+        ['ensino'=>'Ensino EJA (7 . 9)'],
         ['ensino'=>'Formação Técnico (7 . 9)'],
         ['ensino'=>'Formação Técnico Profissional (10 . 12)'],
         ['ensino'=>'Secundário & II Cíclo (10 .12)'],

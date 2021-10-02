@@ -1083,7 +1083,13 @@ class InstitucionalController extends Controller
 
 
     public function recursos_list(){
-
+        $data = [
+            'title' => "Recursos",
+            'type' => "institucional",
+            'menu' => "Recursos",
+            'submenu' => "Listar",
+        ];
+        return view('institucional.recursos.list', $data);
     }
 
     public function recursos_create(){

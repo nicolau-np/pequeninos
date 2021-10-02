@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AnoLectivo;
+use App\CadeiraRecurso;
 use App\CompoDisciplina;
 use App\Curso;
 use App\Disciplina;
@@ -1083,11 +1084,13 @@ class InstitucionalController extends Controller
 
 
     public function recursos_list(){
+        $recursos = CadeiraRecurso::paginate(8);
         $data = [
             'title' => "Recursos",
             'type' => "institucional",
             'menu' => "Recursos",
             'submenu' => "Listar",
+            'getCadeiraRecursos'=>$recursos,
         ];
         return view('institucional.recursos.list', $data);
     }

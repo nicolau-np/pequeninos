@@ -27,6 +27,7 @@
                     <!-- Authentication card start -->
                     <div class="signup-card card-block auth-body mr-auto ml-auto">
                         {{Form::open(['method'=>"put", 'url'=>"/verifycode/{$getReset->id}", 'class'=>"md-float-material"])}}
+                        @csrf
                             <div class="text-center" style="font-size:30px; font-weight: bold;">
                                 SIGE
                             </div>

@@ -36,7 +36,7 @@
                     <!-- Authentication card start -->
                     <div class="login-card card-block auth-body mr-auto ml-auto">
                         {{Form::open(['method'=>"post", 'class'=>"md-float-material", 'url'=>"/logar"])}}
-
+                        @csrf
 
                             <div class="text-center" style="font-size:30px; font-weight: bold;">
                                 SIGE

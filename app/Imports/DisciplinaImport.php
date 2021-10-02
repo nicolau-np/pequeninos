@@ -17,21 +17,31 @@ use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 
 
-class DisciplinaImport implements ToCollection,
-WithHeadingRow,
-SkipsOnError,
-WithValidation,
-WithChunkReading,
-ShouldQueue
+class DisciplinaImport implements
+    ToCollection,
+    WithHeadingRow,
+    SkipsOnError,
+    WithValidation,
+    WithChunkReading,
+    ShouldQueue
 {
     use Importable, SkipsErrors;
 
     public function collection(Collection $rows)
     {
 
-        foreach ($rows as $row) {
-            if (!Disciplina::where(['disciplina'=>$row['disciplina']])->first()) {
+        $data = [
+            'id_componente'=>1,
+            'disciplina'=>null,
+            'sigla'=>null,
+        ];
 
+        foreach ($rows as $row) {
+            if (!Disciplina::where(['disciplina' => $row['disciplina']])->first()) {
+                $data['disciplina'] = $row['disciplina'];
+                $data['sigla'] = $row['sigla'];
+                
+                $disciplina = Disciplina::create($data);
             }
         }
     }

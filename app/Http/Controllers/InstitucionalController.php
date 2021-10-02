@@ -11,6 +11,7 @@ use App\Ensino;
 use App\Grade;
 use App\Hora;
 use App\Imports\DisciplinaImport;
+use App\Imports\GradesImport;
 use App\Imports\TurmaImport;
 use App\ObservacaoConjunta;
 use App\ObservacaoConjuntaRegra;
@@ -464,7 +465,16 @@ class InstitucionalController extends Controller
     }
 
     public function grade_importStore(Request $request){
+        $request->validate([
+            'arquivo' => ['required', 'mimes:xlsx,xls'],
+        ]);
+        $file = $request->file('arquivo');
 
+        $import = new GradesImport;
+
+        if ($import->import($file)) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
     }
 
     public function sala_list(Request $request)

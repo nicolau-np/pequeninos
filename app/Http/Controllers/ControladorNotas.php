@@ -44,6 +44,38 @@ class ControladorNotas extends Controller
         return $retorno;
     }
 
+    public static function notaRec_10($nota)
+    {
+        $retorno = null;
+        if ($nota >= 5 && $nota <= 10) {
+            $retorno = "positivo";
+        } elseif ($nota >= 0 && $nota <= 4.99) {
+            $retorno = "negativo";
+        } elseif ($nota == "") {
+            $retorno = "nenhum";
+        } else {
+            $retorno = "nenhum";
+        }
+
+        return $retorno;
+    }
+
+    public static function notaRec_5($nota)
+    {
+        $retorno = null;
+        if ($nota >= 3 && $nota <= 5) {
+            $retorno = "positivo";
+        } elseif ($nota >= 0 && $nota <= 2.99) {
+            $retorno = "negativo";
+        } elseif ($nota == "") {
+            $retorno = "nenhum";
+        } else {
+            $retorno = "nenhum";
+        }
+
+        return $retorno;
+    }
+
     public static function nota_10Qualitativa($nota)
     {
         $retorno = null;

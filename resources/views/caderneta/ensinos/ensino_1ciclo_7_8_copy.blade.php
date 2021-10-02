@@ -294,6 +294,9 @@ use App\Http\Controllers\ControladorStatic;
 
                             @if ($getEpoca4->estado!="off")
                             <div class="tab-pane @if(session('epoca')=="4") active @endif" role="tabpanel">
+                                @if(!$getCadeiraExame)
+                                <p class="m-0"> Cadeira sem exames</p>
+                                @else
                                 <p class="m-0">
                                     {{Form::open(['method'=>"post"])}}
                                       <!-- provas-->
@@ -339,6 +342,7 @@ use App\Http\Controllers\ControladorStatic;
                                     </table>
                                 {{Form::close()}}
                                 </p>
+                                @endif
                             </div>
                             @endif
 

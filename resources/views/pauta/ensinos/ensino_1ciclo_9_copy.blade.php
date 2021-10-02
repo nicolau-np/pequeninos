@@ -67,9 +67,18 @@ $getCadeiraRecurso = false;
                                       <?php
 
                                       foreach(Session::get('disciplinas') as $disciplina){
+                                        $numero_colspan = 2;
                                         $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
                                         $getCadeiraExame = ControladorStatic::getExameStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
-                                        $getCadeiraExame = ControladorStatic::getRecursoStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
+                                        $getCadeiraRecurso = ControladorStatic::getRecursoStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
+
+                                        if($getCadeiraExame){
+                                            $numero_colspan = $numero_colspan + 1;
+                                        }
+
+                                        if($getCadeiraRecurso){
+                                            $numero_colspan = $numero_colspan + 1;
+                                        }
                                         ?>
                                       <th colspan="{{$numero_colspan}}">{{strtoupper($getDisciplina->disciplina)}}</th>
                                       <?php } ?>
@@ -77,9 +86,18 @@ $getCadeiraRecurso = false;
                                   </tr>
                                   <tr>
                                     @foreach (Session::get('disciplinas') as $disciplina)
+                                    <?php
+                                        $getCadeiraExame = ControladorStatic::getExameStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
+                                        $getCadeiraRecurso = ControladorStatic::getRecursoStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
+                                    ?>
                                     <th>MFD</th>
+                                    @if($getCadeiraExame)
                                     <th>NPE</th>
+                                    @endif
                                     <th>MF</th>
+                                    @if($getCadeiraRecurso)
+                                    <th>REC</th>
+                                    @endif
                                     @endforeach
                                  </tr>
                               </thead>
@@ -119,17 +137,25 @@ $getCadeiraRecurso = false;
                                     <?php
                                     foreach (Session::get('disciplinas') as $disciplina) {
                                         $numero_cadeiras = $numero_cadeiras + 1;
+                                        $getCadeiraExame = ControladorStatic::getExameStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
+                                        $getCadeiraRecurso = ControladorStatic::getRecursoStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
                                         $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina["id_disciplina"], $getDirector->ano_lectivo);
                                         if($final->count() == 0){
                                         ?>
                                         <td>---</td>
+                                        @if ($getCadeiraExame)
                                         <td>---</td>
+                                        @endif
                                         <td>---</td>
+                                        @if ($getCadeiraRecurso)
+                                        <td>---</td>
+                                        @endif
                                     <?php } else {
                                         foreach ($final as $valorf) {
                                         $v1_estilo = ControladorNotas::nota_20($valorf->mfd);
                                         $v2_estilo = ControladorNotas::nota_20($valorf->npe);
                                         $v3_estilo = ControladorNotas::nota_20($valorf->mf);
+                                        $v4_estilo = ControladorNotas::nota_20($valorf->rec);
                                         ?>
                                         <td class="{{$v1_estilo}}">@if($valorf->mfd == null) --- @else {{$valorf->mfd}} @endif</td>
                                         <td class="{{$v2_estilo}}">@if($valorf->npe == null) --- @else {{$valorf->npe}} @endif</td>

@@ -7,8 +7,6 @@ if($getCadeiraExame){
     $numero_colspan = $numero_colspan + 1;
 }
 
-echo $getCadeiraExame." -N- ".$numero_colspan;
-
 $count_avaliados1 = [
     'mac'=>0,
     'npp'=>0,

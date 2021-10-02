@@ -546,6 +546,7 @@ class AjaxController extends Controller
 
     public function updateGlobal(Request $request)
     {
+        //verificar ensino devido a nota que nao pode ser maior que 20 ou 10
         if (Session::get('id_ensinoCAD') == 1) {
             $request->validate([
                 'valor' => ['required', 'numeric', 'min:0', 'max:10'],
@@ -625,5 +626,68 @@ class AjaxController extends Controller
             echo " \\lancou o mf\\ ";
         }
         //fim mfd e mf
+    }
+
+    public function updateRecurso(Request $request){
+         //verificar ensino devido a nota que nao pode ser maior que 20 ou 10
+         if (Session::get('id_ensinoCAD') == 1) {
+            $request->validate([
+                'valor' => ['required', 'numeric', 'min:0', 'max:10'],
+                'campo' => ['required', 'string', 'min:2', 'max:3'],
+                'id_final' => ['required', 'integer', 'min:1'],
+            ]);
+        } else {
+            $request->validate([
+                'valor' => ['required', 'numeric', 'min:0', 'max:20'],
+                'campo' => ['required', 'string', 'min:2', 'max:3'],
+                'id_final' => ['required', 'integer', 'min:1'],
+            ]);
+        }
+
+        //verificar se mudou os campos
+        if (($request->campo != "rec")) {
+            echo " \\mudou campos\\ ";
+        }
+
+        //verificar se mudou o id do trimestre
+        $final = Finals::find($request->id_final);
+        if (!$final) {
+            return null;
+        }
+
+        //verificando se o professor e dono desta turma
+        if (Session::has('id_funcionario')) {
+            //verificando horario e funcionario
+            $data['where_horario'] = [
+                'id_funcionario' => Session::get('id_funcionario'),
+                'id_turma' => $final->estudante->id_turma,
+                'id_disciplina' => $final->id_disciplina,
+                'ano_lectivo' => $final->ano_lectivo,
+                'estado' => "visivel"
+            ];
+
+            $horario = Horario::where($data['where_horario'])->first();
+            if (!$horario) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+
+        //criando campos
+        $campo = "" . $request->campo; //campo de provas
+        $campo2 = $request->campo . "_data"; //campo de data
+        $data['final'] = [
+            "$campo" => $request->valor,
+            "$campo2" => date('Y-m-d'),
+        ];
+
+        $final = Finals::find($request->id_final)->update($data['final']);
+        if ($final) {
+            echo " \\lancou npe\\ ";
+        } else {
+            return null;
+        }
+
     }
 }

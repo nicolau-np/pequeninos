@@ -8,6 +8,9 @@ use App\Http\Controllers\ControladorStatic;
     .npe{
         width: 80px;
     }
+    .rec{
+        width: 80px;
+    }
 </style>
 <div class="page-body">
     <div class="row">
@@ -26,7 +29,7 @@ use App\Http\Controllers\ControladorStatic;
                     <i class="ti-angle-right"></i>
                     {{$getHorario->ano_lectivo}}
                     <i class="ti-angle-right"></i>
-                    @if(session('epoca')!="4")
+                    @if(session('epoca')!="4" && session('epoca')!="5")
                     <a href="/cadernetas/store_copy/{{$getHorario->id_turma}}/{{$getHorario->id_disciplina}}/{{session('epoca')}}/{{$getHorario->ano_lectivo}}"><i class="ti-reload"></i></a>
                     @endif
                     </h5>
@@ -339,6 +342,9 @@ use App\Http\Controllers\ControladorStatic;
 
                             @if ($getEpoca5->estado!="off")
                             <div class="tab-pane @if(session('epoca')=="5") active @endif" role="tabpanel">
+                                @if (!$getCadeiraRecurso)
+                                <p class="m-0">Cadeira sem Recurso</p>
+                                @else
                                 <p class="m-0">
                                     {{Form::open(['method'=>"post"])}}
                                       <!-- provas-->
@@ -384,6 +390,7 @@ use App\Http\Controllers\ControladorStatic;
                                     </table>
                                 {{Form::close()}}
                                 </p>
+                                @endif
                             </div>
                             @endif
 
@@ -466,6 +473,48 @@ use App\Http\Controllers\ControladorStatic;
                 }
             }
         });
+
+        $('.rec').on('keypress', function(e){
+            if(e.which == 13){
+                var valor = $(this).val();
+                var id_final = $(this).data('id');
+                var campo = $(this).data('campo');
+
+                if((valor==="") || (valor<0) || (valor>20)){
+                    $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                }else{
+                    var update = updateRecurso(valor, id_final, campo);
+                    if(update){
+                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
+                    }else{
+                        $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                    }
+                }
+            }
+        });
+
+        function updateRecurso(valor, id_final, campo){
+            retorno = false;
+            var data = {
+                valor: valor,
+                id_final: id_final,
+                campo: campo,
+                _token: "{{ csrf_token() }}"
+            };
+
+            $.ajax({
+                type: "post",
+                url: "{{route('updateRecurso')}}",
+                data: data,
+                dataType: "html",
+                success: function (response) {
+
+                    console.log(response);
+                }
+            });
+            return true;
+        }
+
 
         function updateGlobal(valor, id_final, campo){
             retorno = false;

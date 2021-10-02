@@ -1129,6 +1129,11 @@ class InstitucionalController extends Controller
             'id_disciplina'=>null,
             'estado'=>"on",
         ];
+
+        foreach($request->disciplinas as $disciplina){
+            $data['id_disciplina'] = $disciplina;
+            
+        }
     }
 
     public function recursos_edit($id)

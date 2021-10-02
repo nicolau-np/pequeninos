@@ -158,8 +158,13 @@ $getCadeiraRecurso = false;
                                         $v4_estilo = ControladorNotas::nota_20($valorf->rec);
                                         ?>
                                         <td class="{{$v1_estilo}}">@if($valorf->mfd == null) --- @else {{$valorf->mfd}} @endif</td>
+                                        @if ($getCadeiraExame)
                                         <td class="{{$v2_estilo}}">@if($valorf->npe == null) --- @else {{$valorf->npe}} @endif</td>
+                                        @endif
                                         <td class="{{$v3_estilo}}">@if($valorf->mf == null) --- @else {{$valorf->mf}} @endif</td>
+                                        @if ($getCadeiraRecurso)
+                                        <td class="{{$v4_estilo}}">@if($valorf->rec == null) --- @else {{$valorf->rec}} @endif</td>
+                                        @endif
 
                                     <?php }
                                             if($valorf->mf<=9.99 && $valorf->mf!=null){

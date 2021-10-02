@@ -1,4 +1,4 @@
-<?php
+@php
 use App\Http\Controllers\ControladorNotas;
 
 $numero_colspan = 2;
@@ -145,9 +145,10 @@ $percent_negativasf = [
 ];
 
 
-?>
+@endphp
 @extends('layouts.app')
 @section('content')
+
 <style>
 table{
     font-size:12px;

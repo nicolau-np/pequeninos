@@ -8,6 +8,9 @@ use App\Http\Controllers\ControladorStatic;
     .npe{
         width: 80px;
     }
+    .rec{
+        width: 80px;
+    }
 </style>
 <div class="page-body">
     <div class="row">
@@ -26,7 +29,7 @@ use App\Http\Controllers\ControladorStatic;
                     <i class="ti-angle-right"></i>
                     {{$getHorario->ano_lectivo}}
                     <i class="ti-angle-right"></i>
-                    @if(session('epoca')!="4")
+                    @if(session('epoca')!="4" && session('epoca')!="5")
                     <a href="/cadernetas/store_copy/{{$getHorario->id_turma}}/{{$getHorario->id_disciplina}}/{{session('epoca')}}/{{$getHorario->ano_lectivo}}"><i class="ti-reload"></i></a>
                     @endif
                     </h5>
@@ -79,6 +82,12 @@ use App\Http\Controllers\ControladorStatic;
                             </li>
                             @endif
 
+                            @if ($getEpoca5->estado!="off")
+                            <li class="nav-item">
+                                <a class="nav-link @if(session('epoca')=="5") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/5">REC</a>
+                                <div class="slide"></div>
+                            </li>
+                            @endif
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content tabs-left-content card-block">
@@ -331,6 +340,60 @@ use App\Http\Controllers\ControladorStatic;
                             </div>
                             @endif
 
+                            @if ($getEpoca5->estado!="off")
+                            <div class="tab-pane @if(session('epoca')=="5") active @endif" role="tabpanel">
+                                @if (!$getCadeiraRecurso)
+                                <p class="m-0">Cadeira sem Recurso</p>
+                                @else
+                                <p class="m-0">
+                                    {{Form::open(['method'=>"post"])}}
+                                      <!-- provas-->
+
+                                      <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th colspan="3">DADOS PESSOAIS</th>
+                                                <th rowspan="2">REC</th>
+                                            </tr>
+                                            <tr>
+                                                <th>Nº</th>
+                                                <th>NOME</th>
+                                                <th>G</th>
+                                            </tr>
+                                        </thead>
+
+                                        <tbody>
+                                            @if (session('epoca')==5)
+                                                @if ($getGlobal!=null)
+                                                    @if ($getGlobal->count()==0)
+                                                        Nenhum estudante encontrado
+                                                    @else
+                                                        @foreach ($getGlobal as $global)
+                                                        <?php
+                                                                $observacao = ControladorStatic::getObservacaofinal($global->id_estudante, $global->ano_lectivo);
+                                                            ?>
+                                                                <tr class="{{$observacao->observacao_final}}">
+                                                            <td>{{$loop->iteration}}</td>
+                                                            <td>{{$global->estudante->pessoa->nome}}</td>
+                                                            <td>{{$global->estudante->pessoa->genero}}</td>
+
+                                                            <td>
+                                                                <input type="number" name="npe" data-id="{{$global->id}}" data-campo="rec" value="{{$global->rec}}" class="form-control rec" />
+                                                            </td>
+
+                                                        </tr>
+                                                        @endforeach
+                                                    @endif
+                                                @endif
+                                            @endif
+                                        </tbody>
+                                    </table>
+                                {{Form::close()}}
+                                </p>
+                                @endif
+                            </div>
+                            @endif
+
                         </div>
                     </div>
 
@@ -417,7 +480,7 @@ use App\Http\Controllers\ControladorStatic;
                 var id_final = $(this).data('id');
                 var campo = $(this).data('campo');
 
-                if((valor==="") || (valor<0) || (valor>20)){
+                if((valor==="") || (valor<0) || (valor>5)){
                     $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
                 }else{
                     var update = updateRecurso(valor, id_final, campo);

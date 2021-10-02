@@ -3,15 +3,24 @@
 namespace App\Exports;
 
 use App\Grade;
+use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class GradeExport implements FromCollection
+class GradeExport implements FromView, ShouldAutoSize
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
+    use Exportable;
+
+    public function view(): View
     {
-        return Grade::all();
+        $grades = Grade::all();
+
+        $data = [
+            'getGrades'=>$grades,
+        ];
+        return view('institucional.grades.export', $data);
     }
 }

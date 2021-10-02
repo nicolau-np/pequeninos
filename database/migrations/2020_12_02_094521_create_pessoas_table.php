@@ -19,6 +19,7 @@ class CreatePessoasTable extends Migration
             $table->bigInteger('id_municipio')->unsigned()->index();
             $table->string('nome');
             $table->date('data_nascimento')->nullable();
+            $table->string('email')->nullable();
             $table->string('genero');
             $table->string('estado_civil')->nullable();
             $table->string('naturalidade')->nullable();

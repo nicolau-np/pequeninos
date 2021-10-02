@@ -13,6 +13,7 @@ class Pessoa extends Model
         'nome',
         'data_nascimento',
         'genero',
+        'email',
         'estado_civil',
         'naturalidade',
         'telefone',

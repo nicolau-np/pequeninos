@@ -1,5 +1,13 @@
 @php
 use App\Http\Controllers\ControladorNotas;
+$numero_colspan = 2;
+if($getCadeiraRecurso){
+    $numero_colspan = $numero_colspan + 1;
+}
+
+if($getCadeiraExame){
+    $numero_colspan = $numero_colspan + 1;
+}
 @endphp
 @extends('layouts.app')
 @section('content')
@@ -54,7 +62,7 @@ use App\Http\Controllers\ControladorNotas;
                                       <th colspan="4">1º TRIMESTRE</th>
                                       <th colspan="4">2º TRIMESTRE</th>
                                       <th colspan="4">3º TRIMESTRE</th>
-                                      <th colspan="2">DADOS FINAIS</th>
+                                      <th colspan="{{$numero_colspan}}">DADOS FINAIS</th>
                                       <th rowspan="2">OBS.</th>
                                   </tr>
                                   <tr>
@@ -74,7 +82,13 @@ use App\Http\Controllers\ControladorNotas;
                                       <th>MT3</th>
 
                                       <th>MFD</th>
+                                      @if($getCadeiraExame)
+                                      <th>NPE</th>
+                                      @endif
                                       <th>MF</th>
+                                      @if($getCadeiraRecurso)
+                                      <th>REC</th>
+                                      @endif
                                   </tr>
                               </thead>
                               <tbody>
@@ -174,15 +188,33 @@ use App\Http\Controllers\ControladorNotas;
                                     if($final->count() == 0){
                                  ?>
                                     <td>---</td>
-                                    <td>---</td>
+                                    @if($getCadeiraExame)
+                                      <td>---</td>
+                                     @endif
+                                      <td>---</td>
+                                    @if($getCadeiraRecurso)
+                                      <td>---</td>
+                                    @endif
                                 <?php }
                                     else{
                                         foreach ($final as $valorf){
                                         $v1_estilo = ControladorNotas::nota_20($valorf->mfd);
-                                        $v2_estilo = ControladorNotas::nota_20($valorf->mf);
+                                        if($getCadeiraExame){
+                                        $v2_estilo = ControladorNotas::nota_20($valorf->npe);
+                                        }
+                                        $v3_estilo = ControladorNotas::nota_20($valorf->mf);
+                                        if($getCadeiraRecurso){
+                                        $v4_estilo = ControladorNotas::notaRec_10($valorf->rec);
+                                        }
                                 ?>
                                     <td class="{{$v1_estilo}}">@if($valorf->mfd==null) --- @else {{$valorf->mfd}} @endif</td>
-                                    <td class="{{$v2_estilo}}">@if($valorf->mf==null) --- @else {{$valorf->mf}} @endif</td>
+                                    @if ($getCadeiraExame)
+                                        <td class="{{$v2_estilo}}">@if($valorf->npe==null) --- @else {{$valorf->npe}} @endif</td>
+                                    @endif
+                                    <td class="{{$v3_estilo}}">@if($valorf->mf==null) --- @else {{$valorf->mf}} @endif</td>
+                                    @if ($getCadeiraRecurso)
+                                        <td class="{{$v4_estilo}}">@if($valorf->rec==null) --- @else {{$valorf->rec}} @endif</td>
+                                    @endif
                                 <?php }}?>
                                 <!-- fim dados finais-->
 
@@ -190,13 +222,25 @@ use App\Http\Controllers\ControladorNotas;
                                 @if($final->count()==0)
                                         <td>---</td>
                                 @else
-                                @if($valorf->mf==null)
-                                <td>---</td>
-                                @else
-                                <td class="@if($valorf->mf<=9.99 && $valorf->mf!=null) negativo @else positivo @endif">
-                                            @if($valorf->mf<=9.99 && $valorf->mf!=null) NÃO TRANSITA @else TRANSITA @endif
-                                </td>
-                                @endif
+                                    @if($valorf->mf==null)
+                                    <td>---</td>
+                                    @else
+                                        @if ($getCadeiraRecurso)
+                                            @if ($valorf->rec == null && $valorf->mf<=9.99 && $valorf->mf!=null)
+                                                <td class="negativo">NÃO TRANSITA</td>
+                                            @else
+                                                <td class="@if($valorf->rec<=4.99 && $valorf->rec!=null) negativo @else positivo @endif">
+                                                    @if($valorf->rec<=4.99 && $valorf->rec!=null) NÃO TRANSITA @else TRANSITA @endif
+                                                </td>
+                                            @endif
+
+                                        @else
+                                            <td class="@if($valorf->mf<=9.99 && $valorf->mf!=null) negativo @else positivo @endif">
+                                                @if($valorf->mf<=9.99 && $valorf->mf!=null) NÃO TRANSITA @else TRANSITA @endif
+                                            </td>
+                                        @endif
+
+                                    @endif
 
                                 @endif
                                 <!-- fim obs -->

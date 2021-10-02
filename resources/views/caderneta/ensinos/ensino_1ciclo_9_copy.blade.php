@@ -338,7 +338,7 @@ use App\Http\Controllers\ControladorStatic;
                             @endif
 
                             @if ($getEpoca5->estado!="off")
-                            <div class="tab-pane @if(session('epoca')=="4") active @endif" role="tabpanel">
+                            <div class="tab-pane @if(session('epoca')=="5") active @endif" role="tabpanel">
                                 <p class="m-0">
                                     {{Form::open(['method'=>"post"])}}
                                       <!-- provas-->
@@ -347,7 +347,7 @@ use App\Http\Controllers\ControladorStatic;
                                         <thead>
                                             <tr>
                                                 <th colspan="3">DADOS PESSOAIS</th>
-                                                <th rowspan="2">NPE</th>
+                                                <th rowspan="2">REC</th>
                                             </tr>
                                             <tr>
                                                 <th>Nº</th>

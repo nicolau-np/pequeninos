@@ -218,6 +218,13 @@ class InstitucionalController extends Controller
         }
     }
 
+    public function turma_import(){
+
+    }
+
+    public function turma_importStore(Request $request){
+
+    }
 
     public function disciplina_list()
     {

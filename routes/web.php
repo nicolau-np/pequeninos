@@ -69,6 +69,8 @@ Route::group(['prefix' => 'institucional', 'middleware' => "AdminUser"], functio
         Route::post('/store', "InstitucionalController@turma_store");
         Route::get('/edit/{id}', "InstitucionalController@turma_edit");
         Route::put('/update/{id}', "InstitucionalController@turma_update");
+        Route::get('/import', "InstitucionalController@turma_import");
+        Route::post('/import/store', "InstitucionalController@turma_importStore");
     });
 
     Route::group(['prefix' => 'disciplinas',], function () {

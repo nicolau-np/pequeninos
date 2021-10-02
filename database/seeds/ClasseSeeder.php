@@ -44,10 +44,10 @@ class ClasseSeeder extends Seeder
         //ensino 3
         [
             'id_ensino'=>3,
-            'classe'=>'1 ano',
+            'classe'=>'1º ano',
         ],[
             'id_ensino'=>3,
-            'classe'=>'2 ano',
+            'classe'=>'2º ano',
         ],
 
         //ensino 4
@@ -100,19 +100,19 @@ class ClasseSeeder extends Seeder
          //ensino 8
          [
             'id_ensino'=>8,
-            'classe'=>'1 ano',
+            'classe'=>'1º ano',
         ],[
             'id_ensino'=>8,
-            'classe'=>'2 ano',
+            'classe'=>'2º ano',
         ],[
             'id_ensino'=>8,
-            'classe'=>'3 ano',
+            'classe'=>'3º ano',
         ],[
             'id_ensino'=>8,
-            'classe'=>'4 ano',
+            'classe'=>'4º ano',
         ],[
             'id_ensino'=>8,
-            'classe'=>'5 ano',
+            'classe'=>'5º ano',
         ],
     ];
 

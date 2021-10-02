@@ -63,7 +63,7 @@ class CadernetaController_copy extends Controller
     {
 
         //verificar se a epoca existe
-        if (($epoca != 1) && ($epoca != 2) && ($epoca != 3) && ($epoca != 4)) {
+        if (($epoca != 1) && ($epoca != 2) && ($epoca != 3) && ($epoca != 4) && ($epoca != 5)) {
             return back()->with(['error' => "Não encontrou epoca"]);
         } else {
             Session::put('epoca', $epoca);
@@ -137,7 +137,7 @@ class CadernetaController_copy extends Controller
         $global = null;
 
         //pegando dados trimestrais para exibir na view
-        if ($epoca != 4) {
+        if (($epoca != 4) && ($epoca != 5)) {
 
             $trimestral = Trimestral::whereHas('estudante', function ($query) use ($data2) {
                 $query->where('id_turma', $data2['id_turmaCAD']);
@@ -158,6 +158,7 @@ class CadernetaController_copy extends Controller
         $estado_epoca2 = BloqueioEpoca::where(['epoca' => 2])->first();
         $estado_epoca3 = BloqueioEpoca::where(['epoca' => 3])->first();
         $estado_epoca4 = BloqueioEpoca::where(['epoca' => 4])->first();
+        $estado_epoca5 = BloqueioEpoca::where(['epoca' => 5])->first();
 
         $data = [
             'title' => "Caderneta",
@@ -175,6 +176,7 @@ class CadernetaController_copy extends Controller
             'getEpoca2' => $estado_epoca2,
             'getEpoca3' => $estado_epoca3,
             'getEpoca4' => $estado_epoca4,
+            'getEpoca5' => $estado_epoca5,
         ];
 
         if ($id_ensino == 1) { //iniciacao ate 6
@@ -184,7 +186,7 @@ class CadernetaController_copy extends Controller
             } //se for classificacao quantitativa
             elseif (($classe == "Iniciação") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
                 return view('caderneta.ensinos.ensino_primario_Ini_1_3_5_copy', $data);
-            }elseif(($classe == "6ª classe")){
+            } elseif (($classe == "6ª classe")) {
                 return view('caderneta.ensinos.ensino_primario_6_copy', $data);
             }
         } elseif ($id_ensino == 2) { //7 classe ate 9 ensino geral

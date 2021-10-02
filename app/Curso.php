@@ -36,4 +36,8 @@ class Curso extends Model
     public function observacao_conjunta(){
         return $this->hasMany(ObservacaoConjunta::class, 'id_curso', 'id');
     }
+
+    public function cadeira_recurso(){
+        return $this->hasMany(CadeiraRecurso::class, 'id_curso', 'id');
+    }
 }

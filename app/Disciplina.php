@@ -50,4 +50,8 @@ class Disciplina extends Model
         return $this->hasMany(ObservacaoConjuntaRegra::class, 'id_disciplina', 'id');
     }
 
+    public function cadeira_recurso(){
+        return $this->hasMany(CadeiraRecurso::class, 'id_disciplina', 'id');
+    }
+
 }

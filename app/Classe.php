@@ -40,4 +40,8 @@ class Classe extends Model
     public function observacao_conjunta(){
         return $this->hasMany(ObservacaoConjunta::class, 'id_classe', 'id');
     }
+
+    public function cadeira_recurso(){
+        return $this->hasMany(CadeiraRecurso::class, 'id_classe', 'id');
+    }
 }

@@ -54,4 +54,8 @@ class Disciplina extends Model
         return $this->hasMany(CadeiraRecurso::class, 'id_disciplina', 'id');
     }
 
+    public function cadeira_exame(){
+        return $this->hasMany(CadeiraExame::class, 'id_disciplina', 'id');
+    }
+
 }

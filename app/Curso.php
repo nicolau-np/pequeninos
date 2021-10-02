@@ -40,4 +40,8 @@ class Curso extends Model
     public function cadeira_recurso(){
         return $this->hasMany(CadeiraRecurso::class, 'id_curso', 'id');
     }
+
+    public function cadeira_exame(){
+        return $this->hasMany(CadeiraExame::class, 'id_curso', 'id');
+    }
 }

@@ -458,9 +458,9 @@ class InstitucionalController extends Controller
 
     public function grade_import(){
         $data = [
-            'title' => "Disciplinas",
+            'title' => "Grades Curricular",
             'type' => "institucional",
-            'menu' => "Disciplinas",
+            'menu' => "Grades Curricular",
             'submenu' => "Importar",
         ];
         return view('institucional.grades.import', $data);

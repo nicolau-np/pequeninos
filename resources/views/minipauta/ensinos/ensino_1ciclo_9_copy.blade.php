@@ -1,5 +1,13 @@
 @php
 use App\Http\Controllers\ControladorNotas;
+$numero_colspan = 2;
+if($getCadeiraRecurso){
+    $numero_colspan = $numero_colspan + 1;
+}
+
+if($getCadeiraExame){
+    $numero_colspan = $numero_colspan + 1;
+}
 @endphp
 @extends('layouts.app')
 @section('content')
@@ -54,7 +62,7 @@ use App\Http\Controllers\ControladorNotas;
                                       <th colspan="4">1º TRIMESTRE</th>
                                       <th colspan="4">2º TRIMESTRE</th>
                                       <th colspan="4">3º TRIMESTRE</th>
-                                      <th colspan="3">DADOS FINAIS</th>
+                                      <th colspan="{{$numero_colspan}}">DADOS FINAIS</th>
                                       <th rowspan="2">OBS.</th>
                                   </tr>
                                   <tr>
@@ -74,8 +82,13 @@ use App\Http\Controllers\ControladorNotas;
                                       <th>MT3</th>
 
                                       <th>MFD</th>
+                                      @if($getCadeiraExame)
                                       <th>NPE</th>
+                                      @endif
                                       <th>MF</th>
+                                      @if($getCadeiraRecurso)
+                                      <th>REC</th>
+                                      @endif
                                   </tr>
                               </thead>
                               <tbody>
@@ -175,8 +188,13 @@ use App\Http\Controllers\ControladorNotas;
                                     if($final->count() == 0){
                                  ?>
                                     <td>---</td>
-                                    <td>---</td>
-                                    <td>---</td>
+                                    @if($getCadeiraExame)
+                                      <td>---</td>
+                                     @endif
+                                      <td>---</td>
+                                    @if($getCadeiraRecurso)
+                                      <td>---</td>
+                                    @endif
                                 <?php }
                                     else{
                                         foreach ($final as $valorf){

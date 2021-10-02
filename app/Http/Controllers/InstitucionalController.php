@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AnoLectivo;
+use App\CadeiraExame;
 use App\CadeiraRecurso;
 use App\CompoDisciplina;
 use App\Curso;
@@ -1147,6 +1148,69 @@ class InstitucionalController extends Controller
     }
 
     public function recursos_update(Request $request, $id)
+    {
+    }
+
+
+    public function exames_list()
+    {
+        $exames = CadeiraRecurso::paginate(8);
+        $data = [
+            'title' => "Exames",
+            'type' => "institucional",
+            'menu' => "Exames",
+            'submenu' => "Listar",
+            'getCadeiraExames' => $exames,
+        ];
+        return view('institucional.exames.list', $data);
+    }
+
+    public function exames_create()
+    {
+        $cursos = Curso::pluck('curso', 'id');
+        $data = [
+            'title' => "Exames",
+            'type' => "institucional",
+            'menu' => "Exames",
+            'submenu' => "Novo",
+            'getCursos' => $cursos,
+        ];
+        return view('institucional.exames.new', $data);
+    }
+
+    public function exames_store(Request $request)
+    {
+        $request->validate([
+            'curso' => ['required', 'integer', 'min:1'],
+            'classe' => ['required', 'integer', 'min:1'],
+            'disciplinas' => ['required'],
+            'disciplinas.*' => ['string']
+        ]);
+
+        $data = [
+            'id_curso'=> $request->curso,
+            'id_classe'=> $request->classe,
+            'id_disciplina'=>null,
+            'estado'=>"on",
+        ];
+        $cadeira = false;
+        foreach($request->disciplinas as $disciplina){
+            $data['id_disciplina'] = $disciplina;
+            if(!CadeiraExame::where($data)->first()){
+              $cadeira = CadeiraExame::create($data);
+            }
+        }
+
+        if($cadeira){
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
+    }
+
+    public function exames_edit($id)
+    {
+    }
+
+    public function exames_update(Request $request, $id)
     {
     }
 }

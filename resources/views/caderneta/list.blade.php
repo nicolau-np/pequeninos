@@ -18,6 +18,10 @@ if(($getEpoca4->estado=="on")){
     $epoca_usar = 4;
 }
 
+if(($getEpoca5->estado=="on")){
+    $epoca_usar = 5;
+}
+
 if(($getEpoca1->estado=="off")){
 $epoca_usar = 2;
 }
@@ -31,10 +35,14 @@ if(($getEpoca1->estado=="off") && ($getEpoca2->estado=="off") && ($getEpoca3->es
 }
 
 if(($getEpoca1->estado=="off") && ($getEpoca2->estado=="off") && ($getEpoca3->estado=="off") && ($getEpoca4->estado=="off")){
+    $epoca_usar = 5;
+}
+
+if(($getEpoca1->estado=="off") && ($getEpoca2->estado=="off") && ($getEpoca3->estado=="off") && ($getEpoca4->estado=="off") && ($getEpoca5->estado=="off")){
     $epoca_usar = 1;
 }
 
-if(($getEpoca1->estado=="on") && ($getEpoca2->estado=="on") && ($getEpoca3->estado=="on") && ($getEpoca4->estado=="on")){
+if(($getEpoca1->estado=="on") && ($getEpoca2->estado=="on") && ($getEpoca3->estado=="on") && ($getEpoca4->estado=="on") && ($getEpoca5->estado=="on")){
     $epoca_usar = 1;
 }
 

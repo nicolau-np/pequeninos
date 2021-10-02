@@ -55,25 +55,25 @@ use App\Http\Controllers\ControladorStatic;
                         <ul class="nav nav-tabs md-tabs tabs-left b-none" role="tablist">
                             @if ($getEpoca1->estado!="off")
                             <li class="nav-item">
-                                <a class="nav-link @if(session('epoca')=="1") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/1">1º Trimestre</a>
+                                <a class="nav-link @if(session('epoca')=="1") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/1">1º TRIMESTRE</a>
                                 <div class="slide"></div>
                             </li>
                             @endif
                             @if ($getEpoca2->estado!="off")
                             <li class="nav-item">
-                                <a class="nav-link @if(session('epoca')=="2") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/2">2º Trimestre</a>
+                                <a class="nav-link @if(session('epoca')=="2") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/2">2º TRIMESTRE</a>
                                 <div class="slide"></div>
                             </li>
                             @endif
                             @if ($getEpoca3->estado!="off")
                             <li class="nav-item">
-                                <a class="nav-link @if(session('epoca')=="3") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/3">3º Trimestre</a>
+                                <a class="nav-link @if(session('epoca')=="3") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/3">3º TRIMESTRE</a>
                                 <div class="slide"></div>
                             </li>
                             @endif
                             @if ($getEpoca4->estado!="off")
                             <li class="nav-item">
-                                <a class="nav-link @if(session('epoca')=="4") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/4">Global</a>
+                                <a class="nav-link @if(session('epoca')=="4") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/4">EXAME</a>
                                 <div class="slide"></div>
                             </li>
                             @endif

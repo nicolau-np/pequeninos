@@ -11,6 +11,10 @@ if(!$observacao_geral){
 }else{
     $observacao_geralDB= $observacao_geral->quantidade_negativas;
 }
+
+$numero_colspan = 2;
+$getCadeiraExame = false;
+$getCadeiraRecurso = false;
 ?>
 <style>
 
@@ -61,10 +65,13 @@ if(!$observacao_geral){
                                       <th rowspan="2">NOME COMPLETO</th>
                                       <th rowspan="2">G</th>
                                       <?php
+
                                       foreach(Session::get('disciplinas') as $disciplina){
-                                        $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina'])
+                                        $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
+                                        $getCadeiraExame = ControladorStatic::getExameStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
+                                        $getCadeiraExame = ControladorStatic::getRecursoStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
                                         ?>
-                                      <th colspan="3">{{strtoupper($getDisciplina->disciplina)}}</th>
+                                      <th colspan="{{$numero_colspan}}">{{strtoupper($getDisciplina->disciplina)}}</th>
                                       <?php } ?>
                                       <th rowspan="2">OBSERVAÇÃO</th>
                                   </tr>

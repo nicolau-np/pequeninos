@@ -632,13 +632,13 @@ class AjaxController extends Controller
          //verificar ensino devido a nota que nao pode ser maior que 20 ou 10
          if (Session::get('id_ensinoCAD') == 1) {
             $request->validate([
-                'valor' => ['required', 'numeric', 'min:0', 'max:10'],
+                'valor' => ['required', 'numeric', 'min:0', 'max:5'],
                 'campo' => ['required', 'string', 'min:2', 'max:3'],
                 'id_final' => ['required', 'integer', 'min:1'],
             ]);
         } else {
             $request->validate([
-                'valor' => ['required', 'numeric', 'min:0', 'max:20'],
+                'valor' => ['required', 'numeric', 'min:0', 'max:10'],
                 'campo' => ['required', 'string', 'min:2', 'max:3'],
                 'id_final' => ['required', 'integer', 'min:1'],
             ]);

@@ -480,7 +480,7 @@ use App\Http\Controllers\ControladorStatic;
                 var id_final = $(this).data('id');
                 var campo = $(this).data('campo');
 
-                if((valor==="") || (valor<0) || (valor>20)){
+                if((valor==="") || (valor<0) || (valor>10)){
                     $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
                 }else{
                     var update = updateRecurso(valor, id_final, campo);

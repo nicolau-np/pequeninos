@@ -28,7 +28,7 @@
                     <div class="alert alert-success">{{session('success')}}</div>
                     @endif
 
-                    {{Form::open(['method'=>"post", 'url'=>"/institucional/disciplinas/import/store", 'enctype'=>"multipart/form-data"])}}
+                    {{Form::open(['method'=>"post", 'url'=>"/institucional/grades/import/store", 'enctype'=>"multipart/form-data"])}}
                     @csrf
                     <fieldset>
                         <legend><i class="ti-list"></i> Dados</legend>

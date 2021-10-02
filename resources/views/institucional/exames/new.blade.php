@@ -27,7 +27,7 @@
                     @if(session('success'))
                     <div class="alert alert-success">{{session('success')}}</div>
                     @endif
-                        {{Form::open(['method'=>"post", 'url'=>"/institucional/recursos/store"])}}
+                        {{Form::open(['method'=>"post", 'url'=>"/institucional/exames/store"])}}
                         @csrf
                         <fieldset>
                             <legend><i class="ti-list"></i> Dados do preço</legend>
@@ -95,7 +95,7 @@
 <!-- botão pesquisar -->
 <div class="btnPesquisar">
 	<div class="btnPesquisarBtn">
-		<a href="/institucional/recursos/" class="btn btn-primary btnCircular btnPrincipal" title="Listar"><i class="ti-search"></i></a>
+		<a href="/institucional/exames/" class="btn btn-primary btnCircular btnPrincipal" title="Listar"><i class="ti-search"></i></a>
 	</div>
 </div>
 

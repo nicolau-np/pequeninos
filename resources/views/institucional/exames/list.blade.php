@@ -46,19 +46,19 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @if($getCadeiraRecursos->count()==0)
+                                @if($getCadeiraExames->count()==0)
                                 <span class="not_found">Nenhum exame cadastrado</span>
                                 @else
-                                @foreach ($getCadeiraRecursos as $cadeira_recursos)
+                                @foreach ($getCadeiraExames as $cadeira_exames)
 
                                 <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$cadeira_recursos->curso->curso}}</td>
-                                    <td>{{$cadeira_recursos->classe->classe}}</td>
-                                    <td>{{$cadeira_recursos->disciplina->disciplina}}</td>
-                                    <td>{{$cadeira_recursos->estado}}</td>
+                                    <td>{{$cadeira_exames->curso->curso}}</td>
+                                    <td>{{$cadeira_exames->classe->classe}}</td>
+                                    <td>{{$cadeira_exames->disciplina->disciplina}}</td>
+                                    <td>{{$cadeira_exames->estado}}</td>
                                     <td>
-                                        <a href="/institucional/recursos/edit/{{$cadeira_recursos->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
+                                        <a href="/institucional/exames/edit/{{$cadeira_exames->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
                                         <a href="#" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
                                     </td>
                                 </tr>
@@ -71,7 +71,7 @@
                     </div>
 
                     <div class="pagination">
-                        {{$getCadeiraRecursos->links()}}
+                        {{$getCadeiraExames->links()}}
                     </div>
                 </div>
             </div>
@@ -85,7 +85,7 @@
 <!-- botão pesquisar -->
 <div class="btnPesquisar">
 	<div class="btnPesquisarBtn">
-		<a href="/institucional/recursos/create" class="btn btn-primary btnCircular btnPrincipal" title="Novo"><i class="ti-plus"></i></a>
+		<a href="/institucional/exames/create" class="btn btn-primary btnCircular btnPrincipal" title="Novo"><i class="ti-plus"></i></a>
 	</div>
 </div>
 

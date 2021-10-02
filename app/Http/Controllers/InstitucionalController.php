@@ -452,7 +452,7 @@ class InstitucionalController extends Controller
     }
 
     public function grade_export(){
-        $fileName = "Grades.xlsx";
+        $fileName = "grade_model.xlsx";
         return Excel::download(new GradeExport(), $fileName);
     }
 

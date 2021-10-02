@@ -319,6 +319,16 @@ class InstitucionalController extends Controller
         }
     }
 
+    public function diciplina_import(){
+        $data = [
+            'title' => "Disciplinas",
+            'type' => "institucional",
+            'menu' => "Disciplinas",
+            'submenu' => "Importar",
+        ];
+        return view('institucional.disciplinas.import', $data);
+    }
+
     public function grade_list()
     {
         $grade = Grade::paginate(5);

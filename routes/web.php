@@ -77,6 +77,7 @@ Route::group(['prefix' => 'institucional', 'middleware' => "AdminUser"], functio
         Route::post('/store', "InstitucionalController@disciplina_store");
         Route::get('/edit/{id}', "InstitucionalController@disciplina_edit");
         Route::put('/update/{id}', "InstitucionalController@disciplina_update");
+        Route::get('/import', "InstitucionalController@diciplina_import");
     });
 
     Route::group(['prefix' => 'grades',], function () {

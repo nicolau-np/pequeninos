@@ -1,5 +1,14 @@
 <?php
 use App\Http\Controllers\ControladorNotas;
+
+$numero_colspan = 2;
+
+if($getCadeiraExame){
+    $numero_colspan = $numero_colspan + 1;
+}
+
+echo $getCadeiraExame." -N- ".$numero_colspan;
+
 $count_avaliados1 = [
     'mac'=>0,
     'npp'=>0,
@@ -182,7 +191,7 @@ table{
                                 <th colspan="4">1º TRIMESTRE</th>
                                 <th colspan="4">2º TRIMESTRE</th>
                                 <th colspan="4">3º TRIMESTRE</th>
-                                <th colspan="3">DADOS FINAIS</th>
+                                <th colspan="{{$numero_colspan}}">DADOS FINAIS</th>
                             </tr>
                             <tr>
                                 <th>MAC1</th>
@@ -201,7 +210,9 @@ table{
                                 <th>MT3</th>
 
                                 <th>MFD</th>
+                                @if($getCadeiraExame)
                                 <th>NPE</th>
+                                @endif
                                 <th>MF</th>
 
                             </tr>
@@ -440,7 +451,9 @@ table{
                                                                }
                                                                ?>
                                                             <td>{{$count_avaliadosf['mfd']}}</td>
+                                                            @if($getCadeiraExame)
                                                             <td>{{$count_avaliadosf['npe']}}</td>
+                                                            @endif
                                                             <td>{{$count_avaliadosf['mf']}}</td>
                                                             <!-- end finals-->
                                 </tr>
@@ -464,7 +477,9 @@ table{
                                     <td>{{$count_positivas3['mt']}}</td>
 
                                     <td>{{$count_positivasf['mfd']}}</td>
+                                    @if($getCadeiraExame)
                                     <td>{{$count_positivasf['npe']}}</td>
+                                    @endif
                                     <td>{{$count_positivasf['mf']}}</td>
                                 </tr>
 
@@ -487,7 +502,9 @@ table{
                                     <td>{{$count_negativas3['mt']}}</td>
 
                                     <td>{{$count_negativasf['mfd']}}</td>
+                                    @if($getCadeiraExame)
                                     <td>{{$count_negativasf['npe']}}</td>
+                                    @endif
                                     <td>{{$count_negativasf['mf']}}</td>
                                 </tr>
 
@@ -605,7 +622,9 @@ table{
                                     <td>{{round($percent_positivas3['mt'],2)}}%</td>
 
                                     <td>{{round($percent_positivasf['mfd'],2)}}%</td>
+                                    @if($getCadeiraExame)
                                     <td>{{round($percent_positivasf['npe'],2)}}%</td>
+                                    @endif
                                     <td>{{round($percent_positivasf['mf'],2)}}%</td>
                                 </tr>
 
@@ -723,7 +742,9 @@ table{
                                     <td>{{round($percent_negativas3['mt'],2)}}%</td>
 
                                     <td>{{round($percent_negativasf['mfd'],2)}}%</td>
+                                    @if($getCadeiraExame)
                                     <td>{{round($percent_negativasf['npe'],2)}}%</td>
+                                    @endif
                                     <td>{{round($percent_negativasf['mf'],2)}}%</td>
                                 </tr>
 

@@ -27,19 +27,20 @@ class GradesImport implements
     public function collection(Collection $rows)
     {
         $data = [
-            'id_curso'=>null,
-            'id_classe'=>null,
-            'id_disciplina'=>null,
-            'tipo'=>null,
+            'id_curso' => null,
+            'id_classe' => null,
+            'id_disciplina' => null,
+            'tipo' => null,
         ];
 
         foreach ($rows as $row) {
-            if (!Grade::where($data)->first()) {
-                $data['id_curso'] = $row['id_curso'];
-                $data['id_classe'] = $row['id_classe'];
-                $data['id_disciplina'] = $row['id_disciplina'];
+            $data['id_curso'] = $row['id_curso'];
+            $data['id_classe'] = $row['id_classe'];
+            $data['id_disciplina'] = $row['id_disciplina'];
+            $data['tipo'] = $row['tipo'];
 
-                $disciplina = Grade::create($data);
+            if (!Grade::where($data)->first()) {
+                $grade = Grade::create($data);
             }
         }
     }

@@ -3,11 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\AnoLectivo;
-use App\Classe;
 use App\CompoDisciplina;
 use App\Curso;
 use App\Disciplina;
 use App\Ensino;
+use App\Exports\GradeExport;
 use App\Grade;
 use App\Hora;
 use App\Imports\DisciplinaImport;
@@ -23,7 +23,8 @@ use App\Turma;
 use App\Turno;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
-use Svg\Tag\Rect;
+use Maatwebsite\Excel\Facades\Excel;
+
 
 class InstitucionalController extends Controller
 {
@@ -451,7 +452,8 @@ class InstitucionalController extends Controller
     }
 
     public function grade_export(){
-
+        $fileName = "Grades.xlsx";
+        return Excel::download(new GradeExport(), $fileName);
     }
 
     public function grade_import(){

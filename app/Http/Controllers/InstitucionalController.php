@@ -1096,7 +1096,15 @@ class InstitucionalController extends Controller
     }
 
     public function recursos_create(){
-
+        $cursos = Curso::pluck('curso', 'id');
+        $data = [
+            'title' => "Recursos",
+            'type' => "institucional",
+            'menu' => "Recursos",
+            'submenu' => "Novo",
+            'getCursos'=>$cursos,
+        ];
+        return view('institucional.recursos.new', $data);
     }
 
     public function recursos_store(Request $request){

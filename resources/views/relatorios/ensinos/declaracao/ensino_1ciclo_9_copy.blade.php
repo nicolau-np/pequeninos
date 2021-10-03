@@ -94,6 +94,7 @@ use App\Http\Controllers\ControladorNotas;
             <br/>
 
             <div class="table-responsive">
+
                 <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 50%;">
                     <thead>
                         <tr>
@@ -119,9 +120,9 @@ use App\Http\Controllers\ControladorNotas;
                                     @endphp
 
                                     @if($valorf->rec == null)
-                                        <td>{{$valorf->mf}}</td>
+                                        <td class="{{$v1_estilo}}">{{$valorf->mf}}</td>
                                     @else
-                                        <td>{{$valorf->rec}}</td>
+                                        <td class="{{$v2_estilo}}">{{$valorf->rec}}</td>
                                     @endif
                                 @endforeach
                             @endif
@@ -129,6 +130,7 @@ use App\Http\Controllers\ControladorNotas;
                      @endforeach
                     </tbody>
                 </table>
+
             </div>
             <br/>
             <div class="segundo-paragrafo">
@@ -141,6 +143,30 @@ use App\Http\Controllers\ControladorNotas;
 
         </p>
 
+     </div>
+
+     <div class="rodape">
+        <p style="text-align: center;">
+            <span class="data">
+                Moçamedes, aos {{date('d', strtotime($getDeclaracao->data_emissao))}} de
+                @php
+                    $mes_compreensao = date('m', strtotime($getDeclaracao->data_emissao));
+                    $mes_extenso = ControladorStatic::converterMesExtensao($mes_compreensao);
+                 @endphp
+                 {{$mes_extenso}}
+                de {{date('Y', strtotime($getDeclaracao->data_emissao))}}
+            </span>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <br/>
+            <span class="director">
+                O Director da escola<br/>
+            -------------------------------------------------<br/>
+            LIC. ANTÓNIO KANUTULA BANGO
+            </span>
+        </p>
      </div>
 </div>
 </body>

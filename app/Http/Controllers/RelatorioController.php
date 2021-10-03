@@ -339,8 +339,15 @@ class RelatorioController extends Controller
         if (!$declaracao) {
             return back()->with(['error' => "Não encontrou declaração"]);
         }
+
+        $historico = HistoricEstudante::where(['id_estudante' => $declaracao->id_estudante, 'ano_lectivo' => $declaracao->ano_lectivo])->first();
+        if (!$historico) {
+            return back()->with(['error' => "Não encontrou estudante"]);
+        }
+
         $data  = [
             'getDeclaracao' => $declaracao,
+            'getHistorico' =>$historico,
         ];
         $pdf = PDF::loadView('relatorios.declaracaosem', $data)->setPaper('A4', 'normal');
         return $pdf->stream('DECLARAÇÃO SEM NOTAS ' . $declaracao->ano_lectivo . ' - [ ' . strtoupper($declaracao->estudante->pessoa->nome) . ' ].pdf');

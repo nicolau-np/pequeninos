@@ -8,7 +8,7 @@ use App\Http\Controllers\ControladorNotas;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>DECLARAÇÃO SEM NOTAS {{$getDeclaracao->ano_lectivo}} - [ {{strtoupper($getDeclaracao->estudante->pessoa->nome)}} ] </title>
+    <title>DECLARAÇÃO SEM NOTAS {{$getHistorico->ano_lectivo}} - [ {{strtoupper($getHistorico->estudante->pessoa->nome)}} ] </title>
     <style>
         @page{
             font-family: Arial, Helvetica, sans-serif;
@@ -33,30 +33,30 @@ use App\Http\Controllers\ControladorNotas;
 
                 <div class="primeiro-paragrafo">
                     O ANTÓNIO KANUTULA BANGO Director do Complexo escolar nº 89M
-                    "EDUARDO DOMINGOS SUKUETE" Certifico que: <b>{{$getDeclaracao->estudante->pessoa->nome}}</b>,
-                    Filho de @if($getDeclaracao->estudante->pessoa->pai){{$getDeclaracao->estudante->pessoa->pai}} @else [########################] @endif
-                    e de @if($getDeclaracao->estudante->pessoa->mae){{$getDeclaracao->estudante->pessoa->mae}} @else [########################] @endif
-                     Nascido (a) {{date('d', strtotime($getDeclaracao->estudante->pessoa->data_nascimento))}}
+                    "EDUARDO DOMINGOS SUKUETE" Certifico que: <b>{{$getHistorico->estudante->pessoa->nome}}</b>,
+                    Filho de @if($getHistorico->estudante->pessoa->pai){{$getHistorico->estudante->pessoa->pai}} @else [########################] @endif
+                    e de @if($getHistorico->estudante->pessoa->mae){{$getHistorico->estudante->pessoa->mae}} @else [########################] @endif
+                     Nascido (a) {{date('d', strtotime($getHistorico->estudante->pessoa->data_nascimento))}}
                      de
                      @php
-                        $mes_compreensao = date('m', strtotime($getDeclaracao->estudante->pessoa->data_nascimento));
+                        $mes_compreensao = date('m', strtotime($getHistorico->estudante->pessoa->data_nascimento));
                         $mes_extenso = ControladorStatic::converterMesExtensao($mes_compreensao);
                      @endphp
                      de {{$mes_extenso}} de
-                     {{date('Y', strtotime($getDeclaracao->estudante->pessoa->data_nascimento))}},  natural de
-                     @if($getDeclaracao->estudante->pessoa->naturalidade){{$getDeclaracao->estudante->pessoa->naturalidade}} @else [########################] @endif
-                    Município de {{$getDeclaracao->estudante->pessoa->municipio->municipio}} província de
-                    {{$getDeclaracao->estudante->pessoa->municipio->provincia->provincia}}, portador (a) do Bilhete de Identidade Nº
-                    @if($getDeclaracao->estudante->pessoa->bilhete){{$getDeclaracao->estudante->pessoa->bilhete}}, @else [########################] @endif Passado pelo
+                     {{date('Y', strtotime($getHistorico->estudante->pessoa->data_nascimento))}},  natural de
+                     @if($getHistorico->estudante->pessoa->naturalidade){{$getHistorico->estudante->pessoa->naturalidade}} @else [########################] @endif
+                    Município de {{$getHistorico->estudante->pessoa->municipio->municipio}} província de
+                    {{$getHistorico->estudante->pessoa->municipio->provincia->provincia}}, portador (a) do Bilhete de Identidade Nº
+                    @if($getHistorico->estudante->pessoa->bilhete){{$getHistorico->estudante->pessoa->bilhete}}, @else [########################] @endif Passado pelo
                     arquivo de Identificação de Luanda aos
-                    @if($getDeclaracao->estudante->pessoa->data_emissao)
-                    {{date('d', strtotime($getDeclaracao->estudante->pessoa->data_emissao))}} de
+                    @if($getHistorico->estudante->pessoa->data_emissao)
+                    {{date('d', strtotime($getHistorico->estudante->pessoa->data_emissao))}} de
                     @php
-                        $mes_compreensao = date('m', strtotime($getDeclaracao->estudante->pessoa->data_emissao));
+                        $mes_compreensao = date('m', strtotime($getHistorico->estudante->pessoa->data_emissao));
                         $mes_extenso = ControladorStatic::converterMesExtensao($mes_compreensao);
                      @endphp
                      {{$mes_extenso}} de
-                     {{date('Y', strtotime($getDeclaracao->estudante->pessoa->data_emissao))}}.
+                     {{date('Y', strtotime($getHistorico->estudante->pessoa->data_emissao))}}.
                     @else [########################] @endif
                 </div>
                 <br/>

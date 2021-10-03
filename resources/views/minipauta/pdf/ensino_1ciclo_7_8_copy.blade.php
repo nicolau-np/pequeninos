@@ -2,6 +2,17 @@
 use App\Http\Controllers\ControladorNotas;
 use App\Http\Controllers\ControladorStatic;
 
+$numero_colspan = 2;
+$numero_colspan2 = 2;
+if($getCadeiraRecurso){
+    $numero_colspan = $numero_colspan + 1;
+}
+
+if($getCadeiraExame){
+    $numero_colspan = $numero_colspan + 1;
+    $numero_colspan2 = $numero_colspan2 + 1;
+}
+
 $count_avaliados1 = [
     'mac'=>0,
     'npp'=>0,

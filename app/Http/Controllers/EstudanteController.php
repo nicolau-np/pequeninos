@@ -13,6 +13,7 @@ use App\Provincia;
 use App\Transferencia;
 use App\Turma;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 use function PHPSTORM_META\map;
 
@@ -90,10 +91,10 @@ class EstudanteController extends Controller
         }
 
         $turma = Turma::find($request->turma);
-        if(!$turma){
+        if (!$turma) {
             return back()->with(['error' => "Nao encontrou turma"]);
         }
-        $nome_pasta = $turma->turma."-".$request->ano_lectivo;
+        $nome_pasta = $turma->turma . "-" . $request->ano_lectivo;
 
         if ($request->bilhete != "") {
             $request->validate([
@@ -106,12 +107,12 @@ class EstudanteController extends Controller
             $request->validate([
                 'foto' => ['required', 'mimes:jpg,jpeg,png,JPEG,JPG,PNG', 'max:5000']
             ]);
-            $path = $request->foto->store('fotos_estudantes/'.$nome_pasta);
+            $path = $request->foto->store('fotos_estudantes/' . $nome_pasta);
         }
 
         /* criar numero do estudante*/
-            $estudantes = Estudante::where(['id_turma'=>$request->turma, 'ano_lectivo'=>$request->ano_lectivo])->get();
-            $numero_estudante = $estudantes->count()+1;
+        $estudantes = Estudante::where(['id_turma' => $request->turma, 'ano_lectivo' => $request->ano_lectivo])->get();
+        $numero_estudante = $estudantes->count() + 1;
         /*end*/
 
         $data['pessoa'] = [
@@ -134,7 +135,7 @@ class EstudanteController extends Controller
         $data['estudante'] = [
             'id_turma' => $request->turma,
             'id_pessoa' => null,
-            'numero'=>$numero_estudante,
+            'numero' => $numero_estudante,
             'id_encarregado' => $request->encarregado,
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
@@ -144,7 +145,7 @@ class EstudanteController extends Controller
         $data['historico'] = [
             'id_estudante' => null,
             'id_turma' => $request->turma,
-            'numero'=>$numero_estudante,
+            'numero' => $numero_estudante,
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
         ];
@@ -244,10 +245,10 @@ class EstudanteController extends Controller
         }
 
         $turma = Turma::find($request->turma);
-        if(!$turma){
+        if (!$turma) {
             return back()->with(['error' => "Nao encontrou turma"]);
         }
-        $nome_pasta = $turma->turma."-".$request->ano_lectivo;
+        $nome_pasta = $turma->turma . "-" . $request->ano_lectivo;
 
         if ($request->bilhete != "" && $request->bilhete != $estudante->pessoa->bilhete) {
             $request->validate([
@@ -263,7 +264,7 @@ class EstudanteController extends Controller
             if ($estudante->pessoa->foto != "" && file_exists($estudante->pessoa->foto)) {
                 unlink($estudante->pessoa->foto);
             }
-            $path = $request->foto->store('fotos_estudantes/'.$nome_pasta);
+            $path = $request->foto->store('fotos_estudantes/' . $nome_pasta);
         }
 
 
@@ -551,14 +552,15 @@ class EstudanteController extends Controller
             'ano_lectivo' => $request->ano_lectivo,
         ];
 
-        if(Transferencia::create($data)){
-            if(HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo'=>$request->ano_lectivo])->update(['observacao_final'=>"transferido"])){
+        if (Transferencia::create($data)) {
+            if (HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $request->ano_lectivo])->update(['observacao_final' => "transferido"])) {
                 return back()->with(['success' => "Feito com sucesso"]);
             }
         }
     }
 
-    public function desistencia($id_estudante, $ano_lectivo){
+    public function desistencia($id_estudante, $ano_lectivo)
+    {
         $estudante = Estudante::find($id_estudante);
         if (!$estudante) {
             return back()->with(['error' => "Não encontrou"]);
@@ -586,7 +588,8 @@ class EstudanteController extends Controller
         return view('estudantes.create_desistencias', $data);
     }
 
-    public function store_desistencias(Request $request, $id_estudante){
+    public function store_desistencias(Request $request, $id_estudante)
+    {
         $estudante = Estudante::find($id_estudante);
         if (!$estudante) {
             return back()->with(['error' => "Não encontrou estudante"]);
@@ -605,22 +608,37 @@ class EstudanteController extends Controller
             'ano_lectivo' => $request->ano_lectivo,
         ];
 
-        if(Desistencia::create($data)){
-            if(HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo'=>$request->ano_lectivo])->update(['observacao_final'=>"desistencia"])){
+        if (Desistencia::create($data)) {
+            if (HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $request->ano_lectivo])->update(['observacao_final' => "desistencia"])) {
                 return back()->with(['success' => "Feito com sucesso"]);
             }
         }
+    }
 
-   }
-
-   public function choose_declaracao($id_declaracao){
-    $data = [
-        'title' => "Estudantes",
-        'type' => "estudantes",
-        'menu' => "Estudantes",
-        'submenu' => "Declaração com Notas",
-    ];
-    return view('estudantes.choose_declaracao', $data);
-   }
-
+    public function choose_declaracao($id_declaracao)
+    {
+        $declaracao = Declaracao::find($id_declaracao);
+        if (!$declaracao) {
+            return back()->with(['error' => "Não encontrou declaração"]);
+        }
+        $historico = HistoricEstudante::where(['id_estudante' => $declaracao->id_estudante, 'ano_lectivo' => $declaracao->ano_lectivo])->first();
+        if (!$historico) {
+            return back()->with(['error' => "Não encontrou estudante"]);
+        }
+        Session::forget('disciplinas');
+        $turma = Turma::find($historico->id_turma);
+        if(!$turma){
+            return back()->with(['error' => "Não encontrou turma"]);
+        }
+        $data = [
+            'title' => "Estudantes",
+            'type' => "estudantes",
+            'menu' => "Estudantes",
+            'submenu' => "Declaração com Notas",
+            'getDeclaracao' => $declaracao,
+            'getHistorico'=>$historico,
+            'getTurma'=> $turma,
+        ];
+        return view('estudantes.choose_declaracao', $data);
+    }
 }

@@ -32,7 +32,7 @@
 
 
                             <div class="col-md-4 col-xl-4">
-                            <a href="/mapas/coordenadores" style="text-decoration: none;">
+                            <a href="/relatorios/mapas_aproveitamentos/{id_ensino}" style="text-decoration: none;">
                                 <div class="card widget-card-1">
                                 <div class="card-block-small">
                                     <i class="ti-map bg-c-blue card1-icon"></i>
@@ -49,22 +49,7 @@
                                 </div>
 
 
-                            <div class="col-md-4 col-xl-4">
-                                <a href="/mapas/aproveitamento" style="text-decoration: none;">
-                                    <div class="card widget-card-1">
-                                    <div class="card-block-small">
-                                        <i class="ti-map bg-c-blue card1-icon"></i>
-                                    <span class="text-c-pink f-w-600" style="font-size:13px;">Aproveitamento</span>
-                                        <h4 style="font-size:17px;"> </h4>
-                                        <div>
-                                            <span class="f-left m-t-10 text-muted">
-                                                <i class="text-c-pink f-16 ti-arrow-circle-right m-r-10"></i>Mapa
-                                            </span>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    </a>
-                                    </div>
+
 
                         </div>
 
@@ -84,7 +69,7 @@
 <!-- botão pesquisar -->
 <div class="btnPesquisar">
 	<div class="btnPesquisarBtn">
-		<a href="#" class="btn btn-primary btnCircular btnPrincipal" title="Listar"><i class="ti-search"></i></a>
+		<a href="/mapas" class="btn btn-primary btnCircular btnPrincipal" title="Listar"><i class="ti-search"></i></a>
 	</div>
 </div>
 

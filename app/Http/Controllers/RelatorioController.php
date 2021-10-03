@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\AnoLectivo;
+use App\CadeiraExame;
+use App\CadeiraRecurso;
 use App\Declaracao;
 use App\DirectorTurma;
 use App\Disciplina;
@@ -200,9 +202,31 @@ class RelatorioController extends Controller
         $historico = HistoricEstudante::where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])
             ->orderBy('numero', 'asc')->get();
 
+
+        //verificar se e uma cadeira de recursos
+        $cadeira_recurso = false;
+        $cadeira_recurso = CadeiraRecurso::where([
+            'id_curso' => $turma->id_curso,
+            'id_classe' => $turma->id_classe,
+            'id_disciplina' => $id_disciplina,
+            'estado' => "on",
+        ])->first();
+
+        //verificar cadeiras que tem exame
+        $cadeira_exame = false;
+        $cadeira_exame = CadeiraExame::where([
+            'id_curso' => $turma->id_curso,
+            'id_classe' => $turma->id_classe,
+            'id_disciplina' => $id_disciplina,
+            'estado' => "on",
+        ])->first();
+
+
         $data['view'] = [
             'getHorario' => $horario,
             'getHistorico' => $historico,
+            'getCadeiraRecurso' => $cadeira_recurso,
+            'getCadeiraExame' => $cadeira_exame,
         ];
 
         //buscando ensino atraves de turma
@@ -404,7 +428,8 @@ class RelatorioController extends Controller
         if ($id_ensino == 1) { //iniciacao ate 6
             //se for classificacao quantitativa
             if (($classe == "2ª classe") || ($classe == "4ª classe")) {
-                $pdf = PDF::loadView('relatorios.ensinos.boletins.ensino_primario_2_4_copy', $data['view'])->setPaper('A4', 'landscape');
+
+               $pdf = PDF::loadView('relatorios.ensinos.boletins.ensino_primario_2_4_copy', $data['view'])->setPaper('A4', 'landscape');
             } //se for classificacao quantitativa
             elseif (($classe == "Iniciação") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
                 $pdf = PDF::loadView('relatorios.ensinos.boletins.ensino_primario_Ini_1_3_5_copy', $data['view'])->setPaper('A4', 'landscape');

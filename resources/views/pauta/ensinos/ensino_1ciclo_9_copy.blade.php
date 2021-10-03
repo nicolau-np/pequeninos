@@ -114,7 +114,7 @@ $getCadeiraRecurso = false;
 
                                     <?php
                                     foreach (Session::get('disciplinas') as $disciplina) {
-                                        
+
                                         $getCadeiraExame = ControladorStatic::getExameStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
                                         $getCadeiraRecurso = ControladorStatic::getRecursoStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
                                         $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina["id_disciplina"], $getDirector->ano_lectivo);
@@ -133,7 +133,7 @@ $getCadeiraRecurso = false;
                                         $v1_estilo = ControladorNotas::nota_20($valorf->mfd);
                                         $v2_estilo = ControladorNotas::nota_20($valorf->npe);
                                         $v3_estilo = ControladorNotas::nota_20($valorf->mf);
-                                        $v4_estilo = ControladorNotas::nota_20($valorf->rec);
+                                        $v4_estilo = ControladorNotas::notaRec_10($valorf->rec);
                                         ?>
                                         <td class="{{$v1_estilo}}">@if($valorf->mfd == null) --- @else {{$valorf->mfd}} @endif</td>
                                         @if ($getCadeiraExame)

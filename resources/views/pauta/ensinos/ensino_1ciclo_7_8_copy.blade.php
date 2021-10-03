@@ -133,7 +133,7 @@ $getCadeiraRecurso = false;
                                         $v1_estilo = ControladorNotas::nota_20($valorf->mfd);
                                         $v2_estilo = ControladorNotas::nota_20($valorf->npe);
                                         $v3_estilo = ControladorNotas::nota_20($valorf->mf);
-                                        $v4_estilo = ControladorNotas::nota_20($valorf->rec);
+                                        $v4_estilo = ControladorNotas::notaRec_10($valorf->rec);
                                         ?>
                                         <td class="{{$v1_estilo}}">@if($valorf->mfd == null) --- @else {{$valorf->mfd}} @endif</td>
                                         @if ($getCadeiraExame)

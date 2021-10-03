@@ -32,7 +32,7 @@
 
 
                             <div class="col-md-4 col-xl-4">
-                            <a href="/institucional/observacoes/geral" style="text-decoration: none;">
+                            <a href="/mapas/coordenadores" style="text-decoration: none;">
                                 <div class="card widget-card-1">
                                 <div class="card-block-small">
                                     <i class="ti-bookmark-alt bg-c-green card1-icon"></i>
@@ -50,7 +50,7 @@
 
 
                             <div class="col-md-4 col-xl-4">
-                                <a href="/institucional/observacoes/especifica" style="text-decoration: none;">
+                                <a href="/mapas/coordenadores" style="text-decoration: none;">
                                     <div class="card widget-card-1">
                                     <div class="card-block-small">
                                         <i class="ti-bookmark-alt bg-c-green card1-icon"></i>

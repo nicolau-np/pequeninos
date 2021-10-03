@@ -100,13 +100,11 @@ use App\Http\Controllers\ControladorNotas;
 
              @foreach ($getHistorico as $historico)
              <div class="boletim">
-             <div class="data">
-                 <span class="title">Nº {{$loop->iteration}}</span><br/>
-                 <span class="title">Nome completo:</span> {{$historico->estudante->pessoa->nome}}
-             </div>
+
              <div class="table-responsive">
-                 
+
              </div>
+             
             </div>
              @endforeach
 

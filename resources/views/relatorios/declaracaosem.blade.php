@@ -93,7 +93,7 @@ use App\Http\Controllers\ControladorNotas;
                 <br/>
                 <span class="director">
                     O Director da escola<br/>
-                ---------------------------------------------<br/>
+                -------------------------------------------------<br/>
                 LIC. ANTÓNIO KANUTULA BANGO
                 </span>
             </p>

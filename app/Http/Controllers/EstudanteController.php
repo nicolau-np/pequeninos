@@ -613,4 +613,8 @@ class EstudanteController extends Controller
 
    }
 
+   public function choose_declaracao($id_declaracao){
+       
+   }
+
 }

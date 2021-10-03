@@ -9,6 +9,7 @@
         @page{
             font-family: Arial, Helvetica, sans-serif;
             font-size: 12px;
+            
         }
 
     </style>
@@ -25,14 +26,18 @@
 
          <div class="corpo">
             <p style="text-align: justify;">
-                O ANTÓNIO KANUTULA BANGO Director do Complexo escolar nº 89M
-                "EDUARDO DOMINGOS SUKUETE" Certifico que: {{$getDeclaracao->estudante->pessoa->nome}},
-                Filho de @if($getDeclaracao->estudante->pessoa->pai){{$getDeclaracao->estudante->pessoa->pai}} @else [########################] @endif
-                e de @if($getDeclaracao->estudante->pessoa->mae){{$getDeclaracao->estudante->pessoa->mae}} @else [########################] @endif
-                 Nascido (a) 20 de Dezembro de Junho de
-                2008,  natural do  Huambo Município do Huambo província do
-                Huambo, portador (a) do BI nº009857705HO040 Passado pelo
-                arquivo de Identificação de Luanda aos 12 de 12 de 2018
+
+                <div class="paragrafo">
+                    O ANTÓNIO KANUTULA BANGO Director do Complexo escolar nº 89M
+                    "EDUARDO DOMINGOS SUKUETE" Certifico que: {{$getDeclaracao->estudante->pessoa->nome}},
+                    Filho de @if($getDeclaracao->estudante->pessoa->pai){{$getDeclaracao->estudante->pessoa->pai}} @else [########################] @endif
+                    e de @if($getDeclaracao->estudante->pessoa->mae){{$getDeclaracao->estudante->pessoa->mae}} @else [########################] @endif
+                     Nascido (a) 20 de Dezembro de Junho de
+                    2008,  natural do  Huambo Município do Huambo província do
+                    Huambo, portador (a) do BI nº009857705HO040 Passado pelo
+                    arquivo de Identificação de Luanda aos 12 de 12 de 2018
+                </div>
+
             </p>
 
          </div>

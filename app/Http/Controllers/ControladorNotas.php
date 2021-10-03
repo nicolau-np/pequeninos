@@ -132,6 +132,59 @@ class ControladorNotas extends Controller
         return $retorno;
     }
 
+
+    public function converter_nota($nota_compreensao) {
+        $nota_extensao = null;
+        try {
+            if ($nota_compreensao == 0):
+                $nota_extensao = "Zero";
+            elseif ($nota_compreensao == 1):
+                $nota_extensao = "Um valor";
+            elseif ($nota_compreensao == 2):
+                $nota_extensao = "Dois valores";
+            elseif ($nota_compreensao == 3):
+                $nota_extensao = "Três valores";
+            elseif ($nota_compreensao == 4):
+                $nota_extensao = "Quatro valores";
+            elseif ($nota_compreensao == 5):
+                $nota_extensao = "Cinco valores";
+            elseif ($nota_compreensao == 6):
+                $nota_extensao = "Seis valores";
+            elseif ($nota_compreensao == 7):
+                $nota_extensao = "Sete valores";
+            elseif ($nota_compreensao == 8):
+                $nota_extensao = "Oito valores";
+            elseif ($nota_compreensao == 9):
+                $nota_extensao = "Nove valores";
+            elseif ($nota_compreensao == 10):
+                $nota_extensao = "Dez valores";
+            elseif ($nota_compreensao == 11):
+                $nota_extensao = "Onze valores";
+            elseif ($nota_compreensao == 12):
+                $nota_extensao = "Doze valores";
+            elseif ($nota_compreensao == 13):
+                $nota_extensao = "Treze valores";
+            elseif ($nota_compreensao == 14):
+                $nota_extensao = "Catorze valores";
+            elseif ($nota_compreensao == 15):
+                $nota_extensao = "Quinze valores";
+            elseif ($nota_compreensao == 16):
+                $nota_extensao = "Dezasseis valores";
+            elseif ($nota_compreensao == 17):
+                $nota_extensao = "Dezassete valores";
+            elseif ($nota_compreensao == 18):
+                $nota_extensao = "Dezoito valores";
+            elseif ($nota_compreensao == 19):
+                $nota_extensao = "Dezanove valores";
+            elseif ($nota_compreensao == 20):
+                $nota_extensao = "Vinte valores";
+            endif;
+        } catch (\Exception $ex) {
+            echo 'CONVERSAO::converter => ' . $ex->getMessage();
+        }
+        return $nota_extensao;
+    }
+
     public static function observacao_geral($classe, $curso)
     {
         $observacao = ObservacaoGeral::where(['id_classe' => $classe, 'id_curso' => $curso])->first();

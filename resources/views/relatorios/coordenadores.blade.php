@@ -10,9 +10,21 @@
         @page{
             font-family: Arial, Helvetica, sans-serif;
             font-size: 12px;
+            margin-left: 10px;
+            margin-right: 10px;
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
         .page-break{
             page-break-before: always;
+        }
+
+        table thead{
+            background-color: #4680ff;
+            color: #fff;
+        }
+        .tabela{
+            font-size: 12px;
         }
     </style>
 </head>
@@ -28,6 +40,37 @@
             <p style="text-align: center; font-weight:bold; font-size:15px;">MAPA DE LOCALIZAÇÃO DOS COORDENADORES DE TURMAS</p>
         </div>
         <div class="corpo">
+
+            @foreach ($getTurnos as $turnos)
+            {{$turnos->turno}}
+            <div class="table-responsive">
+                <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th>Nº</th>
+                            <th>NOME DO COORDENADOR</th>
+                            <th>CLASSE/TURMA</th>
+                            <th>SALA Nº</th>
+                            <th>Nº DE ALUNOS</th>
+                            <th>TELEFONE</th>
+                            <th>PERÍODO</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            @endforeach
 
         </div>
         <div class="rodape">

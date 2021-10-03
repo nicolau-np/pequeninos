@@ -25,6 +25,7 @@ use App\TabelaPreco;
 use App\TipoPagamento;
 use App\Transferencia;
 use App\Turma;
+use App\Turno;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -520,12 +521,13 @@ class RelatorioController extends Controller
 
         $cursos = Curso::where(['id_ensino' => $id_ensino,])->get();
         $classes = Classe::where(['id_ensino' => $id_ensino,])->get();
-
+        $turnos = Turno::orderBy('id', 'asc')->get();
         $data['view'] = [
             'getEnsino'=>$ensino,
             'getCursos'=> $cursos,
             'getClasses'=>$classes,
             'getAno'=>$ano_lectivo,
+            'getTurnos'=> $turnos,
         ];
         $pdf = PDF::loadView('relatorios.coordenadores', $data['view'])->setPaper('A4', 'landscape');
         return $pdf->stream('MAPA DE COORDENADORES - ' . $ano_lectivo .  '[ ' . strtoupper($ensino->ensino) . ' ].pdf');

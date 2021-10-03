@@ -130,18 +130,31 @@ $getCadeiraRecurso = false;
                                         @endif
                                     <?php } else {
                                         foreach ($final as $valorf) {
-                                        $v1_estilo = ControladorNotas::nota_10($valorf->mfd);
-                                        $v2_estilo = ControladorNotas::nota_10($valorf->npe);
-                                        $v3_estilo = ControladorNotas::nota_10($valorf->mf);
-                                        $v4_estilo = ControladorNotas::nota_10($valorf->rec);
+                                        $v1_estilo = ControladorNotas::nota_10Qualitativa($valorf->mfd);
+                                        if($getCadeiraExame){
+                                        $v2_estilo = ControladorNotas::nota_10Qualitativa($valorf->npe);
+                                        }
+                                        $v3_estilo = ControladorNotas::nota_10Qualitativa($valorf->mf);
+                                        if($getCadeiraRecurso){
+                                        $v4_estilo = ControladorNotas::notaRec_5($valorf->rec);
+                                        }
+
+                                        $v1_valor = ControladorNotas::estado_nota_qualitativa($valorf->mfd);
+                                        if($getCadeiraExame){
+                                        $v2_valor = ControladorNotas::estado_nota_qualitativa($valorf->npe);
+                                        }
+                                        $v3_valor = ControladorNotas::estado_nota_qualitativa($valorf->mf);
+                                        if($getCadeiraRecurso){
+                                        $v4_valor = ControladorNotas::estado_nota_qualitativaRec($valorf->rec);
+                                        }
                                         ?>
-                                        <td class="{{$v1_estilo}}">@if($valorf->mfd == null) --- @else {{$valorf->mfd}} @endif</td>
+                                        <td class="{{$v1_estilo}}">@if($valorf->mfd==null) --- @else {{$v1_valor}} @endif</td>
                                         @if ($getCadeiraExame)
-                                        <td class="{{$v2_estilo}}">@if($valorf->npe == null) --- @else {{$valorf->npe}} @endif</td>
+                                            <td class="{{$v2_estilo}}">@if($valorf->npe==null) --- @else {{$v2_valor}} @endif</td>
                                         @endif
-                                        <td class="{{$v3_estilo}}">@if($valorf->mf == null) --- @else {{$valorf->mf}} @endif</td>
+                                        <td class="{{$v3_estilo}}">@if($valorf->mf==null) --- @else {{$v3_valor}} @endif</td>
                                         @if ($getCadeiraRecurso)
-                                        <td class="{{$v4_estilo}}">@if($valorf->rec == null) --- @else {{$valorf->rec}} @endif</td>
+                                            <td class="{{$v4_estilo}}">@if($valorf->rec==null) --- @else {{$v4_valor}} @endif</td>
                                         @endif
 
                                     <?php }

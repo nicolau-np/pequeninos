@@ -14,6 +14,37 @@ use App\Http\Controllers\ControladorNotas;
             font-family: Arial, Helvetica, sans-serif;
             font-size: 12px;
         }
+
+        .positivo{
+        color: #4680ff;
+    }
+    .negativo{
+        color: #FC6180;
+    }
+    .nenhum{
+        color: #333;
+    }
+    .transferido{
+    background-color:#FFB64D;
+    color:#fff;
+    font-weight: bold;
+}
+.desistencia{
+    background-color:#FC6180;
+    color:#fff;
+    font-weight: bold;
+}
+    .neutro{
+        color: #FFB64D;
+    }
+    table thead{
+            background-color: #4680ff;
+            color: #fff;
+    }
+    .tabela{
+        font-size: 12px;
+    }
+
     </style>
 </head>
 <body>

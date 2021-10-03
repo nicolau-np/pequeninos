@@ -234,17 +234,18 @@ $percent_negativasf = [
          </div>
          <br/>
          <div class="corpo">
-            <div class="table-responsive">
-             <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
+            <div class="table-responsive tabela">
+                <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
                    <thead>
                        <tr>
                            <th rowspan="2">Nº</th>
-                           <th rowspan="2" width="140px;">NOME COMPLETO</th>
+                           <th rowspan="2">NOME COMPLETO</th>
                            <th rowspan="2">G</th>
                            <th colspan="4">1º TRIMESTRE</th>
                            <th colspan="4">2º TRIMESTRE</th>
                            <th colspan="4">3º TRIMESTRE</th>
-                           <th colspan="2">DADOS FINAIS</th>
+                           <th colspan="{{$numero_colspan}}">DADOS FINAIS</th>
+
                        </tr>
                        <tr>
                            <th>MAC1</th>
@@ -263,7 +264,13 @@ $percent_negativasf = [
                            <th>MT3</th>
 
                            <th>MFD</th>
+                           @if($getCadeiraExame)
+                           <th>NPE</th>
+                           @endif
                            <th>MF</th>
+                           @if($getCadeiraRecurso)
+                           <th>REC</th>
+                           @endif
                        </tr>
                    </thead>
                    <tbody>
@@ -275,7 +282,7 @@ $percent_negativasf = [
 
                          <!-- primeiro trimestre-->
                          <?php
-                             $trimestre1= ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 1, $getHorario->ano_lectivo);
+                             $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 1, $getHorario->ano_lectivo);
                              if($trimestre1->count()==0){
                          ?>
                          <td>---</td>
@@ -354,25 +361,39 @@ $percent_negativasf = [
                          if($final->count() == 0){
                       ?>
                          <td>---</td>
-                         <td>---</td>
+                         @if($getCadeiraExame)
+                           <td>---</td>
+                          @endif
+                           <td>---</td>
+                         @if($getCadeiraRecurso)
+                           <td>---</td>
+                         @endif
                      <?php }
                          else{
                              foreach ($final as $valorf){
                              $v1_estilo = ControladorNotas::nota_20($valorf->mfd);
+                             if($getCadeiraExame){
                              $v2_estilo = ControladorNotas::nota_20($valorf->npe);
+                             }
                              $v3_estilo = ControladorNotas::nota_20($valorf->mf);
+                             if($getCadeiraRecurso){
+                             $v4_estilo = ControladorNotas::notaRec_10($valorf->rec);
+                             }
                      ?>
                          <td class="{{$v1_estilo}}">@if($valorf->mfd==null) --- @else {{$valorf->mfd}} @endif</td>
+                         @if ($getCadeiraExame)
+                             <td class="{{$v2_estilo}}">@if($valorf->npe==null) --- @else {{$valorf->npe}} @endif</td>
+                         @endif
                          <td class="{{$v3_estilo}}">@if($valorf->mf==null) --- @else {{$valorf->mf}} @endif</td>
+                         @if ($getCadeiraRecurso)
+                             <td class="{{$v4_estilo}}">@if($valorf->rec==null) --- @else {{$valorf->rec}} @endif</td>
+                         @endif
                      <?php }}?>
                      <!-- fim dados finais-->
-
-
                      </tr>
                      @endforeach
                    </tbody>
                 </table>
-
             </div>
         </div>
          <br/><br/>
@@ -416,7 +437,7 @@ $percent_negativasf = [
                             <th colspan="4">1º TRIMESTRE</th>
                             <th colspan="4">2º TRIMESTRE</th>
                             <th colspan="4">3º TRIMESTRE</th>
-                            <th colspan="2">DADOS FINAIS</th>
+                            <th colspan="{{$numero_colspan2}}">DADOS FINAIS</th>
                         </tr>
                         <tr>
                             <th>MAC1</th>
@@ -435,6 +456,9 @@ $percent_negativasf = [
                             <th>MT3</th>
 
                             <th>MFD</th>
+                            @if($getCadeiraExame)
+                            <th>NPE</th>
+                            @endif
                             <th>MF</th>
 
                         </tr>
@@ -673,6 +697,9 @@ $percent_negativasf = [
                                                            }
                                                            ?>
                                                         <td>{{$count_avaliadosf['mfd']}}</td>
+                                                        @if($getCadeiraExame)
+                                                        <td>{{$count_avaliadosf['npe']}}</td>
+                                                        @endif
                                                         <td>{{$count_avaliadosf['mf']}}</td>
                                                         <!-- end finals-->
                             </tr>
@@ -696,6 +723,9 @@ $percent_negativasf = [
                                 <td>{{$count_positivas3['mt']}}</td>
 
                                 <td>{{$count_positivasf['mfd']}}</td>
+                                @if($getCadeiraExame)
+                                <td>{{$count_positivasf['npe']}}</td>
+                                @endif
                                 <td>{{$count_positivasf['mf']}}</td>
                             </tr>
 
@@ -718,6 +748,9 @@ $percent_negativasf = [
                                 <td>{{$count_negativas3['mt']}}</td>
 
                                 <td>{{$count_negativasf['mfd']}}</td>
+                                @if($getCadeiraExame)
+                                <td>{{$count_negativasf['npe']}}</td>
+                                @endif
                                 <td>{{$count_negativasf['mf']}}</td>
                             </tr>
 
@@ -835,6 +868,9 @@ $percent_negativasf = [
                                 <td>{{round($percent_positivas3['mt'],2)}}%</td>
 
                                 <td>{{round($percent_positivasf['mfd'],2)}}%</td>
+                                @if($getCadeiraExame)
+                                <td>{{round($percent_positivasf['npe'],2)}}%</td>
+                                @endif
                                 <td>{{round($percent_positivasf['mf'],2)}}%</td>
                             </tr>
 
@@ -952,6 +988,9 @@ $percent_negativasf = [
                                 <td>{{round($percent_negativas3['mt'],2)}}%</td>
 
                                 <td>{{round($percent_negativasf['mfd'],2)}}%</td>
+                                @if($getCadeiraExame)
+                                <td>{{round($percent_negativasf['npe'],2)}}%</td>
+                                @endif
                                 <td>{{round($percent_negativasf['mf'],2)}}%</td>
                             </tr>
 

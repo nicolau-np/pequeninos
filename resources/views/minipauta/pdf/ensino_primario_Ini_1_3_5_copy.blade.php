@@ -2,6 +2,17 @@
 use App\Http\Controllers\ControladorNotas;
 use App\Http\Controllers\ControladorStatic;
 
+$numero_colspan = 2;
+$numero_colspan2 = 2;
+if($getCadeiraRecurso){
+    $numero_colspan = $numero_colspan + 1;
+}
+
+if($getCadeiraExame){
+    $numero_colspan = $numero_colspan + 1;
+    $numero_colspan2 = $numero_colspan2 + 1;
+}
+
 $count_avaliados1 = [
     'mac'=>0,
     'npp'=>0,
@@ -226,160 +237,193 @@ $percent_negativasf = [
          </div>
          <br/>
          <div class="corpo">
-            <div class="table-responsive">
+            <div class="table-responsive tabela">
                 <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
-                    <thead>
-                        <tr>
-                            <th rowspan="2">Nº</th>
-                            <th rowspan="2" width="140px;">NOME COMPLETO</th>
-                            <th rowspan="2">G</th>
-                            <th colspan="4">1º TRIMESTRE</th>
-                            <th colspan="4">2º TRIMESTRE</th>
-                            <th colspan="4">3º TRIMESTRE</th>
-                            <th colspan="2">DADOS FINAIS</th>
-                        </tr>
-                        <tr>
-                            <th>MAC1</th>
-                            <th>NPP1</th>
-                            <th>PT1</th>
-                            <th>MT1</th>
+                   <thead>
+                       <tr>
+                           <th rowspan="2">Nº</th>
+                           <th rowspan="2">NOME COMPLETO</th>
+                           <th rowspan="2">G</th>
+                           <th colspan="4">1º TRIMESTRE</th>
+                           <th colspan="4">2º TRIMESTRE</th>
+                           <th colspan="4">3º TRIMESTRE</th>
+                           <th colspan="{{$numero_colspan}}">DADOS FINAIS</th>
 
-                            <th>MAC2</th>
-                            <th>NPP2</th>
-                            <th>PT2</th>
-                            <th>MT2</th>
+                       </tr>
+                       <tr>
+                           <th>MAC1</th>
+                           <th>NPP1</th>
+                           <th>PT1</th>
+                           <th>MT1</th>
 
-                            <th>MAC3</th>
-                            <th>NPP3</th>
-                            <th>PT3</th>
-                            <th>MT3</th>
+                           <th>MAC2</th>
+                           <th>NPP2</th>
+                           <th>PT2</th>
+                           <th>MT2</th>
 
-                            <th>MFD</th>
-                            <th>MF</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                      @foreach ($getHistorico as $historico)
-                      <tr class="{{$historico->observacao_final}}">
-                          <td>{{$loop->iteration}}</td>
-                          <td>{{$historico->estudante->pessoa->nome}}</td>
-                          <td>{{$historico->estudante->pessoa->genero}}</td>
+                           <th>MAC3</th>
+                           <th>NPP3</th>
+                           <th>PT3</th>
+                           <th>MT3</th>
 
-                          <!-- primeiro trimestre-->
+                           <th>MFD</th>
+                           @if($getCadeiraExame)
+                           <th>NPE</th>
+                           @endif
+                           <th>MF</th>
+                           @if($getCadeiraRecurso)
+                           <th>REC</th>
+                           @endif
+                       </tr>
+                   </thead>
+                   <tbody>
+                     @foreach ($getHistorico as $historico)
+                     <tr class="{{$historico->observacao_final}}">
+                         <td>{{$loop->iteration}}</td>
+                         <td>{{$historico->estudante->pessoa->nome}}</td>
+                         <td>{{$historico->estudante->pessoa->genero}}</td>
+
+                         <!-- primeiro trimestre-->
+                         <?php
+                             $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 1, $getHorario->ano_lectivo);
+                             if($trimestre1->count()==0){
+                         ?>
+                         <td>---</td>
+                         <td>---</td>
+                         <td>---</td>
+                         <td>---</td>
+                             <?php }
+                             else{
+                                 foreach($trimestre1 as $valor1){
+                                     $v1_estilo = ControladorNotas::nota_10Qualitativa($valor1->mac);
+                                     $v2_estilo = ControladorNotas::nota_10Qualitativa($valor1->npp);
+                                     $v3_estilo = ControladorNotas::nota_10Qualitativa($valor1->pt);
+                                     $v4_estilo = ControladorNotas::nota_10Qualitativa($valor1->mt);
+
+                                     $v1_valor = ControladorNotas::estado_nota_qualitativa($valor1->mac);
+                                     $v2_valor = ControladorNotas::estado_nota_qualitativa($valor1->npp);
+                                     $v3_valor = ControladorNotas::estado_nota_qualitativa($valor1->pt);
+                                     $v4_valor = ControladorNotas::estado_nota_qualitativa($valor1->mt);
+                                 ?>
+
+                                     <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$v1_valor}} @endif</td>
+                                     <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$v2_valor}} @endif</td>
+                                     <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$v3_valor}} @endif</td>
+                                     <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$v4_valor}} @endif</td>
+                                 <?php }}?>
+                         <!-- fim primeiro trimestre-->
+
+                         <!-- segundo trimestre-->
+                         <?php
+                             $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 2, $getHorario->ano_lectivo);
+                             if($trimestre2->count()==0){
+                         ?>
+                         <td>---</td>
+                         <td>---</td>
+                         <td>---</td>
+                         <td>---</td>
+                             <?php }
+                             else{
+                                 foreach($trimestre2 as $valor2){
+                                     $v1_estilo = ControladorNotas::nota_10Qualitativa($valor2->mac);
+                                     $v2_estilo = ControladorNotas::nota_10Qualitativa($valor2->npp);
+                                     $v3_estilo = ControladorNotas::nota_10Qualitativa($valor2->pt);
+                                     $v4_estilo = ControladorNotas::nota_10Qualitativa($valor2->mt);
+
+                                     $v1_valor = ControladorNotas::estado_nota_qualitativa($valor2->mac);
+                                     $v2_valor = ControladorNotas::estado_nota_qualitativa($valor2->npp);
+                                     $v3_valor = ControladorNotas::estado_nota_qualitativa($valor2->pt);
+                                     $v4_valor = ControladorNotas::estado_nota_qualitativa($valor2->mt);
+                                 ?>
+
+                                     <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{$v1_valor}} @endif</td>
+                                     <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{$v2_valor}} @endif</td>
+                                     <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{$v3_valor}} @endif</td>
+                                     <td class="{{$v4_estilo}}">@if($valor2->mt==null) --- @else {{$v4_valor}} @endif</td>
+                                 <?php }}?>
+                         <!-- fim segundo trimestre-->
+
+                          <!-- terceiro trimestre-->
                           <?php
-                              $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 1, $getHorario->ano_lectivo);
-                              if($trimestre1->count()==0){
-                          ?>
-                          <td>---</td>
-                          <td>---</td>
-                          <td>---</td>
-                          <td>---</td>
-                              <?php }
-                              else{
-                                  foreach($trimestre1 as $valor1){
-                                      $v1_estilo = ControladorNotas::nota_10Qualitativa($valor1->mac);
-                                      $v2_estilo = ControladorNotas::nota_10Qualitativa($valor1->npp);
-                                      $v3_estilo = ControladorNotas::nota_10Qualitativa($valor1->pt);
-                                      $v4_estilo = ControladorNotas::nota_10Qualitativa($valor1->mt);
-
-                                      $v1_valor = ControladorNotas::estado_nota_qualitativa($valor1->mac);
-                                      $v2_valor = ControladorNotas::estado_nota_qualitativa($valor1->npp);
-                                      $v3_valor = ControladorNotas::estado_nota_qualitativa($valor1->pt);
-                                      $v4_valor = ControladorNotas::estado_nota_qualitativa($valor1->mt);
-                                  ?>
-
-                                      <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$v1_valor}} @endif</td>
-                                      <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$v2_valor}} @endif</td>
-                                      <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$v3_valor}} @endif</td>
-                                      <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$v4_valor}} @endif</td>
-                                  <?php }}?>
-                          <!-- fim primeiro trimestre-->
-
-                          <!-- segundo trimestre-->
-                          <?php
-                              $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 2, $getHorario->ano_lectivo);
-                              if($trimestre2->count()==0){
-                          ?>
-                          <td>---</td>
-                          <td>---</td>
-                          <td>---</td>
-                          <td>---</td>
-                              <?php }
-                              else{
-                                  foreach($trimestre2 as $valor2){
-                                      $v1_estilo = ControladorNotas::nota_10Qualitativa($valor2->mac);
-                                      $v2_estilo = ControladorNotas::nota_10Qualitativa($valor2->npp);
-                                      $v3_estilo = ControladorNotas::nota_10Qualitativa($valor2->pt);
-                                      $v4_estilo = ControladorNotas::nota_10Qualitativa($valor2->mt);
-
-                                      $v1_valor = ControladorNotas::estado_nota_qualitativa($valor2->mac);
-                                      $v2_valor = ControladorNotas::estado_nota_qualitativa($valor2->npp);
-                                      $v3_valor = ControladorNotas::estado_nota_qualitativa($valor2->pt);
-                                      $v4_valor = ControladorNotas::estado_nota_qualitativa($valor2->mt);
-                                  ?>
-
-                                      <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{$v1_valor}} @endif</td>
-                                      <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{$v2_valor}} @endif</td>
-                                      <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{$v3_valor}} @endif</td>
-                                      <td class="{{$v4_estilo}}">@if($valor2->mt==null) --- @else {{$v4_valor}} @endif</td>
-                                  <?php }}?>
-                          <!-- fim segundo trimestre-->
-
-                           <!-- terceiro trimestre-->
-                           <?php
-                           $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 3, $getHorario->ano_lectivo);
-                           if($trimestre3->count()==0){
-                       ?>
-                       <td>---</td>
-                       <td>---</td>
-                       <td>---</td>
-                       <td>---</td>
-                           <?php }
-                           else{
-                               foreach($trimestre3 as $valor3){
-                                   $v1_estilo = ControladorNotas::nota_10Qualitativa($valor3->mac);
-                                   $v2_estilo = ControladorNotas::nota_10Qualitativa($valor3->npp);
-                                   $v3_estilo = ControladorNotas::nota_10Qualitativa($valor3->pt);
-                                   $v4_estilo = ControladorNotas::nota_10Qualitativa($valor3->mt);
-
-                                   $v1_valor = ControladorNotas::estado_nota_qualitativa($valor3->mac);
-                                   $v2_valor = ControladorNotas::estado_nota_qualitativa($valor3->npp);
-                                   $v3_valor = ControladorNotas::estado_nota_qualitativa($valor3->pt);
-                                   $v4_valor = ControladorNotas::estado_nota_qualitativa($valor3->mt);
-                               ?>
-
-                       <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$v1_valor}} @endif</td>
-                       <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{$v2_valor}} @endif</td>
-                       <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{$v3_valor}} @endif</td>
-                       <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{$v4_valor}} @endif</td>
-                               <?php }}?>
-                       <!-- fim terceiro trimestre-->
-
-                       <!-- dados finais-->
-                       <?php
-                          $final = ControladorNotas::getValoresMiniPautaFinalPDF($getHorario->ano_lectivo, $getHorario->id_disciplina, $historico->id_estudante);
-                          if($final->count() == 0){
-                       ?>
-                          <td>---</td>
-                          <td>---</td>
-                      <?php }
-                          else{
-                              foreach ($final as $valorf){
-                              $v1_estilo = ControladorNotas::nota_10Qualitativa($valorf->mfd);
-                              $v2_estilo = ControladorNotas::nota_10Qualitativa($valorf->mf);
-
-                              $v1_valor = ControladorNotas::estado_nota_qualitativa($valorf->mfd);
-                              $v2_valor = ControladorNotas::estado_nota_qualitativa($valorf->mf);
+                          $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 3, $getHorario->ano_lectivo);
+                          if($trimestre3->count()==0){
                       ?>
-                          <td class="{{$v1_estilo}}">@if($valorf->mfd==null) --- @else {{$v1_valor}} @endif</td>
-                          <td class="{{$v2_estilo}}">@if($valorf->mf==null) --- @else {{$v2_valor}} @endif</td>
-                      <?php }}?>
-                      <!-- fim dados finais-->
+                      <td>---</td>
+                      <td>---</td>
+                      <td>---</td>
+                      <td>---</td>
+                          <?php }
+                          else{
+                              foreach($trimestre3 as $valor3){
+                                  $v1_estilo = ControladorNotas::nota_10Qualitativa($valor3->mac);
+                                  $v2_estilo = ControladorNotas::nota_10Qualitativa($valor3->npp);
+                                  $v3_estilo = ControladorNotas::nota_10Qualitativa($valor3->pt);
+                                  $v4_estilo = ControladorNotas::nota_10Qualitativa($valor3->mt);
 
-                      </tr>
-                      @endforeach
-                    </tbody>
-                 </table>
+                                  $v1_valor = ControladorNotas::estado_nota_qualitativa($valor3->mac);
+                                  $v2_valor = ControladorNotas::estado_nota_qualitativa($valor3->npp);
+                                  $v3_valor = ControladorNotas::estado_nota_qualitativa($valor3->pt);
+                                  $v4_valor = ControladorNotas::estado_nota_qualitativa($valor3->mt);
+                              ?>
+
+                      <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$v1_valor}} @endif</td>
+                      <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{$v2_valor}} @endif</td>
+                      <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{$v3_valor}} @endif</td>
+                      <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{$v4_valor}} @endif</td>
+                              <?php }}?>
+                      <!-- fim terceiro trimestre-->
+
+                      <!-- dados finais-->
+                      <?php
+                         $final = ControladorNotas::getValoresMiniPautaFinalPDF($getHorario->ano_lectivo, $getHorario->id_disciplina, $historico->id_estudante);
+                         if($final->count() == 0){
+                      ?>
+                         <td>---</td>
+                         @if($getCadeiraExame)
+                           <td>---</td>
+                          @endif
+                           <td>---</td>
+                         @if($getCadeiraRecurso)
+                           <td>---</td>
+                         @endif
+                     <?php }
+                         else{
+                             foreach ($final as $valorf){
+                             $v1_estilo = ControladorNotas::nota_10Qualitativa($valorf->mfd);
+                             if($getCadeiraExame){
+                             $v2_estilo = ControladorNotas::nota_10Qualitativa($valorf->npe);
+                             }
+                             $v3_estilo = ControladorNotas::nota_10Qualitativa($valorf->mf);
+                             if($getCadeiraRecurso){
+                             $v4_estilo = ControladorNotas::notaRec_5($valorf->rec);
+                             }
+
+                             $v1_valor = ControladorNotas::estado_nota_qualitativa($valorf->mfd);
+                             if($getCadeiraExame){
+                             $v2_valor = ControladorNotas::estado_nota_qualitativa($valorf->npe);
+                             }
+                             $v3_valor = ControladorNotas::estado_nota_qualitativa($valorf->mf);
+                             if($getCadeiraRecurso){
+                             $v4_valor = ControladorNotas::estado_nota_qualitativaRec($valorf->rec);
+                             }
+                     ?>
+
+                         <td class="{{$v1_estilo}}">@if($valorf->mfd==null) --- @else {{$v1_valor}} @endif</td>
+                         @if ($getCadeiraExame)
+                             <td class="{{$v2_estilo}}">@if($valorf->npe==null) --- @else {{$v2_valor}} @endif</td>
+                         @endif
+                         <td class="{{$v3_estilo}}">@if($valorf->mf==null) --- @else {{$v3_valor}} @endif</td>
+                         @if ($getCadeiraRecurso)
+                             <td class="{{$v4_estilo}}">@if($valorf->rec==null) --- @else {{$v4_valor}} @endif</td>
+                         @endif
+
+                     <?php }}?>
+                     <!-- fim dados finais-->
+
+                     </tr>
+                     @endforeach
+                   </tbody>
+                </table>
             </div>
         </div>
          <br/><br/>
@@ -423,7 +467,7 @@ $percent_negativasf = [
                             <th colspan="4">1º TRIMESTRE</th>
                             <th colspan="4">2º TRIMESTRE</th>
                             <th colspan="4">3º TRIMESTRE</th>
-                            <th colspan="2">DADOS FINAIS</th>
+                            <th colspan="{{$numero_colspan2}}">DADOS FINAIS</th>
                         </tr>
                         <tr>
                             <th>MAC1</th>
@@ -442,6 +486,9 @@ $percent_negativasf = [
                             <th>MT3</th>
 
                             <th>MFD</th>
+                            @if($getCadeiraExame)
+                            <th>NPE</th>
+                            @endif
                             <th>MF</th>
 
                         </tr>
@@ -646,7 +693,9 @@ $percent_negativasf = [
                                                                if($valorf->mfd !=null){
                                                                    $count_avaliadosf['mfd']=$count_avaliadosf['mfd']+1;
                                                                }
-
+                                                               if($valorf->npe !=null){
+                                                                   $count_avaliadosf['npe']=$count_avaliadosf['npe']+1;
+                                                               }
                                                                if($valorf->mf !=null){
                                                                    $count_avaliadosf['mf']=$count_avaliadosf['mf']+1;
                                                                }
@@ -656,7 +705,9 @@ $percent_negativasf = [
                                                                if($valorf->mfd >=5){
                                                                    $count_positivasf['mfd']=$count_positivasf['mfd']+1;
                                                                }
-
+                                                               if($valorf->npe >=5){
+                                                                   $count_positivasf['npe']=$count_positivasf['npe']+1;
+                                                               }
                                                                if($valorf->mf >=5){
                                                                    $count_positivasf['mf']=$count_positivasf['mf']+1;
                                                                }
@@ -666,7 +717,9 @@ $percent_negativasf = [
                                                                if($valorf->mfd <=4.99 && $valorf->mfd !=null){
                                                                    $count_negativasf['mfd']=$count_negativasf['mfd']+1;
                                                                }
-
+                                                               if($valorf->npe <=4.99 && $valorf->npe !=null){
+                                                                   $count_negativasf['npe']=$count_negativasf['npe']+1;
+                                                               }
                                                                if($valorf->mf <=4.99 && $valorf->mf !=null){
                                                                    $count_negativasf['mf']=$count_negativasf['mf']+1;
                                                                }
@@ -674,6 +727,9 @@ $percent_negativasf = [
                                                            }
                                                            ?>
                                                         <td>{{$count_avaliadosf['mfd']}}</td>
+                                                        @if($getCadeiraExame)
+                                                        <td>{{$count_avaliadosf['npe']}}</td>
+                                                        @endif
                                                         <td>{{$count_avaliadosf['mf']}}</td>
                                                         <!-- end finals-->
                             </tr>
@@ -697,6 +753,9 @@ $percent_negativasf = [
                                 <td>{{$count_positivas3['mt']}}</td>
 
                                 <td>{{$count_positivasf['mfd']}}</td>
+                                @if($getCadeiraExame)
+                                <td>{{$count_positivasf['npe']}}</td>
+                                @endif
                                 <td>{{$count_positivasf['mf']}}</td>
                             </tr>
 
@@ -719,6 +778,9 @@ $percent_negativasf = [
                                 <td>{{$count_negativas3['mt']}}</td>
 
                                 <td>{{$count_negativasf['mfd']}}</td>
+                                @if($getCadeiraExame)
+                                <td>{{$count_negativasf['npe']}}</td>
+                                @endif
                                 <td>{{$count_negativasf['mf']}}</td>
                             </tr>
 
@@ -796,11 +858,17 @@ $percent_negativasf = [
 
                                 //end terceiro trimestre
 
-                                //terceiro trimestre
+                                //final
                                 if($count_avaliadosf['mfd']==0){
                                     $percent_positivasf['mfd'] = 0;
                                 }else{
                                     $percent_positivasf['mfd'] = ($count_positivasf['mfd']*100)/$count_avaliadosf['mfd'];
+                                }
+
+                                if($count_avaliadosf['npe']==0){
+                                    $percent_positivasf['npe'] = 0;
+                                }else{
+                                    $percent_positivasf['npe'] = ($count_positivasf['npe']*100)/$count_avaliadosf['npe'];
                                 }
 
                                 if($count_avaliadosf['mf']==0){
@@ -810,7 +878,7 @@ $percent_negativasf = [
                                 }
 
 
-                                //end terceiro trimestre
+                                //end final
                                     ?>
                                 <td>% POSITIVAS</td>
 
@@ -830,6 +898,9 @@ $percent_negativasf = [
                                 <td>{{round($percent_positivas3['mt'],2)}}%</td>
 
                                 <td>{{round($percent_positivasf['mfd'],2)}}%</td>
+                                @if($getCadeiraExame)
+                                <td>{{round($percent_positivasf['npe'],2)}}%</td>
+                                @endif
                                 <td>{{round($percent_positivasf['mf'],2)}}%</td>
                             </tr>
 
@@ -907,11 +978,17 @@ $percent_negativasf = [
 
                                 //end terceiro trimestre
 
-                                //terceiro trimestre
+                                //final trimestre
                                 if($count_avaliadosf['mfd']==0){
                                     $percent_negativasf['mfd'] = 0;
                                 }else{
                                     $percent_negativasf['mfd'] = ($count_negativasf['mfd']*100)/$count_avaliadosf['mfd'];
+                                }
+
+                                if($count_avaliadosf['npe']==0){
+                                    $percent_negativasf['npe'] = 0;
+                                }else{
+                                    $percent_negativasf['npe'] = ($count_negativasf['npe']*100)/$count_avaliadosf['npe'];
                                 }
 
                                 if($count_avaliadosf['mf']==0){
@@ -921,7 +998,7 @@ $percent_negativasf = [
                                 }
 
 
-                                //end terceiro trimestre
+                                //end final trimestre
                                     ?>
                                 <td>% NEGATIVAS</td>
 
@@ -941,6 +1018,9 @@ $percent_negativasf = [
                                 <td>{{round($percent_negativas3['mt'],2)}}%</td>
 
                                 <td>{{round($percent_negativasf['mfd'],2)}}%</td>
+                                @if($getCadeiraExame)
+                                <td>{{round($percent_negativasf['npe'],2)}}%</td>
+                                @endif
                                 <td>{{round($percent_negativasf['mf'],2)}}%</td>
                             </tr>
 

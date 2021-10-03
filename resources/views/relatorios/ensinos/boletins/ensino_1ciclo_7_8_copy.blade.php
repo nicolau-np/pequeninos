@@ -1,7 +1,11 @@
-<?php
+@php
 use App\Http\Controllers\ControladorStatic;
 use App\Http\Controllers\ControladorNotas;
-?>
+$numero_estudantes = 0;
+$change_page = false;
+$number_page = 1;
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,9 +16,9 @@ use App\Http\Controllers\ControladorNotas;
 <style>
     @page{
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 9px;
-        margin-left: 10px;
-        margin-right: 10px;
+        font-size: 11px;
+        /*margin-left: 10px;
+        margin-right: 10px;*/
         margin-top: 10px;
         margin-bottom: 10px;
     }
@@ -55,7 +59,7 @@ use App\Http\Controllers\ControladorNotas;
             color: #fff;
     }
     .tabela{
-        font-size: 9px;
+        font-size: 11px;
     }
 
     .title{
@@ -73,97 +77,103 @@ use App\Http\Controllers\ControladorNotas;
     .table-responsive{
         padding: 4px;
     }
+
+    .page-changed{
+        page-break-before: always;
+    }
 </style>
 </head>
 <body>
 
-    <div class="default-page">
-        <div class="cabecalho">
-            @include('include.header_docs')
-        </div>
-        <div class="titulo">
-        <p style="text-align: center; font-weight:bold;">BOLETIM DE NOTAS {{$getEpoca}}º TRIMESTRE</p>
-         </div>
-        <div class="mini-cabecalho">
-            <div class="ano_curso">
-                &nbsp;&nbsp;{{$getDirector->ano_lectivo}} - [ {{strtoupper($getDirector->turma->turma)}} - {{strtoupper($getDirector->turma->curso->curso)}} ]
-            </div>
-            <div class="periodo">
-                PERÍODO: {{strtoupper($getDirector->turma->turno->turno)}}
-                &nbsp;&nbsp;
-                <br/>
-
-            </div>
-         </div><br/><br/>
-
-         <div class="corpo">
 
              @foreach ($getHistorico as $historico)
-             <div class="boletim">
-             <div class="data">
-                 <span class="title">Nº {{$loop->iteration}}</span><br/>
-                 <span class="title">Nome completo:</span> {{$historico->estudante->pessoa->nome}}
-             </div>
-             <div class="table-responsive">
-                 <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
-                    <thead>
+             @php
+                if($numero_estudantes <= 2){
+                    $change_page = false;
+                }
 
-                        <tr>
-                            @foreach (Session::get('disciplinas') as $disciplina)
-                            <?php
-                            $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
-                            ?>
-                           <th colspan="4">{{$getDisciplina->disciplina}}</th>
-                           @endforeach
-                        </tr>
+                if($numero_estudantes >= 3){
+                    $change_page = true;
+                    $numero_estudantes = 0;
+                    $number_page ++;
+                }
+                $numero_estudantes ++;
+             @endphp
 
-                        <tr>
-                          @foreach (Session::get('disciplinas') as $disciplina)
-                            <th>MAC{{$getEpoca}}</th>
-                            <th>NPP{{$getEpoca}}</th>
-                            <th>PT{{$getEpoca}}</th>
-                            <th>MT{{$getEpoca}}</th>
-                          @endforeach
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            @foreach (Session::get('disciplinas') as $disciplina)
-                            <?php
-                            $trimestrel = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'], $historico->id_estudante, $getEpoca, $getDirector->ano_lectivo);
-                            if($trimestrel->count()==0){
-                        ?>
-                        <td>---</td>
-                        <td>---</td>
-                        <td>---</td>
-                        <td>---</td>
-                            <?php }
-                            else{
-                                foreach($trimestrel as $valor1){
-                                    $v1_estilo = ControladorNotas::nota_20($valor1->mac);
-                                    $v2_estilo = ControladorNotas::nota_20($valor1->npp);
-                                    $v3_estilo = ControladorNotas::nota_20($valor1->pt);
-                                    $v4_estilo = ControladorNotas::nota_20($valor1->mt);
-                                ?>
 
-                        <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$valor1->mac}} @endif</td>
-                        <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$valor1->npp}} @endif</td>
-                        <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$valor1->pt}} @endif</td>
-                        <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$valor1->mt}} @endif</td>
-                                <?php }}?>
-                                    @endforeach
+             <div class="@if($change_page) page-changed @endif">
+
+                <div class="table-responsive">
+                    <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 70%;">
+                        <thead>
+                            <tr>
+                                <th style="width:60px;">{{$getDirector->ano_lectivo}}</th>
+                                <th colspan="5">
+                                    {{strtoupper($getDirector->turma->turma)}} -
+                                    {{strtoupper($getDirector->turma->turno->turno)}} -
+                                    {{strtoupper($getDirector->turma->curso->curso)}}&nbsp;&nbsp;
+                                    [&nbsp;
+                                        Nº [{{$historico->numero}}] - {{strtoupper($historico->estudante->pessoa->nome)}}
+                                    &nbsp;]
+                                </th>
                             </tr>
-                    </tbody>
-                </table>
-             </div>
+
+                            <tr>
+                                <th rowspan="2">Nº</th>
+                                <th rowspan="2">DISCIPLINAS</th>
+                                <th colspan="4">{{$getEpoca}}º TRIMESTRE</th>
+                            </tr>
+
+                            <tr>
+                                <th>MAC{{$getEpoca}}</th>
+                                <th>NPP{{$getEpoca}}</th>
+                                <th>PT{{$getEpoca}}</th>
+                                <th>MT{{$getEpoca}}</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (Session::get('disciplinas') as $disciplina)
+                            @php
+                                $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
+                                $trimestral = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'], $historico->id_estudante, $getEpoca, $getDirector->ano_lectivo);
+                            @endphp
+                            <tr>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{strtoupper($getDisciplina->disciplina)}}</td>
+
+                                @if ($trimestral->count()==0)
+                                <td>---</td>
+                                <td>---</td>
+                                <td>---</td>
+                                <td>---</td>
+                                @else
+                                    @foreach ($trimestral as $valor1)
+                                    @php
+                                        $v1_estilo = ControladorNotas::nota_20($valor1->mac);
+                                        $v2_estilo = ControladorNotas::nota_20($valor1->npp);
+                                        $v3_estilo = ControladorNotas::nota_20($valor1->pt);
+                                        $v4_estilo = ControladorNotas::nota_20($valor1->mt);
+                                    @endphp
+                                        <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$valor1->mac}} @endif</td>
+                                        <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$valor1->npp}} @endif</td>
+                                        <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$valor1->pt}} @endif</td>
+                                        <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$valor1->mt}} @endif</td>
+                                    @endforeach
+                                @endif
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                </div>
+
             </div>
-             @endforeach
 
-         </div>
-         <br/><br/>
-
-
-    </div>
+            <hr/>
+            @if($numero_estudantes==3)
+                Page {{$number_page}}
+            @endif
+            @endforeach
 
 </body>
 </html>

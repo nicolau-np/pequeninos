@@ -8,13 +8,13 @@
                 <div class="card-header">
                     <h5>{{$submenu}}
                     <i class="ti-angle-right"></i>
-                    {{$getDirector->turma->turma}}
+                    {{$getTurma->turma}}
                     <i class="ti-angle-right"></i>
-                    {{$getDirector->turma->turno->turno}}
+                    {{$getTurma->turno->turno}}
                     <i class="ti-angle-right"></i>
-                    {{$getDirector->turma->curso->curso}}
+                    {{$getTurma->curso->curso}}
                     <i class="ti-angle-right"></i>
-                    {{$getDirector->ano_lectivo}}
+                    {{$getHistorico->ano_lectivo}}
                     </h5>
                     <span></span>
                     <div class="card-header-right">
@@ -29,7 +29,7 @@
                 </div>
                 <div class="card-block">
 
-                    {{Form::open(['method'=>"put", 'url'=>"/pautas/show/{$getDirector->id_turma}/{$getDirector->ano_lectivo}"])}}
+                    {{Form::open(['method'=>"put", 'url'=>"/relatorios/declaracao/{$getDeclaracao->id}"])}}
                     @csrf
                     @if(session('error'))
                     <div class="alert alert-danger">{{session('error')}}</div>
@@ -41,11 +41,9 @@
 
                     <div class="row">
                         <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary btn-sm float-left"><i class="ti-eye"></i>Visualizar</button>&nbsp;&nbsp;&nbsp;
+                            <button type="submit" class="btn btn-primary btn-sm float-left"><i class="ti-printer"></i>PDF</button>&nbsp;&nbsp;&nbsp;
 
-                            <a href="/pautas/pdf/{{$getDirector->id_turma}}/{{$getDirector->ano_lectivo}}" class="btn btn-warning btn-sm"><i class="ti-printer"></i> PDF</a>
-
-                            <a href="#" class="btn btn-danger btn-sm float-right remover_todas"><i class="ti-trash" aria-hidden="true"></i></a>
+                           <a href="#" class="btn btn-danger btn-sm float-right remover_todas"><i class="ti-trash" aria-hidden="true"></i></a>
                            <table class="table table-bordered">
                             <thead>
                                 <tr>

@@ -346,6 +346,53 @@ class RelatorioController extends Controller
         return $pdf->stream('DECLARAÇÃO SEM NOTAS ' . $declaracao->ano_lectivo . ' - [ ' . strtoupper($declaracao->estudante->pessoa->nome) . ' ].pdf');
     }
 
+    public function declaracaocom($id_declaracao){
+        $declaracao = Declaracao::find($id_declaracao);
+        if (!$declaracao) {
+            return back()->with(['error' => "Não encontrou declaração"]);
+        }
+        $historico = HistoricEstudante::where(['id_estudante' => $declaracao->id_estudante, 'ano_lectivo' => $declaracao->ano_lectivo])->first();
+        if (!$historico) {
+            return back()->with(['error' => "Não encontrou estudante"]);
+        }
+
+        $turma = Turma::find($historico->id_turma);
+        if(!$turma){
+            return back()->with(['error' => "Não encontrou turma"]);
+        }
+
+        if (!Session::has('disciplinas')) {
+            return back()->with(['error' => "Deve selecionar as disciplinas"]);
+        }
+
+        //buscando ensino atraves de turma
+        $id_ensino = $turma->classe->id_ensino;
+        $classe = $turma->classe->classe;
+
+        $data['view'] = [
+
+        ];
+
+        if ($id_ensino == 1) { //iniciacao ate 6
+            //se for classificacao quantitativa
+            if (($classe == "2ª classe") || ($classe == "4ª classe")) {
+                $pdf = PDF::loadView('pauta.pdf.ensino_primario_2_4_copy', $data['view'])->setPaper('A3', 'landscape');
+            } //se for classificacao quantitativa
+            elseif (($classe == "Iniciação") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
+                $pdf = PDF::loadView('pauta.pdf.ensino_primario_Ini_1_3_5_copy', $data['view'])->setPaper('A3', 'landscape');
+            }elseif(($classe == "6ª classe")){
+                $pdf = PDF::loadView('pauta.pdf.ensino_primario_6_copy', $data['view'])->setPaper('A3', 'landscape');
+            }
+        } elseif ($id_ensino == 2) { //7 classe ate 9 ensino geral
+            if ($classe == "9ª classe") {
+                $pdf = PDF::loadView('pauta.pdf.ensino_1ciclo_9_copy', $data['view'])->setPaper('A3', 'landscape');
+            } else {
+                $pdf = PDF::loadView('pauta.pdf.ensino_1ciclo_7_8_copy', $data['view'])->setPaper('A3', 'landscape');
+            }
+        }
+        return $pdf->stream('DECLARAÇÃO COM NOTAS ' . $declaracao->ano_lectivo . ' - [ ' . strtoupper($declaracao->estudante->pessoa->nome) . ' ].pdf');
+    }
+
     public function guiatransferencia($id_transferencia)
     {
         $transferencia = Transferencia::find($id_transferencia);

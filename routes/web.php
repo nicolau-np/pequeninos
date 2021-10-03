@@ -212,7 +212,7 @@ Route::group(['prefix' => 'estudantes', 'middleware' => "AdminUser"], function (
     Route::put('/store_guiatransferencia/{id_estudante}', "EstudanteController@store_guiatransferencia");
     Route::get('/desistencia/{id_estudante}/{ano_lectivo}', "EstudanteController@desistencia");
     Route::put('/store_desistencias/{id_estudante}', "EstudanteController@store_desistencias");
-    Route::get('/declaracao/choose/{id_declaracao}', "EstudanteController@choose_declaracao");
+    Route::get('/declaracaocom/{id_declaracao}', "EstudanteController@choose_declaracao");
 });
 
 Route::group(['prefix' => "turmas", 'middleware' => "AdminUser"], function () {
@@ -273,6 +273,7 @@ Route::group(['prefix' => 'relatorios', 'middleware' => "auth"], function () {
     Route::get('/declaracaosem/{id_declaracao}', "RelatorioController@declaracaosem");
     Route::get('/guiatransferencia/{id_transferencia}', "RelatorioController@guiatransferencia");
     Route::put('/boletins/{id_turma}/{ano_lectivo}', "RelatorioController@boletins");
+    Route::get('/declaracao/{id_declaracao}', "RelatorioController@declaracaocom");
 });
 
 

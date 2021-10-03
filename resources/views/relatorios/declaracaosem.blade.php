@@ -1,3 +1,7 @@
+@php
+use App\Http\Controllers\ControladorStatic;
+use App\Http\Controllers\ControladorNotas;
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +13,7 @@
         @page{
             font-family: Arial, Helvetica, sans-serif;
             font-size: 12px;
-            
+
         }
 
     </style>
@@ -32,10 +36,28 @@
                     "EDUARDO DOMINGOS SUKUETE" Certifico que: {{$getDeclaracao->estudante->pessoa->nome}},
                     Filho de @if($getDeclaracao->estudante->pessoa->pai){{$getDeclaracao->estudante->pessoa->pai}} @else [########################] @endif
                     e de @if($getDeclaracao->estudante->pessoa->mae){{$getDeclaracao->estudante->pessoa->mae}} @else [########################] @endif
-                     Nascido (a) 20 de Dezembro de Junho de
-                    2008,  natural do  Huambo Município do Huambo província do
-                    Huambo, portador (a) do BI nº009857705HO040 Passado pelo
-                    arquivo de Identificação de Luanda aos 12 de 12 de 2018
+                     Nascido (a) {{date('d', strtotime($getDeclaracao->estudante->pessoa->data_nascimento))}}
+                     de
+                     @php
+                        $mes_compreensao = date('m', strtotime($getDeclaracao->estudante->pessoa->data_nascimento));
+                        $mes_extenso = ControladorStatic::converterMesExtensao($mes_compreensao);
+                     @endphp
+                     de {{$mes_extenso}} de
+                     {{date('Y', strtotime($getDeclaracao->estudante->pessoa->data_nascimento))}},  natural de
+                     @if($getDeclaracao->estudante->pessoa->naturalidade){{$getDeclaracao->estudante->pessoa->naturalidade}} @else [########################] @endif
+                    Município de {{$getDeclaracao->estudante->pessoa->municipio->municipio}} província de
+                    {{$getDeclaracao->estudante->pessoa->municipio->provincia->provincia}}, portador (a) do Bilhete de Identidade Nº
+                    @if($getDeclaracao->estudante->pessoa->bilhete){{$getDeclaracao->estudante->pessoa->bilhete}}, @else [########################] @endif Passado pelo
+                    arquivo de Identificação de Luanda aos
+                    @if($getDeclaracao->estudante->pessoa->data_emissao)
+                    {{date('d', strtotime($getDeclaracao->estudante->pessoa->data_emissao))}} de
+                    @php
+                        $mes_compreensao = date('m', strtotime($getDeclaracao->estudante->pessoa->data_emissao));
+                        $mes_extenso = ControladorStatic::converterMesExtensao($mes_compreensao);
+                     @endphp
+                     {{$mes_extenso}} de
+                     {{date('Y', strtotime($getDeclaracao->estudante->pessoa->data_emissao))}}
+                    @else [########################] @endif
                 </div>
 
             </p>

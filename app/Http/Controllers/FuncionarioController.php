@@ -225,7 +225,7 @@ class FuncionarioController extends Controller
             'escalao' => ['required', 'Integer'],
         ]);
 
-        if ($request->bilhete != "" || $request->bilhete != $funcionario->bilhete) {
+        if ($request->bilhete != "" && $request->bilhete != $funcionario->pessoa->bilhete) {
             $request->validate([
                 'bilhete' => ['required', 'string', 'unique:pessoas,bilhete']
             ]);

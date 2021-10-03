@@ -71,6 +71,41 @@ class ControladorStatic extends Controller
         return $mes_extenso;
     }
 
+    public static function converterMesExtensao($mes_compreensao) {
+        $mes_extenso = null;
+        try {
+            if ($mes_compreensao == 1):
+                $mes_extenso = "Janeiro";
+            elseif ($mes_compreensao == 2):
+                $mes_extenso = "Fevereiro";
+            elseif ($mes_compreensao == 3):
+                $mes_extenso = "Março";
+            elseif ($mes_compreensao == 4):
+                $mes_extenso = "Abril";
+            elseif ($mes_compreensao == 5):
+                $mes_extenso = "Maio";
+            elseif ($mes_compreensao == 6):
+                $mes_extenso = "Junho";
+            elseif ($mes_compreensao == 7):
+                $mes_extenso = "Julho";
+            elseif ($mes_compreensao == 8):
+                $mes_extenso = "Agosto";
+            elseif ($mes_compreensao == 9):
+                $mes_extenso = "Setembro";
+            elseif ($mes_compreensao == 10):
+                $mes_extenso = "Outubro";
+            elseif ($mes_compreensao == 11):
+                $mes_extenso = "Novembro";
+            elseif ($mes_compreensao == 12):
+                $mes_extenso = "Dezembro";
+            endif;
+        } catch (\Exception $ex) {
+            echo '' . $ex->getMessage();
+        }
+        return $mes_extenso;
+    }
+
+
     public static function getValoresBalancoTrimestral($epoca, $id_tipo_pagamento, $ano_lectivo)
     {
         $retorno = 0;

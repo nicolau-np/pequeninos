@@ -249,7 +249,7 @@ class EstudanteController extends Controller
         }
         $nome_pasta = $turma->turma."-".$request->ano_lectivo;
 
-        if ($request->bilhete != "" || $request->bilhete != $estudante->bilhete) {
+        if ($request->bilhete != "" && $request->bilhete != $estudante->pessoa->bilhete) {
             $request->validate([
                 'bilhete' => ['required', 'string', 'unique:pessoas,bilhete']
             ]);

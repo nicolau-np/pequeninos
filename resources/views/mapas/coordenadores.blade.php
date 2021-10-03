@@ -31,22 +31,26 @@
                         <div class="row">
 
                             @foreach ($getEnsinos as $ensinos)
-                            <div class="col-md-4 col-xl-4">
+
+
+                            <div class="col-md-5 col-xl-5">
                             <a href="/relatorios/mapas_coordenadores/{{$ensinos->id}}" style="text-decoration: none;">
                                 <div class="card widget-card-1">
                                 <div class="card-block-small">
-                                    <i class="ti-map bg-c-blue card1-icon"></i>
-                                <span class="text-c-pink f-w-600" style="font-size:13px;">Coordenadores</span>
+                                    <i class="ti-user bg-c-green card1-icon"></i>
+                                <span class="text-c-pink f-w-600" style="font-size:13px;">{{$ensinos->ensino}}</span>
                                     <h4 style="font-size:17px;"> </h4>
                                     <div>
                                         <span class="f-left m-t-10 text-muted">
-                                            <i class="text-c-pink f-16 ti-arrow-circle-right m-r-10"></i>Mapa
+                                            <i class="text-c-pink f-16 ti-arrow-circle-right m-r-10"></i>Coordenadores
                                         </span>
                                     </div>
                                 </div>
                                 </div>
                                 </a>
                                 </div>
+
+
                             @endforeach
                         </div>
 

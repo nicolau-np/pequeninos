@@ -9,6 +9,7 @@ use App\Declaracao;
 use App\DirectorTurma;
 use App\Disciplina;
 use App\Encarregado;
+use App\Ensino;
 use App\EpocaPagamento;
 use App\Estudante;
 use App\Fatura;
@@ -501,5 +502,20 @@ class RelatorioController extends Controller
             }
         }
         return $pdf->stream('BOLETIM DE NOTAS ' . $request->epoca . 'º TRIMESTRE - ' . $ano_lectivo . '[ ' . strtoupper($turma->turma) . ' ' . strtoupper($turma->turno->turno) . '-' . strtoupper($turma->curso->curso) . ' ].pdf');
+    }
+
+    public function mapas_coordenadores($id_ensino){
+        $ensino = Ensino::find($id_ensino);
+        if (!$ensino) {
+            return back()->with(['error' => "Não encontrou ensino"]);
+        }
+
+    }
+
+    public function mapas_aproveitamentos($id_ensino){
+        $ensino = Ensino::find($id_ensino);
+        if (!$ensino) {
+            return back()->with(['error' => "Não encontrou ensino"]);
+        }
     }
 }

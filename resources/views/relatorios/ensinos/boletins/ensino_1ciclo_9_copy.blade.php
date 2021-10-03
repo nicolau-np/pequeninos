@@ -78,7 +78,7 @@ $change_page = false;
     }
 
     .page-changed{
-        
+        page-break-before: always;
     }
 </style>
 </head>
@@ -86,13 +86,18 @@ $change_page = false;
 
              @foreach ($getHistorico as $historico)
              @php
-                if($numero_estudantes == 3){
+                if($numero_estudantes <= 2){
+                    $change_page = false;
+                }
+
+                if($numero_estudantes >= 3){
+                    $change_page = true;
                     $numero_estudantes = 0;
                 }
                 $numero_estudantes ++;
              @endphp
              {{$numero_estudantes}}
-             <div class="@if($numero_estudantes==3) page-changed @endif">
+             <div class="@if($change_page) page-changed @endif">
 
                 <div class="table-responsive">
                     <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 70%;">

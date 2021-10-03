@@ -116,17 +116,33 @@ use App\Http\Controllers\ControladorNotas;
 
                         <tbody>
                             @foreach (Session::get('disciplinas') as $disciplina)
-                            <?php
+                            @php
                                 $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
-                                $trimestrel = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'], $historico->id_estudante, $getEpoca, $getDirector->ano_lectivo);
-                            ?>
+                                $trimestral = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'], $historico->id_estudante, $getEpoca, $getDirector->ano_lectivo);
+                            @endphp
                             <tr>
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{strtoupper($getDisciplina->disciplina)}}</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
-                                <td>-</td>
+
+                                @if ($trimestral->count()==0)
+                                <td>---</td>
+                                <td>---</td>
+                                <td>---</td>
+                                <td>---</td>
+                                @else
+                                    @foreach ($trimestral as $valor1)
+                                    @php
+                                        $v1_estilo = ControladorNotas::nota_20($valor1->mac);
+                                        $v2_estilo = ControladorNotas::nota_20($valor1->npp);
+                                        $v3_estilo = ControladorNotas::nota_20($valor1->pt);
+                                        $v4_estilo = ControladorNotas::nota_20($valor1->mt);
+                                    @endphp
+                                        <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$valor1->mac}} @endif</td>
+                                        <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$valor1->npp}} @endif</td>
+                                        <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$valor1->pt}} @endif</td>
+                                        <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$valor1->mt}} @endif</td>
+                                    @endforeach
+                                @endif
                             </tr>
                             @endforeach
                         </tbody>

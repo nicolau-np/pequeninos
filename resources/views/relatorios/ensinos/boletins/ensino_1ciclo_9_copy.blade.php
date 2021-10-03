@@ -81,7 +81,14 @@ $change_page = false;
 <body>
 
              @foreach ($getHistorico as $historico)
-             <div class="page">
+             @php
+                if($numero_estudantes == 3){
+                    $numero_estudantes = 0;
+                }
+                $numero_estudantes ++;
+             @endphp
+             {{$numero_estudantes}}
+             <div class="@if($numero_estudantes==3) page @endif">
 
                 <div class="table-responsive">
                     <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 70%;">

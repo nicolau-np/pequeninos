@@ -5,13 +5,6 @@ use App\Http\Controllers\ControladorStatic;
 @extends('layouts.app')
 @section('content')
 <?php
-$observacao_geral = ControladorNotas::observacao_geral($getDirector->turma->classe->id,$getDirector->turma->curso->id);
-if(!$observacao_geral){
-    $observacao_geralDB=22;
-}else{
-    $observacao_geralDB= $observacao_geral->quantidade_negativas;
-}
-
 $numero_colspan = 2;
 $getCadeiraExame = false;
 $getCadeiraRecurso = false;
@@ -102,24 +95,9 @@ $getCadeiraRecurso = false;
                                  </tr>
                               </thead>
                               <tbody>
-                                  <?php
-                                    $defice_disciplinas = [];
-                                    $count_obs=0;
-                                    $observacao_final = false;
 
-                                    $numero_cadeiras = 0;
-                                    $numero_lancados = 0;
-                                  ?>
                                 @foreach ($getHistorico as $historico)
-                                    <?php
-                                            $numero_cadeiras = 0;
-                                            $numero_lancados = 0;
-                                            $observacao_final = false;
-                                            $count_obs = 0;
-                                            $observacao_especifica=false;
 
-                                            $defice_disciplinas = [];
-                                    ?>
                                   <tr class="{{$historico->observacao_final}}">
                                     <td>{{$loop->iteration}}</td>
                                     <td>
@@ -167,31 +145,11 @@ $getCadeiraRecurso = false;
                                         @endif
 
                                     <?php }
-                                            if($valorf->mf<=9.99 && $valorf->mf!=null){
-                                            //conta disciplinas com negativa
-                                            $count_obs ++;
-                                            //adiciona disciplinas com defices no array
-                                            array_push($defice_disciplinas, $valorf->disciplina->disciplina);
-                                            //faz a verificacao na observacao geral do controlador static, caso encontrar entao esta reprovado a variavel observacao vai ficar true caso nao encontrar prossiga
-                                            $observacao_especifica = ControladorNotas::observacao_especifica($getDirector->turma->classe->id, $getDirector->turma->curso->id, $disciplina["id_disciplina"]);
-                                            }
 
-                                            if($count_obs >= $observacao_geralDB){
-                                                $observacao_final = true;
-                                            }
-                                            if($observacao_especifica){
-                                                $observacao_final = true;
-                                            }
-
-                                            if($valorf->mf!=null){
-                                            $numero_lancados = $numero_lancados +1;
-                                            }
                                         }
-
-
                                         }
                                         ?>
-
+                                        <!-- obs -->
                                         @if($numero_cadeiras != $numero_lancados)
                                         <td>---</td>
                                         @else
@@ -212,7 +170,7 @@ $getCadeiraRecurso = false;
 
                                          </td>
                                         @endif
-
+                                         <!-- fim obs-->
                                   </tr>
                                   @endforeach
                               </tbody>

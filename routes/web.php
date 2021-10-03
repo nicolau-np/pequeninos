@@ -273,7 +273,7 @@ Route::group(['prefix' => 'relatorios', 'middleware' => "auth"], function () {
     Route::get('/declaracaosem/{id_declaracao}', "RelatorioController@declaracaosem");
     Route::get('/guiatransferencia/{id_transferencia}', "RelatorioController@guiatransferencia");
     Route::put('/boletins/{id_turma}/{ano_lectivo}', "RelatorioController@boletins");
-    Route::get('/declaracao/{id_declaracao}', "RelatorioController@declaracaocom");
+    Route::put('/declaracao/{id_declaracao}', "RelatorioController@declaracaocom");
 });
 
 

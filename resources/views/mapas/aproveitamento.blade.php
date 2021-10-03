@@ -32,7 +32,7 @@
 
 
                             <div class="col-md-4 col-xl-4">
-                            <a href="/relatorios/mapas_aproveitamentos/{id_ensino}" style="text-decoration: none;">
+                            <a href="/relatorios/mapas_aproveitamentos/{id_ensino}/{ano_lectivo}" style="text-decoration: none;">
                                 <div class="card widget-card-1">
                                 <div class="card-block-small">
                                     <i class="ti-map bg-c-blue card1-icon"></i>

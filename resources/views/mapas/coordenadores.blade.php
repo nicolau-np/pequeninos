@@ -7,6 +7,11 @@
             <div class="card">
                 <div class="card-header">
                     <h5>{{$submenu}}
+                        <i class="ti-angle-right"></i>
+                        @foreach ($getAnos as $anos)
+                        <a href="/mapas/coordenadores/{{$anos->ano_lectivo}}">{{$anos->ano_lectivo}}</a>
+                        <i class="ti-angle-right"></i>
+                        @endforeach
                     </h5>
                     <span></span>
                     <div class="card-header-right">
@@ -34,7 +39,7 @@
 
 
                             <div class="col-md-5 col-xl-5">
-                            <a href="/relatorios/mapas_coordenadores/{{$ensinos->id}}" style="text-decoration: none;">
+                            <a href="/relatorios/mapas_coordenadores/{{$ensinos->id}}/{{$getAno}}" style="text-decoration: none;">
                                 <div class="card widget-card-1">
                                 <div class="card-block-small">
                                     <i class="ti-user bg-c-green card1-icon"></i>

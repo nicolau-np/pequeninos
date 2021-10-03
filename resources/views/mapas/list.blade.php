@@ -50,7 +50,7 @@
 
 
                             <div class="col-md-4 col-xl-4">
-                                <a href="/mapas/coordenadores" style="text-decoration: none;">
+                                <a href="/mapas/aproveitamento" style="text-decoration: none;">
                                     <div class="card widget-card-1">
                                     <div class="card-block-small">
                                         <i class="ti-map bg-c-blue card1-icon"></i>

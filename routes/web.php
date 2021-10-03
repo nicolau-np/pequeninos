@@ -24,7 +24,7 @@ Route::post('/resetpassword', "UserController@resetpassword_req");
 Route::get('/verify_code/{id_reset}', "UserController@verifycode");
 Route::put('/verifycode/{id_reset}', "UserController@verifycode_put");
 
-Route::group(['prefix' =>"user", 'middleware'=>"auth"], function(){
+Route::group(['prefix' => "user", 'middleware' => "auth"], function () {
     Route::get('/profile', "UserController@profile");
     Route::post('/updateprofile', "UserController@updateprofile");
 });
@@ -111,7 +111,7 @@ Route::group(['prefix' => 'institucional', 'middleware' => "AdminUser"], functio
         Route::put('/update/{id}', "InstitucionalController@hora_update");
     });
 
-    Route::group(['prefix' => 'ano_lectivos', ], function () {
+    Route::group(['prefix' => 'ano_lectivos',], function () {
         Route::get('/', "InstitucionalController@ano_lectivo_list");
         Route::get('/create', "InstitucionalController@ano_lectivo_create");
         Route::post('/store', "InstitucionalController@ano_lectivo_store");
@@ -120,7 +120,7 @@ Route::group(['prefix' => 'institucional', 'middleware' => "AdminUser"], functio
     });
 
 
-    Route::group(['prefix' => "observacoes", 'middleware'=>"admin"], function () {
+    Route::group(['prefix' => "observacoes", 'middleware' => "admin"], function () {
         Route::get('/', "InstitucionalController@observacoes");
 
         Route::group(['prefix' => "geral"], function () {
@@ -139,7 +139,7 @@ Route::group(['prefix' => 'institucional', 'middleware' => "AdminUser"], functio
             Route::put('/update/{id_observacao}', "InstitucionalController@especifica_update");
         });
 
-        Route::group(['prefix' =>"conjunta"], function (){
+        Route::group(['prefix' => "conjunta"], function () {
             Route::get('/', "InstitucionalController@conjunta_list");
             Route::get('/create', "InstitucionalController@conjunta_create");
             Route::post('/store', "InstitucionalController@conjunta_store");
@@ -149,7 +149,7 @@ Route::group(['prefix' => 'institucional', 'middleware' => "AdminUser"], functio
         });
     });
 
-    Route::group(['prefix' =>"recursos"], function(){
+    Route::group(['prefix' => "recursos"], function () {
         Route::get('/', "InstitucionalController@recursos_list");
         Route::get('/create', "InstitucionalController@recursos_create");
         Route::post('/store', "InstitucionalController@recursos_store");
@@ -157,7 +157,7 @@ Route::group(['prefix' => 'institucional', 'middleware' => "AdminUser"], functio
         Route::put('/update/{id}', "InstitucionalController@recursos_update");
     });
 
-    Route::group(['prefix' =>"exames"], function(){
+    Route::group(['prefix' => "exames"], function () {
         Route::get('/', "InstitucionalController@exames_list");
         Route::get('/create', "InstitucionalController@exames_create");
         Route::post('/store', "InstitucionalController@exames_store");
@@ -221,8 +221,15 @@ Route::group(['prefix' => "turmas", 'middleware' => "AdminUser"], function () {
     Route::post('/import/store', "TurmasController@import_store");
 });
 
-Route::group(['prefix' =>"mapas"], function(){
+Route::group(['prefix' => "mapas"], function () {
     Route::get('/', "MapaController@index");
+    Route::group(['prefix' => "coordenadores"], function () {
+        Route::get('/', "MapaController@coodernador");
+    });
+
+    Route::group(['prefix' => "aproveitamento"], function () {
+        Route::get('/', "MapaController@aproveitamento");
+    });
 });
 
 Route::group(['prefix' => 'pagamentos', 'middleware' => "AdminUser"], function () {

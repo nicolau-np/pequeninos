@@ -114,7 +114,7 @@ $getCadeiraRecurso = false;
 
                                     <?php
                                     foreach (Session::get('disciplinas') as $disciplina) {
-                                        $numero_cadeiras = $numero_cadeiras + 1;
+                                        
                                         $getCadeiraExame = ControladorStatic::getExameStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
                                         $getCadeiraRecurso = ControladorStatic::getRecursoStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
                                         $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina["id_disciplina"], $getDirector->ano_lectivo);

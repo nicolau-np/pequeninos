@@ -1,3 +1,6 @@
+@php
+use App\Http\Controllers\ControladorStatic;
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -42,7 +45,13 @@
         <div class="corpo">
 
             @foreach ($getTurnos as $turnos)
-            {{$turnos->turno}}
+            @php
+                $turnos = ControladorStatic::getTurmaTurnoCurso($turnos->id, $cursos->id);
+            @endphp
+            @if ($turnos->count()==0)
+
+            @else
+
             <div class="table-responsive">
                 <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
                     <thead>
@@ -70,6 +79,7 @@
                     </tbody>
                 </table>
             </div>
+            @endif
             @endforeach
 
         </div>

@@ -305,4 +305,9 @@ class ControladorStatic extends Controller
 
         return $cadeira_recurso;
     }
+
+    public static function getTurmaTurnoCurso($id_turno, $id_curso){
+        $turmas = Turma::where(['id_curso' => $id_curso, 'id_turno'=> $id_turno])->get();
+        return $turmas;
+    }
 }

@@ -46,9 +46,9 @@ use App\Http\Controllers\ControladorStatic;
 
             @foreach ($getTurnos as $turnos)
             @php
-                $turnos = ControladorStatic::countTurmaTurnoCurso($turnos->id, $cursos->id);
+                $turmas = ControladorStatic::countTurmaTurnoCurso($turnos->id, $cursos->id);
             @endphp
-            @if ($turnos->count()==0)
+            @if ($turmas->count()==0)
 
             @else
             {{$turnos->turno}}

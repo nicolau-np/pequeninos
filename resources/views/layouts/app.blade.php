@@ -436,14 +436,6 @@ $lastYear = ControladorStatic::getLastYear();
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
-
-                                        <li class="@if($menu=="Mapas") active @endif">
-                                            <a href="/mapas/list">
-                                                <span class="pcoded-micon"><i class="ti-maps"></i></span>
-                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Mapas</span>
-                                                <span class="pcoded-mcaret"></span>
-                                            </a>
-                                        </li>
                                         @endif
 
 
@@ -454,6 +446,14 @@ $lastYear = ControladorStatic::getLastYear();
                                     <a href="/bloqueios">
                                         <span class="pcoded-micon"><i class="ti-key"></i><b>B</b></span>
                                         <span class="pcoded-mtext" data-i18n="nav.form-components.main">Bloqueios</span>
+                                        <span class="pcoded-mcaret"></span>
+                                    </a>
+                                </li>
+
+                                <li class="@if($menu=="Mapas") active @endif">
+                                    <a href="/mapas">
+                                        <span class="pcoded-micon"><i class="ti-map"></i><b>M</b></span>
+                                        <span class="pcoded-mtext" data-i18n="nav.form-components.main">Mapas</span>
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                 </li>

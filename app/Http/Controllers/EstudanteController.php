@@ -7,6 +7,7 @@ use App\Curso;
 use App\Declaracao;
 use App\Desistencia;
 use App\Estudante;
+use App\Grade;
 use App\HistoricEstudante;
 use App\Pessoa;
 use App\Provincia;
@@ -625,11 +626,18 @@ class EstudanteController extends Controller
         if (!$historico) {
             return back()->with(['error' => "Não encontrou estudante"]);
         }
-        Session::forget('disciplinas');
+
         $turma = Turma::find($historico->id_turma);
         if(!$turma){
             return back()->with(['error' => "Não encontrou turma"]);
         }
+
+        $grade_disciplinas = Grade::where([
+            'id_curso' => $turma->id_curso,
+            'id_classe' => $turma->id_classe,
+        ])->get();
+
+        Session::forget('disciplinas');
         $data = [
             'title' => "Estudantes",
             'type' => "estudantes",
@@ -638,6 +646,7 @@ class EstudanteController extends Controller
             'getDeclaracao' => $declaracao,
             'getHistorico'=>$historico,
             'getTurma'=> $turma,
+            'getGrade'=>$grade_disciplinas,
         ];
         return view('estudantes.choose_declaracao', $data);
     }

@@ -18,11 +18,4 @@ class MapaController extends Controller
         return view('mapas.list', $data);
     }
 
-    public function coodernador(){
-        
-    }
-
-    public function aproveitamento(){
-
-    }
 }

@@ -3,6 +3,7 @@ use App\Http\Controllers\ControladorStatic;
 use App\Http\Controllers\ControladorNotas;
 $numero_estudantes = 0;
 $change_page = false;
+$number_page = 1;
 @endphp
 
 <!DOCTYPE html>
@@ -16,8 +17,8 @@ $change_page = false;
     @page{
         font-family: Arial, Helvetica, sans-serif;
         font-size: 11px;
-        margin-left: 10px;
-        margin-right: 10px;
+        /*margin-left: 10px;
+        margin-right: 10px;*/
         margin-top: 10px;
         margin-bottom: 10px;
     }
@@ -84,6 +85,7 @@ $change_page = false;
 </head>
 <body>
 
+
              @foreach ($getHistorico as $historico)
              @php
                 if($numero_estudantes <= 2){
@@ -93,10 +95,12 @@ $change_page = false;
                 if($numero_estudantes >= 3){
                     $change_page = true;
                     $numero_estudantes = 0;
+                    $number_page ++;
                 }
                 $numero_estudantes ++;
              @endphp
-             {{$numero_estudantes}}
+
+
              <div class="@if($change_page) page-changed @endif">
 
                 <div class="table-responsive">
@@ -164,8 +168,12 @@ $change_page = false;
                 </div>
 
             </div>
+
             <hr/>
-             @endforeach
+            @if($numero_estudantes==3)
+                Page {{$number_page}}
+            @endif
+            @endforeach
 
 </body>
 </html>

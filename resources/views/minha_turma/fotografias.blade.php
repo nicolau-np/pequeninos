@@ -57,6 +57,7 @@ use App\Http\Controllers\ControladorStatic;
                                 <tbody>
                                     @foreach ($getHistorico as $historicos)
                                     {{Form::open(['method'=>"put", 'url'=>"/minha_turma/updateFoto/{$historicos->estudante->pessoa->id}/{$historicos->ano_lectivo}/{$historicos->id_turma}", 'enctype'=>"multipart/form-data"])}}
+                                    @csrf
                                     <tr>
                                         <td>{{$loop->iteration}}</td>
                                         <td>
@@ -75,6 +76,7 @@ use App\Http\Controllers\ControladorStatic;
                                             <div class="row">
                                                 <div class="col-md-9">
                                                     {{Form::file('foto', null, ['class'=>"form-control", 'placeholder'=>"Fotografia"])}}
+                                                    
                                                     <div class="erro">
                                                         @if($errors->has('foto'))
                                                         <div class="text-danger">{{$errors->first('foto')}}</div>

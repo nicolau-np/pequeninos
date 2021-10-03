@@ -150,26 +150,7 @@ $getCadeiraRecurso = false;
                                         }
                                         ?>
                                         <!-- obs -->
-                                        @if($numero_cadeiras != $numero_lancados)
-                                        <td>---</td>
-                                        @else
-                                        <td class="@if($observacao_final) negativo @else positivo @endif">
-                                            @if($observacao_final)
-                                                 NÃO TRANSITA
-                                             @else
-                                             TRANSITA
-                                             @if ($defice_disciplinas)
-                                                [DEF.(
-                                                    @foreach ($defice_disciplinas as $item)
-                                                       {{strtoupper($item)}},
-                                                    @endforeach
-                                                    )]
-                                                @endif
-                                             @endif
-
-
-                                         </td>
-                                        @endif
+                                        <td>-----</td>
                                          <!-- fim obs-->
                                   </tr>
                                   @endforeach

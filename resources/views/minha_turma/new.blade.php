@@ -30,7 +30,7 @@
                 <div class="card-block">
 
                     {{Form::open(['method'=>"put", 'url'=>"/pautas/show/{$getDirector->id_turma}/{$getDirector->ano_lectivo}"])}}
-
+                    @csrf
                     @if(session('error'))
                     <div class="alert alert-danger">{{session('error')}}</div>
                     @endif

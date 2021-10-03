@@ -221,6 +221,10 @@ Route::group(['prefix' => "turmas", 'middleware' => "AdminUser"], function () {
     Route::post('/import/store', "TurmasController@import_store");
 });
 
+Route::group(['prefix' =>"mapas"], function(){
+    Route::get('/', "MapaController@index");
+});
+
 Route::group(['prefix' => 'pagamentos', 'middleware' => "AdminUser"], function () {
     Route::get('/listar/{id_estudante}/{ano_lectivo}', "PagamentoController@listar");
     Route::get('/create/{id_tipo_pagamento}', "PagamentoController@create");

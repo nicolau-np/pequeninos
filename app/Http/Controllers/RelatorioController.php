@@ -519,10 +519,15 @@ class RelatorioController extends Controller
         }
 
         $cursos = Curso::where(['id_ensino' => $id_ensino,])->get();
-        $classe = Classe::where(['id_ensino' => $id_ensino,])->get();
+        $classes = Classe::where(['id_ensino' => $id_ensino,])->get();
 
-        $data['view'] = [];
-        $pdf = PDF::loadView('relatorios.ensinos.boletins.ensino_1ciclo_7_8_copy', $data['view'])->setPaper('A4', 'landscape');
+        $data['view'] = [
+            'getEnsino'=>$ensino,
+            'getCursos'=> $cursos,
+            'getClasses'=>$classes,
+            'getAno'=>$ano_lectivo,
+        ];
+        $pdf = PDF::loadView('relatorios.coordenadores', $data['view'])->setPaper('A4', 'landscape');
         return $pdf->stream('MAPA DE COORDENADORES - ' . $ano_lectivo .  '[ ' . strtoupper($ensino->ensino) . ' ].pdf');
     }
 

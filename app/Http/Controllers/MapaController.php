@@ -18,4 +18,26 @@ class MapaController extends Controller
         return view('mapas.list', $data);
     }
 
+
+    public function coordenadores(){
+        $data = [
+            'title' => "Mapas",
+            'type' => "mapas",
+            'menu' => "Mapas",
+            'submenu' => "Coordenadores",
+
+        ];
+        return view('mapas.coordenadores', $data);
+    }
+
+    public function aproveitamento(){
+        $data = [
+            'title' => "Mapas",
+            'type' => "mapas",
+            'menu' => "Mapas",
+            'submenu' => "Aproveitamento",
+
+        ];
+        return view('mapas.aproveitamento', $data);
+    }
 }

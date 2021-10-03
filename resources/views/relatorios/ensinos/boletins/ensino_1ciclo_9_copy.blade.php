@@ -129,6 +129,16 @@ use App\Http\Controllers\ControladorNotas;
                                 <th>MT{{$getEpoca}}</th>
                             </tr>
                         </thead>
+
+                        <tbody>
+                            <tr>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                                <td>-</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
 

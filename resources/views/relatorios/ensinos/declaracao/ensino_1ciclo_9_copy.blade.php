@@ -102,7 +102,15 @@ use App\Http\Controllers\ControladorNotas;
                         </tr>
                     </thead>
                     <tbody>
-                        
+                        @foreach (Session::get('disciplinas') as $disciplinas)
+                        @php
+                        $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
+                        @endphp
+                        <tr>
+                            <td>{{$getDisciplina->disciplina}}</td>
+                            <td></td>
+                        </tr>
+                     @endforeach
                     </tbody>
                 </table>
             </div>

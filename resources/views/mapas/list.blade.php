@@ -35,8 +35,8 @@
                             <a href="/mapas/coordenadores" style="text-decoration: none;">
                                 <div class="card widget-card-1">
                                 <div class="card-block-small">
-                                    <i class="ti-bookmark-alt bg-c-green card1-icon"></i>
-                                <span class="text-c-blue f-w-600" style="font-size:13px;">Localização de Coordenadores</span>
+                                    <i class="ti-map bg-c-blue card1-icon"></i>
+                                <span class="text-c-pink f-w-600" style="font-size:13px;">Coordenadores</span>
                                     <h4 style="font-size:17px;"> </h4>
                                     <div>
                                         <span class="f-left m-t-10 text-muted">
@@ -53,8 +53,8 @@
                                 <a href="/mapas/coordenadores" style="text-decoration: none;">
                                     <div class="card widget-card-1">
                                     <div class="card-block-small">
-                                        <i class="ti-bookmark-alt bg-c-green card1-icon"></i>
-                                    <span class="text-c-blue f-w-600" style="font-size:13px;">Aproveitamentos por Disciplinas</span>
+                                        <i class="ti-map bg-c-blue card1-icon"></i>
+                                    <span class="text-c-pink f-w-600" style="font-size:13px;">Aproveitamento</span>
                                         <h4 style="font-size:17px;"> </h4>
                                         <div>
                                             <span class="f-left m-t-10 text-muted">

@@ -436,7 +436,17 @@ $lastYear = ControladorStatic::getLastYear();
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
+
+                                        <li class="@if($menu=="Mapas") active @endif">
+                                            <a href="/mapas/list">
+                                                <span class="pcoded-micon"><i class="ti-maps"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Mapas</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
                                         @endif
+
+
                                     </ul>
                                 </li>
                                 @if(Auth::user()->nivel_acesso=="admin")

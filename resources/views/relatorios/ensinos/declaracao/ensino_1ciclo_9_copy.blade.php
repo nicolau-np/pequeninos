@@ -61,6 +61,17 @@ use App\Http\Controllers\ControladorNotas;
                 lectivo de [{{$getHistorico->ano_lectivo}}]  a {{$getTurma->classe->classe}}, com a seguinte classificação:
             </div>
             <br/>
+
+            <div class="table-responsive">
+                <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 50%;">
+                    <thead>
+                        <tr>
+                            <td>DISCIPLINAS</td>
+                            <td>NOTAS</td>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
             <br/>
             <div class="segundo-paragrafo">
                 Por ser verdade e me ter sido solicitado, mandei passar a presente declaração que vai por mim assinada e autenticada com o carimbo a óleo, em uso nesta instituição escola.
@@ -69,9 +80,7 @@ use App\Http\Controllers\ControladorNotas;
             <br/>
             <br/>
             <br/>
-            <br/>
-            <br/>
-            <br/>
+
         </p>
 
      </div>

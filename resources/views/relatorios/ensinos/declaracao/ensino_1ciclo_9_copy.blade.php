@@ -102,13 +102,29 @@ use App\Http\Controllers\ControladorNotas;
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach (Session::get('disciplinas') as $disciplinas)
+                        @foreach (Session::get('disciplinas') as $disciplina)
                         @php
                         $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
+                        $final = ControladorNotas::getValoresPautaFinalPDF($getHistorico->id_estudante, $disciplina["id_disciplina"], $getHistorico->ano_lectivo);
                         @endphp
                         <tr>
-                            <td>{{$getDisciplina->disciplina}}</td>
-                            <td></td>
+                            <td>{{strtoupper($getDisciplina->disciplina)}}</td>
+                            @if($final->count()==0)
+                                <td>---</td>
+                            @else
+                                @foreach ($final as $valorf)
+                                    @php
+                                    $v1_estilo = ControladorNotas::nota_20($valorf->mf);
+                                    $v2_estilo = ControladorNotas::notaRec_10($valorf->rec);
+                                    @endphp
+
+                                    @if($valorf->rec == null)
+                                        <td>{{$valorf->mf}}</td>
+                                    @else
+                                        <td>{{$valorf->rec}}</td>
+                                    @endif
+                                @endforeach
+                            @endif
                         </tr>
                      @endforeach
                     </tbody>

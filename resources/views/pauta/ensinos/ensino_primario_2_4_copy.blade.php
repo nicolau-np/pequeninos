@@ -71,7 +71,7 @@ $getCadeiraRecurso = false;
 
                                         if($getCadeiraRecurso){
                                             $numero_colspan = $numero_colspan + 1;
-                                        }
+                                         }
                                         ?>
                                       <th colspan="{{$numero_colspan}}">{{strtoupper($getDisciplina->disciplina)}}</th>
                                       <?php } ?>

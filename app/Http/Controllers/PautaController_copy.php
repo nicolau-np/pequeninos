@@ -124,6 +124,7 @@ class PautaController_copy extends Controller
             'ano_lectivo' => $ano_lectivo
         ])->orderBy('numero', 'asc')->get();
 
+
         $data = [
             'title' => "Pauta",
             'type' => "pauta",

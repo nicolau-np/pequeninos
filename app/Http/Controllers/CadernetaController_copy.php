@@ -172,8 +172,8 @@ class CadernetaController_copy extends Controller
         ])->first();
 
         //verificar cadeiras que tem exame
-        $cadeira_exame = false;
-        $cadeira_exame = CadeiraExame::where([
+        $cadeira_recurso = false;
+        $cadeira_recurso = CadeiraRecurso::where([
             'id_curso' => $turma->id_curso,
             'id_classe' => $turma->id_classe,
             'id_disciplina' => $id_disciplina,

@@ -46,11 +46,9 @@ use App\Http\Controllers\ControladorStatic;
 
             @foreach ($getTurnos as $turnos)
             @php
-                $turmas = ControladorStatic::countTurmaTurnoCurso($turnos->id, $cursos->id);
+                $turmas = ControladorStatic::getTurmaTurnoCurso($turnos->id, $cursos->id);
             @endphp
-            @if ($turmas->count()==0)
-
-            @else
+            @if ($turmas->count()!=0)
             {{$turnos->turno}}
             <div class="table-responsive">
                 <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
@@ -67,6 +65,11 @@ use App\Http\Controllers\ControladorStatic;
                     </thead>
 
                     <tbody>
+                        @php
+                            $turmas0 = ControladorStatic::getTurmaTurnoCurso($turnos->id, $cursos->id);
+                        @endphp
+                        @if ($turmas0->count()!=0)
+                        @foreach ($turmas0 as $turma)
                         <tr>
                             <td></td>
                             <td></td>
@@ -76,6 +79,8 @@ use App\Http\Controllers\ControladorStatic;
                             <td></td>
                             <td></td>
                         </tr>
+                        @endforeach
+                        @endif
                     </tbody>
                 </table>
             </div>

@@ -376,18 +376,18 @@ class RelatorioController extends Controller
         if ($id_ensino == 1) { //iniciacao ate 6
             //se for classificacao quantitativa
             if (($classe == "2ª classe") || ($classe == "4ª classe")) {
-                $pdf = PDF::loadView('pauta.pdf.ensino_primario_2_4_copy', $data['view'])->setPaper('A3', 'landscape');
+                $pdf = PDF::loadView('relatorios.ensinos.declaracao.ensino_primario_2_4_copy', $data['view'])->setPaper('A4', 'normal');
             } //se for classificacao quantitativa
             elseif (($classe == "Iniciação") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
-                $pdf = PDF::loadView('pauta.pdf.ensino_primario_Ini_1_3_5_copy', $data['view'])->setPaper('A3', 'landscape');
+                $pdf = PDF::loadView('relatorios.ensinos.declaracao.ensino_primario_Ini_1_3_5_copy', $data['view'])->setPaper('A4', 'normal');
             }elseif(($classe == "6ª classe")){
-                $pdf = PDF::loadView('pauta.pdf.ensino_primario_6_copy', $data['view'])->setPaper('A3', 'landscape');
+                $pdf = PDF::loadView('relatorios.ensinos.declaracao.ensino_primario_6_copy', $data['view'])->setPaper('A4', 'normal');
             }
         } elseif ($id_ensino == 2) { //7 classe ate 9 ensino geral
             if ($classe == "9ª classe") {
-                $pdf = PDF::loadView('pauta.pdf.ensino_1ciclo_9_copy', $data['view'])->setPaper('A3', 'landscape');
+                $pdf = PDF::loadView('relatorios.ensinos.declaracao.ensino_1ciclo_9_copy', $data['view'])->setPaper('A4', 'normal');
             } else {
-                $pdf = PDF::loadView('pauta.pdf.ensino_1ciclo_7_8_copy', $data['view'])->setPaper('A3', 'landscape');
+                $pdf = PDF::loadView('relatorios.ensinos.declaracao.ensino_1ciclo_7_8_copy', $data['view'])->setPaper('A4', 'normal');
             }
         }
         return $pdf->stream('DECLARAÇÃO COM NOTAS ' . $declaracao->ano_lectivo . ' - [ ' . strtoupper($declaracao->estudante->pessoa->nome) . ' ].pdf');

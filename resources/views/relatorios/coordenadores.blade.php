@@ -30,6 +30,15 @@ $numero = 0;
         .tabela{
             font-size: 12px;
         }
+        .mini-cabecalho{
+        display: block;
+    }
+    .ano_curso{
+        float: left;
+    }
+    .periodo{
+        float: right;
+    }
     </style>
 </head>
 <body>
@@ -43,6 +52,18 @@ $numero = 0;
         <div class="titulo">
             <p style="text-align: center; font-weight:bold; font-size:15px;">MAPA DE LOCALIZAÇÃO DOS COORDENADORES DE TURMAS</p>
         </div>
+        <div class="mini-cabecalho">
+            <div class="ano_curso">
+                &nbsp;&nbsp;{{$getAno}} - [ {{strtoupper($cursos->curso)}} ]
+            </div>
+            <div class="periodo">
+                ENSINO: [ {{strtoupper($getEnsino->ensino)}} ]
+                &nbsp;&nbsp;
+                <br/>
+
+            </div>
+         </div>
+         <br/>
         <div class="corpo">
 
             @foreach ($getTurnos as $turnos)

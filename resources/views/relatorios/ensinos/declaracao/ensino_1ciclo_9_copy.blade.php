@@ -101,6 +101,9 @@ use App\Http\Controllers\ControladorNotas;
                             <td>NOTAS</td>
                         </tr>
                     </thead>
+                    <tbody>
+                        
+                    </tbody>
                 </table>
             </div>
             <br/>

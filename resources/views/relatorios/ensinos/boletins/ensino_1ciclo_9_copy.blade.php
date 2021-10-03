@@ -1,7 +1,10 @@
-<?php
+@php
 use App\Http\Controllers\ControladorStatic;
 use App\Http\Controllers\ControladorNotas;
-?>
+$numero_estudantes = 0;
+$change_page = false;
+@endphp
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,13 +80,8 @@ use App\Http\Controllers\ControladorNotas;
 </head>
 <body>
 
-    <div class="default-page">
-
-
-         <div class="corpo">
-
              @foreach ($getHistorico as $historico)
-             <div class="boletim">
+             <div class="page">
 
                 <div class="table-responsive">
                     <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 70%;">
@@ -150,13 +148,8 @@ use App\Http\Controllers\ControladorNotas;
                 </div>
 
             </div>
+            <hr/>
              @endforeach
-
-         </div>
-         <br/><br/>
-
-
-    </div>
 
 </body>
 </html>

@@ -1,5 +1,6 @@
 @php
 use App\Http\Controllers\ControladorStatic;
+$numero = 0;
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -70,10 +71,21 @@ use App\Http\Controllers\ControladorStatic;
                         @endphp
                         @if ($turmas0->count()!=0)
                         @foreach ($turmas0 as $turma)
-
+                        @php
+                            $numero ++;
+                        @endphp
                         <tr>
-                            <td>{{$loop->iteration}}</td>
-                            <td>coordenador</td>
+                            <td>{{$numero}}</td>
+                            <td>
+                                @php
+                                    $coordenador = ControladorStatic::getCoordenadorTurma($turma->id, $getAno);
+                                @endphp
+                                @if(!$coordenador)
+                                ---
+                                @else
+                                {{strtoupper($coordenador->funcionario->pessoa->nome)}}
+                                @endif
+                            </td>
                             <td>{{strtoupper($turma->classe->classe)}} [ {{$turma->turma}} ]</td>
                             <td>{{strtoupper($turma->sala)}}</td>
                             <td>
@@ -82,7 +94,13 @@ use App\Http\Controllers\ControladorStatic;
                                 @endphp
                                 {{$historico->count()}}
                             </td>
-                            <td>telefone cordernador</td>
+                            <td>
+                                @if(!$coordenador)
+                                ---
+                                @else
+                                {{$coordenador->funcionario->pessoa->telefone}}
+                                @endif
+                            </td>
                             <td>{{strtoupper($turma->turno->turno)}}</td>
                         </tr>
 

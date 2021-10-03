@@ -6,6 +6,7 @@ use App\AnoLectivo;
 use App\CadeiraExame;
 use App\CadeiraRecurso;
 use App\Classe;
+use App\DirectorTurma;
 use App\Disciplina;
 use App\Estudante;
 use App\Grade;
@@ -320,5 +321,10 @@ class ControladorStatic extends Controller
     public static function getTotalEstudantes($id_turma, $ano_lectivo){
         $historico = HistoricEstudante::where(['id_turma'=> $id_turma, 'ano_lectivo' => $ano_lectivo])->get();
         return $historico;
+    }
+
+    public static function getCoordenadorTurma($id_turma, $ano_lectivo){
+        $directores = DirectorTurma::where(['id_turma'=> $id_turma, 'ano_lectivo' => $ano_lectivo])->first();
+        return $directores;
     }
 }

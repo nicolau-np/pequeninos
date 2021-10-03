@@ -76,6 +76,10 @@ $change_page = false;
     .table-responsive{
         padding: 4px;
     }
+
+    .page-changed{
+        
+    }
 </style>
 </head>
 <body>
@@ -88,7 +92,7 @@ $change_page = false;
                 $numero_estudantes ++;
              @endphp
              {{$numero_estudantes}}
-             <div class="@if($numero_estudantes==3) page @endif">
+             <div class="@if($numero_estudantes==3) page-changed @endif">
 
                 <div class="table-responsive">
                     <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 70%;">

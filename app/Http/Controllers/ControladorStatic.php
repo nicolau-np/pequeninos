@@ -71,32 +71,33 @@ class ControladorStatic extends Controller
         return $mes_extenso;
     }
 
-    public static function converterMesExtensao($mes_compreensao) {
+    public static function converterMesExtensao($mes_compreensao)
+    {
         $mes_extenso = null;
         try {
-            if ($mes_compreensao == 1):
+            if ($mes_compreensao == 1) :
                 $mes_extenso = "Janeiro";
-            elseif ($mes_compreensao == 2):
+            elseif ($mes_compreensao == 2) :
                 $mes_extenso = "Fevereiro";
-            elseif ($mes_compreensao == 3):
+            elseif ($mes_compreensao == 3) :
                 $mes_extenso = "Março";
-            elseif ($mes_compreensao == 4):
+            elseif ($mes_compreensao == 4) :
                 $mes_extenso = "Abril";
-            elseif ($mes_compreensao == 5):
+            elseif ($mes_compreensao == 5) :
                 $mes_extenso = "Maio";
-            elseif ($mes_compreensao == 6):
+            elseif ($mes_compreensao == 6) :
                 $mes_extenso = "Junho";
-            elseif ($mes_compreensao == 7):
+            elseif ($mes_compreensao == 7) :
                 $mes_extenso = "Julho";
-            elseif ($mes_compreensao == 8):
+            elseif ($mes_compreensao == 8) :
                 $mes_extenso = "Agosto";
-            elseif ($mes_compreensao == 9):
+            elseif ($mes_compreensao == 9) :
                 $mes_extenso = "Setembro";
-            elseif ($mes_compreensao == 10):
+            elseif ($mes_compreensao == 10) :
                 $mes_extenso = "Outubro";
-            elseif ($mes_compreensao == 11):
+            elseif ($mes_compreensao == 11) :
                 $mes_extenso = "Novembro";
-            elseif ($mes_compreensao == 12):
+            elseif ($mes_compreensao == 12) :
                 $mes_extenso = "Dezembro";
             endif;
         } catch (\Exception $ex) {
@@ -275,12 +276,14 @@ class ControladorStatic extends Controller
         return $classes;
     }
 
-    public static function getDisciplinasGrade($id_curso, $id_classe){
-        $grades = Grade::where(['id_curso'=>$id_curso, 'id_classe'=>$id_classe])->get();
+    public static function getDisciplinasGrade($id_curso, $id_classe)
+    {
+        $grades = Grade::where(['id_curso' => $id_curso, 'id_classe' => $id_classe])->get();
         return $grades;
     }
 
-    public static function getExameStatus($id_curso, $id_classe, $id_disciplina){
+    public static function getExameStatus($id_curso, $id_classe, $id_disciplina)
+    {
         //verificar cadeiras que tem exame
         $cadeira_exame = false;
         $cadeira_exame = CadeiraExame::where([
@@ -293,7 +296,8 @@ class ControladorStatic extends Controller
         return $cadeira_exame;
     }
 
-    public static function getRecursoStatus($id_curso, $id_classe, $id_disciplina){
+    public static function getRecursoStatus($id_curso, $id_classe, $id_disciplina)
+    {
         //verificar se e uma cadeira de recursos
         $cadeira_recurso = false;
         $cadeira_recurso = CadeiraRecurso::where([
@@ -306,8 +310,15 @@ class ControladorStatic extends Controller
         return $cadeira_recurso;
     }
 
-    public static function getTurmaTurnoCurso($id_turno, $id_curso){
-        $turmas = Turma::where(['id_curso' => $id_curso, 'id_turno'=> $id_turno])->orderBy('id_classe', 'asc')->get();
+    public static function getTurmaTurnoCurso($id_turno, $id_curso)
+    {
+        $turmas = Turma::where(['id_curso' => $id_curso, 'id_turno' => $id_turno])
+            ->where('turma', '!=', "Nenhuma")->orderBy('id_classe', 'asc')->get();
         return $turmas;
+    }
+
+    public static function getTotalEstudantes($id_turma, $ano_lectivo){
+        $historico = HistoricEstudante::where(['id_turma'=> $id_turma, 'ano_lectivo' => $ano_lectivo])->get();
+        return $historico;
     }
 }

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\AnoLectivo;
 use App\CadeiraExame;
 use App\CadeiraRecurso;
+use App\Classe;
+use App\Curso;
 use App\Declaracao;
 use App\DirectorTurma;
 use App\Disciplina;
@@ -504,18 +506,27 @@ class RelatorioController extends Controller
         return $pdf->stream('BOLETIM DE NOTAS ' . $request->epoca . 'º TRIMESTRE - ' . $ano_lectivo . '[ ' . strtoupper($turma->turma) . ' ' . strtoupper($turma->turno->turno) . '-' . strtoupper($turma->curso->curso) . ' ].pdf');
     }
 
-    public function mapas_coordenadores($id_ensino){
+    public function mapas_coordenadores($id_ensino, $ano_lectivo)
+    {
         $ensino = Ensino::find($id_ensino);
         if (!$ensino) {
             return back()->with(['error' => "Não encontrou ensino"]);
         }
 
+        $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
+        if (!$ano_lectivos) {
+            return back()->with(['error' => "Não encontrou ano lectivo"]);
+        }
+
+        $cursos = Curso::where(['id_ensino' => $id_ensino,])->get();
+        $classe = Classe::where(['id_ensino' => $id_ensino,])->get();
+
+        $data['view'] = [];
+        $pdf = PDF::loadView('relatorios.ensinos.boletins.ensino_1ciclo_7_8_copy', $data['view'])->setPaper('A4', 'landscape');
+        return $pdf->stream('MAPA DE COORDENADORES - ' . $ano_lectivo .  '[ ' . strtoupper($ensino->ensino) . ' ].pdf');
     }
 
-    public function mapas_aproveitamentos($id_ensino){
-        $ensino = Ensino::find($id_ensino);
-        if (!$ensino) {
-            return back()->with(['error' => "Não encontrou ensino"]);
-        }
+    public function mapas_aproveitamentos($id_ensino, $ano_lectivo)
+    {
     }
 }

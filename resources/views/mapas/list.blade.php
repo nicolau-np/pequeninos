@@ -1,3 +1,6 @@
+@php
+
+@endphp
 @extends('layouts.app')
 @section('content')
 

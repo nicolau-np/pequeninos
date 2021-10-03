@@ -281,8 +281,8 @@ Route::group(['prefix' => 'relatorios', 'middleware' => "auth"], function () {
     Route::put('/boletins/{id_turma}/{ano_lectivo}', "RelatorioController@boletins");
     Route::put('/declaracao/{id_declaracao}', "RelatorioController@declaracaocom");
 
-    Route::get('/mapas_coordenadores/{id_ensino}', "RelatorioController@mapas_coordenadores");
-    Route::get('/mapas_aproveitamentos/{id_ensino}', "RelatorioController@mapas_aproveitamentos");
+    Route::get('/mapas_coordenadores/{id_ensino}/{ano_lectivo}', "RelatorioController@mapas_coordenadores");
+    Route::get('/mapas_aproveitamentos/{id_ensino}/{ano_lectivo}', "RelatorioController@mapas_aproveitamentos");
 });
 
 

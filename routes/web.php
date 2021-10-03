@@ -223,8 +223,8 @@ Route::group(['prefix' => "turmas", 'middleware' => "AdminUser"], function () {
 
 Route::group(['prefix' => "mapas"], function () {
     Route::get('/', "MapaController@index");
-    Route::get('/aproveitamento', "MapaController@aproveitamento");
-    Route::get('/coordenadores', "MapaController@coordenadores");
+    Route::get('/aproveitamento/{ano_lectivo}', "MapaController@aproveitamento");
+    Route::get('/coordenadores/{ano_lectivo}', "MapaController@coordenadores");
 });
 
 Route::group(['prefix' => 'pagamentos', 'middleware' => "AdminUser"], function () {

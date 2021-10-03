@@ -46,12 +46,12 @@ use App\Http\Controllers\ControladorStatic;
 
             @foreach ($getTurnos as $turnos)
             @php
-                $turnos = ControladorStatic::getTurmaTurnoCurso($turnos->id, $cursos->id);
+                $turnos = ControladorStatic::countTurmaTurnoCurso($turnos->id, $cursos->id);
             @endphp
             @if ($turnos->count()==0)
 
             @else
-
+            {{$turnos->turno}}
             <div class="table-responsive">
                 <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
                     <thead>

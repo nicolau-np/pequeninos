@@ -9,12 +9,12 @@ class MapaController extends Controller
     public function index()
     {
         $data = [
-            'title' => "Sistema",
-            'type' => "acerca",
-            'menu' => "Sistema",
-            'submenu' => "Acerca",
+            'title' => "Mapas",
+            'type' => "mapas",
+            'menu' => "Mapas",
+            'submenu' => "Listar",
 
         ];
-        return view('about.sistema', $data);
+        return view('mapas.list', $data);
     }
 }

@@ -66,21 +66,36 @@ use App\Http\Controllers\ControladorNotas;
                 </div>
                 <br/>
                 <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
             </p>
 
          </div>
 
          <div class="rodape">
             <p style="text-align: center;">
-                <div class="data">
-                    Huambo, ­­­­­­­­­­­­­­­­­­­­­­­­­aos 18   de Setembro de 2019
-                </div>
-
-                <div class="director">
+                <span class="data">
+                    Moçamedes, aos {{date('d', strtotime($getDeclaracao->data_emissao))}} de
+                    @php
+                        $mes_compreensao = date('m', strtotime($getDeclaracao->data_emissao));
+                        $mes_extenso = ControladorStatic::converterMesExtensao($mes_compreensao);
+                     @endphp
+                     {{$mes_extenso}}
+                    de {{date('Y', strtotime($getDeclaracao->data_emissao))}}
+                </span>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <br/>
+                <span class="director">
                     O Director da escola<br/>
-                -----------------------------------------------------
+                ---------------------------------------------<br/>
                 LIC. ANTÓNIO KANUTULA BANGO
-                </div>
+                </span>
             </p>
          </div>
     </div>

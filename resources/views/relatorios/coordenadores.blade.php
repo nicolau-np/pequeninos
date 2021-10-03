@@ -134,8 +134,20 @@ $numero = 0;
             @endforeach
 
         </div>
+        <br/><br/>
         <div class="rodape">
 
+            <div class="data">
+                <p style="text-align: center;">
+                Moçamedes aos, {{date('d')}} de
+                @php
+                    $mes_extenso = ControladorStatic::converterMesExtensao(date('m'));
+
+                @endphp
+                {{$mes_extenso}}
+                de {{date('Y')}}
+                </p>
+            </div>
         </div>
     </div>
     @endforeach

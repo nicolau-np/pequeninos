@@ -1,6 +1,13 @@
 @php
 use App\Http\Controllers\ControladorStatic;
 $numero = 0;
+$total=[
+    'coordenadores' =>0,
+    'turmas'=>0,
+    'salas'=>0,
+    'alunos'=>0,
+    'periodos'=>0,
+];
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -66,13 +73,7 @@ $numero = 0;
          <br/>
         <div class="corpo">
 
-            @foreach ($getTurnos as $turnos)
-            @php
-                $turmas = ControladorStatic::getTurmaTurnoCurso($turnos->id, $cursos->id);
-            @endphp
-            @if ($turmas->count()!=0)
-
-            <div class="table-responsive">
+             <div class="table-responsive">
                 <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
                     <thead>
                         <tr>
@@ -87,13 +88,22 @@ $numero = 0;
                     </thead>
 
                     <tbody>
+                        @foreach ($getTurnos as $turnos)
+
                         @php
+
                             $turmas0 = ControladorStatic::getTurmaTurnoCurso($turnos->id, $cursos->id);
                         @endphp
                         @if ($turmas0->count()!=0)
+                        @php
+                        $total['periodos'] ++;
+                        @endphp
                         @foreach ($turmas0 as $turma)
+
                         @php
                             $numero ++;
+                            $total['turmas'] ++;
+                            $total['salas'] ++;
                         @endphp
                         <tr>
                             <td>{{$numero}}</td>
@@ -105,13 +115,17 @@ $numero = 0;
                                 ---
                                 @else
                                 {{strtoupper($coordenador->funcionario->pessoa->nome)}}
+                                    @php
+                                    $total['coordenadores'] ++;
+                                    @endphp
                                 @endif
                             </td>
                             <td>{{strtoupper($turma->classe->classe)}} [ {{$turma->turma}} ]</td>
                             <td>{{strtoupper($turma->sala)}}</td>
                             <td>
                                 @php
-                                    $historico = ControladorStatic::getTotalEstudantesTurma($turma->id, $getAno)
+                                    $historico = ControladorStatic::getTotalEstudantesTurma($turma->id, $getAno);
+                                    $total['alunos'] = $total['alunos'] + $historico->count();
                                 @endphp
                                 {{$historico->count()}}
                             </td>
@@ -126,12 +140,22 @@ $numero = 0;
                         </tr>
 
                         @endforeach
+
                         @endif
+                        @endforeach
+                        <tr style="font-size:14px; font-weight: bold;">
+                            <td>TOTAL</td>
+                            <td>{{$total['coordenadores']}}</td>
+                            <td>{{$total['turmas']}}</td>
+                            <td>{{$total['salas']}}</td>
+                            <td>{{$total['alunos']}}</td>
+                            <td>=====</td>
+                            <td>{{$total['periodos']}}</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
-            @endif
-            @endforeach
+
 
         </div>
         <br/><br/>

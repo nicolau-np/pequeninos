@@ -12,7 +12,7 @@ use App\Http\Controllers\ControladorNotas;
 <style>
     @page{
         font-family: Arial, Helvetica, sans-serif;
-        font-size: 9px;
+        font-size: 11px;
         margin-left: 10px;
         margin-right: 10px;
         margin-top: 10px;
@@ -55,7 +55,7 @@ use App\Http\Controllers\ControladorNotas;
             color: #fff;
     }
     .tabela{
-        font-size: 9px;
+        font-size: 11px;
     }
 
     .title{
@@ -106,7 +106,27 @@ use App\Http\Controllers\ControladorNotas;
                         <thead>
                             <tr>
                                 <th style="width:100px;">{{$getDirector->ano_lectivo}}</th>
-                                <th colspan="5">{{$getDirector->turma->turma}}</th>
+                                <th colspan="5">
+                                    {{strtoupper($getDirector->turma->turma)}} -
+                                    {{strtoupper($getDirector->turma->turno->turno)}} -
+                                    {{strtoupper($getDirector->turma->curso->curso)}}&nbsp;&nbsp;
+                                    [&nbsp;
+                                        Nº [{{$historico->numero}}] - {{strtoupper($historico->estudante->pessoa->nome)}}
+                                    &nbsp;]
+                                </th>
+                            </tr>
+
+                            <tr>
+                                <th rowspan="2">Nº</th>
+                                <th rowspan="2">DISCIPLINAS</th>
+                                <th>{{$getEpoca}}º TRIMESTRE</th>
+                            </tr>
+
+                            <tr>
+                                <th>MAC{{$getEpoca}}</th>
+                                <th>NPP{{$getEpoca}}</th>
+                                <th>PT{{$getEpoca}}</th>
+                                <th>MT{{$getEpoca}}</th>
                             </tr>
                         </thead>
                     </table>

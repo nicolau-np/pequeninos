@@ -1,5 +1,6 @@
 @php
-
+use App\Http\Controllers\ControladorStatic;
+$lastYear = ControladorStatic::getLastYear();
 @endphp
 @extends('layouts.app')
 @section('content')
@@ -35,7 +36,7 @@
 
 
                             <div class="col-md-4 col-xl-4">
-                            <a href="/mapas/coordenadores" style="text-decoration: none;">
+                            <a href="/mapas/coordenadores/{{$lastYear}}" style="text-decoration: none;">
                                 <div class="card widget-card-1">
                                 <div class="card-block-small">
                                     <i class="ti-map bg-c-blue card1-icon"></i>
@@ -53,7 +54,7 @@
 
 
                             <div class="col-md-4 col-xl-4">
-                                <a href="/mapas/aproveitamento" style="text-decoration: none;">
+                                <a href="/mapas/aproveitamento/{{$lastYear}}" style="text-decoration: none;">
                                     <div class="card widget-card-1">
                                     <div class="card-block-small">
                                         <i class="ti-map bg-c-blue card1-icon"></i>

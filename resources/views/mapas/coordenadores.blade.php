@@ -9,7 +9,7 @@
                     <h5>{{$submenu}}
                         <i class="ti-angle-right"></i>
                         @foreach ($getAnos as $anos)
-                        <a href="/mapas/coordenadores/{{$anos->ano_lectivo}}">{{$anos->ano_lectivo}}</a>
+                        <a href="/mapas/coordenadores/{{$anos->ano_lectivo}}" style="color:#4680ff;">{{$anos->ano_lectivo}}</a>
                         <i class="ti-angle-right"></i>
                         @endforeach
                     </h5>

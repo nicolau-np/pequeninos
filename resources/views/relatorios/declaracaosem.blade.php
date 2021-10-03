@@ -31,9 +31,9 @@ use App\Http\Controllers\ControladorNotas;
          <div class="corpo">
             <p style="text-align: justify;">
 
-                <div class="paragrafo">
+                <div class="primeiro-paragrafo">
                     O ANTÓNIO KANUTULA BANGO Director do Complexo escolar nº 89M
-                    "EDUARDO DOMINGOS SUKUETE" Certifico que: {{$getDeclaracao->estudante->pessoa->nome}},
+                    "EDUARDO DOMINGOS SUKUETE" Certifico que: <b>{{$getDeclaracao->estudante->pessoa->nome}}</b>,
                     Filho de @if($getDeclaracao->estudante->pessoa->pai){{$getDeclaracao->estudante->pessoa->pai}} @else [########################] @endif
                     e de @if($getDeclaracao->estudante->pessoa->mae){{$getDeclaracao->estudante->pessoa->mae}} @else [########################] @endif
                      Nascido (a) {{date('d', strtotime($getDeclaracao->estudante->pessoa->data_nascimento))}}
@@ -56,16 +56,32 @@ use App\Http\Controllers\ControladorNotas;
                         $mes_extenso = ControladorStatic::converterMesExtensao($mes_compreensao);
                      @endphp
                      {{$mes_extenso}} de
-                     {{date('Y', strtotime($getDeclaracao->estudante->pessoa->data_emissao))}}
+                     {{date('Y', strtotime($getDeclaracao->estudante->pessoa->data_emissao))}}.
                     @else [########################] @endif
                 </div>
-
+                <br/>
+                <br/>
+                <div class="segundo-paragrafo">
+                    Por ser verdade e me ter sido solicitado, mandei passar a presente declaração que vai por mim assinada e autenticada com o carimbo a óleo, em uso nesta instituição escola.
+                </div>
+                <br/>
+                <br/>
             </p>
 
          </div>
 
          <div class="rodape">
+            <p style="text-align: center;">
+                <div class="data">
+                    Huambo, ­­­­­­­­­­­­­­­­­­­­­­­­­aos 18   de Setembro de 2019
+                </div>
 
+                <div class="director">
+                    O Director da escola<br/>
+                -----------------------------------------------------
+                LIC. ANTÓNIO KANUTULA BANGO
+                </div>
+            </p>
          </div>
     </div>
 </body>

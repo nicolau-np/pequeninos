@@ -394,7 +394,11 @@ use App\Http\Controllers\ControladorStatic;
                                                             <td>{{$global->estudante->pessoa->genero}}</td>
 
                                                             <td>
-                                                                <input type="number" name="rec" data-id="{{$global->id}}" data-campo="rec" value="{{$global->rec}}" class="form-control rec" />
+                                                                @if ($global->mf>=5)
+                                                                <input type="number" name="rec" value="" class="form-control" disabled />
+                                                                @else
+                                                                    <input type="number" name="rec" data-id="{{$global->id}}" data-campo="rec" value="{{$global->rec}}" class="form-control rec" />
+                                                                @endif
                                                             </td>
 
                                                         </tr>

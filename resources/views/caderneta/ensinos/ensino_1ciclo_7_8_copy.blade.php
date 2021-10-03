@@ -385,7 +385,7 @@ use App\Http\Controllers\ControladorStatic;
 
                                                             <td>
                                                                 @if ($global->mf>=10)
-                                                                    TRANSITA
+                                                                <input type="number" name="rec" value="" class="form-control" disabled />
                                                                 @else
                                                                     <input type="number" name="rec" data-id="{{$global->id}}" data-campo="rec" value="{{$global->rec}}" class="form-control rec" />
                                                                 @endif

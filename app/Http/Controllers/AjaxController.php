@@ -682,12 +682,15 @@ class AjaxController extends Controller
             "$campo2" => date('Y-m-d'),
         ];
 
-        $final = Finals::find($request->id_final)->update($data['final']);
-        if ($final) {
-            echo " \\lancou npe\\ ";
-        } else {
-            return null;
-        }
+
+            $final = Finals::find($request->id_final)->update($data['final']);
+            if ($final) {
+                echo " \\lancou npe\\ ";
+            } else {
+                return null;
+            }
+       
+
 
     }
 }

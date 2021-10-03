@@ -614,7 +614,13 @@ class EstudanteController extends Controller
    }
 
    public function choose_declaracao($id_declaracao){
-       
+    $data = [
+        'title' => "Estudantes",
+        'type' => "estudantes",
+        'menu' => "Estudantes",
+        'submenu' => "Declaração com Notas",
+    ];
+    return view('estudantes.choose_declaracao', $data);
    }
 
 }

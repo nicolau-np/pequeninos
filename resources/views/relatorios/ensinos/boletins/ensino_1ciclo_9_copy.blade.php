@@ -101,10 +101,17 @@ use App\Http\Controllers\ControladorNotas;
              @foreach ($getHistorico as $historico)
              <div class="boletim">
 
-             <div class="table-responsive">
+                <div class="table-responsive">
+                    <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 70%;">
+                        <thead>
+                            <tr>
+                                <th style="width:100px;">{{$getDirector->ano_lectivo}}</th>
+                                <th colspan="5">{{$getDirector->turma->turma}}</th>
+                            </tr>
+                        </thead>
+                    </table>
+                </div>
 
-             </div>
-             
             </div>
              @endforeach
 

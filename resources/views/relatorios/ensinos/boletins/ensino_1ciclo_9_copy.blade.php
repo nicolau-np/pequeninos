@@ -78,23 +78,7 @@ use App\Http\Controllers\ControladorNotas;
 <body>
 
     <div class="default-page">
-        <div class="cabecalho">
-            @include('include.header_docs')
-        </div>
-        <div class="titulo">
-        <p style="text-align: center; font-weight:bold;">BOLETIM DE NOTAS {{$getEpoca}}º TRIMESTRE</p>
-         </div>
-        <div class="mini-cabecalho">
-            <div class="ano_curso">
-                &nbsp;&nbsp;{{$getDirector->ano_lectivo}} - [ {{strtoupper($getDirector->turma->turma)}} - {{strtoupper($getDirector->turma->curso->curso)}} ]
-            </div>
-            <div class="periodo">
-                PERÍODO: {{strtoupper($getDirector->turma->turno->turno)}}
-                &nbsp;&nbsp;
-                <br/>
 
-            </div>
-         </div><br/><br/>
 
          <div class="corpo">
 
@@ -105,7 +89,7 @@ use App\Http\Controllers\ControladorNotas;
                     <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 70%;">
                         <thead>
                             <tr>
-                                <th style="width:100px;">{{$getDirector->ano_lectivo}}</th>
+                                <th style="width:60px;">{{$getDirector->ano_lectivo}}</th>
                                 <th colspan="5">
                                     {{strtoupper($getDirector->turma->turma)}} -
                                     {{strtoupper($getDirector->turma->turno->turno)}} -
@@ -119,7 +103,7 @@ use App\Http\Controllers\ControladorNotas;
                             <tr>
                                 <th rowspan="2">Nº</th>
                                 <th rowspan="2">DISCIPLINAS</th>
-                                <th>{{$getEpoca}}º TRIMESTRE</th>
+                                <th colspan="4">{{$getEpoca}}º TRIMESTRE</th>
                             </tr>
 
                             <tr>
@@ -131,13 +115,20 @@ use App\Http\Controllers\ControladorNotas;
                         </thead>
 
                         <tbody>
+                            @foreach (Session::get('disciplinas') as $disciplina)
+                            <?php
+                                $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
+                                $trimestrel = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'], $historico->id_estudante, $getEpoca, $getDirector->ano_lectivo);
+                            ?>
                             <tr>
-                                <td>-</td>
+                                <td>{{$loop->iteration}}</td>
+                                <td>{{strtoupper($getDisciplina->disciplina)}}</td>
                                 <td>-</td>
                                 <td>-</td>
                                 <td>-</td>
                                 <td>-</td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

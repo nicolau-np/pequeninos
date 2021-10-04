@@ -329,7 +329,7 @@ class ControladorStatic extends Controller
     }
 
     public static function getDisciplinaCurso($id_curso){
-        $grade_curricular = Grade::where(['id_curso'=> $id_curso])->get();
+        $grade_curricular = Grade::where(['id_curso'=> $id_curso])->distinct('id_disciplina')->get();
         return $grade_curricular;
     }
 }

@@ -104,7 +104,7 @@ $total=[
                         @if ($getGradeCurricular->count()!=0)
                             @foreach ($getGradeCurricular as $grades)
                                 <tr>
-                                    <td>---</td>
+                                    <td>{{strtoupper($grades->disciplina->disciplina)}}</td>
                                     @foreach ($getClasses as $classes)
                                     <td>-</td>
                                     <td>-</td>

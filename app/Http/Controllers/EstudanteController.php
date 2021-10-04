@@ -543,6 +543,7 @@ class EstudanteController extends Controller
         $request->validate([
             'data' => ['required', 'date'],
             'descricao' => ['required', 'string', 'min:5'],
+            'epoca'=>['required', 'integer', 'min:1'],
             'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
         ]);
 
@@ -550,6 +551,7 @@ class EstudanteController extends Controller
             'id_estudante' => $id_estudante,
             'motivo' => $request->descricao,
             'data_emissao' => $request->data,
+            'epoca'=> $request->epoca,
             'ano_lectivo' => $request->ano_lectivo,
         ];
 
@@ -599,6 +601,7 @@ class EstudanteController extends Controller
         $request->validate([
             'data' => ['required', 'date'],
             'motivo' => ['required', 'string', 'min:5'],
+            'epoca'=>['required', 'integer', 'min:1'],
             'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
         ]);
 
@@ -606,6 +609,7 @@ class EstudanteController extends Controller
             'id_estudante' => $id_estudante,
             'motivo' => $request->motivo,
             'data_saida' => $request->data,
+            'epoca'=>$request->epoca,
             'ano_lectivo' => $request->ano_lectivo,
         ];
 

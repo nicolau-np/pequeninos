@@ -55,6 +55,20 @@
                                         @endif
                                     </div>
                                 </div>
+
+                                <div class="col-md-3">
+                                    {{Form::label('epoca', "Epoca")}} <span class="text-danger">*</span>
+                                    {{Form::select('epoca', [
+                                        '1'=>"1º Trimestre",
+                                        '2'=>"2º Trimestre",
+                                        '3'=>"3º Trimestre",
+                                    ], null, ['class'=>"form-control", 'placeholder'=>"Epoca"])}}
+                                    <div class="erro">
+                                        @if($errors->has('epoca'))
+                                        <div class="text-danger">{{$errors->first('epoca')}}</div>
+                                        @endif
+                                    </div>
+                                </div>
                             </div>
 
                             <div class="row">

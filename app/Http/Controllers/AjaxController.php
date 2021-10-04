@@ -689,8 +689,13 @@ class AjaxController extends Controller
             } else {
                 return null;
             }
-       
 
 
+
+    }
+
+    public function getDisciplinasEnsino($id_curso){
+        $grade_curricular = Grade::where(['id_curso'=> $id_curso])->get();
+        return $grade_curricular;
     }
 }

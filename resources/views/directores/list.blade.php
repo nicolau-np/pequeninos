@@ -89,7 +89,7 @@
 <!-- botão pesquisar -->
 <div class="btnPesquisar">
     <div class="btnPesquisarBtn">
-		<a href="/directores/export" class="btn btn-success btnCircular btnPrincipal" title="Importar"><i class="ti-download"></i></a>
+		<a href="/directores/export" class="btn btn-success btnCircular btnPrincipal" title="Exportar"><i class="ti-download"></i></a>
 	</div>&nbsp;
     <div class="btnPesquisarBtn">
 		<a href="/directores/import" class="btn btn-warning btnCircular btnPrincipal" title="Importar"><i class="ti-upload"></i></a>

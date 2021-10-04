@@ -21,6 +21,6 @@ class DirectorExport implements FromView, ShouldAutoSize
         $data = [
             'getDirectores'=>$grades,
         ];
-        return view('institucional.grades.export', $data);
+        return view('institucional.directores.export', $data);
     }
 }

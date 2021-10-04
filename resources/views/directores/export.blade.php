@@ -1,18 +1,16 @@
 <div>
     <table>
         <tr>
-            <td>id_curso</td>
-            <td>id_classe</td>
-            <td>id_disciplina</td>
-            <td>tipo</td>
+            <td>id_funcionario</td>
+            <td>id_turma</td>
+            <td>ano_lectivo</td>
         </tr>
 
-        @foreach ($getGrades as $grades)
+        @foreach ($getDirectores as $directores)
         <tr>
-            <td>{{$grades->id_curso}}</td>
-            <td>{{$grades->id_classe}}</td>
-            <td>{{$grades->id_disciplina}}</td>
-            <td>{{$grades->tipo}}</td>
+            <td>{{$directores->id_funcionario}}</td>
+            <td>{{$directores->id_turma}}</td>
+            <td>{{$directores->ano_lectivo}}</td>
         </tr>
         @endforeach
     </table>

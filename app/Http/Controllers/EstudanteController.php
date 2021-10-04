@@ -670,16 +670,24 @@ class EstudanteController extends Controller
         }
 
         //verificar se ja existe lancamentos de notas
-        if(Trimestral::where(['id_estudante' => $request->id_estudante,])->first()){
+        if (Trimestral::where(['id_estudante' => $request->id_estudante,])->first()) {
             return back()->with(['error' => "Não pode eliminar o estudante porque já tem lançamentos de notas feitos"]);
         }
         //verificar em pagamentos
-        if(Pagamento::where(['id_estudante' => $request->id_estudante,])->first()){
+        if (Pagamento::where(['id_estudante' => $request->id_estudante,])->first()) {
             return back()->with(['error' => "Não pode eliminar o estudante porque já tem pagamentos feitos"]);
         }
 
-        if(Estudante::find($estudante->id)->update($data['estudante'])){
 
+        Desistencia::where(['id_estudante' => $estudante->id])->delete();
+        Transferencia::where(['id_estudante' => $estudante->id])->delete();
+        Declaracao::where(['id_estudante' => $estudante->id])->delete();
+        if (HistoricEstudante::where(['id_estudante' => $estudante->id])->delete()) {
+            if (Estudante::find($estudante->id)->delete()) {
+                if (Pessoa::find($estudante->id_pessoa)->delete()) {
+                    return back()->with(['success' => "Estudante eliminado com sucesso"]);
+                }
+            }
         }
     }
 }

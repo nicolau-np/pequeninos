@@ -10,7 +10,7 @@
         <tr>
             <td>{{$funcionarios->pessoa->nome}}</td>
             <td>{{$funcionarios->pessoa->genero}}</td>
-            <td>{{$funcionarios->data_nascimento}}</td>
+            <td>{{date('d-m-Y', strtotime($funcionarios->pessoa->data_nascimento))}}</td>
         </tr>
         @endforeach
     </table>

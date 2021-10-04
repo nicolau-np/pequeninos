@@ -55,11 +55,13 @@ class FuncionarioImport implements
         ];
 
         foreach ($rows as $row) {
-            if (!Pessoa::where(['nome' => $row['nome'], 'data_nascimento'=>$row['data_nascimento']])->first()) {
+            //convertendo data
+            $data_nascimento = date('Y-m-d', strtotime($this->transformData(intval($row['data_nascimento']))));
+            if (!Pessoa::where(['nome' => $row['nome'], 'data_nascimento'=>$data_nascimento])->first()) {
 
                 $data['person']['nome'] = $row['nome'];
                 $data['person']['genero'] = $row['genero'];
-                $data['person']['data_nascimento'] = $row['data_nascimento'];
+                $data['person']['data_nascimento'] = $data_nascimento;
                 $pessoa = Pessoa::create($data['person']);
 
                 $data['funcionario']['id_pessoa'] = $pessoa->id;
@@ -75,6 +77,14 @@ class FuncionarioImport implements
 
                 $user = User::create($data['user']);
             }
+        }
+    }
+
+    public function transformData($value, $format="Y-m-d"){
+        try{
+           return  \Carbon\Carbon::instance(\PhpOffice\PhpSpreadsheet\Shared\Date::excelToDateTimeObject($value));
+        }catch(\ErrorException $e){
+            return \Carbon\Carbon::createFromFormat($format, $value);
         }
     }
 

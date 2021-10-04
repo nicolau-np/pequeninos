@@ -175,7 +175,7 @@ class HorarioController extends Controller
         }
 
         if(Horario::find($id_horario)->delete()){
-            return back()->with(['success'=>"Feito com sucesso"]);
+            return back()->with(['success'=>"Eliminado com sucesso"]);
         }
     }
 }

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Cargo;
 use App\Escalao;
+use App\Exports\FuncionarioExport;
 use App\Funcionario;
 use App\Imports\FuncionarioImport;
 use App\Pessoa;
@@ -11,6 +12,7 @@ use App\Provincia;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Maatwebsite\Excel\Facades\Excel;
 
 class FuncionarioController extends Controller
 {
@@ -318,6 +320,11 @@ class FuncionarioController extends Controller
             explode(" ", "a A e E i I o O u U n N c C"),
             $string
         );
+    }
+
+    public function export(){
+        $fileName = "funcionarios_model.xlsx";
+        return Excel::download(new FuncionarioExport(), $fileName);
     }
 
     public function import()

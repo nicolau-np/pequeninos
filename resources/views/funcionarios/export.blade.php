@@ -1,20 +1,16 @@
 <div>
     <table>
         <tr>
-            <td>id_funcionario</td>
-            <td>id_turma</td>
-            <td>id_disciplina</td>
-            <td>estado</td>
-            <td>ano_lectivo</td>
+            <td>nome</td>
+            <td>genero</td>
+            <td>data_nascimento</td>
         </tr>
 
-        @foreach ($getHorarios as $horarios)
+        @foreach ($getFuncionarios as $funcionarios)
         <tr>
-            <td>{{$horarios->id_funcionario}}</td>
-            <td>{{$horarios->id_turma}}</td>
-            <td>{{$horarios->id_disciplina}}</td>
-            <td>{{$horarios->estado}}</td>
-            <td>{{$horarios->ano_lectivo}}</td>
+            <td>{{$funcionarios->pessoa->nome}}</td>
+            <td>{{$funcionarios->pessoa->genero}}</td>
+            <td>{{$funcionarios->data_nascimento}}</td>
         </tr>
         @endforeach
     </table>

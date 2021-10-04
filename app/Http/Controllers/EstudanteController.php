@@ -678,16 +678,16 @@ class EstudanteController extends Controller
             return back()->with(['error' => "Não pode eliminar o estudante porque já tem pagamentos feitos"]);
         }
 
+        $id_pessoa = $estudante->id_pessoa;
+        $id_estudante = $estudante->id;
+        Desistencia::where(['id_estudante' => $id_estudante])->delete();
+        Transferencia::where(['id_estudante' => $id_estudante])->delete();
+        Declaracao::where(['id_estudante' => $id_estudante])->delete();
+        HistoricEstudante::where(['id_estudante' => $id_estudante])->delete();
+        Estudante::find($id_estudante)->delete();
 
-        Desistencia::where(['id_estudante' => $estudante->id])->delete();
-        Transferencia::where(['id_estudante' => $estudante->id])->delete();
-        Declaracao::where(['id_estudante' => $estudante->id])->delete();
-        if (HistoricEstudante::where(['id_estudante' => $estudante->id])->delete()) {
-            if (Estudante::find($estudante->id)->delete()) {
-                if (Pessoa::find($estudante->id_pessoa)->delete()) {
-                    return back()->with(['success' => "Estudante eliminado com sucesso"]);
-                }
-            }
+        if (Pessoa::find($id_pessoa)->delete()) {
+            return back()->with(['success' => "Estudante eliminado com sucesso"]);
         }
     }
 }

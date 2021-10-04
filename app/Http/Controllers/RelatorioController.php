@@ -552,7 +552,7 @@ class RelatorioController extends Controller
         }
 
         $cursos = Curso::where(['id_ensino' => $request->id_ensino,])->get();
-        $classes = Classe::where(['id_ensino' => $request->id_ensino,])->get();
+        $classes = Classe::where(['id_ensino' => $request->id_ensino,])->orderBy('id', 'asc')->get();
         $turnos = Turno::orderBy('id', 'asc')->get();
         $data['view'] = [
             'getEnsino'=>$ensino,

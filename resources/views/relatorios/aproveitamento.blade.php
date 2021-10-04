@@ -20,7 +20,7 @@ $total=[
     <style>
         @page{
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 12px;
+            font-size: 10px;
             margin-left: 10px;
             margin-right: 10px;
             margin-top: 10px;
@@ -35,7 +35,7 @@ $total=[
             color: #fff;
         }
         .tabela{
-            font-size: 12px;
+            font-size: 10px;
         }
         .mini-cabecalho{
         display: block;
@@ -70,9 +70,53 @@ $total=[
 
             </div>
          </div>
-         <br/>
+         <br/><br/>
         <div class="corpo">
 
+            <div class="table-responsive">
+                <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">DISCIPLINA</th>
+                            @foreach ($getClasses as $classes)
+                            <th colspan="4">{{strtoupper($classes->classe)}}</th>
+                            @endforeach
+                            <th colspan="4">TOTAL</th>
+                        </tr>
+
+                        <tr>
+                            @foreach ($getClasses as $classes)
+                            <th>POS</th>
+                            <th>NEG</th>
+                            <th>TOTAL</th>
+                            <th>%</th>
+                            @endforeach
+                            <th>POS</th>
+                            <th>NEG</th>
+                            <th>TOTAL</th>
+                            <th>%</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @php
+
+                        @endphp
+                        <tr>
+                            <td>---</td>
+                            @foreach ($getClasses as $classes)
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            <td>-</td>
+                            @endforeach
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
 
         </div>
         <br/><br/>

@@ -119,8 +119,10 @@ $notas_1ciclo = [
 
                                     @foreach ($getClasses as $classes)
                                     @php
-                                        $getNotas = getNotasEstudantesAproveitamento($getCurso->id, $classes->id, $getEpoca, $getDisciplina->id, $getAno);
+                                        $getNotas = ControladorNotas::getNotasEstudantesAproveitamento($getCurso->id, $classes->id, $getEpoca, $getDisciplina->id, $getAno);
+
                                     @endphp
+                                    {{$getNotas}}
                                     <td>-</td>
                                     <td>-</td>
                                     <td>-</td>

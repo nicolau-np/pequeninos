@@ -272,12 +272,13 @@ class ControladorNotas extends Controller
         ];
 
 
-        $trimestal = Trimestral::with(['estudante.turma'], function ($query) use ($data1) {
+        $trimestal = Trimestral::whereHas('estudante.turma', function ($query) use ($data1) {
             $query->where([
                 'id_curso' => $data1['id_curso'],
                 'id_classe' => $data1['id_classe'],
             ]);
         })->where(['epoca' => $data1['epoca'], 'ano_lectivo' => $data1['ano_lectivo'], 'id_disciplina' => $data1['id_disciplina']])
+            ->where('mt', '!=', "")
             ->get();
 
         return $trimestal;

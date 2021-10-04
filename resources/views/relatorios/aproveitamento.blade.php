@@ -97,13 +97,14 @@ $total=[
                         </tr>
                     </thead>
                     <tbody>
-                        @php
-                            $getGradeCurricular = ControladorStatic::getDisciplinaCurso($getCurso->id);
-                        @endphp
-                        @if ($getGradeCurricular->count()!=0)
-                            @foreach ($getGradeCurricular as $grades)
+
+
+                            @foreach (Session::get('disciplinas') as $disciplina)
+                                @php
+                                    $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
+                                @endphp
                                 <tr>
-                                    <td>{{strtoupper($grades->disciplina->disciplina)}}</td>
+                                    <td>{{strtoupper($getDisciplina->disciplina)}}</td>
                                     @foreach ($getClasses as $classes)
                                     <td>-</td>
                                     <td>-</td>
@@ -116,7 +117,7 @@ $total=[
                                     <td></td>
                                 </tr>
                             @endforeach
-                        @endif
+
                     </tbody>
                 </table>
             </div>

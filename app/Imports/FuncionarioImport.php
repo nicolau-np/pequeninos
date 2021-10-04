@@ -57,7 +57,7 @@ class FuncionarioImport implements
         foreach ($rows as $row) {
             //convertendo data
             $data_nascimento = date('Y-m-d', strtotime($this->transformData(intval($row['data_nascimento']))));
-            if (!Pessoa::where(['nome' => $row['nome'], 'data_nascimento'=>$data_nascimento])->first()) {
+            if (!Pessoa::where(['nome' => $row['nome']])->first()) {
 
                 $data['person']['nome'] = $row['nome'];
                 $data['person']['genero'] = $row['genero'];

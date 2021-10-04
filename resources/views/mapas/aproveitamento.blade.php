@@ -82,7 +82,7 @@
       <div class="modal-content">
 
         <div class="modal-body">
-          {{Form::open(['class'=>'form', 'url'=>"/mapas_aproveitamentos"])}}
+          {{Form::open(['class'=>'form', 'url'=>"/relatorios/mapas_aproveitamentos"])}}
           @csrf
           <div class="row">
             <div class="col-md-12">
@@ -94,7 +94,7 @@
             </div>
             <br/><br/>
             <div class="col-md-12">
-                {{Form::text('ano_lectivo', null, ['class'=>"form-control ano_lectivo", 'placeholder'=>"Ano Lectivo", 'disabled'])}}
+                {{Form::text('ano_lectivo', null, ['class'=>"form-control ano_lectivo", 'placeholder'=>"Ano Lectivo"])}}
                 <input type="hidden" name="id_ensino" class="id_ensino" />
             </div>
             <br/><br/><br/>

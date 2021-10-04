@@ -57,11 +57,11 @@ $total=[
         </div>
         <br/>
         <div class="titulo">
-            <p style="text-align: center; font-weight:bold; font-size:15px;">MAPA DE LOCALIZAÇÃO DOS COORDENADORES DE TURMAS</p>
+            <p style="text-align: center; font-weight:bold; font-size:15px;">MAPA DE APROVEITAMENTO OBTIDO POR DISCIPLINA</p>
         </div>
         <div class="mini-cabecalho">
             <div class="ano_curso">
-                &nbsp;&nbsp;{{$getAno}} - [ {{strtoupper($cursos->curso)}} ]
+            &nbsp;&nbsp;{{$getAno}} - [ {{strtoupper($cursos->curso)}} ] &nbsp;&nbsp; [ {{$getEpoca}}º TRIMESTRE ]
             </div>
             <div class="periodo">
                 ENSINO: [ {{strtoupper($getEnsino->ensino)}} ]

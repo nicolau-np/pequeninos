@@ -282,7 +282,7 @@ Route::group(['prefix' => 'relatorios', 'middleware' => "auth"], function () {
     Route::put('/declaracao/{id_declaracao}', "RelatorioController@declaracaocom");
 
     Route::get('/mapas_coordenadores/{id_ensino}/{ano_lectivo}', "RelatorioController@mapas_coordenadores");
-    Route::get('/mapas_aproveitamentos', "RelatorioController@mapas_aproveitamentos");
+    Route::post('/mapas_aproveitamentos', "RelatorioController@mapas_aproveitamentos");
 });
 
 

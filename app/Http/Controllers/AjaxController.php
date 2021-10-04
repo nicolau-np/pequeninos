@@ -689,10 +689,14 @@ class AjaxController extends Controller
             } else {
                 return null;
             }
-
-
-
     }
 
-   
+    public function getCursoEnsino($id_ensino){
+        $cursos = Curso::where(['id_ensino'=> $id_ensino])->pluck('curso', 'id');
+        $data = [
+            'getCursos'=>$cursos,
+        ];
+        return view('ajax_loads.getCursosEnsino', $data);
+    }
+
 }

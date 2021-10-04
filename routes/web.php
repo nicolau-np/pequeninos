@@ -55,6 +55,8 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/updateRecurso', "AjaxController@updateRecurso")->name('updateRecurso');
 
     
+    Route::get('/getCursoEnsino', "AjaxController@getCursoEnsino")->name('getCursoEnsino')
+
 });
 
 Route::group(['prefix' => 'institucional', 'middleware' => "AdminUser"], function () {

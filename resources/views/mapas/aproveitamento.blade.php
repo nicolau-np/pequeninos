@@ -98,14 +98,15 @@
                 ], null, ['class'=>"form-control", 'placeholder'=>"Epoca"])}}
             </div>
             <br/><br/>
+            <div class="col-md-12 loadCurso">
+                {{Form::select('curso', [], null, ['class'=>"form-control", 'placeholder'=>"Curso"])}}
+            </div>
+            <br/><br/>
             <div class="col-md-12">
                 {{Form::text('ano_lectivo', null, ['class'=>"form-control ano_lectivo", 'placeholder'=>"Ano Lectivo"])}}
                 <input type="hidden" name="id_ensino" class="id_ensino" />
             </div>
-            <br/><br/><br/>
-            <div class="col-md-12">
-                {{Form::select('curso', [], null, ['class'=>"form-control", 'placeholder'=>"Epoca"])}}
-            </div>
+
             <br/><br/><br/>
             <div class="col-md-12" style="text-align: center;">
                 {{Form::submit('SEGUIR',['class'=>"btn btn-primary"])}}
@@ -135,6 +136,10 @@
             $('.id_ensino').val(data.id_ensino);
             $('#epocamodal').modal('show');
         });
+
+        function loadCurso(id_ensino){
+
+        }
     });
 </script>
 @endsection

@@ -8,6 +8,16 @@ $total=[
     'alunos'=>0,
     'periodos'=>0,
 ];
+
+$notas_primario = [
+    'negativa'=>4.99,
+    'positiva'=>5,
+];
+
+$notas_1ciclo = [
+    'negativa'=>9.99,
+    'positiva'=>10,
+];
 @endphp
 <!DOCTYPE html>
 <html lang="en">

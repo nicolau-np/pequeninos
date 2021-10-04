@@ -82,7 +82,7 @@ use App\Http\Controllers\ControladorStatic;
                                         <a href="/estudantes/ficha/{{$estudantes->id}}/{{$estudantes->ano_lectivo}}" class="btn btn-warning btn-sm"><i class="ti-user"></i> Ficha</a>
                                         <a href="/estudantes/confirmar/{{$estudantes->id}}" class="btn btn-info btn-sm"><i class="ti-file"></i> Confir.</a>
                                         <a href="/estudantes/edit/{{$estudantes->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
-                                        <a href="#" data-id_estudante="{{$estudantes->id}}" class="btn btn-danger btn-sm delete"><i class="ti-trash"></i> Eliminar</a>
+                                        <a href="#" data-id_estudante="{{$estudantes->id}}" data-nome_estudante="{{$estudantes->pessoa->nome}}" class="btn btn-danger btn-sm delete"><i class="ti-trash"></i> Eliminar</a>
                                     </td>
                                 </tr>
 
@@ -112,6 +112,39 @@ use App\Http\Controllers\ControladorStatic;
 		<a href="/estudantes/create" class="btn btn-primary btnCircular btnPrincipal" title="Novo"><i class="ti-plus"></i></a>
 	</div>
 </div>
+
+<!-- modal -->
+<div class="modal fade" id="deletemodal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-body">
+          {{Form::open(['method'=>"post",'class'=>'form', 'url'=>"/estudantes/destroy"])}}
+          @csrf
+          <div class="row">
+            <div class="col-md-12">
+                <p style="text-align: center; font-size:18px;">
+                    Tem a certeza que deseja Eliminar o estudante
+                    <b class="nome_estudante"></b>
+                    ??
+                </p>
+            </div>
+            <br/><br/><br/>
+            <div class="col-md-12" style="text-align: center;">
+                {{Form::submit('SIM',['class'=>"btn btn-primary"])}}&nbsp;&nbsp;
+                {{Form::reset('NÃO', ['class'=>"btn btn-danger"])}}
+            </div>
+          </div>
+          {{Form::close()}}
+
+        </div>
+
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+<!-- fim modal -->
 
 <script>
     $(document).ready(function(){
@@ -147,6 +180,19 @@ use App\Http\Controllers\ControladorStatic;
                     $('.load_classes').html(response);
                 }
             });
+        });
+
+        $('.delete').click(function(e){
+            e.preventDefault();
+            var data ={
+                id_estudante:$(this).data('id_estudante'),
+                nome_estudante:$(this).data('nome_estudante'),
+                _token: "{{ csrf_token() }}"
+            };
+
+            $('.id_estudante').val(data.id_estudante);
+            $('.nome_estudante').val(data.nome_estudante);
+            $('#deletemodal').modal('show');
         });
     });
 </script>

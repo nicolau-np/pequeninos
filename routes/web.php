@@ -55,7 +55,7 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/updateRecurso', "AjaxController@updateRecurso")->name('updateRecurso');
 
 
-    Route::get('/getCursoEnsino', "AjaxController@getCursoEnsino")->name('getCursoEnsino');
+    Route::post('/getCursoEnsino', "AjaxController@getCursoEnsino")->name('getCursoEnsino');
 
 });
 

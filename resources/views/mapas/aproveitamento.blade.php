@@ -140,13 +140,14 @@
 
         function loadCurso(id_ensino){
             var data ={
-                id_ensino: id_ensino
+                id_ensino: id_ensino,
+                _token: "{{csfr}}"
             };
             $.ajax({
-                type: "get",
+                type: "post",
                 url: "{{route('getCursoEnsino')}}",
                 data: data,
-                dataType: "dataType",
+                dataType: "html",
                 success: function (response) {
                     $('.loadCurso').html(response);
                 }

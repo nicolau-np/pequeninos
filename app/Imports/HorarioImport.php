@@ -5,7 +5,7 @@ namespace App\Imports;
 use App\Horario;
 use Maatwebsite\Excel\Concerns\ToModel;
 
-class HoarioImport implements ToModel
+class HorarioImport implements ToModel
 {
     /**
     * @param array $row

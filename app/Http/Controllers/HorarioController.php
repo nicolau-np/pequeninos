@@ -6,8 +6,11 @@ use App\AnoLectivo;
 use App\Curso;
 use App\Funcionario;
 use App\Horario;
+use App\Exports\HorarioExport;
+use App\Imports\HorarioImport;
 use App\Sala;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class HorarioController extends Controller
 {
@@ -145,5 +148,33 @@ class HorarioController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function import(){
+        $data = [
+            'title' => "Directores de Turma",
+            'type' => "directores",
+            'menu' => "Directores de Turma",
+            'submenu' => "Importar",
+        ];
+        return view('directores.import', $data);
+    }
+
+    public function export(){
+        $fileName = "directores_model.xlsx";
+        return Excel::download(new HorarioExport(), $fileName);
+    }
+
+    public function import_store(Request $request){
+        $request->validate([
+            'arquivo' => ['required', 'mimes:xlsx,xls'],
+        ]);
+        $file = $request->file('arquivo');
+
+        $import = new HorarioImport;
+
+        if ($import->import($file)) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
     }
 }

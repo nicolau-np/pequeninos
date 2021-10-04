@@ -1,1 +1,1 @@
-{{Form::select('id_curso', $getCursos, null, ['class'=>"form-control", 'placeholder'=>"Curso"])}}
+{{Form::select('id_curso', $getCursos, null, ['class'=>"form-control changeCurso", 'placeholder'=>"Curso"])}}

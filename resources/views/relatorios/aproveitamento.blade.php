@@ -60,7 +60,7 @@ $total=[
         </div>
         <div class="mini-cabecalho">
             <div class="ano_curso">
-            &nbsp;&nbsp;{{$getAno}} - [ {{strtoupper($cursos->curso)}} ] &nbsp;&nbsp; [ {{$getEpoca}}º TRIMESTRE ]
+            &nbsp;&nbsp;{{$getAno}} - [ {{strtoupper($getCurso->curso)}} ] &nbsp;&nbsp; [ {{$getEpoca}}º TRIMESTRE ]
             </div>
             <div class="periodo">
                 ENSINO: [ {{strtoupper($getEnsino->ensino)}} ]

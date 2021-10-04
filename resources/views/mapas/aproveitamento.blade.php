@@ -99,7 +99,7 @@
             </div>
             <br/><br/>
             <div class="col-md-12 loadCurso">
-                {{Form::select('id_curso', [], null, ['class'=>"form-control", 'placeholder'=>"Curso"])}}
+                {{Form::select('id_curso', [], null, ['class'=>"form-control changeCurso", 'placeholder'=>"Curso"])}}
             </div>
             <br/><br/>
             <div class="col-md-12">
@@ -137,6 +137,13 @@
             loadCurso(data.id_ensino);
             $('#epocamodal').modal('show');
         });
+
+        $('.changeCurso').change(function(e){
+            e.preventDefault();
+            alert("hello");
+        });
+
+
 
         function loadCurso(id_ensino){
             var data ={

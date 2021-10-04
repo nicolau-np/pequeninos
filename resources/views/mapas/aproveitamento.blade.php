@@ -77,7 +77,14 @@
 
 <script>
     $('document').ready(function(e){
-        alert("hello");
+        $('.aproveitamento').click(function(e){
+            var data = {
+                id_ensino: $(this).data('id_ensino'),
+                ano_lectivo: $(this).data('ano_lectivo')
+            };
+
+            
+        });
     });
 </script>
 @endsection

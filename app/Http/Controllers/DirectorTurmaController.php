@@ -6,6 +6,7 @@ use App\AnoLectivo;
 use App\Curso;
 use App\DirectorTurma;
 use App\Exports\DirectorExport;
+use App\Imports\DirectorImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -216,5 +217,18 @@ class DirectorTurmaController extends Controller
     public function export(){
         $fileName = "directores_model.xlsx";
         return Excel::download(new DirectorExport(), $fileName);
+    }
+
+    public function import_store(Request $request){
+        $request->validate([
+            'arquivo' => ['required', 'mimes:xlsx,xls'],
+        ]);
+        $file = $request->file('arquivo');
+
+        $import = new DirectorImport;
+
+        if ($import->import($file)) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
     }
 }

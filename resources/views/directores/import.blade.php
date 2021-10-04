@@ -28,7 +28,7 @@
                     <div class="alert alert-success">{{session('success')}}</div>
                     @endif
 
-                    {{Form::open(['method'=>"post", 'url'=>"/institucional/grades/import/store", 'enctype'=>"multipart/form-data"])}}
+                    {{Form::open(['method'=>"post", 'url'=>"/directores/import/store", 'enctype'=>"multipart/form-data"])}}
                     @csrf
                     <fieldset>
                         <legend><i class="ti-list"></i> Dados</legend>
@@ -68,7 +68,7 @@
 <!-- botão pesquisar -->
 <div class="btnPesquisar">
 	<div class="btnPesquisarBtn">
-		<a href="/institucional/grades" class="btn btn-primary btnCircular btnPrincipal" title="Listar"><i class="ti-search"></i></a>
+		<a href="/directores" class="btn btn-primary btnCircular btnPrincipal" title="Listar"><i class="ti-search"></i></a>
 	</div>
 </div>
 

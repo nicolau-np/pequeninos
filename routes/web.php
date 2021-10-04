@@ -257,6 +257,7 @@ Route::group(['prefix' => 'directores', 'middleware' => "AdminUser"], function (
     Route::put('/update/{id}', "DirectorTurmaController@update");
     Route::get('/export', "DirectorTurmaController@export");
     Route::get('/import', "DirectorTurmaController@import");
+    Route::post('/import/store', "DirectorTurmaController@import_store");
 });
 
 

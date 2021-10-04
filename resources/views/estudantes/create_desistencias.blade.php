@@ -47,6 +47,20 @@
                                 </div>
 
                                 <div class="col-md-3">
+                                    {{Form::label('epoca', "Epoca")}} <span class="text-danger">*</span>
+                                    {{Form::select('epoca', [
+                                        '1'=>"1º Trimestre",
+                                        '2'=>"1º Trimestre",
+                                        '3'=>"1º Trimestre",
+                                    ], null, ['class'=>"form-control", 'placeholder'=>"Epoca"])}}
+                                    <div class="erro">
+                                        @if($errors->has('epoca'))
+                                        <div class="text-danger">{{$errors->first('epoca')}}</div>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
                                     {{Form::label('ano_lectivo', "Ano Lectivo")}} <span class="text-danger">*</span>
                                     {{Form::select('ano_lectivo', $getAnos, $getAno, ['class'=>"form-control", 'placeholder'=>"Ano Lectivo"])}}
                                     <div class="erro">
@@ -103,7 +117,7 @@
                                     <td>{{$desistencia->motivo}}</td>
                                     <td>{{$desistencia->data_saida}}</td>
                                     <td>{{$desistencia->ano_lectivo}}</td>
-                                    
+
                                 </tr>
 
                                 @endforeach

@@ -710,10 +710,11 @@ class AjaxController extends Controller
             'id_curso' => ['required', 'integer', 'min:1'],
         ]);
 
-        $grade_curricular = Grade::where(['id_curso' => $request->id_curso,])->get();
+        $grade_curricular = Grade::where(['id_curso' => $request->id_curso,])->distinct()->get(['id_disciplina']);
         $data = [
             'getGrades' => $grade_curricular,
         ];
+
         return view('ajax_loads.getGrades', $data);
     }
 }

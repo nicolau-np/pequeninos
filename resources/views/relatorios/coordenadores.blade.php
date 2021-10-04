@@ -1,6 +1,7 @@
 @php
 use App\Http\Controllers\ControladorStatic;
 $numero = 0;
+
 $total=[
     'coordenadores' =>0,
     'turmas'=>0,
@@ -101,9 +102,11 @@ $total=[
                         @foreach ($turmas0 as $turma)
 
                         @php
+
                             $numero ++;
                             $total['turmas'] ++;
                             $total['salas'] ++;
+
                         @endphp
                         <tr>
                             <td>{{$numero}}</td>

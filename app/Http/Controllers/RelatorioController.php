@@ -556,7 +556,11 @@ class RelatorioController extends Controller
         if(!$curso){
             return back()->with(['error' => "Não encontrou curso"]);
         }
-        
+
+        if (!Session::has('disciplinas')) {
+            return back()->with(['error' => "Deve selecionar as disciplinas"]);
+        }
+
         $classes = Classe::where(['id_ensino' => $request->id_ensino,])->orderBy('id', 'asc')->get();
         $turnos = Turno::orderBy('id', 'asc')->get();
         $data['view'] = [

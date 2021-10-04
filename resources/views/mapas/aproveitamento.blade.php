@@ -106,15 +106,19 @@
                 {{Form::text('ano_lectivo', null, ['class'=>"form-control ano_lectivo", 'placeholder'=>"Ano Lectivo"])}}
                 <input type="hidden" name="id_ensino" class="id_ensino" />
             </div>
-            <br/><br/><br/>
-            <div class="col-md-12 loadDisciplinas">
+            </div>
+            <hr/>
+            <div class="row loadDisciplinas">
 
             </div>
-            <br/><br/><br/>
-            <div class="col-md-12" style="text-align: center;">
+            <hr/>
+            <div class="row">
+                <div class="col-md-12" style="text-align: center;">
                 {{Form::submit('SEGUIR',['class'=>"btn btn-primary"])}}
+                </div>
             </div>
-          </div>
+
+
           {{Form::close()}}
 
         </div>

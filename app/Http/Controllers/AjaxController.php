@@ -691,8 +691,11 @@ class AjaxController extends Controller
             }
     }
 
-    public function getCursoEnsino($id_ensino){
-        $cursos = Curso::where(['id_ensino'=> $id_ensino])->pluck('curso', 'id');
+    public function getCursoEnsino(Request $request){
+        $request->validate([
+            'id_ensino' => ['required', 'integer', 'min:1'],
+        ]);
+        $cursos = Curso::where(['id_ensino'=> $request->id_ensino,])->pluck('curso', 'id');
         $data = [
             'getCursos'=>$cursos,
         ];

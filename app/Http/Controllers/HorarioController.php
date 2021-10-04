@@ -152,12 +152,12 @@ class HorarioController extends Controller
 
     public function import(){
         $data = [
-            'title' => "Directores de Turma",
-            'type' => "directores",
-            'menu' => "Directores de Turma",
+            'title' => "Horários",
+            'type' => "funcionarios",
+            'menu' => "Horários",
             'submenu' => "Importar",
         ];
-        return view('directores.import', $data);
+        return view('horarios.import', $data);
     }
 
     public function export(){

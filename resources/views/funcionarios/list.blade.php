@@ -28,6 +28,10 @@
                             <div class="col-md-1">
                                 <button class="btn btn-success btn-sm"><i class="ti-search"></i></button>
                             </div>
+                            <div class="col-md-3">
+                                <a href="/horarios/export" alt="Exportar Horário"><i class="ti-download"></i></a>&nbsp;&nbsp;
+                                <a href="/horarios/import" alt="Importar Horário"><i class="ti-upload"></i></a>
+                            </div>
                         </div>
                         {{Form::close()}}
                     </div>

@@ -3,15 +3,24 @@
 namespace App\Exports;
 
 use App\Horario;
+use Illuminate\Contracts\Support\Responsable;
+use Illuminate\Contracts\View\View;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
+use Maatwebsite\Excel\Concerns\FromView;
+use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 
-class HorarioExport implements FromCollection
+class HorarioExport implements FromView, ShouldAutoSize
 {
-    /**
-    * @return \Illuminate\Support\Collection
-    */
-    public function collection()
+    use Exportable;
+
+    public function view(): View
     {
-        return Horario::all();
+        $horarios = Horario::all();
+
+        $data = [
+            'getHorarios'=>$horarios,
+        ];
+        return view('horarios.export', $data);
     }
 }

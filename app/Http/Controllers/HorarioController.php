@@ -161,7 +161,7 @@ class HorarioController extends Controller
     }
 
     public function export(){
-        $fileName = "directores_model.xlsx";
+        $fileName = "horarios_model.xlsx";
         return Excel::download(new HorarioExport(), $fileName);
     }
 

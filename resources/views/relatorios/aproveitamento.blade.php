@@ -50,7 +50,6 @@ $total=[
 </head>
 <body>
 
-    @foreach ($getCursos as $cursos)
     <div class="default-page">
         <div class="cabecalho">
             @include('include.header_docs')
@@ -99,7 +98,7 @@ $total=[
                     </thead>
                     <tbody>
                         @php
-                            $getGradeCurricular = ControladorStatic::getDisciplinaCurso($cursos->id);
+                            $getGradeCurricular = ControladorStatic::getDisciplinaCurso($getCurso->id);
                         @endphp
                         @if ($getGradeCurricular->count()!=0)
                             @foreach ($getGradeCurricular as $grades)
@@ -139,7 +138,7 @@ $total=[
             </div>
         </div>
     </div>
-    @endforeach
+
 </body>
 </html>
 

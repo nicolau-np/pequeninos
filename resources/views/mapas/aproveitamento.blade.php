@@ -75,5 +75,9 @@
 	</div>
 </div>
 
-
+<script>
+    $('document').ready(function(e){
+        alert("hello");
+    });
+</script>
 @endsection

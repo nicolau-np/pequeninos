@@ -664,6 +664,11 @@ class EstudanteController extends Controller
             'id_estudante' => ['required', 'integer', 'min:1'],
         ]);
 
+        $estudante = Estudante::find($request->id_estudante);
+        if (!$estudante) {
+            return back()->with(['error' => "Não encontrou estudante"]);
+        }
+
         //verificar se ja existe lancamentos de notas
         if(Trimestral::where(['id_estudante' => $request->id_estudante,])->first()){
             return back()->with(['error' => "Não pode eliminar o estudante porque já tem lançamentos de notas feitos"]);
@@ -672,6 +677,9 @@ class EstudanteController extends Controller
         if(Pagamento::where(['id_estudante' => $request->id_estudante,])->first()){
             return back()->with(['error' => "Não pode eliminar o estudante porque já tem pagamentos feitos"]);
         }
-        
+
+        if(Estudante::find($estudante->id)->update($data['estudante'])){
+
+        }
     }
 }

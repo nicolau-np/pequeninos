@@ -99,7 +99,7 @@
             </div>
             <br/><br/>
             <div class="col-md-12 loadCurso">
-                {{Form::select('curso', [], null, ['class'=>"form-control", 'placeholder'=>"Curso"])}}
+                {{Form::select('id_curso', [], null, ['class'=>"form-control", 'placeholder'=>"Curso"])}}
             </div>
             <br/><br/>
             <div class="col-md-12">

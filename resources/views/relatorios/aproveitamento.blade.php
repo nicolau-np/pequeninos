@@ -9,6 +9,13 @@ $dados = [
     'total'=>0,
     'percent'=>0,
 ];
+
+$dadosGerais = [
+    'pos'=>0,
+    'neg'=>0,
+    'total'=>0,
+    'percent'=>0,
+];
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -70,7 +77,7 @@ $dados = [
 
             </div>
          </div>
-         <br/><br/>
+         <br/>
         <div class="corpo">
 
             <div class="table-responsive">
@@ -105,6 +112,12 @@ $dados = [
                                 @php
                                     $dados['pos'] =0;
                                     $dados['neg'] =0;
+                                    $dados['total'] =0;
+
+                                    $dadosGerais ['pos'] = 0;
+                                    $dadosGerais['neg'] =0;
+                                    $dadosGerais['total'] =0;
+
                                     $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
                                 @endphp
                                 <tr>
@@ -114,6 +127,7 @@ $dados = [
                                     @php
                                     $dados['pos'] =0;
                                     $dados['neg'] =0;
+                                    $dados['total'] =0;
                                         $getNotas = ControladorNotas::getNotasEstudantesAproveitamento($getCurso->id, $classes->id, $getEpoca, $getDisciplina->id, $getAno);
                                         foreach ($getNotas as $notas){
                                             if($getEnsino->id==1){
@@ -131,21 +145,40 @@ $dados = [
                                             }
 
                                         }
+                                        $dados['total'] = $dados['pos']+$dados['neg'];
+
+                                        $dadosGerais['pos'] = $dadosGerais['pos']+$dados['pos'];
+                                        $dadosGerais['neg'] = $dadosGerais['neg']+$dados['neg'];
+                                        $dadosGerais['total'] = $dadosGerais['total']+$dados['total'];
                                     @endphp
 
                                     <td>{{$dados['pos']}}</td>
                                     <td>{{$dados['neg']}}</td>
+                                    <td>{{$dados['total']}}</td>
                                     <td>-</td>
-                                    <td>-</td>
+
 
                                     @endforeach
 
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
+                                    <td>{{$dadosGerais['pos']}}</td>
+                                    <td>{{$dadosGerais['neg']}}</td>
+                                    <td>{{$dadosGerais['total']}}</td>
                                     <td></td>
                                 </tr>
                             @endforeach
+                            <tr>
+                                <td>TOTAL</td>
+                                @foreach ($getClasses as $classes)
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                @endforeach
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
 
                     </tbody>
                 </table>

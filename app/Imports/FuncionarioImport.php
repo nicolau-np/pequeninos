@@ -35,7 +35,7 @@ class FuncionarioImport implements
         $data['person'] = [
             'nome' => null,
             'genero' => null,
-            'data_nascimento' => date('Y-m-d'),
+            'data_nascimento' => null,
             'id_municipio' => 1,
         ];
 
@@ -55,10 +55,11 @@ class FuncionarioImport implements
         ];
 
         foreach ($rows as $row) {
-            if (!Pessoa::where(['nome' => $row['nome']])->first()) {
+            if (!Pessoa::where(['nome' => $row['nome'], 'data_nascimento'=>$row['data_nascimento']])->first()) {
 
                 $data['person']['nome'] = $row['nome'];
                 $data['person']['genero'] = $row['genero'];
+                $data['person']['data_nascimento'] = $row['data_nascimento'];
                 $pessoa = Pessoa::create($data['person']);
 
                 $data['funcionario']['id_pessoa'] = $pessoa->id;

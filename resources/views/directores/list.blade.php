@@ -63,7 +63,7 @@
                                     <td>{{$directores->ano_lectivo}}</td>
                                     <td>
                                         <a href="/directores/edit/{{$directores->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
-                                        <a href="http://" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
+                                        <a href="/directores/destroy/{{$directores->id}}" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
                                     </td>
                                 </tr>
 

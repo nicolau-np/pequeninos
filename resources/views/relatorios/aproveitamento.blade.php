@@ -99,21 +99,25 @@ $total=[
                     </thead>
                     <tbody>
                         @php
-                            $getGradeCurricular = ControladorStatic::
+                            $getGradeCurricular = ControladorStatic::getDisciplinaCurso($cursos->id);
                         @endphp
-                        <tr>
-                            <td>---</td>
-                            @foreach ($getClasses as $classes)
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
-                            <td>-</td>
+                        @if ($getGradeCurricular->count()!=0)
+                            @foreach ($getGradeCurricular as $grades)
+                                <tr>
+                                    <td>---</td>
+                                    @foreach ($getClasses as $classes)
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    <td>-</td>
+                                    @endforeach
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
                             @endforeach
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                        </tr>
+                        @endif
                     </tbody>
                 </table>
             </div>

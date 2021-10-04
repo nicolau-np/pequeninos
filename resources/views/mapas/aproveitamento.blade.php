@@ -103,6 +103,10 @@
                 <input type="hidden" name="id_ensino" class="id_ensino" />
             </div>
             <br/><br/><br/>
+            <div class="col-md-12">
+                {{Form::select('curso', [], null, ['class'=>"form-control", 'placeholder'=>"Epoca"])}}
+            </div>
+            <br/><br/><br/>
             <div class="col-md-12" style="text-align: center;">
                 {{Form::submit('SEGUIR',['class'=>"btn btn-primary"])}}
             </div>

@@ -53,6 +53,8 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/updateProva', "AjaxController@updateProva")->name('updateProva');
     Route::post('/updateGlobal', "AjaxController@updateGlobal")->name('updateGlobal');
     Route::post('/updateRecurso', "AjaxController@updateRecurso")->name('updateRecurso');
+
+    
 });
 
 Route::group(['prefix' => 'institucional', 'middleware' => "AdminUser"], function () {

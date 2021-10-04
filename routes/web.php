@@ -255,7 +255,10 @@ Route::group(['prefix' => 'directores', 'middleware' => "AdminUser"], function (
     Route::post('/store', "DirectorTurmaController@store");
     Route::get('/edit/{id}', "DirectorTurmaController@edit");
     Route::put('/update/{id}', "DirectorTurmaController@update");
+    Route::get('/export', "DirectorTurmaController@export");
+    Route::get('/import', "DirectorTurmaController@import");
 });
+
 
 Route::group(['prefix' => "horarios", 'middleware' => "AdminUser"], function () {
     Route::get('/create/{id_funcionario}', "HorarioController@create");

@@ -398,7 +398,7 @@ class AjaxController extends Controller
         $mfd = Finals::mfd($soma_mts);
         if ($final->npe_data == null) {
             $mf = Finals::mf($soma_mts);
-        }else{
+        } else {
             $mf = Finals::mf_exame($mfd, $final->npe);
         }
 
@@ -530,7 +530,7 @@ class AjaxController extends Controller
         $mfd = Finals::mfd($soma_mts);
         if ($final->npe_data == null) {
             $mf = Finals::mf($soma_mts);
-        }else{
+        } else {
             $mf = Finals::mf_exame($mfd, $final->npe);
         }
 
@@ -628,9 +628,10 @@ class AjaxController extends Controller
         //fim mfd e mf
     }
 
-    public function updateRecurso(Request $request){
-         //verificar ensino devido a nota que nao pode ser maior que 20 ou 10
-         if (Session::get('id_ensinoCAD') == 1) {
+    public function updateRecurso(Request $request)
+    {
+        //verificar ensino devido a nota que nao pode ser maior que 20 ou 10
+        if (Session::get('id_ensinoCAD') == 1) {
             $request->validate([
                 'valor' => ['required', 'numeric', 'min:0', 'max:5'],
                 'campo' => ['required', 'string', 'min:2', 'max:3'],
@@ -683,23 +684,36 @@ class AjaxController extends Controller
         ];
 
 
-            $final = Finals::find($request->id_final)->update($data['final']);
-            if ($final) {
-                echo " \\lancou npe\\ ";
-            } else {
-                return null;
-            }
+        $final = Finals::find($request->id_final)->update($data['final']);
+        if ($final) {
+            echo " \\lancou npe\\ ";
+        } else {
+            return null;
+        }
     }
 
-    public function getCursoEnsino(Request $request){
+    public function getCursoEnsino(Request $request)
+    {
         $request->validate([
             'id_ensino' => ['required', 'integer', 'min:1'],
         ]);
-        $cursos = Curso::where(['id_ensino'=> $request->id_ensino,])->pluck('curso', 'id');
+        $cursos = Curso::where(['id_ensino' => $request->id_ensino,])->pluck('curso', 'id');
         $data = [
-            'getCursos'=>$cursos,
+            'getCursos' => $cursos,
         ];
         return view('ajax_loads.getCursosEnsino', $data);
     }
 
+    public function getDisciplinasCurso(Request $request)
+    {
+        $request->validate([
+            'id_curso' => ['required', 'integer', 'min:1'],
+        ]);
+
+        $grade_curricular = Grade::where(['id_curso' => $request->id_curso,])->get();
+        $data = [
+            'getGrades' => $grade_curricular,
+        ];
+        return view('ajax_loads.getGrades', $data);
+    }
 }

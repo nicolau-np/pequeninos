@@ -56,6 +56,7 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
 
 
     Route::post('/getCursoEnsino', "AjaxController@getCursoEnsino")->name('getCursoEnsino');
+    Route::post('/getDisciplinasCurso', "AjaxController@getDisciplinasCurso");
 
 });
 

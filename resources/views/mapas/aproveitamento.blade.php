@@ -106,7 +106,10 @@
                 {{Form::text('ano_lectivo', null, ['class'=>"form-control ano_lectivo", 'placeholder'=>"Ano Lectivo"])}}
                 <input type="hidden" name="id_ensino" class="id_ensino" />
             </div>
+            <br/><br/><br/>
+            <div class="col-md-12 loadDisciplinas">
 
+            </div>
             <br/><br/><br/>
             <div class="col-md-12" style="text-align: center;">
                 {{Form::submit('SEGUIR',['class'=>"btn btn-primary"])}}
@@ -137,12 +140,6 @@
             loadCurso(data.id_ensino);
             $('#epocamodal').modal('show');
         });
-
-        $('.changeCurso').change(function(e){
-            e.preventDefault();
-            alert("hello");
-        });
-
 
 
         function loadCurso(id_ensino){

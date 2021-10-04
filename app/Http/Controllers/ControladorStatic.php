@@ -327,4 +327,9 @@ class ControladorStatic extends Controller
         $directores = DirectorTurma::where(['id_turma'=> $id_turma, 'ano_lectivo' => $ano_lectivo])->first();
         return $directores;
     }
+
+    public static function getDisciplinaCurso($id_curso){
+        $grade_curricular = Grade::where(['id_curso'=> $id_curso])->get();
+        return $grade_curricular;
+    }
 }

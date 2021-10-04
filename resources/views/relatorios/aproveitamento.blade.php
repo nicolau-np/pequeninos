@@ -99,7 +99,7 @@ $total=[
                     </thead>
                     <tbody>
                         @php
-
+                            $getGradeCurricular = ControladorStatic::
                         @endphp
                         <tr>
                             <td>---</td>

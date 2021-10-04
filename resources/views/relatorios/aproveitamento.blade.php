@@ -2,22 +2,12 @@
 use App\Http\Controllers\ControladorStatic;
 use App\Http\Controllers\ControladorNotas;
 $numero = 0;
-$total=[
-    'coordenadores' =>0,
-    'turmas'=>0,
-    'salas'=>0,
-    'alunos'=>0,
-    'periodos'=>0,
-];
 
-$notas_primario = [
-    'negativa'=>4.99,
-    'positiva'=>5,
-];
-
-$notas_1ciclo = [
-    'negativa'=>9.99,
-    'positiva'=>10,
+$dados = [
+    'pos'=>0,
+    'neg'=>0,
+    'total'=>0,
+    'percent'=>0,
 ];
 @endphp
 <!DOCTYPE html>
@@ -111,7 +101,10 @@ $notas_1ciclo = [
 
 
                             @foreach (Session::get('disciplinas') as $disciplina)
+
                                 @php
+                                    $dados['pos'] =0;
+                                    $dados['neg'] =0;
                                     $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
                                 @endphp
                                 <tr>
@@ -119,12 +112,29 @@ $notas_1ciclo = [
 
                                     @foreach ($getClasses as $classes)
                                     @php
+                                    $dados['pos'] =0;
+                                    $dados['neg'] =0;
                                         $getNotas = ControladorNotas::getNotasEstudantesAproveitamento($getCurso->id, $classes->id, $getEpoca, $getDisciplina->id, $getAno);
+                                        foreach ($getNotas as $notas){
+                                            if($getEnsino->id==1){
+                                                if($notas->mt>=5){
+                                                    $dados['pos'] ++;
+                                                }else{
+                                                    $dados['neg']++;
+                                                }
+                                            }else{
+                                                if($notas->mt>=10){
+                                                    $dados['pos'] ++;
+                                                }else{
+                                                    $dados['neg']++;
+                                                }
+                                            }
 
+                                        }
                                     @endphp
-                                    {{$getNotas}}
-                                    <td>-</td>
-                                    <td>-</td>
+
+                                    <td>{{$dados['pos']}}</td>
+                                    <td>{{$dados['neg']}}</td>
                                     <td>-</td>
                                     <td>-</td>
 

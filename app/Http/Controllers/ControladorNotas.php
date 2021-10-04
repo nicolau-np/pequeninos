@@ -278,7 +278,7 @@ class ControladorNotas extends Controller
                 'id_classe' => $data1['id_classe'],
             ]);
         })->where(['epoca' => $data1['epoca'], 'ano_lectivo' => $data1['ano_lectivo'], 'id_disciplina' => $data1['id_disciplina']])
-            ->where('mt', '!=', "")
+            ->where('mt', '!=', null)
             ->get();
 
         return $trimestal;

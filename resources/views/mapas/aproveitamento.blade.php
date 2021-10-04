@@ -134,11 +134,23 @@
             };
             $('.ano_lectivo').val(data.ano_lectivo);
             $('.id_ensino').val(data.id_ensino);
+            loadCurso(data.id_ensino);
             $('#epocamodal').modal('show');
         });
 
         function loadCurso(id_ensino){
-
+            var data ={
+                id_ensino: id_ensino
+            };
+            $.ajax({
+                type: "get",
+                url: "{{route('getCursoEnsino')}}",
+                data: data,
+                dataType: "dataType",
+                success: function (response) {
+                    $('.loadCurso').html(response);
+                }
+            });
         }
     });
 </script>

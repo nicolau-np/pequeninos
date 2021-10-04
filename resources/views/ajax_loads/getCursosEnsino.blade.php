@@ -3,6 +3,7 @@
 <script>
 $('document').ready(function(){
     $('.changeCurso').change(function(e){
+        if($(this).val()!==""){
         var data = {
             id_curso: $(this).val(),
             _token: "{{csrf_token()}}"
@@ -17,6 +18,8 @@ $('document').ready(function(){
                     $('.loadDisciplinas').html(response);
                 }
             });
+        }
     });
+
 });
 </script>

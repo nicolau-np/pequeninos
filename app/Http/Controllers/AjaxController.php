@@ -694,7 +694,7 @@ class AjaxController extends Controller
 
     public function getCursoEnsino(Request $request)
     {
-        
+        Session::forget('disciplinas');
         $request->validate([
             'id_ensino' => ['required', 'integer', 'min:1'],
         ]);

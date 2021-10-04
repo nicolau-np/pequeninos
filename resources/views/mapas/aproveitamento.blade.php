@@ -147,7 +147,8 @@
 
 
         function loadCurso(id_ensino){
-            var data ={
+            if(id_ensino!==""){
+                var data ={
                 id_ensino: id_ensino,
                 _token: "{{csrf_token()}}"
             };
@@ -161,6 +162,8 @@
                     $('.loadCurso').html(response);
                 }
             });
+            }
+
         }
     });
 </script>

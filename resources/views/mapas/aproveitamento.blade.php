@@ -142,6 +142,7 @@
             $('.ano_lectivo').val(data.ano_lectivo);
             $('.id_ensino').val(data.id_ensino);
             loadCurso(data.id_ensino);
+            $('.loadDisciplinas').html("");
             $('#epocamodal').modal('show');
         });
 

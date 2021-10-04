@@ -208,7 +208,7 @@ class AjaxController extends Controller
     {
         $funcionarios = Funcionario::whereHas('pessoa', function ($query) use ($request) {
             $query->where('nome', 'LIKE', "%{$request->search_text}%");
-        })->get();
+        })->limit(10)->get();
         $data = [
             'getFuncionarios' => $funcionarios,
         ];

@@ -23,6 +23,13 @@ use App\Http\Controllers\ControladorStatic;
                 </div>
                 <div class="card-block">
                     <div class="form">
+                    @if(session('error'))
+                    <div class="alert alert-danger">{{session('error')}}</div>
+                    @endif
+
+                    @if(session('success'))
+                    <div class="alert alert-success">{{session('success')}}</div>
+                    @endif
                         {{Form::open(['class'=>"form_search", 'method'=>"post", 'url'=>"#"])}}
                         <div class="row text-right">
                             <div class="col-md-8">
@@ -124,15 +131,16 @@ use App\Http\Controllers\ControladorStatic;
           <div class="row">
             <div class="col-md-12">
                 <p style="text-align: center; font-size:18px;">
-                    Tem a certeza que deseja Eliminar o estudante
-                    <b class="nome_estudante"></b>
+                    Tem a certeza que deseja Eliminar o(a) estudante
+                    <b class="nome_estudante" style="font-size:22px;"></b>
                     ??
                 </p>
+                <input type="hidden" class="id_estudante" name="id_estudante"/>
             </div>
             <br/><br/><br/>
             <div class="col-md-12" style="text-align: center;">
                 {{Form::submit('SIM',['class'=>"btn btn-primary"])}}&nbsp;&nbsp;
-                {{Form::reset('NÃO', ['class'=>"btn btn-danger"])}}
+                {{Form::reset('NÃO', ['class'=>"btn btn-danger cancel"])}}
             </div>
           </div>
           {{Form::close()}}
@@ -185,14 +193,19 @@ use App\Http\Controllers\ControladorStatic;
         $('.delete').click(function(e){
             e.preventDefault();
             var data ={
-                id_estudante:$(this).data('id_estudante'),
-                nome_estudante:$(this).data('nome_estudante'),
+                id_estudante: $(this).data('id_estudante'),
+                nome_estudante: $(this).data('nome_estudante'),
                 _token: "{{ csrf_token() }}"
             };
 
             $('.id_estudante').val(data.id_estudante);
-            $('.nome_estudante').val(data.nome_estudante);
+            $('.nome_estudante').text(data.nome_estudante);
             $('#deletemodal').modal('show');
+        });
+
+        $('.cancel').click(function(e){
+            e.preventDefault();
+            $('#deletemodal').modal('hide');
         });
     });
 </script>

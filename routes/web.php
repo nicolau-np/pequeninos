@@ -208,6 +208,8 @@ Route::group(['prefix' => 'estudantes', 'middleware' => "AdminUser"], function (
     Route::post('/store', "EstudanteController@store");
     Route::get('/edit/{id}', "EstudanteController@edit");
     Route::put('/update/{id}', "EstudanteController@update");
+    Route::post('/destroy', "EstudanteController@destroy");
+
     Route::get('/confirmar/{id_estudantes}', "EstudanteController@confirmar");
     Route::put('/store_confirmar/{id_estudante}', "EstudanteController@store_confirmar");
     Route::get('/ficha/{id_estudante}/{ano_lectivo}', "EstudanteController@ficha");

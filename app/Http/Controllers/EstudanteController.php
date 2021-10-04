@@ -9,9 +9,12 @@ use App\Desistencia;
 use App\Estudante;
 use App\Grade;
 use App\HistoricEstudante;
+use App\Pagamento;
+use App\PagamentoPai;
 use App\Pessoa;
 use App\Provincia;
 use App\Transferencia;
+use App\Trimestral;
 use App\Turma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
@@ -543,7 +546,7 @@ class EstudanteController extends Controller
         $request->validate([
             'data' => ['required', 'date'],
             'descricao' => ['required', 'string', 'min:5'],
-            'epoca'=>['required', 'integer', 'min:1'],
+            'epoca' => ['required', 'integer', 'min:1'],
             'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
         ]);
 
@@ -551,7 +554,7 @@ class EstudanteController extends Controller
             'id_estudante' => $id_estudante,
             'motivo' => $request->descricao,
             'data_emissao' => $request->data,
-            'epoca'=> $request->epoca,
+            'epoca' => $request->epoca,
             'ano_lectivo' => $request->ano_lectivo,
         ];
 
@@ -601,7 +604,7 @@ class EstudanteController extends Controller
         $request->validate([
             'data' => ['required', 'date'],
             'motivo' => ['required', 'string', 'min:5'],
-            'epoca'=>['required', 'integer', 'min:1'],
+            'epoca' => ['required', 'integer', 'min:1'],
             'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
         ]);
 
@@ -609,7 +612,7 @@ class EstudanteController extends Controller
             'id_estudante' => $id_estudante,
             'motivo' => $request->motivo,
             'data_saida' => $request->data,
-            'epoca'=>$request->epoca,
+            'epoca' => $request->epoca,
             'ano_lectivo' => $request->ano_lectivo,
         ];
 
@@ -632,7 +635,7 @@ class EstudanteController extends Controller
         }
 
         $turma = Turma::find($historico->id_turma);
-        if(!$turma){
+        if (!$turma) {
             return back()->with(['error' => "Não encontrou turma"]);
         }
 
@@ -648,10 +651,27 @@ class EstudanteController extends Controller
             'menu' => "Estudantes",
             'submenu' => "Declaração com Notas",
             'getDeclaracao' => $declaracao,
-            'getHistorico'=>$historico,
-            'getTurma'=> $turma,
-            'getGrade'=>$grade_disciplinas,
+            'getHistorico' => $historico,
+            'getTurma' => $turma,
+            'getGrade' => $grade_disciplinas,
         ];
         return view('estudantes.choose_declaracao', $data);
+    }
+
+    public function destroy(Request $request)
+    {
+        $request->validate([
+            'id_estudante' => ['required', 'integer', 'min:1'],
+        ]);
+
+        //verificar se ja existe lancamentos de notas
+        if(Trimestral::where(['id_estudante' => $request->id_estudante,])->first()){
+            return back()->with(['error' => "Não pode eliminar o estudante porque já tem lançamentos de notas feitos"]);
+        }
+        //verificar em pagamentos
+        if(Pagamento::where(['id_estudante' => $request->id_estudante,])->first()){
+            return back()->with(['error' => "Não pode eliminar o estudante porque já tem pagamentos feitos"]);
+        }
+        
     }
 }

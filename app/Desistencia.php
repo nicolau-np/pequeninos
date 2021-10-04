@@ -12,6 +12,7 @@ class Desistencia extends Model
         'id_estudante',
         'motivo',
         'data_saida',
+        'epoca',
         'ano_lectivo',
     ];
 

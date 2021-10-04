@@ -18,6 +18,7 @@ class CreateDesistenciasTable extends Migration
             $table->bigInteger('id_estudante')->unsigned()->index();
             $table->text('motivo');
             $table->date('data_saida')->nullable();
+            $table->bigInteger('epoca');
             $table->string('ano_lectivo');
             $table->timestamps();
         });

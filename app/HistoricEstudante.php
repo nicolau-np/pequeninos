@@ -14,6 +14,7 @@ class HistoricEstudante extends Model
         'numero',
         'estado',
         'observacao_final',
+        'obs_pauta',
         'ano_lectivo',
     ];
 

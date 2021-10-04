@@ -12,6 +12,7 @@ class Transferencia extends Model
         'id_estudante',
         'motivo',
         'data_emissao',
+        'epoca',
         'ano_lectivo',
     ];
 

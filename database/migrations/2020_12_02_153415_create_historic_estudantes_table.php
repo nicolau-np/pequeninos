@@ -21,6 +21,7 @@ class CreateHistoricEstudantesTable extends Migration
             $table->bigInteger('numero')->nullable();
             $table->string('estado');
             $table->string('observacao_final')->nullable();
+            $table->string('obs_pauta')->nullable();
             $table->string('ano_lectivo');
             $table->timestamps();
         });
@@ -41,3 +42,4 @@ class CreateHistoricEstudantesTable extends Migration
         Schema::dropIfExists('historic_estudantes');
     }
 }
+

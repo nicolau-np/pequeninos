@@ -123,7 +123,7 @@
                              <td>{{$horarios->turma->turma}}</td>
                              <td>{{$horarios->estado}}</td>
                              <td>
-                                <a href="http://" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
+                                <a href="/horarios/destroy/{{$horarios->id}}" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
                              </td>
                             </tr>
 

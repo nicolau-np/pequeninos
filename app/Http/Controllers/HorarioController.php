@@ -139,16 +139,6 @@ class HorarioController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
-    }
 
     public function import(){
         $data = [
@@ -175,6 +165,17 @@ class HorarioController extends Controller
 
         if ($import->import($file)) {
             return back()->with(['success' => "Feito com sucesso"]);
+        }
+    }
+
+    public function destroy($id_horario){
+        $horario = Horario::find($id_horario);
+        if(!$horario) {
+            return back()->with(['error' => "Não encontrou horario"]);
+        }
+
+        if(Horario::find($id_horario)->delete()){
+            return back()->with(['success'=>"Feito com sucesso"]);
         }
     }
 }

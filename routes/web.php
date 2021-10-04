@@ -267,6 +267,7 @@ Route::group(['prefix' => 'directores', 'middleware' => "AdminUser"], function (
 Route::group(['prefix' => "horarios", 'middleware' => "AdminUser"], function () {
     Route::get('/create/{id_funcionario}', "HorarioController@create");
     Route::put('/store/{id_funcionario}', "HorarioController@store");
+    Route::get('/destroy/{id_horario}', "HorarioController@destroy");
 
     Route::get('/export', "HorarioController@export");
     Route::get('/import', "HorarioController@import");

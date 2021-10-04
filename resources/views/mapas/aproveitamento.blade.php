@@ -75,15 +75,56 @@
 	</div>
 </div>
 
+
+<!-- modal -->
+<div class="modal fade" id="epocamodal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-body">
+          {{Form::open(['class'=>'form', 'url'=>"/mapas_aproveitamentos"])}}
+          @csrf
+          <div class="row">
+            <div class="col-md-12">
+                {{Form::select('epoca', [
+                    '1'=>"1º Trimestre",
+                    '2'=>"2º Trimestre",
+                    '3'=>"3º Trimestre",
+                ], null, ['class'=>"form-control", 'placeholder'=>"Epoca"])}}
+            </div>
+            <br/><br/>
+            <div class="col-md-12">
+                {{Form::text('ano_lectivo', null, ['class'=>"form-control ano_lectivo", 'placeholder'=>"Ano Lectivo", 'disabled'])}}
+                <input type="hidden" name="id_ensino" class="id_ensino" />
+            </div>
+            <br/><br/><br/>
+            <div class="col-md-12" style="text-align: center;">
+                {{Form::submit('SEGUIR',['class'=>"btn btn-primary"])}}
+            </div>
+          </div>
+          {{Form::close()}}
+
+        </div>
+
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+<!-- fim modal -->
+
+
 <script>
     $('document').ready(function(e){
         $('.aproveitamento').click(function(e){
+            e.preventDefault();
             var data = {
                 id_ensino: $(this).data('id_ensino'),
                 ano_lectivo: $(this).data('ano_lectivo')
             };
-
-            
+            $('.ano_lectivo').val(data.ano_lectivo);
+            $('.id_ensino').val(data.id_ensino);
+            $('#epocamodal').modal('show');
         });
     });
 </script>

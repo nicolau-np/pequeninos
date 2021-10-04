@@ -82,7 +82,7 @@ use App\Http\Controllers\ControladorStatic;
                                         <a href="/estudantes/ficha/{{$estudantes->id}}/{{$estudantes->ano_lectivo}}" class="btn btn-warning btn-sm"><i class="ti-user"></i> Ficha</a>
                                         <a href="/estudantes/confirmar/{{$estudantes->id}}" class="btn btn-info btn-sm"><i class="ti-file"></i> Confir.</a>
                                         <a href="/estudantes/edit/{{$estudantes->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
-                                        <a href="http://" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
+                                        <a href="#" data-id_estudante="{{$estudantes->id}}" class="btn btn-danger btn-sm delete"><i class="ti-trash"></i> Eliminar</a>
                                     </td>
                                 </tr>
 

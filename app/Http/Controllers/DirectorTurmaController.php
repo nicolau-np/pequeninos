@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\AnoLectivo;
 use App\Curso;
 use App\DirectorTurma;
+use App\Exports\DirectorExport;
 use Illuminate\Http\Request;
+use Maatwebsite\Excel\Facades\Excel;
 
 class DirectorTurmaController extends Controller
 {
@@ -202,10 +204,17 @@ class DirectorTurmaController extends Controller
     }
 
     public function import(){
-
+        $data = [
+            'title' => "Directores de Turma",
+            'type' => "directores",
+            'menu' => "Directores de Turma",
+            'submenu' => "Importar",
+        ];
+        return view('directores.import', $data);
     }
 
     public function export(){
-        
+        $fileName = "directores_model.xlsx";
+        return Excel::download(new DirectorExport(), $fileName);
     }
 }

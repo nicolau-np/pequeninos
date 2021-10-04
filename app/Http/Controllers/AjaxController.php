@@ -142,7 +142,7 @@ class AjaxController extends Controller
     {
         $estudantes  = Estudante::whereHas('pessoa', function ($query) use ($request) {
             $query->where('nome', 'LIKE', "%{$request->search_text}%");
-        })->limit(10)->get();
+        })->limit(5)->get();
 
         $data = [
             'getEstudantes' => $estudantes
@@ -154,7 +154,7 @@ class AjaxController extends Controller
     {
         $funcionarios  = Funcionario::whereHas('pessoa', function ($query) use ($request) {
             $query->where('nome', 'LIKE', "%{$request->search_text}%");
-        })->limit(10)->get();
+        })->limit(5)->get();
 
         $data = [
             'getFuncionarios' => $funcionarios
@@ -166,7 +166,7 @@ class AjaxController extends Controller
     {
         $encarregados  = Encarregado::whereHas('pessoa', function ($query) use ($request) {
             $query->where('nome', 'LIKE', "%{$request->search_text}%");
-        })->limit(10)->get();
+        })->limit(5)->get();
 
         $data = [
             'getEncarregados' => $encarregados

@@ -201,7 +201,14 @@ class DirectorTurmaController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $director = DirectorTurma::find($id);
+        if (!$director) {
+            return back()->with(['error' => "Não encontrou director"]);
+        }
+
+        if(DirectorTurma::find($id)->delete()){
+            return back()->with(['success' => "Eliminado com sucesso"]);
+        }
     }
 
     public function import(){

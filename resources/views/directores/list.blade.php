@@ -20,6 +20,13 @@
                 </div>
                 <div class="card-block">
                     <div class="form">
+                        @if(session('error'))
+                        <div class="alert alert-danger">{{session('error')}}</div>
+                        @endif
+
+                        @if(session('success'))
+                        <div class="alert alert-success">{{session('success')}}</div>
+                        @endif
                         {{Form::open(['class'=>"form_search", 'method'=>"post", 'url'=>"#"])}}
                         <div class="row text-right">
                             <div class="col-md-8">

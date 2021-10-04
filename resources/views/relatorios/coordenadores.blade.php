@@ -150,7 +150,7 @@ $total=[
                             <td>TOTAL</td>
                             <td>{{$total['coordenadores']}}</td>
                             <td>{{$total['turmas']}}</td>
-                            <td>{{$total['salas']}}</td>
+                            <td>=====</td>
                             <td>{{$total['alunos']}}</td>
                             <td>=====</td>
                             <td>{{$total['periodos']}}</td>

@@ -7,6 +7,11 @@
             <div class="card">
                 <div class="card-header">
                     <h5>{{$submenu}}
+                        <i class="ti-angle-right"></i>
+                        @foreach ($getAnos as $anos)
+                        <a href="/mapas/aproveitamento/{{$anos->ano_lectivo}}" style="color:#4680ff;">{{$anos->ano_lectivo}}</a>
+                        <i class="ti-angle-right"></i>
+                        @endforeach
                     </h5>
                     <span></span>
                     <div class="card-header-right">

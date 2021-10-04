@@ -1,5 +1,6 @@
 @php
 use App\Http\Controllers\ControladorStatic;
+use App\Http\Controllers\ControladorNotas;
 $numero = 0;
 $total=[
     'coordenadores' =>0,
@@ -115,12 +116,18 @@ $notas_1ciclo = [
                                 @endphp
                                 <tr>
                                     <td>{{strtoupper($getDisciplina->disciplina)}}</td>
+
                                     @foreach ($getClasses as $classes)
+                                    @php
+                                        $getNotas = getNotasEstudantesAproveitamento($getCurso->id, $classes->id, $getEpoca, $getDisciplina->id, $getAno);
+                                    @endphp
                                     <td>-</td>
                                     <td>-</td>
                                     <td>-</td>
                                     <td>-</td>
+
                                     @endforeach
+
                                     <td></td>
                                     <td></td>
                                     <td></td>

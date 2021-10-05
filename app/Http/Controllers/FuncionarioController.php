@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cargo;
+use App\DirectorTurma;
 use App\Escalao;
 use App\Exports\FuncionarioExport;
 use App\Funcionario;
@@ -360,7 +361,7 @@ class FuncionarioController extends Controller
             'id_funcionario' => ['required', 'integer', 'min:1'],
         ]);
 
-        $funcionario =Funcionario::find($request->id);
+        $funcionario =Funcionario::find($request->id_funcionario);
         if (!$funcionario) {
             return back()->with(['error' => "Nao encontrou funcionario"]);
         }
@@ -368,6 +369,20 @@ class FuncionarioController extends Controller
         $horario= Horario::where(['id_funcionario'=>$funcionario->id])->first();
         if($horario){
             return back()->with(['error' => "Não deve eliminar porque já tem horarios cadastrados"]);
+        }
+
+        $director = DirectorTurma::where(['id_funcionario'=> $funcionario->id])->first();
+        if($director){
+            return back()->with(['error' => "Não deve eliminar porque já é director de turma"]);
+        }
+
+        $id_pessoa = $funcionario->id_pessoa;
+        $id_funcionario = $funcionario->id;
+        User::where(['id_pessoa'=> $id_pessoa])->delete();
+        Funcionario::find($id_funcionario)->delete();
+
+        if(Pessoa::find($id_pessoa)->delete()){
+            return back()->with(['success' => "Eliminado com sucesso"]);
         }
 
     }

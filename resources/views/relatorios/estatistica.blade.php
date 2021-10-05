@@ -12,6 +12,11 @@ $desistidos = [
     'f'=>0,
 ];
 
+$transferidos = [
+    'mf'=>0,
+    'f'=>0,
+];
+
 
 
 @endphp
@@ -107,6 +112,11 @@ $desistidos = [
 
                             $desistidos['mf'] = 0;
                             $desistidos['f'] = 0;
+
+                            $transferidos['mf'] = 0;
+                            $transferidos['f'] = 0;
+
+                            //matriculados
                             $getHistoricoMatriculados = ControladorStatic::getEstatisticaMariculados($classes->id, $getAno);
                             foreach ($getHistoricoMatriculados as $historicomatriculados){
                                 if(($historicomatriculados->estudante->pessoa->genero=="F") || ($historicomatriculados->estudante->pessoa->genero=="f")){
@@ -115,6 +125,7 @@ $desistidos = [
                                 $matriculados['mf']++;
                             }
 
+                            //desistidos
                             $getHistoricoDesistidos = ControladorStatic::getEstatisticaDesistidos($classes->id, $getAno);
                             foreach ($getHistoricoDesistidos as $historicodesistidos) {
                                 $getDesistido = ControladorStatic::getDesistidosEpoca($getEpoca, $historicodesistidos->id_estudante, $getAno);
@@ -128,6 +139,9 @@ $desistidos = [
 
                                 }
                             }
+
+                            //transferidos
+                            
                         @endphp
                         <tr>
                             <td>{{strtoupper($classes->classe)}}</td>

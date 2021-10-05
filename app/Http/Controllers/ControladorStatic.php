@@ -15,6 +15,7 @@ use App\HistoricEstudante;
 use App\Horario;
 use App\Pagamento;
 use App\PagamentoPai;
+use App\Transferencia;
 use App\Turma;
 
 class ControladorStatic extends Controller
@@ -366,5 +367,25 @@ class ControladorStatic extends Controller
     {
         $desistidos = Desistencia::where(['epoca' => $epoca, 'ano_lectivo' => $ano_lectivo, 'id_estudante' => $id_estudante])->first();
         return $desistidos;
+    }
+
+
+    public static function getEstatisticaTransferencia($id_classe, $ano_lectivo)
+    {
+        $data1 = [
+            'id_classe' => $id_classe,
+            'ano_lectivo' => $ano_lectivo,
+        ];
+        $historico = HistoricEstudante::whereHas('turma.classe', function ($query) use ($data1) {
+            $query->where(['id_classe' => $data1['id_classe']]);
+        })->where(['ano_lectivo' => $data1['ano_lectivo'], 'observacao_final' => "transferencia"])->get();
+
+        return $historico;
+    }
+
+    public static function getTransferidosEpoca($epoca, $id_estudante, $ano_lectivo)
+    {
+        $transferidos = Transferencia::where(['epoca' => $epoca, 'ano_lectivo' => $ano_lectivo, 'id_estudante' => $id_estudante])->first();
+        return $transferidos;
     }
 }

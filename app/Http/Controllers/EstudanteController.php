@@ -558,6 +558,10 @@ class EstudanteController extends Controller
             'ano_lectivo' => $request->ano_lectivo,
         ];
 
+        if(Transferencia::where(['id_estudante' => $id_estudante,])->first()){
+            return back()->with(['error' => "Já foi transferido estudante"]);
+        }
+
         if (Transferencia::create($data)) {
             if (HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $request->ano_lectivo])->update(['observacao_final' => "transferido"])) {
                 return back()->with(['success' => "Feito com sucesso"]);

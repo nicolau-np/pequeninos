@@ -60,4 +60,24 @@ class MapaController extends Controller
         ];
         return view('mapas.aproveitamento', $data);
     }
+
+    public function estatistica($ano_lectivo){
+        $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
+        if(!$ano_lectivos){
+            return back()->with(['error' => "Não encontrou ano lectivo"]);
+        }
+
+        $anos = AnoLectivo::orderBy('id', 'desc')->get();
+        $ensinos = Ensino::orderBy('id', 'asc')->get();
+        $data = [
+            'title' => "Mapas",
+            'type' => "mapas",
+            'menu' => "Mapas",
+            'submenu' => "Aproveitamento",
+            'getEnsinos'=> $ensinos,
+            'getAnos' =>$anos,
+            'getAno'=>$ano_lectivo,
+        ];
+        return view('mapas.estatistica', $data);
+    }
 }

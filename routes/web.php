@@ -234,7 +234,7 @@ Route::group(['prefix' => "mapas"], function () {
     Route::get('/', "MapaController@index");
     Route::get('/aproveitamento/{ano_lectivo}', "MapaController@aproveitamento");
     Route::get('/coordenadores/{ano_lectivo}', "MapaController@coordenadores");
-    Route::get('/coordenadores/{ano_lectivo}', "MapaController@coordenadores");
+    Route::get('/estatistica/{ano_lectivo}', "MapaController@estatistica");
 });
 
 Route::group(['prefix' => 'pagamentos', 'middleware' => "AdminUser"], function () {

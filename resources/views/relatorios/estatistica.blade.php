@@ -73,9 +73,12 @@ $numero = 0;
                             <th rowspan="2">CLASSES</th>
                             <th colspan="2">MATRICULADOS</th>
                             <th colspan="2">DESISTIDOS</th>
+                            <th colspan="2">TRANSFERIDOS</th>
                             <th colspan="2">CHEGADOS AO FIM</th>
                         </tr>
                         <tr>
+                            <th>MF</th>
+                            <th>F</th>
                             <th>MF</th>
                             <th>F</th>
                             <th>MF</th>
@@ -87,7 +90,9 @@ $numero = 0;
                     <tbody>
                         @foreach ($getClasses as $classes)
                         <tr>
-                            <td>{{$classes->classe}}</td>
+                            <td>{{strtoupper($classes->classe)}}</td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                             <td></td>
                             <td></td>
@@ -96,6 +101,17 @@ $numero = 0;
                             <td></td>
                         </tr>
                         @endforeach
+                        <tr>
+                            <td>TOTAL</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                        </tr>
                     </tbody>
                 </table>
             </div>

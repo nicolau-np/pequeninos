@@ -69,4 +69,16 @@ class Estudante extends Model
         return $this->hasMany(Desistencia::class, 'id_estudante', 'id');
     }
 
+    public function eja_nota_mensal(){
+        return $this->hasMany(EjaNotaMensal::class, 'id_estudante', 'id');
+    }
+
+    public function eja_nota_trimestral(){
+        return $this->hasMany(EjaNotaTrimestral::class, 'id_estudante', 'id');
+    }
+
+    public function eja_nota_final(){
+        return $this->hasMany(EjaNotaFinal::class, 'id_estudante', 'id');
+    }
+
 }

@@ -714,8 +714,9 @@ class EstudanteController extends Controller
             'title' => "Estudantes",
             'type' => "estudantes",
             'menu' => "Estudantes",
-            'submenu' => "Declaração com Notas",
+            'submenu' => "Restringir Notas",
+            'getHistorico'=> $historico,
         ];
-        return view('estudantes.choose_declaracao', $data);
+        return view('estudantes.restringir_notas', $data);
     }
 }

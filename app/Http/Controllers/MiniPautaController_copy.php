@@ -76,7 +76,7 @@ class MiniPautaController_copy extends Controller
 
         $data = [
             'title' => "Mini Pauta",
-            'type' => "minipauta",
+            'type' => "mobile",
             'menu' => "Caderneta",
             'submenu' => "Listar",
             'getHorario' => $horario,

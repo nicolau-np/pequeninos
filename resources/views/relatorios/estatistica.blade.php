@@ -9,7 +9,7 @@ $numero = 0;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>MAPA DE ESTATÍSTICA - {{$getEpoca}}º TRIMESTRE - {{$getAno}} - [ {{strtoupper($getEnsino->ensino)}} ]</title>
+    <title>FICHA DE ESTATÍSTICA - {{$getEpoca}}º TRIMESTRE - {{$getAno}} - [ {{strtoupper($getEnsino->ensino)}} ]</title>
 
     <style>
         @page{
@@ -50,7 +50,7 @@ $numero = 0;
         </div>
         <br/>
         <div class="titulo">
-            <p style="text-align: center; font-weight:bold; font-size:15px;">MAPA DE APROVEITAMENTO OBTIDO POR DISCIPLINA</p>
+            <p style="text-align: center; font-weight:bold; font-size:15px;">FICHA DE ESTATÍSTICA TRIMESTRAL</p>
         </div>
         <div class="mini-cabecalho">
             <div class="ano_curso">
@@ -67,7 +67,16 @@ $numero = 0;
         <div class="corpo">
 
             <div class="table-responsive">
-
+                <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <td>CLASSES</td>
+                            <td>MATRICULADOS</td>
+                            <td>DESISTIDOS</td>
+                            <td>CHEGADOS AO FIM</td>
+                        </tr>
+                    </thead>
+                </table>
             </div>
 
         </div>

@@ -8,7 +8,7 @@ use App\Http\Controllers\ControladorStatic;
                                 $observacao_final = ControladorStatic::getObservacaofinal($estudantes->id, $estudantes->ano_lectivo);
                                 ?>
                                 <tr class="{{$observacao_final->observacao_final}}">
-                                <th scope="row">{{$loop->iteration}}</th>
+                                <th scope="row">{{$estudantes->id}}</th>
                                 <td>
                                     <img src="
                                         @if($estudantes->pessoa->foto)

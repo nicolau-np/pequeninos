@@ -47,7 +47,7 @@ use App\Http\Controllers\ControladorStatic;
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th>#</th>
+                                    <th>Nº PROC.</th>
                                     <th style="width:47px;">Foto</th>
                                     <th>Nome</th>
                                     <th>Curso</th>
@@ -67,7 +67,7 @@ use App\Http\Controllers\ControladorStatic;
                                 $observacao_final = ControladorStatic::getObservacaofinal($estudantes->id, $estudantes->ano_lectivo);
                                 ?>
                                 <tr class="{{$observacao_final->observacao_final}}">
-                                <th scope="row">{{$loop->iteration}}</th>
+                                <th scope="row">{{$estudantes->id}}</th>
                                     <td>
                                         <img src="
                                             @if($estudantes->pessoa->foto)

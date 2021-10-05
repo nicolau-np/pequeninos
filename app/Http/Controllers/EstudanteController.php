@@ -698,4 +698,24 @@ class EstudanteController extends Controller
             return back()->with(['success' => "Estudante eliminado com sucesso"]);
         }
     }
+
+    public function restringir_notas($id_estudante, $ano_lectivo){
+        $estudante = Estudante::find($id_estudante);
+        if (!$estudante) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+
+        $historico = HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])->first();
+        if (!$historico) {
+            return back()->with(['error' => "Estudante nao matriculado neste ano lectivo"]);
+        }
+
+        $data = [
+            'title' => "Estudantes",
+            'type' => "estudantes",
+            'menu' => "Estudantes",
+            'submenu' => "Declaração com Notas",
+        ];
+        return view('estudantes.choose_declaracao', $data);
+    }
 }

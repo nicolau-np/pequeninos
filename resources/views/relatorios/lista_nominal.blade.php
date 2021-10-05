@@ -64,6 +64,7 @@
                 <thead>
                     <tr>
                         <th>Nº</th>
+                        <th>Nº PROC.</th>
                         <th>NOME COMPLETO</th>
                         <th>GÊNERO</th>
                         <th>IDADE</th>
@@ -75,6 +76,7 @@
                     @foreach ($getHistorico as $historico)
                 <tr class="{{$historico->observacao_final}}">
                     <td>{{$loop->iteration}}</td>
+                    <td>{{$historico->id_estudante}}</td>
                     <td>{{$historico->estudante->pessoa->nome}}</td>
                     <td>{{$historico->estudante->pessoa->genero}}</td>
                     <td>

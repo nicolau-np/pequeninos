@@ -65,6 +65,7 @@
                                         <div class="accordion-desc">
                                             <div class="data">
                                                 <span class="title">Nº:</span> {{$getHistoricoEstudante->numero}}<br/>
+                                                <span class="title">Nº Processo:</span> {{$getHistoricoEstudante->id_estudante}}<br/>
                                                 <span class="title">Curso:</span> {{$getHistoricoEstudante->turma->curso->curso}}<br/>
                                                 <span class="title">Classe:</span> {{$getHistoricoEstudante->turma->classe->classe}}<br/>
                                                 <span class="title">Turma:</span> {{$getHistoricoEstudante->turma->turma}}<br/>
@@ -117,6 +118,7 @@
                                     <a href="/estudantes/desistencia/{{$getHistoricoEstudante->id_estudante}}/{{$getHistoricoEstudante->ano_lectivo}}" class="btn btn-danger">Desistência</a><hr/>
                                     <a href="/estudantes/termo/{{$getHistoricoEstudante->id_estudante}}/{{$getHistoricoEstudante->ano_lectivo}}" class="btn btn-info">Termo</a><hr/>
                                     <a href="/estudantes/extrato/{{$getHistoricoEstudante->id_estudante}}/{{$getHistoricoEstudante->ano_lectivo}}" class="btn btn-success">Extrato de Pagamentos</a><hr/>
+                                    <a href="/estudantes/restringir_notas/{{$getHistoricoEstudante->id_estudante}}/{{$getHistoricoEstudante->ano_lectivo}}" class="btn btn-inverse">Restringir Notas</a>
                                     </div>
 
                                 </fieldset>

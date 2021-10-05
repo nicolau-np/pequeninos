@@ -47,7 +47,7 @@
                                     <h4 style="font-size:17px;"> </h4>
                                     <div>
                                         <span class="f-left m-t-10 text-muted">
-                                            <i class="text-c-pink f-16 ti-arrow-circle-right m-r-10"></i>Coordenadores
+                                            <i class="text-c-pink f-16 ti-arrow-circle-right m-r-10"></i>{{$getAno}}
                                         </span>
                                     </div>
                                 </div>

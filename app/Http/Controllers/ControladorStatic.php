@@ -16,6 +16,7 @@ use App\Horario;
 use App\Pagamento;
 use App\PagamentoPai;
 use App\Transferencia;
+use App\Trimestral;
 use App\Turma;
 
 class ControladorStatic extends Controller
@@ -388,4 +389,6 @@ class ControladorStatic extends Controller
         $transferidos = Transferencia::where(['epoca' => $epoca, 'ano_lectivo' => $ano_lectivo, 'id_estudante' => $id_estudante])->first();
         return $transferidos;
     }
+
+    
 }

@@ -1,3 +1,6 @@
+@php
+use App\Http\Controllers\ControladorStatic;
+@endphp
 @extends('layouts.app')
 @section('content')
 
@@ -50,7 +53,7 @@
                                         <td>{{$trimestres}}ª Epoca</td>
                                         <td></td>
                                         <td>
-                                            <a href="#" class="btn btn-primary btn-sm">Mudar Estado</a>
+                                        <a href="/estudantes/restringe/{{$getHistorico->id_estudante}}/{{$getHistorico->ano_lectivo}}/{{$trimestres}}" class="btn btn-primary btn-sm">Mudar Estado</a>
                                         </td>
                                     </tr>
                                     @endforeach

@@ -64,7 +64,9 @@ $lastYear = ControladorStatic::getLastYear();
         </div>
     </div>
     <!-- Pre-loader end -->
-
+    @if($type=="mobile")
+    @yield('content')
+    @else
     <div id="pcoded" class="pcoded">
         <div class="pcoded-overlay-box"></div>
         <div class="pcoded-container navbar-wrapper">
@@ -507,6 +509,7 @@ $lastYear = ControladorStatic::getLastYear();
 
                         </div>
                     </nav>
+
                     <div class="pcoded-content">
                         <div class="pcoded-inner-content">
 
@@ -555,8 +558,10 @@ $lastYear = ControladorStatic::getLastYear();
                     </div>
                 </div>
             </div>
+            </div>
         </div>
     </div>
+    @endif
 </div>
 @if($menu=="Home")
 <div class="fixed-button">

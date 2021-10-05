@@ -182,9 +182,9 @@ class CadernetaController_copy extends Controller
 
         $data = [
             'title' => "Caderneta",
-            'type' => "caderneta",
+            'type' => "mobile",
             'menu' => "Caderneta",
-            'submenu' => "Lancamento",
+            'submenu' => "Lançamento",
             'getHorario' => $horario,
             'getId_turma' => $id_turma,
             'getId_disciplina' => $id_disciplina,

@@ -18,6 +18,7 @@ use App\NotaFinal;
 use App\NotaTrimestral;
 use App\Trimestral;
 use App\Turma;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
@@ -160,6 +161,17 @@ class AjaxController extends Controller
             'getFuncionarios' => $funcionarios
         ];
         return view('ajax_loads.searchFuncionarios', $data);
+    }
+
+    public function searchUsuarios(Request $request){
+        $usuarios  = User::whereHas('pessoa', function ($query) use ($request) {
+            $query->where('nome', 'LIKE', "%{$request->search_text}%");
+        })->limit(5)->get();
+
+        $data = [
+            'getUsuarios' => $usuarios
+        ];
+        return view('ajax_loads.searchUsuarios', $data);
     }
 
     public function searchEncarregados(Request $request)

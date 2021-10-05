@@ -43,10 +43,10 @@
                                     <th>Email</th>
                                     <th>Estado</th>
                                     <th>Nível de Acesso</th>
-                                    <th>Operações</th>
+
                                 </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="load_usuarios">
                                 @if($getUsuarios->count()==0)
                                 <span class="not_found">Nenhum usuário cadastrado</span>
                                 @else
@@ -59,10 +59,7 @@
                                     <td>{{$usuarios->email}}</td>
                                     <td>{{$usuarios->estado}}</td>
                                     <td>{{$usuarios->nivel_acesso}}</td>
-                                    <td>
-                                        <a href="#" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
-                                        <a href="#" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
-                                    </td>
+
                                 </tr>
 
                                 @endforeach
@@ -91,5 +88,27 @@
 	</div>
 </div>
 
+
+<script>
+    $(document).ready(function(){
+        $('.text_search').keyup(function(e){
+            e.preventDefault();
+            var data = {
+                search_text: $(this).val(),
+                _token: "{{ csrf_token() }}"
+            };
+            $.ajax({
+                type: "post",
+                url: "{{route('searchUsuarios')}}",
+                data: data,
+                dataType: "html",
+                success: function (response) {
+                    $('.load_usuarios').html(response);
+                }
+            });
+        });
+
+    });
+</script>
 
 @endsection

@@ -710,12 +710,20 @@ class EstudanteController extends Controller
             return back()->with(['error' => "Estudante nao matriculado neste ano lectivo"]);
         }
 
+        $trimestres = [
+            '1',
+            '2',
+            '3',
+            '4',
+        ];
+
         $data = [
             'title' => "Estudantes",
             'type' => "estudantes",
             'menu' => "Estudantes",
             'submenu' => "Restringir Notas",
             'getHistorico'=> $historico,
+            'getTrimestres'=>$trimestres,
         ];
         return view('estudantes.restringir_notas', $data);
     }

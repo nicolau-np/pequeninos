@@ -34,7 +34,7 @@ class CadernetaController_copy extends Controller
             'ano_lectivo' => $ano_lectivo,
             'estado' => "visivel",
         ];
-        $horarios = Horario::where($data['where'])->paginate(8);
+        $horarios = Horario::where($data['where'])->paginate(10);
         Session::put('id_funcionario', $funcionario->id);
 
         //pegando todos os valores dos bloqueios dos trimestres
@@ -58,6 +58,7 @@ class CadernetaController_copy extends Controller
             'getEpoca4' => $estado_epoca4,
             'getEpoca5' => $estado_epoca5,
         ];
+
         return view('caderneta.list', $data);
     }
 

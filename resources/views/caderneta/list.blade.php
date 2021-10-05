@@ -98,7 +98,10 @@ if(($getEpoca1->estado=="on") && ($getEpoca2->estado=="on") && ($getEpoca3->esta
                         $getEstudantes = ControladorStatic::getTotalEstudantesTurma($horario->id_turma, $horario->ano_lectivo);
                         $numero_estudantes = $getEstudantes->count();
                      ?>
-                    <div class="col-md-4 col-xl-4">
+                     @if ($horario->turma->curso->id_ensino == 3)
+                        eja
+                     @else
+                     <div class="col-md-4 col-xl-4">
                         <div class="card widget-card-1">
                             <div class="card-block-small">
                                 <i class="icofont icofont-file-alt bg-c-blue card1-icon"></i>
@@ -130,6 +133,8 @@ if(($getEpoca1->estado=="on") && ($getEpoca2->estado=="on") && ($getEpoca3->esta
                             </div>
                         </div>
                     </div>
+                     @endif
+
                     @endforeach
                     @endif
 

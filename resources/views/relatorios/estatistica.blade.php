@@ -17,7 +17,30 @@ $transferidos = [
     'f'=>0,
 ];
 
+$chegados_fim=[
+    'mf'=>0,
+    'f'=>0,
+]
 
+$matriculadosT = [
+    'mf'=>0,
+    'f'=>0,
+];
+
+$desistidosT = [
+    'mf'=>0,
+    'f'=>0,
+];
+
+$transferidosT = [
+    'mf'=>0,
+    'f'=>0,
+];
+
+$chegados_fimT=[
+    'mf'=>0,
+    'f'=>0,
+]
 
 @endphp
 <!DOCTYPE html>
@@ -116,6 +139,9 @@ $transferidos = [
                             $transferidos['mf'] = 0;
                             $transferidos['f'] = 0;
 
+                            $chegados_fim['mf'] = 0;
+                            $chegados_fim['f'] = 0;
+
                             //matriculados
                             $getHistoricoMatriculados = ControladorStatic::getEstatisticaMariculados($classes->id, $getAno);
                             foreach ($getHistoricoMatriculados as $historicomatriculados){
@@ -155,6 +181,9 @@ $transferidos = [
                                 }
                             }
 
+                            $chegados_fim['mf'] = $matriculados['mf'] - ($desistidos['mf'] + $transferidos['mf']);
+                            $chegados_fim['f'] = $matriculados['f'] - ($desistidos['f'] + $transferidos['f']);
+
                         @endphp
                         <tr>
                             <td>{{strtoupper($classes->classe)}}</td>
@@ -164,8 +193,8 @@ $transferidos = [
                             <td>{{$desistidos['f']}}</td>
                             <td>{{$transferidos['mf']}}</td>
                             <td>{{$transferidos['f']}}</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$chegados_fim['mf']}}</td>
+                            <td>{{$chegados_fim['f']}}</td>
                         </tr>
                         @endforeach
                         <tr>

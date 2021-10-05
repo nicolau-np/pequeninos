@@ -52,7 +52,16 @@ use App\Http\Controllers\ControladorStatic;
                     @if(session('success'))
                     <div class="alert alert-success">{{session('success')}}</div>
                     @endif
+                    <div class="col-md-12">
+                        <p>
+                            <label class="badge badge-info">TPC => Tarefa de Casa</label>&nbsp;&nbsp;&nbsp;
+                            <label class="badge badge-info">OC => Organização do Caderno</label>&nbsp;&nbsp;&nbsp;
+                            <label class="badge badge-info">PA => Participação nas Aulas</label>&nbsp;&nbsp;&nbsp;
+                            <label class="badge badge-info">PG => Participação nos Grupos</label>&nbsp;&nbsp;&nbsp;
+                            <label class="badge badge-info">TP => Teste do Professor</label>&nbsp;&nbsp;&nbsp;
+                        </p>
 
+                    </div>
                     <div class="col-lg-12 col-xl-12">
 
                         <!-- Nav tabs -->
@@ -220,7 +229,7 @@ use App\Http\Controllers\ControladorStatic;
                                                             <td>{{$mensal->estudante->pessoa->nome}}</td>
                                                             <td>{{$mensal->estudante->pessoa->genero}}</td>
 
-                                                            
+
                                                         </tr>
                                                         @endforeach
                                                     @endif

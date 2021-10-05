@@ -127,7 +127,7 @@ class PautaController_copy extends Controller
 
         $data = [
             'title' => "Pauta",
-            'type' => "pauta",
+            'type' => "mobile",
             'menu' => "pauta",
             'submenu' => "Novo",
             'getDirector' => $directorTurma,

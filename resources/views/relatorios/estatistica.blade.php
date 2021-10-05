@@ -70,12 +70,25 @@ $numero = 0;
                 <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
                     <thead>
                         <tr>
-                            <td>CLASSES</td>
-                            <td>MATRICULADOS</td>
-                            <td>DESISTIDOS</td>
-                            <td>CHEGADOS AO FIM</td>
+                            <th>CLASSES</th>
+                            <th colspan="2">MATRICULADOS</th>
+                            <th colspan="2">DESISTIDOS</th>
+                            <th colspan="2">CHEGADOS AO FIM</th>
+                        </tr>
+                        <tr>
+                            <th>MF</th>
+                            <th>F</th>
+                            <th>MF</th>
+                            <th>F</th>
+                            <th>MF</th>
+                            <th>F</th>
                         </tr>
                     </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                        </tr>
+                    </tbody>
                 </table>
             </div>
 

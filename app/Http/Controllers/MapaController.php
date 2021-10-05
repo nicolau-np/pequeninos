@@ -80,4 +80,5 @@ class MapaController extends Controller
         ];
         return view('mapas.estatistica', $data);
     }
+
 }

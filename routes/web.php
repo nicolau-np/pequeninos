@@ -307,6 +307,7 @@ Route::group(['prefix' => 'relatorios', 'middleware' => "auth"], function () {
 
     Route::get('/mapas_coordenadores/{id_ensino}/{ano_lectivo}', "RelatorioController@mapas_coordenadores");
     Route::post('/mapas_aproveitamentos', "RelatorioController@mapas_aproveitamentos");
+    Route::post('/mapas_estatistica', "RelatorioController@mapas_estatistica");
 });
 
 

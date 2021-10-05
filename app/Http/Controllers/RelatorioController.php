@@ -539,7 +539,7 @@ class RelatorioController extends Controller
             'epoca'=>['required', 'integer', 'min:1'],
             'ano_lectivo'=>['required', 'string',],
             'id_ensino'=>['required', 'integer', 'min:1'],
-            'id_ensino'=>['required', 'integer', 'min:1'],
+            'id_curso'=>['required', 'integer', 'min:1'],
         ]);
 
         $ensino = Ensino::find($request->id_ensino);
@@ -573,5 +573,42 @@ class RelatorioController extends Controller
         ];
         $pdf = PDF::loadView('relatorios.aproveitamento', $data['view'])->setPaper('A4', 'landscape');
         return $pdf->stream('MAPA DE APROVEITAMENTO - '.$request->epoca.'º TRIMESTRE - ' . $request->ano_lectivo .  '[ ' . strtoupper($ensino->ensino) . ' ].pdf');
+    }
+
+    public function mapas_estatistica(Request $request){
+        $request->validate([
+            'epoca'=>['required', 'integer', 'min:1'],
+            'ano_lectivo'=>['required', 'string',],
+            'id_ensino'=>['required', 'integer', 'min:1'],
+            'id_curso'=>['required', 'integer', 'min:1'],
+        ]);
+
+        $ensino = Ensino::find($request->id_ensino);
+        if (!$ensino) {
+            return back()->with(['error' => "Não encontrou ensino"]);
+        }
+
+        $ano_lectivos = AnoLectivo::where('ano_lectivo', $request->ano_lectivo)->first();
+        if (!$ano_lectivos) {
+            return back()->with(['error' => "Não encontrou ano lectivo"]);
+        }
+
+        $curso = Curso::find($request->id_curso);
+        if(!$curso){
+            return back()->with(['error' => "Não encontrou curso"]);
+        }
+
+        $classes = Classe::where(['id_ensino' => $request->id_ensino,])->orderBy('id', 'asc')->get();
+        $turnos = Turno::orderBy('id', 'asc')->get();
+        $data['view'] = [
+            'getEnsino'=>$ensino,
+            'getClasses'=>$classes,
+            'getAno'=>$request->ano_lectivo,
+            'getTurnos'=> $turnos,
+            'getEpoca'=>$request->epoca,
+            'getCurso'=>$curso,
+        ];
+        $pdf = PDF::loadView('relatorios.estatistica', $data['view'])->setPaper('A4', 'landscape');
+        return $pdf->stream('MAPA DE ESTATÍSTICA - '.$request->epoca.'º TRIMESTRE - ' . $request->ano_lectivo .  '[ ' . strtoupper($ensino->ensino) . ' ].pdf');
     }
 }

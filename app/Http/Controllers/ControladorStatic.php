@@ -343,4 +343,17 @@ class ControladorStatic extends Controller
 
         return $historico;
     }
+
+    public static function getEstatisticaDesistidos($id_classe,$ano_lectivo, $epoca){
+        $data1 = [
+            'id_classe'=>$id_classe,
+            'epoca'=> $epoca,
+            'ano_lectivo'=>$ano_lectivo,
+        ];
+        $historico= HistoricEstudante::whereHas('turma.classe', function ($query) use ($data1){
+            $query->where(['id_classe'=>$data1['id_classe']]);
+        })->where(['ano_lectivo'=>$data1['ano_lectivo'], 'observacao_final'=>"desistencia"])->get();
+
+        return $historico;
+    }
 }

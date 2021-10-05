@@ -6,6 +6,12 @@ $matriculados = [
     'mf'=>0,
     'f'=>0,
 ];
+
+$desistidos = [
+    'mf'=>0,
+    'f'=>0,
+];
+
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -98,7 +104,7 @@ $matriculados = [
                             $matriculados['f'] = 0;
                             $getHistoricoMatriculados = ControladorStatic::getEstatisticaMariculados($classes->id, $getAno);
                             foreach ($getHistoricoMatriculados as $historicomatriculados){
-                                if($historicomatriculados->estudante->pessoa->genero=="F"){
+                                if(($historicomatriculados->estudante->pessoa->genero=="F") || ($historicomatriculados->estudante->pessoa->genero=="f")){
                                     $matriculados['f'] ++;
                                 }
                                 $matriculados['mf']++;

@@ -1,6 +1,7 @@
 <?php
 
 use App\AnoLectivo;
+use App\HistoricEstudante;
 use App\Trimestral;
 use Illuminate\Support\Facades\Route;
 
@@ -351,22 +352,14 @@ Route::group(['prefix' => "about"], function () {
 /*rota de test*/
 Route::get('test', function () {
     $data1 = [
-        'epoca' => 1,
-        'id_disciplina' => 8,
-        'ano_lectivo' => "2021-2022",
-        'id_curso' => 1,
-        'id_classe' => 2,
+        'id_classe'=>2,
+        'epoca'=> 1,
+        'ano_lectivo'=>"2021-2022",
     ];
+    $historico= HistoricEstudante::whereHas('turma.classe', function ($query) use ($data1){
+        $query->where(['id_classe'=>$data1['id_classe']]);
+    })->where(['ano_lectivo'=>$data1['ano_lectivo'], 'observacao_final'=>"desistencia"])->get();
 
-    $trimestal = Trimestral::whereHas('estudante.turma', function ($query) use ($data1) {
-        $query->where([
-            'id_curso' => $data1['id_curso'],
-            'id_classe' => $data1['id_classe'],
-        ]);
-    })->where(['epoca' => $data1['epoca'], 'ano_lectivo' => $data1['ano_lectivo'], 'id_disciplina' => $data1['id_disciplina']])
-        ->where('mt', '!=', null)
-        ->get();
-
-    return $trimestal;
+    return $historico;
 });
 /*fim*/

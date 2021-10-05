@@ -2,6 +2,10 @@
 use App\Http\Controllers\ControladorStatic;
 use App\Http\Controllers\ControladorNotas;
 $numero = 0;
+$matriculados = [
+    'mf'=>0,
+    'f'=>0,
+];
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -89,10 +93,15 @@ $numero = 0;
                     </thead>
                     <tbody>
                         @foreach ($getClasses as $classes)
+                        @php
+                            $matriculados['mf'] = 0;
+                            $matriculados['f'] = 0;
+                            $getMatriculados = ControladorStatic::getEstatisticaMariculados($classes->id, $getAno);
+                        @endphp
                         <tr>
                             <td>{{strtoupper($classes->classe)}}</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$matriculados['mf']}}</td>
+                            <td>{{$matriculados['f']}}</td>
                             <td></td>
                             <td></td>
                             <td></td>

@@ -9,15 +9,15 @@ class CursoSeeder extends Seeder
 
         [
             'id_ensino'=>1,
-            'curso'=>'Fundamental',
+            'curso'=>'Ensino Primário',
         ],
         [
             'id_ensino'=>2,
-            'curso'=>'Geral',
+            'curso'=>'Iº Cíclo',
         ],
         [
             'id_ensino'=>3,
-            'curso'=>'Geral(EJA)',
+            'curso'=>'Iº Cíclo (EJA)',
         ]
     ];
 

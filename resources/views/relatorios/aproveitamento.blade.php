@@ -113,6 +113,7 @@ $dadosGerais = [
                                     $dados['pos'] =0;
                                     $dados['neg'] =0;
                                     $dados['total'] =0;
+                                    $dados['percent']=0;
 
                                     $dadosGerais ['pos'] = 0;
                                     $dadosGerais['neg'] =0;
@@ -128,6 +129,8 @@ $dadosGerais = [
                                     $dados['pos'] =0;
                                     $dados['neg'] =0;
                                     $dados['total'] =0;
+                                    $dados['percent']=0;
+                                    
                                         $getNotas = ControladorNotas::getNotasEstudantesAproveitamento($getCurso->id, $classes->id, $getEpoca, $getDisciplina->id, $getAno);
                                         foreach ($getNotas as $notas){
                                             if($getEnsino->id==1){

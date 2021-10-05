@@ -604,7 +604,7 @@ table{
                                     //end final
                                         ?>
                                     <td>% POSITIVAS</td>
-
+ 
                                     <td>{{round($percent_positivas1['mac'],2)}}%</td>
                                     <td>{{round($percent_positivas1['npp'],2)}}%</td>
                                     <td>{{round($percent_positivas1['pt'],2)}}%</td>

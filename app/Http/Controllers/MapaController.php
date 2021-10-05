@@ -73,7 +73,7 @@ class MapaController extends Controller
             'title' => "Mapas",
             'type' => "mapas",
             'menu' => "Mapas",
-            'submenu' => "Aproveitamento",
+            'submenu' => "Estatística",
             'getEnsinos'=> $ensinos,
             'getAnos' =>$anos,
             'getAno'=>$ano_lectivo,

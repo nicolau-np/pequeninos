@@ -291,6 +291,14 @@ $dadosGerais01 = [
                 de {{date('Y')}}
                 </p>
             </div>
+
+            <div class="director">
+                <p style="text-align: center;">
+                    O Director da escola<br/>
+                    -------------------------------------------------<br/>
+                    LIC. ANTÓNIO KANUTULA BANGO
+                 </p>
+            </div>
         </div>
     </div>
 

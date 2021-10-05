@@ -97,18 +97,39 @@ use App\Http\Controllers\ControladorStatic;
                                             <thead>
                                                 <tr>
                                                     <th colspan="3">DADOS PESSOAIS</th>
-                                                    <th colspan="3">AVALIAÇÕES</th>
-                                                    <th colspan="2">PROVAS</th>
+                                                    <th colspan="5">1ª SEMANA</th>
+                                                    <th colspan="5">2ª SEMANA</th>
+                                                    <th colspan="5">3ª SEMANA</th>
+                                                    <th colspan="5">4ª SEMANA</th>
                                                 </tr>
                                                 <tr>
                                                     <th>Nº</th>
                                                     <th>NOME</th>
                                                     <th>G</th>
-                                                    <th>OUT</th>
-                                                    <th>NOV</th>
-                                                    <th>DEZ</th>
-                                                    <th>NPP</th>
-                                                    <th>PT</th>
+
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
+                                                    <th></th>
                                                 </tr>
                                             </thead>
 
@@ -127,7 +148,29 @@ use App\Http\Controllers\ControladorStatic;
                                                                 <td>{{$mensal->estudante->pessoa->nome}}</td>
                                                                 <td>{{$mensal->estudante->pessoa->genero}}</td>
 
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
 
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
+                                                                <td></td>
                                                             </tr>
                                                             @endforeach
                                                         @endif

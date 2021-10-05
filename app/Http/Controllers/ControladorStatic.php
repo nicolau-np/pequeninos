@@ -332,4 +332,13 @@ class ControladorStatic extends Controller
         $grade_curricular = Grade::where(['id_curso'=> $id_curso])->distinct('id_disciplina')->get();
         return $grade_curricular;
     }
+
+    public static function getEstatisticaMariculados($id_classe,$ano_lectivo){
+        $data1 = [
+            'id_classe'=>$id_classe,
+        ];
+        $historico= HistoricEstudante::whereHas('turma.classe', function ($query) use ($data1){
+            $query->where(['id_classe'=>$data1['id_classe']]);
+        })->where(['ano_lectivo'=>$ano_lectivo])->get();
+    }
 }

@@ -620,7 +620,7 @@ class EstudanteController extends Controller
             'ano_lectivo' => $request->ano_lectivo,
         ];
 
-        if(Desistencia::where(['id_estudante' => $id_estudante,])){
+        if(Desistencia::where(['id_estudante' => $id_estudante,])->first()){
             return back()->with(['error' => "Já está desistido estudante"]);
         }
 

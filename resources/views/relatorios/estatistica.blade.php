@@ -104,6 +104,9 @@ $desistidos = [
                         @php
                             $matriculados['mf'] = 0;
                             $matriculados['f'] = 0;
+
+                            $desistidos['mf'] = 0;
+                            $desistidos['f'] = 0;
                             $getHistoricoMatriculados = ControladorStatic::getEstatisticaMariculados($classes->id, $getAno);
                             foreach ($getHistoricoMatriculados as $historicomatriculados){
                                 if(($historicomatriculados->estudante->pessoa->genero=="F") || ($historicomatriculados->estudante->pessoa->genero=="f")){
@@ -114,15 +117,24 @@ $desistidos = [
 
                             $getHistoricoDesistidos = ControladorStatic::getEstatisticaDesistidos($classes->id, $getAno);
                             foreach ($getHistoricoDesistidos as $historicodesistidos) {
-                                
+                                $getDesistido = ControladorStatic::getDesistidosEpoca($getEpoca, $historicodesistidos->id_estudante, $getAno);
+                                if($getDesistido){
+                                    //encontrou desistido nesta epoca
+                                    //se o genero for F soma desistidos F
+                                    if(($historicodesistidos->estudante->pessoa->genero=="F") || $historicodesistidos->estudante->pessoa->genero=="f"){
+                                        $desistidos['f']++;
+                                    }
+                                    $desistidos['mf'] ++;
+
+                                }
                             }
                         @endphp
                         <tr>
                             <td>{{strtoupper($classes->classe)}}</td>
                             <td>{{$matriculados['mf']}}</td>
                             <td>{{$matriculados['f']}}</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$desistidos['mf']}}</td>
+                            <td>{{$desistidos['f']}}</td>
                             <td></td>
                             <td></td>
                             <td></td>

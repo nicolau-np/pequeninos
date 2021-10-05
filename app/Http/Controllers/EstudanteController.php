@@ -616,6 +616,10 @@ class EstudanteController extends Controller
             'ano_lectivo' => $request->ano_lectivo,
         ];
 
+        if(Desistencia::where(['id_estudante' => $id_estudante,])){
+            return back()->with(['error' => "Já está desistido estudante"]);
+        }
+
         if (Desistencia::create($data)) {
             if (HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $request->ano_lectivo])->update(['observacao_final' => "desistencia"])) {
                 return back()->with(['success' => "Feito com sucesso"]);

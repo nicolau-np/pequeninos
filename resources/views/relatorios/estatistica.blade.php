@@ -12,6 +12,8 @@ $desistidos = [
     'f'=>0,
 ];
 
+
+
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -108,6 +110,11 @@ $desistidos = [
                                     $matriculados['f'] ++;
                                 }
                                 $matriculados['mf']++;
+                            }
+
+                            $getHistoricoDesistidos = ControladorStatic::getEstatisticaDesistidos($classes->id, $getAno);
+                            foreach ($getHistoricoDesistidos as $historicodesistidos) {
+                                
                             }
                         @endphp
                         <tr>

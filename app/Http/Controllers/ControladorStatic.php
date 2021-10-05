@@ -6,6 +6,7 @@ use App\AnoLectivo;
 use App\CadeiraExame;
 use App\CadeiraRecurso;
 use App\Classe;
+use App\Desistencia;
 use App\DirectorTurma;
 use App\Disciplina;
 use App\Estudante;
@@ -318,42 +319,52 @@ class ControladorStatic extends Controller
         return $turmas;
     }
 
-    public static function getTotalEstudantes($id_turma, $ano_lectivo){
-        $historico = HistoricEstudante::where(['id_turma'=> $id_turma, 'ano_lectivo' => $ano_lectivo])->get();
+    public static function getTotalEstudantes($id_turma, $ano_lectivo)
+    {
+        $historico = HistoricEstudante::where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])->get();
         return $historico;
     }
 
-    public static function getCoordenadorTurma($id_turma, $ano_lectivo){
-        $directores = DirectorTurma::where(['id_turma'=> $id_turma, 'ano_lectivo' => $ano_lectivo])->first();
+    public static function getCoordenadorTurma($id_turma, $ano_lectivo)
+    {
+        $directores = DirectorTurma::where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])->first();
         return $directores;
     }
 
-    public static function getDisciplinaCurso($id_curso){
-        $grade_curricular = Grade::where(['id_curso'=> $id_curso])->distinct('id_disciplina')->get();
+    public static function getDisciplinaCurso($id_curso)
+    {
+        $grade_curricular = Grade::where(['id_curso' => $id_curso])->distinct('id_disciplina')->get();
         return $grade_curricular;
     }
 
-    public static function getEstatisticaMariculados($id_classe,$ano_lectivo){
+    public static function getEstatisticaMariculados($id_classe, $ano_lectivo)
+    {
         $data1 = [
-            'id_classe'=>$id_classe,
+            'id_classe' => $id_classe,
         ];
-        $historico= HistoricEstudante::whereHas('turma.classe', function ($query) use ($data1){
-            $query->where(['id_classe'=>$data1['id_classe']]);
-        })->where(['ano_lectivo'=>$ano_lectivo])->get();
+        $historico = HistoricEstudante::whereHas('turma.classe', function ($query) use ($data1) {
+            $query->where(['id_classe' => $data1['id_classe']]);
+        })->where(['ano_lectivo' => $ano_lectivo])->get();
 
         return $historico;
     }
 
-    public static function getEstatisticaDesistidos($id_classe,$ano_lectivo, $epoca){
+    public static function getEstatisticaDesistidos($id_classe, $ano_lectivo)
+    {
         $data1 = [
-            'id_classe'=>$id_classe,
-            'epoca'=> $epoca,
-            'ano_lectivo'=>$ano_lectivo,
+            'id_classe' => $id_classe,
+            'ano_lectivo' => $ano_lectivo,
         ];
-        $historico= HistoricEstudante::whereHas('turma.classe', function ($query) use ($data1){
-            $query->where(['id_classe'=>$data1['id_classe']]);
-        })->where(['ano_lectivo'=>$data1['ano_lectivo'], 'observacao_final'=>"desistencia"])->get();
+        $historico = HistoricEstudante::whereHas('turma.classe', function ($query) use ($data1) {
+            $query->where(['id_classe' => $data1['id_classe']]);
+        })->where(['ano_lectivo' => $data1['ano_lectivo'], 'observacao_final' => "desistencia"])->get();
 
         return $historico;
+    }
+
+    public static function getDesistidosEpoca($epoca, $id_estudante, $ano_lectivo)
+    {
+        $desistidos = Desistencia::where(['epoca' => $epoca, 'ano_lectivo' => $ano_lectivo, 'id_estudante' => $id_estudante])->first();
+        return $desistidos;
     }
 }

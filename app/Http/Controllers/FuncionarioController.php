@@ -182,7 +182,7 @@ class FuncionarioController extends Controller
             return back()->with(['error' => "Nao encontrou"]);
         }
 
-        $user = User::where(['id_pessoa'=>$funcionario->id_pessoa])->first();
+        $user = User::where(['id_pessoa' => $funcionario->id_pessoa])->first();
 
         $cargos = Cargo::pluck('cargo', 'id');
         $escalaos = Escalao::pluck('escalao', 'id');
@@ -192,7 +192,7 @@ class FuncionarioController extends Controller
             'type' => "funcionarios",
             'menu' => "Funcionários",
             'submenu' => "Editar",
-            'getUser'=>$user,
+            'getUser' => $user,
             'getCargos' => $cargos,
             'getEscalaos' => $escalaos,
             'getProvincias' => $provincias,
@@ -322,7 +322,8 @@ class FuncionarioController extends Controller
         );
     }
 
-    public function export(){
+    public function export()
+    {
         $fileName = "funcionarios_model.xlsx";
         return Excel::download(new FuncionarioExport(), $fileName);
     }
@@ -350,5 +351,18 @@ class FuncionarioController extends Controller
         if ($import->import($file)) {
             return back()->with(['success' => "Feito com sucesso"]);
         }
+    }
+
+    public function destroy(Request $request)
+    {
+        $request->validate([
+            'id_funcionario' => ['required', 'integer', 'min:1'],
+        ]);
+
+        $funcionario =Funcionario::find($request->id);
+        if (!$funcionario) {
+            return back()->with(['error' => "Nao encontrou funcionario"]);
+        }
+        
     }
 }

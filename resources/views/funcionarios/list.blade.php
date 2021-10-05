@@ -20,6 +20,13 @@
                 </div>
                 <div class="card-block">
                     <div class="form">
+                        @if(session('error'))
+                    <div class="alert alert-danger">{{session('error')}}</div>
+                    @endif
+
+                    @if(session('success'))
+                    <div class="alert alert-success">{{session('success')}}</div>
+                    @endif
                         {{Form::open(['class'=>"form_search", 'method'=>"post", 'url'=>"#"])}}
                         <div class="row text-right">
                             <div class="col-md-8">
@@ -64,7 +71,7 @@
                                     <td>
                                         <a href="/horarios/create/{{$funcionarios->id}}" class="btn btn-success btn-sm"><i class="ti-time"></i> Hora.</a>
                                         <a href="/funcionarios/edit/{{$funcionarios->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
-                                        <a href="http://" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
+                                        <a href="#" data-id_funcionario="{{$funcionarios->id}}" data-nome_funcionario="{{$funcionarios->pessoa->nome}}" class="btn btn-danger btn-sm delete"><i class="ti-trash"></i> Eliminar</a>
                                     </td>
                                 </tr>
 
@@ -100,6 +107,39 @@
 	</div>
 </div>
 
+<!-- modal -->
+<div class="modal fade" id="deletemodal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-body">
+          {{Form::open(['method'=>"post",'class'=>'form', 'url'=>"/funcionarios/destroy"])}}
+          @csrf
+          <div class="row">
+            <div class="col-md-12">
+                <p style="text-align: center; font-size:18px;">
+                    Tem a certeza que deseja Eliminar o(a) funcionário(a)
+                    <b class="nome_funcionario" style="font-size:22px;"></b>
+                    ??
+                </p>
+                <input type="hidden" class="id_funcionario" name="id_funcionario"/>
+            </div>
+            <br/><br/><br/>
+            <div class="col-md-12" style="text-align: center;">
+                {{Form::submit('SIM',['class'=>"btn btn-primary"])}}&nbsp;&nbsp;
+                {{Form::reset('NÃO', ['class'=>"btn btn-danger cancel"])}}
+            </div>
+          </div>
+          {{Form::close()}}
+
+        </div>
+
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+<!-- fim modal -->
 
 <script>
     $(document).ready(function(){
@@ -119,6 +159,27 @@
                 }
             });
         });
+
+
+        $('.delete').click(function(e){
+            e.preventDefault();
+            var data ={
+                id_funcionario: $(this).data('id_funcionario'),
+                nome_funcionario: $(this).data('nome_funcionario'),
+                _token: "{{ csrf_token() }}"
+            };
+
+            $('.id_funcionario').val(data.id_funcionario);
+            $('.nome_funcionario').text(data.nome_funcionario);
+            $('#deletemodal').modal('show');
+        });
+
+        $('.cancel').click(function(e){
+            e.preventDefault();
+            $('#deletemodal').modal('hide');
+        });
     });
 </script>
+
+
 @endsection

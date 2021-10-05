@@ -16,6 +16,20 @@ $dadosGerais = [
     'total'=>0,
     'percent'=>0,
 ];
+
+$dados01 = [
+    'pos'=>0,
+    'neg'=>0,
+    'total'=>0,
+    'percent'=>0,
+];
+
+$dadosGerais01 = [
+    'pos'=>0,
+    'neg'=>0,
+    'total'=>0,
+    'percent'=>0,
+];
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -195,15 +209,67 @@ $dadosGerais = [
                             <tr>
                                 <td>TOTAL</td>
                                 @foreach ($getClasses as $classes)
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+
+                                @php
+                                    $dados01['pos'] =0;
+                                    $dados01['neg'] =0;
+                                    $dados01['total'] =0;
+                                    $dados01['percent']=0;
+                                    $getNotas01 = ControladorNotas::getNotasEstudantesAproveitamentoClasse($getCurso->id, $classes->id, $getEpoca, $getAno);
+                                    foreach ($getNotas01 as $notas){
+                                            if($getEnsino->id==1){
+                                                if($notas->mt>=5){
+                                                    $dados01['pos'] ++;
+                                                }else{
+                                                    $dados01['neg']++;
+                                                }
+                                            }else{
+                                                if($notas->mt>=10){
+                                                    $dados01['pos'] ++;
+                                                }else{
+                                                    $dados01['neg']++;
+                                                }
+                                            }
+
+                                        }
+                                        $dados01['total'] = $dados01['pos']+$dados01['neg'];
+                                        if($dados01['total']<=0){
+                                            $dados01['percent'] = "###";
+                                        }else{
+                                            $dados01['percent'] = ($dados01['pos']*100)/$dados01['total'];
+                                        }
+
+                                        $dadosGerais01['pos'] = $dadosGerais01['pos']+$dados01['pos'];
+                                        $dadosGerais01['neg'] = $dadosGerais01['neg']+$dados01['neg'];
+                                        $dadosGerais01['total'] = $dadosGerais01['total']+$dados01['total'];
+                                        if($dadosGerais01['total'] <=0){
+                                            $dadosGerais01['percent'] ="###";
+                                        }else{
+                                            $dadosGerais01['percent'] = ($dadosGerais01['pos']*100)/$dadosGerais01['total'];
+                                        }
+                                @endphp
+                                <td>{{$dados01['pos']}}</td>
+                                <td>{{$dados01['neg']}}</td>
+                                <td>{{$dados01['total']}}</td>
+                                <td>
+                                    @if ($dados01['total']<=0)
+                                    {{$dados01['percent']}}
+                                    @else
+                                    {{round($dados01['percent'],2)}}
+                                    @endif
+
+                                </td>
                                 @endforeach
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>{{$dadosGerais01['pos']}}</td>
+                                <td>{{$dadosGerais01['neg']}}</td>
+                                <td>{{$dadosGerais01['total']}}</td>
+                                <td>
+                                    @if($dadosGerais01['total']<=0)
+                                    {{$dadosGerais01['percent']}}
+                                    @else
+                                    {{round($dadosGerais01['percent'],2)}}
+                                    @endif
+                                </td>
                             </tr>
 
                     </tbody>

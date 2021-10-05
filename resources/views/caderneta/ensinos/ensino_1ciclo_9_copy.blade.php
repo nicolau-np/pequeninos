@@ -96,7 +96,7 @@ use App\Http\Controllers\ControladorStatic;
                                 <p class="m-0">
 
                                     {{Form::open(['method'=>"post"])}}
-                                        <table class="table table-bordered">
+                                        <table class="table table-bordered tabela_notas">
                                             <thead>
                                                 <tr>
                                                     <th colspan="3">DADOS PESSOAIS</th>
@@ -162,7 +162,7 @@ use App\Http\Controllers\ControladorStatic;
                             <div class="tab-pane @if(session('epoca')=="2") active @endif" role="tabpanel">
                                 <p class="m-0">
                                     {{Form::open(['method'=>"post"])}}
-                                    <table class="table table-bordered">
+                                    <table class="table table-bordered tabela_notas">
                                         <thead>
                                             <tr>
                                                 <th colspan="3">DADOS PESSOAIS</th>
@@ -228,7 +228,7 @@ use App\Http\Controllers\ControladorStatic;
                             <div class="tab-pane @if(session('epoca')=="3") active @endif" role="tabpanel">
                                 <p class="m-0">
                                     {{Form::open(['method'=>"post"])}}
-                                    <table class="table table-bordered">
+                                    <table class="table table-bordered tabela_notas">
                                         <thead>
                                             <tr>
                                                 <th colspan="3">DADOS PESSOAIS</th>
@@ -299,7 +299,7 @@ use App\Http\Controllers\ControladorStatic;
                                     {{Form::open(['method'=>"post"])}}
                                       <!-- provas-->
 
-                                      <table class="table table-bordered">
+                                      <table class="table table-bordered tabela_notas">
                                         <thead>
                                             <tr>
                                                 <th colspan="3">DADOS PESSOAIS</th>
@@ -353,7 +353,7 @@ use App\Http\Controllers\ControladorStatic;
                                     {{Form::open(['method'=>"post"])}}
                                       <!-- provas-->
 
-                                      <table class="table table-bordered">
+                                      <table class="table table-bordered tabela_notas">
                                         <thead>
                                             <tr>
                                                 <th colspan="3">DADOS PESSOAIS</th>

@@ -20,7 +20,7 @@ $transferidos = [
 $chegados_fim=[
     'mf'=>0,
     'f'=>0,
-]
+];
 
 $matriculadosT = [
     'mf'=>0,
@@ -184,6 +184,18 @@ $chegados_fimT=[
                             $chegados_fim['mf'] = $matriculados['mf'] - ($desistidos['mf'] + $transferidos['mf']);
                             $chegados_fim['f'] = $matriculados['f'] - ($desistidos['f'] + $transferidos['f']);
 
+                            //dados do total
+                            $matriculadosT['mf'] = $matriculadosT['mf']+$matriculados['mf'];
+                            $matriculadosT['f'] = $matriculadosT['f']+$matriculados['f'];
+
+                            $desistidosT['mf'] = $desistidosT['mf']+$desistidos['mf'];
+                            $desistidosT['f'] = $desistidosT['f']+$desistidos['f'];
+
+                            $transferidosT['mf'] = $transferidosT['mf']+$transferidos['mf'];
+                            $transferidosT['f'] = $transferidosT['f']+$transferidos['f'];
+
+                            $chegados_fimT['mf'] = $chegados_fimT['mf']+$chegados_fim['mf'];
+                            $chegados_fimT['f'] = $chegados_fimT['f']+$chegados_fim['f'];
                         @endphp
                         <tr>
                             <td>{{strtoupper($classes->classe)}}</td>
@@ -199,14 +211,14 @@ $chegados_fimT=[
                         @endforeach
                         <tr>
                             <td>TOTAL</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$matriculadosT['mf']}}</td>
+                            <td>{{$matriculadosT['f']}}</td>
+                            <td>{{$desistidosT['mf']}}</td>
+                            <td>{{$desistidosT['f']}}</td>
+                            <td>{{$transferidosT['mf']}}</td>
+                            <td>{{$transferidosT['f']}}</td>
+                            <td>{{$chegados_fimT['mf']}}</td>
+                            <td>{{$chegados_fimT['f']}}</td>
                         </tr>
                     </tbody>
                 </table>

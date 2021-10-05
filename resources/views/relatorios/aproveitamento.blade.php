@@ -118,6 +118,7 @@ $dadosGerais = [
                                     $dadosGerais ['pos'] = 0;
                                     $dadosGerais['neg'] =0;
                                     $dadosGerais['total'] =0;
+                                    $dadosGerais['percent'] =0;
 
                                     $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
                                 @endphp
@@ -130,8 +131,8 @@ $dadosGerais = [
                                     $dados['neg'] =0;
                                     $dados['total'] =0;
                                     $dados['percent']=0;
-                                    
-                                        $getNotas = ControladorNotas::getNotasEstudantesAproveitamento($getCurso->id, $classes->id, $getEpoca, $getDisciplina->id, $getAno);
+
+                                        $getNotas = ControladorNotas::getNotasEstudantesAproveitamentoDisciplina($getCurso->id, $classes->id, $getEpoca, $getDisciplina->id, $getAno);
                                         foreach ($getNotas as $notas){
                                             if($getEnsino->id==1){
                                                 if($notas->mt>=5){
@@ -149,16 +150,32 @@ $dadosGerais = [
 
                                         }
                                         $dados['total'] = $dados['pos']+$dados['neg'];
+                                        if($dados['total']<=0){
+                                            $dados['percent'] = "###";
+                                        }else{
+                                            $dados['percent'] = ($dados['pos']*100)/$dados['total'];
+                                        }
 
                                         $dadosGerais['pos'] = $dadosGerais['pos']+$dados['pos'];
                                         $dadosGerais['neg'] = $dadosGerais['neg']+$dados['neg'];
                                         $dadosGerais['total'] = $dadosGerais['total']+$dados['total'];
+                                        if($dadosGerais['total'] <=0){
+                                            $dadosGerais['percent'] ="###";
+                                        }else{
+                                            $dadosGerais['percent'] = ($dadosGerais['pos']*100)/$dadosGerais['total'];
+                                        }
                                     @endphp
 
                                     <td>{{$dados['pos']}}</td>
                                     <td>{{$dados['neg']}}</td>
                                     <td>{{$dados['total']}}</td>
-                                    <td>-</td>
+                                    <td>
+                                        @if($dados['total']==0)
+                                            {{$dados['percent']}}
+                                        @else
+                                            {{round($dados['percent'],2)}}
+                                        @endif
+                                    </td>
 
 
                                     @endforeach
@@ -166,7 +183,13 @@ $dadosGerais = [
                                     <td>{{$dadosGerais['pos']}}</td>
                                     <td>{{$dadosGerais['neg']}}</td>
                                     <td>{{$dadosGerais['total']}}</td>
-                                    <td></td>
+                                    <td>
+                                        @if($dadosGerais['total']==0)
+                                        {{$dadosGerais['percent']}}
+                                        @else
+                                        {{round($dadosGerais['percent'],2)}}
+                                        @endif
+                                    </td>
                                 </tr>
                             @endforeach
                             <tr>

@@ -261,7 +261,7 @@ class ControladorNotas extends Controller
 
     /*fim carregar para PDF*/
 
-    public static function getNotasEstudantesAproveitamento($id_curso, $id_classe, $epoca, $id_disciplina, $ano_lectivo)
+    public static function getNotasEstudantesAproveitamentoDisciplina($id_curso, $id_classe, $epoca, $id_disciplina, $ano_lectivo)
     {
         $data1 = [
             'epoca' => $epoca,
@@ -278,6 +278,27 @@ class ControladorNotas extends Controller
                 'id_classe' => $data1['id_classe'],
             ]);
         })->where(['epoca' => $data1['epoca'], 'ano_lectivo' => $data1['ano_lectivo'], 'id_disciplina' => $data1['id_disciplina']])
+            ->where('mt', '!=', null)
+            ->get();
+
+        return $trimestal;
+    }
+
+    public static function getNotasEstudantesAproveitamentoClasse($id_curso, $id_classe, $epoca, $ano_lectivo){
+        $data1 = [
+            'epoca' => $epoca,
+            'ano_lectivo' => $ano_lectivo,
+            'id_curso' => $id_curso,
+            'id_classe' => $id_classe,
+        ];
+
+
+        $trimestal = Trimestral::whereHas('estudante.turma', function ($query) use ($data1) {
+            $query->where([
+                'id_curso' => $data1['id_curso'],
+                'id_classe' => $data1['id_classe'],
+            ]);
+        })->where(['epoca' => $data1['epoca'], 'ano_lectivo' => $data1['ano_lectivo']])
             ->where('mt', '!=', null)
             ->get();
 

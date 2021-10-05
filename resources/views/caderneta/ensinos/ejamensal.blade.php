@@ -29,9 +29,9 @@ use App\Http\Controllers\ControladorStatic;
                     <i class="ti-angle-right"></i>
                     {{$getHorario->ano_lectivo}}
                     <i class="ti-angle-right"></i>
-                    @if(session('epoca')!="4" && session('epoca')!="5")
-                    <a href="/cadernetas/store_copy/{{$getHorario->id_turma}}/{{$getHorario->id_disciplina}}/{{session('epoca')}}/{{$getHorario->ano_lectivo}}"><i class="ti-reload"></i></a>
-                    @endif
+
+                    <a href="/cadernetas/store_copy_ejamensal/{{$getHorario->id_turma}}/{{$getHorario->id_disciplina}}/{{session('epoca')}}/{{$getHorario->ano_lectivo}}"><i class="ti-reload"></i></a>
+
                     </h5>
                     <span></span>
                     <div class="card-header-right">
@@ -75,19 +75,7 @@ use App\Http\Controllers\ControladorStatic;
                                 <div class="slide"></div>
                             </li>
                             @endif
-                            @if ($getEpoca4->estado!="off")
-                            <li class="nav-item">
-                                <a class="nav-link @if(session('epoca')=="4") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/4">EXAME</a>
-                                <div class="slide"></div>
-                            </li>
-                            @endif
 
-                            @if ($getEpoca5->estado!="off")
-                            <li class="nav-item">
-                                <a class="nav-link @if(session('epoca')=="5") active @endif" href="/cadernetas/create/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/5">REC</a>
-                                <div class="slide"></div>
-                            </li>
-                            @endif
                         </ul>
                         <!-- Tab panes -->
                         <div class="tab-content tabs-left-content card-block">
@@ -290,7 +278,7 @@ use App\Http\Controllers\ControladorStatic;
                             </div>
                             @endif
 
-           
+
 
                         </div>
                     </div>

@@ -132,7 +132,7 @@ $transferidos = [
                                 if($getDesistido){
                                     //encontrou desistido nesta epoca
                                     //se o genero for F soma desistidos F
-                                    if(($historicodesistidos->estudante->pessoa->genero=="F") || $historicodesistidos->estudante->pessoa->genero=="f"){
+                                    if(($historicodesistidos->estudante->pessoa->genero=="F") || ($historicodesistidos->estudante->pessoa->genero=="f")){
                                         $desistidos['f']++;
                                     }
                                     $desistidos['mf'] ++;
@@ -141,7 +141,20 @@ $transferidos = [
                             }
 
                             //transferidos
-                            
+                            $getHistoricoTransferidos = ControladorStatic::getEstatisticaTransferencia($classes->id, $getAno);
+                            foreach ($getHistoricoTransferidos as $historicotransferidos) {
+                                $getTransferido = ControladorStatic::getTransferidosEpoca($getEpoca, $historicotransferidos->id_estudante, $getAno);
+                                if($getTransferido){
+                                    //encontrou transferidos nesta epoca
+                                    //se o genero for F soma transferidos F
+                                    if(($historicotransferidos->estudante->pessoa->genero=="F") || ($historicotransferidos->estudante->pessoa->genero=="f")){
+                                        $transferidos['f']++;
+                                    }
+                                    $transferidos['mf'] ++;
+
+                                }
+                            }
+
                         @endphp
                         <tr>
                             <td>{{strtoupper($classes->classe)}}</td>
@@ -149,8 +162,8 @@ $transferidos = [
                             <td>{{$matriculados['f']}}</td>
                             <td>{{$desistidos['mf']}}</td>
                             <td>{{$desistidos['f']}}</td>
-                            <td></td>
-                            <td></td>
+                            <td>{{$transferidos['mf']}}</td>
+                            <td>{{$transferidos['f']}}</td>
                             <td></td>
                             <td></td>
                         </tr>

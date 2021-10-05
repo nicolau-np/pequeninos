@@ -378,7 +378,7 @@ class ControladorStatic extends Controller
         ];
         $historico = HistoricEstudante::whereHas('turma.classe', function ($query) use ($data1) {
             $query->where(['id_classe' => $data1['id_classe']]);
-        })->where(['ano_lectivo' => $data1['ano_lectivo'], 'observacao_final' => "transferencia"])->get();
+        })->where(['ano_lectivo' => $data1['ano_lectivo'], 'observacao_final' => "transferido"])->get();
 
         return $historico;
     }

@@ -608,7 +608,7 @@ class RelatorioController extends Controller
             'getEpoca'=>$request->epoca,
             'getCurso'=>$curso,
         ];
-        $pdf = PDF::loadView('relatorios.estatistica', $data['view'])->setPaper('A4', 'landscape');
+        $pdf = PDF::loadView('relatorios.estatistica', $data['view'])->setPaper('A4', 'normal');
         return $pdf->stream('FICHA DE ESTATÍSTICA - '.$request->epoca.'º TRIMESTRE - ' . $request->ano_lectivo .  '[ ' . strtoupper($ensino->ensino) . ' ].pdf');
     }
 }

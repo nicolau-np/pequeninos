@@ -14,7 +14,7 @@ $numero = 0;
     <style>
         @page{
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 10px;
+            font-size: 12px;
             margin-left: 10px;
             margin-right: 10px;
             margin-top: 10px;
@@ -29,7 +29,7 @@ $numero = 0;
             color: #fff;
         }
         .tabela{
-            font-size: 10px;
+            font-size: 12px;
         }
         .mini-cabecalho{
         display: block;
@@ -70,7 +70,7 @@ $numero = 0;
                 <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
                     <thead>
                         <tr>
-                            <th>CLASSES</th>
+                            <th rowspan="2">CLASSES</th>
                             <th colspan="2">MATRICULADOS</th>
                             <th colspan="2">DESISTIDOS</th>
                             <th colspan="2">CHEGADOS AO FIM</th>
@@ -85,9 +85,17 @@ $numero = 0;
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($getClasses as $classes)
                         <tr>
+                            <td>{{$classes->classe}}</td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td></td>
                             <td></td>
                         </tr>
+                        @endforeach
                     </tbody>
                 </table>
             </div>

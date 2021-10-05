@@ -6,6 +6,7 @@ use App\Cargo;
 use App\Escalao;
 use App\Exports\FuncionarioExport;
 use App\Funcionario;
+use App\Horario;
 use App\Imports\FuncionarioImport;
 use App\Pessoa;
 use App\Provincia;
@@ -363,6 +364,11 @@ class FuncionarioController extends Controller
         if (!$funcionario) {
             return back()->with(['error' => "Nao encontrou funcionario"]);
         }
-        
+
+        $horario= Horario::where(['id_funcionario'=>$funcionario->id])->first();
+        if($horario){
+            return back()->with(['error' => "Não deve eliminar porque já tem horarios cadastrados"]);
+        }
+
     }
 }

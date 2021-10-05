@@ -96,7 +96,13 @@ $matriculados = [
                         @php
                             $matriculados['mf'] = 0;
                             $matriculados['f'] = 0;
-                            $getMatriculados = ControladorStatic::getEstatisticaMariculados($classes->id, $getAno);
+                            $getHistoricoMatriculados = ControladorStatic::getEstatisticaMariculados($classes->id, $getAno);
+                            foreach ($getHistoricoMatriculados as $historicomatriculados){
+                                if($historicomatriculados->estudante->pessoa->genero=="F"){
+                                    $matriculados['f'] ++;
+                                }
+                                $matriculados['mf']++;
+                            }
                         @endphp
                         <tr>
                             <td>{{strtoupper($classes->classe)}}</td>

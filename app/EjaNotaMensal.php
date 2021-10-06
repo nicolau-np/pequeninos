@@ -54,4 +54,11 @@ class EjaNotaMensal extends Model
     public function disciplina(){
         return $this->belongsTo(Disciplina::class, 'id_disciplina', 'id');
     }
+
+    public static function calc_medias_mensais($somas){
+        $media = $somas/4;
+        return $media;
+    }
+
+
 }

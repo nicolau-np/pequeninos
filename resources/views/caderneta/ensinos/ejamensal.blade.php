@@ -210,73 +210,24 @@ use App\Http\Controllers\ControladorStatic;
                                                                 <td>{{$mensal->estudante->pessoa->genero}}</td>
 
                                                                 <td>
-                                                                    <input type="number" name="tpc{{$getSemana}}" data-id="{{$mensal->id}}" data-campo="tpc{{$getSemana}}" value="
-                                                                    @if($getSemana==1)
-                                                                    {{$mensal->tpc1}}
-                                                                    @elseif($getSemana==2)
-                                                                    {{$mensal->tpc2}}
-                                                                    @elseif($getSemana==3)
-                                                                    {{$mensal->tpc3}}
-                                                                    @elseif($getSemana==4)
-                                                                    {{$mensal->tpc4}}
-                                                                    @endif
-                                                                    " class="form-control av_mensal" />
+                                                                    <input type="number" name="tpc{{$getSemana}}" data-id="{{$mensal->id}}" data-campo="tpc{{$getSemana}}" value="@if($getSemana==1){{$mensal->tpc1}}@elseif($getSemana==2){{$mensal->tpc2}}@elseif($getSemana==3){{$mensal->tpc3}}@elseif($getSemana==4){{$mensal->tpc4}}@endif"
+                                                                    class="form-control av_mensal" />
                                                                 </td>
 
                                                                 <td>
-                                                                    <input type="number" name="oc{{$getSemana}}" data-id="{{$mensal->id}}" data-campo="oc{{$getSemana}}" value="
-                                                                    @if($getSemana==1)
-                                                                    {{$mensal->oc1}}
-                                                                    @elseif($getSemana==2)
-                                                                    {{$mensal->oc2}}
-                                                                    @elseif($getSemana==3)
-                                                                    {{$mensal->oc3}}
-                                                                    @elseif($getSemana==4)
-                                                                    {{$mensal->oc4}}
-                                                                    @endif
-                                                                    " class="form-control av_mensal" />
+                                                                    <input type="number" name="oc{{$getSemana}}" data-id="{{$mensal->id}}" data-campo="oc{{$getSemana}}" value="@if($getSemana==1){{$mensal->oc1}}@elseif($getSemana==2){{$mensal->oc2}}@elseif($getSemana==3){{$mensal->oc3}}@elseif($getSemana==4){{$mensal->oc4}}@endif" class="form-control av_mensal" />
                                                                 </td>
 
                                                                 <td>
-                                                                    <input type="number" name="pa{{$getSemana}}" data-id="{{$mensal->id}}" data-campo="pa{{$getSemana}}" value="
-                                                                    @if($getSemana==1)
-                                                                    {{$mensal->pa1}}
-                                                                    @elseif($getSemana==2)
-                                                                    {{$mensal->pa2}}
-                                                                    @elseif($getSemana==3)
-                                                                    {{$mensal->pa3}}
-                                                                    @elseif($getSemana==4)
-                                                                    {{$mensal->pa4}}
-                                                                    @endif
-                                                                    " class="form-control av_mensal" />
+                                                                    <input type="number" name="pa{{$getSemana}}" data-id="{{$mensal->id}}" data-campo="pa{{$getSemana}}" value="@if($getSemana==1){{$mensal->pa1}}@elseif($getSemana==2){{$mensal->pa2}}@elseif($getSemana==3){{$mensal->pa3}}@elseif($getSemana==4){{$mensal->pa4}}@endif" class="form-control av_mensal" />
                                                                 </td>
 
                                                                 <td>
-                                                                    <input type="number" name="pg{{$getSemana}}" data-id="{{$mensal->id}}" data-campo="pg{{$getSemana}}" value="
-                                                                    @if($getSemana==1)
-                                                                    {{$mensal->pg1}}
-                                                                    @elseif($getSemana==2)
-                                                                    {{$mensal->pg2}}
-                                                                    @elseif($getSemana==3)
-                                                                    {{$mensal->pg3}}
-                                                                    @elseif($getSemana==4)
-                                                                    {{$mensal->pg4}}
-                                                                    @endif
-                                                                    " class="form-control av_mensal" />
+                                                                    <input type="number" name="pg{{$getSemana}}" data-id="{{$mensal->id}}" data-campo="pg{{$getSemana}}" value="@if($getSemana==1){{$mensal->pg1}}@elseif($getSemana==2){{$mensal->pg2}}@elseif($getSemana==3){{$mensal->pg3}}@elseif($getSemana==4){{$mensal->pg4}}@endif" class="form-control av_mensal" />
                                                                 </td>
 
                                                                 <td>
-                                                                    <input type="number" name="tp{{$getSemana}}" data-id="{{$mensal->id}}" data-campo="tp{{$getSemana}}" value="
-                                                                    @if($getSemana==1)
-                                                                    {{$mensal->tp1}}
-                                                                    @elseif($getSemana==2)
-                                                                    {{$mensal->tp2}}
-                                                                    @elseif($getSemana==3)
-                                                                    {{$mensal->tp3}}
-                                                                    @elseif($getSemana==4)
-                                                                    {{$mensal->tp4}}
-                                                                    @endif
-                                                                    " class="form-control tp_mensal" />
+                                                                    <input type="number" name="tp{{$getSemana}}" data-id="{{$mensal->id}}" data-campo="tp{{$getSemana}}" value="@if($getSemana==1){{$mensal->tp1}}@elseif($getSemana==2){{$mensal->tp2}}@elseif($getSemana==3){{$mensal->tp3}}@elseif($getSemana==4){{$mensal->tp4}}@endif" class="form-control tp_mensal" />
                                                                 </td>
                                                             </tr>
                                                             @endforeach
@@ -332,73 +283,24 @@ use App\Http\Controllers\ControladorStatic;
                                                                 <td>{{$mensal->estudante->pessoa->genero}}</td>
 
                                                                 <td>
-                                                                    <input type="number" name="tpc{{$getSemana}}" data-id="{{$mensal->id}}" data-campo="tpc{{$getSemana}}" value="
-                                                                    @if($getSemana==1)
-                                                                    {{$mensal->tpc1}}
-                                                                    @elseif($getSemana==2)
-                                                                    {{$mensal->tpc2}}
-                                                                    @elseif($getSemana==3)
-                                                                    {{$mensal->tpc3}}
-                                                                    @elseif($getSemana==4)
-                                                                    {{$mensal->tpc4}}
-                                                                    @endif
-                                                                    " class="form-control av_mensal" />
+                                                                    <input type="number" name="tpc{{$getSemana}}" data-id="{{$mensal->id}}" data-campo="tpc{{$getSemana}}" value="@if($getSemana==1){{$mensal->tpc1}}@elseif($getSemana==2){{$mensal->tpc2}}@elseif($getSemana==3){{$mensal->tpc3}}@elseif($getSemana==4){{$mensal->tpc4}}@endif"
+                                                                    class="form-control av_mensal" />
                                                                 </td>
 
                                                                 <td>
-                                                                    <input type="number" name="oc{{$getSemana}}" data-id="{{$mensal->id}}" data-campo="oc{{$getSemana}}" value="
-                                                                    @if($getSemana==1)
-                                                                    {{$mensal->oc1}}
-                                                                    @elseif($getSemana==2)
-                                                                    {{$mensal->oc2}}
-                                                                    @elseif($getSemana==3)
-                                                                    {{$mensal->oc3}}
-                                                                    @elseif($getSemana==4)
-                                                                    {{$mensal->oc4}}
-                                                                    @endif
-                                                                    " class="form-control av_mensal" />
+                                                                    <input type="number" name="oc{{$getSemana}}" data-id="{{$mensal->id}}" data-campo="oc{{$getSemana}}" value="@if($getSemana==1){{$mensal->oc1}}@elseif($getSemana==2){{$mensal->oc2}}@elseif($getSemana==3){{$mensal->oc3}}@elseif($getSemana==4){{$mensal->oc4}}@endif" class="form-control av_mensal" />
                                                                 </td>
 
                                                                 <td>
-                                                                    <input type="number" name="pa{{$getSemana}}" data-id="{{$mensal->id}}" data-campo="pa{{$getSemana}}" value="
-                                                                    @if($getSemana==1)
-                                                                    {{$mensal->pa1}}
-                                                                    @elseif($getSemana==2)
-                                                                    {{$mensal->pa2}}
-                                                                    @elseif($getSemana==3)
-                                                                    {{$mensal->pa3}}
-                                                                    @elseif($getSemana==4)
-                                                                    {{$mensal->pa4}}
-                                                                    @endif
-                                                                    " class="form-control av_mensal" />
+                                                                    <input type="number" name="pa{{$getSemana}}" data-id="{{$mensal->id}}" data-campo="pa{{$getSemana}}" value="@if($getSemana==1){{$mensal->pa1}}@elseif($getSemana==2){{$mensal->pa2}}@elseif($getSemana==3){{$mensal->pa3}}@elseif($getSemana==4){{$mensal->pa4}}@endif" class="form-control av_mensal" />
                                                                 </td>
 
                                                                 <td>
-                                                                    <input type="number" name="pg{{$getSemana}}" data-id="{{$mensal->id}}" data-campo="pg{{$getSemana}}" value="
-                                                                    @if($getSemana==1)
-                                                                    {{$mensal->pg1}}
-                                                                    @elseif($getSemana==2)
-                                                                    {{$mensal->pg2}}
-                                                                    @elseif($getSemana==3)
-                                                                    {{$mensal->pg3}}
-                                                                    @elseif($getSemana==4)
-                                                                    {{$mensal->pg4}}
-                                                                    @endif
-                                                                    " class="form-control av_mensal" />
+                                                                    <input type="number" name="pg{{$getSemana}}" data-id="{{$mensal->id}}" data-campo="pg{{$getSemana}}" value="@if($getSemana==1){{$mensal->pg1}}@elseif($getSemana==2){{$mensal->pg2}}@elseif($getSemana==3){{$mensal->pg3}}@elseif($getSemana==4){{$mensal->pg4}}@endif" class="form-control av_mensal" />
                                                                 </td>
 
                                                                 <td>
-                                                                    <input type="number" name="tp{{$getSemana}}" data-id="{{$mensal->id}}" data-campo="tp{{$getSemana}}" value="
-                                                                    @if($getSemana==1)
-                                                                    {{$mensal->tp1}}
-                                                                    @elseif($getSemana==2)
-                                                                    {{$mensal->tp2}}
-                                                                    @elseif($getSemana==3)
-                                                                    {{$mensal->tp3}}
-                                                                    @elseif($getSemana==4)
-                                                                    {{$mensal->tp4}}
-                                                                    @endif
-                                                                    " class="form-control tp_mensal" />
+                                                                    <input type="number" name="tp{{$getSemana}}" data-id="{{$mensal->id}}" data-campo="tp{{$getSemana}}" value="@if($getSemana==1){{$mensal->tp1}}@elseif($getSemana==2){{$mensal->tp2}}@elseif($getSemana==3){{$mensal->tp3}}@elseif($getSemana==4){{$mensal->tp4}}@endif" class="form-control tp_mensal" />
                                                                 </td>
                                                             </tr>
                                                             @endforeach

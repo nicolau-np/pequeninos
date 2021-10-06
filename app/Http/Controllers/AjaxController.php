@@ -708,11 +708,11 @@ class AjaxController extends Controller
 
     public function updateAV_mensal(Request $request)
     {
-        /*$request->validate([
-            'valor' => ['required', 'numeric', 'min:0', 'max:1'],
+        $request->validate([
+            'valor' => ['required', 'numeric', 'min:0', 'max:2'],
             'campo' => ['required', 'string', 'min:2', 'max:3'],
             'id_mensal' => ['required', 'integer', 'min:1'],
-        ]);*/
+        ]);
         //verificar se mudou os campos
 
         //verifica se mudou o id do mes

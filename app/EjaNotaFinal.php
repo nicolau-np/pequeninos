@@ -13,6 +13,7 @@ class EjaNotaFinal extends Model
         'id_disciplina',
         'media',
         'nf',
+        'rec',
         'estado',
         'ano_lectivo',
     ];

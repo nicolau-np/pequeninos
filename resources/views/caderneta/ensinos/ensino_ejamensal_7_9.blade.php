@@ -77,19 +77,19 @@ use App\Http\Controllers\ControladorStatic;
                         <ul class="nav nav-tabs md-tabs tabs-left b-none" role="tablist">
                             @if ($getEpoca1->estado!="off")
                             <li class="nav-item">
-                                <a class="nav-link @if(session('epoca')=="1") active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/1/1">1º TRIMESTRE</a>
+                                <a class="nav-link @if(session('epoca')=="1") active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/1/1">1º MÊS</a>
                                 <div class="slide"></div>
                             </li>
                             @endif
                             @if ($getEpoca2->estado!="off")
                             <li class="nav-item">
-                                <a class="nav-link @if(session('epoca')=="2") active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/2/1">2º TRIMESTRE</a>
+                                <a class="nav-link @if(session('epoca')=="2") active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/2/1">2º MÊS</a>
                                 <div class="slide"></div>
                             </li>
                             @endif
                             @if ($getEpoca3->estado!="off")
                             <li class="nav-item">
-                                <a class="nav-link @if(session('epoca')=="3") active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/3/1">3º TRIMESTRE</a>
+                                <a class="nav-link @if(session('epoca')=="3") active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/3/1">3º MÊS</a>
                                 <div class="slide"></div>
                             </li>
                             @endif

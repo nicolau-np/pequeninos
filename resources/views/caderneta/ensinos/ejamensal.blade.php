@@ -485,9 +485,49 @@ use App\Http\Controllers\ControladorStatic;
 
         $('.tp_mensal').on('keypress', function(e){
             if(e.which == 13){
-                
+                var valor = $(this).val();
+                var id_mensal = $(this).data('id');
+                var campo = $(this).data('campo');
+
+                if((valor==="") || (valor<0) || (valor>10)){
+                    $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                }else{
+                    var update = updateTP(valor, id_mensal, campo);
+                    if(update){
+                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
+                    }else{
+                        $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                    }
+                }
             }
         });
+
+        $('.av_mensal').on('keypress', function(e){
+            if(e.which == 13){
+                var valor = $(this).val();
+                var id_mensal = $(this).data('id');
+                var campo = $(this).data('campo');
+
+                if((valor==="") || (valor<0) || (valor>1)){
+                    $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                }else{
+                    var update = updateTP(valor, id_mensal, campo);
+                    if(update){
+                        $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
+                    }else{
+                        $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
+                    }
+                }
+            }
+        });
+
+        function updateTP(valor, id_mensal, campo){
+            return true;
+        }
+
+        function updateAV(valor, id_mensal, campo){
+            return true;
+        }
 
     });
 </script>

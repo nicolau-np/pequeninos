@@ -305,12 +305,13 @@ use App\Http\Controllers\ControladorStatic;
                                         <thead>
                                             <tr>
                                                 <th colspan="3">DADOS PESSOAIS</th>
-                                                <th rowspan="2">NPE</th>
+                                                <th>NOTA</th>
                                             </tr>
                                             <tr>
                                                 <th>Nº</th>
                                                 <th>NOME</th>
                                                 <th>G</th>
+                                                <th>NPE</th>
                                             </tr>
                                         </thead>
 
@@ -359,12 +360,13 @@ use App\Http\Controllers\ControladorStatic;
                                         <thead>
                                             <tr>
                                                 <th colspan="3">DADOS PESSOAIS</th>
-                                                <th rowspan="2">REC</th>
+                                                <th>NOTA</th>
                                             </tr>
                                             <tr>
                                                 <th>Nº</th>
                                                 <th>NOME</th>
                                                 <th>G</th>
+                                                <th>REC</th>
                                             </tr>
                                         </thead>
 

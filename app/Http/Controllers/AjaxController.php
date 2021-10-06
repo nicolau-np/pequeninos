@@ -708,11 +708,11 @@ class AjaxController extends Controller
 
     public function updateAV_mensal(Request $request)
     {
-        $request->validate([
+        /*$request->validate([
             'valor' => ['required', 'numeric', 'min:0', 'max:1'],
             'campo' => ['required', 'string', 'min:2', 'max:3'],
             'id_mensal' => ['required', 'integer', 'min:1'],
-        ]);
+        ]);*/
         //verificar se mudou os campos
 
         //verifica se mudou o id do mes
@@ -785,10 +785,11 @@ class AjaxController extends Controller
         //salvando a nota media
         $mensal = EjaNotaMensal::find($request->id_mensal)->update($data['media_mensal']);
         if ($mensal) {
-            echo " \\lancou avaliacao\\ ";
+            echo " \\lancou media\\ ";
         } else {
             return null;
         }
+
     }
 
     public function updateTP_mensal(Request $request)
@@ -820,5 +821,6 @@ class AjaxController extends Controller
         ];
 
         return view('ajax_loads.getGrades', $data);
-    }
+
+   }
 }

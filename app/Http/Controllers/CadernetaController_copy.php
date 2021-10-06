@@ -235,7 +235,11 @@ class CadernetaController_copy extends Controller
         }
 
         if (($semana != 1) && ($semana != 2) && ($semana != 3) && ($semana != 4)) {
-            return back()->with(['error' => "Não encontrou mes"]);
+            return back()->with(['error' => "Não encontrou semana"]);
+        }
+
+        if(($mes!=1) && ($mes!=2) && ($mes!=3) && ($mes!=4) && ($mes!=5) && ($mes!=6) && ($mes!=7) && ($mes!=8) && ($mes!=9)){
+            return back()->with(['error' => "Não encontrou mês"]);
         }
 
         //verificando se a epoca está bloqueada
@@ -328,6 +332,7 @@ class CadernetaController_copy extends Controller
             'getEpoca2' => $estado_epoca2,
             'getEpoca3' => $estado_epoca3,
             'getSemana' => $semana,
+            'getMes'=>$mes,
         ];
 
         return view('caderneta.ensinos.ensino_ejamensal_7_9', $data);

@@ -709,8 +709,8 @@ class AjaxController extends Controller
     public function updateAV_mensal(Request $request)
     {
         $request->validate([
-            'valor' => ['required', 'numeric', 'min:0', 'max:2'],
-            'campo' => ['required', 'string', 'min:2', 'max:3'],
+            'valor' => ['required', 'numeric', 'min:0', 'max:1'],
+            'campo' => ['required', 'string', 'min:2', 'max:4'],
             'id_mensal' => ['required', 'integer', 'min:1'],
         ]);
         //verificar se mudou os campos
@@ -796,7 +796,7 @@ class AjaxController extends Controller
     {
         $request->validate([
             'valor' => ['required', 'numeric', 'min:0', 'max:10'],
-            'campo' => ['required', 'string', 'min:2', 'max:3'],
+            'campo' => ['required', 'string', 'min:2', 'max:4'],
             'id_mensal' => ['required', 'integer', 'min:1'],
         ]);
         //verificar se mudou os campos

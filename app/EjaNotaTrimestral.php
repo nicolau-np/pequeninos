@@ -27,15 +27,26 @@ class EjaNotaTrimestral extends Model
         'ano_lectivo',
     ];
 
-    public function estudante(){
+    public function estudante()
+    {
         return $this->belongsTo(Estudante::class, 'id_estudante', 'id');
     }
 
-    public function disciplina(){
+    public function disciplina()
+    {
         return $this->belongsTo(Disciplina::class, 'id_disciplina', 'id');
     }
 
-    public static function subtotal(){
-        
+    public static function subtotal($soma_meses, $prova)
+    {
+        $subtotal = ($soma_meses + $prova) / 4;
+        return $subtotal;
+    }
+
+    public static function media_trimestral($tcp, $subtotal, $autoav)
+    {
+        $media_trimestral = $tcp + $subtotal + $autoav;
+
+        return $media_trimestral;
     }
 }

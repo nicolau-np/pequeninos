@@ -511,7 +511,7 @@ use App\Http\Controllers\ControladorStatic;
                 if((valor==="") || (valor<0) || (valor>1)){
                     $(this).css({'background': 'red', 'color': 'white', 'font-weight': 'bold'});
                 }else{
-                    var update = updateTP(valor, id_mensal, campo);
+                    var update = updateAV(valor, id_mensal, campo);
                     if(update){
                         $(this).css({'background': 'green', 'color': 'white', 'font-weight': 'bold'});
                     }else{
@@ -522,10 +522,46 @@ use App\Http\Controllers\ControladorStatic;
         });
 
         function updateTP(valor, id_mensal, campo){
+            retorno = false;
+            var data = {
+                valor: valor,
+                id_mensal: id_mensal,
+                campo: campo,
+                _token: "{{ csrf_token() }}"
+            };
+
+            $.ajax({
+                type: "post",
+                url: "{{route('updateTP_mensal')}}",
+                data: data,
+                dataType: "html",
+                success: function (response) {
+
+                    console.log(response);
+                }
+            });
             return true;
         }
 
         function updateAV(valor, id_mensal, campo){
+            retorno = false;
+            var data = {
+                valor: valor,
+                id_mensal: id_mensal,
+                campo: campo,
+                _token: "{{ csrf_token() }}"
+            };
+
+            $.ajax({
+                type: "post",
+                url: "{{route('updateAV_mensal')}}",
+                data: data,
+                dataType: "html",
+                success: function (response) {
+
+                    console.log(response);
+                }
+            });
             return true;
         }
 

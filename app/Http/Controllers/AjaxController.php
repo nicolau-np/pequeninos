@@ -730,4 +730,12 @@ class AjaxController extends Controller
 
         return view('ajax_loads.getGrades', $data);
     }
+
+    public function updateAV_mensal(Request $request){
+
+    }
+
+    public function updateTP_mensal(Request $request){
+
+    }
 }

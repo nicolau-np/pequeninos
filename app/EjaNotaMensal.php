@@ -70,7 +70,6 @@ class EjaNotaMensal extends Model
     public static function calc_total_mensal($tpc_media, $oc_media, $pg_media, $pa_media, $tp_media)
     {
         $total = $tpc_media + $oc_media + $pg_media + $pa_media + $tp_media;
-
         return $total;
     }
 }

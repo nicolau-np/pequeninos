@@ -920,6 +920,16 @@ class AjaxController extends Controller
         /**fim */
     }
 
+    public function updateProvaEJA(Request $request){
+        $request->validate([
+            'valor' => ['required', 'numeric', 'min:0', 'max:14'],
+            'campo' => ['required', 'string', 'min:2', 'max:6'],
+            'id_trimestral' => ['required', 'integer', 'min:1'],
+        ]);
+
+        
+    }
+
     public function getCursoEnsino(Request $request)
     {
         Session::forget('disciplinas');

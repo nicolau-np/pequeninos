@@ -225,7 +225,7 @@ class CadernetaController_copy extends Controller
     }
 
 
-    public function ejamensal($id_turma, $id_disciplina, $ano_lectivo, $epoca, $semana)
+    public function ejamensal($id_turma, $id_disciplina, $ano_lectivo, $epoca, $mes, $semana)
     {
         //verificar se a epoca existe
         if (($epoca != 1) && ($epoca != 2) && ($epoca != 3)) {

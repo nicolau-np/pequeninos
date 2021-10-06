@@ -319,7 +319,7 @@ Route::group(['prefix' => 'relatorios', 'middleware' => "auth"], function () {
 Route::group(['prefix' => 'cadernetas', 'middleware' => "prof"], function () {
     Route::get('/list/{lastYear}', "CadernetaController_copy@list");
     Route::get('/create/{id_turma}/{id_disciplina}/{ano_lectivo}/{epoca}', "CadernetaController_copy@create");
-    Route::get('/ejamensal/{id_turma}/{id_disciplina}/{ano_lectivo}/{epoca}/{semana}', "CadernetaController_copy@ejamensal");
+    Route::get('/ejamensal/{id_turma}/{id_disciplina}/{ano_lectivo}/{epoca}/{mes}/{semana}', "CadernetaController_copy@ejamensal");
     Route::get('/ejatrimestral/{id_turma}/{id_disciplina}/{ano_lectivo}/{epoca}', "CadernetaController_copy@ejatrimestral");
 
     Route::get('/store/{id_turma}/{id_disciplina}/{ano_lectivo}', "CadernetaController_copy@store");

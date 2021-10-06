@@ -1,17 +1,20 @@
 <?php
 use App\Http\Controllers\ControladorStatic;
-
+$mes_usar = 0;
 $epoca_usar = 0;
 if(($getEpoca1->estado=="on")){
     $epoca_usar = 1;
+    $mes_usar= 1;
 }
 
 if(($getEpoca2->estado=="on")){
     $epoca_usar = 2;
+    $mes_usar= 4;
 }
 
 if(($getEpoca3->estado=="on")){
     $epoca_usar = 3;
+    $mes_usar= 7;
 }
 
 if(($getEpoca4->estado=="on")){
@@ -24,10 +27,12 @@ if(($getEpoca5->estado=="on")){
 
 if(($getEpoca1->estado=="off")){
 $epoca_usar = 2;
+$mes_usar= 4;
 }
 
 if(($getEpoca1->estado=="off") && ($getEpoca2->estado=="off")){
     $epoca_usar = 3;
+    $mes_usar= 7;
 }
 
 if(($getEpoca1->estado=="off") && ($getEpoca2->estado=="off") && ($getEpoca3->estado=="off")){
@@ -40,10 +45,12 @@ if(($getEpoca1->estado=="off") && ($getEpoca2->estado=="off") && ($getEpoca3->es
 
 if(($getEpoca1->estado=="off") && ($getEpoca2->estado=="off") && ($getEpoca3->estado=="off") && ($getEpoca4->estado=="off") && ($getEpoca5->estado=="off")){
     $epoca_usar = 1;
+    $mes_usar= 1;
 }
 
 if(($getEpoca1->estado=="on") && ($getEpoca2->estado=="on") && ($getEpoca3->estado=="on") && ($getEpoca4->estado=="on") && ($getEpoca5->estado=="on")){
     $epoca_usar = 1;
+    $mes_usar= 1;
 }
 
 
@@ -111,7 +118,7 @@ if(($getEpoca1->estado=="on") && ($getEpoca2->estado=="on") && ($getEpoca3->esta
                                         Ano: {{$horario->ano_lectivo}} &nbsp;&nbsp; <b>[ {{$numero_estudantes}} ]</b>
                                         <hr/>
                                        <div class="operacoes">
-                                       <a href="/cadernetas/ejamensal/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}/{{$epoca_usar}}/1" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="" data-original-title="Notas do Mês">
+                                       <a href="/cadernetas/ejamensal/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}/{{$epoca_usar}}/{{$mes_usar}}/1" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="" data-original-title="Notas do Mês">
                                             <i class="icofont icofont-edit-alt"></i>
                                         </a>&nbsp;
                                         <a href="/cadernetas/ejatrimestral/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}/{{$epoca_usar}}" type="button" class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="" data-original-title="Notas do Trimestre">

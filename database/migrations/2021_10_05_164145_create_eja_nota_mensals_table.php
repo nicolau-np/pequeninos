@@ -49,6 +49,10 @@ class CreateEjaNotaMensalsTable extends Migration
             $table->decimal('pa_media',4,2)->nullable();
             $table->decimal('tp_media',4,2)->nullable();
 
+            //total
+            $table->decimal('total',4,2)->nullable();
+            
+            $table->bigInteger('mes');
             $table->bigInteger('epoca');
             $table->string('estado');
             $table->string('ano_lectivo');

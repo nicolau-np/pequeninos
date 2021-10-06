@@ -65,10 +65,10 @@ use App\Http\Controllers\ControladorStatic;
 
 
                     <div class="col-md-8">
-                        <a href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/{{session('epoca')}}/1" class="@if($getSemana==1) btn btn-primary @else btn btn-inverse @endif">1ª SEMANA</a>&nbsp;&nbsp;
-                        <a href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/{{session('epoca')}}/2" class="@if($getSemana==2) btn btn-primary @else btn btn-inverse @endif">2ª SEMANA</a>&nbsp;&nbsp;
-                        <a href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/{{session('epoca')}}/3" class="@if($getSemana==3) btn btn-primary @else btn btn-inverse @endif">3ª SEMANA</a>&nbsp;&nbsp;
-                        <a href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/{{session('epoca')}}/4" class="@if($getSemana==4) btn btn-primary @else btn btn-inverse @endif">4ª SEMANA</a>&nbsp;&nbsp;
+                    <a href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/{{session('epoca')}}/{{$getMes}}/1" class="@if($getSemana==1) btn btn-primary @else btn btn-inverse @endif">1ª SEMANA</a>&nbsp;&nbsp;
+                        <a href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/{{session('epoca')}}/{{$getMes}}/2" class="@if($getSemana==2) btn btn-primary @else btn btn-inverse @endif">2ª SEMANA</a>&nbsp;&nbsp;
+                        <a href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/{{session('epoca')}}/{{$getMes}}/3" class="@if($getSemana==3) btn btn-primary @else btn btn-inverse @endif">3ª SEMANA</a>&nbsp;&nbsp;
+                        <a href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/{{session('epoca')}}/{{$getMes}}/4" class="@if($getSemana==4) btn btn-primary @else btn btn-inverse @endif">4ª SEMANA</a>&nbsp;&nbsp;
                     </div>
 
                     <div class="col-lg-12 col-xl-12">
@@ -77,19 +77,43 @@ use App\Http\Controllers\ControladorStatic;
                         <ul class="nav nav-tabs md-tabs tabs-left b-none" role="tablist">
                             @if ($getEpoca1->estado!="off")
                             <li class="nav-item">
-                                <a class="nav-link @if(session('epoca')=="1") active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/1/1">1º MÊS</a>
+                                <a class="nav-link @if((session('epoca')=="1") && ($getMes==1)) active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/1/1/1">1º MÊS</a>
+                                <div class="slide"></div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @if((session('epoca')=="1") && ($getMes==2)) active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/1/2/1">2º MÊS</a>
+                                <div class="slide"></div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @if((session('epoca')=="1") && ($getMes==3)) active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/1/3/1">3º MÊS</a>
                                 <div class="slide"></div>
                             </li>
                             @endif
                             @if ($getEpoca2->estado!="off")
                             <li class="nav-item">
-                                <a class="nav-link @if(session('epoca')=="2") active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/2/1">2º MÊS</a>
+                                <a class="nav-link @if((session('epoca')=="2") && ($getMes==4)) active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/2/4/1">4º MÊS</a>
+                                <div class="slide"></div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @if((session('epoca')=="2") && ($getMes==5)) active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/2/5/1">5º MÊS</a>
+                                <div class="slide"></div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @if((session('epoca')=="2") && ($getMes==6)) active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/2/6/1">6º MÊS</a>
                                 <div class="slide"></div>
                             </li>
                             @endif
                             @if ($getEpoca3->estado!="off")
                             <li class="nav-item">
-                                <a class="nav-link @if(session('epoca')=="3") active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/3/1">3º MÊS</a>
+                                <a class="nav-link @if((session('epoca')=="3") && ($getMes==7)) active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/3/7/1">7º MÊS</a>
+                                <div class="slide"></div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @if((session('epoca')=="3") && ($getMes==8)) active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/3/8/1">8º MÊS</a>
+                                <div class="slide"></div>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link @if((session('epoca')=="3") && ($getMes==9)) active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/3/9/1">9º MÊS</a>
                                 <div class="slide"></div>
                             </li>
                             @endif

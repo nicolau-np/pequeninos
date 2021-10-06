@@ -42,6 +42,10 @@ class EjaNotaMensal extends Model
         'pa_media',
         'tp_media',
 
+        //total
+        'total',
+
+        'mes',
         'epoca',
         'estado',
         'ano_lectivo',

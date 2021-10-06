@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Classe;
 use App\Curso;
 use App\Disciplina;
+use App\EjaNotaMensal;
 use App\Encarregado;
 use App\Estudante;
 use App\Finals;
@@ -163,7 +164,8 @@ class AjaxController extends Controller
         return view('ajax_loads.searchFuncionarios', $data);
     }
 
-    public function searchUsuarios(Request $request){
+    public function searchUsuarios(Request $request)
+    {
         $usuarios  = User::whereHas('pessoa', function ($query) use ($request) {
             $query->where('nome', 'LIKE', "%{$request->search_text}%");
         })->limit(5)->get();
@@ -704,6 +706,89 @@ class AjaxController extends Controller
         }
     }
 
+    public function updateAV_mensal(Request $request)
+    {
+        $request->validate([
+            'valor' => ['required', 'numeric', 'min:0', 'max:1'],
+            'campo' => ['required', 'string', 'min:2', 'max:3'],
+            'id_mensal' => ['required', 'integer', 'min:1'],
+        ]);
+        //verificar se mudou os campos
+
+        //verifica se mudou o id do mes
+        $mensal = EjaNotaMensal::find($request->id_mensal);
+        if (!$mensal) {
+            return null;
+        }
+
+        //verificando se o professor e dono desta turma
+        if (Session::has('id_funcionario')) {
+            //verificando horario e funcionario
+            $data['where_horario'] = [
+                'id_funcionario' => Session::get('id_funcionario'),
+                'id_turma' => $mensal->estudante->id_turma,
+                'id_disciplina' => $mensal->id_disciplina,
+                'ano_lectivo' => $mensal->ano_lectivo,
+                'estado' => "visivel"
+            ];
+
+            $horario = Horario::where($data['where_horario'])->first();
+            if (!$horario) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+
+        //criando campos
+        $campo = "" . $request->campo; //campo de avaliacao
+        $data['mensal'] = [
+            "$campo" => $request->valor,
+        ];
+
+        //salvando a nota avaliacao
+        $mensal = EjaNotaMensal::find($request->id_mensal)->update($data['mensal']);
+        if ($mensal) {
+            echo " \\lancou avaliacao\\ ";
+        } else {
+            return null;
+        }
+
+        //efectuar os calculos a alteracao de uma nota
+        $mensal = EjaNotaMensal::find($request->id_mensal);
+        if (!$mensal) {
+            return null;
+        }
+
+        $somas = 0;
+        $campo_media = null;
+        //campos de tpc
+        if (($campo == "tpc1") || ($campo == "tpc2") || ($campo == "tpc3") || ($campo == "tpc4")) {
+            $somas = $mensal->tpc1 + $mensal->tpc2 + $mensal->tpc3 + $mensal->tpc4;
+            $campo_media = "tpc_media";
+        } elseif (($campo == "oc1") || ($campo == "oc2") || ($campo == "oc3") || ($campo == "oc4")) {
+            $somas = $mensal->oc1 + $mensal->oc2 + $mensal->oc3 + $mensal->oc4;
+            $campo_media = "tpc_media";
+        }
+
+        $media_mensal = EjaNotaMensal::calc_medias_mensais($somas);
+        $data['media_mensal'] = [
+            "$campo_media" => $media_mensal,
+        ];
+
+        //salvando a nota media
+        $mensal = EjaNotaMensal::find($request->id_mensal)->update($data['media_mensal']);
+        if ($mensal) {
+            echo " \\lancou avaliacao\\ ";
+        } else {
+            return null;
+        }
+    }
+
+    public function updateTP_mensal(Request $request)
+    {
+    }
+
     public function getCursoEnsino(Request $request)
     {
         Session::forget('disciplinas');
@@ -729,13 +814,5 @@ class AjaxController extends Controller
         ];
 
         return view('ajax_loads.getGrades', $data);
-    }
-
-    public function updateAV_mensal(Request $request){
-
-    }
-
-    public function updateTP_mensal(Request $request){
-
     }
 }

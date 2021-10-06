@@ -34,4 +34,8 @@ class EjaNotaTrimestral extends Model
     public function disciplina(){
         return $this->belongsTo(Disciplina::class, 'id_disciplina', 'id');
     }
+
+    public static function subtotal(){
+        
+    }
 }

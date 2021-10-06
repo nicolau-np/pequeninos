@@ -54,18 +54,21 @@ use App\Http\Controllers\ControladorStatic;
                     @endif
                     <div class="col-md-12">
                         <p style="font-size: 14px;">
-                            <label class="badge badge-success">TPC => TAREFA DE CASA</label>&nbsp;&nbsp;&nbsp;
-                            <label class="badge badge-primary">OC => ORGANIZAÇÃO DO CADERNO</label>&nbsp;&nbsp;&nbsp;
-                            <label class="badge badge-danger">PA => PARTICIPAÇÃO NAS AULAS</label>&nbsp;&nbsp;&nbsp;
-                            <label class="badge badge-info">PG => PARTICIPAÇÃO NOS GRUPOS</label>&nbsp;&nbsp;&nbsp;
-                            <label class="badge badge-warning">TP => TESTE DO PROFESSOR</label>&nbsp;&nbsp;&nbsp;
+                            <label class="badge badge-success">TPC=> [0-1] => TAREFA DE CASA</label>&nbsp;&nbsp;&nbsp;
+                            <label class="badge badge-primary">OC=> [0-1] => ORGANIZAÇÃO DO CADERNO</label>&nbsp;&nbsp;&nbsp;
+                            <label class="badge badge-danger">PA=> [0-1] => PARTICIPAÇÃO NAS AULAS</label>&nbsp;&nbsp;&nbsp;
+                            <label class="badge badge-info">PG=> [0-1] => PARTICIPAÇÃO NOS GRUPOS</label>&nbsp;&nbsp;&nbsp;
+                            <label class="badge badge-warning">TP=> [0-10] => TESTE DO PROFESSOR</label>&nbsp;&nbsp;&nbsp;
                         </p>
 
                     </div>
 
 
-                    <div class="col-md-8 float-right">
-                        meses
+                    <div class="col-md-8">
+                        <a href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/{{session('epoca')}}/1" class="@if($getSemana==1) btn btn-primary @else btn btn-inverse @endif">1ª SEMANA</a>&nbsp;&nbsp;
+                        <a href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/{{session('epoca')}}/2" class="@if($getSemana==2) btn btn-primary @else btn btn-inverse @endif">2ª SEMANA</a>&nbsp;&nbsp;
+                        <a href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/{{session('epoca')}}/3" class="@if($getSemana==3) btn btn-primary @else btn btn-inverse @endif">3ª SEMANA</a>&nbsp;&nbsp;
+                        <a href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/{{session('epoca')}}/4" class="@if($getSemana==4) btn btn-primary @else btn btn-inverse @endif">4ª SEMANA</a>&nbsp;&nbsp;
                     </div>
 
                     <div class="col-lg-12 col-xl-12">

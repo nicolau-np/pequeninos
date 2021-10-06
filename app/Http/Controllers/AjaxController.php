@@ -810,6 +810,13 @@ class AjaxController extends Controller
             return null;
         }
 
+          /*colocar calculo do semestre sempre que fazer alteracao aqui */
+
+        /**fim */
+
+        /*colocar calculo do final sempre que fazer alteracao aqui */
+
+        /**fim */
     }
 
     public function updateTP_mensal(Request $request)
@@ -903,6 +910,14 @@ class AjaxController extends Controller
         } else {
             return null;
         }
+
+        /*colocar calculo do semestre sempre que fazer alteracao aqui */
+
+        /**fim */
+
+        /*colocar calculo do final sempre que fazer alteracao aqui */
+
+        /**fim */
     }
 
     public function getCursoEnsino(Request $request)

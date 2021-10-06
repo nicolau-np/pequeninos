@@ -7,7 +7,9 @@ use App\BloqueioEpoca;
 use App\CadeiraExame;
 use App\CadeiraRecurso;
 use App\Disciplina;
+use App\EjaNotaFinal;
 use App\EjaNotaMensal;
+use App\EjaNotaTrimestral;
 use App\Estudante;
 use App\Finals;
 use App\Funcionario;
@@ -375,7 +377,7 @@ class CadernetaController_copy extends Controller
             'epocaCAD' => $epoca,
             'id_ensinoCAD' => $id_ensino,
             'classeCAD' => $classe,
-            'getSemanaCAD'=>$semana,
+            'getSemanaCAD' => $semana,
         ];
         //guardando valores na secao
         Session::put($data2);
@@ -405,10 +407,153 @@ class CadernetaController_copy extends Controller
             'getEpoca1' => $estado_epoca1,
             'getEpoca2' => $estado_epoca2,
             'getEpoca3' => $estado_epoca3,
-            'getSemana'=>$semana,
+            'getSemana' => $semana,
         ];
 
-        return view('caderneta.ensinos.ensino_ejamensal_7_9.blade', $data);
+        return view('caderneta.ensinos.ensino_ejamensal_7_9', $data);
+    }
+
+    public function ejatrimestral($id_turma, $id_disciplina, $ano_lectivo, $epoca)
+    {
+        //verificar se a epoca existe
+        if (($epoca != 1) && ($epoca != 2) && ($epoca != 3) && ($epoca != 4) && ($epoca != 5)) {
+            return back()->with(['error' => "Não encontrou epoca"]);
+        } else {
+            Session::put('epoca', $epoca);
+        }
+
+        //verificando se a epoca está bloqueada
+        $bloqueios = BloqueioEpoca::where(['epoca' => $epoca])->first();
+        if ($bloqueios->estado == "off") {
+            return back()->with(['error' => "Epoca bloqueiada"]);
+        }
+
+        //veirficar turma se existe
+        $id_ensino = null;
+        $turma = Turma::find($id_turma);
+        if (!$turma) {
+            return back()->with(['error' => "Não encontrou turma"]);
+        }
+        //buscando ensino atraves de turma
+        $id_ensino = $turma->classe->id_ensino;
+        $classe = $turma->classe->classe;
+
+        //pegando ano lectivo e verificando
+        $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
+        if (!$ano_lectivos) {
+            return back()->with(['error' => "Não encontrou ano lectivo"]);
+        }
+
+        //negar se o ano lectivo ja estiver bloqueado
+        if ($ano_lectivos->estado == "off") {
+            return back()->with(['error' => "Sem permissão de fazer lançamentos para esta turma"]);
+        }
+
+        //verificando disciplina
+        $disciplina = Disciplina::find($id_disciplina);
+        if (!$disciplina) {
+            return back()->with(['error' => "Não encontrou disciplina"]);
+        }
+
+        //verificando se o professor e dono desta turma
+        if (Session::has('id_funcionario')) {
+            //verificando horario e funcionario
+            $data['where_horario'] = [
+                'id_funcionario' => Session::get('id_funcionario'),
+                'id_turma' => $id_turma,
+                'id_disciplina' => $id_disciplina,
+                'ano_lectivo' => $ano_lectivo,
+                'estado' => "visivel"
+            ];
+
+            $horario = Horario::where($data['where_horario'])->first();
+            if (!$horario) {
+                return back()->with(['error' => "Não é professor desta turma"]);
+            }
+        } else {
+            return back()->with(['error' => "Deve iniciar sessão"]);
+        }
+        //data
+        $data2 = [
+            'id_disciplinaCAD' => $id_disciplina,
+            'id_turmaCAD' => $id_turma,
+            'ano_lectivoCAD' => $ano_lectivo,
+            'epocaCAD' => $epoca,
+            'id_ensinoCAD' => $id_ensino,
+            'classeCAD' => $classe,
+        ];
+        //guardando valores na secao
+        Session::put($data2);
+
+
+        $trimestral = null;
+        $global = null;
+
+        //pegando dados trimestrais para exibir na view
+        if (($epoca != 4) && ($epoca != 5)) {
+
+            $trimestral = EjaNotaTrimestral::whereHas('estudante', function ($query) use ($data2) {
+                $query->where('id_turma', $data2['id_turmaCAD']);
+                $query->where('ano_lectivo', $data2['ano_lectivoCAD']);
+            })->where(['epoca' => $data2['epocaCAD'], 'id_disciplina' => $data2['id_disciplinaCAD']])
+                ->get()->sortBy('estudante.numero');
+        } else {
+            //pegando dados finais para exibir na view
+            $global = EjaNotaFinal::whereHas('estudante', function ($query) use ($data2) {
+                $query->where('id_turma', $data2['id_turmaCAD']);
+                $query->where('ano_lectivo', $data2['ano_lectivoCAD']);
+            })->where(['id_disciplina' => $data2['id_disciplinaCAD']])
+                ->get()->sortBy('estudante.numero');
+        }
+
+        //pegando todos os valores dos bloqueios dos trimestres
+        $estado_epoca1 = BloqueioEpoca::where(['epoca' => 1])->first();
+        $estado_epoca2 = BloqueioEpoca::where(['epoca' => 2])->first();
+        $estado_epoca3 = BloqueioEpoca::where(['epoca' => 3])->first();
+        $estado_epoca4 = BloqueioEpoca::where(['epoca' => 4])->first();
+        $estado_epoca5 = BloqueioEpoca::where(['epoca' => 5])->first();
+
+        //verificar cadeiras que tem exame
+        $cadeira_exame = false;
+        $cadeira_exame = CadeiraExame::where([
+            'id_curso' => $turma->id_curso,
+            'id_classe' => $turma->id_classe,
+            'id_disciplina' => $id_disciplina,
+            'estado' => "on",
+        ])->first();
+
+        //verificar cadeiras que tem exame
+        $cadeira_recurso = false;
+        $cadeira_recurso = CadeiraRecurso::where([
+            'id_curso' => $turma->id_curso,
+            'id_classe' => $turma->id_classe,
+            'id_disciplina' => $id_disciplina,
+            'estado' => "on",
+        ])->first();
+
+        $data = [
+            'title' => "Caderneta",
+            'type' => "mobile",
+            'menu' => "Caderneta",
+            'submenu' => "Lançamento",
+            'getHorario' => $horario,
+            'getId_turma' => $id_turma,
+            'getId_disciplina' => $id_disciplina,
+            'getAno_lectivo' => $ano_lectivo,
+
+            'getTrimestral' => $trimestral,
+            'getGlobal' => $global,
+            'getEpoca1' => $estado_epoca1,
+            'getEpoca2' => $estado_epoca2,
+            'getEpoca3' => $estado_epoca3,
+            'getEpoca4' => $estado_epoca4,
+            'getEpoca5' => $estado_epoca5,
+            'getCadeiraRecurso' => $cadeira_recurso,
+            'getCadeiraExame' => $cadeira_exame,
+        ];
+
+        return view('caderneta.ensinos.ensino_ejatrimestral_7_9', $data);
+
     }
 
     public function store_copy_ejamensal($id_turma, $id_disciplina, $epoca, $ano_lectivo)

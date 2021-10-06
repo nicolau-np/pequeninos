@@ -408,7 +408,7 @@ class CadernetaController_copy extends Controller
             'getSemana'=>$semana,
         ];
 
-        return view('caderneta.ensinos.ejamensal', $data);
+        return view('caderneta.ensinos.ensino_ejamensal_7_9.blade', $data);
     }
 
     public function store_copy_ejamensal($id_turma, $id_disciplina, $epoca, $ano_lectivo)

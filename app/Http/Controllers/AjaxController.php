@@ -794,6 +794,75 @@ class AjaxController extends Controller
 
     public function updateTP_mensal(Request $request)
     {
+        $request->validate([
+            'valor' => ['required', 'numeric', 'min:0', 'max:10'],
+            'campo' => ['required', 'string', 'min:2', 'max:3'],
+            'id_mensal' => ['required', 'integer', 'min:1'],
+        ]);
+        //verificar se mudou os campos
+
+        //verifica se mudou o id do mes
+        $mensal = EjaNotaMensal::find($request->id_mensal);
+        if (!$mensal) {
+            return null;
+        }
+
+        //verificando se o professor e dono desta turma
+        if (Session::has('id_funcionario')) {
+            //verificando horario e funcionario
+            $data['where_horario'] = [
+                'id_funcionario' => Session::get('id_funcionario'),
+                'id_turma' => $mensal->estudante->id_turma,
+                'id_disciplina' => $mensal->id_disciplina,
+                'ano_lectivo' => $mensal->ano_lectivo,
+                'estado' => "visivel"
+            ];
+
+            $horario = Horario::where($data['where_horario'])->first();
+            if (!$horario) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+
+        //criando campos
+        $campo = "" . $request->campo; //campo de avaliacao
+        $data['mensal'] = [
+            "$campo" => $request->valor,
+        ];
+
+        //salvando a nota avaliacao
+        $mensal = EjaNotaMensal::find($request->id_mensal)->update($data['mensal']);
+        if ($mensal) {
+            echo " \\lancou avaliacao\\ ";
+        } else {
+            return null;
+        }
+
+        //efectuar os calculos a alteracao de uma nota
+        $mensal = EjaNotaMensal::find($request->id_mensal);
+        if (!$mensal) {
+            return null;
+        }
+
+
+        //campos de tpc
+        $somas = $mensal->tp1 + $mensal->tp2 + $mensal->tp3 + $mensal->tp4;
+        $campo_media = "tp_media";
+
+        $media_mensal = EjaNotaMensal::calc_medias_mensais($somas);
+        $data['media_mensal'] = [
+            "$campo_media" => $media_mensal,
+        ];
+
+        //salvando a nota media
+        $mensal = EjaNotaMensal::find($request->id_mensal)->update($data['media_mensal']);
+        if ($mensal) {
+            echo " \\lancou media\\ ";
+        } else {
+            return null;
+        }
     }
 
     public function getCursoEnsino(Request $request)

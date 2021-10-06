@@ -790,6 +790,26 @@ class AjaxController extends Controller
             return null;
         }
 
+        //calculanco total
+        $mensal = EjaNotaMensal::find($request->id_mensal);
+        if (!$mensal) {
+            return null;
+        }
+
+        $total = EjaNotaMensal::calc_total_mensal($mensal->tpc_media, $mensal->oc_media, $mensal->pg_media, $mensal->pa_media, $mensal->tp_media);
+
+        $data['total'] = [
+            'total'=>$total,
+        ];
+
+        //salvando a nota total
+        $mensal = EjaNotaMensal::find($request->id_mensal)->update($data['total']);
+        if ($mensal) {
+            echo " \\lancou total\\ ";
+        } else {
+            return null;
+        }
+
     }
 
     public function updateTP_mensal(Request $request)
@@ -860,6 +880,26 @@ class AjaxController extends Controller
         $mensal = EjaNotaMensal::find($request->id_mensal)->update($data['media_mensal']);
         if ($mensal) {
             echo " \\lancou media\\ ";
+        } else {
+            return null;
+        }
+
+        //calculanco total
+        $mensal = EjaNotaMensal::find($request->id_mensal);
+        if (!$mensal) {
+            return null;
+        }
+
+        $total = EjaNotaMensal::calc_total_mensal($mensal->tpc_media, $mensal->oc_media, $mensal->pg_media, $mensal->pa_media, $mensal->tp_media);
+
+        $data['total'] = [
+            'total'=>$total,
+        ];
+
+        //salvando a nota total
+        $mensal = EjaNotaMensal::find($request->id_mensal)->update($data['total']);
+        if ($mensal) {
+            echo " \\lancou total\\ ";
         } else {
             return null;
         }

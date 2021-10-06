@@ -325,6 +325,7 @@ Route::group(['prefix' => 'cadernetas', 'middleware' => "prof"], function () {
     Route::get('/store/{id_turma}/{id_disciplina}/{ano_lectivo}', "CadernetaController_copy@store");
     Route::get('/store_copy/{id_turma}/{id_disciplina}/{epoca}/{ano_lectivo}', "CadernetaController_copy@store_copy");
     Route::get('/store_copy_ejamensal/{id_turma}/{id_disciplina}/{epoca}/{ano_lectivo}', "CadernetaController_copy@store_copy_ejamensal");
+    Route::get('/store_copy_ejatrimestral/{id_turma}/{id_disciplina}/{epoca}/{ano_lectivo}', "CadernetaController_copy@store_copy_ejatrimestral");
 
     Route::get('/printer/{id_turma}/{id_disciplina}/{ano_lectivo}', "RelatorioController@minipauta");
 });

@@ -768,7 +768,13 @@ class AjaxController extends Controller
             $campo_media = "tpc_media";
         } elseif (($campo == "oc1") || ($campo == "oc2") || ($campo == "oc3") || ($campo == "oc4")) {
             $somas = $mensal->oc1 + $mensal->oc2 + $mensal->oc3 + $mensal->oc4;
-            $campo_media = "tpc_media";
+            $campo_media = "oc_media";
+        }elseif (($campo == "pg1") || ($campo == "pg2") || ($campo == "pg3") || ($campo == "pg4")) {
+            $somas = $mensal->pg1 + $mensal->pg2 + $mensal->pg3 + $mensal->pg4;
+            $campo_media = "pg_media";
+        }elseif (($campo == "pa1") || ($campo == "pa2") || ($campo == "pa3") || ($campo == "pa4")) {
+            $somas = $mensal->pa1 + $mensal->pa2 + $mensal->pa3 + $mensal->pa4;
+            $campo_media = "pa_media";
         }
 
         $media_mensal = EjaNotaMensal::calc_medias_mensais($somas);

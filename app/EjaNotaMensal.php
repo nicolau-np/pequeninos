@@ -51,18 +51,26 @@ class EjaNotaMensal extends Model
         'ano_lectivo',
     ];
 
-    public function estudante(){
+    public function estudante()
+    {
         return $this->belongsTo(Estudante::class, 'id_estudante', 'id');
     }
 
-    public function disciplina(){
+    public function disciplina()
+    {
         return $this->belongsTo(Disciplina::class, 'id_disciplina', 'id');
     }
 
-    public static function calc_medias_mensais($somas){
-        $media = $somas/4;
+    public static function calc_medias_mensais($somas)
+    {
+        $media = $somas / 4;
         return $media;
     }
 
+    public static function calc_total_mensal($tpc_media, $oc_media, $pg_media, $pa_media, $tp_media)
+    {
+        $total = $tpc_media + $oc_media + $pg_media + $pa_media + $tp_media;
 
+        return $total;
+    }
 }

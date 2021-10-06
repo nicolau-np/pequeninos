@@ -30,7 +30,7 @@ use App\Http\Controllers\ControladorStatic;
                     {{$getHorario->ano_lectivo}}
                     <i class="ti-angle-right"></i>
 
-                    <a href="/cadernetas/store_copy_ejamensal/{{$getHorario->id_turma}}/{{$getHorario->id_disciplina}}/{{session('epoca')}}/{{$getHorario->ano_lectivo}}"><i class="ti-reload"></i></a>
+                    <a href="/cadernetas/store_copy_ejamensal/{{$getHorario->id_turma}}/{{$getHorario->id_disciplina}}/{{session('epoca')}}/{{$getMes}}/{{$getHorario->ano_lectivo}}"><i class="ti-reload"></i></a>
 
                     </h5>
                     <span></span>

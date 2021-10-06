@@ -301,7 +301,8 @@ class CadernetaController_copy extends Controller
             'epocaCAD' => $epoca,
             'id_ensinoCAD' => $id_ensino,
             'classeCAD' => $classe,
-            'getSemanaCAD' => $semana,
+            'semanaCAD' => $semana,
+            'mesCAD'=>$mes,
         ];
         //guardando valores na secao
         Session::put($data2);
@@ -314,7 +315,7 @@ class CadernetaController_copy extends Controller
         $mensal = EjaNotaMensal::whereHas('estudante', function ($query) use ($data2) {
             $query->where('id_turma', $data2['id_turmaCAD']);
             $query->where('ano_lectivo', $data2['ano_lectivoCAD']);
-        })->where(['epoca' => $data2['epocaCAD'], 'id_disciplina' => $data2['id_disciplinaCAD']])
+        })->where(['epoca' => $data2['epocaCAD'], 'id_disciplina' => $data2['id_disciplinaCAD'], 'mes'=>$data2['mesCAD']])
             ->get()->sortBy('estudante.numero');
 
         $data = [
@@ -642,9 +643,10 @@ class CadernetaController_copy extends Controller
         }
     }
 
-    public function store_copy_ejamensal($id_turma, $id_disciplina, $epoca, $ano_lectivo)
+    public function store_copy_ejamensal($id_turma, $id_disciplina, $epoca, $mes, $ano_lectivo)
     {
         if (($epoca == 1) || ($epoca == 2) || ($epoca == 3)) {
+            if(($mes==1) || ($mes==2) || ($mes==3) || ($mes==4) || ($mes==5) || ($mes==6) || ($mes==7) || ($mes==8) || ($mes==9)){
 
             $turma = Turma::find($id_turma);
             if (!$turma) {
@@ -687,6 +689,7 @@ class CadernetaController_copy extends Controller
             $data['mensal'] = [
                 'id_estudante' => null,
                 'id_disciplina' => $id_disciplina,
+                'mes'=>$mes,
                 'epoca' => $epoca,
                 'estado' => "on",
                 'ano_lectivo' => $ano_lectivo,
@@ -702,6 +705,7 @@ class CadernetaController_copy extends Controller
             }
 
             return back()->with(['success' => "Actualizou com sucesso"]);
+        }
         } else {
             return back(['success' => "Actualizado com sucesso"]);
         }

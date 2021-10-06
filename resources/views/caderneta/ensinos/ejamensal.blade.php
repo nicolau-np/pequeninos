@@ -62,25 +62,31 @@ use App\Http\Controllers\ControladorStatic;
                         </p>
 
                     </div>
+
+
+                    <div class="col-md-8 float-right">
+                        meses
+                    </div>
+
                     <div class="col-lg-12 col-xl-12">
 
                         <!-- Nav tabs -->
                         <ul class="nav nav-tabs md-tabs tabs-left b-none" role="tablist">
                             @if ($getEpoca1->estado!="off")
                             <li class="nav-item">
-                                <a class="nav-link @if(session('epoca')=="1") active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/1">1º TRIMESTRE</a>
+                                <a class="nav-link @if(session('epoca')=="1") active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/1/1">1º TRIMESTRE</a>
                                 <div class="slide"></div>
                             </li>
                             @endif
                             @if ($getEpoca2->estado!="off")
                             <li class="nav-item">
-                                <a class="nav-link @if(session('epoca')=="2") active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/2">2º TRIMESTRE</a>
+                                <a class="nav-link @if(session('epoca')=="2") active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/2/1">2º TRIMESTRE</a>
                                 <div class="slide"></div>
                             </li>
                             @endif
                             @if ($getEpoca3->estado!="off")
                             <li class="nav-item">
-                                <a class="nav-link @if(session('epoca')=="3") active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/3">3º TRIMESTRE</a>
+                                <a class="nav-link @if(session('epoca')=="3") active @endif" href="/cadernetas/ejamensal/{{$getId_turma}}/{{$getId_disciplina}}/{{$getAno_lectivo}}/3/1">3º TRIMESTRE</a>
                                 <div class="slide"></div>
                             </li>
                             @endif
@@ -97,39 +103,19 @@ use App\Http\Controllers\ControladorStatic;
                                             <thead>
                                                 <tr>
                                                     <th colspan="3">DADOS PESSOAIS</th>
-                                                    <th colspan="5">1ª SEMANA</th>
-                                                    <th colspan="5">2ª SEMANA</th>
-                                                    <th colspan="5">3ª SEMANA</th>
-                                                    <th colspan="5">4ª SEMANA</th>
+                                                    <th colspan="5">{{$getSemana}}ª SEMANA</th>
                                                 </tr>
                                                 <tr>
                                                     <th>Nº</th>
                                                     <th>NOME</th>
                                                     <th>G</th>
 
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
+                                                    <th>TPC</th>
+                                                    <th>OC</th>
+                                                    <th>PA</th>
+                                                    <th>PG</th>
+                                                    <th>TP</th>
 
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
-                                                    <th></th>
                                                 </tr>
                                             </thead>
 
@@ -147,24 +133,6 @@ use App\Http\Controllers\ControladorStatic;
                                                                 <td>{{$loop->iteration}}</td>
                                                                 <td>{{$mensal->estudante->pessoa->nome}}</td>
                                                                 <td>{{$mensal->estudante->pessoa->genero}}</td>
-
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
-                                                                <td></td>
 
                                                                 <td></td>
                                                                 <td></td>

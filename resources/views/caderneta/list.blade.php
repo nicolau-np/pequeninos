@@ -111,7 +111,7 @@ if(($getEpoca1->estado=="on") && ($getEpoca2->estado=="on") && ($getEpoca3->esta
                                         Ano: {{$horario->ano_lectivo}} &nbsp;&nbsp; <b>[ {{$numero_estudantes}} ]</b>
                                         <hr/>
                                        <div class="operacoes">
-                                       <a href="/cadernetas/ejamensal/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}/{{$epoca_usar}}" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="" data-original-title="Notas do Mês">
+                                       <a href="/cadernetas/ejamensal/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}/{{$epoca_usar}}/1" type="button" class="btn btn-primary btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="" data-original-title="Notas do Mês">
                                             <i class="icofont icofont-edit-alt"></i>
                                         </a>&nbsp;
                                         <a href="/cadernetas/ejatrimestral/{{$horario->id_turma}}/{{$horario->id_disciplina}}/{{$horario->ano_lectivo}}/{{$epoca_usar}}" type="button" class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="left" title="" data-original-title="Notas do Trimestre">

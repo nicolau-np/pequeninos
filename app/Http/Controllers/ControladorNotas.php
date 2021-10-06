@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\EjaNotaMensal;
 use App\Finals;
 use App\ObservacaoGeral;
 use App\ObservacaoUnica;
@@ -303,5 +304,17 @@ class ControladorNotas extends Controller
             ->get();
 
         return $trimestal;
+    }
+
+    public static function getNotaMes($id_estudante, $ano_lectivo, $id_disciplina, $epoca, $mes){
+        $data=[
+            'id_estudante' =>$id_estudante,
+            'id_disciplina'=> $id_disciplina,
+            'ano_lectivo' => $ano_lectivo,
+            'epoca'=> $epoca,
+            'mes' =>$mes,
+        ];
+        $nota_mes = EjaNotaMensal::where($data)->first();
+        return $nota_mes;
     }
 }

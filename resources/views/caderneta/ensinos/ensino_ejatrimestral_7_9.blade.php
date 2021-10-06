@@ -1,5 +1,6 @@
 <?php
 use App\Http\Controllers\ControladorStatic;
+use App\Http\Controllers\ControladorNotas;
 ?>
 @extends('layouts.app')
 @section('content')
@@ -100,18 +101,18 @@ use App\Http\Controllers\ControladorStatic;
                                             <thead>
                                                 <tr>
                                                     <th colspan="3">DADOS PESSOAIS</th>
-                                                    <th colspan="3">AVALIAÇÕES</th>
-                                                    <th colspan="2">PROVAS</th>
+                                                    <th colspan="3">NOTAS</th>
+                                                    <th rowspan=2>PROVA</th>
+                                                    <th rowspan="2">TCP</th>
+                                                    <th rowspan="2">AUTAV.</th>
                                                 </tr>
                                                 <tr>
                                                     <th>Nº</th>
                                                     <th>NOME</th>
                                                     <th>G</th>
-                                                    <th>OUT</th>
-                                                    <th>NOV</th>
-                                                    <th>DEZ</th>
-                                                    <th>NPP</th>
-                                                    <th>PT</th>
+                                                    <th>1º MÊS</th>
+                                                    <th>2º MÊS</th>
+                                                    <th>3º MÊS</th>
                                                 </tr>
                                             </thead>
 
@@ -130,22 +131,45 @@ use App\Http\Controllers\ControladorStatic;
                                                                 <td>{{$trimestral->estudante->pessoa->nome}}</td>
                                                                 <td>{{$trimestral->estudante->pessoa->genero}}</td>
 
+                                                                @php
+                                                                    $mes1 = ControladorNotas::getNotaMes($trimestral->id_estudante, $trimestral->ano_lectivo, $trimestral->id_disciplina, $trimestral->epoca, 1);
+                                                                    $mes2 = ControladorNotas::getNotaMes($trimestral->id_estudante, $trimestral->ano_lectivo, $trimestral->id_disciplina, $trimestral->epoca, 2);
+                                                                    $mes3 = ControladorNotas::getNotaMes($trimestral->id_estudante, $trimestral->ano_lectivo, $trimestral->id_disciplina, $trimestral->epoca, 3);
+                                                                @endphp
                                                                 <td>
-                                                                    <input type="number" name="av1" data-id="{{$trimestral->id}}" data-campo="av1" value="{{$trimestral->av1}}" class="form-control avaliacao" />
+                                                                    @if ($mes1->total!=null)
+                                                                    {{$mes1->total}}
+                                                                    @else
+                                                                    ---
+                                                                    @endif
+
                                                                 </td>
                                                                 <td>
-                                                                    <input type="number" name="av2" data-id="{{$trimestral->id}}" data-campo="av2" value="{{$trimestral->av2}}" class="form-control avaliacao" />
+                                                                    @if ($mes2->total!=null)
+                                                                    {{$mes2->total}}
+                                                                    @else
+                                                                    ---
+                                                                    @endif
                                                                 </td>
                                                                 <td>
-                                                                    <input type="number" name="av3" data-id="{{$trimestral->id}}" data-campo="av3" value="{{$trimestral->av3}}" class="form-control avaliacao" />
+                                                                    @if($mes3->total!=null)
+                                                                    {{$mes3->total}}
+                                                                    @else
+                                                                    ---
+                                                                    @endif
                                                                 </td>
 
                                                                 <td>
-                                                                    <input type="number" name="npp" data-id="{{$trimestral->id}}" data-campo="npp" value="{{$trimestral->npp}}" class="form-control prova" />
+                                                                    <input type="number" name="prova" data-id="{{$trimestral->id}}" data-campo="prova" value="{{$trimestral->prova}}" class="form-control prova" />
                                                                 </td>
                                                                 <td>
-                                                                    <input type="number" name="npp" data-id="{{$trimestral->id}}" data-campo="pt" value="{{$trimestral->pt}}" class="form-control prova" />
+                                                                    <input type="number" name="tcp" data-id="{{$trimestral->id}}" data-campo="tcp" value="{{$trimestral->tcp}}" class="form-control tcp" />
                                                                 </td>
+                                                                <td>
+                                                                    <input type="number" name="autoav" data-id="{{$trimestral->id}}" data-campo="autoav" value="{{$trimestral->autoav}}" class="form-control autoav" />
+                                                                </td>
+
+
                                                             </tr>
                                                             @endforeach
                                                         @endif

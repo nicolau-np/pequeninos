@@ -12,6 +12,7 @@ class HistoricEstudante extends Model
         'id_estudante',
         'id_turma',
         'numero',
+        'numero_acesso',
         'estado',
         'observacao_final',
         'obs_pauta',

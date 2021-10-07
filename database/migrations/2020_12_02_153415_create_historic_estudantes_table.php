@@ -19,6 +19,7 @@ class CreateHistoricEstudantesTable extends Migration
             $table->bigInteger('id_estudante')->unsigned()->index();
             $table->bigInteger('id_turma')->unsigned()->index();
             $table->bigInteger('numero')->nullable();
+            $table->string('numero_acesso')->nullable();
             $table->string('estado');
             $table->string('observacao_final')->nullable();
             $table->string('obs_pauta')->nullable();
@@ -42,4 +43,3 @@ class CreateHistoricEstudantesTable extends Migration
         Schema::dropIfExists('historic_estudantes');
     }
 }
-

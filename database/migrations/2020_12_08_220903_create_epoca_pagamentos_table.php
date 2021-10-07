@@ -17,6 +17,8 @@ class CreateEpocaPagamentosTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('id_forma_pagamento')->unsigned()->index();
             $table->string('epoca');
+            $table->bigInteger('numero')->nullable();
+            $table->string('sigla')->nullable();
             $table->timestamps();
         });
 

@@ -11,6 +11,7 @@ class EpocaPagamento extends Model
     protected $fillable = [
         'id_forma_pagamento',
         'epoca',
+        'numero',
     ];
 
     public function forma_pagamento(){

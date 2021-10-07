@@ -432,7 +432,7 @@ $lastYear = ControladorStatic::getLastYear();
 
                                         @if(Auth::user()->nivel_acesso=="admin")
                                         <li class="@if($menu=="Balanços") active @endif">
-                                            <a href="/estatisticas/balancos/list/{{date('Y')}}">
+                                            <a href="/estatisticas/balancos/list/{{$lastYear}}">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.basic-components.breadcrumbs">Balanços</span>
                                                 <span class="pcoded-mcaret"></span>

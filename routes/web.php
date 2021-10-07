@@ -35,6 +35,7 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/getClasses', "AjaxController@getClasses")->name('getClasses');
     Route::post('/getClasses2', "AjaxController@getClasses2")->name('getClasses2');
     Route::post('/getClasses3', "AjaxController@getClasses3")->name('getClasses3');
+    Route::post('/getClasses4', "AjaxController@getClasses4")->name('getClasses4');
     Route::post('/getMunicipios', "AjaxController@getMunicipios")->name('getMunicipios');
     Route::post('/getTurmas', "AjaxController@getTurmas")->name('getTurmas');
     Route::post('/getEncarregados', "AjaxController@getEncarregados")->name('getEncarregados');
@@ -150,7 +151,7 @@ Route::group(['prefix' => 'institucional', 'middleware' => "AdminUser"], functio
             Route::post('/store', "InstitucionalController@conjunta_store");
             Route::get('/edit/{id_observacao}', "InstitucionalController@conjunta_edit");
             Route::get('/update/{id_observacao}', "InstitucionalController@conjunta_update");
-            
+
         });
     });
 

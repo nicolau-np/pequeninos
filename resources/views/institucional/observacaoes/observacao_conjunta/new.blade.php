@@ -79,8 +79,6 @@
 
                             </div>
 
-
-
                         {{Form::close()}}
                    </div>
                 </div>
@@ -110,7 +108,7 @@
             if(data.id_curso!=""){
                $.ajax({
                 type: "post",
-                url: "{{route('getClasses3')}}",
+                url: "{{route('getClasses4')}}",
                 data: data,
                 dataType: "html",
                 success: function (response) {

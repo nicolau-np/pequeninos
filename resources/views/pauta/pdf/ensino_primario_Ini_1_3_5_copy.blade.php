@@ -64,6 +64,9 @@ $getCadeiraRecurso = false;
             background-color: #4680ff;
             color: #fff;
     }
+    table tbody tr td{
+        border: 1px solid #333;
+    }
     .tabela{
         font-size: 9px;
     }

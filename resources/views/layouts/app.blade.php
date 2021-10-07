@@ -634,22 +634,6 @@ $lastYear = ControladorStatic::getLastYear();
 <!-- Accordion js -->
 <script type="text/javascript" src="{{asset('assets/template/pages/accordion/accordion.js')}}"></script>
 
-<script>
-    $(document).ready(function() {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-
-    $(document).ready(function() {
-        $('[data-toggle="popover"]').popover({
-            html: true,
-            content: function() {
-                return $('#primary-popover-content').html();
-            }
-        });
-    });
-
-</script>
-
 </body>
 @else
 @yield('content')

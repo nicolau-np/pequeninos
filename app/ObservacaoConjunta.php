@@ -22,7 +22,4 @@ class ObservacaoConjunta extends Model
         return $this->belongsTo(Classe::class, 'id_classe', 'id');
     }
 
-    public function observacao_conjunta_regra(){
-        return $this->hasMany(ObservacaoConjuntaRegra::class, 'id_observacao_conjunta', 'id');
-    }
 }

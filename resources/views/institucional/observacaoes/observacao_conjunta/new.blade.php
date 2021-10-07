@@ -58,13 +58,21 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-3">
-                                    {{Form::label('disciplina', "Disciplina")}} <span class="text-danger">*</span>
-                                    <span class="load_disciplinas">
-                                        <input type="checkbox" name="disciplinas[]" />
-                                    </span>
+                                    {{Form::label('disciplina1', "Disciplina 1")}} <span class="text-danger">*</span>
+
                                 <div class="erro">
-                                    @if($errors->has('disciplinas'))
-                                    <div class="text-danger">{{$errors->first('disciplinas')}}</div>
+                                    @if($errors->has('disciplina1'))
+                                    <div class="text-danger">{{$errors->first('disciplina1')}}</div>
+                                    @endif
+                                </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    {{Form::label('disciplina2', "Disciplina 2")}} <span class="text-danger">*</span>
+
+                                <div class="erro">
+                                    @if($errors->has('disciplina2'))
+                                    <div class="text-danger">{{$errors->first('disciplina2')}}</div>
                                     @endif
                                 </div>
                                 </div>
@@ -93,7 +101,7 @@
 <!-- botão pesquisar -->
 <div class="btnPesquisar">
 	<div class="btnPesquisarBtn">
-		<a href="/institucional/observacoes/especifica/" class="btn btn-primary btnCircular btnPrincipal" title="Listar"><i class="ti-search"></i></a>
+		<a href="/institucional/observacoes/conjunta/" class="btn btn-primary btnCircular btnPrincipal" title="Listar"><i class="ti-search"></i></a>
 	</div>
 </div>
 

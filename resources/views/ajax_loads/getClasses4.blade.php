@@ -11,16 +11,7 @@
                 _token: "{{ csrf_token() }}"
             };
             if((data.id_classe!="") && (data.id_curso!="")){
-                $.ajax({
-                type: "post",
-                url: "{{route('getTurmas')}}",
-                data: data,
-                dataType: "html",
-                success: function (response) {
-                    $('.load_turmas').html(response);
-                    getDisciplinas(data);
-                }
-            });
+                getDisciplinas(data);
             }
 
         });
@@ -28,7 +19,7 @@
         function getDisciplinas(data){
             $.ajax({
                 type: "post",
-                url: "{{route('getDisciplinasCad2')}}",
+                url: "{{route('getDisciplinasCad3')}}",
                 data: data,
                 dataType: "html",
                 success: function (response) {

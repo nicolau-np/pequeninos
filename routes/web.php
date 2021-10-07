@@ -50,6 +50,7 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/searchEncarregados', "AjaxController@searchEncarregados")->name('searchEncarregados');
     Route::post('/getDisciplinasCad', "AjaxController@getDisciplinasCad")->name('getDisciplinasCad');
     Route::post('/getDisciplinasCad2', "AjaxController@getDisciplinasCad2")->name('getDisciplinasCad2');
+    Route::post('/getDisciplinasCad3', "AjaxController@getDisciplinasCad3")->name('getDisciplinasCad3');
     Route::post('/getHoras', "AjaxController@getHoras")->name('getHoras');
     Route::post('/getFuncionarios', "AjaxController@getFuncionarios")->name('getFuncionarios');
 

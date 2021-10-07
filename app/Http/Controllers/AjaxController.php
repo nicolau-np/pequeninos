@@ -221,6 +221,15 @@ class AjaxController extends Controller
         return view('ajax_loads.getDisciplinasCad2', $data);
     }
 
+    public function getDisciplinasCad3(Request $request)
+    {
+        $disciplinas = Grade::where(['id_curso' => $request->id_curso, 'id_classe' => $request->id_classe])->get();
+        $data = [
+            'getGrade' => $disciplinas,
+        ];
+        return view('ajax_loads.getDisciplinasCad3', $data);
+    }
+
     public function getHoras(Request $request)
     {
         $turma = Turma::find($request->id_turma);

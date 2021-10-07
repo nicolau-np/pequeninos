@@ -150,7 +150,7 @@ Route::group(['prefix' => 'institucional', 'middleware' => "AdminUser"], functio
             Route::post('/store', "InstitucionalController@conjunta_store");
             Route::get('/edit/{id_observacao}', "InstitucionalController@conjunta_edit");
             Route::get('/update/{id_observacao}', "InstitucionalController@conjunta_update");
-            Route::get('/regras/{id_observacao}', "InstitucionalController@conjunta_regras");
+            
         });
     });
 

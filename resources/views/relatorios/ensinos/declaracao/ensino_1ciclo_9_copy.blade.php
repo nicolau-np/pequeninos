@@ -43,6 +43,9 @@ use App\Http\Controllers\ControladorNotas;
             background-color: #4680ff;
             color: #fff;
     }
+    table tbody tr td{
+        border: 1px solid #333;
+    }
     .tabela{
         font-size: 12px;
         margin:auto;
@@ -139,7 +142,7 @@ use App\Http\Controllers\ControladorNotas;
             <div class="segundo-paragrafo">
                 Por ser verdade e me ter sido solicitado, mandei passar a presente declaração que vai por mim assinada e autenticada com o carimbo a óleo, em uso nesta instituição escola.
             </div>
-           
+
         </p>
 
      </div>

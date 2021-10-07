@@ -962,26 +962,6 @@ class InstitucionalController extends Controller
     {
     }
 
-    public function conjunta_regras($id_observacao)
-    {
-        $observacao = ObservacaoConjunta::find($id_observacao);
-        if (!$observacao) {
-            return back()->with(['error' => "Não encontrou"]);
-        }
-
-        $regras = ObservacaoConjuntaRegra::where(['id_observacao_conjunta' => $observacao->id])->get();
-        $data = [
-            'title' => "Observações",
-            'type' => "institucional",
-            'menu' => "Observações",
-            'submenu' => "Regras",
-            'getObservacao' => $observacao,
-            'getRegras' => $regras,
-        ];
-        return view('institucional.observacaoes.observacao_conjunta.regras', $data);
-    }
-
-
     public function recursos_list()
     {
         $recursos = CadeiraRecurso::paginate(8);

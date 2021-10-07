@@ -62,4 +62,12 @@ class Disciplina extends Model
         return $this->hasMany(EjaNotaFinal::class, 'id_disciplina', 'id');
     }
 
+    public function obs_conjunta1(){
+        return $this->hasMany(ObservacaoConjunta::class, 'id_disciplina1', 'id');
+    }
+
+    public function obs_conjunta2(){
+        return $this->hasMany(ObservacaoConjunta::class, 'id_disciplina2', 'id');
+    }
+
 }

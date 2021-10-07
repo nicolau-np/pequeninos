@@ -936,6 +936,9 @@ class InstitucionalController extends Controller
             'disciplina2' => ['required', 'integer', 'min:1'],
         ]);
 
+        if($request->disciplina1 == $request->disciplina2){
+            return back()->with(['error'=>"Disciplinas identicas"]);
+        }
         $data['observacao'] = [
             'id_curso' => $request->curso,
             'id_classe' => $request->classe,

@@ -223,7 +223,9 @@ class AjaxController extends Controller
 
     public function getDisciplinasCad3(Request $request)
     {
-        $disciplinas = Grade::where(['id_curso' => $request->id_curso, 'id_classe' => $request->id_classe])->get();
+        $disciplinas = Disciplina::whereHas('grade', function ($query) use ($request){
+          $query->where(['id_curso' => $request->id_curso, 'id_classe' => $request->id_classe]);
+        })->pluck('disciplina', 'id');
         $data = [
             'getGrade' => $disciplinas,
         ];

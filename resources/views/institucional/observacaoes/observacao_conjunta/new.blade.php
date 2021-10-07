@@ -56,7 +56,7 @@
                                 </div>
 
                             </div>
-                            <div class="row">
+                            <div class="row load_disciplinas">
                                 <div class="col-md-3">
                                     {{Form::label('disciplina1', "Disciplina 1")}} <span class="text-danger">*</span>
                                     {{ Form::select('disciplina1', [], null, ['class'=>"form-control", 'placeholder'=>"Disciplina 1"]) }}

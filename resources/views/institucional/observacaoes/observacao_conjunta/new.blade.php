@@ -43,7 +43,7 @@
                                 </div>
                                 </div>
 
-                                <div class="col-md-2">
+                                <div class="col-md-3">
                                     {{Form::label('classe', "Classe")}} <span class="text-danger">*</span>
                                     <span class="load_classes2">
                                     {{Form::select('classe', [], null, ['class'=>"form-control", 'placeholder'=>"Classe"])}}
@@ -59,7 +59,7 @@
                             <div class="row">
                                 <div class="col-md-3">
                                     {{Form::label('disciplina1', "Disciplina 1")}} <span class="text-danger">*</span>
-
+                                    {{ Form::select('disciplina1', [], null, ['class'=>"form-control", 'placeholder'=>"Disciplina 1"]) }}
                                 <div class="erro">
                                     @if($errors->has('disciplina1'))
                                     <div class="text-danger">{{$errors->first('disciplina1')}}</div>
@@ -69,7 +69,7 @@
 
                                 <div class="col-md-3">
                                     {{Form::label('disciplina2', "Disciplina 2")}} <span class="text-danger">*</span>
-
+                                    {{ Form::select('disciplina2', [], null, ['class'=>"form-control", 'placeholder'=>"Disciplina 2"]) }}
                                 <div class="erro">
                                     @if($errors->has('disciplina2'))
                                     <div class="text-danger">{{$errors->first('disciplina2')}}</div>

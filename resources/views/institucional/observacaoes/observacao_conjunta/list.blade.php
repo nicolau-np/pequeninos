@@ -55,7 +55,6 @@
                                         <td>{{$observacoes->classe->classe}}</td>
                                         <td>{{$observacoes->estado}}</td>
                                         <td>
-                                            <a href="/institucional/observacoes/conjunta/regras/{{$observacoes->id}}" class="btn btn-success btn-sm"><i class="ti-file-alt"></i> Regras</a>
                                             <a href="/institucional/observacoes/conjunta/edit/{{$observacoes->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
                                             <a href="#" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
                                         </td>

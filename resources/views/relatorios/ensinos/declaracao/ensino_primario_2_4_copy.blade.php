@@ -13,6 +13,8 @@ use App\Http\Controllers\ControladorNotas;
         @page{
             font-family: Arial, Helvetica, sans-serif;
             font-size: 12px;
+            line-height: 17.5pt;
+            text-align: justify;
         }
 
         .positivo{
@@ -53,7 +55,7 @@ use App\Http\Controllers\ControladorNotas;
     <div class="cabecalho">
         @include('include.header_docs')
     </div>
-    <br/><br/><br/>
+
     <div class="titulo">
         <p style="text-align: center; font-weight:bold; font-size:18px;">DECLARAÇÃO COM NOTAS</p>
     </div>
@@ -138,9 +140,6 @@ use App\Http\Controllers\ControladorNotas;
                 Por ser verdade e me ter sido solicitado, mandei passar a presente declaração que vai por mim assinada e autenticada com o carimbo a óleo, em uso nesta instituição escola.
             </div>
             <br/>
-            <br/>
-            <br/>
-            <br/>
 
         </p>
 
@@ -158,10 +157,7 @@ use App\Http\Controllers\ControladorNotas;
                 de {{date('Y', strtotime($getDeclaracao->data_emissao))}}
             </span>
             <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+            
             <span class="director">
                 O Director da escola<br/>
             -------------------------------------------------<br/>

@@ -43,6 +43,7 @@ use App\Http\Controllers\ControladorNotas;
     }
     .tabela{
         font-size: 12px;
+        margin:auto;
     }
 
     </style>

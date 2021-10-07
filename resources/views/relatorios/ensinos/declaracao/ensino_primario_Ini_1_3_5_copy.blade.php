@@ -13,6 +13,7 @@ use App\Http\Controllers\ControladorNotas;
         @page{
             font-family: Arial, Helvetica, sans-serif;
             font-size: 12px;
+            
         }
 
         .positivo{
@@ -43,6 +44,7 @@ use App\Http\Controllers\ControladorNotas;
     }
     .tabela{
         font-size: 12px;
+        margin:auto;
     }
 
     </style>

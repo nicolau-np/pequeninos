@@ -18,6 +18,7 @@ class CreateDeclaracaosTable extends Migration
             $table->bigInteger('id_estudante')->unsigned()->index();
             $table->string('tipo');
             $table->text('motivo');
+            $table->string('numero')->nullable();
             $table->date('data_emissao')->nullable();
             $table->string('ano_lectivo');
             $table->timestamps();

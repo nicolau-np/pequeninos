@@ -12,6 +12,7 @@ class Declaracao extends Model
         'id_estudante',
         'tipo',
         'motivo',
+        'numero',
         'data_emissao',
         'ano_lectivo',
     ];

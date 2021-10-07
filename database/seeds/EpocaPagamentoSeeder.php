@@ -23,6 +23,27 @@ class EpocaPagamentoSeeder extends Seeder
         'numero'=>null,
        ],
        //mensal
+
+       [
+        'id_forma_pagamento'=>2,
+        'epoca'=>"Setembro",
+        'numero'=>9,
+       ],
+       [
+        'id_forma_pagamento'=>2,
+        'epoca'=>"Outubro",
+        'numero'=>10,
+       ],
+       [
+        'id_forma_pagamento'=>2,
+        'epoca'=>"Novembro",
+        'numero'=>11,
+       ],
+       [
+        'id_forma_pagamento'=>2,
+        'epoca'=>"Dezembro",
+        'numero'=>12,
+       ],
        [
         'id_forma_pagamento'=>2,
         'epoca'=>"Janeiro",
@@ -62,26 +83,6 @@ class EpocaPagamentoSeeder extends Seeder
         'id_forma_pagamento'=>2,
         'epoca'=>"Agosto",
         'numero'=>8,
-       ],
-       [
-        'id_forma_pagamento'=>2,
-        'epoca'=>"Setembro",
-        'numero'=>9,
-       ],
-       [
-        'id_forma_pagamento'=>2,
-        'epoca'=>"Outubro",
-        'numero'=>10,
-       ],
-       [
-        'id_forma_pagamento'=>2,
-        'epoca'=>"Novembro",
-        'numero'=>11,
-       ],
-       [
-        'id_forma_pagamento'=>2,
-        'epoca'=>"Dezembro",
-        'numero'=>12,
        ],
        //anual
        [

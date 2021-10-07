@@ -11,6 +11,8 @@ class ObservacaoConjunta extends Model
     protected $fillable = [
         'id_curso',
         'id_classe',
+        'id_disciplina1',
+        'id_disciplina2',
         'estado',
     ];
 
@@ -20,6 +22,14 @@ class ObservacaoConjunta extends Model
 
     public function classe(){
         return $this->belongsTo(Classe::class, 'id_classe', 'id');
+    }
+
+    public function disciplina1(){
+        return $this->belongsTo(Disciplina::class, 'id_disciplina1', 'id');
+    }
+
+    public function disciplina2(){
+        return $this->belongsTo(Disciplina::class, 'id_disciplina2', 'id');
     }
 
 }

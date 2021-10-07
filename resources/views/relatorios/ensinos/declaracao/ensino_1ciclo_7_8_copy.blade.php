@@ -13,7 +13,7 @@ use App\Http\Controllers\ControladorNotas;
         @page{
             font-family: Arial, Helvetica, sans-serif;
             font-size: 12px;
-            line-height: 20pt;
+            line-height: 17.5pt;
             text-align: justify;
         }
 
@@ -55,7 +55,7 @@ use App\Http\Controllers\ControladorNotas;
     <div class="cabecalho">
         @include('include.header_docs')
     </div>
-    <br/><br/><br/>
+
     <div class="titulo">
         <p style="text-align: center; font-weight:bold; font-size:18px;">DECLARAÇÃO COM NOTAS</p>
     </div>
@@ -94,7 +94,6 @@ use App\Http\Controllers\ControladorNotas;
                 Concluiu neste Complexo Escolar nº 89M "EDUARDO DOMINGOS SUKUETE" no ano
                 lectivo de [{{$getHistorico->ano_lectivo}}]  a {{$getTurma->classe->classe}}, com a seguinte classificação:
             </div>
-            <br/>
 
             <div class="table-responsive">
 
@@ -139,10 +138,6 @@ use App\Http\Controllers\ControladorNotas;
             <div class="segundo-paragrafo">
                 Por ser verdade e me ter sido solicitado, mandei passar a presente declaração que vai por mim assinada e autenticada com o carimbo a óleo, em uso nesta instituição escola.
             </div>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
 
         </p>
 
@@ -160,10 +155,7 @@ use App\Http\Controllers\ControladorNotas;
                 de {{date('Y', strtotime($getDeclaracao->data_emissao))}}
             </span>
             <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
+
             <span class="director">
                 O Director da escola<br/>
             -------------------------------------------------<br/>

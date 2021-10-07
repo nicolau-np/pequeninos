@@ -40,6 +40,8 @@
                                     <th>#</th>
                                     <th>Curso</th>
                                     <th>Classe</th>
+                                    <th>Disciplina1</th>
+                                    <th>Disciplina2</th>
                                     <th>Estado</th>
                                     <th>Operações</th>
                                 </tr>
@@ -53,6 +55,8 @@
                                         <td>{{$loop->iteration}}</td>
                                         <td>{{$observacoes->curso->curso}}</td>
                                         <td>{{$observacoes->classe->classe}}</td>
+                                        <td>{{$observacoes->disciplina1->disciplina}}</td>
+                                        <td>{{$observacoes->disciplina2->disciplina}}</td>
                                         <td>{{$observacoes->estado}}</td>
                                         <td>
                                             <a href="/institucional/observacoes/conjunta/edit/{{$observacoes->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>

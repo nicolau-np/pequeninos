@@ -33,10 +33,7 @@ class Classe extends Model
         return $this->hasMany(ObservacaoGeral::class, 'id_classe', 'id');
     }
 
-    public function observacao_unica(){
-        return $this->hasMany(ObservacaoUnica::class, 'id_classe', 'id');
-    }
-
+   
     public function observacao_conjunta(){
         return $this->hasMany(ObservacaoConjunta::class, 'id_classe', 'id');
     }

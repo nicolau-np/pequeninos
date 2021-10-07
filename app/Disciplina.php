@@ -42,10 +42,6 @@ class Disciplina extends Model
         return $this->hasMany(NotaFinal::class, 'id_disciplina', 'id');
     }
 
-    public function observacao_unica(){
-        return $this->hasMany(ObservacaoUnica::class, 'id_disciplina', 'id');
-    }
-
     public function observacao_conjunta_regra(){
         return $this->hasMany(ObservacaoConjuntaRegra::class, 'id_disciplina', 'id');
     }

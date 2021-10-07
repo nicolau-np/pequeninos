@@ -932,38 +932,25 @@ class InstitucionalController extends Controller
         $request->validate([
             'curso' => ['required', 'integer', 'min:1'],
             'classe' => ['required', 'integer', 'min:1'],
-            'disciplinas' => ['required'],
-            'disciplinas.*' => ['string']
+            'disciplina1' => ['required', 'integer', 'min:1'],
+            'disciplina2' => ['required', 'integer', 'min:1'],
         ]);
 
         $data['observacao'] = [
             'id_curso' => $request->curso,
             'id_classe' => $request->classe,
+            'id_disciplina1'=> $request->disciplina1,
+            'id_disciplina2'=> $request->disciplina2,
             'estado' => "on",
         ];
 
-        $data['regras'] = [
-            'id_observacao_conjunta' => null,
-            'id_disciplina' => null,
-            'estado' => "on",
-        ];
-
-        if (ObservacaoConjunta::where(['id_curso' => $request->curso, 'id_classe' => $request->classe])->first()) {
+        if (ObservacaoConjunta::where($data['observacao'])->first()) {
             return back()->with(['error' => "Já cadastou"]);
         }
         $observacao = ObservacaoConjunta::create($data['observacao']);
         if ($observacao) {
-            $regras = false;
-            $data['regras']['id_observacao_conjunta'] = $observacao->id;
-            foreach ($request->disciplinas as $disciplinas) {
-                $data['regras']['id_disciplina'] = $disciplinas;
-                if (!ObservacaoConjuntaRegra::where($data['regras'])->first()) {
-                    $regras = ObservacaoConjuntaRegra::create($data['regras']);
-                }
-            }
-            if ($regras) {
                 return back()->with(['success' => "Feito com sucesso"]);
-            }
+
         }
     }
 

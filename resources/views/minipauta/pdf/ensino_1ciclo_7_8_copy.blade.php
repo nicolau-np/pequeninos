@@ -167,6 +167,7 @@ $percent_negativasf = [
         margin-right: 10px;
         margin-top: 10px;
         margin-bottom: 10px;
+
     }
     .mini-cabecalho{
         display: block;
@@ -191,6 +192,9 @@ $percent_negativasf = [
             background-color: #4680ff;
             color: #fff;
     }
+    table tbody tr td{
+        border: 1px solid #333;
+    }
     .tabela{
         font-size: 9px;
     }
@@ -208,6 +212,7 @@ $percent_negativasf = [
     color:#fff;
     font-weight: bold;
 }
+
 </style>
 </head>
 <body>

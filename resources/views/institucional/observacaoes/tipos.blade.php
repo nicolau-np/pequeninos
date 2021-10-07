@@ -48,25 +48,6 @@
                                 </a>
                                 </div>
 
-
-                            <div class="col-md-4 col-xl-4">
-                                <a href="/institucional/observacoes/especifica" style="text-decoration: none;">
-                                    <div class="card widget-card-1">
-                                    <div class="card-block-small">
-                                        <i class="ti-bookmark-alt bg-c-green card1-icon"></i>
-                                    <span class="text-c-blue f-w-600" style="font-size:13px;">Específica</span>
-                                        <h4 style="font-size:17px;"> </h4>
-                                        <div>
-                                            <span class="f-left m-t-10 text-muted">
-                                                <i class="text-c-pink f-16 ti-arrow-circle-right m-r-10"></i>Observações
-                                            </span>
-                                        </div>
-                                    </div>
-                                    </div>
-                                    </a>
-                                    </div>
-
-
                                     <div class="col-md-4 col-xl-4">
                                         <a href="/institucional/observacoes/conjunta" style="text-decoration: none;">
                                             <div class="card widget-card-1">

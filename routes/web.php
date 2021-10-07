@@ -144,14 +144,6 @@ Route::group(['prefix' => 'institucional', 'middleware' => "AdminUser"], functio
             Route::put('/update/{id_observacao}', "InstitucionalController@geral_update");
         });
 
-        /*Route::group(['prefix' => "especifica"], function () {
-            Route::get('/', "InstitucionalController@especifica_list");
-            Route::get('/create', "InstitucionalController@especifica_create");
-            Route::post('/store', "InstitucionalController@especifica_store");
-            Route::get('/edit/{id_observacao}', "InstitucionalController@especifica_edit");
-            Route::put('/update/{id_observacao}', "InstitucionalController@especifica_update");
-        });*/
-
         Route::group(['prefix' => "conjunta"], function () {
             Route::get('/', "InstitucionalController@conjunta_list");
             Route::get('/create', "InstitucionalController@conjunta_create");

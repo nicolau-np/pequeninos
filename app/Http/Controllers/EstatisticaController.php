@@ -18,7 +18,7 @@ class EstatisticaController extends Controller
 
     public function lista_pagamento(){
         $tipo_pagamentos = TipoPagamento::pluck('tipo', 'id');
-        $ano_lectivo = AnoLectivo::pluck('ano_lectivo', 'ano_lectivo');
+        $ano_lectivo = AnoLectivo::orderBy('id', 'desc')->pluck('ano_lectivo', 'ano_lectivo');
         $cursos = Curso::pluck('curso', 'id');
         $data = [
             'title' => "Lista de Pagamentos",

@@ -49,7 +49,7 @@ $getCadeiraRecurso = false;
                     <div class="row">
                        <div class="col-lg-12 col-xl-12">
                        <div class="table-responsive tabela">
-                           <table class="table table-bordered table-striped">
+                           <table class="table table-bordered ">
                               <thead>
 
                                   <tr>

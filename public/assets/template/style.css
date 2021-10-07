@@ -113,22 +113,29 @@ fieldset legend{
 
 .tabela_notas{
     font-size: 12px;
-    overflow-y: auto;
-    height: 110px;
 }
 
-.tabela_notas thead th{
-    position: sticky;
-    top: 0;
-}
 
-.tabela_notas thead th{
-    background-color:#4680ff;
+
+.tabela_notas thead{
+    background-color: #4680ff;
     color: #fff;
-    font-size: 10px;
 }
-.tabela_notas th, td{
-    
+
+.tabela_notas thead tr th {
+    position:sticky;
+    top:0;
+    background-color: #4680ff;
+    color: #fff;
 }
+
+
+
+
+
+
+
+
+
 
 

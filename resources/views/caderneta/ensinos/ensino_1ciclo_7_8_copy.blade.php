@@ -98,6 +98,7 @@ use App\Http\Controllers\ControladorStatic;
                                 <p class="m-0">
 
                                     {{Form::open(['method'=>"post"])}}
+
                                         <table class="table table-bordered tabela_notas">
                                             <thead>
                                                 <tr>
@@ -155,6 +156,7 @@ use App\Http\Controllers\ControladorStatic;
                                                 @endif
                                             </tbody>
                                         </table>
+
                                     {{Form::close()}}
                                  </p>
                             </div>
@@ -305,12 +307,13 @@ use App\Http\Controllers\ControladorStatic;
                                         <thead>
                                             <tr>
                                                 <th colspan="3">DADOS PESSOAIS</th>
-                                                <th rowspan="2">NPE</th>
+                                                <th>PROVA</th>
                                             </tr>
                                             <tr>
                                                 <th>Nº</th>
                                                 <th>NOME</th>
                                                 <th>G</th>
+                                                <th>NPE</th>
                                             </tr>
                                         </thead>
 
@@ -359,12 +362,13 @@ use App\Http\Controllers\ControladorStatic;
                                         <thead>
                                             <tr>
                                                 <th colspan="3">DADOS PESSOAIS</th>
-                                                <th rowspan="2">REC</th>
+                                                <th>PROVA</th>
                                             </tr>
                                             <tr>
                                                 <th>Nº</th>
                                                 <th>NOME</th>
                                                 <th>G</th>
+                                                <th>REC</th>
                                             </tr>
                                         </thead>
 

@@ -26,7 +26,7 @@ use App\Http\Controllers\ControladorNotas;
         </div>
         <br/>
         <div class="titulo">
-            <p style="text-align: center; font-weight:bold; font-size:18px;">DECLARAÇÃO</p>
+        <p style="text-align: center; font-weight:bold; font-size:18px;">DECLARAÇÃO Nº {{str_pad($getDeclaracao->numero, 4, 0, STR_PAD_LEFT)}}/{{$getDeclaracao->ano_emissao}}</p>
          </div>
 
          <div class="corpo">

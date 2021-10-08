@@ -66,6 +66,7 @@
                                             <div class="data">
                                                 <span class="title">Nº:</span> {{$getHistoricoEstudante->numero}}<br/>
                                                 <span class="title">Nº Processo:</span> {{$getHistoricoEstudante->id_estudante}}<br/>
+                                                <span class="title">Nº Acesso:</span> {{$getHistoricoEstudante->numero_acesso}}<br/>
                                                 <span class="title">Curso:</span> {{$getHistoricoEstudante->turma->curso->curso}}<br/>
                                                 <span class="title">Classe:</span> {{$getHistoricoEstudante->turma->classe->classe}}<br/>
                                                 <span class="title">Turma:</span> {{$getHistoricoEstudante->turma->turma}}<br/>

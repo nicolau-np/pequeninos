@@ -29,6 +29,7 @@ ShouldQueue
 
     public function collection(Collection $rows)
     {
+
         $data['pessoa'] = [
             'nome' => null,
             'genero' => null,
@@ -40,6 +41,7 @@ ShouldQueue
             'id_pessoa' => null,
             'id_turma' => Session::get('id_turmaIMP'),
             'numero'=>null,
+            'numero_acesso'=> null,
             'id_encarregado' => 1,
             'estado' => "on",
             'ano_lectivo' => Session::get('ano_lectivoIMP'),
@@ -49,15 +51,22 @@ ShouldQueue
             'id_estudante' => null,
             'id_turma' => Session::get('id_turmaIMP'),
             'numero'=>null,
+            'numero_acesso'=> null,
             'estado' => "on",
             'observacao_final' => null,
             'ano_lectivo' => Session::get('ano_lectivoIMP'),
         ];
         foreach ($rows as $row) {
+
             //convertendo data
             $data_nascimento = date('Y-m-d', strtotime($this->transformData(intval($row['data_nascimento']))));
 
             if (!Pessoa::where(['nome' => $row['nome']])->first()) {
+
+                /*gerar numero aleatorio*/
+                $gerando_aleatorio = str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
+                /*fim*/
+
                 $data['pessoa']['nome'] = $row['nome'];
                 $data['pessoa']['genero'] = $row['genero'];
 
@@ -69,8 +78,15 @@ ShouldQueue
                 $estudante = Estudante::create($data['estudante']);
 
                 $data['historico']['id_estudante'] = $estudante->id;
+                $data['historico']['numero_acesso'] = $gerando_aleatorio."-".$estudante->id;
+                $numero_acesso = $gerando_aleatorio."-".$estudante->id;
                 $data['historico']['numero'] = $row['n'];
                 $historico = HistoricEstudante::create($data['historico']);
+
+                if($historico){
+                    Estudante::find($estudante->id)->update(['numero_acesso'=>$numero_acesso]);
+                }
+
             }
 
         }

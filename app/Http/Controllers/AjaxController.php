@@ -977,13 +977,31 @@ class AjaxController extends Controller
         $horarios = Horario::where(['id_turma' => $turma->id, 'ano_lectivo' => $ano_lectivo, 'estado' => "visivel"])->get();
         //observacao geral
         $obs_geral = ObservacaoGeral::where(['id_curso' => $turma->id_curso, 'id_classe' => $turma->id_classe])->first();
-        if ($obs_geral->count() >= 1) {
+        if ($obs_geral) {
             $observacao_geral = $obs_geral->quantidade_negativas;
         }
-        //observacao conjunta
+
         foreach ($horarios as $horario) {
             //ciclo para listagem de todas as disciplinas que já tem professor nesta turma.
+            $dados_finais = Finals::where(
+                [
+                    'id_estudante' => $historico->id_estudante,
+                    'ano_lectivo' => $historico->ano_lectivo,
+                    'id_disciplina' => $horario->id_disciplina
+                ]
+            )->first(); //pegar os dados finais de cada disciplina
 
+            if ($dados_finais) {
+                //ensino primario nota <=4.99 && 2.99
+                if ($turma->curso->id_ensino == 1) {
+                    if (($dados_finais->rec != null) && ($dados_finais->rec)) { //se fez recurso entao verifica com o valor do recurso
+
+                    }
+                } elseif ($turma->curso->id_ensino >= 1) {
+                }
+
+                //1 ciclo e ensino secundario nota<=9.99 && 4.99
+            }
         }
     }
 

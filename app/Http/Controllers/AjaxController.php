@@ -977,6 +977,9 @@ class AjaxController extends Controller
         $horarios = Horario::where(['id_turma' => $turma->id, 'ano_lectivo' => $ano_lectivo, 'estado' => "visivel"])->get();
         //observacao geral
         $obs_geral = ObservacaoGeral::where(['id_curso' => $turma->id_curso, 'id_classe' => $turma->id_classe])->first();
+        if ($obs_geral->count() >= 1) {
+            $observacao_geral = $obs_geral->quantidade_negativas;
+        }
         //observacao conjunta
         foreach ($horarios as $horario) {
             //ciclo para listagem de todas as disciplinas que já tem professor nesta turma.

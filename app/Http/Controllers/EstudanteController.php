@@ -506,7 +506,7 @@ class EstudanteController extends Controller
         if (!$historico) {
             return back()->with(['error' => "Estudante nao matriculado neste ano lectivo"]);
         }
-        $declaracao = Declaracao::where(['ano_lectivo' => $request->ano_lectivo])->get();
+        $declaracao = Declaracao::where(['ano_emissao' => date('Y')])->get();
         $numero = $declaracao->count() + 1;
         $data = [
             'id_estudante' => $id_estudante,
@@ -567,7 +567,7 @@ class EstudanteController extends Controller
             'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
         ]);
 
-        $transferencia = Transferencia::where(['ano_lectivo' => $request->ano_lectivo])->get();
+        $transferencia = Transferencia::where(['ano_emissao' => date('Y')])->get();
         $numero = $transferencia->count() + 1;
 
         $data = [

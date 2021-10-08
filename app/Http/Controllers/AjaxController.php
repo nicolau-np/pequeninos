@@ -12,6 +12,7 @@ use App\Estudante;
 use App\Finals;
 use App\Funcionario;
 use App\Grade;
+use App\HistoricEstudante;
 use App\Hora;
 use App\Horario;
 use App\Municipio;
@@ -954,6 +955,13 @@ class AjaxController extends Controller
         ]);
 
 
+    }
+
+    public function acharObervacao($id_estudante, $ano_lectivo){
+        $historico = HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo'=> $ano_lectivo])->first();
+        if($historico){
+            return back()->with(['error'=>"Não encontrou ano lectivo"]);
+        }
     }
 
     public function getCursoEnsino(Request $request)

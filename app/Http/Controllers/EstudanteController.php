@@ -493,16 +493,16 @@ class EstudanteController extends Controller
         if (!$historico) {
             return back()->with(['error' => "Estudante nao matriculado neste ano lectivo"]);
         }
-
-
+        $declaracao = Declaracao::where(['ano_lectivo' => $request->ano_lectivo])->get();
+        $numero = $declaracao->count() + 1;
         $data = [
             'id_estudante' => $id_estudante,
             'tipo' => $request->tipo,
             'motivo' => $request->motivo,
-            'numero'=>$numero,
+            'numero' => $numero,
             'data_emissao' => $request->data,
             'ano_lectivo' => $request->ano_lectivo,
-            'ano_emissao'=>date('Y'),
+            'ano_emissao' => date('Y'),
         ];
 
         if (Declaracao::create($data)) {
@@ -535,6 +535,7 @@ class EstudanteController extends Controller
             'getAno' => $ano_lectivo,
             'getAnos' => $anos,
             'getTransferencias' => $transferencias,
+
         ];
         return view('estudantes.create_transferencia', $data);
     }
@@ -553,15 +554,20 @@ class EstudanteController extends Controller
             'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
         ]);
 
+        $transferencia = Transferencia::where(['ano_lectivo' => $request->ano_lectivo])->get();
+        $numero = $transferencia->count() + 1;
+
         $data = [
             'id_estudante' => $id_estudante,
             'motivo' => $request->descricao,
             'data_emissao' => $request->data,
             'epoca' => $request->epoca,
+            'numero'=>$numero,
             'ano_lectivo' => $request->ano_lectivo,
+            'ano_emissao' => date('Y'),
         ];
 
-        if(Transferencia::where(['id_estudante' => $id_estudante,])->first()){
+        if (Transferencia::where(['id_estudante' => $id_estudante,])->first()) {
             return back()->with(['error' => "Já foi transferido estudante"]);
         }
 
@@ -623,7 +629,7 @@ class EstudanteController extends Controller
             'ano_lectivo' => $request->ano_lectivo,
         ];
 
-        if(Desistencia::where(['id_estudante' => $id_estudante,])->first()){
+        if (Desistencia::where(['id_estudante' => $id_estudante,])->first()) {
             return back()->with(['error' => "Já está desistido estudante"]);
         }
 
@@ -702,7 +708,8 @@ class EstudanteController extends Controller
         }
     }
 
-    public function restringir_notas($id_estudante, $ano_lectivo){
+    public function restringir_notas($id_estudante, $ano_lectivo)
+    {
         $estudante = Estudante::find($id_estudante);
         if (!$estudante) {
             return back()->with(['error' => "Não encontrou"]);
@@ -725,8 +732,8 @@ class EstudanteController extends Controller
             'type' => "estudantes",
             'menu' => "Estudantes",
             'submenu' => "Restringir Notas",
-            'getHistorico'=> $historico,
-            'getTrimestres'=>$trimestres,
+            'getHistorico' => $historico,
+            'getTrimestres' => $trimestres,
         ];
         return view('estudantes.restringir_notas', $data);
     }

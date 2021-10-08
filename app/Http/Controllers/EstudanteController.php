@@ -418,6 +418,7 @@ class EstudanteController extends Controller
         $data['historico'] = [
             'id_estudante' => $id_estudante,
             'id_turma' => $request->turma,
+            'numero_acesso'=>$estudante->numero_acesso,
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
         ];

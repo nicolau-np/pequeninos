@@ -18,6 +18,7 @@ use App\Horario;
 use App\Municipio;
 use App\NotaFinal;
 use App\NotaTrimestral;
+use App\ObservacaoConjunta;
 use App\ObservacaoGeral;
 use App\Trimestral;
 use App\Turma;
@@ -976,7 +977,11 @@ class AjaxController extends Controller
         // pesquisar horario desta turma neste ano
         $horarios = Horario::where(['id_turma' => $turma->id, 'ano_lectivo' => $ano_lectivo, 'estado' => "visivel"])->get();
         //observacao geral
-        $obs_geral = ObservacaoGeral::where(['id_curso' => $turma->id_curso, 'id_classe' => $turma->id_classe])->first();
+        $obs_geral = ObservacaoGeral::where([
+            'id_curso' => $turma->id_curso,
+            'id_classe' => $turma->id_classe,
+            'estado' => "on"
+        ])->first();
         if ($obs_geral) {
             $observacao_geral = $obs_geral->quantidade_negativas;
         }
@@ -1010,8 +1015,22 @@ class AjaxController extends Controller
             }
         }
 
+        if ($count_negativas >= $observacao_geral) {
+            //faz alteracao no historico de estudante como reprovado
+            $obs_final = "Não Transita";
+            HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])
+                ->update(['obs_pauta' => $obs_final]);
+            echo "reprovado";
+            // e termina o programa aqui
 
+        }
         //fim condicao geral
+
+        //inicia condicao conjunta
+        $observacao_conjunta = ObservacaoConjunta::where(['id_curso' => $turma->id_curso, 'id_classe' => $turma->id_classe, 'estado' => "on"])->get();
+
+        //fim condicao conjunta
+
     }
 
     public function getCursoEnsino(Request $request)

@@ -992,15 +992,20 @@ class AjaxController extends Controller
             )->first(); //pegar os dados finais de cada disciplina
 
             if ($dados_finais) {
-                //ensino primario nota <=4.99 && 2.99
-                if ($turma->curso->id_ensino == 1) {
-                    if (($dados_finais->rec != null) && ($dados_finais->rec)) { //se fez recurso entao verifica com o valor do recurso
 
+                if ($turma->curso->id_ensino == 1) { //ensino primario nota <=4.99 && 2.99
+                    if (($dados_finais->rec != null) && ($dados_finais->rec <= 2.99)) { //se fez recurso entao verifica com o valor do recurso
+                        $count_negativas++;
+                    } elseif (($dados_finais->rec == null) && ($dados_finais->mf != null) && ($dados_finais->mf <= 4.99)) {
+                        $count_negativas++;
                     }
-                } elseif ($turma->curso->id_ensino >= 1) {
+                } elseif ($turma->curso->id_ensino >= 2) { //1 ciclo e ensino secundario nota<=9.99 && 4.99
+                    if (($dados_finais->rec != null) && ($dados_finais->rec <= 4.99)) { //se fez recurso entao verifica com o valor do recurso
+                        $count_negativas++;
+                    } elseif (($dados_finais->rec == null) && ($dados_finais->mf != null) && ($dados_finais->mf <= 9.99)) {
+                        $count_negativas++;
+                    }
                 }
-
-                //1 ciclo e ensino secundario nota<=9.99 && 4.99
             }
         }
     }

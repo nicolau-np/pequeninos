@@ -981,6 +981,7 @@ class AjaxController extends Controller
             $observacao_geral = $obs_geral->quantidade_negativas;
         }
 
+        //achar reprovacao na condicao geral
         foreach ($horarios as $horario) {
             //ciclo para listagem de todas as disciplinas que já tem professor nesta turma.
             $dados_finais = Finals::where(
@@ -1008,6 +1009,9 @@ class AjaxController extends Controller
                 }
             }
         }
+
+
+        //fim condicao geral
     }
 
     public function getCursoEnsino(Request $request)

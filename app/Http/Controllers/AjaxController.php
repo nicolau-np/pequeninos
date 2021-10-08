@@ -18,6 +18,7 @@ use App\Horario;
 use App\Municipio;
 use App\NotaFinal;
 use App\NotaTrimestral;
+use App\ObservacaoGeral;
 use App\Trimestral;
 use App\Turma;
 use App\User;
@@ -58,7 +59,8 @@ class AjaxController extends Controller
         return view('ajax_loads.getClasses3', $data);
     }
 
-    public function getClasses4(Request $request){
+    public function getClasses4(Request $request)
+    {
         $request->validate([
             'id_curso' => ['required', 'Integer'],
         ]);
@@ -224,8 +226,8 @@ class AjaxController extends Controller
 
     public function getDisciplinasCad3(Request $request)
     {
-        $disciplinas = Disciplina::whereHas('grade', function ($query) use ($request){
-          $query->where(['id_curso' => $request->id_curso, 'id_classe' => $request->id_classe]);
+        $disciplinas = Disciplina::whereHas('grade', function ($query) use ($request) {
+            $query->where(['id_curso' => $request->id_curso, 'id_classe' => $request->id_classe]);
         })->pluck('disciplina', 'id');
         $data = [
             'getGrade' => $disciplinas,
@@ -796,10 +798,10 @@ class AjaxController extends Controller
         } elseif (($campo == "oc1") || ($campo == "oc2") || ($campo == "oc3") || ($campo == "oc4")) {
             $somas = $mensal->oc1 + $mensal->oc2 + $mensal->oc3 + $mensal->oc4;
             $campo_media = "oc_media";
-        }elseif (($campo == "pg1") || ($campo == "pg2") || ($campo == "pg3") || ($campo == "pg4")) {
+        } elseif (($campo == "pg1") || ($campo == "pg2") || ($campo == "pg3") || ($campo == "pg4")) {
             $somas = $mensal->pg1 + $mensal->pg2 + $mensal->pg3 + $mensal->pg4;
             $campo_media = "pg_media";
-        }elseif (($campo == "pa1") || ($campo == "pa2") || ($campo == "pa3") || ($campo == "pa4")) {
+        } elseif (($campo == "pa1") || ($campo == "pa2") || ($campo == "pa3") || ($campo == "pa4")) {
             $somas = $mensal->pa1 + $mensal->pa2 + $mensal->pa3 + $mensal->pa4;
             $campo_media = "pa_media";
         }
@@ -826,7 +828,7 @@ class AjaxController extends Controller
         $total = EjaNotaMensal::calc_total_mensal($mensal->tpc_media, $mensal->oc_media, $mensal->pg_media, $mensal->pa_media, $mensal->tp_media);
 
         $data['total'] = [
-            'total'=>$total,
+            'total' => $total,
         ];
 
         //salvando a nota total
@@ -927,7 +929,7 @@ class AjaxController extends Controller
         $total = EjaNotaMensal::calc_total_mensal($mensal->tpc_media, $mensal->oc_media, $mensal->pg_media, $mensal->pa_media, $mensal->tp_media);
 
         $data['total'] = [
-            'total'=>$total,
+            'total' => $total,
         ];
 
         //salvando a nota total
@@ -947,28 +949,39 @@ class AjaxController extends Controller
         /**fim */
     }
 
-    public function updateProvaEJA(Request $request){
+    public function updateProvaEJA(Request $request)
+    {
         $request->validate([
             'valor' => ['required', 'numeric', 'min:0', 'max:14'],
             'campo' => ['required', 'string', 'min:2', 'max:6'],
             'id_trimestral' => ['required', 'integer', 'min:1'],
         ]);
-
-
     }
 
-    public function acharObervacao($id_estudante, $ano_lectivo){
-        $historico = HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo'=> $ano_lectivo])->first();
-        if($historico){
-            return back()->with(['error'=>"Não encontrou ano lectivo"]);
+    public function acharObervacao($id_estudante, $ano_lectivo)
+    {
+        $obs_final = null;
+        $count_negativas = 0;
+        $observacao_geral = 22; //dando um valor qualquer para que nao deia erro se nao encontrar nenhuma obs geral
+
+        $historico = HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])->first();
+        if ($historico) {
+            return back()->with(['error' => "Não encontrou ano lectivo"]);
         }
         $turma = Turma::find($historico->id_turma);
-        if($turma){
-            return back()->with(['error'=>"Não encontrou turma"]);
+        if ($turma) {
+            return back()->with(['error' => "Não encontrou turma"]);
         }
 
         // pesquisar horario desta turma neste ano
-        $horario = Horario::where()->get();
+        $horarios = Horario::where(['id_turma' => $turma->id, 'ano_lectivo' => $ano_lectivo, 'estado' => "visivel"])->get();
+        //observacao geral
+        $obs_geral = ObservacaoGeral::where(['id_curso' => $turma->id_curso, 'id_classe' => $turma->id_classe])->first();
+        //observacao conjunta
+        foreach ($horarios as $horario) {
+            //ciclo para listagem de todas as disciplinas que já tem professor nesta turma.
+
+        }
     }
 
     public function getCursoEnsino(Request $request)
@@ -996,6 +1009,5 @@ class AjaxController extends Controller
         ];
 
         return view('ajax_loads.getGrades', $data);
-
-   }
+    }
 }

@@ -967,7 +967,8 @@ class AjaxController extends Controller
             return back()->with(['error'=>"Não encontrou turma"]);
         }
 
-        // dar sequncia do pensamento
+        // pesquisar horario desta turma neste ano
+        $horario = Horario::where()->get();
     }
 
     public function getCursoEnsino(Request $request)

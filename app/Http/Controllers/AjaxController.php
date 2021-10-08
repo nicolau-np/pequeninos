@@ -961,7 +961,7 @@ class AjaxController extends Controller
 
     public function acharObervacao($id_estudante, $ano_lectivo)
     {
-        $obs_final = null;
+        $obs_final = "Transita";
         $count_negativas = 0;
         $observacao_geral = 22; //dando um valor qualquer para que nao deia erro se nao encontrar nenhuma obs geral
 
@@ -1031,6 +1031,12 @@ class AjaxController extends Controller
 
         //fim condicao conjunta
 
+        $historico = HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])
+            ->update(['obs_pauta' => $obs_final]);
+
+        if ($historico) {
+            echo "alterou estado observacao";
+        }
     }
 
     public function getCursoEnsino(Request $request)

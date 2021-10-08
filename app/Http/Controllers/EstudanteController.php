@@ -119,6 +119,11 @@ class EstudanteController extends Controller
         $numero_estudante = $estudantes->count() + 1;
         /*end*/
 
+        /*criar numero acesso */
+        $gerando_aleatorio = str_pad(mt_rand(0, 9999), 4, '0', STR_PAD_LEFT);
+
+        /*end*/
+
         $data['pessoa'] = [
             'id_municipio' => $request->municipio,
             'nome' => $request->nome,
@@ -140,6 +145,7 @@ class EstudanteController extends Controller
             'id_turma' => $request->turma,
             'id_pessoa' => null,
             'numero' => $numero_estudante,
+            'numero_acesso'=>null,
             'id_encarregado' => $request->encarregado,
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
@@ -150,6 +156,7 @@ class EstudanteController extends Controller
             'id_estudante' => null,
             'id_turma' => $request->turma,
             'numero' => $numero_estudante,
+            'numero_acesso'=>null,
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
         ];
@@ -166,9 +173,14 @@ class EstudanteController extends Controller
             $data['estudante']['id_pessoa'] = $pessoa->id;
             $estudante = Estudante::create($data['estudante']);
             if ($estudante) {
+                $data['historico']['numero_acesso'] = $gerando_aleatorio."-".$estudante->id;
                 $data['historico']['id_estudante'] = $estudante->id;
+                $numero_acesso = $gerando_aleatorio."-".$estudante->id;
                 if (HistoricEstudante::create($data['historico'])) {
-                    return back()->with(['success' => "Feito com sucesso"]);
+                    if(Estudante::find($estudante->id)->update(['numero_acesso'=>$numero_acesso])){
+                        return back()->with(['success' => "Feito com sucesso"]);
+                    }
+
                 }
             }
         }

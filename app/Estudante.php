@@ -13,6 +13,7 @@ class Estudante extends Model
         'id_pessoa',
         'id_encarregado',
         'numero',
+        'numero_acesso',
         'estado',
         'ano_lectivo',
     ];

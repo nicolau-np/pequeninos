@@ -962,12 +962,12 @@ class AjaxController extends Controller
         if($historico){
             return back()->with(['error'=>"Não encontrou ano lectivo"]);
         }
-        $turma = Turma::find($historico->id_turma)->first();
-        if($historico){
+        $turma = Turma::find($historico->id_turma);
+        if($turma){
             return back()->with(['error'=>"Não encontrou turma"]);
         }
 
-        
+        // dar sequncia do pensamento
     }
 
     public function getCursoEnsino(Request $request)

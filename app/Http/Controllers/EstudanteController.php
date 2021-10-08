@@ -494,12 +494,15 @@ class EstudanteController extends Controller
             return back()->with(['error' => "Estudante nao matriculado neste ano lectivo"]);
         }
 
+
         $data = [
             'id_estudante' => $id_estudante,
             'tipo' => $request->tipo,
             'motivo' => $request->motivo,
+            'numero'=>$numero,
             'data_emissao' => $request->data,
             'ano_lectivo' => $request->ano_lectivo,
+            'ano_emissao'=>date('Y'),
         ];
 
         if (Declaracao::create($data)) {

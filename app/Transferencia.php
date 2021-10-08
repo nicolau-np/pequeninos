@@ -15,6 +15,7 @@ class Transferencia extends Model
         'numero',
         'epoca',
         'ano_lectivo',
+        'ano_emissao',
     ];
 
     public function estudante()

@@ -15,6 +15,7 @@ class Declaracao extends Model
         'numero',
         'data_emissao',
         'ano_lectivo',
+        'ano_emissao',
     ];
 
     public function estudante(){

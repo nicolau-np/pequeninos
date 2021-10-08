@@ -18,9 +18,10 @@ class CreateTransferenciasTable extends Migration
             $table->bigInteger('id_estudante')->unsigned()->index();
             $table->text('motivo');
             $table->date('data_emissao')->nullable();
-            $table->string('numero')->nullable();
+            $table->bigInteger('numero')->nullable();
             $table->bigInteger('epoca');
             $table->string('ano_lectivo');
+            $table->bigInteger('ano_emissao');
             $table->timestamps();
         });
 

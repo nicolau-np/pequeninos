@@ -964,6 +964,11 @@ class AjaxController extends Controller
         $obs_final = "Transita";
         $count_negativas = 0;
         $observacao_geral = 22; //dando um valor qualquer para que nao deia erro se nao encontrar nenhuma obs geral
+        //variaveis das observacoes conjuntas
+        $disciplinas = [
+            'd1' => false,
+            'd2' => false,
+        ];
 
         $historico = HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])->first();
         if ($historico) {
@@ -1028,6 +1033,42 @@ class AjaxController extends Controller
 
         //inicia condicao conjunta
         $observacao_conjunta = ObservacaoConjunta::where(['id_curso' => $turma->id_curso, 'id_classe' => $turma->id_classe, 'estado' => "on"])->get();
+
+        if ($observacao_conjunta) {
+            foreach ($horarios as $horario) {
+                //ciclo para listagem de todas as disciplinas que já tem professor nesta turma.
+                $dados_finais = Finals::where(
+                    [
+                        'id_estudante' => $historico->id_estudante,
+                        'ano_lectivo' => $historico->ano_lectivo,
+                        'id_disciplina' => $horario->id_disciplina
+                    ]
+                )->first(); //pegar os dados finais de cada disciplina
+
+                if ($dados_finais) {
+                    if ($turma->curso->id_ensino == 1) { //ensino primario nota <=4.99 && 2.99
+                        if (($dados_finais->rec != null) && ($dados_finais->rec <= 2.99)) { //se fez recurso entao verifica com o valor do recurso
+                            //se for recurso
+
+                        } elseif (($dados_finais->rec == null) && ($dados_finais->mf != null) && ($dados_finais->mf <= 4.99)) {
+                        }
+                    } elseif ($turma->curso->id_ensino >= 2) { //1 ciclo e ensino secundario nota<=9.99 && 4.99
+                        if (($dados_finais->rec != null) && ($dados_finais->rec <= 4.99)) { //se fez recurso entao verifica com o valor do recurso
+                            //se for recurso
+
+                        } elseif (($dados_finais->rec == null) && ($dados_finais->mf != null) && ($dados_finais->mf <= 9.99)) {
+                            foreach ($observacao_conjunta as $obs_conjunta) {
+                                if (($horario->disciplina == $obs_conjunta->disciplina1) && ($horario->disciplina == $obs_conjunta->disciplina2)) {
+                                    $disciplinas['d1'] = true;
+                                } elseif ($horario->disciplina == $obs_conjunta->disciplina2) {
+                                    $disciplinas['d2'] = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
 
         //fim condicao conjunta
 

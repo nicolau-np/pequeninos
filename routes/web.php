@@ -67,7 +67,6 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
 
     Route::post('/getCursoEnsino', "AjaxController@getCursoEnsino")->name('getCursoEnsino');
     Route::post('/getDisciplinasCurso', "AjaxController@getDisciplinasCurso")->name('getDisciplinasCurso');
-
 });
 
 Route::group(['prefix' => 'institucional', 'middleware' => "AdminUser"], function () {
@@ -152,7 +151,6 @@ Route::group(['prefix' => 'institucional', 'middleware' => "AdminUser"], functio
             Route::post('/store', "InstitucionalController@conjunta_store");
             Route::get('/edit/{id_observacao}', "InstitucionalController@conjunta_edit");
             Route::get('/update/{id_observacao}', "InstitucionalController@conjunta_update");
-
         });
     });
 
@@ -231,7 +229,7 @@ Route::group(['prefix' => "turmas", 'middleware' => "AdminUser"], function () {
     Route::post('/import/store', "TurmasController@import_store");
 });
 
-Route::group(['prefix' => "mapas", 'middleware'=>"AdminUser"], function () {
+Route::group(['prefix' => "mapas", 'middleware' => "AdminUser"], function () {
     Route::get('/', "MapaController@index");
     Route::get('/aproveitamento/{ano_lectivo}', "MapaController@aproveitamento");
     Route::get('/coordenadores/{ano_lectivo}', "MapaController@coordenadores");
@@ -357,7 +355,7 @@ Route::group(['prefix' => "about"], function () {
 
 /*rota de test*/
 Route::get('test', function () {
-    $data1 = [
+    /*$data1 = [
         'id_classe'=>2,
         'epoca'=> 1,
         'ano_lectivo'=>"2021-2022",
@@ -366,6 +364,6 @@ Route::get('test', function () {
         $query->where(['id_classe'=>$data1['id_classe']]);
     })->where(['ano_lectivo'=>$data1['ano_lectivo'], 'observacao_final'=>"desistencia"])->get();
 
-    return $historico;
+    return $historico;*/
 });
 /*fim*/

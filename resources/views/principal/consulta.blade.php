@@ -18,6 +18,12 @@
                             <div class="col-md-4 col-sm-12">
                                 {{Form::label('codigo_acesso', "Código de Acesso")}}
                                 {{Form::text('codigo_acesso', null, ['class'=>"form-control", 'placeholder'=>"Código de Acesso"])}}
+                           </div>
+                        </div>
+                        <br/>
+                        <div class="row">
+                            <div class="col-md-4">
+                                {{Form::submit('CONSULTAR', ['class'=>"btn btn-primary",])}}
                             </div>
                         </div>
                     {{Form::close()}}

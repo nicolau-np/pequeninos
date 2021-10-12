@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Estudante;
+use App\Grade;
 use App\HistoricEstudante;
 use App\Trimestral;
 use App\Turma;
@@ -47,12 +48,15 @@ class PrincipalController extends Controller
             return back()->with(['error' => "Não encontrou turma do estudante"]);
         }
 
+        $grades = Grade::where(['id_curso'=>$turma->id_curso, 'id_classe' => $turma->id_classe])->get();
+
         $data = [
             'title'=>"SIGE - Sistema de Gestão Escolar",
             'type'=>"consulta",
             'menu'=>"Consultar",
             'submenu'=>"Dados",
             'getEstudante'=> $estudante,
+            'getGrades'=>$grades,
         ];
         return view('principal.dados', $data);
     }

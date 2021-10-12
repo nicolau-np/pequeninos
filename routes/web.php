@@ -30,7 +30,7 @@ Route::put('/verifycode/{id_reset}', "UserController@verifycode_put");
 
 /*rota para consultar nota*/
 Route::group(['prefix' => "consultar",], function () {
-    Route::get('/', "ConsultarController@index")->name('consultar');
+    Route::get('/', "PrincipalController@consultar")->name('consultar');
 });
 /*fim */
 

@@ -69,7 +69,7 @@
 
 							<div class="navbar-collapse collapse">
 								<ul class="nav navbar-nav navbar-right">
-									<li><a href="#home">Principal</a></li>
+									<li><a href="/">Principal</a></li>
                                     <li><a href="#about">Sobre</a></li>
                                     <li><a href="#contact-us">Contactar</a></li>
                                     <li><a href="{{route('consultar')}}">Consultar</a></li>

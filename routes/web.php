@@ -28,6 +28,12 @@ Route::post('/resetpassword', "UserController@resetpassword_req");
 Route::get('/verify_code/{id_reset}', "UserController@verifycode");
 Route::put('/verifycode/{id_reset}', "UserController@verifycode_put");
 
+/*rota para consultar nota*/
+Route::group(['prefix' => "consultar",], function () {
+    Route::get('/', "ConsultarController@index")->name('consultar');
+});
+/*fim */
+
 Route::group(['prefix' => "user", 'middleware' => "auth"], function () {
     Route::get('/profile', "UserController@profile");
     Route::post('/updateprofile', "UserController@updateprofile");
@@ -358,8 +364,15 @@ Route::group(['prefix' => "about"], function () {
 /*rota de test*/
 Route::get('test', function () {
 
-    $users = User::all();
+    /* $user = User::find(1);
 
-    $templateProcessor = new TemplateProcessor('word-models.example.docx');
+    $templateProcessor = new TemplateProcessor('word-models/example.docx');
+    $templateProcessor->setValue('id', $user->id);
+    $templateProcessor->setValue('username', $user->username);
+
+    $fileName = $user->username;
+    $templateProcessor->saveAs($fileName, '.docx');
+
+    return response()->download($fileName, '.docx')->deleteFileAfterSend(true);*/
 });
 /*fim*/

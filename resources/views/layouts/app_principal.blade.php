@@ -72,7 +72,7 @@
 									<li><a href="#home">Principal</a></li>
                                     <li><a href="#about">Sobre</a></li>
                                     <li><a href="#contact-us">Contactar</a></li>
-                                    <li><a href="#">Consultar</a></li>
+                                    <li><a href="{{route('consultar')}}">Consultar</a></li>
                                 <li><a href="{{route('login')}}">Entrar</a></li>
 								</ul>
 							</div>

@@ -31,6 +31,7 @@ Route::put('/verifycode/{id_reset}', "UserController@verifycode_put");
 /*rota para consultar nota*/
 Route::group(['prefix' => "consultar",], function () {
     Route::get('/', "PrincipalController@consultar")->name('consultar');
+    Route::post('/dados', "PrincipalController@dados");
 });
 /*fim */
 

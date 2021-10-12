@@ -13,7 +13,7 @@
                     @if(session('success'))
                     <div class="alert alert-success">{{session('success')}}</div>
                     @endif
-                    {{Form::open(['class'=>"form_consulta", 'method'=>"post", 'url'=>"/consultar"])}}
+                    {{Form::open(['class'=>"form_consulta", 'method'=>"post", 'url'=>"/consultar/dados"])}}
                         <div class="row">
                             <div class="col-md-4 col-sm-12">
                                 {{Form::label('codigo_acesso', "Código de Acesso")}}

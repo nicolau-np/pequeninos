@@ -26,4 +26,14 @@ class PrincipalController extends Controller
         ];
         return view('principal.consulta', $data);
     }
+
+    public function dados(){
+        $data = [
+            'title'=>"SIGE - Sistema de Gestão Escolar",
+            'type'=>"consulta",
+            'menu'=>"Consultar",
+            'submenu'=>"Dados",
+        ];
+        return view('principal.dados', $data);
+    }
 }

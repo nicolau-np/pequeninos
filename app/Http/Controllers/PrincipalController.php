@@ -38,11 +38,13 @@ class PrincipalController extends Controller
         if(!$estudante){
             return back()->with(['error' => "Código de Acesso Incorrecto"]);
         }
+
         $data = [
             'title'=>"SIGE - Sistema de Gestão Escolar",
             'type'=>"consulta",
             'menu'=>"Consultar",
             'submenu'=>"Dados",
+            'getEstudante'=> $estudante,
         ];
         return view('principal.dados', $data);
     }

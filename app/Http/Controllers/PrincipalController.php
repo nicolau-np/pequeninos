@@ -8,7 +8,7 @@ class PrincipalController extends Controller
 {
     public function index(){
         $data = [
-            'title'=>"OKUSSOLEKA - Sistema de Gestão Escolar",
+            'title'=>"SIGE - Sistema de Gestão Escolar",
             'type'=>"principal",
             'menu'=>"Principal",
             'submenu'=>"",

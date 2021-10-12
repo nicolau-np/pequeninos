@@ -49,7 +49,8 @@ class PrincipalController extends Controller
         }
 
         $grades = Grade::where(['id_curso'=>$turma->id_curso, 'id_classe' => $turma->id_classe])->get();
-
+        $classe = $turma->classe->classe;
+        $id_ensino = $turma->curso->id_ensino;
         $data = [
             'title'=>"SIGE - Sistema de Gestão Escolar",
             'type'=>"consulta",
@@ -58,6 +59,19 @@ class PrincipalController extends Controller
             'getEstudante'=> $estudante,
             'getGrades'=>$grades,
         ];
-        return view('principal.dados', $data);
+        if($id_ensino == 1){
+            if(($classe=="Iniciação") || ($classe=="1ª classe") || ($classe=="3ª classe") || ($classe=="5ª classe")){
+
+            }elseif(($classe=="6ª classe")){
+
+            }
+        }elseif($id_ensino == 2){
+            if(($classe=="7ª classe") || ($classe=="8ª classe")){
+                return view('principal.ensinos.ensino_1ciclo_7_8_copy', $data);
+            }elseif(($classe=="9ª classe")){
+
+            }
+        }
+
     }
 }

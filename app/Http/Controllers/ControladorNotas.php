@@ -193,11 +193,7 @@ class ControladorNotas extends Controller
         return $observacao;
     }
 
-    public static function observacao_especifica($classe, $curso, $disciplina)
-    {
-        $observacao = ObservacaoUnica::where(['id_classe' => $classe, 'id_curso' => $curso, 'id_disciplina' => $disciplina])->first();
-        return $observacao;
-    }
+  
 
 
     /*carregar para os PDFs, pautas minipautas e estatisticas */

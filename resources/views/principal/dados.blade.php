@@ -8,10 +8,9 @@
                 <fieldset>
                     <legend>Dados Estudante</legend>
                     <b>Nome Completo:</b> {{$getEstudante->pessoa->nome}}<br/>
-                    <b>Turma:</b> {{$getEstudante->turma->turma}}&nbsp;&nbsp;
-                    <b>Classe:</b> {{$getEstudante->turma->classe->classe}}&nbsp;&nbsp;
-                    <b>Turno:</b> {{$getEstudante->turma->turno->turno}}&nbsp;&nbsp;
-                    <b>Ano Lectivo:</b> {{$getEstudante->ano_lectivo}}&nbsp;&nbsp;
+                    <b>Turma:</b> {{$getEstudante->turma->turma}} [ {{$getEstudante->turma->turno->turno}} ]<br/>
+                    <b>Classe:</b> {{$getEstudante->turma->classe->classe}}<br/>
+                    <b>Ano Lectivo:</b> {{$getEstudante->ano_lectivo}}<br/>
                 </fieldset>
             </div>
             <div class="col-md-3" style="font-size:20px;">
@@ -27,7 +26,11 @@
         </div>
 
         <div class="row">
-            
+           <div class="col-md-12">
+            <fieldset>
+                <legend>Aproveitamento e Notas</legend>
+            </fieldset>
+            </div>
         </div>
     </div>
 </section>

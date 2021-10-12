@@ -12,16 +12,16 @@
 Sistema de Gestão Escolar atendendo as seguintes questões: 
 
 - Propinas.
-- Notas
+- Notas.
 
 ## Permições
 
 Existem quatro tipos de permições:
 
-- admin : administrador do sistema, também conhecido como super usuario 
+- admin: administrador do sistema, também conhecido como super usuario 
 e neste caso ele abrange os Directores, e Subdirectores.
 
-- user : também conhecido como chefe de secretaria, ele cuida de todos os 
+- user: também conhecido como chefe de secretaria, ele cuida de todos os 
 aspectos ligados as finanças, propinas.
 
 - professor: constituído pelos seguintes cargos, Professor Efectivo, Professor Colaborador e Professor Eventual.

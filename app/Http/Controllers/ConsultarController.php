@@ -8,5 +8,6 @@ class ConsultarController extends Controller
 {
     public function index()
     {
+        
     }
 }

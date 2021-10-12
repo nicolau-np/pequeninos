@@ -125,7 +125,7 @@
 
 
 		<!-- footer -->
-
+        @if($type=="principal")
 		<footer>
 			<div class="container">
 				<div class="row">
@@ -196,7 +196,7 @@
 				</div>
 			</div>
 
-		</footer>
+        </footer>
 
 		<!-- Copyright -->
 		<div class="copyright">
@@ -231,7 +231,7 @@
 					</div>
 				</div>
 			</div>
-
+            @endif
 		<!-- footer -->
 
 

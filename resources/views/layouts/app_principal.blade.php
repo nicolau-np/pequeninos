@@ -210,10 +210,10 @@
 						<div class="col-sm-5">
 							<div class="footer-menu pull-right">
 								<ul>
-									<li><a href="#">Home</a></li>
+									<li><a href="/">Home</a></li>
 									<li><a href="#">Sobre</a></li>
-                                    <li><a href="#">Contactar</a></li>
-                                    <li><a href="#">Consultar</a></li>
+                                <li><a href="#">Contactar</a></li>
+                                    <li><a href="{{route('consultar')}}">Consultar</a></li>
                                 <li><a href="{{route('login')}}">Entrar</a></li>
 								</ul>
 							</div>

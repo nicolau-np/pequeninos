@@ -4,7 +4,7 @@
 <section id="dados" class="site-padding">
     <div class="container">
         <div class="row">
-            <div class="col-md-9" style="font-size:20px;">
+            <div class="col-md-9" style="font-size:18px;">
                 <fieldset>
                     <legend>Dados Estudante</legend>
                     <b>Nome Completo:</b> {{$getEstudante->pessoa->nome}}<br/>
@@ -13,7 +13,7 @@
                     <b>Ano Lectivo:</b> {{$getEstudante->ano_lectivo}}<br/>
                 </fieldset>
             </div>
-            <div class="col-md-3" style="font-size:20px;">
+            <div class="col-md-3">
                 <img src="
                             @if ($getEstudante->pessoa->foto)
                             {{asset($getEstudante->pessoa->foto)}}
@@ -29,6 +29,11 @@
            <div class="col-md-12">
             <fieldset>
                 <legend>Aproveitamento e Notas</legend>
+                <div class="row">
+                    <div class="col-md-12">
+                        
+                    </div>
+                </div>
             </fieldset>
             </div>
         </div>

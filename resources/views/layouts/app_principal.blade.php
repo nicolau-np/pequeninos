@@ -83,7 +83,8 @@
 			</div>
 			<!-- Main Menu End -->
 
-			<!-- Sider Start -->
+            <!-- Sider Start -->
+            @if($type=="principal")
 			<div class="slider">
 				<div id="fawesome-carousel" class="carousel slide" data-ride="carousel">
 					<ol class="carousel-indicators indicatior2">
@@ -112,7 +113,8 @@
 						</div>
 					</div>
 				</div>
-			</div>
+            </div>
+            @endif
 			<!-- Sider End -->
 
 		</header>

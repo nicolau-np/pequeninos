@@ -31,7 +31,52 @@
                 <legend>Aproveitamento e Notas</legend>
                 <div class="row">
                     <div class="col-md-12">
-                        
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th rowspan="2">DISCIPLINA</th>
+                                    <th colspan="4">1º TRIMESTRE</th>
+                                    <th colspan="4">2º TRIMESTRE</th>
+                                    <th colspan="4">3º TRIMESTRE</th>
+                                </tr>
+                                <tr>
+                                    <th>MAC</th>
+                                    <th>NPP</th>
+                                    <th>PT</th>
+                                    <th>MT</th>
+
+                                    <th>MAC</th>
+                                    <th>NPP</th>
+                                    <th>PT</th>
+                                    <th>MT</th>
+
+                                    <th>MAC</th>
+                                    <th>NPP</th>
+                                    <th>PT</th>
+                                    <th>MT</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td></td>
+
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </fieldset>

@@ -3,6 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Estudante;
+use App\HistoricEstudante;
+use App\Trimestral;
+use App\Turma;
 use Illuminate\Http\Request;
 
 class PrincipalController extends Controller
@@ -37,6 +40,11 @@ class PrincipalController extends Controller
         $estudante = Estudante::where(['numero_acesso'=>$request->codigo_acesso])->first();
         if(!$estudante){
             return back()->with(['error' => "Código de Acesso Incorrecto"]);
+        }
+
+        $turma = Turma::find($estudante->id_turma);
+        if(!$turma){
+            return back()->with(['error' => "Não encontrou turma do estudante"]);
         }
 
         $data = [

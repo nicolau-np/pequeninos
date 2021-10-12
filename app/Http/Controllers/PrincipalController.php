@@ -27,7 +27,8 @@ class PrincipalController extends Controller
         return view('principal.consulta', $data);
     }
 
-    public function dados(){
+    public function dados($codigo){
+        
         $data = [
             'title'=>"SIGE - Sistema de Gestão Escolar",
             'type'=>"consulta",

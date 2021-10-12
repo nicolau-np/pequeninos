@@ -13,12 +13,16 @@
                     @if(session('success'))
                     <div class="alert alert-success">{{session('success')}}</div>
                     @endif
-                    {{Form::open(['class'=>"form_consulta", 'method'=>"post", 'url'=>"/consultar/dados"])}}
+                    {{Form::open(['class'=>"form_consulta", 'method'=>"get", 'url'=>"/consultar/dados"])}}
                         <div class="row">
                             <div class="col-md-4 col-sm-12">
                                 {{Form::label('codigo_acesso', "Código de Acesso")}}
                                 {{Form::text('codigo_acesso', null, ['class'=>"form-control", 'placeholder'=>"Código de Acesso"])}}
-
+                                <span class="text-danger">
+                                    @if($errors->has('codigo_acesso'))
+                                    <div class="text-danger">{{$errors->first('codigo_acesso')}}</div>
+                                    @endif
+                                </span>
                            </div>
                         </div>
                         <div class="row">

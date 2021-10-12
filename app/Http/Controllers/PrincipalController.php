@@ -27,8 +27,11 @@ class PrincipalController extends Controller
         return view('principal.consulta', $data);
     }
 
-    public function dados($codigo){
-        
+    public function dados(Request $request){
+
+        $request->validate([
+            'codigo_acesso'=> ['required', 'string', 'min:6'],
+        ]);
         $data = [
             'title'=>"SIGE - Sistema de Gestão Escolar",
             'type'=>"consulta",

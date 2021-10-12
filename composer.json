@@ -9,16 +9,17 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5|^8.0",
+        "barryvdh/laravel-dompdf": "^0.8.6",
         "fideloper/proxy": "^4.4",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^6.3.1|^7.0.1",
         "laravel/framework": "^7.29",
+        "laravel/socialite": "^5.1",
         "laravel/tinker": "^2.5",
         "laravel/ui": "^2.4",
-        "barryvdh/laravel-dompdf": "^0.8.6",
-        "laravel/socialite": "^5.1",
         "laravelcollective/html": "^6.1",
         "maatwebsite/excel": "~3.1",
+        "phpoffice/phpword": "dev-master",
         "stichoza/google-translate-php": "^4.1"
     },
     "require-dev": {

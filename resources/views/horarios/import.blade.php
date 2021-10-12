@@ -71,5 +71,5 @@
 		<a href="/directores" class="btn btn-primary btnCircular btnPrincipal" title="Listar"><i class="ti-search"></i></a>
 	</div>
 </div>
-
+    
 @endsection

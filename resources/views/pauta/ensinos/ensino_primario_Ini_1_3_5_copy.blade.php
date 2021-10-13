@@ -124,7 +124,7 @@ $getCadeiraRecurso = false;
                                         @if ($getCadeiraExame)
                                         <td>---</td>
                                         @endif
-                                        <td>---</td>
+                                        <td class="td_color">---</td>
                                         @if ($getCadeiraRecurso)
                                         <td>---</td>
                                         @endif
@@ -152,7 +152,7 @@ $getCadeiraRecurso = false;
                                         @if ($getCadeiraExame)
                                             <td class="{{$v2_estilo}}">@if($valorf->npe==null) --- @else {{$v2_valor}} @endif</td>
                                         @endif
-                                        <td class="{{$v3_estilo}}">@if($valorf->mf==null) --- @else {{$v3_valor}} @endif</td>
+                                        <td class="{{$v3_estilo}} td_color">@if($valorf->mf==null) --- @else {{$v3_valor}} @endif</td>
                                         @if ($getCadeiraRecurso)
                                             <td class="{{$v4_estilo}}">@if($valorf->rec==null) --- @else {{$v4_valor}} @endif</td>
                                         @endif

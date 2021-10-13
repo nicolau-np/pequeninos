@@ -146,17 +146,22 @@ $getCadeiraRecurso = false;
                                         <td>---</td>
                                         @endif
                                     <?php } else {
+                                        ?>
+
+                                        @if(!$getCadeiraExame)
+                                        <td>---</td>
+                                        <td>---</td>
+                                        <td>---</td>
+                                        @endif
+
+                                        <?php
                                         foreach ($final as $valorf) {
                                         $v1_estilo = ControladorNotas::nota_20($valorf->mfd);
                                         $v2_estilo = ControladorNotas::nota_20($valorf->npe);
                                         $v3_estilo = ControladorNotas::nota_20($valorf->mf);
                                         $v4_estilo = ControladorNotas::notaRec_10($valorf->rec);
                                         ?>
-                                        @if(!$getCadeiraExame)
-                                        <td>---</td>
-                                        <td>---</td>
-                                        <td>---</td>
-                                        @endif
+
                                         <td class="{{$v1_estilo}}">@if($valorf->mfd == null) --- @else {{$valorf->mfd}} @endif</td>
                                         @if ($getCadeiraExame)
                                         <td class="{{$v2_estilo}}">@if($valorf->npe == null) --- @else {{$valorf->npe}} @endif</td>

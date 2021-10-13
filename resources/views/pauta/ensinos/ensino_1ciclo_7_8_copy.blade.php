@@ -129,6 +129,11 @@ $getCadeiraRecurso = false;
                                         $getCadeiraExame = ControladorStatic::getExameStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
                                         $getCadeiraRecurso = ControladorStatic::getRecursoStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
                                         $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina["id_disciplina"], $getDirector->ano_lectivo);
+
+                                        $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina["id_disciplina"], $historico->id_estudante, 1, $getDirector->ano_lectivo);
+                                        $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina["id_disciplina"], $historico->id_estudante, 2, $getDirector->ano_lectivo);
+                                        $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina["id_disciplina"], $historico->id_estudante, 3, $getDirector->ano_lectivo);
+                                        
                                         if($final->count() == 0){
                                         ?>
                                         @if (!$getCadeiraExame)

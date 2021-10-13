@@ -105,7 +105,7 @@ fieldset legend{
     color: #333;
 }
 .neutro{
-    color: #FFB64D;
+    color: #FC6180;
 }
 .tabela{
     font-size: 12px;
@@ -132,8 +132,11 @@ fieldset legend{
 }
 
 .td_color{
-    background-color: #f7c203;
+    background-color:#badaf1;
+    font-weight: bold;
 }
+
+
 
 
 

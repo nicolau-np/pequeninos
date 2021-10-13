@@ -133,7 +133,9 @@ $getCadeiraRecurso = false;
                                         $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina["id_disciplina"], $historico->id_estudante, 1, $getDirector->ano_lectivo);
                                         $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina["id_disciplina"], $historico->id_estudante, 2, $getDirector->ano_lectivo);
                                         $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina["id_disciplina"], $historico->id_estudante, 3, $getDirector->ano_lectivo);
-                                        
+
+
+
                                         if($final->count() == 0){
                                         ?>
                                         @if (!$getCadeiraExame)
@@ -154,9 +156,43 @@ $getCadeiraRecurso = false;
                                         ?>
 
                                         @if(!$getCadeiraExame)
-                                        <td>---</td>
-                                        <td>---</td>
-                                        <td>---</td>
+
+                                        <!-- primiero trimestre-->
+                                        <?php
+                                        foreach($trimestre1 as $valor1){
+                                            $v4_estilo = ControladorNotas::nota_20($valor1->mt);
+                                        ?>
+
+                                        <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{round($valor1->mt,2)}} @endif</td>
+                                        <?php
+                                        }
+                                        ?>
+                                        <!-- fim primiero trimestre-->
+
+                                        <!-- segundo trimestre-->
+                                        <?php
+                                        foreach($trimestre2 as $valor2){
+                                            $v4_estilo = ControladorNotas::nota_20($valor2->mt);
+                                        ?>
+
+                                        <td class="{{$v4_estilo}}">@if($valor2->mt==null) --- @else {{round($valor2->mt,2)}} @endif</td>
+                                        <?php
+                                        }
+                                        ?>
+                                        <!-- fim segundo trimestre-->
+
+                                               <!-- terceiro trimestre-->
+                                               <?php
+                                               foreach($trimestre3 as $valor3){
+                                                   $v4_estilo = ControladorNotas::nota_20($valor3->mt);
+                                               ?>
+
+                                               <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{round($valor3->mt,2)}} @endif</td>
+                                               <?php
+                                               }
+                                               ?>
+                                               <!-- fim terceiro trimestre-->
+
                                         @endif
 
                                         <?php

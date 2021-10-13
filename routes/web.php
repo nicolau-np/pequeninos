@@ -362,6 +362,11 @@ Route::group(['prefix' => "about"], function () {
     Route::get('/instituicao', "AboutController@instituicao");
 });
 
+Route::group(['prefix'=>"word", 'middleware'=>"AdminUser"], function(){
+    Route::get('declaracaosem/{id_declaracao}', "PhpWordController@declaracaosemnota");
+
+});
+
 /*rota de test*/
 Route::get('test', function () {
 
@@ -460,7 +465,7 @@ Route::get('test2', function () {
     // $templateProcessor->setValue('userName#3', 'Ray');
     // $templateProcessor->setValue('userPhone#3', '+1 428 889 775');
 
-    
+
     $templateProcessor->saveAs('word_models/Sample_07_TemplateCloneRow.docx');
 
 });

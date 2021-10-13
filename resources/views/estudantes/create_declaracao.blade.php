@@ -121,6 +121,7 @@
                                     <td>
                                         @if ($declaracaos->tipo=="sem nota")
                                             <a href="/relatorios/declaracaosem/{{$declaracaos->id}}" class="btn btn-primary btn-sm"><i class="ti-print"></i> Imprimir</a>
+                                            <a href="/word/declaracaosem/{{$declaracaos->id}}" class="btn btn-primary btn-sm"><i class="ti-print"></i> Word</a>
                                         @else
                                             <a href="/estudantes/declaracaocom/{{$declaracaos->id}}" class="btn btn-primary btn-sm"><i class="ti-print"></i> Imprimir</a>
                                         @endif

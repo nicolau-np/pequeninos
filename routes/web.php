@@ -365,18 +365,20 @@ Route::group(['prefix' => "about"], function () {
 /*rota de test*/
 Route::get('test', function () {
 
-     $user = User::find(1);
+    $user = User::find(1);
 
-     $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/example.docx');
+    $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/example.docx');
 
-// Variables on different parts of document
-$templateProcessor->setValue('id', $user->id);            // On section/content
-$templateProcessor->setValue('username', $user->username);             // On footer
-// On header
-$filename = $user->username;
-$templateProcessor->saveAs('word_models/user.docx');
-
-return response()->download($filename.'.docx');
-
+    // Variables on different parts of document
+    $templateProcessor->setValue('id', $user->id);            // On section/content
+    $templateProcessor->setValue('username', $user->username);             // On footer
+    // On header
+    $filename = $user->username;
+    try {
+        $templateProcessor->saveAs('word_models/user.docx');
+    } catch (\Exception $e) {
+        echo $e->getMessage();
+    }
+    return response()->download($filename . '.docx');
 });
 /*fim*/

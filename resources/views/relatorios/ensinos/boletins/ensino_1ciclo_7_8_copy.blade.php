@@ -58,6 +58,9 @@ $number_page = 1;
             background-color: #4680ff;
             color: #fff;
     }
+    table tbody tr td{
+        border: 1px solid #333;
+    }
     .tabela{
         font-size: 11px;
     }
@@ -155,9 +158,9 @@ $number_page = 1;
                                         $v3_estilo = ControladorNotas::nota_20($valor1->pt);
                                         $v4_estilo = ControladorNotas::nota_20($valor1->mt);
                                     @endphp
-                                        <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$valor1->mac}} @endif</td>
-                                        <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$valor1->npp}} @endif</td>
-                                        <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$valor1->pt}} @endif</td>
+                                        <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{round($valor1->mac,2)}} @endif</td>
+                                        <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{round($valor1->npp,2)}} @endif</td>
+                                        <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{round($valor1->pt,2)}} @endif</td>
                                         <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$valor1->mt}} @endif</td>
                                     @endforeach
                                 @endif

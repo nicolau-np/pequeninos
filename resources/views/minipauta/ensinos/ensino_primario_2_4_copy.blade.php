@@ -125,10 +125,10 @@ if($getCadeiraExame){
                                                 $v4_estilo = ControladorNotas::nota_10($valor1->mt);
                                             ?>
 
-                                    <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$valor1->mac}} @endif</td>
-                                    <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$valor1->npp}} @endif</td>
-                                    <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$valor1->pt}} @endif</td>
-                                    <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$valor1->mt}} @endif</td>
+                                    <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{round($valor1->mac,2)}} @endif</td>
+                                    <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{round($valor1->npp,2)}} @endif</td>
+                                    <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{round($valor1->pt,2)}} @endif</td>
+                                    <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{round($valor1->mt,2)}} @endif</td>
                                             <?php }}?>
                                     <!-- fim primeiro trimestre-->
 
@@ -150,10 +150,10 @@ if($getCadeiraExame){
                                                 $v4_estilo = ControladorNotas::nota_10($valor2->mt);
                                             ?>
 
-                                    <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{$valor2->mac}} @endif</td>
-                                    <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{$valor2->npp}} @endif</td>
-                                    <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{$valor2->pt}} @endif</td>
-                                    <td class="{{$v4_estilo}}">@if($valor2->mt==null) --- @else {{$valor2->mt}} @endif</td>
+                                    <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{round($valor2->mac,2)}} @endif</td>
+                                    <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{round($valor2->npp,2)}} @endif</td>
+                                    <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{round($valor2->pt,2)}} @endif</td>
+                                    <td class="{{$v4_estilo}}">@if($valor2->mt==null) --- @else {{round($valor2->mt,2)}} @endif</td>
                                             <?php }}?>
                                     <!-- fim segundo trimestre-->
 
@@ -175,10 +175,10 @@ if($getCadeiraExame){
                                              $v4_estilo = ControladorNotas::nota_10($valor3->mt);
                                          ?>
 
-                                 <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$valor3->mac}} @endif</td>
-                                 <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{$valor3->npp}} @endif</td>
-                                 <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{$valor3->pt}} @endif</td>
-                                 <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{$valor3->mt}} @endif</td>
+                                 <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{round($valor3->mac,2)}} @endif</td>
+                                 <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{round($valor3->npp,2)}} @endif</td>
+                                 <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{round($valor3->pt,2)}} @endif</td>
+                                 <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{round($valor3->mt,2)}} @endif</td>
                                          <?php }}?>
                                  <!-- fim terceiro trimestre-->
 
@@ -207,9 +207,9 @@ if($getCadeiraExame){
                                         $v4_estilo = ControladorNotas::notaRec_5($valorf->rec);
                                         }
                                 ?>
-                                    <td class="{{$v1_estilo}}">@if($valorf->mfd==null) --- @else {{$valorf->mfd}} @endif</td>
+                                    <td class="{{$v1_estilo}}">@if($valorf->mfd==null) --- @else {{round($valorf->mfd,2)}} @endif</td>
                                     @if ($getCadeiraExame)
-                                        <td class="{{$v2_estilo}}">@if($valorf->npe==null) --- @else {{$valorf->npe}} @endif</td>
+                                        <td class="{{$v2_estilo}}">@if($valorf->npe==null) --- @else {{round($valorf->npe,2)}} @endif</td>
                                     @endif
                                     <td class="{{$v3_estilo}}">@if($valorf->mf==null) --- @else {{$valorf->mf}} @endif</td>
                                     @if ($getCadeiraRecurso)

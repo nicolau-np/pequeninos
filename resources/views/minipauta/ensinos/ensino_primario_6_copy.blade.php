@@ -115,7 +115,7 @@ if($getCadeiraExame){
                                     <td>---</td>
                                     <td>---</td>
                                     <td>---</td>
-                                    <td>---</td>
+                                    <td class="td_color">---</td>
                                         <?php }
                                         else{
                                             foreach($trimestre1 as $valor1){
@@ -128,7 +128,7 @@ if($getCadeiraExame){
                                     <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{round($valor1->mac,2)}} @endif</td>
                                     <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{round($valor1->npp,2)}} @endif</td>
                                     <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{round($valor1->pt,2)}} @endif</td>
-                                    <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{round($valor1->mt,2)}} @endif</td>
+                                    <td class="{{$v4_estilo}} td_color">@if($valor1->mt==null) --- @else {{round($valor1->mt,2)}} @endif</td>
                                             <?php }}?>
                                     <!-- fim primeiro trimestre-->
 
@@ -140,7 +140,7 @@ if($getCadeiraExame){
                                     <td>---</td>
                                     <td>---</td>
                                     <td>---</td>
-                                    <td>---</td>
+                                    <td class="td_color">---</td>
                                         <?php }
                                         else{
                                             foreach($trimestre2 as $valor2){
@@ -153,7 +153,7 @@ if($getCadeiraExame){
                                     <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{round($valor2->mac,2)}} @endif</td>
                                     <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{round($valor2->npp,2)}} @endif</td>
                                     <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{round($valor2->pt,2)}} @endif</td>
-                                    <td class="{{$v4_estilo}}">@if($valor2->mt==null) --- @else {{round($valor2->mt,2)}} @endif</td>
+                                    <td class="{{$v4_estilo}} td_color">@if($valor2->mt==null) --- @else {{round($valor2->mt,2)}} @endif</td>
                                             <?php }}?>
                                     <!-- fim segundo trimestre-->
 
@@ -165,7 +165,7 @@ if($getCadeiraExame){
                                  <td>---</td>
                                  <td>---</td>
                                  <td>---</td>
-                                 <td>---</td>
+                                 <td class="td_color">---</td>
                                      <?php }
                                      else{
                                          foreach($trimestre3 as $valor3){
@@ -178,7 +178,7 @@ if($getCadeiraExame){
                                  <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{round($valor3->mac,2)}} @endif</td>
                                  <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{round($valor3->npp,2)}} @endif</td>
                                  <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{round($valor3->pt,2)}} @endif</td>
-                                 <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{round($valor3->mt,2)}} @endif</td>
+                                 <td class="{{$v4_estilo}} td_color">@if($valor3->mt==null) --- @else {{round($valor3->mt,2)}} @endif</td>
                                          <?php }}?>
                                  <!-- fim terceiro trimestre-->
 
@@ -211,7 +211,7 @@ if($getCadeiraExame){
                                     @if ($getCadeiraExame)
                                         <td class="{{$v2_estilo}}">@if($valorf->npe==null) --- @else {{round($valorf->npe,2)}} @endif</td>
                                     @endif
-                                    <td class="{{$v3_estilo}}">@if($valorf->mf==null) --- @else {{$valorf->mf}} @endif</td>
+                                    <td class="{{$v3_estilo}} td_color">@if($valorf->mf==null) --- @else {{$valorf->mf}} @endif</td>
                                     @if ($getCadeiraRecurso)
                                         <td class="{{$v4_estilo}}">@if($valorf->rec==null) --- @else {{$valorf->rec}} @endif</td>
                                     @endif

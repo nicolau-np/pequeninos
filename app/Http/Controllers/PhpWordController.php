@@ -20,13 +20,14 @@ class PhpWordController extends Controller
             return back()->with(['error' => "Não encontrou estudante"]);
         }
 
-        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/example.docx');
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/declaracaosemnota.docx');
 
         // Variables on different parts of document
-        $templateProcessor->setValue('id', $user->id);            // On section/content
-        $templateProcessor->setValue('username', $user->username);             // On footer
+        $templateProcessor->setValue('nome', $historico->estudante->pessoa->nome);            // On section/content
+        $templateProcessor->setValue('pai', $historico->estudante->pessoa->pai);
+        $templateProcessor->setValue('mae', $historico->estudante->pessoa->mae);           // On footer
         // On header
-        $filename = "";
+        $filename = $historico->estudante->pessoa->nome."declaracaosemnota.docx";
         try {
             $templateProcessor->saveAs('word_models/'.$filename.'.docx');
         } catch (\Exception $e) {

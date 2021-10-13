@@ -375,10 +375,10 @@ Route::get('test', function () {
     // On header
     $filename = $user->username;
     try {
-        $templateProcessor->saveAs('word_models/user.docx');
+        $templateProcessor->saveAs('word_models/'.$filename);
     } catch (\Exception $e) {
         echo $e->getMessage();
     }
-    return response()->download($filename . '.docx');
+    return response()->download($filename . '.docx')->deleteFileAfterSend(true);
 });
 /*fim*/

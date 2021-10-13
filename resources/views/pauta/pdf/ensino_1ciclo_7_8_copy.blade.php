@@ -177,7 +177,7 @@ $getCadeiraRecurso = false;
 
                        <tr class="{{$historico->observacao_final}}">
                          <td>{{$loop->iteration}}</td>
-                         
+
                          <td>{{$historico->estudante->pessoa->nome}}</td>
                          <td>{{$historico->estudante->pessoa->genero}}</td>
 
@@ -201,7 +201,7 @@ $getCadeiraRecurso = false;
                              <td>---</td>
                              <td>---</td>
                              @endif
-                             <td>---</td>
+                             <td class="@if(!$getCadeiraExame) td_color @endif">---</td>
                              @if ($getCadeiraExame)
                              <td>---</td>
                              <td class="td_color">---</td>

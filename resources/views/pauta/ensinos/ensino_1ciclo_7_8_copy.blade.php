@@ -159,37 +159,55 @@ $getCadeiraRecurso = false;
 
                                         <!-- primiero trimestre-->
                                         <?php
+                                        if($trimestre1->count()==0){
+                                        ?>
+                                        <td>---</td>
+                                     <?php
+
+                                    }else{
                                         foreach($trimestre1 as $valor1){
                                             $v4_estilo = ControladorNotas::nota_20($valor1->mt);
                                         ?>
 
                                         <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{round($valor1->mt,2)}} @endif</td>
                                         <?php
-                                        }
+                                        }}
                                         ?>
                                         <!-- fim primiero trimestre-->
 
                                         <!-- segundo trimestre-->
                                         <?php
+                                        if($trimestre2->count()==0){
+                                        ?>
+                                        <td>---</td>
+                                     <?php
+
+                                    }else{
                                         foreach($trimestre2 as $valor2){
                                             $v4_estilo = ControladorNotas::nota_20($valor2->mt);
                                         ?>
 
                                         <td class="{{$v4_estilo}}">@if($valor2->mt==null) --- @else {{round($valor2->mt,2)}} @endif</td>
                                         <?php
-                                        }
+                                        }}
                                         ?>
                                         <!-- fim segundo trimestre-->
 
                                                <!-- terceiro trimestre-->
                                                <?php
+                                               if($trimestre3->count()==0){
+                                               ?>
+                                               <td>---</td>
+                                            <?php
+
+                                           }else{
                                                foreach($trimestre3 as $valor3){
                                                    $v4_estilo = ControladorNotas::nota_20($valor3->mt);
                                                ?>
 
                                                <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{round($valor3->mt,2)}} @endif</td>
                                                <?php
-                                               }
+                                               }}
                                                ?>
                                                <!-- fim terceiro trimestre-->
 
@@ -203,7 +221,7 @@ $getCadeiraRecurso = false;
                                         $v4_estilo = ControladorNotas::notaRec_10($valorf->rec);
                                         ?>
 
-                                        <td class="{{$v1_estilo}}">@if($valorf->mfd == null) --- @else {{$valorf->mfd}} @endif</td>
+                                        <td class="{{$v1_estilo}} @if(!$getCadeiraExame) td_color @endif">@if($valorf->mfd == null) --- @else {{$valorf->mfd}} @endif</td>
                                         @if ($getCadeiraExame)
                                         <td class="{{$v2_estilo}}">@if($valorf->npe == null) --- @else {{$valorf->npe}} @endif</td>
                                         <td class="{{$v3_estilo}} td_color">@if($valorf->mf == null) --- @else {{$valorf->mf}} @endif</td>

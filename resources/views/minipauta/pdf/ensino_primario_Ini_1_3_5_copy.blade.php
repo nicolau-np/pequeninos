@@ -214,6 +214,10 @@ $percent_negativasf = [
     color:#fff;
     font-weight: bold;
 }
+.td_color{
+    background-color:#badaf1;
+    font-weight: bold;
+}
 </style>
 </head>
 <body>
@@ -294,7 +298,7 @@ $percent_negativasf = [
                          <td>---</td>
                          <td>---</td>
                          <td>---</td>
-                         <td>---</td>
+                         <td class="td_color">---</td>
                              <?php }
                              else{
                                  foreach($trimestre1 as $valor1){
@@ -312,7 +316,7 @@ $percent_negativasf = [
                                      <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$v1_valor}} @endif</td>
                                      <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$v2_valor}} @endif</td>
                                      <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$v3_valor}} @endif</td>
-                                     <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$v4_valor}} @endif</td>
+                                     <td class="{{$v4_estilo}} td_color">@if($valor1->mt==null) --- @else {{$v4_valor}} @endif</td>
                                  <?php }}?>
                          <!-- fim primeiro trimestre-->
 
@@ -324,7 +328,7 @@ $percent_negativasf = [
                          <td>---</td>
                          <td>---</td>
                          <td>---</td>
-                         <td>---</td>
+                         <td class="td_color">---</td>
                              <?php }
                              else{
                                  foreach($trimestre2 as $valor2){
@@ -342,7 +346,7 @@ $percent_negativasf = [
                                      <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{$v1_valor}} @endif</td>
                                      <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{$v2_valor}} @endif</td>
                                      <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{$v3_valor}} @endif</td>
-                                     <td class="{{$v4_estilo}}">@if($valor2->mt==null) --- @else {{$v4_valor}} @endif</td>
+                                     <td class="{{$v4_estilo}} td_color">@if($valor2->mt==null) --- @else {{$v4_valor}} @endif</td>
                                  <?php }}?>
                          <!-- fim segundo trimestre-->
 
@@ -354,7 +358,7 @@ $percent_negativasf = [
                       <td>---</td>
                       <td>---</td>
                       <td>---</td>
-                      <td>---</td>
+                      <td class="td_color">---</td>
                           <?php }
                           else{
                               foreach($trimestre3 as $valor3){
@@ -372,7 +376,7 @@ $percent_negativasf = [
                       <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$v1_valor}} @endif</td>
                       <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{$v2_valor}} @endif</td>
                       <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{$v3_valor}} @endif</td>
-                      <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{$v4_valor}} @endif</td>
+                      <td class="{{$v4_estilo}} td_color">@if($valor3->mt==null) --- @else {{$v4_valor}} @endif</td>
                               <?php }}?>
                       <!-- fim terceiro trimestre-->
 
@@ -415,7 +419,7 @@ $percent_negativasf = [
                          @if ($getCadeiraExame)
                              <td class="{{$v2_estilo}}">@if($valorf->npe==null) --- @else {{$v2_valor}} @endif</td>
                          @endif
-                         <td class="{{$v3_estilo}}">@if($valorf->mf==null) --- @else {{$v3_valor}} @endif</td>
+                         <td class="{{$v3_estilo}} td_color">@if($valorf->mf==null) --- @else {{$v3_valor}} @endif</td>
                          @if ($getCadeiraRecurso)
                              <td class="{{$v4_estilo}}">@if($valorf->rec==null) --- @else {{$v4_valor}} @endif</td>
                          @endif
@@ -1100,7 +1104,7 @@ $percent_negativasf = [
                           <td>---</td>
                           <td>---</td>
                           <td>---</td>
-                          <td>---</td>
+                          <td class="td_color">---</td>
                               <?php }
                               else{
                                   foreach($trimestre1 as $valor1){
@@ -1130,7 +1134,7 @@ $percent_negativasf = [
                                       <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$v1_valor}} @endif</td>
                                       <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$v2_valor}} @endif</td>
                                       <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$v3_valor}} @endif</td>
-                                      <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$v4_valor}} @endif</td>
+                                      <td class="{{$v4_estilo}} td_color">@if($valor1->mt==null) --- @else {{$v4_valor}} @endif</td>
                                   <?php }}?>
                           <!-- fim primeiro trimestre-->
 
@@ -1210,7 +1214,7 @@ $percent_negativasf = [
                               <td>---</td>
                               <td>---</td>
                               <td>---</td>
-                              <td>---</td>
+                              <td class="td_color">---</td>
                                   <?php }
                                   else{
                                       foreach($trimestre2 as $valor2){
@@ -1240,7 +1244,7 @@ $percent_negativasf = [
                                           <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{$v1_valor}} @endif</td>
                                           <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{$v2_valor}} @endif</td>
                                           <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{$v3_valor}} @endif</td>
-                                          <td class="{{$v4_estilo}}">@if($valor2->mt==null) --- @else {{$v4_valor}} @endif</td>
+                                          <td class="{{$v4_estilo}} td_color">@if($valor2->mt==null) --- @else {{$v4_valor}} @endif</td>
                                       <?php }}?>
                               <!-- fim primeiro trimestre-->
 
@@ -1321,7 +1325,7 @@ $percent_negativasf = [
                       <td>---</td>
                       <td>---</td>
                       <td>---</td>
-                      <td>---</td>
+                      <td class="td_color">---</td>
                           <?php }
                           else{
                               foreach($trimestre3 as $valor3){
@@ -1351,7 +1355,7 @@ $percent_negativasf = [
                                   <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$v1_valor}} @endif</td>
                                   <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{$v2_valor}} @endif</td>
                                   <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{$v3_valor}} @endif</td>
-                                  <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{$v4_valor}} @endif</td>
+                                  <td class="{{$v4_estilo}} td_color">@if($valor3->mt==null) --- @else {{$v4_valor}} @endif</td>
                               <?php }}?>
                       <!-- fim primeiro trimestre-->
 

@@ -89,6 +89,10 @@ $getCadeiraRecurso = false;
         text-align: center;
         float:center;
     }
+    .td_color{
+    background-color:#badaf1;
+    font-weight: bold;
+}
 </style>
 
 <body>
@@ -113,116 +117,203 @@ $getCadeiraRecurso = false;
          </div>
          <br/>
          <div class="corpo">
-            <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
-                <thead>
+            <div class="table-responsive tabela">
+                <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
+                   <thead>
 
-                    <tr>
-                        <th rowspan="2">Nº</th>
-                        <th rowspan="2">NOME COMPLETO</th>
-                        <th rowspan="2">G</th>
-                        <?php
+                       <tr>
+                           <th rowspan="2">Nº</th>
+                           <th rowspan="2">NOME COMPLETO</th>
+                           <th rowspan="2">G</th>
+                           <?php
 
-                        foreach(Session::get('disciplinas') as $disciplina){
-                          $numero_colspan = 2;
-                          $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
-                          $getCadeiraExame = ControladorStatic::getExameStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
-                          $getCadeiraRecurso = ControladorStatic::getRecursoStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
+                           foreach(Session::get('disciplinas') as $disciplina){
+                             $numero_colspan = 2;
+                             $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
+                             $getCadeiraExame = ControladorStatic::getExameStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
+                             $getCadeiraRecurso = ControladorStatic::getRecursoStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
 
-                          if($getCadeiraExame){
-                              $numero_colspan = $numero_colspan + 1;
-                          }
+                             if($getCadeiraExame){
+                                 $numero_colspan = $numero_colspan + 1;
+                             }
 
-                          if($getCadeiraRecurso){
-                              $numero_colspan = $numero_colspan + 1;
-                          }
-                          ?>
-                        <th colspan="{{$numero_colspan}}">{{strtoupper($getDisciplina->disciplina)}}</th>
-                        <?php } ?>
-                        <th rowspan="2">OBSERVAÇÃO</th>
-                    </tr>
-                    <tr>
-                      @foreach (Session::get('disciplinas') as $disciplina)
-                      <?php
-                          $getCadeiraExame = ControladorStatic::getExameStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
-                          $getCadeiraRecurso = ControladorStatic::getRecursoStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
-                      ?>
-                      <th>MFD</th>
-                      @if($getCadeiraExame)
-                      <th>NPE</th>
-                      @endif
-                      <th>MF</th>
-                      @if($getCadeiraRecurso)
-                      <th>REC</th>
-                      @endif
-                      @endforeach
-                   </tr>
-                </thead>
-                <tbody>
+                             if(!$getCadeiraExame){
+                                 $numero_colspan = 4;
+                             }
 
-                  @foreach ($getHistorico as $historico)
+                             if($getCadeiraRecurso){
+                                 $numero_colspan = $numero_colspan + 1;
+                             }
+                             ?>
+                           <th colspan="{{$numero_colspan}}">{{strtoupper($getDisciplina->disciplina)}}</th>
+                           <?php } ?>
+                           <th rowspan="2">OBSERVAÇÃO</th>
+                       </tr>
+                       <tr>
+                         @foreach (Session::get('disciplinas') as $disciplina)
+                         <?php
+                             $getCadeiraExame = ControladorStatic::getExameStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
+                             $getCadeiraRecurso = ControladorStatic::getRecursoStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
+                         ?>
+                         @if(!$getCadeiraExame)
+                         <th>MT1</th>
+                         <th>MT2</th>
+                         <th>MT3</th>
+                         @endif
+                         <th>MFD</th>
+                         @if($getCadeiraExame)
+                         <th>NPE</th>
+                         <th>MF</th>
+                         @endif
 
-                    <tr class="{{$historico->observacao_final}}">
-                      <td>{{$loop->iteration}}</td>
-                      <td>{{$historico->estudante->pessoa->nome}}</td>
-                      <td>{{$historico->estudante->pessoa->genero}}</td>
+                         @if($getCadeiraRecurso)
+                         <th>REC</th>
+                         @endif
+                         @endforeach
+                      </tr>
+                   </thead>
+                   <tbody>
 
-                      <?php
-                      foreach (Session::get('disciplinas') as $disciplina) {
+                     @foreach ($getHistorico as $historico)
 
-                          $getCadeiraExame = ControladorStatic::getExameStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
-                          $getCadeiraRecurso = ControladorStatic::getRecursoStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
-                          $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina["id_disciplina"], $getDirector->ano_lectivo);
-                          if($final->count() == 0){
-                          ?>
-                          <td>---</td>
-                          @if ($getCadeiraExame)
-                          <td>---</td>
-                          @endif
-                          <td>---</td>
-                          @if ($getCadeiraRecurso)
-                          <td>---</td>
-                          @endif
-                      <?php } else {
-                          foreach ($final as $valorf) {
-                          $v1_estilo = ControladorNotas::nota_10Qualitativa($valorf->mfd);
-                          if($getCadeiraExame){
-                          $v2_estilo = ControladorNotas::nota_10Qualitativa($valorf->npe);
-                          }
-                          $v3_estilo = ControladorNotas::nota_10Qualitativa($valorf->mf);
-                          if($getCadeiraRecurso){
-                          $v4_estilo = ControladorNotas::notaRec_5($valorf->rec);
-                          }
+                       <tr class="{{$historico->observacao_final}}">
+                         <td>{{$loop->iteration}}</td>
+                         <td>{{$historico->estudante->pessoa->nome}}</td>
+                         <td>{{$historico->estudante->pessoa->genero}}</td>
 
-                          $v1_valor = ControladorNotas::estado_nota_qualitativa($valorf->mfd);
-                          if($getCadeiraExame){
-                          $v2_valor = ControladorNotas::estado_nota_qualitativa($valorf->npe);
-                          }
-                          $v3_valor = ControladorNotas::estado_nota_qualitativa($valorf->mf);
-                          if($getCadeiraRecurso){
-                          $v4_valor = ControladorNotas::estado_nota_qualitativaRec($valorf->rec);
-                          }
-                          ?>
-                          <td class="{{$v1_estilo}}">@if($valorf->mfd==null) --- @else {{$v1_valor}} @endif</td>
-                          @if ($getCadeiraExame)
-                              <td class="{{$v2_estilo}}">@if($valorf->npe==null) --- @else {{$v2_valor}} @endif</td>
-                          @endif
-                          <td class="{{$v3_estilo}}">@if($valorf->mf==null) --- @else {{$v3_valor}} @endif</td>
-                          @if ($getCadeiraRecurso)
-                              <td class="{{$v4_estilo}}">@if($valorf->rec==null) --- @else {{$v4_valor}} @endif</td>
-                          @endif
+                         <?php
+                         foreach (Session::get('disciplinas') as $disciplina) {
 
-                      <?php }
+                             $getCadeiraExame = ControladorStatic::getExameStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
+                             $getCadeiraRecurso = ControladorStatic::getRecursoStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
+                             $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina["id_disciplina"], $getDirector->ano_lectivo);
 
-                          }
-                          }
-                          ?>
-                          <!-- obs -->
-                          <td>-----</td>
-                           <!-- fim obs-->
-                    </tr>
-                    @endforeach
-                </tbody>
-             </table>
+                             $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina["id_disciplina"], $historico->id_estudante, 1, $getDirector->ano_lectivo);
+                             $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina["id_disciplina"], $historico->id_estudante, 2, $getDirector->ano_lectivo);
+                             $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina["id_disciplina"], $historico->id_estudante, 3, $getDirector->ano_lectivo);
+                             if($final->count() == 0){
+                             ?>
+                              @if (!$getCadeiraExame)
+                              <td>---</td>
+                              <td>---</td>
+                              <td>---</td>
+                              @endif
+                             <td class="@if(!$getCadeiraExame) td_color @endif">---</td>
+                             @if ($getCadeiraExame)
+                             <td>---</td>
+                             <td class="td_color">---</td>
+                             @endif
+
+                             @if ($getCadeiraRecurso)
+                             <td>---</td>
+                             @endif
+                         <?php } else {
+                             ?>
+
+                         @if(!$getCadeiraExame)
+
+                             <!-- primiero trimestre-->
+                             <?php
+                             if($trimestre1->count()==0){
+                             ?>
+                             <td>---</td>
+                          <?php
+
+                         }else{
+                             foreach($trimestre1 as $valor1){
+                                 $v4_estilo = ControladorNotas::nota_10($valor1->mt);
+                                 $v4_valor = ControladorNotas::estado_nota_qualitativa($valor1->mt);
+                             ?>
+
+                             <td class="{{$v4_estilo}}">@if($valor1->mt==null) --- @else {{$v4_valor}} @endif</td>
+                             <?php
+                             }}
+                             ?>
+                             <!-- fim primiero trimestre-->
+
+                             <!-- segundo trimestre-->
+                             <?php
+                             if($trimestre2->count()==0){
+                             ?>
+                             <td>---</td>
+                          <?php
+
+                         }else{
+                             foreach($trimestre2 as $valor2){
+                                 $v4_estilo = ControladorNotas::nota_10($valor2->mt);
+                                 $v4_valor = ControladorNotas::estado_nota_qualitativa($valor2->mt);
+                             ?>
+
+                             <td class="{{$v4_estilo}}">@if($valor2->mt==null) --- @else {{$v4_valor}} @endif</td>
+                             <?php
+                             }}
+                             ?>
+                             <!-- fim segundo trimestre-->
+
+                                    <!-- terceiro trimestre-->
+                                    <?php
+                                    if($trimestre3->count()==0){
+                                    ?>
+                                    <td>---</td>
+                                 <?php
+
+                                }else{
+                                    foreach($trimestre3 as $valor3){
+                                        $v4_estilo = ControladorNotas::nota_10($valor3->mt);
+                                        $v4_valor = ControladorNotas::estado_nota_qualitativa($valor3->mt);
+                                    ?>
+
+                                    <td class="{{$v4_estilo}}">@if($valor3->mt==null) --- @else {{$v4_valor}} @endif</td>
+                                    <?php
+                                    }}
+                                    ?>
+                                    <!-- fim terceiro trimestre-->
+
+                         @endif
+
+                         <?php
+                             foreach ($final as $valorf) {
+                             $v1_estilo = ControladorNotas::nota_10Qualitativa($valorf->mfd);
+                             if($getCadeiraExame){
+                             $v2_estilo = ControladorNotas::nota_10Qualitativa($valorf->npe);
+                             }
+                             $v3_estilo = ControladorNotas::nota_10Qualitativa($valorf->mf);
+                             if($getCadeiraRecurso){
+                             $v4_estilo = ControladorNotas::notaRec_5($valorf->rec);
+                             }
+
+                             $v1_valor = ControladorNotas::estado_nota_qualitativa($valorf->mfd);
+                             if($getCadeiraExame){
+                             $v2_valor = ControladorNotas::estado_nota_qualitativa($valorf->npe);
+                             }
+                             $v3_valor = ControladorNotas::estado_nota_qualitativa($valorf->mf);
+                             if($getCadeiraRecurso){
+                             $v4_valor = ControladorNotas::estado_nota_qualitativaRec($valorf->rec);
+                             }
+                             ?>
+                             <td class="{{$v1_estilo}} @if(!$getCadeiraExame) td_color @endif">@if($valorf->mfd==null) --- @else {{$v1_valor}} @endif</td>
+                             @if ($getCadeiraExame)
+                                 <td class="{{$v2_estilo}}">@if($valorf->npe==null) --- @else {{$v2_valor}} @endif</td>
+                                 <td class="{{$v3_estilo}} td_color">@if($valorf->mf==null) --- @else {{$v3_valor}} @endif</td>
+                             @endif
+
+                             @if ($getCadeiraRecurso)
+                                 <td class="{{$v4_estilo}}">@if($valorf->rec==null) --- @else {{$v4_valor}} @endif</td>
+                             @endif
+
+                         <?php }
+
+                             }
+                             }
+                             ?>
+                             <!-- obs -->
+                             <td>-----</td>
+                              <!-- fim obs-->
+                       </tr>
+                       @endforeach
+                   </tbody>
+                </table>
+            </div>
          </div>
          <br/><br/>
          <div class="rodape">

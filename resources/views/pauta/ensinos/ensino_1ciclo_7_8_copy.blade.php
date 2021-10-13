@@ -69,6 +69,10 @@ $getCadeiraRecurso = false;
                                             $numero_colspan = $numero_colspan + 1;
                                         }
 
+                                        if(!$getCadeiraExame){
+                                            $numero_colspan = 4;
+                                        }
+
                                         if($getCadeiraRecurso){
                                             $numero_colspan = $numero_colspan + 1;
                                         }
@@ -83,11 +87,18 @@ $getCadeiraRecurso = false;
                                         $getCadeiraExame = ControladorStatic::getExameStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
                                         $getCadeiraRecurso = ControladorStatic::getRecursoStatus($getDirector->turma->id_curso, $getDirector->turma->id_classe, $disciplina['id_disciplina']);
                                     ?>
+                                    @if(!$getCadeiraExame)
+                                    <th>MT1</th>
+                                    <th>MT2</th>
+                                    <th>MT3</th>
+                                    @endif
                                     <th>MFD</th>
+
                                     @if($getCadeiraExame)
                                     <th>NPE</th>
-                                    @endif
                                     <th>MF</th>
+                                    @endif
+
                                     @if($getCadeiraRecurso)
                                     <th>REC</th>
                                     @endif
@@ -120,11 +131,15 @@ $getCadeiraRecurso = false;
                                         $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina["id_disciplina"], $getDirector->ano_lectivo);
                                         if($final->count() == 0){
                                         ?>
+                                        @if (!$getCadeiraExame)
+                                        
+                                        @endif
                                         <td>---</td>
                                         @if ($getCadeiraExame)
                                         <td>---</td>
-                                        @endif
                                         <td class="td_color">---</td>
+                                        @endif
+
                                         @if ($getCadeiraRecurso)
                                         <td>---</td>
                                         @endif
@@ -138,8 +153,9 @@ $getCadeiraRecurso = false;
                                         <td class="{{$v1_estilo}}">@if($valorf->mfd == null) --- @else {{$valorf->mfd}} @endif</td>
                                         @if ($getCadeiraExame)
                                         <td class="{{$v2_estilo}}">@if($valorf->npe == null) --- @else {{$valorf->npe}} @endif</td>
-                                        @endif
                                         <td class="{{$v3_estilo}} td_color">@if($valorf->mf == null) --- @else {{$valorf->mf}} @endif</td>
+                                        @endif
+
                                         @if ($getCadeiraRecurso)
                                         <td class="{{$v4_estilo}}">@if($valorf->rec == null) --- @else {{$valorf->rec}} @endif</td>
                                         @endif

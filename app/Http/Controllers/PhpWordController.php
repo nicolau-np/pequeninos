@@ -39,7 +39,13 @@ class PhpWordController extends Controller
         $dia_hoje="[##############]";
         $mes_hoje="[##############]";
         $ano_hoje="[##############]";
+        $bilhete = "[##############]";
         /**fim variaveis */
+
+
+        /**atribuindo valores nas variaveis */
+            
+        /**fim */
 
         // Variables on different parts of document
         $templateProcessor->setValue('nome', $nome);            // On section/content
@@ -56,7 +62,8 @@ class PhpWordController extends Controller
         $templateProcessor->setValue('numero', $numero);
         $templateProcessor->setValue('dia_hoje', $dia_hoje);            // On section/content
         $templateProcessor->setValue('mes_hoje', $mes_hoje);
-        $templateProcessor->setValue('ano_hoje', $ano_hoje);            // On footer
+        $templateProcessor->setValue('ano_hoje', $ano_hoje);
+        $templateProcessor->setValue('bilhete', $bilhete);           // On footer
         // On header
         $filename = $historico->estudante->pessoa->nome . "declaracaosemnota.docx";
         try {

@@ -50,16 +50,28 @@ class PhpWordController extends Controller
         $mes = ControladorStatic::converterMesExtensao($mes1);
         $dia = date('d',strtotime($historico->estudante->pessoa->data_nascimento));
         $ano = date('Y',strtotime($historico->estudante->pessoa->data_nascimento));
+
         $nome = $historico->estudante->pessoa->nome;
-        $pai = $historico->estudante->pessoa->pai;
-        $mae = $historico->estudante->pessoa->mae;
-        $bilhete = $historico->estudante->pessoa->bilhete;
-        $naturalidade = $historico->estudante->pessoa->naturalidade;
+        if($historico->estudante->pessoa->pai){
+            $pai = $historico->estudante->pessoa->pai;
+        }
+        if($historico->estudante->pessoa->mae){
+            $mae = $historico->estudante->pessoa->mae;
+        }
+        if($historico->estudante->pessoa->bilhete){
+            $bilhete = $historico->estudante->pessoa->bilhete;
+        }
+        if($historico->estudante->pessoa->naturalidade){
+            $naturalidade = $historico->estudante->pessoa->naturalidade;
+        }
+        if($historico->estudante->pessoa->provincia){
+            $provincia = $historico->estudante->pessoa->provincia;
+        }
         $numero = $historico->numero;
         $turma = $historico->turma->turma;
         $classe = $historico->turma->classe->classe;
         $ano_lectivo = $historico->ano_lectivo;
-        $provincia = $historico->estudante->pessoa->provincia;
+
 
         $dia_hoje = date('d', strtotime($declaracao->data_emissao));
         $mes2 = date('m', strtotime($declaracao->data_emissao));

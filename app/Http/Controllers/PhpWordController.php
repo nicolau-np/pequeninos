@@ -8,6 +8,9 @@ use Illuminate\Http\Request;
 
 class PhpWordController extends Controller
 {
+
+  use ControladorStatic;
+
     public function declaracaosemnota($id_declaracao)
     {
 
@@ -36,15 +39,28 @@ class PhpWordController extends Controller
         $classe = "[##############]";
         $turma = "[##############]";
         $numero = "[##############]";
-        $dia_hoje="[##############]";
-        $mes_hoje="[##############]";
-        $ano_hoje="[##############]";
+        $dia_hoje = "[##############]";
+        $mes_hoje = "[##############]";
+        $ano_hoje = "[##############]";
         $bilhete = "[##############]";
         /**fim variaveis */
 
 
         /**atribuindo valores nas variaveis */
-            
+        $mes1 = date('m',strtotime($historico->estudante->pessoa->data_nascimento));
+        $mes = ControladorStatic::converterMesExtensao($mes1);
+        $dia = date('d',strtotime($historico->estudante->pessoa->data_nascimento));
+        $ano = date('Y',strtotime($historico->estudante->pessoa->data_nascimento));
+        $nome = $historico->estudante->pessoa->nome;
+        $pai = $historico->estudante->pessoa->pai;
+        $mae = $historico->estudante->pessoa->mae;
+        $bilhete = $historico->estudante->pessoa->bilhete;
+        $naturalidade = $historico->estudante->pessoa->naturalidade;
+        $numero = $historico->numero;
+        $turma = $historico->turma->turma;
+        $classe = $historico->turma->classe->classe;
+        $ano_lectivo = $historico->ano_lectivo;
+        $provincia = $historico->estudante->pessoa->provincia;
         /**fim */
 
         // Variables on different parts of document

@@ -5,17 +5,14 @@ namespace App\Http\Controllers;
 use App\Declaracao;
 use App\HistoricEstudante;
 use Illuminate\Http\Request;
-use App\Controller\ControladorStatic;
+use App\Http\Controllers\ControladorStatic;
 
 class PhpWordController extends Controller
 {
 
 
-   
-
     public function declaracaosemnota($id_declaracao)
     {
-
         $declaracao = Declaracao::find($id_declaracao);
         if (!$declaracao) {
             return back()->with(['error' => "Não encontrou declaração"]);
@@ -63,6 +60,11 @@ class PhpWordController extends Controller
         $classe = $historico->turma->classe->classe;
         $ano_lectivo = $historico->ano_lectivo;
         $provincia = $historico->estudante->pessoa->provincia;
+
+        $dia_hoje = date('d', strtotime($declaracao->data_emissao));
+        $mes2 = date('m', strtotime($declaracao->data_emissao));
+        $mes_hoje = ControladorStatic::converterMesExtensao($mes2);
+        $ano_hoje = date('Y', strtotime($declaracao->data_emissao));
         /**fim */
 
         // Variables on different parts of document

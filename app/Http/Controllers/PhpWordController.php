@@ -105,4 +105,18 @@ class PhpWordController extends Controller
         }
         return response()->download('word_models/' . $filename . '.docx')->deleteFileAfterSend(true);
     }
+
+    public function declaracaocomnota($id_declaracao){
+        $declaracao = Declaracao::find($id_declaracao);
+        if (!$declaracao) {
+            return back()->with(['error' => "Não encontrou declaração"]);
+        }
+
+        $historico = HistoricEstudante::where(['id_estudante' => $declaracao->id_estudante, 'ano_lectivo' => $declaracao->ano_lectivo])->first();
+        if (!$historico) {
+            return back()->with(['error' => "Não encontrou estudante"]);
+        }
+
+        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/declaracaosemnota.docx');
+    }
 }

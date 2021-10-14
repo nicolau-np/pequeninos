@@ -42,7 +42,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <button type="submit" class="btn btn-primary btn-sm float-left"><i class="ti-printer"></i>PDF</button>&nbsp;&nbsp;&nbsp;
-
+                            <word href="/declaracaocom/{{$getDeclaracao->id}}" class="btn btn-success">word</a>
                            <a href="#" class="btn btn-danger btn-sm float-right remover_todas"><i class="ti-trash" aria-hidden="true"></i></a>
                            <table class="table table-bordered">
                             <thead>

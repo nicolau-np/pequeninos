@@ -364,6 +364,7 @@ Route::group(['prefix' => "about"], function () {
 
 Route::group(['prefix'=>"word", 'middleware'=>"AdminUser"], function(){
     Route::get('declaracaosem/{id_declaracao}', "PhpWordController@declaracaosemnota");
+    Route::get('declaracaocom/{id_declaracao}', "PhpWordController@declaracaocomnota");
 
 });
 

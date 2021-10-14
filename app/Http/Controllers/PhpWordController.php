@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use App\Declaracao;
 use App\HistoricEstudante;
 use Illuminate\Http\Request;
+use App\Controller\ControladorStatic;
 
 class PhpWordController extends Controller
 {
 
-  use ControladorStatic;
+
+   
 
     public function declaracaosemnota($id_declaracao)
     {

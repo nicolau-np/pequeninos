@@ -6,6 +6,7 @@ use App\Declaracao;
 use App\HistoricEstudante;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ControladorStatic;
+use App\Turma;
 
 class PhpWordController extends Controller
 {
@@ -46,25 +47,25 @@ class PhpWordController extends Controller
 
 
         /**atribuindo valores nas variaveis */
-        $mes1 = date('m',strtotime($historico->estudante->pessoa->data_nascimento));
+        $mes1 = date('m', strtotime($historico->estudante->pessoa->data_nascimento));
         $mes = ControladorStatic::converterMesExtensao($mes1);
-        $dia = date('d',strtotime($historico->estudante->pessoa->data_nascimento));
-        $ano = date('Y',strtotime($historico->estudante->pessoa->data_nascimento));
+        $dia = date('d', strtotime($historico->estudante->pessoa->data_nascimento));
+        $ano = date('Y', strtotime($historico->estudante->pessoa->data_nascimento));
 
         $nome = $historico->estudante->pessoa->nome;
-        if($historico->estudante->pessoa->pai){
+        if ($historico->estudante->pessoa->pai) {
             $pai = $historico->estudante->pessoa->pai;
         }
-        if($historico->estudante->pessoa->mae){
+        if ($historico->estudante->pessoa->mae) {
             $mae = $historico->estudante->pessoa->mae;
         }
-        if($historico->estudante->pessoa->bilhete){
+        if ($historico->estudante->pessoa->bilhete) {
             $bilhete = $historico->estudante->pessoa->bilhete;
         }
-        if($historico->estudante->pessoa->naturalidade){
+        if ($historico->estudante->pessoa->naturalidade) {
             $naturalidade = $historico->estudante->pessoa->naturalidade;
         }
-        if($historico->estudante->pessoa->provincia){
+        if ($historico->estudante->pessoa->provincia) {
             $provincia = $historico->estudante->pessoa->provincia;
         }
         $numero = $historico->numero;
@@ -106,7 +107,8 @@ class PhpWordController extends Controller
         return response()->download('word_models/' . $filename . '.docx')->deleteFileAfterSend(true);
     }
 
-    public function declaracaocomnota($id_declaracao){
+    public function declaracaocomnota($id_declaracao)
+    {
         $declaracao = Declaracao::find($id_declaracao);
         if (!$declaracao) {
             return back()->with(['error' => "Não encontrou declaração"]);
@@ -116,7 +118,20 @@ class PhpWordController extends Controller
         if (!$historico) {
             return back()->with(['error' => "Não encontrou estudante"]);
         }
+        $turma = Turma::find($historico->id_turma);
+        $classe = $turma->classe->classe;
+        $id_ensino = $turma->curso->id_ensino;
 
-        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/declaracaosemnota.docx');
+        if ($id_ensino == 1) {
+            if (($classe == "Iniciação") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
+            } elseif ($classe == "6ª classe") {
+            }
+        } elseif ($id_ensino == 2) {
+            if ($classe == "9ª classe") {
+            } elseif (($classe == "7ª classe") || ($classe == "8ª classe")) {
+                $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/declaracao_notas/ensino_1ciclo_7_8_copy.docx');
+            }
+        }
+
     }
 }

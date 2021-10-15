@@ -226,11 +226,18 @@ class PhpWordController extends Controller
             $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina['id_disciplina'], $historico->ano_lectivo);
             if ($final) {
                 foreach ($final as $valorf) {
-                    $nota_valor = $valorf->mf;
+                    if($valorf->rec == null){
+                        $nota_valor = str_pad($valorf->mf, 2, 0, STR_PAD_LEFT);
+                        $nota_extensao = ControladorNotas::converter_nota($valorf->mf);
+                    }else{
+                        $nota_valor = str_pad($valorf->rec, 2, 0, STR_PAD_LEFT);
+                        $nota_extensao = ControladorNotas::converter_nota($valorf->rec);
+                    }
+
                 }
             }
 
-            array_push($values, ['disciplinas' => $getDisciplina->disciplina, 'valores' => $nota_valor, 'extensao'=>$nota_extensao]);
+            array_push($values, ['disciplinas' => $getDisciplina->disciplina, 'valores' => $nota_valor, 'extensao' => $nota_extensao]);
             $nota_valor = "[######]";
             $nota_extensao = "[####]";
         }

@@ -1001,7 +1001,7 @@ class AjaxController extends Controller
         //fim
 
 
-        //achar reprovacao na condicao geral
+        //achar reprovacao na condicao geral  e nuclear ou especifica
         foreach ($horarios as $horario) {
             //ciclo para listagem de todas as disciplinas que já tem professor nesta turma.
             $dados_finais = Finals::where(
@@ -1016,14 +1016,59 @@ class AjaxController extends Controller
 
                 if ($turma->curso->id_ensino == 1) { //ensino primario nota <=4.99 && 2.99
                     if (($dados_finais->rec != null) && ($dados_finais->rec <= 2.99)) { //se fez recurso entao verifica com o valor do recurso
+                        /**verificar se a disciplina é nuclear para contar nas nucleare_count */
+                        $isNuclearGrade = Grade::where([
+                            'id_curso' => $turma->id_curso,
+                            'id_classe' => $turma->id_classe,
+                            'id_disciplina' => $horario->id_disciplina,
+                            'nuclear' => "1",
+                        ])->first();
+                        if ($isNuclearGrade) {
+                            $count_negativas_nuclear++;
+                        }
+                        /**fim */
                         $count_negativas++;
                     } elseif (($dados_finais->rec == null) && ($dados_finais->mf != null) && ($dados_finais->mf <= 4.99)) {
+                        /**verificar se a disciplina é nuclear para contar nas nucleare_count */
+                        $isNuclearGrade = Grade::where([
+                            'id_curso' => $turma->id_curso,
+                            'id_classe' => $turma->id_classe,
+                            'id_disciplina' => $horario->id_disciplina,
+                            'nuclear' => "1",
+                        ])->first();
+                        if ($isNuclearGrade) {
+                            $count_negativas_nuclear++;
+                        }
+                        /**fim */
                         $count_negativas++;
                     }
                 } elseif ($turma->curso->id_ensino >= 2) { //1 ciclo e ensino secundario nota<=9.99 && 4.99
                     if (($dados_finais->rec != null) && ($dados_finais->rec <= 4.99)) { //se fez recurso entao verifica com o valor do recurso
+                        /**verificar se a disciplina é nuclear para contar nas nucleare_count */
+                        $isNuclearGrade = Grade::where([
+                            'id_curso' => $turma->id_curso,
+                            'id_classe' => $turma->id_classe,
+                            'id_disciplina' => $horario->id_disciplina,
+                            'nuclear' => "1",
+                        ])->first();
+                        if ($isNuclearGrade) {
+                            $count_negativas_nuclear++;
+                        }
+                        /**fim */
                         $count_negativas++;
                     } elseif (($dados_finais->rec == null) && ($dados_finais->mf != null) && ($dados_finais->mf <= 9.99)) {
+                        /**verificar se a disciplina é nuclear para contar nas nucleare_count */
+                        $isNuclearGrade = Grade::where([
+                            'id_curso' => $turma->id_curso,
+                            'id_classe' => $turma->id_classe,
+                            'id_disciplina' => $horario->id_disciplina,
+                            'nuclear' => "1",
+                        ])->first();
+                        if ($isNuclearGrade) {
+                            $count_negativas_nuclear++;
+                        }
+
+                        /**fim */
                         $count_negativas++;
                     }
                 }
@@ -1036,16 +1081,28 @@ class AjaxController extends Controller
             HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])
                 ->update(['obs_pauta' => $obs_final]);
             echo "reprovado";
+            return null;
             // e termina o programa aqui
 
         }
-        //fim condicao geral
+        if ($count_negativas_nuclear >= $total_nucleares) {
+            //faz alteracao no historico de estudante como reprovado
+            $obs_final = "Não Transita";
+            HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])
+                ->update(['obs_pauta' => $obs_final]);
+            echo "reprovado";
+            return null;
+            // e termina o programa aqui
+        }
+
+        //fim condicao geral e nuclear
 
         $historico = HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])
             ->update(['obs_pauta' => $obs_final]);
 
         if ($historico) {
             echo "alterou estado observacao";
+            return null;
         }
     }
 

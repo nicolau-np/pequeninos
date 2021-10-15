@@ -584,9 +584,10 @@ class AjaxController extends Controller
         ];
         if (Finals::where($data['where_mts'])->update($data['calculo_final'])) {
             echo " \\lancou o mfd e mf \\ ";
+            $this->acharObervacao($final->id_estudante, $final->ano_lectivo);
         }
         //fim mfd e mf
-        $this->acharObervacao($final->id_estudante, $final->ano_lectivo);
+
     }
 
     public function updateGlobal(Request $request)
@@ -669,9 +670,10 @@ class AjaxController extends Controller
         ];
         if (Finals::find($request->id_final)->update($data['calculo_final'])) {
             echo " \\lancou o mf\\ ";
+            $this->acharObervacao($final->id_estudante, $final->ano_lectivo);
         }
         //fim mfd e mf
-        $this->acharObervacao($final->id_estudante, $final->ano_lectivo);
+
     }
 
     public function updateRecurso(Request $request)
@@ -733,10 +735,11 @@ class AjaxController extends Controller
         $final = Finals::find($request->id_final)->update($data['final']);
         if ($final) {
             echo " \\lancou npe\\ ";
+            $this->acharObervacao($final->id_estudante, $final->ano_lectivo);
         } else {
             return null;
         }
-        $this->acharObervacao($final->id_estudante, $final->ano_lectivo);
+
     }
 
     public function updateAV_mensal(Request $request)
@@ -1105,8 +1108,9 @@ class AjaxController extends Controller
 
         if ($historico) {
             echo "// alterou estado observacao com TRANSITOU //";
-            return null;
         }
+        echo "//// chegou ate observacao ////";
+
     }
 
     public function getCursoEnsino(Request $request)

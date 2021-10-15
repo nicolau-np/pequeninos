@@ -399,31 +399,46 @@ class InstitucionalController extends Controller
             'menu' => "Grades Curricular",
             'submenu' => "Novo",
             'getCursos' => $cursos,
+            'getDisciplinas' => Disciplina::all(),
         ];
-        return view('institucional.grades.new', $data);
+
+
+
+        return view('institucional.grades.new2', $data);
     }
 
     public function grade_store(Request $request)
     {
+
+
+
         $request->validate([
+            'disciplinas' => 'required',
+            'disciplinas.*.id' => [
+                'required',
+                'exists:disciplinas,id',
+
+            ],
+            'disciplinas.*.is_nuclear' => 'required|in:1,0',
             'curso' => ['required', 'Integer'],
             'classe' => ['required', 'Integer'],
             'epoca' => ['required', 'string'],
         ]);
 
-        if (!Session::has('disciplinas')) {
+/*         if (!Session::has('disciplinas')) {
             return back()->with(['error' => "Deve selecionar disciplinas"]);
         }
 
         if (Session::get('disciplinas') == null) {
             return back()->with(['error' => "Deve selecionar disciplinas"]);
         }
-
+ */
         $data['store'] = [
             'id_curso' => $request->curso,
             'id_classe' => $request->classe,
             'id_disciplina' => null,
             'tipo' => $request->epoca,
+            'nuclear' => null,
         ];
 
         $data['where'] = [
@@ -432,9 +447,10 @@ class InstitucionalController extends Controller
             'id_disciplina' => null,
         ];
 
-        foreach (Session::get('disciplinas') as $disciplina) {
-            $data['store']['id_disciplina'] = $disciplina['id_disciplina'];
-            $data['where']['id_disciplina'] = $disciplina['id_disciplina'];
+        foreach ($request->get('disciplinas',[]) as $disciplina) {
+            $data['store']['id_disciplina'] = $disciplina['id'];
+            $data['where']['id_disciplina'] = $disciplina['id'];
+            $data["store"]['nuclear'] = $disciplina['is_nuclear'];
             if (!Grade::where($data['where'])->first()) {
                 $grade = Grade::create($data['store']);
             } else {
@@ -936,14 +952,14 @@ class InstitucionalController extends Controller
             'disciplina2' => ['required', 'integer', 'min:1'],
         ]);
 
-        if($request->disciplina1 == $request->disciplina2){
-            return back()->with(['error'=>"Disciplinas identicas"]);
+        if ($request->disciplina1 == $request->disciplina2) {
+            return back()->with(['error' => "Disciplinas identicas"]);
         }
         $data['observacao'] = [
             'id_curso' => $request->curso,
             'id_classe' => $request->classe,
-            'id_disciplina1'=> $request->disciplina1,
-            'id_disciplina2'=> $request->disciplina2,
+            'id_disciplina1' => $request->disciplina1,
+            'id_disciplina2' => $request->disciplina2,
             'estado' => "on",
         ];
 
@@ -952,8 +968,7 @@ class InstitucionalController extends Controller
         }
         $observacao = ObservacaoConjunta::create($data['observacao']);
         if ($observacao) {
-                return back()->with(['success' => "Feito com sucesso"]);
-
+            return back()->with(['success' => "Feito com sucesso"]);
         }
     }
 
@@ -1001,20 +1016,20 @@ class InstitucionalController extends Controller
         ]);
 
         $data = [
-            'id_curso'=> $request->curso,
-            'id_classe'=> $request->classe,
-            'id_disciplina'=>null,
-            'estado'=>"on",
+            'id_curso' => $request->curso,
+            'id_classe' => $request->classe,
+            'id_disciplina' => null,
+            'estado' => "on",
         ];
         $cadeira = false;
-        foreach($request->disciplinas as $disciplina){
+        foreach ($request->disciplinas as $disciplina) {
             $data['id_disciplina'] = $disciplina;
-            if(!CadeiraRecurso::where($data)->first()){
-              $cadeira = CadeiraRecurso::create($data);
+            if (!CadeiraRecurso::where($data)->first()) {
+                $cadeira = CadeiraRecurso::create($data);
             }
         }
 
-        if($cadeira){
+        if ($cadeira) {
             return back()->with(['success' => "Feito com sucesso"]);
         }
     }
@@ -1064,20 +1079,20 @@ class InstitucionalController extends Controller
         ]);
 
         $data = [
-            'id_curso'=> $request->curso,
-            'id_classe'=> $request->classe,
-            'id_disciplina'=>null,
-            'estado'=>"on",
+            'id_curso' => $request->curso,
+            'id_classe' => $request->classe,
+            'id_disciplina' => null,
+            'estado' => "on",
         ];
         $cadeira = false;
-        foreach($request->disciplinas as $disciplina){
+        foreach ($request->disciplinas as $disciplina) {
             $data['id_disciplina'] = $disciplina;
-            if(!CadeiraExame::where($data)->first()){
-              $cadeira = CadeiraExame::create($data);
+            if (!CadeiraExame::where($data)->first()) {
+                $cadeira = CadeiraExame::create($data);
             }
         }
 
-        if($cadeira){
+        if ($cadeira) {
             return back()->with(['success' => "Feito com sucesso"]);
         }
     }

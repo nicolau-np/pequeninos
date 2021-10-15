@@ -13,6 +13,8 @@ class Grade extends Model
         'id_classe',
         'id_disciplina',
         'tipo',
+        'nuclear',
+        'estado',
     ];
 
     public function curso(){

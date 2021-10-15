@@ -9,7 +9,7 @@
                     <h5>{{$submenu}}</h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -32,14 +32,14 @@
                         <fieldset>
                             <legend><i class="ti-list"></i> Dados da Grade Curricular</legend>
                             <div class="row">
-                               
+
                                 <div class="col-md-4">
                                     {{Form::label('curso', "Curso")}} <span class="text-danger">*</span>
                                     {{Form::select('curso', $getCursos, null, ['class'=>"form-control curso", 'placeholder'=>"Curso"])}}
                                 <div class="erro">
                                     @if($errors->has('curso'))
                                     <div class="text-danger">{{$errors->first('curso')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
@@ -51,7 +51,7 @@
                                 <div class="erro">
                                     @if($errors->has('classe'))
                                     <div class="text-danger">{{$errors->first('classe')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
@@ -64,7 +64,7 @@
                                 <div class="erro">
                                     @if($errors->has('epoca'))
                                     <div class="text-danger">{{$errors->first('epoca')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
@@ -74,14 +74,14 @@
                                     <div class="erro">
                                         @if($errors->has('disciplina'))
                                         <div class="text-danger">{{$errors->first('disciplina')}}</div>
-                                        @endif 
+                                        @endif
                                     </div>
                                     <hr/>
                                 </div>
-                                
+
                                 <div class="col-md-6">
                                     {{Form::submit('Salvar', ['class'=>"btn btn-primary btn-sm float-left"])}}
-                                     
+
                                     <a href="#" class="btn btn-danger btn-sm float-right remover_todas"><i class="ti-trash" aria-hidden="true"></i></a>
                                    <table class="table table-bordered">
                                     <thead>
@@ -106,16 +106,16 @@
                             </div>
                             <br/>
                         </fieldset>
-                       
-                   
-                       
+
+
+
                         {{Form::close()}}
                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- hidden-sm-up -->
@@ -172,7 +172,7 @@
                     }else if(response.status === "error"){
                         disciplinas();
                     }
-                  
+
                 }
             });
         });
@@ -193,7 +193,7 @@
                 }
             });
         });
- 
+
     });
 </script>
 @endsection

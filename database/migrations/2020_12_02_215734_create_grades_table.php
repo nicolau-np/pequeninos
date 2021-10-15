@@ -19,7 +19,9 @@ class CreateGradesTable extends Migration
             $table->bigInteger('id_curso')->unsigned()->index();
             $table->bigInteger('id_classe')->unsigned()->index();
             $table->bigInteger('id_disciplina')->unsigned()->index();
+            $table->string('nuclear')->nullable();
             $table->string('tipo')->nullable();
+            $table->string('estado')->nullable();
             $table->timestamps();
         });
 

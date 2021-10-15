@@ -213,4 +213,4 @@ class PhpWordController extends Controller
         }
         return response()->download('word_models/declaracao_notas/' . $filename . '.docx')->deleteFileAfterSend(true);
     }
-}
+} 

@@ -487,11 +487,11 @@ Route::get('test3', function (){
     $ano_lectivo = "2021-2022";
 
     $historico = HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])->first();
-    if ($historico) {
-        return back()->with(['error' => "Não encontrou ano lectivo"]);
+    if (!$historico) {
+        return back()->with(['error' => "Não encontrou estudante"]);
     }
     $turma = Turma::find($historico->id_turma);
-    if ($turma) {
+    if (!$turma) {
         return back()->with(['error' => "Não encontrou turma"]);
     }
 
@@ -608,6 +608,7 @@ Route::get('test3', function (){
         $obs_final = "Não Transita";
         HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])
             ->update(['obs_pauta' => $obs_final]);
+
         echo "// reprovado //";
         return null;
         // e termina o programa aqui
@@ -615,12 +616,7 @@ Route::get('test3', function (){
 
     //fim condicao geral e nuclear
 
-    $historico = HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])
-        ->update(['obs_pauta' => $obs_final]);
 
-    if ($historico) {
-        echo "// alterou estado observacao com TRANSITOU //";
-    }
     echo "//// chegou ate observacao ////";
 
 });

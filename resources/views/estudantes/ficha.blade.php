@@ -71,6 +71,7 @@
                                                 <span class="title">Classe:</span> {{$getHistoricoEstudante->turma->classe->classe}}<br/>
                                                 <span class="title">Turma:</span> {{$getHistoricoEstudante->turma->turma}}<br/>
                                                 <span class="title">Turno:</span> {{$getHistoricoEstudante->turma->turno->turno}}<br/>
+                                                <span class="title">ESTADO FINAL:</span> {{strtoupper($getHistoricoEstudante->obs_pauta)}}<br/>
                                             </div>
 
                                         </div>

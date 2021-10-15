@@ -454,7 +454,7 @@ class AjaxController extends Controller
             echo " \\lancou o mfd e mf \\ ";
         }
         //fim mfd e mf
-
+        $this->acharObervacao($final->id_estudante, $final->ano_lectivo);
 
     }
 
@@ -586,6 +586,7 @@ class AjaxController extends Controller
             echo " \\lancou o mfd e mf \\ ";
         }
         //fim mfd e mf
+        $this->acharObervacao($final->id_estudante, $final->ano_lectivo);
     }
 
     public function updateGlobal(Request $request)
@@ -670,6 +671,7 @@ class AjaxController extends Controller
             echo " \\lancou o mf\\ ";
         }
         //fim mfd e mf
+        $this->acharObervacao($final->id_estudante, $final->ano_lectivo);
     }
 
     public function updateRecurso(Request $request)
@@ -734,6 +736,7 @@ class AjaxController extends Controller
         } else {
             return null;
         }
+        $this->acharObervacao($final->id_estudante, $final->ano_lectivo);
     }
 
     public function updateAV_mensal(Request $request)
@@ -1080,7 +1083,7 @@ class AjaxController extends Controller
             $obs_final = "Não Transita";
             HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])
                 ->update(['obs_pauta' => $obs_final]);
-            echo "reprovado";
+            echo "// reprovado //";
             return null;
             // e termina o programa aqui
 
@@ -1090,7 +1093,7 @@ class AjaxController extends Controller
             $obs_final = "Não Transita";
             HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])
                 ->update(['obs_pauta' => $obs_final]);
-            echo "reprovado";
+            echo "// reprovado //";
             return null;
             // e termina o programa aqui
         }
@@ -1101,7 +1104,7 @@ class AjaxController extends Controller
             ->update(['obs_pauta' => $obs_final]);
 
         if ($historico) {
-            echo "alterou estado observacao";
+            echo "// alterou estado observacao com TRANSITOU //";
             return null;
         }
     }

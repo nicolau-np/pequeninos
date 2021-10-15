@@ -219,12 +219,23 @@ class PhpWordController extends Controller
         ];*/
 
         $values = [];
+        $nota_valor = "[######]";
+        $nota_extensao = "[####]";
         foreach (Session::get('disciplinas') as $disciplina) {
             $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
             $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina['id_disciplina'], $historico->ano_lectivo);
+            if ($final) {
+                foreach ($final as $valorf) {
+                    $nota_valor = $valorf->mf;
+                }
+            }
+
+            array_push($values, ['disciplinas' => $getDisciplina->disciplina, 'valores' => $nota_valor, 'extensao'=>$nota_extensao]);
+            $nota_valor = "[######]";
+            $nota_extensao = "[####]";
         }
 
-        $templateProcessor->cloneRowAndSetValues('disciplinaID', $values);
+        $templateProcessor->cloneRowAndSetValues('disciplinas', $values);
 
         /**fim */
 

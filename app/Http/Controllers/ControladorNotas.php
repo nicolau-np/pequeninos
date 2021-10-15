@@ -141,45 +141,45 @@ class ControladorNotas extends Controller
             if ($nota_compreensao == 0) :
                 $nota_extensao = "Zero";
             elseif ($nota_compreensao == 1) :
-                $nota_extensao = "Um valor";
+                $nota_extensao = "Um";
             elseif ($nota_compreensao == 2) :
-                $nota_extensao = "Dois valores";
+                $nota_extensao = "Dois";
             elseif ($nota_compreensao == 3) :
-                $nota_extensao = "Três valores";
+                $nota_extensao = "Três";
             elseif ($nota_compreensao == 4) :
-                $nota_extensao = "Quatro valores";
+                $nota_extensao = "Quatro";
             elseif ($nota_compreensao == 5) :
-                $nota_extensao = "Cinco valores";
+                $nota_extensao = "Cinco";
             elseif ($nota_compreensao == 6) :
-                $nota_extensao = "Seis valores";
+                $nota_extensao = "Seis";
             elseif ($nota_compreensao == 7) :
-                $nota_extensao = "Sete valores";
+                $nota_extensao = "Sete";
             elseif ($nota_compreensao == 8) :
-                $nota_extensao = "Oito valores";
+                $nota_extensao = "Oito";
             elseif ($nota_compreensao == 9) :
-                $nota_extensao = "Nove valores";
+                $nota_extensao = "Nove";
             elseif ($nota_compreensao == 10) :
-                $nota_extensao = "Dez valores";
+                $nota_extensao = "Dez";
             elseif ($nota_compreensao == 11) :
-                $nota_extensao = "Onze valores";
+                $nota_extensao = "Onze";
             elseif ($nota_compreensao == 12) :
-                $nota_extensao = "Doze valores";
+                $nota_extensao = "Doze";
             elseif ($nota_compreensao == 13) :
-                $nota_extensao = "Treze valores";
+                $nota_extensao = "Treze";
             elseif ($nota_compreensao == 14) :
-                $nota_extensao = "Catorze valores";
+                $nota_extensao = "Catorze";
             elseif ($nota_compreensao == 15) :
-                $nota_extensao = "Quinze valores";
+                $nota_extensao = "Quinze";
             elseif ($nota_compreensao == 16) :
-                $nota_extensao = "Dezasseis valores";
+                $nota_extensao = "Dezasseis";
             elseif ($nota_compreensao == 17) :
-                $nota_extensao = "Dezassete valores";
+                $nota_extensao = "Dezassete";
             elseif ($nota_compreensao == 18) :
-                $nota_extensao = "Dezoito valores";
+                $nota_extensao = "Dezoito";
             elseif ($nota_compreensao == 19) :
-                $nota_extensao = "Dezanove valores";
+                $nota_extensao = "Dezanove";
             elseif ($nota_compreensao == 20) :
-                $nota_extensao = "Vinte valores";
+                $nota_extensao = "Vinte";
             endif;
         } catch (\Exception $ex) {
             echo 'CONVERSAO::converter => ' . $ex->getMessage();
@@ -193,7 +193,7 @@ class ControladorNotas extends Controller
         return $observacao;
     }
 
-  
+
 
 
     /*carregar para os PDFs, pautas minipautas e estatisticas */

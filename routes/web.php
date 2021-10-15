@@ -1,6 +1,7 @@
 <?php
 
 use App\AnoLectivo;
+use App\Grade;
 use App\HistoricEstudante;
 use App\Trimestral;
 use App\User;
@@ -471,3 +472,16 @@ Route::get('test2', function () {
 
 });
 /*fim*/
+
+Route::get('test3', function (){
+    $total_nucleares = 0;
+
+    $grade = Grade::where([
+        'id_classe'=>8,
+        'id_curso'=>2,
+        'nuclear'=>"1",
+    ])->get();
+
+    $total_nucleares = $grade->count();
+    echo $total_nucleares;
+});

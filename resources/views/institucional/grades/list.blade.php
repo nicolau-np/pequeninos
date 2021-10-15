@@ -66,7 +66,7 @@ use App\Http\Controllers\ControladorStatic; ?>
                                                         @foreach ($getGrades as $grades)
                                                             <span
                                                                 style="font-size:10px;">{{ $grades->disciplina->disciplina }}
-                                                                - {{ $grades->disciplina->nuclear }}</span><br />
+                                                                - @if($grades->nuclear=="1") SIM @else NAO @endif</span><br />
                                                         @endforeach
                                                         <hr />
                                                     @endforeach

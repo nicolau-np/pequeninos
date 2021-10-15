@@ -6,7 +6,9 @@ use App\Declaracao;
 use App\HistoricEstudante;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ControladorStatic;
+use App\Http\Controllers\ControladorNotas;
 use App\Turma;
+use Illuminate\Support\Facades\Session;
 
 class PhpWordController extends Controller
 {
@@ -205,6 +207,28 @@ class PhpWordController extends Controller
         $templateProcessor->setValue('ano_hoje', $ano_hoje);
         $templateProcessor->setValue('bilhete', $bilhete);           // On footer
         // On header
+
+
+        /**trabalhando nas notas */
+
+        /*$values = [
+            ['disciplinaID' => "Matematica", 'valor' => 10,],
+            ['disciplinaID' => "Portugues", 'valor' => 18,],
+            ['disciplinaID' => "Fisica", 'valor' => 11,],
+
+        ];*/
+
+        $values = [];
+        foreach (Session::get('disciplinas') as $disciplina) {
+            $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
+            $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina['id_disciplina'], $historico->ano_lectivo);
+        }
+
+        $templateProcessor->cloneRowAndSetValues('disciplinaID', $values);
+
+        /**fim */
+
+
         $filename = $historico->estudante->pessoa->nome . "declaracaocomnota.docx";
         try {
             $templateProcessor->saveAs('word_models/declaracao_notas/' . $filename . '.docx');
@@ -213,4 +237,4 @@ class PhpWordController extends Controller
         }
         return response()->download('word_models/declaracao_notas/' . $filename . '.docx')->deleteFileAfterSend(true);
     }
-} 
+}

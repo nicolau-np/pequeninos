@@ -10,10 +10,7 @@ use Illuminate\Http\Request;
 
 class FinancaController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
+
 
     public function tabela_preco_list()
     {
@@ -58,6 +55,17 @@ class FinancaController extends Controller
             'classe.*' => ['string']
         ]);
 
+        $tipo_pagamento = TipoPagamento::find($request->tipo_pagamento);
+        if (!$tipo_pagamento) {
+            return back()->with(['error' => "Nao encontrou tipo de pagamento"]);
+        }
+
+        if ($tipo_pagamento->multa == "sim") {
+            $request->validate([
+                'percentagem_multa' => ['required', 'integer', 'min:1'],
+            ]);
+        }
+
         $data = [
             'id_tipo_pagamento' => $request->tipo_pagamento,
             'id_curso' => $request->curso,
@@ -65,6 +73,7 @@ class FinancaController extends Controller
             'id_turno' => $request->turno,
             'preco' => $request->preco,
             'forma_pagamento' => $request->forma_pagamento,
+            'percentagem_multa'=>$request->percentagem_multa,
         ];
 
         $data2 = [
@@ -76,21 +85,21 @@ class FinancaController extends Controller
         ];
 
 
-       $tabela = false;
+        $tabela = false;
         foreach ($request->classe as $classe) {
             $data['id_classe'] = $classe;
             $data2['id_classe'] = $classe;
             if (!TabelaPreco::where($data)->first()) {
-                if(!TabelaPreco::where($data2)->first()){
+                if (!TabelaPreco::where($data2)->first()) {
                     $tabela = TabelaPreco::create($data);
-                }    
+                }
             }
         }
-        
-        if($tabela){
+
+        if ($tabela) {
             return back()->with(['success' => "Feito com sucesso"]);
-        }else{
-            return back()->with(['error' => "Já Cadastrou"]); 
+        } else {
+            return back()->with(['error' => "Já Cadastrou"]);
         }
     }
 

@@ -9,7 +9,7 @@
                     <h5>{{$submenu}}</h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -36,11 +36,11 @@
                                 <div class="col-md-3">
                                     {{Form::label('tipo_pagamento', "Pagamento")}} <span class="text-danger">*</span>
                                     {{Form::select('tipo_pagamento', $getTipoPagamentos, null, ['class'=>"form-control", 'placeholder'=>"Pagamento"])}}
-                                
+
                                 <div class="erro">
                                     @if($errors->has('tipo_pagamento'))
                                     <div class="text-danger">{{$errors->first('tipo_pagamento')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
@@ -52,11 +52,11 @@
                                         'Anual'=>"Anual",
                                         'Momental'=>"Momental",
                                     ], null, ['class'=>"form-control", 'placeholder'=>"Forma de Pagamento"])}}
-                                
+
                                 <div class="erro">
                                     @if($errors->has('forma_pagamento'))
                                     <div class="text-danger">{{$errors->first('forma_pagamento')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
@@ -66,19 +66,19 @@
                                 <div class="erro">
                                     @if($errors->has('curso'))
                                     <div class="text-danger">{{$errors->first('curso')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
                                 <div class="col-md-2">
                                     {{Form::label('turno', "Turno")}} <span class="text-danger">*</span>
-                                    
+
                                     {{Form::select('turno', $getTurnos, null, ['class'=>"form-control", 'placeholder'=>"Turno"])}}
-                                
+
                                 <div class="erro">
                                     @if($errors->has('turno'))
                                     <div class="text-danger">{{$errors->first('turno')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
@@ -90,7 +90,7 @@
                                 <div class="erro">
                                     @if($errors->has('classe'))
                                     <div class="text-danger">{{$errors->first('classe')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                                 </div>
 
@@ -100,7 +100,17 @@
                                     <div class="erro">
                                         @if($errors->has('preco'))
                                         <div class="text-danger">{{$errors->first('preco')}}</div>
-                                        @endif 
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    {{Form::label('percentagem_multa', "% Multa")}}
+                                    {{Form::number('percentagem_multa', null, ['class'=>"form-control", 'placeholder'=>"% Multa"])}}
+                                    <div class="erro">
+                                        @if($errors->has('percentagem_multa'))
+                                        <div class="text-danger">{{$errors->first('percentagem_multa')}}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -113,16 +123,16 @@
                                  </div>
 
                             </div>
-                        
-                       
-                        
+
+
+
                         {{Form::close()}}
                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- hidden-sm-up -->
@@ -151,9 +161,9 @@
                 success: function (response) {
                     $('.load_classes2').html(response);
                 }
-            }); 
+            });
             }
-            
+
         });
     });
 </script>

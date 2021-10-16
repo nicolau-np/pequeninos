@@ -455,7 +455,6 @@ class AjaxController extends Controller
         }
         //fim mfd e mf
         $this->acharObervacao($final->id_estudante, $final->ano_lectivo);
-
     }
 
     public function updateProva(Request $request)
@@ -584,7 +583,6 @@ class AjaxController extends Controller
         ];
         if (Finals::where($data['where_mts'])->update($data['calculo_final'])) {
             echo " \\lancou o mfd e mf \\ ";
-
         }
         //fim mfd e mf
         $this->acharObervacao($final->id_estudante, $final->ano_lectivo);
@@ -670,7 +668,6 @@ class AjaxController extends Controller
         ];
         if (Finals::find($request->id_final)->update($data['calculo_final'])) {
             echo " \\lancou o mf\\ ";
-
         }
         //fim mfd e mf
         $this->acharObervacao($final->id_estudante, $final->ano_lectivo);
@@ -735,7 +732,6 @@ class AjaxController extends Controller
         $final = Finals::find($request->id_final)->update($data['final']);
         if ($final) {
             echo " \\lancou npe\\ ";
-
         } else {
             return null;
         }
@@ -1091,15 +1087,18 @@ class AjaxController extends Controller
             // e termina o programa aqui
 
         }
-        if ($count_negativas_nuclear >= $total_nucleares) {
-            //faz alteracao no historico de estudante como reprovado
-            $obs_final = "Não Transita";
-            HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])
-                ->update(['obs_pauta' => $obs_final]);
-            echo "// reprovado //";
-            return null;
-            // e termina o programa aqui
+        if ($total_nucleares >= 1) {
+            if ($count_negativas_nuclear >= $total_nucleares) {
+                //faz alteracao no historico de estudante como reprovado
+                $obs_final = "Não Transita";
+                HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])
+                    ->update(['obs_pauta' => $obs_final]);
+                echo "// reprovado //";
+                return null;
+                // e termina o programa aqui
+            }
         }
+
 
         //fim condicao geral e nuclear
 
@@ -1110,7 +1109,6 @@ class AjaxController extends Controller
             echo "// alterou estado observacao com TRANSITOU //";
         }
         echo "//// chegou ate observacao ////";
-
     }
 
     public function getCursoEnsino(Request $request)

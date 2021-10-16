@@ -243,7 +243,7 @@ $getCadeiraRecurso = false;
                                     <td>---</td>
                                     <?php } else {foreach ($trimestre1 as $valor1) {
 
-                                    $v4_estilo = ControladorNotas::nota_10($valor1->mt);
+                                    $v4_estilo = ControladorNotas::nota_10Qualitativa($valor1->mt);
                                     $v4_valor = ControladorNotas::estado_nota_qualitativa($valor1->mt);
                                     ?>
 
@@ -260,7 +260,7 @@ $getCadeiraRecurso = false;
                                     <td>---</td>
                                     <?php } else {foreach ($trimestre2 as $valor2) {
 
-                                    $v4_estilo = ControladorNotas::nota_10($valor2->mt);
+                                    $v4_estilo = ControladorNotas::nota_10Qualitativa($valor2->mt);
                                     $v4_valor = ControladorNotas::estado_nota_qualitativa($valor2->mt);
                                     ?>
 
@@ -277,7 +277,7 @@ $getCadeiraRecurso = false;
                                     <td>---</td>
                                     <?php } else {foreach ($trimestre3 as $valor3) {
 
-                                    $v4_estilo = ControladorNotas::nota_10($valor3->mt);
+                                    $v4_estilo = ControladorNotas::nota_10Qualitativa($valor3->mt);
                                     $v4_valor = ControladorNotas::estado_nota_qualitativa($valor3->mt);
                                     ?>
 

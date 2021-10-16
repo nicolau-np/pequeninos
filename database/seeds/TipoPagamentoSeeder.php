@@ -6,9 +6,9 @@ use Illuminate\Support\Facades\DB;
 class TipoPagamentoSeeder extends Seeder
 {
     static $tipo_pagamentos = [
-        ['tipo' => "Propina"],
-        ['tipo' => "Matricula & Reconfirmação"],
-        ['tipo' => "Comparticipação de Pais"],
+        ['tipo' => "Comparticipação de Mensal", 'multa' => "sim"],
+        ['tipo' => "Matricula & Reconfirmação", 'multa' => "nao"],
+        ['tipo' => "Comparticipação de Pais", 'multa' => "nao"],
     ];
 
     public function run()

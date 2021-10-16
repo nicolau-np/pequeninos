@@ -27,4 +27,8 @@ class TipoPagamento extends Model
     {
         return $this->hasMany(PagamentoPai::class, 'id_tipo_pagamento', 'id');
     }
+
+    public function multado(){
+        return $this->hasMany(Multado::class, 'id_tipo_pagamento', 'id');
+    }
 }

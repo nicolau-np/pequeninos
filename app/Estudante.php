@@ -82,4 +82,8 @@ class Estudante extends Model
         return $this->hasMany(EjaNotaFinal::class, 'id_estudante', 'id');
     }
 
+    public function multado(){
+        return $this->hasMany(Multado::class, 'id_estudante', 'id');
+    }
+
 }

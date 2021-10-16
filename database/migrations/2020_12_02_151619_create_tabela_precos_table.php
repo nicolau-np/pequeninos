@@ -22,7 +22,6 @@ class CreateTabelaPrecosTable extends Migration
             $table->bigInteger('id_turno')->unsigned()->index();
             $table->decimal('preco', 14,2);
             $table->string('forma_pagamento');
-            $table->string('multa')->nullable();
             $table->bigInteger('percentagem_multa')->nullable();
             $table->bigInteger('dia_cobranca_multa')->nullable();
             $table->timestamps();

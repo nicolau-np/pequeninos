@@ -15,7 +15,6 @@ class TabelaPreco extends Model
         'id_turno',
         'preco',
         'forma_pagamento',
-        'multa',
         'percentagem_multa',
         'dia_cobranca_multa',
 

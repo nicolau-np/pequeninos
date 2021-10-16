@@ -73,7 +73,7 @@ class FinancaController extends Controller
             'id_turno' => $request->turno,
             'preco' => $request->preco,
             'forma_pagamento' => $request->forma_pagamento,
-            'percentagem_multa'=>$request->percentagem_multa,
+            'percentagem_multa' => $request->percentagem_multa,
         ];
 
         $data2 = [
@@ -140,18 +140,30 @@ class FinancaController extends Controller
             'forma_pagamento' => ['required', 'string']
         ]);
 
+        $tipo_pagamento = TipoPagamento::find($request->tipo_pagamento);
+        if (!$tipo_pagamento) {
+            return back()->with(['error' => "Nao encontrou tipo de pagamento"]);
+        }
+
+        if ($tipo_pagamento->multa == "sim") {
+            $request->validate([
+                'percentagem_multa' => ['required', 'integer', 'min:1'],
+            ]);
+        }
+
         $data = [
             'id_tipo_pagamento' => $request->tipo_pagamento,
             'id_curso' => $request->curso,
             'id_classe' => $request->classe,
             'preco' => $request->preco,
-            'forma_pagamento' => $request->forma_pagamento
+            'forma_pagamento' => $request->forma_pagamento,
+            'percentagem_multa' => $request->percentagem_multa,
         ];
 
         if (
             $request->tipo_pagamento != $tabela_preco->id_tipo_pagamento || $request->curso != $tabela_preco->id_curso
             || $request->classe != $tabela_preco->id_classe || $request->preco != $tabela_preco->preco
-            || $request->forma_pagamento != $tabela_preco->forma_pagamento
+            || $request->forma_pagamento != $tabela_preco->forma_pagamento || $request->percentagem_multa != $tabela_preco->percentagem_multa
         ) {
             if (TabelaPreco::where($data)->first()) {
                 return back()->with(['error' => "Já cadastrou este"]);

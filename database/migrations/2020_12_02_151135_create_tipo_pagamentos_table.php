@@ -18,6 +18,7 @@ class CreateTipoPagamentosTable extends Migration
             $table->bigIncrements('id');
             $table->string('tipo')->unique();
             $table->string('multa')->nullable();
+            $table->bigInteger('dia_cobranca_multa')->nullable();
             $table->timestamps();
         });
     }

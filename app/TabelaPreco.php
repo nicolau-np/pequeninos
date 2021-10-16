@@ -16,8 +16,6 @@ class TabelaPreco extends Model
         'preco',
         'forma_pagamento',
         'percentagem_multa',
-        'dia_cobranca_multa',
-
     ];
 
     public function tipo_pagamento()

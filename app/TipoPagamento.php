@@ -11,6 +11,7 @@ class TipoPagamento extends Model
     protected $fillable = [
         'tipo',
         'multa',
+        'dia_cobranca_multa'
     ];
 
     public function tabela_pagamento()

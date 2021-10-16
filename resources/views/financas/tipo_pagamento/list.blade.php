@@ -9,7 +9,7 @@
                     <h5>{{$submenu}}</h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -31,7 +31,7 @@
                         </div>
                         {{Form::close()}}
                     </div>
-                    
+
                     <div class="table-responsive">
                         <br/>
                         <table class="table table-bordered">
@@ -39,6 +39,8 @@
                                 <tr>
                                     <th>#</th>
                                     <th>Tipo</th>
+                                    <th>Multa</th>
+                                    <th>Dia Cobrança</th>
                                     <th>Operações</th>
                                 </tr>
                             </thead>
@@ -47,10 +49,12 @@
                                 <span class="not_found">Nenhum Tipo de Pagamento cadastrado</span>
                                 @else
                                 @foreach ($getTipoPagamentos as $tipo_pagamento)
-                                    
+
                                 <tr>
                                 <th scope="row">{{$loop->iteration}}</th>
                                     <td>{{$tipo_pagamento->tipo}}</td>
+                                    <td>{{$tipo_pagamento->multa}}</td>
+                                    <td>{{$tipo_pagamento->dia_cobranca_multa}}</td>
                                     <td>
                                         <a href="/financas/tipo_pagamentos/edit/{{$tipo_pagamento->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>
                                         <a href="http://" class="btn btn-danger btn-sm"><i class="ti-trash"></i> Eliminar</a>
@@ -59,7 +63,7 @@
 
                                 @endforeach
                                 @endif
-                             
+
                             </tbody>
                         </table>
                     </div>
@@ -71,7 +75,7 @@
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- hidden-sm-up -->

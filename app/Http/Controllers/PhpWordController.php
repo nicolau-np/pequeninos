@@ -126,10 +126,15 @@ class PhpWordController extends Controller
 
         if ($id_ensino == 1) {
             if (($classe == "Iniciação") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
+                $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/declaracao_notas/ensino_primario_ini_1_3_5_copy.docx');
+            } elseif (($classe == "2ª classe") || ($classe == "4ª classe")) {
+                $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/declaracao_notas/ensino_primario_2_4_copy.docx');
             } elseif ($classe == "6ª classe") {
+                $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/declaracao_notas/ensino_primario_6_copy.docx');
             }
         } elseif ($id_ensino == 2) {
             if ($classe == "9ª classe") {
+                $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/declaracao_notas/ensino_1ciclo_9_copy.docx');
             } elseif (($classe == "7ª classe") || ($classe == "8ª classe")) {
                 $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/declaracao_notas/ensino_1ciclo_7_8_copy.docx');
             }
@@ -226,24 +231,23 @@ class PhpWordController extends Controller
             $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina['id_disciplina'], $historico->ano_lectivo);
             if ($final) {
                 foreach ($final as $valorf) {
-                    if($valorf->rec == null){
+                    if ($valorf->rec == null) {
                         $nota_valor = str_pad($valorf->mf, 2, 0, STR_PAD_LEFT);
                         $nota_extensao = ControladorNotas::converter_nota($valorf->mf);
-                    }else{
+                    } else {
                         $nota_valor = str_pad($valorf->rec, 2, 0, STR_PAD_LEFT);
                         $nota_extensao = ControladorNotas::converter_nota($valorf->rec);
                     }
-
                 }
             }
 
             array_push($values, ['disciplinas' => $getDisciplina->disciplina, 'valores' => $nota_valor, 'extensao' => $nota_extensao]);
+
             $nota_valor = "[######]";
             $nota_extensao = "[####]";
         }
 
         $templateProcessor->cloneRowAndSetValues('disciplinas', $values);
-
         /**fim */
 
 

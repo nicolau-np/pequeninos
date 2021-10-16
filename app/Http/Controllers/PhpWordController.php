@@ -216,35 +216,49 @@ class PhpWordController extends Controller
 
         /**trabalhando nas notas */
 
-        /*$values = [
-            ['disciplinaID' => "Matematica", 'valor' => 10,],
-            ['disciplinaID' => "Portugues", 'valor' => 18,],
-            ['disciplinaID' => "Fisica", 'valor' => 11,],
-
-        ];*/
-
         $values = [];
         $nota_valor = "[######]";
         $nota_extensao = "[####]";
-        foreach (Session::get('disciplinas') as $disciplina) {
-            $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
-            $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina['id_disciplina'], $historico->ano_lectivo);
-            if ($final) {
-                foreach ($final as $valorf) {
-                    if ($valorf->rec == null) {
-                        $nota_valor = str_pad($valorf->mf, 2, 0, STR_PAD_LEFT);
-                        $nota_extensao = ControladorNotas::converter_nota($valorf->mf);
-                    } else {
-                        $nota_valor = str_pad($valorf->rec, 2, 0, STR_PAD_LEFT);
-                        $nota_extensao = ControladorNotas::converter_nota($valorf->rec);
+        if (($id_ensino == 1) && (($classe == "Iniciação") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe"))) {//para notas qualitativa
+            foreach (Session::get('disciplinas') as $disciplina) {
+                $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
+                $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina['id_disciplina'], $historico->ano_lectivo);
+                if ($final) {
+                    foreach ($final as $valorf) {
+                        if ($valorf->rec == null) {
+                            $nota_valor = ControladorNotas::estado_nota_qualitativa($valorf->mf);
+                        } else {
+                            $nota_valor = ControladorNotas::estado_nota_qualitativaRec($valorf->rec);
+                        }
                     }
                 }
+
+                array_push($values, ['disciplinas' => $getDisciplina->disciplina, 'valores' => $nota_valor, 'extensao' => $nota_extensao]);
+
+                $nota_valor = "[######]";
+                $nota_extensao = "[####]";
             }
+        } else { //para notas quantitativa
+            foreach (Session::get('disciplinas') as $disciplina) {
+                $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
+                $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina['id_disciplina'], $historico->ano_lectivo);
+                if ($final) {
+                    foreach ($final as $valorf) {
+                        if ($valorf->rec == null) {
+                            $nota_valor = str_pad($valorf->mf, 2, 0, STR_PAD_LEFT);
+                            $nota_extensao = ControladorNotas::converter_nota($valorf->mf);
+                        } else {
+                            $nota_valor = str_pad($valorf->rec, 2, 0, STR_PAD_LEFT);
+                            $nota_extensao = ControladorNotas::converter_nota($valorf->rec);
+                        }
+                    }
+                }
 
-            array_push($values, ['disciplinas' => $getDisciplina->disciplina, 'valores' => $nota_valor, 'extensao' => $nota_extensao]);
+                array_push($values, ['disciplinas' => $getDisciplina->disciplina, 'valores' => $nota_valor, 'extensao' => $nota_extensao]);
 
-            $nota_valor = "[######]";
-            $nota_extensao = "[####]";
+                $nota_valor = "[######]";
+                $nota_extensao = "[####]";
+            }
         }
 
         $templateProcessor->cloneRowAndSetValues('disciplinas', $values);

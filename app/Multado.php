@@ -10,18 +10,20 @@ class Multado extends Model
 
     protected $fillable = [
         'id_estudante',
-            'id_tipo_pagamento',
-            'mes_multa',
-            'percentagem',
-            'dia_multado',
-            'ano_lectivo',
+        'id_tipo_pagamento',
+        'mes_multa',
+        'percentagem',
+        'dia_multado',
+        'ano_lectivo',
     ];
 
-    public function estudante(){
+    public function estudante()
+    {
         return $this->belongsTo(Estudante::class, 'id_estudante', 'id');
     }
 
-    public function tipo_pagamento(){
+    public function tipo_pagamento()
+    {
         return $this->belongsTo(TipoPagamento::class, 'id_tipo_pagamento', 'id');
     }
 }

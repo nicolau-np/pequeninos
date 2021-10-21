@@ -404,7 +404,7 @@ Route::get('test', function () {
 
                 foreach ($epoca_pagamentos as $epocas) {
                     echo "<b style='color:blue;'>" . $epocas->numero . " == " . $epocas->epoca . "</b><br/>";
-                    /**psquisar estudantes deste ano com multas */
+                    /**pesquisar estudantes deste ano com multas */
                     $data = [
                         'epoca' => $epocas->epoca,
                         'id_classe' => $tabela_preco->id_classe,
@@ -418,6 +418,9 @@ Route::get('test', function () {
                     foreach ($estudantes as $estudante) {
                         //buscar estudantes que nao pagaram para aplicar multas
                         echo $estudante->pessoa->nome . "<br/>";
+                        if(){
+
+                        }
                     }
                 }
             }

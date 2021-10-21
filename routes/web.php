@@ -398,7 +398,10 @@ Route::get('test', function () {
 
             /*se a forma de pagamento for mensal*/
             if ($forma_pagamento->forma_pagamento == "Mensal") {
+                /**pegar o id do mes actual em epocas de pagamento */
+                $epocaID = EpocaPagamento::where(['numero'=>$mes])->first();
                 /**pegar epocas de pagamentos */
+
                 $epoca_pagamentos = EpocaPagamento::where(['id_forma_pagamento' => $forma_pagamento->id])
                     ->where('numero', '<', $mes)->get();
 

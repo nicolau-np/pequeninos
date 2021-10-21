@@ -12,8 +12,10 @@ class Multado extends Model
         'id_estudante',
         'id_tipo_pagamento',
         'mes_multa',
+        'mes',
         'percentagem',
         'dia_multado',
+        'estado',
         'ano_lectivo',
     ];
 

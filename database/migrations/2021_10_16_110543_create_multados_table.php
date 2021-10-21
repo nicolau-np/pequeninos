@@ -19,8 +19,10 @@ class CreateMultadosTable extends Migration
             $table->bigInteger('id_estudante')->unsigned()->index();
             $table->bigInteger('id_tipo_pagamento')->unsigned()->index();
             $table->bigInteger('mes_multa');
+            $table->string('mes');
             $table->bigInteger('percentagem');
             $table->bigInteger('dia_multado');
+            $table->string('estado');
             $table->string('ano_lectivo');
             $table->timestamps();
         });

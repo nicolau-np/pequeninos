@@ -391,7 +391,7 @@ Route::get('test', function () {
         /**pegar todas tabelas de precos dos pagamentos com multas */
         $tabela_precos = TabelaPreco::where(['id_tipo_pagamento' => $tipo_pagamento->id])->get();
         foreach ($tabela_precos as $tabela_preco) {
-            echo $tabela_preco->curso->curso . " == " . $tabela_preco->classe->classe . " == " . $tabela_preco->turno->turno . " == " . $tabela_preco->preco . "kz == " . $tabela_preco->percentagem_multa . "% <br/>";
+            echo "<b style='color:green;'>".$tabela_preco->curso->curso . " == " . $tabela_preco->classe->classe . " == " . $tabela_preco->turno->turno . " == " . $tabela_preco->preco . "kz == " . $tabela_preco->percentagem_multa . "% </b> <br/>";
             /**pegar id de forma de pagamento */
             $forma_pagamento = FormaPagamento::where(['forma_pagamento' => $tabela_preco->forma_pagamento])->first();
             /**pegar epocas de pagamentos */
@@ -400,7 +400,7 @@ Route::get('test', function () {
 
 
             foreach ($epoca_pagamentos as $epocas) {
-                echo $epocas->numero . " == " . $epocas->epoca . "<br/>";
+                echo "<b style='color:blue;'>".$epocas->numero . " == " . $epocas->epoca . "</b><br/>";
                 /**psquisar estudantes deste ano com multas */
                 $data = [
                     'epoca' => $epocas->epoca,

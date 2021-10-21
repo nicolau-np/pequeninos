@@ -19,10 +19,6 @@ use Illuminate\Support\Facades\Session;
 class PagamentoController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('admin');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -68,16 +64,16 @@ class PagamentoController extends Controller
         $educandos = Estudante::where('id_encarregado',$estudante->id_encarregado)->get();
         $data['pagamento'] = [
             'id_tipo_pagamento'=>$id_tipo_pagamento,
-            'id_estudante' => $historico->id_estudante, 
+            'id_estudante' => $historico->id_estudante,
             'ano_lectivo' => $historico->ano_lectivo,
         ];
 
         $data['pagamento_pai'] = [
             'id_tipo_pagamento'=>$id_tipo_pagamento,
-            'id_encarregado' => $historico->estudante->id_encarregado, 
+            'id_encarregado' => $historico->estudante->id_encarregado,
             'ano_lectivo' => $historico->ano_lectivo,
         ];
-        
+
         //apagamento pai
         if($id_tipo_pagamento == 3){
             $meses_pagos = PagamentoPai::where($data['pagamento_pai'])->get();
@@ -85,7 +81,7 @@ class PagamentoController extends Controller
             //pagamento estudante
             $meses_pagos = Pagamento::where($data['pagamento'])->get();
         }
-        
+
         //preencher o array de meses pagos
         foreach ($meses_pagos as $pagos) {
             array_push($array_pagos, $pagos->epoca);
@@ -94,9 +90,9 @@ class PagamentoController extends Controller
         foreach ($epocas_pagemento as $epocas) {
             array_push($array_epocas_pagamento, $epocas->epoca);
         }
-        
+
         $array_nao_pagos = array_diff_assoc($array_epocas_pagamento, $array_pagos);
-       
+
         $data = [
             'title' => "Pagamentos",
             'type' => "pagamento",
@@ -138,13 +134,13 @@ class PagamentoController extends Controller
             'id_curso' => $historico->estudante->turma->curso->id,
             'id_turno'=>$historico->estudante->turma->id_turno,
             'id_tipo_pagamento' => $id_tipo_pagamento,
-            
+
         ];
 
         $tabela_preco = TabelaPreco::where($data)->first();
         if (!$tabela_preco) {
             return back()->with(['error' => "Não encontrou preco"]);
-        }    
+        }
         $data['fatura'] = [
             'data_fatura'=>date('Y-m-d'),
             'ano'=>date('Y'),
@@ -156,7 +152,7 @@ class PagamentoController extends Controller
             'epoca' => null,
             'ano_lectivo' => $historico->ano_lectivo,
         ];
-        
+
          $data['store'] = [
             'id_tipo_pagamento' => $id_tipo_pagamento,
             'id_usuario' => $id_user,
@@ -166,7 +162,7 @@ class PagamentoController extends Controller
             'data_pagamento' => date('Y-m-d'),
             'fatura'=>$fatura->id,
             'mes_pagamento'=>date('m'),
-            'ano_lectivo' => $historico->ano_lectivo,   
+            'ano_lectivo' => $historico->ano_lectivo,
         ];
 
         $data['where_pai'] = [
@@ -185,7 +181,7 @@ class PagamentoController extends Controller
             'data_pagamento' => date('Y-m-d'),
             'fatura'=>$fatura->id,
             'mes_pagamento'=>date('m'),
-            'ano_lectivo' => $historico->ano_lectivo, 
+            'ano_lectivo' => $historico->ano_lectivo,
         ];
 
         //apagamento pai
@@ -196,7 +192,7 @@ class PagamentoController extends Controller
                 if(!PagamentoPai::where($data['where_pai'])->first()){
                     $pagamento = PagamentoPai::create($data['store_pai']);
                 }
-            } 
+            }
         }else{
             //pagamento estudante
             foreach ($request->meses_a_pagar as $epoca) {
@@ -207,7 +203,7 @@ class PagamentoController extends Controller
             }
             }
         }
-        
+
         if ($pagamento) {
             return back()->with(['success' => "Feito com sucesso"]);
         }
@@ -227,7 +223,7 @@ class PagamentoController extends Controller
         if (!$historico) {
             return back()->with(['error' => "Não encontrou historico"]);
         }
-        
+
         $data['where_pai'] = [
             'id_tipo_pagamento'=>$id_tipo_pagamento,
             'id_encarregado'=>$historico->estudante->id_encarregado,
@@ -241,9 +237,9 @@ class PagamentoController extends Controller
             'epoca'=>$request->epoca,
             'ano_lectivo'=>$historico->ano_lectivo,
         ];
-        
+
         if($id_tipo_pagamento == 3){
-           $pagamento = PagamentoPai::where($data['where_pai'])->first(); 
+           $pagamento = PagamentoPai::where($data['where_pai'])->first();
         }else{
             $pagamento = Pagamento::where($data['where_estudante'])->first();
         }
@@ -253,7 +249,7 @@ class PagamentoController extends Controller
         ];
 
         return view('ajax_loads.getPagamentoDetails', $data);
-        
+
     }
 
     /**

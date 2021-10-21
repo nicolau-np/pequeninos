@@ -1,11 +1,13 @@
 <?php
 
 use App\AnoLectivo;
+use App\Estudante;
 use App\Finals;
 use App\Grade;
 use App\HistoricEstudante;
 use App\Horario;
 use App\ObservacaoGeral;
+use App\Pagamento;
 use App\TabelaPreco;
 use App\TipoPagamento;
 use App\Trimestral;
@@ -377,6 +379,8 @@ Route::group(['prefix' => "word", 'middleware' => "AdminUser"], function () {
 /*rota de test*/
 Route::get('test', function () {
     $dia = date('d');
+    $ano_lectivo = "2021-2022";
+    $epoca = null;
     /**primeiro deve pegar os tipos de pagamentos que tem multa com os seus respentivos dias */
     $tipo_pagamentos = TipoPagamento::where(['multa' => "sim", 'dia_cobranca_multa' => $dia])->get();
     foreach ($tipo_pagamentos as $tipo_pagamento) {
@@ -384,7 +388,11 @@ Route::get('test', function () {
         /**pegar todas tabelas de precos dos pagamentos com multas */
         $tabela_precos = TabelaPreco::where(['id_tipo_pagamento'=> $tipo_pagamento->id])->get();
         foreach ($tabela_precos as $tabela_preco){
-            echo $tabela_preco->preco." == ".$tabela_preco->percentagem_multa."<br/>";
+            echo $tabela_preco->curso->curso." == ".$tabela_preco->classe->classe." == ".$tabela_preco->turno->turno." == ".$tabela_preco->preco."kz == ".$tabela_preco->percentagem_multa."% <br/>";
+            /**psquisar estudantes deste ano com multas */
+            $estudantes = Estudante::whereHas('pagamento', function($query){
+
+            })->where(['id_curso' => $tabela_preco->id_curso, 'id_classe'=>$tabela_preco->id_classe, 'ano_lectivo'=>$ano_lectivo])->get();
         }
         echo"<hr/>";
     }

@@ -375,7 +375,7 @@ Route::group(['prefix'=>"word", 'middleware'=>"AdminUser"], function(){
 
 /*rota de test*/
 Route::get('test', function () {
-
+    
 });
 
 /*fim*/

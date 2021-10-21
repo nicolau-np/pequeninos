@@ -385,7 +385,7 @@ Route::get('test', function () {
     $ano_lectivo = "2021-2022";
     $epoca = null;
     /**primeiro deve pegar os tipos de pagamentos que tem multa com os seus respentivos dias */
-    $tipo_pagamentos = TipoPagamento::where(['multa' => "sim", 'dia_cobranca_multa' => $dia])->get();
+    $tipo_pagamentos = TipoPagamento::where(['multa' => "sim"])->where('dia_cobranca_multa', '<=', $dia)->get();
     foreach ($tipo_pagamentos as $tipo_pagamento) {
         echo "<b>" . $tipo_pagamento->tipo . "</b><br/>";
         /**pegar todas tabelas de precos dos pagamentos com multas */
@@ -396,9 +396,7 @@ Route::get('test', function () {
             $forma_pagamento = FormaPagamento::where(['forma_pagamento' => $tabela_preco->forma_pagamento])->first();
 
             /*se a forma de pagamento for mensal*/
-            if ($forma_pagamento->forma == "forma_pagamento") {
-
-
+            if ($forma_pagamento->forma_pagamento == "Mensal") {
                 /**pegar epocas de pagamentos */
                 $epoca_pagamentos = EpocaPagamento::where(['id_forma_pagamento' => $forma_pagamento->id])
                     ->where('numero', '<', $mes)->get();

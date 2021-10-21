@@ -413,10 +413,7 @@ Route::get('test', function () {
                     $query->where(['epoca' => $data['epoca']]);
                 })->where(['ano_lectivo' => $ano_lectivo])->get();
                 foreach ($estudantes as $estudante) {
-                   /* if ($estudante->turma->id_classe == $tabela_preco->id_classe && $estudante->turma->id_curso == $tabela_preco->id_curso) {
-                        //buscar estudantes que nao pagaram para aplicar multas
-
-                    }*/
+                    //buscar estudantes que nao pagaram para aplicar multas
                     echo $estudante->pessoa->nome . "<br/>";
                 }
             }

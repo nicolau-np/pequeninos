@@ -75,7 +75,16 @@ use \App\Http\Controllers\ControladorStatic;
                                             Já pagou todos meses
                                         @else
                                             @foreach ($getNaoPagos as $nao_pagos)
-                                            <input type="checkbox" name="meses_a_pagar[]" value="{{$nao_pagos}}" /> {{$nao_pagos}}<br/>
+                                            <input type="checkbox" name="meses_a_pagar[]" value="{{$nao_pagos}}" /> {{$nao_pagos}}
+                                            @php
+                                                $multa = ControladorStatic::getMultas($getEstudante->id, $getTabelaPreco->id_tipo_pagamento, $nao_pagos, $getEstudante->ano_lectivo);
+                                            @endphp
+                                                @if($multa)
+                                                    <div class="text-danger">
+                                                      =>  {{$multa->percentagem}} %
+                                                    </div>
+                                                @endif
+                                            <br/>
                                             @endforeach
                                             <div class="erro">
                                                 @if($errors->has('meses_a_pagar'))

@@ -13,6 +13,7 @@ use App\Estudante;
 use App\Grade;
 use App\HistoricEstudante;
 use App\Horario;
+use App\Multado;
 use App\Pagamento;
 use App\PagamentoPai;
 use App\Transferencia;
@@ -390,5 +391,15 @@ class ControladorStatic extends Controller
         return $transferidos;
     }
 
-    
+    public static function getMultas($id_estudante, $id_tipo_pagamento, $mes, $ano_lectivo)
+    {
+        $multa = Multado::where([
+            'id_estudante' => $id_estudante,
+            'id_tipo_pagamento' => $id_tipo_pagamento,
+            'mes' => $mes,
+            'estado' => "on",
+            'ano_lectivo' => $ano_lectivo,
+        ])->first();
+        return $multa;
+    }
 }

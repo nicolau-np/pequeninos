@@ -403,7 +403,7 @@ Route::get('test', function () {
                 /**pegar epocas de pagamentos */
 
                 $epoca_pagamentos = EpocaPagamento::where(['id_forma_pagamento' => $forma_pagamento->id])
-                    ->where('numero', '<', $mes)->get();
+                    ->where('id', '<', $epocaID->id)->get();
 
 
                 foreach ($epoca_pagamentos as $epocas) {

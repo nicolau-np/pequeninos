@@ -8,6 +8,7 @@ use App\Estudante;
 use App\Fatura;
 use App\FormaPagamento;
 use App\HistoricEstudante;
+use App\Multado;
 use App\Pagamento;
 use App\PagamentoPai;
 use App\TabelaPreco;
@@ -48,7 +49,7 @@ class PagamentoController extends Controller
         $data['tabela_preco'] = [
             'id_classe' => $historico->estudante->turma->classe->id,
             'id_curso' => $historico->estudante->turma->curso->id,
-            'id_turno'=>$historico->estudante->turma->id_turno,
+            'id_turno' => $historico->estudante->turma->id_turno,
             'id_tipo_pagamento' => $id_tipo_pagamento,
         ];
 
@@ -61,23 +62,23 @@ class PagamentoController extends Controller
         $forma_pagamento = FormaPagamento::where('forma_pagamento', $tabela_preco->forma_pagamento)->first();
         $epocas_pagemento = EpocaPagamento::where('id_forma_pagamento', $forma_pagamento->id)->get();
         $estudante = Estudante::find($historico->id_estudante);
-        $educandos = Estudante::where('id_encarregado',$estudante->id_encarregado)->get();
+        $educandos = Estudante::where('id_encarregado', $estudante->id_encarregado)->get();
         $data['pagamento'] = [
-            'id_tipo_pagamento'=>$id_tipo_pagamento,
+            'id_tipo_pagamento' => $id_tipo_pagamento,
             'id_estudante' => $historico->id_estudante,
             'ano_lectivo' => $historico->ano_lectivo,
         ];
 
         $data['pagamento_pai'] = [
-            'id_tipo_pagamento'=>$id_tipo_pagamento,
+            'id_tipo_pagamento' => $id_tipo_pagamento,
             'id_encarregado' => $historico->estudante->id_encarregado,
             'ano_lectivo' => $historico->ano_lectivo,
         ];
 
         //apagamento pai
-        if($id_tipo_pagamento == 3){
+        if ($id_tipo_pagamento == 3) {
             $meses_pagos = PagamentoPai::where($data['pagamento_pai'])->get();
-        }else{
+        } else {
             //pagamento estudante
             $meses_pagos = Pagamento::where($data['pagamento'])->get();
         }
@@ -103,8 +104,8 @@ class PagamentoController extends Controller
             'getEpocasPagamento' => $epocas_pagemento,
             'getPagos' => $array_pagos,
             'getNaoPagos' => $array_nao_pagos,
-            'getEstudante'=>$estudante,
-            'getEducandos'=>$educandos,
+            'getEstudante' => $estudante,
+            'getEducandos' => $educandos,
         ];
         return view('pagamento.new', $data);
     }
@@ -132,7 +133,7 @@ class PagamentoController extends Controller
         $data = [
             'id_classe' => $historico->estudante->turma->classe->id,
             'id_curso' => $historico->estudante->turma->curso->id,
-            'id_turno'=>$historico->estudante->turma->id_turno,
+            'id_turno' => $historico->estudante->turma->id_turno,
             'id_tipo_pagamento' => $id_tipo_pagamento,
 
         ];
@@ -142,8 +143,8 @@ class PagamentoController extends Controller
             return back()->with(['error' => "Não encontrou preco"]);
         }
         $data['fatura'] = [
-            'data_fatura'=>date('Y-m-d'),
-            'ano'=>date('Y'),
+            'data_fatura' => date('Y-m-d'),
+            'ano' => date('Y'),
         ];
         $fatura = Fatura::create($data['fatura']);
         $data['where'] = [
@@ -153,15 +154,15 @@ class PagamentoController extends Controller
             'ano_lectivo' => $historico->ano_lectivo,
         ];
 
-         $data['store'] = [
+        $data['store'] = [
             'id_tipo_pagamento' => $id_tipo_pagamento,
             'id_usuario' => $id_user,
             'id_estudante' => $historico->id_estudante,
             'epoca' => null,
             'preco' => $tabela_preco->preco,
             'data_pagamento' => date('Y-m-d'),
-            'fatura'=>$fatura->id,
-            'mes_pagamento'=>date('m'),
+            'fatura' => $fatura->id,
+            'mes_pagamento' => date('m'),
             'ano_lectivo' => $historico->ano_lectivo,
         ];
 
@@ -179,28 +180,41 @@ class PagamentoController extends Controller
             'epoca' => null,
             'preco' => $tabela_preco->preco,
             'data_pagamento' => date('Y-m-d'),
-            'fatura'=>$fatura->id,
-            'mes_pagamento'=>date('m'),
+            'fatura' => $fatura->id,
+            'mes_pagamento' => date('m'),
+            'ano_lectivo' => $historico->ano_lectivo,
+        ];
+
+        $data['multa'] = [
+            'id_estudante' => $historico->id_estudante,
+            'id_tipo_pagamento' => $id_tipo_pagamento,
+            'mes' => null,
+            'estado' => "on",
             'ano_lectivo' => $historico->ano_lectivo,
         ];
 
         //apagamento pai
-        if($id_tipo_pagamento == 3){
+        if ($id_tipo_pagamento == 3) {
             foreach ($request->meses_a_pagar as $epoca) {
                 $data['store_pai']['epoca'] = $epoca;
                 $data['where_pai']['epoca'] = $epoca;
-                if(!PagamentoPai::where($data['where_pai'])->first()){
+                if (!PagamentoPai::where($data['where_pai'])->first()) {
                     $pagamento = PagamentoPai::create($data['store_pai']);
                 }
             }
-        }else{
+        } else {
+
             //pagamento estudante
             foreach ($request->meses_a_pagar as $epoca) {
-            $data['store']['epoca'] = $epoca;
-            $data['where']['epoca'] = $epoca;
-            if(!Pagamento::where($data['where'])->first()){
-                $pagamento = Pagamento::create($data['store']);
-            }
+                $data['store']['epoca'] = $epoca;
+                $data['where']['epoca'] = $epoca;
+                $data['multa']['mes'] = $epoca;
+                if (!Pagamento::where($data['where'])->first()) {
+                    $pagamento = Pagamento::create($data['store']);
+                    if (Multado::where($data['multa'])->first()) {
+                        Multado::where($data['multa'])->update(['estado' => "off"]);
+                    }
+                }
             }
         }
 
@@ -225,31 +239,30 @@ class PagamentoController extends Controller
         }
 
         $data['where_pai'] = [
-            'id_tipo_pagamento'=>$id_tipo_pagamento,
-            'id_encarregado'=>$historico->estudante->id_encarregado,
-            'epoca'=>$request->epoca,
-            'ano_lectivo'=>$historico->ano_lectivo,
+            'id_tipo_pagamento' => $id_tipo_pagamento,
+            'id_encarregado' => $historico->estudante->id_encarregado,
+            'epoca' => $request->epoca,
+            'ano_lectivo' => $historico->ano_lectivo,
         ];
 
         $data['where_estudante'] = [
-            'id_tipo_pagamento'=>$id_tipo_pagamento,
-            'id_estudante'=>$historico->id_estudante,
-            'epoca'=>$request->epoca,
-            'ano_lectivo'=>$historico->ano_lectivo,
+            'id_tipo_pagamento' => $id_tipo_pagamento,
+            'id_estudante' => $historico->id_estudante,
+            'epoca' => $request->epoca,
+            'ano_lectivo' => $historico->ano_lectivo,
         ];
 
-        if($id_tipo_pagamento == 3){
-           $pagamento = PagamentoPai::where($data['where_pai'])->first();
-        }else{
+        if ($id_tipo_pagamento == 3) {
+            $pagamento = PagamentoPai::where($data['where_pai'])->first();
+        } else {
             $pagamento = Pagamento::where($data['where_estudante'])->first();
         }
 
         $data = [
-            'getPagamentoDetails'=>$pagamento,
+            'getPagamentoDetails' => $pagamento,
         ];
 
         return view('ajax_loads.getPagamentoDetails', $data);
-
     }
 
     /**
@@ -297,7 +310,7 @@ class PagamentoController extends Controller
         $data = [
             'id_classe' => $historico->estudante->turma->classe->id,
             'id_curso' => $historico->estudante->turma->curso->id,
-            'id_turno' =>$historico->estudante->turma->id_turno,
+            'id_turno' => $historico->estudante->turma->id_turno,
         ];
         $tabela_preco = TabelaPreco::where($data)->get();
         Session::put('id_historico', $historico->id);

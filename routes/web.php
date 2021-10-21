@@ -404,15 +404,20 @@ Route::get('test', function () {
                 /**psquisar estudantes deste ano com multas */
                 $data = [
                     'epoca' => $epocas->epoca,
+                    'id_classe'=>$tabela_preco->id_classe,
+                    'id_curso'=>$tabela_preco->id_curso,
                 ];
-                $estudantes = Estudante::whereHas('pagamento', function ($query) use ($data) {
+                $estudantes = Estudante::whereHas('turma', function($query) use ($data){
+                    $query->where(['id_curso'=>$data['id_curso'], 'id_classe'=>$data['id_classe']]);
+                })->whereHas('pagamento', function ($query) use ($data) {
                     $query->where(['epoca' => $data['epoca']]);
                 })->where(['ano_lectivo' => $ano_lectivo])->get();
                 foreach ($estudantes as $estudante) {
-                    if ($estudante->turma->id_classe == $tabela_preco->id_classe && $estudante->turma->id_curso == $tabela_preco->id_curso) {
-                        /**buscar estudantes que nao pagaram para aplicar multas */
-                        echo $estudante->pessoa->nome . "<br/>";
-                    }
+                   /* if ($estudante->turma->id_classe == $tabela_preco->id_classe && $estudante->turma->id_curso == $tabela_preco->id_curso) {
+                        //buscar estudantes que nao pagaram para aplicar multas
+
+                    }*/
+                    echo $estudante->pessoa->nome . "<br/>";
                 }
             }
         }

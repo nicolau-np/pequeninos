@@ -426,8 +426,10 @@ Route::get('test', function () {
                             'id_estudante' => $estudante->id,
                             'id_tipo_pagamento' => $tipo_pagamento->id,
                             'mes_multa' => $epocas->numero,
+                            'mes'=>$epocas->epoca,
                             'percentagem' => $tabela_preco->percentagem_multa,
                             'dia_multado' => $dia,
+                            'estado'=>"on",
                             'ano_lectivo' => $ano_lectivo,
                         ];
                         if (!Multado::where(['id_estudante' => $estudante->id, 'id_tipo_pagamento' => $tipo_pagamento->id, 'mes_multa' => $epocas->numero, 'ano_lectivo' => $ano_lectivo])->first()) {

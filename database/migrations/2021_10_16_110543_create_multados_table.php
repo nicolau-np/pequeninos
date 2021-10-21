@@ -22,8 +22,8 @@ class CreateMultadosTable extends Migration
             $table->string('mes');
             $table->bigInteger('percentagem');
             $table->bigInteger('dia_multado');
-            $table->string('estado');
             $table->string('ano_lectivo');
+            $table->string('estado');
             $table->timestamps();
         });
 

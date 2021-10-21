@@ -402,4 +402,16 @@ class ControladorStatic extends Controller
         ])->first();
         return $multa;
     }
+
+    public static function getMultasOFF($id_estudante, $id_tipo_pagamento, $mes, $ano_lectivo)
+    {
+        $multa = Multado::where([
+            'id_estudante' => $id_estudante,
+            'id_tipo_pagamento' => $id_tipo_pagamento,
+            'mes' => $mes,
+            'estado' => "off",
+            'ano_lectivo' => $ano_lectivo,
+        ])->first();
+        return $multa;
+    }
 }

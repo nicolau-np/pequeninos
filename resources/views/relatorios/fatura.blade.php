@@ -209,6 +209,7 @@ use App\Http\Controllers\ControladorStatic;
                     <tbody>
                         <?php
                         $total = 0;
+                        $total_multa = 0;
                         $created_at = null;
 
                         foreach ($getPagamento as $pagamento) {
@@ -221,9 +222,10 @@ use App\Http\Controllers\ControladorStatic;
                             <td>{{ number_format($pagamento->preco, 2, ',', '.') }}</td>
                             @php
                                 $valor_multa = 0;
-                                $multa = ControladorStatic::getMultas($getHistorico->id_estudante, $getTipoPagamento->id, $pagamento->epoca, $getHistorico->ano_lectivo);
+                                $multa = ControladorStatic::getMultasOFF($getHistorico->id_estudante, $getTipoPagamento->id, $pagamento->epoca, $getHistorico->ano_lectivo);
                                 if ($multa) {
-                                    $valor_multa = ($getTabelaPreco->preco * $multa->percentagem) / 100;
+                                    $valor_multa = ($pagamento->preco * $multa->percentagem) / 100;
+                                    $total_multa = $total_multa + $valor_multa;
                                 }
                             @endphp
                             @if ($getTipoPagamento->multa == 'sim')
@@ -237,7 +239,7 @@ use App\Http\Controllers\ControladorStatic;
                     </tbody>
                 </table>
                 <p style="font-size:14px;">
-                    Total Geral: {{ number_format($total, 2, ',', '.') }} Akz
+                    Total Geral: {{ number_format(($total + $total_multa), 2, ',', '.') }} Akz
                 </p>
             </div>
         @endif
@@ -399,11 +401,16 @@ use App\Http\Controllers\ControladorStatic;
                         <tr class="tr_especial">
                             <th>EPOCA</th>
                             <th>VALOR (Akz)</th>
+                            @if ($getTipoPagamento->multa == 'sim')
+                                <th>MULTA (Akz)</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $total = 0;
+                        $total_multa = 0;
+
                         $created_at = null;
 
                         foreach ($getPagamento as $pagamento) {
@@ -414,6 +421,17 @@ use App\Http\Controllers\ControladorStatic;
                         <tr>
                             <td>{{ $pagamento->epoca }}</td>
                             <td>{{ number_format($pagamento->preco, 2, ',', '.') }}</td>
+                            @php
+                            $valor_multa = 0;
+                            $multa = ControladorStatic::getMultasOFF($getHistorico->id_estudante, $getTipoPagamento->id, $pagamento->epoca, $getHistorico->ano_lectivo);
+                            if ($multa) {
+                                $valor_multa = ($pagamento->preco * $multa->percentagem) / 100;
+                                $total_multa = $total_multa + $valor_multa;
+                            }
+                        @endphp
+                        @if ($getTipoPagamento->multa == 'sim')
+                            <td>{{number_format($valor_multa,2,',','.')}}</th>
+                        @endif
                         </tr>
                         <?php
                         }
@@ -422,7 +440,7 @@ use App\Http\Controllers\ControladorStatic;
                     </tbody>
                 </table>
                 <p style="font-size:14px;">
-                    Total Geral: {{ number_format($total, 2, ',', '.') }} Akz
+                    Total Geral: {{ number_format(($total + $total_multa), 2, ',', '.') }} Akz
                 </p>
             </div>
         @endif

@@ -8,6 +8,7 @@ use App\FormaPagamento;
 use App\Grade;
 use App\HistoricEstudante;
 use App\Horario;
+use App\Multado;
 use App\ObservacaoGeral;
 use App\Pagamento;
 use App\TabelaPreco;
@@ -380,10 +381,10 @@ Route::group(['prefix' => "word", 'middleware' => "AdminUser"], function () {
 
 /*rota de test*/
 Route::get('test', function () {
-    $dia = date('d');
-    $mes = date('m');
-    $ano_lectivo = "2021-2022";
-    $epoca = null;
+    $dia = date('d');// dia de hoje
+    $mes = date('m');// mes de hoje
+    $ano_lectivo = "2021-2022"; //ultimo ano lectivo
+
     /**primeiro deve pegar os tipos de pagamentos que tem multa com os seus respentivos dias */
     $tipo_pagamentos = TipoPagamento::where(['multa' => "sim"])->where('dia_cobranca_multa', '<=', $dia)->get();
     foreach ($tipo_pagamentos as $tipo_pagamento) {
@@ -418,8 +419,8 @@ Route::get('test', function () {
                     foreach ($estudantes as $estudante) {
                         //buscar estudantes que nao pagaram para aplicar multas
                         echo $estudante->pessoa->nome . "<br/>";
-                        if(){
-
+                        if (!Multado::where(['id_estudante' => $estudante->id, 'id_tipo_pagamento' => $tipo_pagamento->id, 'mes_multa' => $epocas->numero, 'ano_lectivo' => $ano_lectivo])->first()) {
+                            echo "multado <br/>";
                         }
                     }
                 }

@@ -207,14 +207,16 @@ class FinancaController extends Controller
             'multa' => ['required', 'string', 'min:3'],
         ]);
 
-        if($request->multa == "sim"){
+        if ($request->multa == "sim") {
             $request->validate([
-                'dia_cobranca_multa'=> ['required', 'integer', 'min:1', 'max:31'],
+                'dia_cobranca_multa' => ['required', 'integer', 'min:1', 'max:31'],
             ]);
         }
 
         $data = [
             'tipo' => $request->tipo_pagamento,
+            'multa'=>$request->multa,
+            'dia_cobranca_multa'=>$request->dia_cobranca_multa,
         ];
 
         if (TipoPagamento::create($data)) {
@@ -246,15 +248,29 @@ class FinancaController extends Controller
             return back()->with(['error' => "Nao encontrou"]);
         }
 
+        $request->validate([
+            'tipo_pagamento' => ['required', 'string', 'min:5', 'max:255', ],
+            'multa' => ['required', 'string', 'min:3'],
+        ]);
+
+        if ($request->multa == "sim") {
+            $request->validate([
+                'dia_cobranca_multa' => ['required', 'integer', 'min:1', 'max:31'],
+            ]);
+        }
+
+        if($request->tipo_pagamento!=$tipo_pagamento->tipo){
+            $request->validate([
+                'tipo_pagamento' => ['required', 'string', 'min:5', 'max:255', 'unique:tipo_pagamentos,tipo'],
+
+            ]);
+        }
+
         $data = [
             'tipo' => $request->tipo_pagamento,
+            'multa'=>$request->multa,
+            'dia_cobranca_multa'=>$request->dia_cobranca_multa,
         ];
-
-        if ($request->tipo_pagamento != $tipo_pagamento->tipo) {
-            if (TipoPagamento::where('tipo', $data['tipo'])->first()) {
-                return back()->with(['error' => "Já cadastrou"]);
-            }
-        }
 
         if (TipoPagamento::find($tipo_pagamento->id)->update($data)) {
             return back()->with(['success' => "Feito com sucesso"]);

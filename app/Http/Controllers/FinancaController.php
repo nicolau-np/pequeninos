@@ -203,8 +203,15 @@ class FinancaController extends Controller
     public function tipo_pagamento_store(Request $request)
     {
         $request->validate([
-            'tipo_pagamento' => ['required', 'string', 'min:5', 'max:255', 'unique:tipo_pagamentos,tipo']
+            'tipo_pagamento' => ['required', 'string', 'min:5', 'max:255', 'unique:tipo_pagamentos,tipo'],
+            'multa' => ['required', 'string', 'min:3'],
         ]);
+
+        if($request->multa == "sim"){
+            $request->validate([
+                'dia_cobranca_multa'=> ['required', 'integer', 'min:1', 'max:31'],
+            ]);
+        }
 
         $data = [
             'tipo' => $request->tipo_pagamento,

@@ -9,7 +9,7 @@
                     <h5>{{$submenu}}</h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -38,7 +38,31 @@
                                     <div class="erro">
                                         @if($errors->has('tipo_pagamento'))
                                         <div class="text-danger">{{$errors->first('tipo_pagamento')}}</div>
-                                        @endif 
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    {{Form::label('multa', "Multa")}} <span class="text-danger">*</span>
+                                    {{Form::select('multa', [
+                                        'sim'=>"sim",
+                                        'nao'=>"nao",
+
+                                    ], null, ['class'=>"form-control", 'placeholder'=>"Multa"])}}
+                                    <div class="erro">
+                                        @if($errors->has('multa'))
+                                        <div class="text-danger">{{$errors->first('multa')}}</div>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    {{Form::label('dia_cobranca_multa', "Dia de Cobrança")}}
+                                    {{Form::number('dia_cobranca_multa', null, ['class'=>"form-control", 'placeholder'=>"Dia de Cobrança"])}}
+                                    <div class="erro">
+                                        @if($errors->has('dia_cobranca_multa'))
+                                        <div class="text-danger">{{$errors->first('dia_cobranca_multa')}}</div>
+                                        @endif
                                     </div>
                                 </div>
                             </div>
@@ -51,16 +75,16 @@
                                  </div>
 
                             </div>
-                        
-                       
-                        
+
+
+
                         {{Form::close()}}
                    </div>
                 </div>
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- hidden-sm-up -->

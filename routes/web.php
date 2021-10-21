@@ -432,11 +432,11 @@ Route::get('test', function () {
                             'estado'=>"on",
                             'ano_lectivo' => $ano_lectivo,
                         ];
-                        if (!Multado::where(['id_estudante' => $estudante->id, 'id_tipo_pagamento' => $tipo_pagamento->id, 'mes_multa' => $epocas->numero, 'ano_lectivo' => $ano_lectivo])->first()) {
+                        /*if (!Multado::where(['id_estudante' => $estudante->id, 'id_tipo_pagamento' => $tipo_pagamento->id, 'mes_multa' => $epocas->numero, 'ano_lectivo' => $ano_lectivo])->first()) {
                             if (Multado::create($data)) {
                                 echo "multado <br/>";
                             }
-                        }
+                        }*/
                     }
                 }
             }

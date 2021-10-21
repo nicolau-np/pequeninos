@@ -423,7 +423,7 @@ Route::get('test', function () {
                             'id_estudante' => $estudante->id,
                             'id_tipo_pagamento' => $tipo_pagamento->id,
                             'mes_multa' => $epocas->numero,
-                            'percentagem' => $tabela_preco->percentagem,
+                            'percentagem' => $tabela_preco->percentagem_multa,
                             'dia_multado' => $dia,
                             'ano_lectivo' => $ano_lectivo,
                         ];

@@ -1,3 +1,7 @@
+@php
+use \App\Http\Controllers\ControladorStatic;
+@endphp
+
 @extends('layouts.app')
 @section('content')
 

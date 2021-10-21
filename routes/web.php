@@ -403,13 +403,16 @@ Route::get('test', function () {
                 echo $epocas->numero . " == " . $epocas->epoca . "<br/>";
                 /**psquisar estudantes deste ano com multas */
                 $data = [
-                    'epoca'=>$epocas->epoca,
+                    'epoca' => $epocas->epoca,
                 ];
-                $estudantes = Estudante::whereHas('pagamento', function ($query) use($data) {
-                    $query->where(['epoca'=>$data['epoca']]);
-                })->where(['id_curso' => $tabela_preco->id_curso, 'id_classe' => $tabela_preco->id_classe, 'ano_lectivo' => $ano_lectivo])->get();
-                foreach ($estudantes as $estudante){
-
+                $estudantes = Estudante::whereHas('pagamento', function ($query) use ($data) {
+                    $query->where(['epoca' => $data['epoca']]);
+                })->where(['ano_lectivo' => $ano_lectivo])->get();
+                foreach ($estudantes as $estudante) {
+                    if ($estudante->turma->id_classe == $tabela_preco->id_classe && $estudante->turma->id_curso == $tabela_preco->id_curso) {
+                        /**buscar estudantes que nao pagaram para aplicar multas */
+                        echo $estudante->pessoa->nome . "<br/>";
+                    }
                 }
             }
         }

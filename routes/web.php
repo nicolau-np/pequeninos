@@ -6,6 +6,7 @@ use App\Grade;
 use App\HistoricEstudante;
 use App\Horario;
 use App\ObservacaoGeral;
+use App\TabelaPreco;
 use App\TipoPagamento;
 use App\Trimestral;
 use App\Turma;
@@ -368,19 +369,24 @@ Route::group(['prefix' => "about"], function () {
     Route::get('/instituicao', "AboutController@instituicao");
 });
 
-Route::group(['prefix'=>"word", 'middleware'=>"AdminUser"], function(){
+Route::group(['prefix' => "word", 'middleware' => "AdminUser"], function () {
     Route::get('declaracaosem/{id_declaracao}', "PhpWordController@declaracaosemnota");
     Route::get('declaracaocom/{id_declaracao}', "PhpWordController@declaracaocomnota");
-
 });
 
 /*rota de test*/
 Route::get('test', function () {
     $dia = date('d');
     /**primeiro deve pegar os tipos de pagamentos que tem multa com os seus respentivos dias */
-    $tipo_pagamentos = TipoPagamento::where(['dia_cobranca_multa'=> $dia])->get();
-    foreach ($tipo_pagamentos as $tipo_pagamento){
-        
+    $tipo_pagamentos = TipoPagamento::where(['multa' => "sim", 'dia_cobranca_multa' => $dia])->get();
+    foreach ($tipo_pagamentos as $tipo_pagamento) {
+        echo "<b>".$tipo_pagamento->tipo . "</b><br/>";
+        /**pegar todas tabelas de precos dos pagamentos com multas */
+        $tabela_precos = TabelaPreco::where(['id_tipo_pagamento'=> $tipo_pagamento->id])->get();
+        foreach ($tabela_precos as $tabela_preco){
+            echo $tabela_preco->preco." == ".$tabela_preco->percentagem_multa."<br/>";
+        }
+        echo"<hr/>";
     }
 });
 

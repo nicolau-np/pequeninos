@@ -391,7 +391,7 @@ Route::get('test', function () {
             echo $tabela_preco->curso->curso." == ".$tabela_preco->classe->classe." == ".$tabela_preco->turno->turno." == ".$tabela_preco->preco."kz == ".$tabela_preco->percentagem_multa."% <br/>";
             /**psquisar estudantes deste ano com multas */
             $estudantes = Estudante::whereHas('pagamento', function($query){
-
+                $query->where('');
             })->where(['id_curso' => $tabela_preco->id_curso, 'id_classe'=>$tabela_preco->id_classe, 'ano_lectivo'=>$ano_lectivo])->get();
         }
         echo"<hr/>";

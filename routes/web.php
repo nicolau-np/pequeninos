@@ -381,8 +381,8 @@ Route::group(['prefix' => "word", 'middleware' => "AdminUser"], function () {
 
 /*rota de test*/
 Route::get('test', function () {
-    $dia = date('d');// dia de hoje
-    $mes = date('m');// mes de hoje
+    $dia = date('d'); // dia de hoje
+    $mes = date('m'); // mes de hoje
     $ano_lectivo = "2021-2022"; //ultimo ano lectivo
 
     /**primeiro deve pegar os tipos de pagamentos que tem multa com os seus respentivos dias */
@@ -419,8 +419,18 @@ Route::get('test', function () {
                     foreach ($estudantes as $estudante) {
                         //buscar estudantes que nao pagaram para aplicar multas
                         echo $estudante->pessoa->nome . "<br/>";
+                        $data = [
+                            'id_estudante' => $estudante->id,
+                            'id_tipo_pagamento' => $tipo_pagamento->id,
+                            'mes_multa' => $epocas->numero,
+                            'percentagem' => $tabela_preco->percentagem,
+                            'dia_multado' => $dia,
+                            'ano_lectivo' => $ano_lectivo,
+                        ];
                         if (!Multado::where(['id_estudante' => $estudante->id, 'id_tipo_pagamento' => $tipo_pagamento->id, 'mes_multa' => $epocas->numero, 'ano_lectivo' => $ano_lectivo])->first()) {
-                            echo "multado <br/>";
+                            if (Multado::create($data)) {
+                                echo "multado <br/>";
+                            }
                         }
                     }
                 }

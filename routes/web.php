@@ -6,6 +6,7 @@ use App\Grade;
 use App\HistoricEstudante;
 use App\Horario;
 use App\ObservacaoGeral;
+use App\TipoPagamento;
 use App\Trimestral;
 use App\Turma;
 use App\User;
@@ -375,7 +376,12 @@ Route::group(['prefix'=>"word", 'middleware'=>"AdminUser"], function(){
 
 /*rota de test*/
 Route::get('test', function () {
-    
+    $dia = date('d');
+    /**primeiro deve pegar os tipos de pagamentos que tem multa com os seus respentivos dias */
+    $tipo_pagamentos = TipoPagamento::where(['dia_cobranca_multa'=> $dia])->get();
+    foreach ($tipo_pagamentos as $tipo_pagamento){
+        
+    }
 });
 
 /*fim*/

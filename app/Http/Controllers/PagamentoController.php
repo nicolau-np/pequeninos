@@ -91,8 +91,13 @@ class PagamentoController extends Controller
         foreach ($epocas_pagemento as $epocas) {
             array_push($array_epocas_pagamento, $epocas->epoca);
         }
+        if($forma_pagamento->forma_pagamento == "Necessidade"){
+            $array_nao_pagos = array_diff_assoc($array_epocas_pagamento, $array_pagos);
+            
+        }else{
+            $array_nao_pagos = array_diff_assoc($array_epocas_pagamento, $array_pagos);
+        }
 
-        $array_nao_pagos = array_diff_assoc($array_epocas_pagamento, $array_pagos);
 
         $data = [
             'title' => "Pagamentos",

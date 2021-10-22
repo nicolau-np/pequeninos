@@ -1,7 +1,6 @@
 <?php
 use App\Http\Controllers\ControladorStatic;
 $lastYear = ControladorStatic::getLastYear();
-$multados = ControladorStatic::marcarMultas();
 ?>
 <!DOCTYPE html>
 <html lang="{{app()->getLocale()}}">

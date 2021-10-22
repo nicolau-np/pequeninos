@@ -37,7 +37,10 @@ use App\Http\Controllers\ControladorStatic;
                             <div class="col-md-12">
                                 <div class="tabela">
                                     <div class="data">
-                                        Data de Extração: {{date('d-m-Y H:i:s')}}
+                                        Data de Extração: {{date('d-m-Y H:i:s')}} &nbsp;&nbsp;&nbsp;&nbsp;
+                                    </div>
+                                    <div class="print">
+                                        <a href="/relatorios/extrato_pagamentos/{{$getHistorico->id_estudante}}/{{$getHistorico->ano_lectivo}}"></a>
                                     </div>
                                     <table class="table table-bordered">
                                         <thead>

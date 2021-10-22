@@ -149,7 +149,7 @@ use App\Http\Controllers\ControladorStatic;
                                     @endphp
                                     <td>
                                         @if ($pagamento == null)
-                                            ---
+                                            ===
                                         @else
                                             @if ($getTabelaPreco->tipo_pagamento->multa == 'sim')
                                                 @php

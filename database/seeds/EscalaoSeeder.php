@@ -6,9 +6,11 @@ use Illuminate\Support\Facades\DB;
 class EscalaoSeeder extends Seeder
 {
     static $escalaos = [
-        ['escalao'=>"EPX I"],
-        ['escalao'=>"EPX II"],
-        ['escalao'=>"ESP I"],
+        ['escalao'=>"PEPD 6º E"],
+        ['escalao'=>"PIICESD 6º E"],
+        ['escalao'=>"PEPAUX 6º E"],
+        ['escalao'=>"PICESD 6º E"],
+        ['escalao'=>"PEPD 6º E"],
     ];
     public function run()
     {

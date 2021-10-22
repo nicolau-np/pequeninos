@@ -242,6 +242,8 @@ Route::group(['prefix' => 'estudantes', 'middleware' => "AdminUser"], function (
     Route::put('/store_desistencias/{id_estudante}', "EstudanteController@store_desistencias");
     Route::get('/declaracaocom/{id_declaracao}', "EstudanteController@choose_declaracao");
     Route::get('/restringir_notas/{id_estudante}/{ano_lectivo}', "EstudanteController@restringir_notas");
+
+    Route::get('/extrato/{id_estudante}/{ano_lectivo}', "EstudanteController@extrato");
 });
 
 Route::group(['prefix' => "turmas", 'middleware' => "AdminUser"], function () {

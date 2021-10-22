@@ -750,4 +750,25 @@ class EstudanteController extends Controller
         ];
         return view('estudantes.restringir_notas', $data);
     }
+
+    public function extrato($id_estudante, $ano_lectivo)
+    {
+        $estudante = Estudante::find($id_estudante);
+        if (!$estudante) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+
+        $historico = HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])->first();
+        if (!$historico) {
+            return back()->with(['error' => "Estudante nao matriculado neste ano lectivo"]);
+        }
+
+        $data = [
+            'title' => "Estudantes",
+            'type' => "estudantes",
+            'menu' => "Estudantes",
+            'submenu' => "Extrato de Pagamentos",
+        ];
+        return view('estudantes.extrato_pagamentos', $data);
+    }
 }

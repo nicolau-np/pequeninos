@@ -47,6 +47,7 @@ use App\Http\Controllers\ControladorStatic;
                                                 <th>Epoca ou Tipo</th>
                                                 <th>Valor (Akz)</th>
                                                 <th>Multa (Akz)</th>
+                                                <th>Data de Pagamento</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -79,10 +80,11 @@ use App\Http\Controllers\ControladorStatic;
                                                                 $valor_multa = ($pagamentos->preco * $multa->percentagem) / 100;
                                                             }
                                                             $total_multa = $total_multa + $valor_multa;
-                                                            
+
                                                         @endphp
                                                         {{ number_format($valor_multa, 2, ',', '.') }}
                                                     </td>
+                                                <td>{{date('d-m-Y H:i:s', strtotime($pagamentos->created_at))}}</td>
                                                 </tr>
                                             @endforeach
                                             <tr style="font-weight: bold;">
@@ -91,6 +93,7 @@ use App\Http\Controllers\ControladorStatic;
                                                 <td>===</td>
                                                 <td>{{ number_format($total, 2, ',', '.') }}</td>
                                                 <td>{{ number_format($total_multa, 2, ',', '.') }}</td>
+                                                <td>===</td>
                                             </tr>
                                         </tbody>
                                     </table>

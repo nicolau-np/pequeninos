@@ -152,7 +152,7 @@ use App\Http\Controllers\ControladorNotas;
      <div class="rodape">
         <p style="text-align: center;">
             <span class="data">
-                Moçamedes, aos {{date('d', strtotime($getDeclaracao->data_emissao))}} de
+                Huambo, aos {{date('d', strtotime($getDeclaracao->data_emissao))}} de
                 @php
                     $mes_compreensao = date('m', strtotime($getDeclaracao->data_emissao));
                     $mes_extenso = ControladorStatic::converterMesExtensao($mes_compreensao);
@@ -165,7 +165,7 @@ use App\Http\Controllers\ControladorNotas;
             <span class="director">
                 O Director da escola<br/>
             -------------------------------------------------<br/>
-            Aurélio Messele Tchissende 
+            Aurélio Messele Tchissende
             </span>
         </p>
      </div>

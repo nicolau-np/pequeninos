@@ -230,7 +230,7 @@ $chegados_fimT=[
 
             <div class="data">
                 <p style="text-align: center;">
-                Moçamedes aos, {{date('d')}} de
+                Huambo aos, {{date('d')}} de
                 @php
                     $mes_extenso = ControladorStatic::converterMesExtensao(date('m'));
 
@@ -244,7 +244,7 @@ $chegados_fimT=[
                 <p style="text-align: center;">
                     O Director da escola<br/>
                     -------------------------------------------------<br/>
-                    Aurélio Messele Tchissende 
+                    Aurélio Messele Tchissende
                  </p>
             </div>
         </div>

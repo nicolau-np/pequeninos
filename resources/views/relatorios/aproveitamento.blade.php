@@ -282,7 +282,7 @@ $dadosGerais01 = [
 
             <div class="data">
                 <p style="text-align: center;">
-                Moçamedes aos, {{date('d')}} de
+                    Huambo aos, {{date('d')}} de
                 @php
                     $mes_extenso = ControladorStatic::converterMesExtensao(date('m'));
 
@@ -296,7 +296,7 @@ $dadosGerais01 = [
                 <p style="text-align: center;">
                     O Director da escola<br/>
                     -------------------------------------------------<br/>
-                    Aurélio Messele Tchissende 
+                    Aurélio Messele Tchissende
                  </p>
             </div>
         </div>

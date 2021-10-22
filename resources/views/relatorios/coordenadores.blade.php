@@ -166,7 +166,7 @@ $total=[
 
             <div class="data">
                 <p style="text-align: center;">
-                Moçamedes aos, {{date('d')}} de
+                    Huambo aos, {{date('d')}} de
                 @php
                     $mes_extenso = ControladorStatic::converterMesExtensao(date('m'));
 

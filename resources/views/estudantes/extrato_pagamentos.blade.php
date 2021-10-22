@@ -37,12 +37,21 @@
                                         <thead>
                                             <tr>
                                                 <th>#</th>
+                                                <th>Descrição</th>
+                                                <th>Epoca</th>
+                                                <th>Valor</th>
+                                                <th>Multa</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-
-                                            </tr>
+                                            @foreach ($getPagamentos as $pagamentos)
+                                                <tr>
+                                                <td>{{$loop->iteration}}</td>
+                                                <td></td>
+                                                <td></td>
+                                                <td></td>
+                                                </tr>
+                                            @endforeach
                                         </tbody>
                                     </table>
                                 </div>

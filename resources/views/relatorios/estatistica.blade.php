@@ -244,7 +244,7 @@ $chegados_fimT=[
                 <p style="text-align: center;">
                     O Director da escola<br/>
                     -------------------------------------------------<br/>
-                    LIC. ANTÓNIO KANUTULA BANGO
+                    Aurélio Messele Tchissende 
                  </p>
             </div>
         </div>

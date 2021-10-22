@@ -166,7 +166,7 @@ use App\Http\Controllers\ControladorNotas;
             <span class="director">
                 O Director da escola<br/>
             -------------------------------------------------<br/>
-            LIC. ANTÓNIO KANUTULA BANGO
+            Aurélio Messele Tchissende 
             </span>
         </p>
      </div>

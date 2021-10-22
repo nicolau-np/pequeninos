@@ -341,16 +341,16 @@ $getCadeiraRecurso = false;
         <div class="rodape">
             <div class="teacher_name">
                 <div class="subdirector">
-                    O(A) SUBDIRECTOR(A) PEDAGÓGICO<br />
+                    O(A) COOORDENADOR DE TURMA<br />
                     __________________________________<br />
-                    // BACH. PASCOAL VITA TCHINGALULE //
+                    //  //
                 </div>
 
 
                 <div class="director">
                     O(A) DIRECTOR(A)<br />
                     _____________________________<br />
-                    // LIC. ANTÓNIO KANUTULA BANGO //
+                    // Aurélio Messele Tchissende  //
                 </div>
             </div>
         </div>

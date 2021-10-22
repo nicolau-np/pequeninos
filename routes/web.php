@@ -257,7 +257,7 @@ Route::group(['prefix' => "mapas", 'middleware' => "AdminUser"], function () {
     Route::get('/estatistica/{ano_lectivo}', "MapaController@estatistica");
 });
 
-Route::group(['prefix' => 'pagamentos', 'middleware' => "AdminUser"], function () {
+Route::group(['prefix' => 'pagamentos', 'middleware' => "user"], function () {
     Route::get('/listar/{id_estudante}/{ano_lectivo}', "PagamentoController@listar");
     Route::get('/create/{id_tipo_pagamento}', "PagamentoController@create");
     Route::post('/store', "PagamentoController@store");

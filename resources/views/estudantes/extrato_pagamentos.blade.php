@@ -42,31 +42,48 @@ use App\Http\Controllers\ControladorStatic;
                                                 <th>#</th>
                                                 <th>Descrição</th>
                                                 <th>Epoca</th>
-                                                <th>Valor</th>
-                                                <th>Multa</th>
+                                                <th>Valor (Akz)</th>
+                                                <th>Multa (Akz)</th>
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @php
+                                                $total = 0;
+                                                $total_multa = 0;
+                                            @endphp
                                             @foreach ($getPagamentos as $pagamentos)
+
                                                 <tr>
-                                                <td>{{$loop->iteration}}</td>
-                                                <td>{{$pagamentos->tipo_pagamento->tipo}}</td>
-                                                <td>{{$pagamentos->epoca}}</td>
-                                                <td>{{number_format($pagamentos->preco,2,',','.')}}</td>
-                                                <td>
-                                                    @php
-                                                    $valor_multa = 0;
-                                                    $multa = ControladorStatic::getMultas($getHistorico->id_estudante, $pagamentos->id_tipo_pagamento, $pagamentos->epoca, $getHistorico->ano_lectivo);
-                                                    if ($multa) {
-                                                        $valor_multa = ($getTabelaPreco->preco * $multa->percentagem) / 100;
-                                                    }
-                                                    @endphp
-                                                    {{number_format($valor_multa,2,',', '.')}}
-                                                </td>
-                                            </tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $pagamentos->tipo_pagamento->tipo }}</td>
+                                                    <td>{{ $pagamentos->epoca }}</td>
+                                                    <td>{{ number_format($pagamentos->preco, 2, ',', '.') }}</td>
+                                                    <td>
+                                                        @php
+                                                            $total = $total + $pagamentos->preco;
+                                                            $valor_multa = 0;
+                                                            $multa = ControladorStatic::getMultas($getHistorico->id_estudante, $pagamentos->id_tipo_pagamento, $pagamentos->epoca, $getHistorico->ano_lectivo);
+                                                            if ($multa) {
+                                                                $valor_multa = ($getTabelaPreco->preco * $multa->percentagem) / 100;
+                                                            }
+                                                            $total_multa = $total_multa + $valor_multa;
+                                                        @endphp
+                                                        {{ number_format($valor_multa, 2, ',', '.') }}
+                                                    </td>
+                                                </tr>
                                             @endforeach
+                                            <tr style="font-weight: bold;">
+                                                <td>TOTAL</td>
+                                                <td>===</td>
+                                                <td>===</td>
+                                                <td>{{ number_format($total, 2, ',', '.') }}</td>
+                                                <td>{{ number_format($total_multa, 2, ',', '.') }}</td>
+                                            </tr>
                                         </tbody>
                                     </table>
+                                    <div class="total_geral" style="font-weight: bold; font-size:20px; color:#4680ff;">
+                                        TOTAL GERAL: {{number_format(($total+$total_multa),2,',', '.')}} Akz
+                                    </div>
                                 </div>
                             </div>
                         </div>

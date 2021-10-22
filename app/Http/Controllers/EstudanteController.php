@@ -768,6 +768,7 @@ class EstudanteController extends Controller
             'type' => "estudantes",
             'menu' => "Estudantes",
             'submenu' => "Extrato de Pagamentos",
+            'getHistorico' =>$historico,
         ];
         return view('estudantes.extrato_pagamentos', $data);
     }

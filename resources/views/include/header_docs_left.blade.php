@@ -1,7 +1,7 @@
 <p>
     <span style="font-weight: bold;">
-        COMPLEXO ESCOLAR Nº 89M "EDUARDO DOMINGOS SUKUETE"<br/>
-        = MOÇÂMEDES - NAMIBE =
+        COMPLEXO ESCOLAR SOS DO HUAMBO<br/>
+        = HUAMBO =
     </span><br/>
-    NIF: 5121019874<br/>
+    NIF: <br/>
 </p>

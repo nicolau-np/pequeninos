@@ -54,7 +54,14 @@ use App\Http\Controllers\ControladorStatic;
                                                 <td>{{$pagamentos->epoca}}</td>
                                                 <td>{{number_format($pagamentos->preco,2,',','.')}}</td>
                                                 <td>
-
+                                                    @php
+                                                    $valor_multa = 0;
+                                                    $multa = ControladorStatic::getMultas($getHistorico->id_estudante, $pagamentos->id_tipo_pagamento, $pagamentos->epoca, $getHistorico->ano_lectivo);
+                                                    if ($multa) {
+                                                        $valor_multa = ($getTabelaPreco->preco * $multa->percentagem) / 100;
+                                                    }
+                                                    @endphp
+                                                    {{number_format($valor_multa,2,',', '.')}}
                                                 </td>
                                             </tr>
                                             @endforeach

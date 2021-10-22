@@ -199,6 +199,7 @@ use App\Http\Controllers\ControladorStatic;
                 <table border=1 cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 60%;">
                     <thead>
                         <tr class="tr_especial">
+                        
                             <th>EPOCA</th>
                             <th>VALOR (Akz)</th>
                             @if ($getTipoPagamento->multa == 'sim')

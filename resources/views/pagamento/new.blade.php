@@ -155,7 +155,8 @@ use App\Http\Controllers\ControladorStatic;
                                                 <ul>
                                                     @if ($getTabelaPreco->forma_pagamento == 'Necessidade')
                                                     @foreach ($getPagos as $pagos)
-                                                            <li><a data-epoca="{{ $pagos }}" href="#"
+                                                            <li>{{$loop->iteration}}º =>
+                                                                <a data-epoca="{{ $pagos }}" href="#"
                                                                     style="color:#4680ff;"
                                                                     class="show_pagamento">{{ $getTabelaPreco->tipo_pagamento->tipo }}</a></li>
                                                         @endforeach

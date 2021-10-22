@@ -381,7 +381,8 @@ Route::group(['prefix' => "word", 'middleware' => "AdminUser"], function () {
 
 /*rota de test*/
 Route::get('test', function () {
-    
+    $ano = AnoLectivo::latest('ano_lectivo')->first();
+    echo $ano->ano_lectivo;
 });
 
 /*fim*/

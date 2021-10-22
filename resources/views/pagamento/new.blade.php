@@ -78,8 +78,9 @@ use App\Http\Controllers\ControladorStatic;
                                                     Já pagou todos meses
                                                 @else
                                                     @foreach ($getNaoPagos as $nao_pagos)
+
                                                         <input type="checkbox" name="meses_a_pagar[]"
-                                                            value="{{ $nao_pagos }}" /> {{ $nao_pagos }}
+                                                            value="{{ $nao_pagos }}" /> {{ $nao_pagos }} =>
                                                         @php
                                                             $valor_multa = 0;
                                                             $multa = ControladorStatic::getMultas($getEstudante->id, $getTabelaPreco->id_tipo_pagamento, $nao_pagos, $getEstudante->ano_lectivo);
@@ -89,14 +90,18 @@ use App\Http\Controllers\ControladorStatic;
                                                         @endphp
                                                         @if ($multa)
                                                             <span class="text-danger" style="font-weight: bold;">
-                                                                + {{ $multa->percentagem }} % => {{number_format($valor_multa,2,',','.')}} Akz
+                                                                +
+                                                                {{ number_format($valor_multa, 2, ',', '.') }} Akz =>
                                                             </span>
                                                         @endif
+                                                        <span
+                                                            class="preco" style="color:#4680ff; font-weight:bold;">{{ number_format($getTabelaPreco->preco + $valor_multa, 2, ',', '.') }} Akz</span>
                                                         <br />
                                                     @endforeach
                                                     <div class="erro">
                                                         @if ($errors->has('meses_a_pagar'))
-                                                            <div class="text-danger">{{ $errors->first('meses_a_pagar') }}
+                                                            <div class="text-danger">
+                                                                {{ $errors->first('meses_a_pagar') }}
                                                             </div>
                                                         @endif
                                                     </div>

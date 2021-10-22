@@ -763,12 +763,15 @@ class EstudanteController extends Controller
             return back()->with(['error' => "Estudante nao matriculado neste ano lectivo"]);
         }
 
+        $pagamentos = Pagamento::where(['id_estudante' => $id_estudante,'ano_lectivo'=>$ano_lectivo])->get();
+
         $data = [
             'title' => "Estudantes",
             'type' => "estudantes",
             'menu' => "Estudantes",
             'submenu' => "Extrato de Pagamentos",
             'getHistorico' =>$historico,
+            'getPagamentos'=>$pagamentos,
         ];
         return view('estudantes.extrato_pagamentos', $data);
     }

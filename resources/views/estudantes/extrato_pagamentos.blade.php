@@ -15,6 +15,8 @@
                             {{ $getHistorico->turma->turno->turno }}
                             <i class="ti-angle-right"></i>
                             {{ $getHistorico->turma->curso->curso }}
+                            <i class="ti-angle-right"></i>
+                            {{ $getHistorico->ano_lectivo }}
                         </h5>
                         <span></span>
                         <div class="card-header-right">
@@ -30,7 +32,20 @@
                     <div class="card-block">
                         <div class="row">
                             <div class="col-md-12">
-                                elloh
+                                <div class="tabela">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

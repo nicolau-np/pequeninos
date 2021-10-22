@@ -331,7 +331,7 @@ Route::group(['prefix' => 'relatorios', 'middleware' => "auth"], function () {
     Route::post('/mapas_aproveitamentos', "RelatorioController@mapas_aproveitamentos");
     Route::post('/mapas_estatistica', "RelatorioController@mapas_estatistica");
 
-    Route::get('/extrato_pagamentos/{id_estudante}/{ano_lectivo}', "EstudanteController@extrato_pagamentos");
+    Route::get('/extrato_pagamentos/{id_estudante}/{ano_lectivo}', "RelatorioController@extrato_pagamentos");
 });
 
 

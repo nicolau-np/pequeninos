@@ -638,7 +638,7 @@ class RelatorioController extends Controller
             'getPagamentos'=>$pagamentos,
         ];
 
-        $pdf = PDF::loadView('relatorios.extrato_pagamentos', $data['view'])->setPaper('A4', 'normal');
-        return $pdf->stream('EXTRATO PAGAMENTOS - [' . $historico->estudante->pessoa->nome .'-'. $historico->ano_lectivo .  ' ].pdf');
+        $pdf = PDF::loadView('relatorios.extrato_pagamentos', $data)->setPaper('A4', 'normal');
+        return $pdf->stream('EXTRATO PAGAMENTOS - [' . strtoupper($historico->estudante->pessoa->nome) .'-'. $historico->ano_lectivo .  ' ].pdf');
     }
 }

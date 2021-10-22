@@ -36,12 +36,13 @@ use App\Http\Controllers\ControladorStatic;
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="tabela">
-                                    <div class="data">
-                                        Data de Extração: {{date('d-m-Y H:i:s')}} &nbsp;&nbsp;&nbsp;&nbsp;
-                                    </div>
-                                    <div class="print">
-                                        <a href="/relatorios/extrato_pagamentos/{{$getHistorico->id_estudante}}/{{$getHistorico->ano_lectivo}}"></a>
-                                    </div>
+                                    <span class="data">
+                                        Data de Extração: {{date('d-m-Y H:i:s')}} 
+                                    </span>
+                                    <span class="print float-right">
+                                        <a href="/relatorios/extrato_pagamentos/{{$getHistorico->id_estudante}}/{{$getHistorico->ano_lectivo}}" class="btn btn-primary btn-sm">
+                                            <i class="ti-printer"></i> Imprimir</a>
+                                    </span>
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>

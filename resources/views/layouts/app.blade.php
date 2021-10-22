@@ -376,7 +376,7 @@ $lastYear = ControladorStatic::getLastYear();
                                 </li>
                                 @endif
 
-                                @if(Auth::user()->nivel_acesso=="admin")
+                                @if(Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="user")
                                 <li class="pcoded-hasmenu @if($type=="financas") active pcoded-trigger @endif">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="ti-money"></i></span>

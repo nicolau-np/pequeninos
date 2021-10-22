@@ -50,7 +50,7 @@
                                         'Trimestral'=>"Trimestral",
                                         'Mensal'=>"Mensal",
                                         'Anual'=>"Anual",
-                                        'Momental'=>"Momental",
+                                        'Necessidade'=>"Necessidade",
                                     ], null, ['class'=>"form-control", 'placeholder'=>"Forma de Pagamento"])}}
 
                                 <div class="erro">

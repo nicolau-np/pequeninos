@@ -90,7 +90,7 @@ class EpocaPagamentoSeeder extends Seeder
         'epoca'=>"1ª Vez",
         'numero'=>null,
        ],
-       //momental
+       //necessidade
        [
         'id_forma_pagamento'=>4,
         'epoca'=>"Pagar",

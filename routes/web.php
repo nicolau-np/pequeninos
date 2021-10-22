@@ -381,68 +381,7 @@ Route::group(['prefix' => "word", 'middleware' => "AdminUser"], function () {
 
 /*rota de test*/
 Route::get('test', function () {
-    $dia = date('d'); // dia de hoje
-    $mes = date('m'); // mes de hoje
-    $ano_lectivo = "2021-2022"; //ultimo ano lectivo
-
-    /**primeiro deve pegar os tipos de pagamentos que tem multa com os seus respentivos dias */
-    $tipo_pagamentos = TipoPagamento::where(['multa' => "sim"])->where('dia_cobranca_multa', '<=', $dia)->get();
-    foreach ($tipo_pagamentos as $tipo_pagamento) {
-        echo "<b>" . $tipo_pagamento->tipo . "</b><br/>";
-        /**pegar todas tabelas de precos dos pagamentos com multas */
-        $tabela_precos = TabelaPreco::where(['id_tipo_pagamento' => $tipo_pagamento->id])->get();
-        foreach ($tabela_precos as $tabela_preco) {
-            echo "<b style='color:green;'>" . $tabela_preco->curso->curso . " == " . $tabela_preco->classe->classe . " == " . $tabela_preco->turno->turno . " == " . $tabela_preco->preco . "kz == " . $tabela_preco->percentagem_multa . "% </b> <br/>";
-            /**pegar id de forma de pagamento */
-            $forma_pagamento = FormaPagamento::where(['forma_pagamento' => $tabela_preco->forma_pagamento])->first();
-
-            /*se a forma de pagamento for mensal*/
-            if ($forma_pagamento->forma_pagamento == "Mensal") {
-                /**pegar o id do mes actual em epocas de pagamento */
-                $epocaID = EpocaPagamento::where(['numero'=>$mes])->first();
-                /**pegar epocas de pagamentos */
-
-                $epoca_pagamentos = EpocaPagamento::where(['id_forma_pagamento' => $forma_pagamento->id])
-                    ->where('id', '<', $epocaID->id)->get();
-
-
-                foreach ($epoca_pagamentos as $epocas) {
-                    echo "<b style='color:blue;'>" . $epocas->numero . " == " . $epocas->epoca . "</b><br/>";
-                    /**pesquisar estudantes deste ano com multas */
-                    $data = [
-                        'epoca' => $epocas->epoca,
-                        'id_classe' => $tabela_preco->id_classe,
-                        'id_curso' => $tabela_preco->id_curso,
-                    ];
-                    $estudantes = Estudante::whereHas('turma', function ($query) use ($data) {
-                        $query->where(['id_curso' => $data['id_curso'], 'id_classe' => $data['id_classe']]);
-                    })->whereDoesntHave('pagamento', function ($query) use ($data) {
-                        $query->where(['epoca' => $data['epoca']]);
-                    })->where(['ano_lectivo' => $ano_lectivo])->get();
-                    foreach ($estudantes as $estudante) {
-                        //buscar estudantes que nao pagaram para aplicar multas
-                        //echo $estudante->pessoa->nome . "<br/>";
-                        $data = [
-                            'id_estudante' => $estudante->id,
-                            'id_tipo_pagamento' => $tipo_pagamento->id,
-                            'mes_multa' => $epocas->numero,
-                            'mes'=>$epocas->epoca,
-                            'percentagem' => $tabela_preco->percentagem_multa,
-                            'dia_multado' => $dia,
-                            'estado'=>"on",
-                            'ano_lectivo' => $ano_lectivo,
-                        ];
-                        if (!Multado::where(['id_estudante' => $estudante->id, 'id_tipo_pagamento' => $tipo_pagamento->id, 'mes_multa' => $epocas->numero, 'ano_lectivo' => $ano_lectivo])->first()) {
-                            if (Multado::create($data)) {
-                                echo "multado <br/>";
-                            }
-                        }
-                    }
-                }
-            }
-        }
-        echo "<hr/>";
-    }
+    
 });
 
 /*fim*/

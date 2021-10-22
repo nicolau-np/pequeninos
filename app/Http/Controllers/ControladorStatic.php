@@ -422,7 +422,9 @@ class ControladorStatic extends Controller
     public static function marcarMultas(){
         $dia = date('d'); // dia de hoje
         $mes = date('m'); // mes de hoje
-        $ano_lectivo = "2021-2022"; //ultimo ano lectivo
+        $lastYear = AnoLectivo::latest('ano_lectivo')->first();
+
+        $ano_lectivo = $lastYear->ano_lectivo; //ultimo ano lectivo
 
         /**primeiro deve pegar os tipos de pagamentos que tem multa com os seus respentivos dias */
         $tipo_pagamentos = TipoPagamento::where(['multa' => "sim"])->where('dia_cobranca_multa', '<=', $dia)->get();
@@ -480,7 +482,7 @@ class ControladorStatic extends Controller
                     }
                 }
             }
-           
+
         }
     }
 }

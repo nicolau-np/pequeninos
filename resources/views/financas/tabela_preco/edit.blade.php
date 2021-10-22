@@ -49,7 +49,8 @@
                                     {{Form::select('forma_pagamento', [
                                         'Trimestral'=>"Trimestral",
                                         'Mensal'=>"Mensal",
-                                        'Anual'=>"Anual"
+                                        'Anual'=>"Anual",
+                                        'Necessidade'=>"Necessidade",
                                     ], $getTabela_preco->forma_pagamento, ['class'=>"form-control", 'placeholder'=>"Forma de Pagamento"])}}
 
                                 <div class="erro">

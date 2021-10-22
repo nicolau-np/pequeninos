@@ -56,6 +56,13 @@ class RelatorioController extends Controller
             $pagamento = Pagamento::where('fatura', $id_fatura)->get();
         }
         $educandos = Estudante::where('id_encarregado', $historico->estudante->id_encarregado)->get();
+        $tabela_preco = TabelaPreco::where([
+            'id_tipo_pagamento' => $id_tipo_pagamento,
+            'id_curso' => $historico->turma->id_curso,
+            'id_classe' => $historico->turma->id_classe,
+            'id_turno' => $historico->turma->id_turno,
+
+        ])->first();
         $data = [
             'getPagamento' => $pagamento,
             'getHistorico' => $historico,
@@ -63,6 +70,7 @@ class RelatorioController extends Controller
             'getTipoPagamento' => $tipo_pagamento,
             'getFatura' => $fatura,
             'getEducandos' => $educandos,
+            'getTabelaPreco' => $tabela_preco,
         ];
         $pdf = PDF::loadView('relatorios.fatura', $data)->setPaper('A4', 'normal');
 
@@ -523,11 +531,11 @@ class RelatorioController extends Controller
         $classes = Classe::where(['id_ensino' => $id_ensino,])->get();
         $turnos = Turno::orderBy('id', 'asc')->get();
         $data['view'] = [
-            'getEnsino'=>$ensino,
-            'getCursos'=> $cursos,
-            'getClasses'=>$classes,
-            'getAno'=>$ano_lectivo,
-            'getTurnos'=> $turnos,
+            'getEnsino' => $ensino,
+            'getCursos' => $cursos,
+            'getClasses' => $classes,
+            'getAno' => $ano_lectivo,
+            'getTurnos' => $turnos,
         ];
         $pdf = PDF::loadView('relatorios.coordenadores', $data['view'])->setPaper('A4', 'landscape');
         return $pdf->stream('MAPA DE COORDENADORES - ' . $ano_lectivo .  '[ ' . strtoupper($ensino->ensino) . ' ].pdf');
@@ -536,10 +544,10 @@ class RelatorioController extends Controller
     public function mapas_aproveitamentos(Request $request)
     {
         $request->validate([
-            'epoca'=>['required', 'integer', 'min:1'],
-            'ano_lectivo'=>['required', 'string',],
-            'id_ensino'=>['required', 'integer', 'min:1'],
-            'id_curso'=>['required', 'integer', 'min:1'],
+            'epoca' => ['required', 'integer', 'min:1'],
+            'ano_lectivo' => ['required', 'string',],
+            'id_ensino' => ['required', 'integer', 'min:1'],
+            'id_curso' => ['required', 'integer', 'min:1'],
         ]);
 
         $ensino = Ensino::find($request->id_ensino);
@@ -553,7 +561,7 @@ class RelatorioController extends Controller
         }
 
         $curso = Curso::find($request->id_curso);
-        if(!$curso){
+        if (!$curso) {
             return back()->with(['error' => "Não encontrou curso"]);
         }
 
@@ -564,23 +572,24 @@ class RelatorioController extends Controller
         $classes = Classe::where(['id_ensino' => $request->id_ensino,])->orderBy('id', 'asc')->get();
         $turnos = Turno::orderBy('id', 'asc')->get();
         $data['view'] = [
-            'getEnsino'=>$ensino,
-            'getClasses'=>$classes,
-            'getAno'=>$request->ano_lectivo,
-            'getTurnos'=> $turnos,
-            'getEpoca'=>$request->epoca,
-            'getCurso'=>$curso,
+            'getEnsino' => $ensino,
+            'getClasses' => $classes,
+            'getAno' => $request->ano_lectivo,
+            'getTurnos' => $turnos,
+            'getEpoca' => $request->epoca,
+            'getCurso' => $curso,
         ];
         $pdf = PDF::loadView('relatorios.aproveitamento', $data['view'])->setPaper('A4', 'landscape');
-        return $pdf->stream('MAPA DE APROVEITAMENTO - '.$request->epoca.'º TRIMESTRE - ' . $request->ano_lectivo .  '[ ' . strtoupper($ensino->ensino) . ' ].pdf');
+        return $pdf->stream('MAPA DE APROVEITAMENTO - ' . $request->epoca . 'º TRIMESTRE - ' . $request->ano_lectivo .  '[ ' . strtoupper($ensino->ensino) . ' ].pdf');
     }
 
-    public function mapas_estatistica(Request $request){
+    public function mapas_estatistica(Request $request)
+    {
         $request->validate([
-            'epoca'=>['required', 'integer', 'min:1'],
-            'ano_lectivo'=>['required', 'string',],
-            'id_ensino'=>['required', 'integer', 'min:1'],
-            'id_curso'=>['required', 'integer', 'min:1'],
+            'epoca' => ['required', 'integer', 'min:1'],
+            'ano_lectivo' => ['required', 'string',],
+            'id_ensino' => ['required', 'integer', 'min:1'],
+            'id_curso' => ['required', 'integer', 'min:1'],
         ]);
 
         $ensino = Ensino::find($request->id_ensino);
@@ -594,21 +603,21 @@ class RelatorioController extends Controller
         }
 
         $curso = Curso::find($request->id_curso);
-        if(!$curso){
+        if (!$curso) {
             return back()->with(['error' => "Não encontrou curso"]);
         }
 
         $classes = Classe::where(['id_ensino' => $request->id_ensino,])->orderBy('id', 'asc')->get();
         $turnos = Turno::orderBy('id', 'asc')->get();
         $data['view'] = [
-            'getEnsino'=>$ensino,
-            'getClasses'=>$classes,
-            'getAno'=>$request->ano_lectivo,
-            'getTurnos'=> $turnos,
-            'getEpoca'=>$request->epoca,
-            'getCurso'=>$curso,
+            'getEnsino' => $ensino,
+            'getClasses' => $classes,
+            'getAno' => $request->ano_lectivo,
+            'getTurnos' => $turnos,
+            'getEpoca' => $request->epoca,
+            'getCurso' => $curso,
         ];
         $pdf = PDF::loadView('relatorios.estatistica', $data['view'])->setPaper('A4', 'normal');
-        return $pdf->stream('FICHA DE ESTATÍSTICA - '.$request->epoca.'º TRIMESTRE - ' . $request->ano_lectivo .  '[ ' . strtoupper($ensino->ensino) . ' ].pdf');
+        return $pdf->stream('FICHA DE ESTATÍSTICA - ' . $request->epoca . 'º TRIMESTRE - ' . $request->ano_lectivo .  '[ ' . strtoupper($ensino->ensino) . ' ].pdf');
     }
 }

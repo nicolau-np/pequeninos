@@ -419,7 +419,8 @@ class ControladorStatic extends Controller
         return $multa;
     }
 
-    public static function marcarMultas(){
+    public static function marcarMultas()
+    {
         $dia = date('d'); // dia de hoje
         $mes = date('m'); // mes de hoje
         $lastYear = AnoLectivo::latest('ano_lectivo')->first();
@@ -440,7 +441,7 @@ class ControladorStatic extends Controller
                 /*se a forma de pagamento for mensal*/
                 if ($forma_pagamento->forma_pagamento == "Mensal") {
                     /**pegar o id do mes actual em epocas de pagamento */
-                    $epocaID = EpocaPagamento::where(['numero'=>$mes])->first();
+                    $epocaID = EpocaPagamento::where(['numero' => $mes])->first();
                     /**pegar epocas de pagamentos */
 
                     $epoca_pagamentos = EpocaPagamento::where(['id_forma_pagamento' => $forma_pagamento->id])
@@ -467,10 +468,10 @@ class ControladorStatic extends Controller
                                 'id_estudante' => $estudante->id,
                                 'id_tipo_pagamento' => $tipo_pagamento->id,
                                 'mes_multa' => $epocas->numero,
-                                'mes'=>$epocas->epoca,
+                                'mes' => $epocas->epoca,
                                 'percentagem' => $tabela_preco->percentagem_multa,
                                 'dia_multado' => $dia,
-                                'estado'=>"on",
+                                'estado' => "on",
                                 'ano_lectivo' => $ano_lectivo,
                             ];
                             if (!Multado::where(['id_estudante' => $estudante->id, 'id_tipo_pagamento' => $tipo_pagamento->id, 'mes_multa' => $epocas->numero, 'ano_lectivo' => $ano_lectivo])->first()) {
@@ -482,7 +483,12 @@ class ControladorStatic extends Controller
                     }
                 }
             }
-
         }
+    }
+
+    public static function getTabelaPreco($id_tipo_pagamento)
+    {
+        $tabela_preco = TabelaPreco::where(['id_tipo_pagamento' => $id_tipo_pagamento])->first();
+        return $tabela_preco;
     }
 }

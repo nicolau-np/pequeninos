@@ -1,3 +1,7 @@
+@php
+use App\Http\Controllers\ControladorStatic;
+$multados = ControladorStatic::marcarMultas();
+@endphp
 @extends('layouts.app')
 @section('content')
 

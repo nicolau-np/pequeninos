@@ -36,12 +36,15 @@ use App\Http\Controllers\ControladorStatic;
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="tabela">
+                                    <div class="data">
+                                        Data de Extração: {{date('d-m-Y H:i:s')}}
+                                    </div>
                                     <table class="table table-bordered">
                                         <thead>
                                             <tr>
                                                 <th>#</th>
                                                 <th>Descrição</th>
-                                                <th>Epoca</th>
+                                                <th>Epoca ou Tipo</th>
                                                 <th>Valor (Akz)</th>
                                                 <th>Multa (Akz)</th>
                                             </tr>
@@ -52,21 +55,31 @@ use App\Http\Controllers\ControladorStatic;
                                                 $total_multa = 0;
                                             @endphp
                                             @foreach ($getPagamentos as $pagamentos)
-
+                                            @php
+                                                $tabela_preco = ControladorStatic::getTabelaPreco($pagamentos->id_tipo_pagamento);
+                                            @endphp
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $pagamentos->tipo_pagamento->tipo }}</td>
-                                                    <td>{{ $pagamentos->epoca }}</td>
+                                                    <td>
+                                                        @if($tabela_preco->forma_pagamento == "Necessidade")
+
+                                                        {{$pagamentos->tipo_pagamento->tipo}}
+                                                        @else
+                                                        {{ $pagamentos->epoca }}
+                                                        @endif
+                                                    </td>
                                                     <td>{{ number_format($pagamentos->preco, 2, ',', '.') }}</td>
                                                     <td>
                                                         @php
                                                             $total = $total + $pagamentos->preco;
                                                             $valor_multa = 0;
-                                                            $multa = ControladorStatic::getMultas($getHistorico->id_estudante, $pagamentos->id_tipo_pagamento, $pagamentos->epoca, $getHistorico->ano_lectivo);
+                                                            $multa = ControladorStatic::getMultasOFF($getHistorico->id_estudante, $pagamentos->id_tipo_pagamento, $pagamentos->epoca, $getHistorico->ano_lectivo);
                                                             if ($multa) {
-                                                                $valor_multa = ($getTabelaPreco->preco * $multa->percentagem) / 100;
+                                                                $valor_multa = ($pagamentos->preco * $multa->percentagem) / 100;
                                                             }
                                                             $total_multa = $total_multa + $valor_multa;
+                                                            
                                                         @endphp
                                                         {{ number_format($valor_multa, 2, ',', '.') }}
                                                     </td>

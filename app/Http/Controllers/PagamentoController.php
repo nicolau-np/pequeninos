@@ -91,10 +91,10 @@ class PagamentoController extends Controller
         foreach ($epocas_pagemento as $epocas) {
             array_push($array_epocas_pagamento, $epocas->epoca);
         }
-        if($forma_pagamento->forma_pagamento == "Necessidade"){
-            $array_nao_pagos = array_diff_assoc($array_epocas_pagamento, $array_pagos);
-            
-        }else{
+        if ($forma_pagamento->forma_pagamento == "Necessidade") {
+            //$array_nao_pagos = array_diff_assoc($array_epocas_pagamento, $array_pagos);
+            $array_nao_pagos = $array_epocas_pagamento;
+        } else {
             $array_nao_pagos = array_diff_assoc($array_epocas_pagamento, $array_pagos);
         }
 
@@ -208,16 +208,34 @@ class PagamentoController extends Controller
                 }
             }
         } else {
+            if ($tabela_preco->forma_pagamento == "Necessidade") {
+                //se a forma de pagamento for por necessidade
+                foreach ($request->meses_a_pagar as $epoca) {
+                    $data['store']['epoca'] = $epoca;
+                    $data['where']['epoca'] = $epoca;
+                    $data['multa']['mes'] = $epoca;
 
-            //pagamento estudante
-            foreach ($request->meses_a_pagar as $epoca) {
-                $data['store']['epoca'] = $epoca;
-                $data['where']['epoca'] = $epoca;
-                $data['multa']['mes'] = $epoca;
-                if (!Pagamento::where($data['where'])->first()) {
+                    /**caso ja tenha feito o pagamento */
+
                     $pagamento = Pagamento::create($data['store']);
                     if (Multado::where($data['multa'])->first()) {
                         Multado::where($data['multa'])->update(['estado' => "off"]);
+                    }
+                }
+            } else {
+                //caso contrario
+                //pagamento estudante
+                foreach ($request->meses_a_pagar as $epoca) {
+                    $data['store']['epoca'] = $epoca;
+                    $data['where']['epoca'] = $epoca;
+                    $data['multa']['mes'] = $epoca;
+
+                    /**caso ja tenha feito o pagamento */
+                    if (!Pagamento::where($data['where'])->first()) {
+                        $pagamento = Pagamento::create($data['store']);
+                        if (Multado::where($data['multa'])->first()) {
+                            Multado::where($data['multa'])->update(['estado' => "off"]);
+                        }
                     }
                 }
             }

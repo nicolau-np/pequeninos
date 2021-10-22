@@ -77,27 +77,55 @@ use App\Http\Controllers\ControladorStatic;
                                                 @if ($getNaoPagos == null)
                                                     Já pagou todos meses
                                                 @else
-                                                    @foreach ($getNaoPagos as $nao_pagos)
+                                                    @if ($getTabelaPreco->forma_pagamento == 'Necessidade')
+                                                        @foreach ($getNaoPagos as $nao_pagos)
+                                                            <input type="checkbox" name="meses_a_pagar[]"
+                                                                value="{{ $nao_pagos }}" />
+                                                            {{ $getTabelaPreco->tipo_pagamento->tipo }} =>
+                                                            @php
+                                                                $valor_multa = 0;
+                                                                $multa = ControladorStatic::getMultas($getEstudante->id, $getTabelaPreco->id_tipo_pagamento, $nao_pagos, $getEstudante->ano_lectivo);
+                                                                if ($multa) {
+                                                                    $valor_multa = ($getTabelaPreco->preco * $multa->percentagem) / 100;
+                                                                }
+                                                            @endphp
+                                                            @if ($multa)
+                                                                <span class="text-danger" style="font-weight: bold;">
+                                                                    +
+                                                                    {{ number_format($valor_multa, 2, ',', '.') }} Akz =>
+                                                                </span>
+                                                            @endif
+                                                            <span class="preco"
+                                                                style="color:#4680ff; font-weight:bold;">{{ number_format($getTabelaPreco->preco + $valor_multa, 2, ',', '.') }}
+                                                                Akz</span>
+                                                            <br />
+                                                        @endforeach
+                                                    @else
+                                                        @foreach ($getNaoPagos as $nao_pagos)
 
-                                                        <input type="checkbox" name="meses_a_pagar[]"
-                                                            value="{{ $nao_pagos }}" /> {{ $nao_pagos }} =>
-                                                        @php
-                                                            $valor_multa = 0;
-                                                            $multa = ControladorStatic::getMultas($getEstudante->id, $getTabelaPreco->id_tipo_pagamento, $nao_pagos, $getEstudante->ano_lectivo);
-                                                            if ($multa) {
-                                                                $valor_multa = ($getTabelaPreco->preco * $multa->percentagem) / 100;
-                                                            }
-                                                        @endphp
-                                                        @if ($multa)
-                                                            <span class="text-danger" style="font-weight: bold;">
-                                                                +
-                                                                {{ number_format($valor_multa, 2, ',', '.') }} Akz =>
-                                                            </span>
-                                                        @endif
-                                                        <span
-                                                            class="preco" style="color:#4680ff; font-weight:bold;">{{ number_format($getTabelaPreco->preco + $valor_multa, 2, ',', '.') }} Akz</span>
-                                                        <br />
-                                                    @endforeach
+                                                            <input type="checkbox" name="meses_a_pagar[]"
+                                                                value="{{ $nao_pagos }}" /> {{ $nao_pagos }} =>
+                                                            @php
+                                                                $valor_multa = 0;
+                                                                $multa = ControladorStatic::getMultas($getEstudante->id, $getTabelaPreco->id_tipo_pagamento, $nao_pagos, $getEstudante->ano_lectivo);
+                                                                if ($multa) {
+                                                                    $valor_multa = ($getTabelaPreco->preco * $multa->percentagem) / 100;
+                                                                }
+                                                            @endphp
+                                                            @if ($multa)
+                                                                <span class="text-danger" style="font-weight: bold;">
+                                                                    +
+                                                                    {{ number_format($valor_multa, 2, ',', '.') }} Akz =>
+                                                                </span>
+                                                            @endif
+                                                            <span class="preco"
+                                                                style="color:#4680ff; font-weight:bold;">{{ number_format($getTabelaPreco->preco + $valor_multa, 2, ',', '.') }}
+                                                                Akz</span>
+                                                            <br />
+
+
+                                                        @endforeach
+                                                    @endif
                                                     <div class="erro">
                                                         @if ($errors->has('meses_a_pagar'))
                                                             <div class="text-danger">
@@ -125,11 +153,19 @@ use App\Http\Controllers\ControladorStatic;
                                                 Nenhum pago
                                             @else
                                                 <ul>
+                                                    @if ($getTabelaPreco->forma_pagamento == 'Necessidade')
                                                     @foreach ($getPagos as $pagos)
-                                                        <li><a data-epoca="{{ $pagos }}" href="#"
-                                                                style="color:#4680ff;"
-                                                                class="show_pagamento">{{ $pagos }}</a></li>
-                                                    @endforeach
+                                                            <li><a data-epoca="{{ $pagos }}" href="#"
+                                                                    style="color:#4680ff;"
+                                                                    class="show_pagamento">{{ $getTabelaPreco->tipo_pagamento->tipo }}</a></li>
+                                                        @endforeach
+                                                    @else
+                                                        @foreach ($getPagos as $pagos)
+                                                            <li><a data-epoca="{{ $pagos }}" href="#"
+                                                                    style="color:#4680ff;"
+                                                                    class="show_pagamento">{{ $pagos }}</a></li>
+                                                        @endforeach
+                                                    @endif
                                                 </ul>
                                             @endif
                                         </p>

@@ -1,3 +1,6 @@
+@php
+use App\Http\Controllers\ControladorStatic;
+@endphp
 @extends('layouts.app')
 @section('content')
 
@@ -47,10 +50,13 @@
                                             @foreach ($getPagamentos as $pagamentos)
                                                 <tr>
                                                 <td>{{$loop->iteration}}</td>
-                                                <td></td>
-                                                <td></td>
-                                                <td></td>
-                                                </tr>
+                                                <td>{{$pagamentos->tipo_pagamento->tipo}}</td>
+                                                <td>{{$pagamentos->epoca}}</td>
+                                                <td>{{number_format($pagamentos->preco,2,',','.')}}</td>
+                                                <td>
+
+                                                </td>
+                                            </tr>
                                             @endforeach
                                         </tbody>
                                     </table>

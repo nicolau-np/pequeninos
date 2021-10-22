@@ -9,7 +9,7 @@
                     <h5>{{$submenu}}</h5>
                     <span></span>
                     <div class="card-header-right">
-                        
+
                         <ul class="list-unstyled card-option" style="width: 35px;">
                             <li class=""><i class="icofont icofont-simple-left"></i></li>
                             <li><i class="icofont icofont-maximize full-card"></i></li>
@@ -36,11 +36,11 @@
                             <div class="col-md-3">
                                 {{Form::label('tipo_pagamento', "Pagamento")}} <span class="text-danger">*</span>
                                 {{Form::select('tipo_pagamento', $getTipoPagamentos, null, ['class'=>"form-control", 'placeholder'=>"Pagamento"])}}
-                            
+
                             <div class="erro">
                                 @if($errors->has('tipo_pagamento'))
                                 <div class="text-danger">{{$errors->first('tipo_pagamento')}}</div>
-                                @endif 
+                                @endif
                             </div>
                             </div>
 
@@ -50,7 +50,7 @@
                             <div class="erro">
                                 @if($errors->has('curso'))
                                 <div class="text-danger">{{$errors->first('curso')}}</div>
-                                @endif 
+                                @endif
                             </div>
                             </div>
 
@@ -62,7 +62,7 @@
                             <div class="erro">
                                 @if($errors->has('classe'))
                                 <div class="text-danger">{{$errors->first('classe')}}</div>
-                                @endif 
+                                @endif
                             </div>
                             </div>
 
@@ -74,7 +74,7 @@
                             <div class="erro">
                                 @if($errors->has('turma'))
                                 <div class="text-danger">{{$errors->first('turma')}}</div>
-                                @endif 
+                                @endif
                             </div>
                             </div>
 
@@ -84,7 +84,7 @@
                                 <div class="erro">
                                     @if($errors->has('ano_lectivo'))
                                     <div class="text-danger">{{$errors->first('ano_lectivo')}}</div>
-                                    @endif 
+                                    @endif
                                 </div>
                             </div>
 
@@ -92,16 +92,16 @@
                                 <button type="submit" class="btn btn-success btn-sm" style="position: absolute; top:29px; left:10px;"><i class="ti-search"></i></button>
                             </div>
                         </div>
-                        </fieldset> 
-              
+                        </fieldset>
+
                        {{Form::close()}}
                    </div>
-                   
+
                 </div>
             </div>
         </div>
     </div>
-    
+
 </div>
 
 <!-- hidden-sm-up -->
@@ -116,6 +116,7 @@
                 id_curso: $(this).val(),
                 _token: "{{ csrf_token() }}"
             }
+            if(data.id_curso!=""){
             $.ajax({
                 type: "post",
                 url: "{{route('getClasses')}}",
@@ -125,6 +126,7 @@
                     $('.load_classes').html(response);
                 }
             });
+        }
         });
     });
 </script>

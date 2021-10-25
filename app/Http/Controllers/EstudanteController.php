@@ -220,7 +220,7 @@ class EstudanteController extends Controller
             return back()->with(['error' => "Não encontrou"]);
         }
         $ano_lectivo = AnoLectivo::where(['ano_lectivo' => $estudante->ano_lectivo])->first();
-
+        $categorias = CategoriaEstudante::pluck('categoria', 'id');
         $provincias = Provincia::pluck('provincia', 'id');
         $cursos = Curso::pluck('curso', 'id');
         $ano_lectivos = AnoLectivo::pluck('ano_lectivo', 'ano_lectivo');
@@ -234,6 +234,7 @@ class EstudanteController extends Controller
             'getAnoLectivo' => $ano_lectivos,
             'getEstudante' => $estudante,
             'getAno' => $ano_lectivo,
+            'getCategorias'=>$categorias,
         ];
         return view('estudantes.edit', $data);
     }
@@ -357,7 +358,7 @@ class EstudanteController extends Controller
             return back()->with(['error' => "Não encontrou"]);
         }
         $ano_lectivo = AnoLectivo::where(['ano_lectivo' => $estudante->ano_lectivo])->first();
-
+        $categorias = CategoriaEstudante::pluck('categoria', 'id');
         $provincias = Provincia::pluck('provincia', 'id');
         $cursos = Curso::pluck('curso', 'id');
         $ano_lectivos = AnoLectivo::pluck('ano_lectivo', 'ano_lectivo');
@@ -371,6 +372,7 @@ class EstudanteController extends Controller
             'getAnoLectivo' => $ano_lectivos,
             'getEstudante' => $estudante,
             'getAno' => $ano_lectivo,
+            'getCategorias'=>$categorias,
         ];
         return view('estudantes.confirmar', $data);
     }

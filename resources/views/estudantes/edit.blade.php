@@ -114,6 +114,36 @@
                                     </div>
                                 </div>
 
+                                <div class="col-md-3">
+                                    {{ Form::label('residencia', 'Residencia') }}
+                                    {{ Form::text('residencia', $getRegras->pessoa->residencia, ['class'=>"form-control" => 'form-control', 'placeholder' => 'Residencia']) }}
+                                    <div class="erro">
+                                        @if ($errors->has('residencia'))
+                                            <div class="text-danger">{{ $errors->first('residencia') }}</div>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    {{ Form::label('rua', 'Rua') }}
+                                    {{ Form::text('rua', $getEstudante->pessoa->rua, ['class'=>"form-control" => 'form-control', 'placeholder' => 'Rua']) }}
+                                    <div class="erro">
+                                        @if ($errors->has('rua'))
+                                            <div class="text-danger">{{ $errors->first('rua') }}</div>
+                                        @endif
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    {{ Form::label('bairro', 'Bairro') }}
+                                    {{ Form::text('bairro', $getEstudante->pessoa->bairro, ['class'=>"form-control" => 'form-control', 'placeholder' => 'Bairro']) }}
+                                    <div class="erro">
+                                        @if ($errors->has('bairro'))
+                                            <div class="text-danger">{{ $errors->first('bairro') }}</div>
+                                        @endif
+                                    </div>
+                                </div>
+
 
                                 <div class="col-md-3">
                                     {{Form::label('data_nascimento', "Data de Nascimento")}} <span class="text-danger">*</span>
@@ -221,6 +251,16 @@
                         <fieldset>
                             <legend><i class="ti-list"></i> Dados acadêmicos</legend>
                             <div class="row">
+                                <div class="col-md-3">
+                                    {{ Form::label('categoria', 'Categoria') }}
+                                    {{ Form::select('categoria', $getCategorias, $getEstudante->categoria, ['class' => 'form-control', 'placeholder' => 'Categoria']) }}
+                                    <div class="erro">
+                                        @if ($errors->has('categoria'))
+                                            <div class="text-danger">{{ $errors->first('categoria') }}</div>
+                                        @endif
+                                    </div>
+                                </div>
+
                                 <div class="col-md-3">
                                     {{Form::label('curso', "Curso")}} <span class="text-danger">*</span>
                                     {{Form::select('curso', $getCursos, $getEstudante->turma->id_curso, ['class'=>"form-control curso", 'placeholder'=>"Curso"])}}

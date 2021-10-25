@@ -195,10 +195,12 @@ class EstudanteController extends Controller
                 $data['historico']['numero_acesso'] = $gerando_aleatorio . "-" . $estudante->id;
                 $data['historico']['id_estudante'] = $estudante->id;
                 $numero_acesso = $gerando_aleatorio . "-" . $estudante->id;
-                if (HistoricEstudante::create($data['historico'])) {
+                $historico =HistoricEstudante::create($data['historico']);
+                if ($historico) {
                     if (Estudante::find($estudante->id)->update(['numero_acesso' => $numero_acesso])) {
                         foreach($request->docs_entregues as $docs){
                             $data['docs_entregues']['documento'] = $docs;
+                            $data['docs_entregues']['id_historico'] = $historico->id;
                             DocumentoEntregue::create($data['docs_entregues']);
                         }
                         return back()->with(['success' => "Feito com sucesso"]);

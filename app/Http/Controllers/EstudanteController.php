@@ -144,6 +144,9 @@ class EstudanteController extends Controller
             'mae' => $request->mae,
             'comuna' => $request->comuna,
             'foto' => $path,
+            'bairro'=>$request->bairro,
+            'rua'=> $request->rua,
+            'residencia'=> $request->residencia,
         ];
 
         $data['estudante'] = [
@@ -154,6 +157,7 @@ class EstudanteController extends Controller
             'id_encarregado' => $request->encarregado,
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
+            'categoria' =>$request->categoria,
 
         ];
 
@@ -164,6 +168,7 @@ class EstudanteController extends Controller
             'numero_acesso'=>null,
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
+            'categoria' =>$request->categoria,
         ];
 
         if (Pessoa::where([
@@ -304,6 +309,9 @@ class EstudanteController extends Controller
             'mae' => $request->mae,
             'comuna' => $request->comuna,
             'foto' => $path,
+            'bairro'=>$request->bairro,
+            'rua'=> $request->rua,
+            'residencia'=> $request->residencia,
         ];
 
         $data['estudante'] = [
@@ -311,12 +319,14 @@ class EstudanteController extends Controller
             'id_encarregado' => $request->encarregado,
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
+            'categoria' =>$request->categoria,
         ];
 
         $data['historico'] = [
             'id_turma' => $request->turma,
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
+            'categoria' =>$request->categoria,
         ];
 
         if ($request->nome != $data['pessoa']['nome'] || $request->data_nascimento != $data['pessoa']['data_nascimento']) {
@@ -411,6 +421,9 @@ class EstudanteController extends Controller
             'mae' => $request->mae,
             'comuna' => $request->comuna,
             'foto' => null,
+            'bairro'=>$request->bairro,
+            'rua'=> $request->rua,
+            'residencia'=> $request->residencia,
         ];
 
         $data['estudante'] = [
@@ -418,6 +431,7 @@ class EstudanteController extends Controller
             'id_encarregado' => $request->encarregado,
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
+            'categoria' =>$request->categoria,
         ];
 
         $data['historico'] = [
@@ -426,6 +440,7 @@ class EstudanteController extends Controller
             'numero_acesso'=>$estudante->numero_acesso,
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
+            'categoria' =>$request->categoria,
         ];
 
         if (HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $data['estudante']['ano_lectivo']])->first()) {

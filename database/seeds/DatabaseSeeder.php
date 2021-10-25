@@ -34,6 +34,7 @@ class DatabaseSeeder extends Seeder
            FormaPagamentoSeeder::class,
            EpocaPagamentoSeeder::class,
            BloqueioEpocaSeeder::class,
+           CategoriaEstudanteSeeder::class,
        ]);
     }
 }

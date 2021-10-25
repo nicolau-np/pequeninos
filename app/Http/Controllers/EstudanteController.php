@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AnoLectivo;
+use App\CategoriaEstudante;
 use App\Curso;
 use App\Declaracao;
 use App\Desistencia;
@@ -34,6 +35,7 @@ class EstudanteController extends Controller
         $estudantes = Estudante::paginate(5);
         $cursos = Curso::pluck('curso', 'id');
         $ano_lectivos = AnoLectivo::pluck('ano_lectivo', 'ano_lectivo');
+
         $data = [
             'title' => "Estudantes",
             'type' => "estudantes",
@@ -42,6 +44,7 @@ class EstudanteController extends Controller
             'getEstudantes' => $estudantes,
             'getCursos' => $cursos,
             'getAnos' => $ano_lectivos,
+
         ];
         return view('estudantes.list', $data);
     }
@@ -56,6 +59,7 @@ class EstudanteController extends Controller
         $provincias = Provincia::pluck('provincia', 'id');
         $cursos = Curso::pluck('curso', 'id');
         $ano_lectivos = AnoLectivo::pluck('ano_lectivo', 'ano_lectivo');
+        $categorias = CategoriaEstudante::pluck('categoria', 'id');
         $data = [
             'title' => "Estudantes",
             'type' => "estudantes",
@@ -64,6 +68,7 @@ class EstudanteController extends Controller
             'getProvincias' => $provincias,
             'getCursos' => $cursos,
             'getAnoLectivo' => $ano_lectivos,
+            'getCategorias'=>$categorias,
         ];
         return view('estudantes.new', $data);
     }

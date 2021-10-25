@@ -23,6 +23,9 @@ class Pessoa extends Model
         'pai',
         'mae',
         'comuna',
+        'residencia',
+        'rua',
+        'bairro',
         'foto',
     ];
 

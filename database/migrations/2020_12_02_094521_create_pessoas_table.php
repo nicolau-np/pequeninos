@@ -30,6 +30,9 @@ class CreatePessoasTable extends Migration
             $table->string('pai')->nullable();
             $table->string('mae')->nullable();
             $table->string('comuna')->nullable();
+            $table->string('residencia')->nullable();
+            $table->string('rua')->nullable();
+            $table->string('bairro')->nullable();
             $table->text('foto')->nullable();
             $table->timestamps();
         });

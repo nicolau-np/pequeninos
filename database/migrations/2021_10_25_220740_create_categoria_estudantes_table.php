@@ -16,7 +16,8 @@ class CreateCategoriaEstudantesTable extends Migration
         Schema::create('categoria_estudantes', function (Blueprint $table) {
             $table->engine="InnoDB";
             $table->bigIncrements('id');
-            $table->string('categoria');
+            $table->string('categoria')->unique();
+            $table->string('sigla');
             $table->string('estado');
             $table->timestamps();
         });

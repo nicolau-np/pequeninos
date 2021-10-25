@@ -10,6 +10,7 @@ class CategoriaEstudante extends Model
 
     protected $fillable = [
         'categoria',
+        'sigla',
         'estado',
     ];
 

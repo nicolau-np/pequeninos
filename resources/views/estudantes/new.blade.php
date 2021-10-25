@@ -304,7 +304,20 @@
                                             @endif
                                         </div>
                                     </div>
-
+                                    <div class="col-md-6">
+                                        {{Form::label('docs_entregues', 'Docs Entregues')}} <span class="text-danger">*</span><br/>
+                                        <input type="checkbox" name="docs_entregues[]" /> Cédula ou B.I
+                                        &nbsp;&nbsp;
+                                        <input type="checkbox" name="docs_entregues[]" /> Atestado Médico
+                                        &nbsp;&nbsp;
+                                        <input type="checkbox" name="docs_entregues[]" /> 4 Fotografias
+                                        <div class="erro">
+                                            @if ($errors->has('docs_entregues'))
+                                                <div class="text-danger">{{ $errors->first('docs_entregues') }}</div>
+                                            @endif
+                                        </div>
+                                        <br/>
+                                    </div>
                                     <div class="col-md-3">
                                         {{ Form::label('ano_lectivo', 'Ano Lectivo') }} <span class="text-danger">*</span>
                                         {{ Form::select('ano_lectivo', $getAnoLectivo, null, ['class' => 'form-control', 'placeholder' => 'Ano Lectivo']) }}

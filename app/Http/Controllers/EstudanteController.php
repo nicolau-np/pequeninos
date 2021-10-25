@@ -7,6 +7,7 @@ use App\CategoriaEstudante;
 use App\Curso;
 use App\Declaracao;
 use App\Desistencia;
+use App\DocumentoEntregue;
 use App\Estudante;
 use App\Grade;
 use App\HistoricEstudante;
@@ -68,7 +69,7 @@ class EstudanteController extends Controller
             'getProvincias' => $provincias,
             'getCursos' => $cursos,
             'getAnoLectivo' => $ano_lectivos,
-            'getCategorias'=>$categorias,
+            'getCategorias' => $categorias,
         ];
         return view('estudantes.new', $data);
     }
@@ -92,6 +93,8 @@ class EstudanteController extends Controller
             'classe' => ['required', 'Integer'],
             'turma' => ['required', 'Integer'],
             'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
+            'docs_entregues' => ['required'],
+            'docs_entregues.*' => ['string']
         ]);
 
         $ano_lectivo = AnoLectivo::where('ano_lectivo', $request->ano_lectivo)->first();
@@ -144,20 +147,20 @@ class EstudanteController extends Controller
             'mae' => $request->mae,
             'comuna' => $request->comuna,
             'foto' => $path,
-            'bairro'=>$request->bairro,
-            'rua'=> $request->rua,
-            'residencia'=> $request->residencia,
+            'bairro' => $request->bairro,
+            'rua' => $request->rua,
+            'residencia' => $request->residencia,
         ];
 
         $data['estudante'] = [
             'id_turma' => $request->turma,
             'id_pessoa' => null,
             'numero' => $numero_estudante,
-            'numero_acesso'=>null,
+            'numero_acesso' => null,
             'id_encarregado' => $request->encarregado,
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
-            'categoria' =>$request->categoria,
+            'categoria' => $request->categoria,
 
         ];
 
@@ -165,10 +168,16 @@ class EstudanteController extends Controller
             'id_estudante' => null,
             'id_turma' => $request->turma,
             'numero' => $numero_estudante,
-            'numero_acesso'=>null,
+            'numero_acesso' => null,
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
-            'categoria' =>$request->categoria,
+            'categoria' => $request->categoria,
+        ];
+
+        $data['docs_entregues'] = [
+            'id_historico'=>null,
+            'documento'=>null,
+            'estado'=> "on",
         ];
 
         if (Pessoa::where([
@@ -183,14 +192,17 @@ class EstudanteController extends Controller
             $data['estudante']['id_pessoa'] = $pessoa->id;
             $estudante = Estudante::create($data['estudante']);
             if ($estudante) {
-                $data['historico']['numero_acesso'] = $gerando_aleatorio."-".$estudante->id;
+                $data['historico']['numero_acesso'] = $gerando_aleatorio . "-" . $estudante->id;
                 $data['historico']['id_estudante'] = $estudante->id;
-                $numero_acesso = $gerando_aleatorio."-".$estudante->id;
+                $numero_acesso = $gerando_aleatorio . "-" . $estudante->id;
                 if (HistoricEstudante::create($data['historico'])) {
-                    if(Estudante::find($estudante->id)->update(['numero_acesso'=>$numero_acesso])){
+                    if (Estudante::find($estudante->id)->update(['numero_acesso' => $numero_acesso])) {
+                        foreach($request->docs_entregues as $docs){
+                            $data['docs_entregues']['documento'] = $docs;
+                            DocumentoEntregue::create($data['docs_entregues']);
+                        }
                         return back()->with(['success' => "Feito com sucesso"]);
                     }
-
                 }
             }
         }
@@ -234,7 +246,7 @@ class EstudanteController extends Controller
             'getAnoLectivo' => $ano_lectivos,
             'getEstudante' => $estudante,
             'getAno' => $ano_lectivo,
-            'getCategorias'=>$categorias,
+            'getCategorias' => $categorias,
         ];
         return view('estudantes.edit', $data);
     }
@@ -310,9 +322,9 @@ class EstudanteController extends Controller
             'mae' => $request->mae,
             'comuna' => $request->comuna,
             'foto' => $path,
-            'bairro'=>$request->bairro,
-            'rua'=> $request->rua,
-            'residencia'=> $request->residencia,
+            'bairro' => $request->bairro,
+            'rua' => $request->rua,
+            'residencia' => $request->residencia,
         ];
 
         $data['estudante'] = [
@@ -320,14 +332,14 @@ class EstudanteController extends Controller
             'id_encarregado' => $request->encarregado,
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
-            'categoria' =>$request->categoria,
+            'categoria' => $request->categoria,
         ];
 
         $data['historico'] = [
             'id_turma' => $request->turma,
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
-            'categoria' =>$request->categoria,
+            'categoria' => $request->categoria,
         ];
 
         if ($request->nome != $data['pessoa']['nome'] || $request->data_nascimento != $data['pessoa']['data_nascimento']) {
@@ -372,7 +384,7 @@ class EstudanteController extends Controller
             'getAnoLectivo' => $ano_lectivos,
             'getEstudante' => $estudante,
             'getAno' => $ano_lectivo,
-            'getCategorias'=>$categorias,
+            'getCategorias' => $categorias,
         ];
         return view('estudantes.confirmar', $data);
     }
@@ -412,7 +424,7 @@ class EstudanteController extends Controller
         if (!$turma) {
             return back()->with(['error' => "Nao encontrou turma"]);
         }
-        
+
         $nome_pasta = $turma->turma . "-" . $request->ano_lectivo;
         $path = $estudante->pessoa->foto;
         if ($request->hasFile('foto') && $request->foto->isValid()) {
@@ -440,9 +452,9 @@ class EstudanteController extends Controller
             'mae' => $request->mae,
             'comuna' => $request->comuna,
             'foto' => $path,
-            'bairro'=>$request->bairro,
-            'rua'=> $request->rua,
-            'residencia'=> $request->residencia,
+            'bairro' => $request->bairro,
+            'rua' => $request->rua,
+            'residencia' => $request->residencia,
         ];
 
         $data['estudante'] = [
@@ -450,16 +462,16 @@ class EstudanteController extends Controller
             'id_encarregado' => $request->encarregado,
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
-            'categoria' =>$request->categoria,
+            'categoria' => $request->categoria,
         ];
 
         $data['historico'] = [
             'id_estudante' => $id_estudante,
             'id_turma' => $request->turma,
-            'numero_acesso'=>$estudante->numero_acesso,
+            'numero_acesso' => $estudante->numero_acesso,
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
-            'categoria' =>$request->categoria,
+            'categoria' => $request->categoria,
         ];
 
         if (HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $data['estudante']['ano_lectivo']])->first()) {
@@ -614,7 +626,7 @@ class EstudanteController extends Controller
             'motivo' => $request->descricao,
             'data_emissao' => $request->data,
             'epoca' => $request->epoca,
-            'numero'=>$numero,
+            'numero' => $numero,
             'ano_lectivo' => $request->ano_lectivo,
             'ano_emissao' => date('Y'),
         ];
@@ -802,15 +814,15 @@ class EstudanteController extends Controller
             return back()->with(['error' => "Estudante nao matriculado neste ano lectivo"]);
         }
 
-        $pagamentos = Pagamento::where(['id_estudante' => $id_estudante,'ano_lectivo'=>$ano_lectivo])->get();
+        $pagamentos = Pagamento::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])->get();
 
         $data = [
             'title' => "Estudantes",
             'type' => "estudantes",
             'menu' => "Estudantes",
             'submenu' => "Extrato de Pagamentos",
-            'getHistorico' =>$historico,
-            'getPagamentos'=>$pagamentos,
+            'getHistorico' => $historico,
+            'getPagamentos' => $pagamentos,
         ];
         return view('estudantes.extrato_pagamentos', $data);
     }

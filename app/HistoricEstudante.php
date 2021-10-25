@@ -26,4 +26,8 @@ class HistoricEstudante extends Model
     public function turma(){
         return $this->belongsTo(Turma::class, 'id_turma', 'id');
     }
+
+    public function documento_entregues(){
+        return $this->hasMany(DocumentoEntregue::class, 'id_historico', 'id');
+    }
 }

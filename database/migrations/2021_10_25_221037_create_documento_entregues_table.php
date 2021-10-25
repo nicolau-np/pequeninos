@@ -14,8 +14,16 @@ class CreateDocumentoEntreguesTable extends Migration
     public function up()
     {
         Schema::create('documento_entregues', function (Blueprint $table) {
-            $table->id();
+            $table->engine = "InnoDB";
+            $table->bigIncrements('id');
+            $table->bigInteger('id_historico')->unsigned()->index();
+            $table->string('documento');
+            $table->string('estado');
             $table->timestamps();
+        });
+
+        Schema::table('documento_entregues', function (Blueprint $table){
+            $table->foreign('id_historico')->references('id')->on('historic_estudantes')->onUpdate('cascade');
         });
     }
 

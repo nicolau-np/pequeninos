@@ -283,7 +283,7 @@ class EstudanteController extends Controller
             ]);
         }
 
-        $path = null;
+        $path = $estudante->pessoa->foto;
         if ($request->hasFile('foto') && $request->foto->isValid()) {
             $request->validate([
                 'foto' => ['required', 'mimes:jpg,png,jpeg,JPG,PNG,JPEG', 'max:5000']
@@ -408,6 +408,23 @@ class EstudanteController extends Controller
             return back()->with(['error' => "Não encontrou ano lectivo"]);
         }
 
+        $turma = Turma::find($request->turma);
+        if (!$turma) {
+            return back()->with(['error' => "Nao encontrou turma"]);
+        }
+        
+        $nome_pasta = $turma->turma . "-" . $request->ano_lectivo;
+        $path = $estudante->pessoa->foto;
+        if ($request->hasFile('foto') && $request->foto->isValid()) {
+            $request->validate([
+                'foto' => ['required', 'mimes:jpg,png,jpeg,JPG,PNG,JPEG', 'max:5000']
+            ]);
+            if ($estudante->pessoa->foto != "" && file_exists($estudante->pessoa->foto)) {
+                unlink($estudante->pessoa->foto);
+            }
+            $path = $request->foto->store('fotos_estudantes/' . $nome_pasta);
+        }
+
         $data['pessoa'] = [
             'id_municipio' => $request->municipio,
             'nome' => $request->nome,
@@ -422,7 +439,7 @@ class EstudanteController extends Controller
             'pai' => $request->pai,
             'mae' => $request->mae,
             'comuna' => $request->comuna,
-            'foto' => null,
+            'foto' => $path,
             'bairro'=>$request->bairro,
             'rua'=> $request->rua,
             'residencia'=> $request->residencia,

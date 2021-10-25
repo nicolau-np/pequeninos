@@ -14,6 +14,7 @@ class Estudante extends Model
         'id_encarregado',
         'numero',
         'numero_acesso',
+        'categoria',
         'estado',
         'ano_lectivo',
     ];

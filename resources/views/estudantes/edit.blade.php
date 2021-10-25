@@ -116,7 +116,7 @@
 
                                 <div class="col-md-3">
                                     {{ Form::label('residencia', 'Residencia') }}
-                                    {{ Form::text('residencia', $getRegras->pessoa->residencia, ['class'=>"form-control" => 'form-control', 'placeholder' => 'Residencia']) }}
+                                    {{ Form::text('residencia', $getEstudante->pessoa->residencia, ['class'=>"form-control",'form-control', 'placeholder' => 'Residencia']) }}
                                     <div class="erro">
                                         @if ($errors->has('residencia'))
                                             <div class="text-danger">{{ $errors->first('residencia') }}</div>
@@ -126,7 +126,7 @@
 
                                 <div class="col-md-3">
                                     {{ Form::label('rua', 'Rua') }}
-                                    {{ Form::text('rua', $getEstudante->pessoa->rua, ['class'=>"form-control" => 'form-control', 'placeholder' => 'Rua']) }}
+                                    {{ Form::text('rua', $getEstudante->pessoa->rua, ['class'=>"form-control", 'form-control', 'placeholder' => 'Rua']) }}
                                     <div class="erro">
                                         @if ($errors->has('rua'))
                                             <div class="text-danger">{{ $errors->first('rua') }}</div>
@@ -136,7 +136,7 @@
 
                                 <div class="col-md-3">
                                     {{ Form::label('bairro', 'Bairro') }}
-                                    {{ Form::text('bairro', $getEstudante->pessoa->bairro, ['class'=>"form-control" => 'form-control', 'placeholder' => 'Bairro']) }}
+                                    {{ Form::text('bairro', $getEstudante->pessoa->bairro, ['class'=>"form-control",'form-control', 'placeholder' => 'Bairro']) }}
                                     <div class="erro">
                                         @if ($errors->has('bairro'))
                                             <div class="text-danger">{{ $errors->first('bairro') }}</div>

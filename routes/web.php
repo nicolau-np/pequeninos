@@ -303,12 +303,13 @@ Route::group(['prefix' => "horarios", 'middleware' => "AdminUser"], function () 
     Route::post('/import/store', "HorarioController@import_store");
 });
 
-Route::group(['prefix' => 'estatisticas', 'middleware' => "auth"], function () {
-    Route::group(['prefix' => 'pagamentos', 'middleware' => "AdminUser"], function () {
+Route::group(['prefix' => 'estatisticas', 'middleware' => "MasterAdminUser"], function () {
+
+    Route::group(['prefix' => 'pagamentos',], function () {
         Route::get('/', "EstatisticaController@lista_pagamento");
     });
 
-    Route::group(['prefix' => 'balancos', 'middleware' => "admin"], function () {
+    Route::group(['prefix' => 'balancos',], function () {
         Route::get('/list/{ano}', "EstatisticaController@balanco");
     });
 

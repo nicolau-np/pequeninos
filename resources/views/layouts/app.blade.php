@@ -376,7 +376,7 @@ $lastYear = ControladorStatic::getLastYear();
                                 </li>
                                 @endif
 
-                                @if(Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="user")
+                                @if(Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="user" || Auth::user()->nivel_acesso=="master")
                                 <li class="pcoded-hasmenu @if($type=="financas") active pcoded-trigger @endif">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="ti-money"></i></span>
@@ -412,7 +412,7 @@ $lastYear = ControladorStatic::getLastYear();
                                 </li>
                                 @endif
 
-
+                                @if(Auth::user()->nivel_acesso=="master" || Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="user")
                                 <li class="pcoded-hasmenu @if($type=="estatisticas") active pcoded-trigger @endif">
                                     <a href="javascript:void(0)">
                                         <span class="pcoded-micon"><i class="ti-bar-chart"></i></span>
@@ -420,7 +420,7 @@ $lastYear = ControladorStatic::getLastYear();
                                         <span class="pcoded-mcaret"></span>
                                     </a>
                                     <ul class="pcoded-submenu">
-                                        @if(Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="user")
+
                                         <li class="@if($menu=="Listas de Pagamentos") active @endif">
                                             <a href="/estatisticas/pagamentos/">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
@@ -428,9 +428,9 @@ $lastYear = ControladorStatic::getLastYear();
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
-                                        @endif
 
-                                        @if(Auth::user()->nivel_acesso=="admin")
+
+
                                         <li class="@if($menu=="Balanços") active @endif">
                                             <a href="/estatisticas/balancos/list/{{$lastYear}}">
                                                 <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
@@ -438,12 +438,16 @@ $lastYear = ControladorStatic::getLastYear();
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
-                                        @endif
+
 
 
                                     </ul>
                                 </li>
-                                @if(Auth::user()->nivel_acesso=="admin")
+
+                                @endif
+
+
+                                @if(Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="master")
                                 <li class="@if($menu=="Bloqueios de Epocas") active @endif">
                                     <a href="/bloqueios">
                                         <span class="pcoded-micon"><i class="ti-key"></i><b>B</b></span>

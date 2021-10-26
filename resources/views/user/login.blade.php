@@ -174,8 +174,8 @@
     <script type="text/javascript" src="{{asset('assets/template/js/modernizr/modernizr.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/template/js/modernizr/css-scrollbars.js')}}"></script>
     <script type="text/javascript" src="{{asset('assets/template/js/common-pages.js')}}"></script>
-    <SCRIPT LANGUAGE="JavaScript">
-        <!-- Disable
+    <!--<SCRIPT LANGUAGE="JavaScript">
+        Disable
         function disableselect(e){
         return false
         }
@@ -192,8 +192,8 @@
         document.onmousedown=disableselect
         document.onclick=reEnable
         }
-        //-->
-        </script>
+
+        </script>-->
 </body>
 
 

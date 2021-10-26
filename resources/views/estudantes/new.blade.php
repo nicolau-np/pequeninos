@@ -159,6 +159,36 @@
                                         </div>
                                     </div>
 
+                                    <div class="col-md-5">
+                                        {{ Form::label('deficiencia', 'Tem necessidades de atenção especial?') }}
+                                        {{ Form::select(
+    'deficiencia',
+    [
+        'nao'=> 'nao',
+        'sim'=> 'sim',
+    ],
+    null,
+    ['class' => 'form-control', 'placeholder' => 'Tem necessidades de atenção especial?'],
+) }}
+
+                                        <div class="erro">
+                                            @if ($errors->has('deficiencia'))
+                                                <div class="text-danger">{{ $errors->first('deficiencia') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-3">
+                                        {{ Form::label('tipo_deficiencia', 'Porque?') }}
+                                        {{ Form::text('tipo_deficiencia', null, ['class' => 'form-control', 'placeholder' => 'Porque?']) }}
+                                        <div class="erro">
+                                            @if ($errors->has('tipo_deficiencia'))
+                                                <div class="text-danger">{{ $errors->first('tipo_deficiencia') }}</div>
+                                            @endif
+                                        </div>
+                                    </div>
+
+
                                     <div class="col-md-3">
                                         {{ Form::label('estado_civil', 'Estado Civíl') }}
                                         {{ Form::select(

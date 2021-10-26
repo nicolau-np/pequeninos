@@ -51,6 +51,13 @@
                                                 <span class="title">Data de Nascimento:</span> {{$getHistoricoEstudante->estudante->pessoa->data_nascimento}}<br/>
                                                 <span class="title">Estado Civíl:</span> {{$getHistoricoEstudante->estudante->pessoa->estado_civil}}<br/>
                                                 <span class="title">Naturalidade:</span> {{$getHistoricoEstudante->estudante->pessoa->naturalidade}}<br/>
+
+                                                <span class="title">Residencia:</span> {{$getHistoricoEstudante->estudante->pessoa->residencia}}<br/>
+                                                <span class="title">Rua:</span> {{$getHistoricoEstudante->estudante->pessoa->rua}}<br/>
+                                                <span class="title">Bairro:</span> {{$getHistoricoEstudante->estudante->pessoa->bairro}}<br/>
+
+                                                <span class="title">Necessidade Especial:</span> {{$getHistoricoEstudante->estudante->pessoa->deficiencia}} &nbsp;&nbsp;&nbsp; {{$getHistoricoEstudante->estudante->pessoa->tipo_deficiencia}}<br/>
+
                                                 <span class="title">Telefone:</span> {{$getHistoricoEstudante->estudante->pessoa->telefone}}<br/>
                                                 <span class="title">Nº do Bilhete:</span> {{$getHistoricoEstudante->estudante->pessoa->bilhete}}<br/>
                                                 <span class="title">Data de Emissão:</span> {{$getHistoricoEstudante->estudante->pessoa->data_emissao}}<br/>

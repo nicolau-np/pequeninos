@@ -68,6 +68,7 @@
                         <th>NOME COMPLETO</th>
                         <th>GÊNERO</th>
                         <th>IDADE</th>
+                        <th>CATEGORIA</th>
                         <th>OBS.</th>
                     </tr>
 
@@ -91,6 +92,7 @@
                         @endif
 
                     </td>
+                <td>{{$historico->categoria }}</td>
                     <td>
                         @if ($historico->observacao_final == "transferido")
                             Transferência

@@ -277,6 +277,8 @@ class EstudanteController extends Controller
             'classe' => ['required', 'Integer'],
             'turma' => ['required', 'Integer'],
             'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
+            'docs_entregues' => ['required'],
+            'docs_entregues.*' => ['string']
         ]);
 
         $ano_lectivo = AnoLectivo::where('ano_lectivo', $request->ano_lectivo)->first();
@@ -307,6 +309,7 @@ class EstudanteController extends Controller
             $path = $request->foto->store('fotos_estudantes/' . $nome_pasta);
         }
 
+        $historico = HistoricEstudante::where(['id_estudante' => $estudante->id, 'ano_lectivo'=> $estudante->ano_lectivo])->first();
 
         $data['pessoa'] = [
             'id_municipio' => $request->municipio,
@@ -345,6 +348,12 @@ class EstudanteController extends Controller
             'categoria' => $request->categoria,
         ];
 
+        $data['docs_entregues'] = [
+            'id_historico'=>$historico->id,
+            'documento'=>null,
+            'estado'=> "on",
+        ];
+
         if ($request->nome != $data['pessoa']['nome'] || $request->data_nascimento != $data['pessoa']['data_nascimento']) {
             if (Pessoa::where([
                 'nome' => $data['pessoa']['nome'],
@@ -359,6 +368,11 @@ class EstudanteController extends Controller
 
             if (Estudante::find($estudante->id)->update($data['estudante'])) {
                 if (HistoricEstudante::find($estudante->id)->update($data['historico'])) {
+                    DocumentoEntregue::where(['id_historico'=>$historico->id])->delete();
+                    foreach($request->docs_entregues as $docs){
+                        $data['docs_entregues']['documento'] = $docs;
+                        DocumentoEntregue::create($data['docs_entregues']);
+                    }
                     return back()->with(['success' => "Feito com sucesso"]);
                 }
             }

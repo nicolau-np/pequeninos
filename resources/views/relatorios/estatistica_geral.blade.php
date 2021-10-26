@@ -9,7 +9,7 @@
     <style>
         @page {
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 12px;
+            font-size: 10px;
             margin: 10px;
         }
 
@@ -31,7 +31,7 @@
         }
 
         .tabela {
-            font-size: 12px;
+            font-size: 10px;
         }
 
         .transferido {
@@ -72,13 +72,40 @@
                     <tr>
                         <th>TURMAS</th>
                         @foreach ($getCategorias as $categorias)
-                            <th>{{ strtoupper($categorias->categoria) }}</th>
+                            <th colspan="3">{{ strtoupper($categorias->categoria) }}</th>
                         @endforeach
                     </tr>
 
                 </thead>
                 <tbody>
+                    <tr>
+                        <td></td>
+                        @foreach ($getCategorias as $categorias)
+                            <td>M</td>
+                            <td>F</td>
+                            <td>TOTAL</td>
+                        @endforeach
 
+                    </tr>
+
+                    @foreach ($getTurmas as $turmas)
+                        <tr>
+                            <td>{{ $turmas->turma }}</td>
+                            @foreach ($getCategorias as $categorias)
+                                <td>---</td>
+                                <td>---</td>
+                                <td>---</td>
+                            @endforeach
+                        </tr>
+                    @endforeach
+                    <tr>
+                        <td>TOTAL</td>
+                        @foreach ($getCategorias as $categorias)
+                            <td>---</td>
+                            <td>---</td>
+                            <td>---</td>
+                        @endforeach
+                    </tr>
                 </tbody>
             </table>
         </div>

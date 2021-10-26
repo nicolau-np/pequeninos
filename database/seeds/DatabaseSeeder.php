@@ -13,7 +13,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
        $this->call([
-           PaisSeeder::class,
+           /*PaisSeeder::class,
            ProvinciaSeeder::class,
            MunicipioSeeder::class,
            PessoaSeeder::class,
@@ -34,7 +34,8 @@ class DatabaseSeeder extends Seeder
            FormaPagamentoSeeder::class,
            EpocaPagamentoSeeder::class,
            BloqueioEpocaSeeder::class,
-           CategoriaEstudanteSeeder::class,
+           CategoriaEstudanteSeeder::class,*/
+           ConfigBloqueioSeeder::class,
        ]);
     }
 }

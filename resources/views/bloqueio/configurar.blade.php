@@ -45,30 +45,12 @@
                             <thead>
                                 <tr>
                                     <th>#</th>
-                                    <th>Epoca</th>
+                                    <th>Tipo</th>
                                     <th>Estado</th>
                                     <th>Operações</th>
                                 </tr>
                             </thead>
-                            <tbody class="load_estudantes">
-                                @if($getBloqueios->count()==0)
-                                <span class="not_found">Nenhum tipo de bloqueio cadastrado</span>
-                                @else
-                                @foreach ($getBloqueios as $bloqueios)
-
-                                <tr>
-                                <th scope="row">{{$loop->iteration}}</th>
-                                    <td>{{$bloqueios->epoca}}ª Epoca</td>
-                                    <td>{{$bloqueios->estado}}</td>
-                                    <td>
-
-                                    <a href="/bloqueios/config/{{$bloqueios->id}}" class="btn btn-primary btn-sm"><i class="ti-check"></i> Configurar</a>
-                                    <a href="/bloqueios/update/{{$bloqueios->id}}" class="btn btn-primary btn-sm"><i class="ti-check"></i> Mudar estado</a>
-                                    </td>
-                                </tr>
-
-                                @endforeach
-                                @endif
+                            <tbody>
 
                             </tbody>
                         </table>

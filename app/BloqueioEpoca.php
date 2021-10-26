@@ -12,4 +12,8 @@ class BloqueioEpoca extends Model
         'epoca',
         'estado',
     ];
+
+    public function config_bloqueio(){
+        return $this->hasMany(ConfigBloqueio::class, 'id_bloqueio', 'id');
+    }
 }

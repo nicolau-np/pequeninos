@@ -87,6 +87,23 @@ $lastYear = ControladorStatic::getLastYear();
                                             </a>
                                             </div>
 
+                                            <div class="col-md-4 col-xl-4">
+                                                <a href="#" class="estatistica_geral" style="text-decoration: none;">
+                                                    <div class="card widget-card-1">
+                                                    <div class="card-block-small">
+                                                        <i class="ti-map bg-c-blue card1-icon"></i>
+                                                    <span class="text-c-pink f-w-600" style="font-size:13px;">Estatística Geral</span>
+                                                        <h4 style="font-size:17px;"> </h4>
+                                                        <div>
+                                                            <span class="f-left m-t-10 text-muted">
+                                                                <i class="text-c-pink f-16 ti-arrow-circle-right m-r-10"></i>Mapa
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+                                                    </a>
+                                                    </div>
+
                         </div>
 
                     </div>
@@ -109,5 +126,54 @@ $lastYear = ControladorStatic::getLastYear();
 	</div>
 </div>
 
+
+<!-- modal -->
+<div class="modal fade" id="epocamodal">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-body">
+          {{Form::open(['class'=>'form', 'url'=>"/relatorios/estatistica_geral"])}}
+          @csrf
+          <div class="row">
+            <div class="col-md-12">
+                {{ Form::label('ano_lectivo', 'Ano Lectivo') }} <span class="text-danger">*</span>
+                {{ Form::select('ano_lectivo', $getAnoLectivo, null, ['class' => 'form-control', 'placeholder' => 'Ano Lectivo']) }}
+
+                <div class="erro">
+                    @if ($errors->has('ano_lectivo'))
+                        <div class="text-danger">{{ $errors->first('ano_lectivo') }}</div>
+                    @endif
+                </div>
+            </div>
+            </div>
+           <hr/>
+            <div class="row">
+                <div class="col-md-12" style="text-align: center;">
+                {{Form::submit('SEGUIR',['class'=>"btn btn-primary"])}}
+                </div>
+            </div>
+
+
+          {{Form::close()}}
+
+        </div>
+
+      </div>
+      <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+  </div>
+<!-- fim modal -->
+
+<script>
+    $(document).ready(function(){
+        $('.estatistica_geral').click(function(e) {
+            e.preventDefault();
+
+            $('#epocamodal').modal('show');
+        });
+    });
+</script>
 
 @endsection

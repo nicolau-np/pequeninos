@@ -10,11 +10,13 @@ class MapaController extends Controller
 {
     public function index()
     {
+        $ano_lectivos = AnoLectivo::pluck('ano_lectivo', 'id');
         $data = [
             'title' => "Mapas",
             'type' => "mapas",
             'menu' => "Mapas",
             'submenu' => "Listar",
+            'getAnoLectivo'=>$ano_lectivos
 
         ];
         return view('mapas.list', $data);

@@ -316,7 +316,20 @@ $getEstudante->pessoa->deficiencia,
                                     @endif
                                 </div>
                                 </div>
-
+                                <div class="col-md-6">
+                                    {{Form::label('docs_entregues', 'Docs Entregues')}} <span class="text-danger">*</span><br/>
+                                    <input type="checkbox" name="docs_entregues[]" value="Cédula ou B.I" /> Cédula ou B.I
+                                    &nbsp;&nbsp;
+                                    <input type="checkbox" name="docs_entregues[]" value="Atestado Médico" /> Atestado Médico
+                                    &nbsp;&nbsp;
+                                    <input type="checkbox" name="docs_entregues[]" value="4 Fotografias" /> 4 Fotografias
+                                    <div class="erro">
+                                        @if ($errors->has('docs_entregues'))
+                                            <div class="text-danger">{{ $errors->first('docs_entregues') }}</div>
+                                        @endif
+                                    </div>
+                                    <br/>
+                                </div>
                                 <div class="col-md-3">
                                     {{Form::label('ano_lectivo', "Ano Lectivo")}} <span class="text-danger">*</span>
                                     {{Form::select('ano_lectivo', $getAnoLectivo, $getAno->ano_lectivo, ['class'=>"form-control", 'placeholder'=>"Ano Lectivo"])}}

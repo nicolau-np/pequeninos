@@ -407,6 +407,8 @@ class EstudanteController extends Controller
             'classe' => ['required', 'Integer'],
             'turma' => ['required', 'Integer'],
             'ano_lectivo' => ['required', 'string', 'min:4', 'max:255'],
+            'docs_entregues' => ['required'],
+            'docs_entregues.*' => ['string']
         ]);
 
         if ($request->bilhete != "" || $request->bilhete != $estudante->bilhete) {
@@ -476,13 +478,25 @@ class EstudanteController extends Controller
             'categoria' => $request->categoria,
         ];
 
+        $data['docs_entregues'] = [
+            'id_historico'=>null,
+            'documento'=>null,
+            'estado'=> "on",
+        ];
+
         if (HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $data['estudante']['ano_lectivo']])->first()) {
             return back()->with(['error' => "Já confirmou para este ano"]);
         }
 
         if (Pessoa::find($estudante->pessoa->id)->update($data['pessoa'])) {
             if (Estudante::find($estudante->id)->update($data['estudante'])) {
-                if (HistoricEstudante::create($data['historico'])) {
+                $historico = HistoricEstudante::create($data['historico']);
+                if ($historico) {
+                    foreach($request->docs_entregues as $docs){
+                        $data['docs_entregues']['documento'] = $docs;
+                        $data['docs_entregues']['id_historico'] = $historico->id;
+                        DocumentoEntregue::create($data['docs_entregues']);
+                    }
                     return back()->with(['success' => "Feito com sucesso"]);
                 }
             }

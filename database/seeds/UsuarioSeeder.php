@@ -13,7 +13,7 @@ class UsuarioSeeder extends Seeder
             [
                 'id_pessoa' => 1,
                 'username' => "sige.master",//master director geral
-                'password' => Hash::make("olamundo2015"),
+                'password' => Hash::make("escola001"),
                 'estado' => "on",
                 'nivel_acesso' => "master",
                 'isVerified'=>1,
@@ -21,16 +21,16 @@ class UsuarioSeeder extends Seeder
             [
                 'id_pessoa' => 2,
                 'username' => "sige.admin",//admin pedagogico
-                'password' => Hash::make("olamundo2015"),
+                'password' => Hash::make("escola001"),
                 'estado' => "on",
                 'nivel_acesso' => "admin",
                 'isVerified'=>1,
             ],[
                 'id_pessoa' => 3,
                 'username' => "sige.user",//user financas
-                'password' => Hash::make("olamundo2015"),
+                'password' => Hash::make("escola001"),
                 'estado' => "on",
-                'nivel_acesso' => "admin",
+                'nivel_acesso' => "user",
                 'isVerified'=>1,
             ],
 

@@ -12,7 +12,7 @@ class UsuarioSeeder extends Seeder
         DB::table('usuarios')->insert([
             [
                 'id_pessoa' => 1,
-                'username' => "sige.master",
+                'username' => "sige.master",//master director geral
                 'password' => Hash::make("olamundo2015"),
                 'estado' => "on",
                 'nivel_acesso' => "master",
@@ -20,14 +20,14 @@ class UsuarioSeeder extends Seeder
             ],
             [
                 'id_pessoa' => 2,
-                'username' => "sige.admin",
+                'username' => "sige.admin",//admin pedagogico
                 'password' => Hash::make("olamundo2015"),
                 'estado' => "on",
                 'nivel_acesso' => "admin",
                 'isVerified'=>1,
             ],[
                 'id_pessoa' => 3,
-                'username' => "sige.user",
+                'username' => "sige.user",//user financas
                 'password' => Hash::make("olamundo2015"),
                 'estado' => "on",
                 'nivel_acesso' => "admin",

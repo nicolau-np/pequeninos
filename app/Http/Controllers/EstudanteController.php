@@ -234,6 +234,8 @@ class EstudanteController extends Controller
         $provincias = Provincia::pluck('provincia', 'id');
         $cursos = Curso::pluck('curso', 'id');
         $ano_lectivos = AnoLectivo::pluck('ano_lectivo', 'ano_lectivo');
+        $historico = HistoricEstudante::where(['id_estudante' => $estudante->id, 'ano_lectivo'=> $estudante->ano_lectivo])->first();
+        $docs_entregues = DocumentoEntregue::where(['id_historico'=> $historico->id])->get();
         $data = [
             'title' => "Estudantes",
             'type' => "estudantes",
@@ -245,6 +247,7 @@ class EstudanteController extends Controller
             'getEstudante' => $estudante,
             'getAno' => $ano_lectivo,
             'getCategorias' => $categorias,
+            'getDocsEntregues'=>$docs_entregues,
         ];
         return view('estudantes.edit', $data);
     }

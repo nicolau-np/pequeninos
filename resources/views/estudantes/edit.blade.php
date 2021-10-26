@@ -359,24 +359,46 @@
                                     <div class="col-md-6">
                                         {{ Form::label('docs_entregues', 'Docs Entregues') }} <span
                                             class="text-danger">*</span><br />
-                                        @foreach ($getDocsEntregues as $docs)
-                                            @if ($docs->documento == "Cédula ou B.I")
-                                            <input type="checkbox" name="docs_entregues[]" value="Cédula ou B.I" checked /> Cédula
-                                            ou B.I
-                                            &nbsp;&nbsp;
-                                            @endif
+                                        @php
+                                            $bi = false;
+                                            $atestado = false;
+                                            $foto = false;
+                                            $isExist = false;
 
-                                            @if ($docs->documento == "Atestado Médico")
-                                            <input type="checkbox" name="docs_entregues[]" value="Atestado Médico" checked />
-                                            Atestado Médico
-                                            &nbsp;&nbsp;
-                                            @endif
+                                            if ($getDocsEntregues->count() == 0) {
+                                                $isExist = false;
+                                            } else {
+                                                $isExist = true;
+                                                foreach ($getDocsEntregues as $docs) {
+                                                    if ($docs->documento == 'Cédula ou B.I') {
+                                                        $bi = true;
+                                                    } elseif ($docs->documento == 'Atestado Médico') {
+                                                        $atestado = true;
+                                                    } elseif ($docs->documento == '4 Fotografias') {
+                                                        $foto = true;
+                                                    }
+                                                }
+                                            }
 
-                                            @if ($docs->documento == "4 Fotografias")
-                                            <input type="checkbox" name="docs_entregues[]" value="4 Fotografias" /> 4
-                                            Fotografias
-                                            @endif
-                                        @endforeach
+                                        @endphp
+
+
+                                        <input type="checkbox" name="docs_entregues[]" value="Cédula ou B.I" @if ($bi) checked @endif />
+                                        Cédula
+                                        ou B.I
+                                        &nbsp;&nbsp;
+
+
+
+                                        <input type="checkbox" name="docs_entregues[]" value="Atestado Médico" @if($atestado) checked @endif />
+                                        Atestado Médico
+                                        &nbsp;&nbsp;
+
+
+
+                                        <input type="checkbox" name="docs_entregues[]" value="4 Fotografias" @if($foto) checked @endif /> 4
+                                        Fotografias
+
 
                                         <div class="erro">
                                             @if ($errors->has('docs_entregues'))
@@ -387,7 +409,8 @@
                                     </div>
 
                                     <div class="col-md-3">
-                                        {{ Form::label('ano_lectivo', 'Ano Lectivo') }} <span class="text-danger">*</span>
+                                        {{ Form::label('ano_lectivo', 'Ano Lectivo') }} <span
+                                            class="text-danger">*</span>
                                         {{ Form::select('ano_lectivo', $getAnoLectivo, $getAno->ano_lectivo, ['class' => 'form-control', 'placeholder' => 'Ano Lectivo']) }}
 
                                         <div class="erro">

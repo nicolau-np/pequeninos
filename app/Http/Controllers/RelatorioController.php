@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AnoLectivo;
 use App\CadeiraExame;
 use App\CadeiraRecurso;
+use App\CategoriaEstudante;
 use App\Classe;
 use App\Curso;
 use App\Declaracao;
@@ -648,10 +649,19 @@ class RelatorioController extends Controller
         $request->validate([
             'ano_lectivo' => ['required', 'string',]
         ]);
+        $ano_lectivo = AnoLectivo::find($request->ano_lectivo);
+        if (!$ano_lectivo) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+        $categorias = CategoriaEstudante::get();
+        $turmas = Turma::where('turma', '!=', 'Nenhuma')->orderBy('id_classe', 'asc')->get();
         $data = [
-
+            'getTurmas'=>$turmas,
+            'getCategorias' => $categorias,
+            'getAno' => $ano_lectivo->ano_lectivo,
         ];
         $pdf = PDF::loadView('relatorios.estatistica_geral', $data)->setPaper('A4', 'normal');
-        return $pdf->stream('ESTATÍSTICA GERAL - [' . $request->ano_lectivo .  ' ].pdf');
+        return $pdf->stream('ESTATÍSTICA GERAL - [' . $ano_lectivo->ano_lectivo .  ' ].pdf');
+
     }
 }

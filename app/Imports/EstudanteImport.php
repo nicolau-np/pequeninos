@@ -44,7 +44,9 @@ ShouldQueue
             'numero_acesso'=> null,
             'id_encarregado' => 1,
             'estado' => "on",
+            'categoria'=>null,
             'ano_lectivo' => Session::get('ano_lectivoIMP'),
+
         ];
 
         $data['historico'] = [
@@ -53,6 +55,7 @@ ShouldQueue
             'numero'=>null,
             'numero_acesso'=> null,
             'estado' => "on",
+            'categoria'=>null,
             'observacao_final' => null,
             'ano_lectivo' => Session::get('ano_lectivoIMP'),
         ];
@@ -81,10 +84,12 @@ ShouldQueue
                 $data['historico']['numero_acesso'] = $gerando_aleatorio."-".$estudante->id;
                 $numero_acesso = $gerando_aleatorio."-".$estudante->id;
                 $data['historico']['numero'] = $row['n'];
+                $data['historico']['categoria'] = $row['categoria'];
+                $data['estudante']['categoria'] = $row['categoria'];
                 $historico = HistoricEstudante::create($data['historico']);
 
                 if($historico){
-                    Estudante::find($estudante->id)->update(['numero_acesso'=>$numero_acesso]);
+                    $estudante = Estudante::find($estudante->id)->update(['numero_acesso'=>$numero_acesso]);
                 }
 
             }

@@ -26,11 +26,6 @@ use function PHPSTORM_META\map;
 class EstudanteController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('AdminUser');
-    }
-
     public function index()
     {
         $estudantes = Estudante::paginate(5);
@@ -150,6 +145,8 @@ class EstudanteController extends Controller
             'bairro' => $request->bairro,
             'rua' => $request->rua,
             'residencia' => $request->residencia,
+            'deficiencia'=> $request->deficiencia,
+            'tipo_deficiencia'=> $request->tipo_deficiencia,
         ];
 
         $data['estudante'] = [
@@ -161,7 +158,6 @@ class EstudanteController extends Controller
             'estado' => "on",
             'ano_lectivo' => $request->ano_lectivo,
             'categoria' => $request->categoria,
-
         ];
 
         $data['historico'] = [

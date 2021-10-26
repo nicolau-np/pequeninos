@@ -33,6 +33,8 @@ class CreatePessoasTable extends Migration
             $table->string('residencia')->nullable();
             $table->string('rua')->nullable();
             $table->string('bairro')->nullable();
+            $table->string('deficiencia')->nullable();
+            $table->string('tipo_deficiencia')->nullable();
             $table->text('foto')->nullable();
             $table->timestamps();
         });

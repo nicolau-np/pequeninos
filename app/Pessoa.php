@@ -26,22 +26,28 @@ class Pessoa extends Model
         'residencia',
         'rua',
         'bairro',
+        'deficiencia',
+        'tipo_deficiencia',
         'foto',
     ];
 
-    public function municipio(){
+    public function municipio()
+    {
         return $this->belongsTo(Municipio::class, 'id_municipio', 'id');
     }
 
-    public function usuario(){
+    public function usuario()
+    {
         return $this->hasMany(User::class, 'id_pessoa', 'id');
     }
 
-    public function estudante(){
+    public function estudante()
+    {
         return $this->hasMany(Estudante::class, 'id_pessoa', 'id');
     }
 
-    public function funcionario(){
+    public function funcionario()
+    {
         return $this->hasMany(Funcionario::class, 'id_pessoa', 'id');
     }
 }

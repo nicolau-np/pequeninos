@@ -455,6 +455,8 @@ class EstudanteController extends Controller
             'bairro' => $request->bairro,
             'rua' => $request->rua,
             'residencia' => $request->residencia,
+            'deficiencia'=> $request->deficiencia,
+            'tipo_deficiencia'=> $request->tipo_deficiencia,
         ];
 
         $data['estudante'] = [

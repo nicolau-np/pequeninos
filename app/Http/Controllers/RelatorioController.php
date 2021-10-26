@@ -621,7 +621,8 @@ class RelatorioController extends Controller
         return $pdf->stream('FICHA DE ESTATÍSTICA - ' . $request->epoca . 'º TRIMESTRE - ' . $request->ano_lectivo .  '[ ' . strtoupper($ensino->ensino) . ' ].pdf');
     }
 
-    public function extrato_pagamentos($id_estudante, $ano_lectivo){
+    public function extrato_pagamentos($id_estudante, $ano_lectivo)
+    {
         $estudante = Estudante::find($id_estudante);
         if (!$estudante) {
             return back()->with(['error' => "Não encontrou"]);
@@ -632,13 +633,25 @@ class RelatorioController extends Controller
             return back()->with(['error' => "Estudante nao matriculado neste ano lectivo"]);
         }
 
-        $pagamentos = Pagamento::where(['id_estudante' => $id_estudante,'ano_lectivo'=>$ano_lectivo])->get();
+        $pagamentos = Pagamento::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])->get();
         $data = [
-            'getHistorico' =>$historico,
-            'getPagamentos'=>$pagamentos,
+            'getHistorico' => $historico,
+            'getPagamentos' => $pagamentos,
         ];
 
         $pdf = PDF::loadView('relatorios.extrato_pagamentos', $data)->setPaper('A4', 'normal');
-        return $pdf->stream('EXTRATO PAGAMENTOS - [' . strtoupper($historico->estudante->pessoa->nome) .'-'. $historico->ano_lectivo .  ' ].pdf');
+        return $pdf->stream('EXTRATO PAGAMENTOS - [' . strtoupper($historico->estudante->pessoa->nome) . '-' . $historico->ano_lectivo .  ' ].pdf');
+    }
+
+    public function estatistica_geral(Request $request)
+    {
+        $request->validate([
+            'ano_lectivo' => ['required', 'string',]
+        ]);
+        $data = [
+
+        ];
+        $pdf = PDF::loadView('relatorios.estatistica_geral', $data)->setPaper('A4', 'normal');
+        return $pdf->stream('ESTATÍSTICA GERAL - [' . $request->ano_lectivo .  ' ].pdf');
     }
 }

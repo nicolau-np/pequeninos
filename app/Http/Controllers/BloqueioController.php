@@ -8,10 +8,7 @@ use Illuminate\Http\Request;
 class BloqueioController extends Controller
 {
 
-    public function __construct()
-    {
-        $this->middleware('AdminUser');
-    }
+
 
     public function index(){
         $bloqueios = BloqueioEpoca::all();
@@ -43,5 +40,22 @@ class BloqueioController extends Controller
         if(BloqueioEpoca::find($id)->update($data)){
             return back()->with(['success' => "Epoca ".$bloqueio->epoca." mudado para o estado ".$estado]);
         }
+    }
+
+    public function config($id){
+        $bloqueio = BloqueioEpoca::find($id);
+        if(!$bloqueio){
+            return back()->with(['error' => "Não encontrou"]);
+        }
+
+        $data = [
+            'title' => "Bloqueios de Epocas",
+            'type' => "bloqueios",
+            'menu' => "Bloqueios de Epocas",
+            'submenu' => "Configurar",
+            'getBloqueio'=>$bloqueio,
+        ];
+
+        return view('bloqueio.configurar', $data);
     }
 }

@@ -195,6 +195,7 @@ Route::group(['prefix' => 'institucional', 'middleware' => "AdminUser"], functio
 Route::group(['prefix' => 'bloqueios', 'middleware' => "AdminUser"], function () {
     Route::get('/', "BloqueioController@index");
     Route::get('/update/{id}', "BloqueioController@update");
+    Route::get('/config/{id}', "BloqueioController@config");
 });
 
 Route::group(['prefix' => 'financas', 'middleware' => "AdminUser"], function () {

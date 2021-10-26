@@ -62,6 +62,7 @@
                                     <td>{{$bloqueios->estado}}</td>
                                     <td>
 
+                                    <a href="/bloqueios/config/{{$bloqueios->id}}" class="btn btn-primary btn-sm"><i class="ti-check"></i> Configurar</a>
                                     <a href="/bloqueios/update/{{$bloqueios->id}}" class="btn btn-primary btn-sm"><i class="ti-check"></i> Mudar estado</a>
                                     </td>
                                 </tr>

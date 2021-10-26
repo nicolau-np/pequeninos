@@ -31,7 +31,7 @@ class PessoaSeeder extends Seeder
             'id_municipio' => 4,
             'nome' => "Encarregado Exemplo",
             'data_nascimento' => "1990-01-01",
-            'genero' => "Masculino",
+            'genero' => "M",
             'estado_civil' => "solteiro"
         ],
 

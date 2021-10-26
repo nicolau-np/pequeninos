@@ -12,28 +12,29 @@ class UsuarioSeeder extends Seeder
         DB::table('usuarios')->insert([
             [
                 'id_pessoa' => 1,
-                'username' => "nicolau.pungue",
+                'username' => "sige.master",
+                'password' => Hash::make("olamundo2015"),
+                'estado' => "on",
+                'nivel_acesso' => "master",
+                'isVerified'=>1,
+            ],
+            [
+                'id_pessoa' => 2,
+                'username' => "sige.admin",
+                'password' => Hash::make("olamundo2015"),
+                'estado' => "on",
+                'nivel_acesso' => "admin",
+                'isVerified'=>1,
+            ],[
+                'id_pessoa' => 3,
+                'username' => "sige.user",
                 'password' => Hash::make("olamundo2015"),
                 'estado' => "on",
                 'nivel_acesso' => "admin",
                 'isVerified'=>1,
             ],
-            [
-                'id_pessoa' => 2,
-                'username' => "hebraim.zua",
-                'password' => Hash::make("olaola"),
-                'estado' => "on",
-                'nivel_acesso' => "user",
-                'isVerified'=>1,
-            ],
-            [
-                'id_pessoa' => 3,
-                'username' => "fernanda.rosa",
-                'password' => Hash::make("babaca"),
-                'estado' => "on",
-                'nivel_acesso' => "user",
-                'isVerified'=>1,
-            ],
+
+
         ]);
     }
 }

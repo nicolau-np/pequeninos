@@ -182,7 +182,7 @@ class UserController extends Controller
             $data2['id_reset'] = $reset_password->id;
             /*enviar email*/
             Mail::send('email.reset_password', $data2, function ($message) use ($data2) {
-                $message->from('mr1Normaliii@gmail.com', 'Escola-SOS');
+                $message->from('sos@sigeokussoleka.com', 'Escola-SOS');
                 $message->subject('[Escola-SOS] Código de verificação');
                 $message->to($data2['email']);
             });

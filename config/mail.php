@@ -36,11 +36,11 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => 'smtp.gmail.com',
+            'host' => 'mail.sigeokussoleka.com',
             'port' => "465",
             'encryption' => "ssl",
-            'username' => "mr1Normaliii@gmail.com",
-            'password' => "olamundo2015",
+            'username' => "sos@sigeokussoleka.com",
+            'password' => "sos2021@1",
             'timeout' => null,
             'auth_mode' => null,
         ],
@@ -84,7 +84,7 @@ return [
     */
 
     'from' => [
-        'address' => "mr1Normaliii@gmail.com",
+        'address' => "sos@sigeokussoleka.com",
         'name' => "Escola-SOS",
     ],
 

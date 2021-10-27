@@ -8,31 +8,31 @@ class CategoriaEstudanteSeeder extends Seeder
     static $categorias = [
         [
             'categoria' => "ALUNOS BOLSEIROS DA COMUNIDADE CARENTE",
-            'sigla' => "BCC",
+            'sigla' => "ABCC",
             'estado' => "on",
         ], [
             'categoria' => "ALUNOS ISENTOS A 100% FILHOS DOS FUNCIONARIOS",
-            'sigla' => "IFF 100%",
+            'sigla' => "FF 100%",
             'estado' => "on",
         ], [
             'categoria' => "ALUNOS ISENTOS A 100% (QUADRO DE HONRA)",
-            'sigla' => "IQH",
+            'sigla' => "QH 100%",
             'estado' => "on",
         ], [
             'categoria' => "ALUNOS ISENTOS A 50% FILHOS DOS FUNCIONARIOS",
-            'sigla' => "IFF 50%",
+            'sigla' => "FF 50%",
             'estado' => "on",
         ], [
             'categoria' => "CRIANÇAS CONTRIBUNTES DO PROG DE FORT FAMILIAR",
-            'sigla' => "CPFF",
+            'sigla' => "PFF",
             'estado' => "on",
         ], [
             'categoria' => "CRIANÇAS CONTRIBUNTES  DA ALDEIA SOS",
-            'sigla' => "CA SOS",
+            'sigla' => "Aldeia",
             'estado' => "on",
         ], [
             'categoria' => "ALUNOS CONTRIBUNTES DA COMUNIDADE",
-            'sigla' => "CC",
+            'sigla' => "Comunidade",
             'estado' => "on",
         ]
     ];

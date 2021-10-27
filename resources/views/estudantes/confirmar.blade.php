@@ -271,7 +271,7 @@ $getEstudante->pessoa->deficiencia,
                             <div class="row">
                                 <div class="col-md-3">
                                     {{ Form::label('categoria', 'Categoria') }}
-                                    {{ Form::select('categoria', $getCategorias, $getEstudante->sigla, ['class' => 'form-control', 'placeholder' => 'Categoria']) }}
+                                    {{ Form::select('categoria', $getCategorias, $getEstudante->categoria, ['class' => 'form-control', 'placeholder' => 'Categoria']) }}
                                     <div class="erro">
                                         @if ($errors->has('categoria'))
                                             <div class="text-danger">{{ $errors->first('categoria') }}</div>

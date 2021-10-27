@@ -1,23 +1,9 @@
 <?php
 
 use App\AnoLectivo;
-use App\EpocaPagamento;
-use App\Estudante;
-use App\Finals;
-use App\FormaPagamento;
-use App\Grade;
-use App\HistoricEstudante;
-use App\Horario;
-use App\Multado;
-use App\ObservacaoGeral;
-use App\Pagamento;
-use App\TabelaPreco;
-use App\TipoPagamento;
-use App\Trimestral;
-use App\Turma;
-use App\User;
+
 use Illuminate\Support\Facades\Route;
-use PhpOffice\PhpWord\TemplateProcessor;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -196,6 +182,7 @@ Route::group(['prefix' => 'bloqueios', 'middleware' => "AdminUser"], function ()
     Route::get('/', "BloqueioController@index");
     Route::get('/update/{id}', "BloqueioController@update");
     Route::get('/config/{id}', "BloqueioController@config");
+    Route::get('/config/update/{id}', "BloqueioController@updateconfig");
 });
 
 Route::group(['prefix' => 'financas', 'middleware' => "AdminUser"], function () {

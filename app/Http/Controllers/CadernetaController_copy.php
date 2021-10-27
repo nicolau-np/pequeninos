@@ -6,6 +6,7 @@ use App\AnoLectivo;
 use App\BloqueioEpoca;
 use App\CadeiraExame;
 use App\CadeiraRecurso;
+use App\ConfigBloqueio;
 use App\Disciplina;
 use App\EjaNotaFinal;
 use App\EjaNotaMensal;
@@ -184,6 +185,8 @@ class CadernetaController_copy extends Controller
             'estado' => "on",
         ])->first();
 
+        $config_bloqueios = ConfigBloqueio::where(['id_bloqueio'=>$epoca])->get();
+
         $data = [
             'title' => "Caderneta",
             'type' => "mobile",
@@ -203,6 +206,7 @@ class CadernetaController_copy extends Controller
             'getEpoca5' => $estado_epoca5,
             'getCadeiraRecurso' => $cadeira_recurso,
             'getCadeiraExame' => $cadeira_exame,
+            'getConfigBloqueios'=>$config_bloqueios,
         ];
 
         if ($id_ensino == 1) { //iniciacao ate 6

@@ -30,6 +30,7 @@ class GradesImport implements
             'id_curso' => null,
             'id_classe' => null,
             'id_disciplina' => null,
+            'nuclear'=>null,
             'tipo' => null,
         ];
 
@@ -38,6 +39,7 @@ class GradesImport implements
             $data['id_classe'] = $row['id_classe'];
             $data['id_disciplina'] = $row['id_disciplina'];
             $data['tipo'] = $row['tipo'];
+            $data['nuclear']= $row['nuclear'];
 
             if (!Grade::where($data)->first()) {
                 $grade = Grade::create($data);

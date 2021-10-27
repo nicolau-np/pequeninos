@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\BloqueioEpoca;
+use App\ConfigBloqueio;
 use Illuminate\Http\Request;
 
 class BloqueioController extends Controller
@@ -47,13 +48,14 @@ class BloqueioController extends Controller
         if(!$bloqueio){
             return back()->with(['error' => "Não encontrou"]);
         }
-
+        $config_bloqueios = ConfigBloqueio::where(['id_bloqueio'=>$id])->get();
         $data = [
             'title' => "Bloqueios de Epocas",
             'type' => "bloqueios",
             'menu' => "Bloqueios de Epocas",
             'submenu' => "Configurar",
             'getBloqueio'=>$bloqueio,
+            'getConfigBloqueio'=>$config_bloqueios,
         ];
 
         return view('bloqueio.configurar', $data);

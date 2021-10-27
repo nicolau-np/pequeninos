@@ -20,7 +20,8 @@
         "laravelcollective/html": "^6.1",
         "maatwebsite/excel": "~3.1",
         "phpoffice/phpword": "dev-master",
-        "stichoza/google-translate-php": "^4.1"
+        "stichoza/google-translate-php": "^4.1",
+        "livewire/livewire": "^1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

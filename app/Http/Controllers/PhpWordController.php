@@ -125,9 +125,9 @@ class PhpWordController extends Controller
         $id_ensino = $turma->curso->id_ensino;
 
         if ($id_ensino == 1) {
-            if (($classe == "Iniciação") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
+            if (($classe == "Iniciação")) {
                 $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/declaracao_notas/ensino_primario_ini_1_3_5_copy.docx');
-            } elseif (($classe == "2ª classe") || ($classe == "4ª classe")) {
+            } elseif (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
                 $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/declaracao_notas/ensino_primario_2_4_copy.docx');
             } elseif ($classe == "6ª classe") {
                 $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/declaracao_notas/ensino_primario_6_copy.docx');

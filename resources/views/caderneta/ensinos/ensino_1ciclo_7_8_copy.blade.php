@@ -39,8 +39,13 @@ if (session('epoca') <= 3) {
     @extends('layouts.app')
     @section('content')
         <style>
-            .notaP,
-            .notaA {
+           
+
+            .avaliacao{
+                width: 80px;
+            }
+
+            .prova{
                 width: 80px;
             }
 

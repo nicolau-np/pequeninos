@@ -32,6 +32,13 @@ class UsuarioSeeder extends Seeder
                 'estado' => "on",
                 'nivel_acesso' => "user",
                 'isVerified'=>1,
+            ],[
+                'id_pessoa' => 4,
+                'username' => "sige.super",//user love
+                'password' => Hash::make("escola001"),
+                'estado' => "on",
+                'nivel_acesso' => "super",
+                'isVerified'=>1,
             ],
 
 

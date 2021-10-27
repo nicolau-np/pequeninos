@@ -361,6 +361,10 @@ Route::group(['prefix' => 'pautas', 'middleware' => "AdminProfUser"], function (
 
 Route::group(['prefix' => 'usuarios', 'middleware' => "AdminUser"], function () {
     Route::get('/', "UserController@index");
+    Route::get('/create', "UserController@create");
+    Route::post('/store', "UserController@store");
+    Route::get('/edit/{id}', "UserController@edit");
+    Route::put('/update/{id}', "UserController@update");
 });
 
 Route::group(['prefix' => "about"], function () {

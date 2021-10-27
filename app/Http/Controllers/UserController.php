@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Pessoa;
+use App\Provincia;
 use App\ResetPassword;
 use App\User;
 use Illuminate\Http\Request;
@@ -171,11 +172,11 @@ class UserController extends Controller
 
         $data2 = [
             'verify_code' => $verify_code,
-            'email' =>$user->email,
-            'name'=>$user->username,
-            'id_user'=>$user->id,
+            'email' => $user->email,
+            'name' => $user->username,
+            'id_user' => $user->id,
             'hash_code' => $verify_code_hash,
-            'id_reset'=>null,
+            'id_reset' => null,
         ];
         $reset_password = ResetPassword::create($data);
         if ($reset_password) {
@@ -191,17 +192,18 @@ class UserController extends Controller
         }
     }
 
-    public function verifycode($id_reset){
+    public function verifycode($id_reset)
+    {
         $reset_password = ResetPassword::find($id_reset);
-        if(!$reset_password){
+        if (!$reset_password) {
             return back()->with(['error' => "Nao encontrou"]);
         }
         $user = User::find($reset_password->id_user);
-        if(!$user){
+        if (!$user) {
             return back()->with(['error' => "Nao encontrou"]);
         }
 
-        if($reset_password->estado=="off"){
+        if ($reset_password->estado == "off") {
             return back()->with(['error' => "Código sem validade"]);
         }
 
@@ -210,56 +212,229 @@ class UserController extends Controller
             'type' => "login",
             'menu' => "Código de Verificação",
             'submenu' => "",
-            'getReset'=>$reset_password,
-            'getUser'=> $user,
+            'getReset' => $reset_password,
+            'getUser' => $user,
         ];
         return view('user.verifycode', $data);
-
-   }
-
-   public function verifycode_put(Request $request, $id_reset){
-    $reset_password = ResetPassword::find($id_reset);
-    if(!$reset_password){
-        return back()->with(['error' => "Nao encontrou"]);
-    }
-    $user = User::find($reset_password->id_user);
-    if(!$user){
-        return back()->with(['error' => "Nao encontrou"]);
     }
 
-    if($reset_password->estado=="off"){
-        return back()->with(['error' => "Código sem validade"]);
-    }
+    public function verifycode_put(Request $request, $id_reset)
+    {
+        $reset_password = ResetPassword::find($id_reset);
+        if (!$reset_password) {
+            return back()->with(['error' => "Nao encontrou"]);
+        }
+        $user = User::find($reset_password->id_user);
+        if (!$user) {
+            return back()->with(['error' => "Nao encontrou"]);
+        }
 
-    $request->validate([
-        'code'=>['required', 'numeric', 'min:1'],
-    ]);
+        if ($reset_password->estado == "off") {
+            return back()->with(['error' => "Código sem validade"]);
+        }
 
-    //verificar codigo incripetado com email
-    $hash_code = $request->code . "" . $user->email;
-    $verify_code = Hash::check($hash_code, $reset_password->hash_code);
-    if(!$verify_code){
-        return back()->with(['error' => "Código de verificação incorrecto"]);
-    }
-    //verificar codigo simples
-    if($request->code!=$reset_password->verify_code){
-        return back()->with(['error' => "Código de verificação incorrecto"]);
-    }
+        $request->validate([
+            'code' => ['required', 'numeric', 'min:1'],
+        ]);
 
-    $default_password = Hash::make('escola001');
-    $data['user'] = [
-        'password' =>$default_password,
-    ];
+        //verificar codigo incripetado com email
+        $hash_code = $request->code . "" . $user->email;
+        $verify_code = Hash::check($hash_code, $reset_password->hash_code);
+        if (!$verify_code) {
+            return back()->with(['error' => "Código de verificação incorrecto"]);
+        }
+        //verificar codigo simples
+        if ($request->code != $reset_password->verify_code) {
+            return back()->with(['error' => "Código de verificação incorrecto"]);
+        }
 
-    $data['reset'] = [
-        'estado'=>"off",
-    ];
+        $default_password = Hash::make('escola001');
+        $data['user'] = [
+            'password' => $default_password,
+        ];
 
-    if(User::find($user->id)->update($data['user'])){
-        if(ResetPassword::find($id_reset)->update($data['reset'])){
-            return redirect()->route('login');
+        $data['reset'] = [
+            'estado' => "off",
+        ];
+
+        if (User::find($user->id)->update($data['user'])) {
+            if (ResetPassword::find($id_reset)->update($data['reset'])) {
+                return redirect()->route('login');
+            }
         }
     }
 
-  }
+    public function create()
+    {
+        $provincias = Provincia::pluck('provincia', 'id');
+        $data = [
+            'title' => "Usuários",
+            'type' => "usuarios",
+            'menu' => "Usuários",
+            'submenu' => "Novo",
+            'getProvincias' => $provincias,
+        ];
+        return view('user.new', $data);
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'nome' => ['required', 'string', 'min:7', 'max:255'],
+            'genero' => ['required', 'string'],
+            'provincia' => ['required', 'Integer'],
+            'municipio' => ['required', 'Integer'],
+            'data_nascimento' => ['required', 'date'],
+            'nivel_acesso' => ['required', 'string'],
+            'email' => ['required', 'string', 'unique:usuarios,email'],
+        ]);
+
+        if ($request->bilhete != "") {
+            $request->validate([
+                'bilhete' => ['required', 'string', 'unique:pessoas,bilhete']
+            ]);
+        }
+
+        $data['pessoa'] = [
+            'id_municipio' => $request->municipio,
+            'nome' => $request->nome,
+            'data_nascimento' => $request->data_nascimento,
+            'genero' => $request->genero,
+            'estado_civil' => $request->estado_civil,
+            'naturalidade' => $request->naturalidade,
+            'telefone' => $request->telefone,
+            'bilhete' => $request->bilhete,
+            'data_emissao' => $request->data_emissao,
+            'local_emissao' => $request->local_emissao,
+            'pai' => $request->pai,
+            'mae' => $request->mae,
+            'comuna' => $request->comuna,
+        ];
+
+        $palavra_passe = Hash::make("escola001");
+        $string_nome = explode(" ", $request->nome);
+        $primeiro_nome = $string_nome[0];
+        $ultimo_nome = end($string_nome);
+
+        $data['usuario'] = [
+            'id_pessoa' => null,
+            'username' => null,
+            'password' => $palavra_passe,
+            'estado' => "on",
+            'nivel_acesso' => $request->nivel_acesso,
+            'email' => $request->email,
+        ];
+
+        if (Pessoa::where([
+            'nome' => $data['pessoa']['nome'],
+            'data_nascimento' => $data['pessoa']['data_nascimento']
+        ])->first()) {
+            return back()->with(['error' => "Já cadasrou este usuário"]);
+        }
+
+        $pessoa = Pessoa::create($data['pessoa']);
+        if ($pessoa) {
+            $data['usuario']['id_pessoa'] = $pessoa->id;
+            $nome_completo = strtolower($primeiro_nome . "." . $ultimo_nome) . "" . $pessoa->id;
+            $nome_converte = $this->converter_acentos($nome_completo);
+            $data['usuario']['username'] = $nome_converte;
+            if (User::create($data['usuario'])) {
+                return back()->with(['success' => "Feito com sucesso"]);
+            }
+        }
+    }
+
+    public function converter_acentos($string)
+    {
+
+        return preg_replace(
+            array(
+                "/(á|â|ã|à)/", "/(Á|Â|Ã|À)/",
+                "/(é|è|ê)/", "/(É|È|Ê)/", "/(í|ì|î)/", "/(Í|Ì|Î)/",
+                "/(ó|ò|õ|ô)/", "/(Ó|Ò|Õ|Ô)/", "/(ú|ù|û)/", "/(Ú|Ù|Û)/",
+                "/(ñ)/", "/(Ñ)/", "/(ç)/", "/(Ç)/"
+            ),
+            explode(" ", "a A e E i I o O u U n N c C"),
+            $string
+        );
+    }
+
+    public function edit($id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return back()->with(['error' => "Nao encontrou"]);
+        }
+        $provincias = Provincia::pluck('provincia', 'id');
+        $data = [
+            'title' => "Usuários",
+            'type' => "usuarios",
+            'menu' => "Usuários",
+            'submenu' => "Novo",
+            'getProvincias' => $provincias,
+            'getUser' => $user,
+        ];
+        return view('user.edit', $data);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::find($id);
+        if (!$user) {
+            return back()->with(['error' => "Nao encontrou"]);
+        }
+        $request->validate([
+            'nome' => ['required', 'string', 'min:7', 'max:255'],
+            'genero' => ['required', 'string'],
+            'provincia' => ['required', 'Integer'],
+            'municipio' => ['required', 'Integer'],
+            'data_nascimento' => ['required', 'date'],
+            'nivel_acesso' => ['required', 'string'],
+            'email' => ['required', 'string',],
+        ]);
+
+        if ($request->bilhete != $user->pessoa->bilhete) {
+            $request->validate([
+                'bilhete' => ['required', 'string', 'unique:pessoas,bilhete']
+            ]);
+        }
+
+        if ($request->email != $user->email) {
+            $request->validate([
+                'email' => ['required', 'string', 'unique:usuarios,email']
+            ]);
+        }
+
+        $data['pessoa'] = [
+            'id_municipio' => $request->municipio,
+            'nome' => $request->nome,
+            'data_nascimento' => $request->data_nascimento,
+            'genero' => $request->genero,
+            'estado_civil' => $request->estado_civil,
+            'naturalidade' => $request->naturalidade,
+            'telefone' => $request->telefone,
+            'bilhete' => $request->bilhete,
+            'data_emissao' => $request->data_emissao,
+            'local_emissao' => $request->local_emissao,
+            'pai' => $request->pai,
+            'mae' => $request->mae,
+            'comuna' => $request->comuna,
+
+        ];
+
+        $data['usuario'] = [
+            'nivel_acesso' => $request->nivel_acesso,
+            'email' => $request->email,
+        ];
+
+
+
+        $pessoa = Pessoa::find($user->id_pessoa)->update($data['pessoa']);
+        if ($pessoa) {
+
+            if (User::find($user->id)->update($data['usuario'])) {
+                return back()->with(['success' => "Feito com sucesso"]);
+            }
+        }
+    }
 }

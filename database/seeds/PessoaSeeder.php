@@ -25,6 +25,12 @@ class PessoaSeeder extends Seeder
             'data_nascimento' => "1996-08-29",
             'genero' => "M",
             'estado_civil' => "solteiro"
+        ],[
+            'id_municipio' => 1,
+            'nome' => "Sige Super",
+            'data_nascimento' => "1996-08-29",
+            'genero' => "M",
+            'estado_civil' => "solteiro"
         ],
 
         [

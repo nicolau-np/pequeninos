@@ -147,6 +147,58 @@ $percent_negativasf = [
     'npe'=>0,
     'mf'=>0,
 ];
+
+
+$t1 = [
+    'get' => null,
+];
+
+$t2 = [
+    'get' => null,
+];
+
+$t3 = [
+    'get' => null,
+];
+
+$lanca1 = [
+    'f' => 0,
+    'mf' => 0,
+];
+$lanca2 = [
+    'f' => 0,
+    'mf' => 0,
+];
+$lanca3 = [
+    'f' => 0,
+    'mf' => 0,
+];
+
+$negat1 = [
+    'f' => 0,
+    'mf' => 0,
+];
+$negat2 = [
+    'f' => 0,
+    'mf' => 0,
+];
+$negat3 = [
+    'f' => 0,
+    'mf' => 0,
+];
+
+$posit1 = [
+    'f' => 0,
+    'mf' => 0,
+];
+$posit2 = [
+    'f' => 0,
+    'mf' => 0,
+];
+$posit3 = [
+    'f' => 0,
+    'mf' => 0,
+];
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -465,7 +517,167 @@ $percent_negativasf = [
          </div>
          <br/>
          <div class="corpo">
+            <div class="generalizada">
+                @php
+                    $t1['get'] = ControladorNotas::getNotasEstudantesPDF($getHorario->id_turma, $getHorario->id_disciplina, $getHorario->ano_lectivo, 1);
+                    $t2['get'] = ControladorNotas::getNotasEstudantesPDF($getHorario->id_turma, $getHorario->id_disciplina, $getHorario->ano_lectivo, 2);
+                    $t3['get'] = ControladorNotas::getNotasEstudantesPDF($getHorario->id_turma, $getHorario->id_disciplina, $getHorario->ano_lectivo, 3);
 
+                    /*1 trimestre*/
+                    foreach ($t1['get'] as $v1) {
+                        if ($v1->mt != null) {
+                            /*avaliados*/
+                            $lanca1['mf'] = $lanca1['mf'] + 1;
+                            if ($v1->estudante->pessoa->genero == 'F') {
+                                $lanca1['f'] = $lanca1['f'] + 1;
+                            }
+                        }
+
+                        if ($v1->mt != null && $v1->mt <=4.99) {
+                            /*negativas*/
+                            $negat1['mf'] = $negat1['mf'] + 1;
+                            if ($v1->estudante->pessoa->genero == 'F') {
+                                $negat1['f'] = $negat1['f'] + 1;
+                            }
+                        }
+
+                        if ($v1->mt != null && $v1->mt >=5) {
+                            /*positivas*/
+                            $posit1['mf'] = $posit1['mf'] + 1;
+                            if ($v1->estudante->pessoa->genero == 'F') {
+                                $posit1['f'] = $posit1['f'] + 1;
+                            }
+                        }
+                    }
+
+                    /*2 trimestre*/
+                    foreach ($t2['get'] as $v2) {
+                        if ($v2->mt != null) {
+                            /*avaliados*/
+                            $lanca2['mf'] = $lanca2['mf'] + 1;
+                            if ($v2->estudante->pessoa->genero == 'F') {
+                                $lanca2['f'] = $lanca2['f'] + 2;
+                            }
+                        }
+
+                        if ($v2->mt != null && $v2->mt <=4.99) {
+                            /*negativas*/
+                            $negat2['mf'] = $negat2['mf'] + 1;
+                            if ($v2->estudante->pessoa->genero == 'F') {
+                                $negat2['f'] = $negat2['f'] + 1;
+                            }
+                        }
+
+                        if ($v2->mt != null && $v2->mt >=5) {
+                            /*positivas*/
+                            $posit2['mf'] = $posit2['mf'] + 1;
+                            if ($v2->estudante->pessoa->genero == 'F') {
+                                $posit2['f'] = $posit2['f'] + 1;
+                            }
+                        }
+                    }
+
+                    /*3 trimestre*/
+                    foreach ($t3['get'] as $v3) {
+                        if ($v3->mt != null) {
+                            /*avaliados*/
+                            $lanca3['mf'] = $lanca3['mf'] + 1;
+                            if ($v3->estudante->pessoa->genero == 'F') {
+                                $lanca3['f'] = $lanca3['f'] + 1;
+                            }
+                        }
+                        if ($v3->mt != null && $v3->mt <=4.99) {
+                            /*negativas*/
+                            $negat3['mf'] = $negat3['mf'] + 1;
+                            if ($v3->estudante->pessoa->genero == 'F') {
+                                $negat3['f'] = $negat3['f'] + 1;
+                            }
+                        }
+
+                        if ($v3->mt != null && $v3->mt >=5) {
+                            /*positivas*/
+                            $posit3['mf'] = $posit3['mf'] + 1;
+                            if ($v3->estudante->pessoa->genero == 'F') {
+                                $posit3['f'] = $posit3['f'] + 1;
+                            }
+                        }
+                    }
+
+                @endphp
+                <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
+                    <thead>
+                        <tr>
+                            <th rowspan="2">-</th>
+                            <th colspan="2">1º TRIMESTRE</th>
+                            <th colspan="2">2º TRIMESTRE</th>
+                            <th colspan="2">3º TRIMESTRE</th>
+                        </tr>
+                        <tr>
+
+                            <th>F</th>
+                            <th>MF</th>
+
+                            <th>F</th>
+                            <th>MF</th>
+
+                            <th>F</th>
+                            <th>MF</th>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>AVALIADOS</td>
+
+                            <!-- 1 trimestre-->
+                            <td>{{ $lanca1['f'] }}</td>
+                            <td>{{ $lanca1['mf'] }}</td>
+
+                            <!-- 2 trimestre-->
+                            <td>{{ $lanca2['f'] }}</td>
+                            <td>{{ $lanca2['mf'] }}</td>
+
+                            <!-- 3 trimestre-->
+                            <td>{{ $lanca3['f'] }}</td>
+                            <td>{{ $lanca3['mf'] }}</td>
+
+                        </tr>
+
+                        <tr>
+                            <td>NEGATIVAS</td>
+
+                            <!-- 1 trimestre-->
+                            <td>{{ $negat1['f'] }}</td>
+                            <td>{{ $negat1['mf'] }}</td>
+
+                            <!-- 2 trimestre-->
+                            <td>{{ $negat2['f'] }}</td>
+                            <td>{{ $negat2['mf'] }}</td>
+
+                            <!-- 3 trimestre-->
+                            <td>{{ $negat3['f'] }}</td>
+                            <td>{{ $negat3['mf'] }}</td>
+                        </tr>
+
+                        <tr>
+                            <td>POSITIVAS</td>
+
+                            <!-- 1 trimestre-->
+                            <td>{{ $posit1['f'] }}</td>
+                            <td>{{ $posit1['mf'] }}</td>
+
+                            <!-- 2 trimestre-->
+                            <td>{{ $posit2['f'] }}</td>
+                            <td>{{ $posit2['mf'] }}</td>
+
+                            <!-- 3 trimestre-->
+                            <td>{{ $posit3['f'] }}</td>
+                            <td>{{ $posit3['mf'] }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br/><br/>
             <div class="table-responsive tabela">
                 <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
                     <thead>

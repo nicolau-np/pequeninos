@@ -10,7 +10,9 @@
                                     <td>{{$usuarios->email}}</td>
                                     <td>{{$usuarios->estado}}</td>
                                     <td>{{$usuarios->nivel_acesso}}</td>
-
+                                    <td>
+                                        <a href="/usuarios/edit/{{$usuarios->id}}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Editar</a>
+                                    </td>
                                 </tr>
 
                                 @endforeach

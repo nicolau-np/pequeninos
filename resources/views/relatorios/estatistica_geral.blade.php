@@ -90,7 +90,7 @@
 
                     @foreach ($getTurmas as $turmas)
                         <tr>
-                            <td>{{ $turmas->turma }}</td>
+                        <td style="width:100px;">{{strtoupper($turmas->classe->classe)}} [ {{ $turmas->turma }} ]</td>
                             @foreach ($getCategorias as $categorias)
                                 <td>---</td>
                                 <td>---</td>

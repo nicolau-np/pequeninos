@@ -660,7 +660,7 @@ class RelatorioController extends Controller
             'getCategorias' => $categorias,
             'getAno' => $ano_lectivo->ano_lectivo,
         ];
-        $pdf = PDF::loadView('relatorios.estatistica_geral', $data)->setPaper('A4', 'normal');
+        $pdf = PDF::loadView('relatorios.estatistica_geral', $data)->setPaper('A4', 'landscape');
         return $pdf->stream('ESTATÍSTICA GERAL - [' . $ano_lectivo->ano_lectivo .  ' ].pdf');
 
     }

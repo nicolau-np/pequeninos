@@ -76,7 +76,7 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/getDisciplinasCurso', "AjaxController@getDisciplinasCurso")->name('getDisciplinasCurso');
 });
 
-Route::group(['prefix' => 'institucional', 'middleware' => "AdminUser"], function () {
+Route::group(['prefix' => 'institucional', 'middleware' => "admin"], function () {
     Route::group(['prefix' => 'cursos'], function () {
         Route::get('/', "InstitucionalController@curso_list");
         Route::get('/create', "InstitucionalController@curso_create");
@@ -211,7 +211,7 @@ Route::group(['prefix' => 'encarregados', 'middleware' => "AdminUser"], function
     Route::put('/update/{id}', "EncarregadoController@update");
 });
 
-Route::group(['prefix' => 'estudantes', 'middleware' => "AdminUser"], function () {
+Route::group(['prefix' => 'estudantes', 'middleware' => "AdminSuperUser"], function () {
     Route::get('/', "EstudanteController@index");
     Route::get('/create', "EstudanteController@create");
     Route::post('/store', "EstudanteController@store");
@@ -234,13 +234,13 @@ Route::group(['prefix' => 'estudantes', 'middleware' => "AdminUser"], function (
     Route::get('/extrato/{id_estudante}/{ano_lectivo}', "EstudanteController@extrato");
 });
 
-Route::group(['prefix' => "turmas", 'middleware' => "AdminUser"], function () {
+Route::group(['prefix' => "turmas", 'middleware' => "AdminSuperUser"], function () {
     Route::get('/list/{ano}', "TurmasController@index");
     Route::get('/import/create/{id_turma}/{ano_lectivo}', "TurmasController@import_create");
     Route::post('/import/store', "TurmasController@import_store");
 });
 
-Route::group(['prefix' => "mapas", 'middleware' => "AdminUser"], function () {
+Route::group(['prefix' => "mapas", 'middleware' => "AdminMaster"], function () {
     Route::get('/', "MapaController@index");
     Route::get('/aproveitamento/{ano_lectivo}', "MapaController@aproveitamento");
     Route::get('/coordenadores/{ano_lectivo}', "MapaController@coordenadores");
@@ -254,7 +254,7 @@ Route::group(['prefix' => 'pagamentos', 'middleware' => "user"], function () {
     Route::post('/show', "PagamentoController@show")->name('show_pagamento');
 });
 
-Route::group(['prefix' => 'funcionarios', 'middleware' => "AdminUser"], function () {
+Route::group(['prefix' => 'funcionarios', 'middleware' => "AdminSuper"], function () {
     Route::get('/', "FuncionarioController@index");
     Route::get('/create', "FuncionarioController@create");
     Route::post('/store', "FuncionarioController@store");
@@ -267,7 +267,7 @@ Route::group(['prefix' => 'funcionarios', 'middleware' => "AdminUser"], function
     Route::post('/import/store', "FuncionarioController@store_import");
 });
 
-Route::group(['prefix' => 'directores', 'middleware' => "AdminUser"], function () {
+Route::group(['prefix' => 'directores', 'middleware' => "AdminSuper"], function () {
     Route::get('/', "DirectorTurmaController@index");
     Route::get('/create', "DirectorTurmaController@create");
     Route::post('/store', "DirectorTurmaController@store");
@@ -344,7 +344,7 @@ Route::group(['prefix' => 'minipautas', 'middleware' => "auth"], function () {
 });
 
 
-Route::group(['prefix' => 'minha_turma', 'middleware' => "AdminProfUser"], function () {
+Route::group(['prefix' => 'minha_turma', 'middleware' => "AdminProfSuper"], function () {
     Route::get('/list/{lastYear}', "MinhaTurmaController@list");
     Route::get('/horario/{id_turma}/{ano_lectivo}', "MinhaTurmaController@horario");
     Route::get('/boletins_notas/{id_turma}/{ano_lectivo}', "MinhaTurmaController@boletins_notas");
@@ -352,14 +352,14 @@ Route::group(['prefix' => 'minha_turma', 'middleware' => "AdminProfUser"], funct
     Route::put('/updateFoto/{id_pessoa}/{ano_lectivo}/{id_turma}', "MinhaTurmaController@updateFoto");
 });
 
-Route::group(['prefix' => 'pautas', 'middleware' => "AdminProfUser"], function () {
+Route::group(['prefix' => 'pautas', 'middleware' => "AdminProfSuper"], function () {
     Route::get('/create/{id_turma}/{ano_lectivo}', "PautaController_copy@create");
     Route::put('/show/{id_turma}/{ano_lectivo}', "PautaController_copy@show");
 
     Route::get('/pdf/{id_turma}/{ano_lectivo}', "RelatorioController@pauta");
 });
 
-Route::group(['prefix' => 'usuarios', 'middleware' => "AdminUser"], function () {
+Route::group(['prefix' => 'usuarios', 'middleware' => "admin"], function () {
     Route::get('/', "UserController@index");
     Route::get('/create', "UserController@create");
     Route::post('/store', "UserController@store");

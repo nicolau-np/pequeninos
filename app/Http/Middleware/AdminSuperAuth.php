@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Closure;
+use Illuminate\Support\Facades\Auth;
 
 class AdminSuperAuth
 {
@@ -15,6 +16,9 @@ class AdminSuperAuth
      */
     public function handle($request, Closure $next)
     {
-        return $next($request);
+        if ((Auth::check()) && ((Auth::user()->nivel_acesso == "admin") || (Auth::user()->nivel_acesso == "super"))) {
+            return $next($request);
+        }
+        return redirect()->route('home');
     }
 }

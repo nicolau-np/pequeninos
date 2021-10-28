@@ -60,6 +60,11 @@ class Kernel extends HttpKernel
         'AdminUser' => \App\Http\Middleware\AdminUserAuth::class,
         'MasterAdminUser' => \App\Http\Middleware\MasterUserAdmin::class,
         'AdminProfUser' => \App\Http\Middleware\AdminProfessorUserAuth::class,
+
+        'AdminSuper' => \App\Http\Middleware\AdminSuperAuth::class,
+        'AdminSuperUser' => \App\Http\Middleware\AdminSuperUserAuth::class,
+        'AdminMaster' => \App\Http\Middleware\AdminMasterAuth::class,
+
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,
         'cache.headers' => \Illuminate\Http\Middleware\SetCacheHeaders::class,

@@ -7,7 +7,7 @@ class EncarregadoSeeder extends Seeder
 {
    static $encarregados = [
        [
-        'id_pessoa'=>4,
+        'id_pessoa'=>5,
         'estado'=>"on",
        ]
    ];

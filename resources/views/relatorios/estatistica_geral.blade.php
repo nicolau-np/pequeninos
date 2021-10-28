@@ -18,7 +18,7 @@ $total = [
     <style>
         @page {
             font-family: Arial, Helvetica, sans-serif;
-            font-size: 10px;
+            font-size: 11px;
             margin: 10px;
         }
 
@@ -40,7 +40,7 @@ $total = [
         }
 
         .tabela {
-            font-size: 10px;
+            font-size: 11px;
         }
 
         .transferido {
@@ -104,17 +104,33 @@ $total = [
                             $total['m'] = 0;
                         @endphp
                         <tr>
-                            <td style="width:100px;">{{ strtoupper($turmas->classe->classe) }} [ {{ $turmas->turma }}
+                            <td style="width:100px;">{{ strtoupper($turmas->classe->classe) }} [
+                                {{ $turmas->turma }}
                                 ]</td>
                             @foreach ($getCategorias as $categorias)
                                 @php
                                     $total['mf'] = 0;
                                     $total['f'] = 0;
                                     $total['m'] = 0;
+
+                                    $historico = ControladorStatic::getTotalCategoriaTurma($turmas->id, $categorias->sigla, $getAno);
+                                    if ($historico->count() >= 1) {
+                                        foreach ($historico as $h) {
+                                            /*total*/
+                                            $total['mf']++;
+                                            /*femeninos*/
+                                            if ($h->estudante->pessoa->genero == 'F') {
+                                                $total['f']++;
+                                            } elseif ($h->estudante->pessoa->genero == 'M') {
+                                                $total['m']++;
+                                            }
+                                        }
+                                    }
+
                                 @endphp
-                                <td>{{$total['m']}}</td>
-                                <td>{{$total['f']}}</td>
-                                <td>{{$total['mf']}}</td>
+                                <td>{{ $total['m'] }}</td>
+                                <td>{{ $total['f'] }}</td>
+                                <td>{{ $total['mf'] }}</td>
                             @endforeach
                         </tr>
                     @endforeach

@@ -1,5 +1,11 @@
 @php
 use App\Http\Controllers\ControladorStatic;
+
+$total = [
+    'mf' => 0,
+    'm' => 0,
+    'f' => 0,
+];
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -92,12 +98,23 @@ use App\Http\Controllers\ControladorStatic;
                     </tr>
 
                     @foreach ($getTurmas as $turmas)
+                        @php
+                            $total['mf'] = 0;
+                            $total['f'] = 0;
+                            $total['m'] = 0;
+                        @endphp
                         <tr>
-                        <td style="width:100px;">{{strtoupper($turmas->classe->classe)}} [ {{ $turmas->turma }} ]</td>
+                            <td style="width:100px;">{{ strtoupper($turmas->classe->classe) }} [ {{ $turmas->turma }}
+                                ]</td>
                             @foreach ($getCategorias as $categorias)
-                                <td>---</td>
-                                <td>---</td>
-                                <td>---</td>
+                                @php
+                                    $total['mf'] = 0;
+                                    $total['f'] = 0;
+                                    $total['m'] = 0;
+                                @endphp
+                                <td>{{$total['m']}}</td>
+                                <td>{{$total['f']}}</td>
+                                <td>{{$total['mf']}}</td>
                             @endforeach
                         </tr>
                     @endforeach

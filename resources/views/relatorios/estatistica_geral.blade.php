@@ -1,3 +1,6 @@
+@php
+use App\Http\Controllers\ControladorStatic;
+@endphp
 <!DOCTYPE html>
 <html lang="en">
 

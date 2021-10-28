@@ -491,4 +491,10 @@ class ControladorStatic extends Controller
         $tabela_preco = TabelaPreco::where(['id_tipo_pagamento' => $id_tipo_pagamento])->first();
         return $tabela_preco;
     }
+
+    public static function getTotalCategoriaTurma($id_turma, $categoria, $ano_lectivo)
+    {
+        $historico = HistoricEstudante::where(['id_turma' => $id_turma, 'categoria' => $categoria, 'ano_lectivo' => $ano_lectivo])->get();
+        return $historico;
+    }
 }

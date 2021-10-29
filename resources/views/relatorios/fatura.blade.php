@@ -81,7 +81,7 @@ use App\Http\Controllers\ControladorStatic;
                     </span>
                 @endif
                 <span style="font-weight: bold;">
-                    NAMIBE-ANGOLA
+                    HUAMBO-ANGOLA
                 </span>
             </p>
 
@@ -290,7 +290,7 @@ use App\Http\Controllers\ControladorStatic;
                     </span>
                 @endif
                 <span style="font-weight: bold;">
-                    NAMIBE-ANGOLA
+                    HUAMBO-ANGOLA
                 </span>
             </p>
 

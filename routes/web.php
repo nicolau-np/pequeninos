@@ -365,6 +365,7 @@ Route::group(['prefix' => 'usuarios', 'middleware' => "admin"], function () {
     Route::post('/store', "UserController@store");
     Route::get('/edit/{id}', "UserController@edit");
     Route::put('/update/{id}', "UserController@update");
+    Route::get('/print', "RelatorioController@printusers");
 });
 
 Route::group(['prefix' => "about"], function () {

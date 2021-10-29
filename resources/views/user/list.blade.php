@@ -33,6 +33,7 @@
                         </div>
 
                         <div class="table-responsive">
+                            <a href="/usuarios/print" class="btn btn-primary">Imprimir</a>
                             <br />
                             <table class="table table-bordered">
                                 <thead>

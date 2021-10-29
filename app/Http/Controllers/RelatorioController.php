@@ -27,6 +27,7 @@ use App\TipoPagamento;
 use App\Transferencia;
 use App\Turma;
 use App\Turno;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -663,5 +664,14 @@ class RelatorioController extends Controller
         $pdf = PDF::loadView('relatorios.estatistica_geral', $data)->setPaper('A4', 'landscape');
         return $pdf->stream('ESTATÍSTICA GERAL - [' . $ano_lectivo->ano_lectivo .  ' ].pdf');
 
+    }
+
+    public function printusers(){
+        $users = User::all();
+        $data = [
+            'getUsuarios'=>$users
+        ];
+        $pdf = PDF::loadView('relatorios.users', $data)->setPaper('A4', 'normal');
+        return $pdf->stream('LISTA DE USUÁRIOS.pdf');
     }
 }

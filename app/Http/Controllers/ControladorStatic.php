@@ -497,4 +497,21 @@ class ControladorStatic extends Controller
         $historico = HistoricEstudante::where(['id_turma' => $id_turma, 'categoria' => $categoria, 'ano_lectivo' => $ano_lectivo])->get();
         return $historico;
     }
+
+    public static function getTotalTurma($id_turma, $ano_lectivo)
+    {
+        $historico = HistoricEstudante::where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])->get();
+        return $historico;
+    }
+
+    public static function getTotalCategoria($categoria, $ano_lectivo)
+    {
+        $historico = HistoricEstudante::where(['categoria' => $categoria, 'ano_lectivo' => $ano_lectivo])->get();
+        return $historico;
+    }
+
+    public static function getTotal($ano_lectivo){
+        $historico = HistoricEstudante::where(['ano_lectivo'=>$ano_lectivo])->get();
+        return $historico;
+    }
 }

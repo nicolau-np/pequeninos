@@ -6,6 +6,24 @@ $total = [
     'm' => 0,
     'f' => 0,
 ];
+
+$total_escola = [
+    'mf' => 0,
+    'm' => 0,
+    'f' => 0,
+];
+
+$total_categoria = [
+    'mf' => 0,
+    'm' => 0,
+    'f' => 0,
+];
+
+$total_geral = [
+    'mf' => 0,
+    'm' => 0,
+    'f' => 0,
+];
 @endphp
 <!DOCTYPE html>
 <html lang="en">
@@ -83,6 +101,7 @@ $total = [
                         @foreach ($getCategorias as $categorias)
                             <th colspan="3">{{ strtoupper($categorias->categoria) }}</th>
                         @endforeach
+                        <th colspan="3">TOTAL DE ALUNOS NA ESCOLA</th>
                     </tr>
 
                 </thead>
@@ -90,10 +109,13 @@ $total = [
                     <tr>
                         <td></td>
                         @foreach ($getCategorias as $categorias)
-                            <td>M</td>
-                            <td>F</td>
-                            <td>TOTAL</td>
+                            <th>M</th>
+                            <th>F</th>
+                            <th>TOTAL</th>
                         @endforeach
+                        <th>M</th>
+                        <th>F</th>
+                        <th>TOTAL</th>
 
                     </tr>
 
@@ -102,6 +124,24 @@ $total = [
                             $total['mf'] = 0;
                             $total['f'] = 0;
                             $total['m'] = 0;
+
+                            $total_escola['mf'] = 0;
+                            $total_escola['f'] = 0;
+                            $total_escola['m'] = 0;
+                            $total_historico = ControladorStatic::getTotalTurma($turmas->id, $getAno);
+                            if ($total_historico->count() >= 1) {
+                                foreach ($total_historico as $total_h) {
+                                    $total_escola['mf']++;
+                                    if ($total_h->estudante->pessoa->genero == 'F') {
+                                        /*femenino*/
+                                        $total_escola['f']++;
+                                    } elseif ($total_h->estudante->pessoa->genero == 'M') {
+                                        /*masculino*/
+                                        $total_escola['m']++;
+                                    }
+                                }
+                            }
+
                         @endphp
                         <tr>
                             <td style="width:100px;">{{ strtoupper($turmas->classe->classe) }} [
@@ -132,15 +172,55 @@ $total = [
                                 <td>{{ $total['f'] }}</td>
                                 <td>{{ $total['mf'] }}</td>
                             @endforeach
+                            <td>{{ $total_escola['m'] }}</td>
+                            <td>{{ $total_escola['f'] }}</td>
+                            <td>{{ $total_escola['mf'] }}</td>
                         </tr>
                     @endforeach
                     <tr>
-                        <td>TOTAL</td>
+                        <th>TOTAL</th>
                         @foreach ($getCategorias as $categorias)
-                            <td>---</td>
-                            <td>---</td>
-                            <td>---</td>
+                            @php
+                                $total_categoria['mf'] = 0;
+                                $total_categoria['f'] = 0;
+                                $total_categoria['m'] = 0;
+                                $total_cat = ControladorStatic::getTotalCategoria($categorias->sigla, $getAno);
+                                if ($total_cat->count() >= 1) {
+                                    foreach ($total_cat as $total_c) {
+                                        $total_categoria['mf']++;
+                                        if ($total_c->estudante->pessoa->genero == 'F') {
+                                            $total_categoria['f']++;
+                                        } elseif ($total_c->estudante->pessoa->genero == 'M') {
+                                            $total_categoria['m']++;
+                                        }
+                                    }
+                                }
+                            @endphp
+                            <th>{{ $total_categoria['m'] }}</th>
+                            <th>{{ $total_categoria['f'] }}</th>
+                            <th>{{ $total_categoria['mf'] }}</th>
                         @endforeach
+
+                        @php
+                            $total_getal['mf'] = 0;
+                            $total_getal['f'] = 0;
+                            $total_getal['m'] = 0;
+                            $total_g = ControladorStatic::getTotal($getAno);
+                            if ($total_g->count() >= 1) {
+                                foreach ($total_g as $tot_g) {
+                                    $total_geral['mf']++;
+                                    if ($tot_g->estudante->pessoa->genero == 'F') {
+                                        $total_geral['f']++;
+                                    } elseif ($tot_g->estudante->pessoa->genero == 'M') {
+                                        $total_geral['m']++;
+                                    }
+                                }
+                            }
+                        @endphp
+                        <th>{{ $total_geral['m'] }}</th>
+                        <th>{{ $total_geral['f'] }}</th>
+                        <th>{{ $total_geral['mf'] }}</th>
+
                     </tr>
                 </tbody>
             </table>

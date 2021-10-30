@@ -50,7 +50,9 @@ $total = [
                          @endif
                     </div>
 
-
+                    <div class="descricao">
+                        Ano Lectivo: {{ $getAno }}
+                    </div>
                     <div class="grafico">
                         <div class="col-lg-12 col-xl-12">
                             <!-- Nav tabs -->

@@ -50,16 +50,18 @@ $total = [
                                 <div class="alert alert-danger">{{ session('error') }}</div>
                             @endif
                         </div>
-
+                        <div class="descricao">
+                            Ano Lectivo: {{ $getAno }}
+                        </div>
                         <div class="tabela">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
-                                        <th>Pagamentos</th>
+                                        <th>Tipos de Pagamentos</th>
                                         @foreach ($getCategorias as $categorias)
-                                        <th style="text-align: center;">
-                                            {{$categorias->sigla}}
-                                        </th>
+                                            <th style="text-align: center;">
+                                                {{ $categorias->sigla }}
+                                            </th>
                                         @endforeach
                                         <th>TOTAL</th>
 
@@ -67,13 +69,13 @@ $total = [
                                 </thead>
                                 <tbody>
                                     @foreach ($getTipoPagamentos as $tipo_pagamentos)
-                                    <tr>
-                                    <td>{{$tipo_pagamentos->tipo}}</td>
-                                        @foreach ($getCategorias as $categorias)
-                                        <td></td>
-                                        @endforeach
-                                        <td></td>
-                                    </tr>
+                                        <tr>
+                                            <td>{{ $tipo_pagamentos->tipo }}</td>
+                                            @foreach ($getCategorias as $categorias)
+                                                <td></td>
+                                            @endforeach
+                                            <td></td>
+                                        </tr>
                                     @endforeach
                                 </tbody>
                             </table>

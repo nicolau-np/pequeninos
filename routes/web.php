@@ -240,11 +240,18 @@ Route::group(['prefix' => "turmas", 'middleware' => "AdminSuperUser"], function 
     Route::post('/import/store', "TurmasController@import_store");
 });
 
-Route::group(['prefix' => "mapas", 'middleware' => "AdminMaster"], function () {
+Route::group(['prefix' => "mapas", 'middleware' => "AdminUserSuperMaster"], function () {
     Route::get('/', "MapaController@index");
     Route::get('/aproveitamento/{ano_lectivo}', "MapaController@aproveitamento");
     Route::get('/coordenadores/{ano_lectivo}', "MapaController@coordenadores");
     Route::get('/estatistica/{ano_lectivo}', "MapaController@estatistica");
+
+    Route::group(['prefix'=>"balancos"], function (){
+        Route::get('/', "MapaController@balancos");
+        Route::get('/geral', "MapaController@balanco_geral");
+        Route::get('/categoria', "MapaController@balanco_categoria");
+        Route::get('/turma', "MapaController@balanco_turma");
+    });
 });
 
 Route::group(['prefix' => 'pagamentos', 'middleware' => "user"], function () {

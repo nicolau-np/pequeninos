@@ -466,7 +466,7 @@ $lastYear = ControladorStatic::getLastYear();
                                 </li>
                                 @endif
 
-                                @if(Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="master")
+                                @if(Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="master" || Auth::user()->nivel_acesso=="user" || Auth::user()->nivel_acesso=="super")
                                 <li class="@if($menu=="Mapas") active @endif">
                                     <a href="/mapas">
                                         <span class="pcoded-micon"><i class="ti-map"></i><b>M</b></span>

@@ -83,4 +83,26 @@ class MapaController extends Controller
         return view('mapas.estatistica', $data);
     }
 
+    public function balancos(){
+        $data = [
+            'title' => "Mapas",
+            'type' => "mapas",
+            'menu' => "Mapas",
+            'submenu' => "Balanços",
+        ];
+        return view('mapas.balancos', $data);
+    }
+
+    public function balanco_geral(){
+
+    }
+
+
+    public function balanco_categoria(){
+
+    }
+
+    public function balanco_turma(){
+
+    }
 }

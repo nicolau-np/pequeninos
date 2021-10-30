@@ -65,6 +65,7 @@ class Kernel extends HttpKernel
         'AdminSuperUser' => \App\Http\Middleware\AdminSuperUserAuth::class,
         'AdminMaster' => \App\Http\Middleware\AdminMasterAuth::class,
         'AdminProfSuper' => \App\Http\Middleware\AdminProfSuperAuth::class,
+        'AdminUserSuperMaster'=> \App\Http\Middleware\AdminUserSuperMasterAuth::class,
 
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'bindings' => \Illuminate\Routing\Middleware\SubstituteBindings::class,

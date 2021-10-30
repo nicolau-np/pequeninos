@@ -37,7 +37,7 @@ class EstatisticaController extends Controller
         $tipo_pagamentos = TipoPagamento::get();
         $data = [
             'title' => "Balanços",
-            'type' => "estatisticas",
+            'type' => "mobile",
             'menu' => "Balanços",
             'submenu' => "Gráfico",
             'getTipoPagamentos'=>$tipo_pagamentos,

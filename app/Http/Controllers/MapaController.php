@@ -93,16 +93,34 @@ class MapaController extends Controller
         return view('mapas.balancos', $data);
     }
 
-    public function balanco_geral(){
-
+    public function balanco_geral($ano_lectivo){
+        $data = [
+            'title' => "Balanços",
+            'type' => "mapas",
+            'menu' => "Mapas",
+            'submenu' => "Geral",
+        ];
+        return view('mapas.balanco_geral', $data);
     }
 
 
-    public function balanco_categoria(){
-
+    public function balanco_categoria($ano_lectivo){
+        $data = [
+            'title' => "Balanços",
+            'type' => "mapas",
+            'menu' => "Mapas",
+            'submenu' => "Categoria",
+        ];
+        return view('mapas.balanco_categoria', $data);
     }
 
-    public function balanco_turma(){
-
+    public function balanco_turma($ano_lectivo){
+        $data = [
+            'title' => "Balanços",
+            'type' => "mapas",
+            'menu' => "Mapas",
+            'submenu' => "Turma",
+        ];
+        return view('mapas.balanco_turma', $data);
     }
 }

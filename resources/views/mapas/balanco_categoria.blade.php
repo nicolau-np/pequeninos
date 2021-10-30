@@ -1,22 +1,6 @@
 @php
 use App\Http\Controllers\ControladorStatic;
 
-$meses = [9, 10, 11, 12, 1, 2, 3, 4, 5, 6, 7, 8];
-$total = [
-    'set' => 0,
-    'out' => 0,
-    'nov' => 0,
-    'dez' => 0,
-    'jan' => 0,
-    'fev' => 0,
-    'mar' => 0,
-    'abr' => 0,
-    'mai' => 0,
-    'jun' => 0,
-    'jul' => 0,
-    'ago' => 0,
-];
-
 @endphp
 @extends('layouts.app')
 @section('content')
@@ -69,10 +53,20 @@ $total = [
                                 </thead>
                                 <tbody>
                                     @foreach ($getTipoPagamentos as $tipo_pagamentos)
+                                        @php
+                                            $total = 0;
+                                        @endphp
                                         <tr>
                                             <td>{{ $tipo_pagamentos->tipo }}</td>
                                             @foreach ($getCategorias as $categorias)
-                                                <td></td>
+                                                @php
+                                                    $total = 0;
+                                                    $getValores = ControladorStatic::getTotalValoresCategoria($getAno, $tipo_pagamentos->id, $categorias->sigla);
+                                                    foreach ($getValores as $valores) {
+                                                        $total = $total + $valores->preco;
+                                                    }
+                                                @endphp
+                                                <td>{{ number_format($total, 2, ',', '.') }}</td>
                                             @endforeach
                                             <td></td>
                                         </tr>

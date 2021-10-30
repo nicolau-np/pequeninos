@@ -510,8 +510,27 @@ class ControladorStatic extends Controller
         return $historico;
     }
 
-    public static function getTotal($ano_lectivo){
-        $historico = HistoricEstudante::where(['ano_lectivo'=>$ano_lectivo])->get();
+    public static function getTotal($ano_lectivo)
+    {
+        $historico = HistoricEstudante::where(['ano_lectivo' => $ano_lectivo])->get();
         return $historico;
+    }
+
+    public static function getTotalValoresCategoria($ano_lectivo, $id_tipo_pagamento, $categoria)
+    {
+        $data = [
+            'categoria' => $categoria,
+            'ano_lectivo' => $ano_lectivo,
+            'id_tipo_pagamento' => $id_tipo_pagamento,
+        ];
+
+        $valoresPagamentos = Pagamento::whereHas('estudante', function ($query) use ($data){
+            $query->whereHas('historico', function ($query2)  use($data){
+                $query2->where(['ano_lectivo'=>$data['ano_lectivo']]);
+                $query2->where(['categoria'=>$data['categoria']]);
+            });
+        })->where(['id_tipo_pagamento'=>$data['id_tipo_pagamento']])->get();
+
+        return $valoresPagamentos;
     }
 }

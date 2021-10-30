@@ -1,7 +1,8 @@
 <?php
 
 use App\AnoLectivo;
-
+use App\Estudante;
+use App\Pagamento;
 use Illuminate\Support\Facades\Route;
 
 
@@ -246,7 +247,7 @@ Route::group(['prefix' => "mapas", 'middleware' => "AdminUserSuperMaster"], func
     Route::get('/coordenadores/{ano_lectivo}', "MapaController@coordenadores");
     Route::get('/estatistica/{ano_lectivo}', "MapaController@estatistica");
 
-    Route::group(['prefix'=>"balancos"], function (){
+    Route::group(['prefix' => "balancos"], function () {
         Route::get('/', "MapaController@balancos");
         Route::get('/geral/{ano_lectivo}', "MapaController@balanco_geral");
         Route::get('/categoria/{ano_lectivo}', "MapaController@balanco_categoria");
@@ -300,11 +301,11 @@ Route::group(['prefix' => "horarios", 'middleware' => "AdminUser"], function () 
 
 Route::group(['prefix' => 'estatisticas', 'middleware' => "auth"], function () {
 
-    Route::group(['prefix' => 'pagamentos', 'middleware'=>"MasterAdminUser"], function () {
+    Route::group(['prefix' => 'pagamentos', 'middleware' => "MasterAdminUser"], function () {
         Route::get('/', "EstatisticaController@lista_pagamento");
     });
 
-    Route::group(['prefix' => 'balancos', 'middleware'=>"MasterAdminUser"], function () {
+    Route::group(['prefix' => 'balancos', 'middleware' => "MasterAdminUser"], function () {
         Route::get('/list/{ano}', "EstatisticaController@balanco");
     });
 
@@ -387,8 +388,20 @@ Route::group(['prefix' => "word", 'middleware' => "AdminUser"], function () {
 
 /*rota de test*/
 Route::get('test', function () {
-    $ano = AnoLectivo::latest('ano_lectivo')->first();
-    echo $ano->ano_lectivo;
+    $data = [
+        'categoria' => "Comunidade",
+        'ano_lectivo' => "2021-2022",
+        'id_tipo_pagamento' => 1,
+    ];
+
+    $valoresPagamentos = Pagamento::whereHas('estudante', function ($query) use ($data){
+        $query->whereHas('historico', function ($query2)  use($data){
+            $query2->where(['ano_lectivo'=>$data['ano_lectivo']]);
+            $query2->where(['categoria'=>$data['categoria']]);
+        });
+    })->where(['id_tipo_pagamento'=>$data['id_tipo_pagamento']])->get();
+
+    return $valoresPagamentos;
 });
 
 /*fim*/

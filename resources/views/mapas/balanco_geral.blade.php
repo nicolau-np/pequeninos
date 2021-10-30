@@ -72,7 +72,7 @@ $total = [
 
                                 <div class="tab-pane active" id="profile5" role="tabpanel">
                                     <p class="m-0">
-                                        <div class="table-responsive">
+                                        <div class="table-responsive tabela_balanco">
                                             <table class="table table-bordered" style="font-size:12px;">
                                                 <thead>
                                                     <tr>

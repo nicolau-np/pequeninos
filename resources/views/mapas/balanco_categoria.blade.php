@@ -37,7 +37,7 @@ use App\Http\Controllers\ControladorStatic;
                         <div class="descricao">
                             Ano Lectivo: {{ $getAno }}
                         </div>
-                        <div class="tabela">
+                        <div class="tabela_balanco">
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
@@ -47,7 +47,6 @@ use App\Http\Controllers\ControladorStatic;
                                                 {{ $categorias->sigla }}
                                             </th>
                                         @endforeach
-                                        <th>TOTAL</th>
 
                                     </tr>
                                 </thead>
@@ -68,9 +67,27 @@ use App\Http\Controllers\ControladorStatic;
                                                 @endphp
                                                 <td>{{ number_format($total, 2, ',', '.') }}</td>
                                             @endforeach
-                                            <td></td>
+
+
                                         </tr>
                                     @endforeach
+                                    <tr>
+                                        <th>TOTAL</th>
+                                        @foreach ($getCategorias as $categorias)
+
+                                            @php
+                                                $totalCategoria = 0;
+
+                                                $getValoresTCategoria = ControladorStatic::getValoresTotalCategoria($getAno, $categorias->sigla);
+                                                foreach ($getValoresTCategoria as $valoresCategoria) {
+                                                    $totalCategoria = $totalCategoria + $valoresCategoria->preco;
+
+                                                }
+                                            @endphp
+                                            <th>{{ number_format($totalCategoria, 2, ',', '.') }}</th>
+                                        @endforeach
+
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>

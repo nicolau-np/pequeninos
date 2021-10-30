@@ -533,4 +533,40 @@ class ControladorStatic extends Controller
 
         return $valoresPagamentos;
     }
+
+    public static function getValoresTotalCategoria($ano_lectivo, $categoria)
+    {
+        $data = [
+            'categoria' => $categoria,
+            'ano_lectivo' => $ano_lectivo,
+        ];
+
+        $valoresPagamentos = Pagamento::whereHas('estudante', function ($query) use ($data){
+            $query->whereHas('historico', function ($query2)  use($data){
+                $query2->where(['ano_lectivo'=>$data['ano_lectivo']]);
+                $query2->where(['categoria'=>$data['categoria']]);
+            });
+        })->get();
+
+        return $valoresPagamentos;
+    }
+
+    public static function getTotalValoresTipoPagamento($ano_lectivo, $id_tipo_pagamento)
+    {
+        $data = [
+            'ano_lectivo' => $ano_lectivo,
+            'id_tipo_pagamento' => $id_tipo_pagamento,
+        ];
+
+        $valoresPagamentos = Pagamento::whereHas('estudante', function ($query) use ($data){
+            $query->whereHas('historico', function ($query2)  use($data){
+                $query2->where(['ano_lectivo'=>$data['ano_lectivo']]);
+               
+            });
+        })->where(['id_tipo_pagamento'=>$data['id_tipo_pagamento']])->get();
+
+        return $valoresPagamentos;
+    }
+
+
 }

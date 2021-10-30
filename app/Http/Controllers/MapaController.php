@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AnoLectivo;
+use App\CategoriaEstudante;
 use App\Ensino;
 use App\TipoPagamento;
 use Illuminate\Http\Request;
@@ -109,17 +110,29 @@ class MapaController extends Controller
             'getAnos'=>$ano_lectivos,
             'getTipoPagamentos'=>$tipo_pagamentos,
             'getAno'=>$ano_lectivo,
+
         ];
         return view('mapas.balanco_geral', $data);
     }
 
 
     public function balanco_categoria($ano_lectivo){
+      $ano_lect = AnoLectivo::where(['ano_lectivo'=>$ano_lectivo])->first();
+        if (!$ano_lect) {
+            return back()->with(['error' => "Nao encontrou"]);
+        }
+        $ano_lectivos = AnoLectivo::orderBy('id', 'desc')->get();
+        $tipo_pagamentos = TipoPagamento::get();
+        $categorias = CategoriaEstudante::get();
         $data = [
             'title' => "Balanços",
-            'type' => "mapas",
+            'type' => "mobile",
             'menu' => "Mapas",
             'submenu' => "Categoria",
+            'getAnos'=>$ano_lectivos,
+            'getTipoPagamentos'=>$tipo_pagamentos,
+            'getAno'=>$ano_lectivo,
+            'getCategorias' => $categorias,
         ];
         return view('mapas.balanco_categoria', $data);
     }

@@ -137,7 +137,9 @@ fieldset legend{
 }
 
 
-
+.tabela_balanco{
+    overflow-x: auto;
+}
 
 
 

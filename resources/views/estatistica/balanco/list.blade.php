@@ -51,7 +51,7 @@ $total = [
                     </div>
 
 
-                    <div class="grafico">
+                    <div class="grafico tabela_balanco">
                         <div class="col-lg-12 col-xl-12">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs md-tabs tabs-left b-none" role="tablist">

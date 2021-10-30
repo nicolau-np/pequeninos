@@ -53,7 +53,7 @@ $total = [
                     <div class="descricao">
                         Ano Lectivo: {{ $getAno }}
                     </div>
-                    <div class="grafico">
+                    <div class="grafico tabela_balanco">
                         <div class="col-lg-12 col-xl-12">
                             <!-- Nav tabs -->
                             <ul class="nav nav-tabs md-tabs tabs-left b-none" role="tablist">
@@ -72,7 +72,7 @@ $total = [
 
                                 <div class="tab-pane active" id="profile5" role="tabpanel">
                                     <p class="m-0">
-                                        <div class="table-responsive tabela_balanco">
+                                        <div class="tabela_balanco">
                                             <table class="table table-bordered" style="font-size:12px;">
                                                 <thead>
                                                     <tr>
@@ -147,77 +147,80 @@ $total = [
                                                 </tbody>
                                             </table>
                                         </div>
-                                        <!-- pagamentos mensais-->
-                                        <figure class="highcharts-figure">
-                                            <div id="container_mensal" style="width: 100%;"></div>
-                                            <p class="highcharts-description">
-                                                Gráfico de barras ilustrando os pagamentos feitos em um determinado mês,
-                                                contabiliza todos pagamentos.
-                                            </p>
-                                        </figure>
+                                        <div class="grafico">
+                                 <!-- pagamentos mensais-->
+                                 <figure class="highcharts-figure">
+                                    <div id="container_mensal" style="width: 100%;"></div>
+                                    <p class="highcharts-description">
+                                        Gráfico de barras ilustrando os pagamentos feitos em um determinado mês,
+                                        contabiliza todos pagamentos.
+                                    </p>
+                                </figure>
 
-                                        <script type="text/javascript">
-                                        Highcharts.chart('container_mensal', {
-                                            chart: {
-                                                type: 'column'
-                                            },
-                                            title: {
-                                                text: 'Grafico demonstrativo dos Balanços do ano {{$getAno}}'
-                                            },
-                                            subtitle: {
-                                                text: 'Source: okussoleka.com'
-                                            },
-                                            xAxis: {
-                                                categories: [
-                                                    <?php
-                                                        foreach($meses as $mes){
-                                                            $getMes = ControladorStatic::converterMes($mes);
-                                                        ?>
-                                                    '{{$getMes}}',
-                                                    <?php }?>
-                                                ],
-                                                crosshair: true
-                                            },
-                                            yAxis: {
-                                                min: 0,
-                                                title: {
-                                                    text: 'Valores (Akz)'
-                                                }
-                                            },
-                                            tooltip: {
-                                                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-                                                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                                                    '<td style="padding:0"><b>{point.y:,2f} Akz</b></td></tr>',
-                                                footerFormat: '</table>',
-                                                shared: true,
-                                                useHTML: true
-                                            },
-                                            plotOptions: {
-                                                column: {
-                                                    pointPadding: 0.2,
-                                                    borderWidth: 0
-                                                }
-                                            },
-                                            series: [
-                                                <?php
-                                                foreach($getTipoPagamentos as $tipo_pagamentos){
+                                <script type="text/javascript">
+                                Highcharts.chart('container_mensal', {
+                                    chart: {
+                                        type: 'column'
+                                    },
+                                    title: {
+                                        text: 'Grafico demonstrativo dos Balanços do ano {{$getAno}}'
+                                    },
+                                    subtitle: {
+                                        text: 'Source: okussoleka.com'
+                                    },
+                                    xAxis: {
+                                        categories: [
+                                            <?php
+                                                foreach($meses as $mes){
+                                                    $getMes = ControladorStatic::converterMes($mes);
                                                 ?>
-                                                {
-                                                name: '{{$tipo_pagamentos->tipo}}',
-                                                data: [
-                                                    <?php
-                                                    foreach($meses as $mes){
-                                                        $valores = ControladorStatic::getValoresBalancoMensal($mes, $tipo_pagamentos->id, $getAno);
-                                                    ?>
-                                                    {{$valores}},
-                                                    <?php }?>
-                                                    ]
-
-                                            },
+                                            '{{$getMes}}',
+                                            <?php }?>
+                                        ],
+                                        crosshair: true
+                                    },
+                                    yAxis: {
+                                        min: 0,
+                                        title: {
+                                            text: 'Valores (Akz)'
+                                        }
+                                    },
+                                    tooltip: {
+                                        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                                        pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                                            '<td style="padding:0"><b>{point.y:,2f} Akz</b></td></tr>',
+                                        footerFormat: '</table>',
+                                        shared: true,
+                                        useHTML: true
+                                    },
+                                    plotOptions: {
+                                        column: {
+                                            pointPadding: 0.2,
+                                            borderWidth: 0
+                                        }
+                                    },
+                                    series: [
+                                        <?php
+                                        foreach($getTipoPagamentos as $tipo_pagamentos){
+                                        ?>
+                                        {
+                                        name: '{{$tipo_pagamentos->tipo}}',
+                                        data: [
+                                            <?php
+                                            foreach($meses as $mes){
+                                                $valores = ControladorStatic::getValoresBalancoMensal($mes, $tipo_pagamentos->id, $getAno);
+                                            ?>
+                                            {{$valores}},
                                             <?php }?>
                                             ]
-                                        });
-                                    </script>
+
+                                    },
+                                    <?php }?>
+                                    ]
+                                });
+                            </script>
+                                        </div>
+
                                     </p>
                                 </div>
                                 <div class="tab-pane" id="messages5" role="tabpanel">

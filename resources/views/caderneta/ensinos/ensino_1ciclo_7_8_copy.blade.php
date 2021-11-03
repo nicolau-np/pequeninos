@@ -8,8 +8,7 @@ $p2 = false;
 
 $pg = false;
 $rec = false;
-if (session('epoca') <= 3) {
-    foreach ($getConfigBloqueios as $config_bloqueios) { if ($config_bloqueios->tipo == 'av1'
+if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) { if ($config_bloqueios->tipo == 'av1'
     && $config_bloqueios->estado == 'on') {
     $av1 = true;
     } elseif ($config_bloqueios->tipo == 'av2' && $config_bloqueios->estado == 'on') {
@@ -23,29 +22,27 @@ if (session('epoca') <= 3) {
     }
     }
     } elseif (session('epoca') == 4) {
-        foreach ($getConfigBloqueios as $config_bloqueios){
-            if($config_bloqueios->tipo=="pg" && $config_bloqueios->estado == 'on'){
-                $pg=true;
-            }
-        }
+    foreach ($getConfigBloqueios as $config_bloqueios) {
+    if ($config_bloqueios->tipo == 'pg' && $config_bloqueios->estado == 'on') {
+    $pg = true;
+    }
+    }
     } elseif (session('epoca') == 5) {
-        foreach ($getConfigBloqueios as $config_bloqueios){
-            if($config_bloqueios->tipo=="rec" && $config_bloqueios->estado == 'on'){
-                $rec=true;
-            }
-        }
+    foreach ($getConfigBloqueios as $config_bloqueios) {
+    if ($config_bloqueios->tipo == 'rec' && $config_bloqueios->estado == 'on') {
+    $rec = true;
+    }
+    }
     }
     ?>
     @extends('layouts.app')
     @section('content')
         <style>
-
-
-            .avaliacao{
+            .avaliacao {
                 width: 80px;
             }
 
-            .prova{
+            .prova {
                 width: 80px;
             }
 
@@ -102,398 +99,150 @@ if (session('epoca') <= 3) {
                             @endif
 
                             <div class="tabela_balanco">
-                                 <div class="col-lg-12 col-xl-12">
+                                <div class="col-lg-12 col-xl-12">
 
-                                <!-- Nav tabs -->
-                                <ul class="nav nav-tabs md-tabs tabs-left b-none" role="tablist">
-                                    @if ($getEpoca1->estado != 'off')
-                                        <li class="nav-item">
-                                            <a class="nav-link @if (session('epoca')=='1' ) active @endif"
-                                                href="/cadernetas/create/{{ $getId_turma }}/{{ $getId_disciplina }}/{{ $getAno_lectivo }}/1">1º
-                                                TRIMESTRE</a>
-                                            <div class="slide"></div>
-                                        </li>
-                                    @endif
-                                    @if ($getEpoca2->estado != 'off')
-                                        <li class="nav-item">
-                                            <a class="nav-link @if (session('epoca')=='2' ) active @endif"
-                                                href="/cadernetas/create/{{ $getId_turma }}/{{ $getId_disciplina }}/{{ $getAno_lectivo }}/2">2º
-                                                TRIMESTRE</a>
-                                            <div class="slide"></div>
-                                        </li>
-                                    @endif
-                                    @if ($getEpoca3->estado != 'off')
-                                        <li class="nav-item">
-                                            <a class="nav-link @if (session('epoca')=='3' ) active @endif"
-                                                href="/cadernetas/create/{{ $getId_turma }}/{{ $getId_disciplina }}/{{ $getAno_lectivo }}/3">3º
-                                                TRIMESTRE</a>
-                                            <div class="slide"></div>
-                                        </li>
-                                    @endif
-                                    @if ($getEpoca4->estado != 'off')
-                                        <li class="nav-item">
-                                            <a class="nav-link @if (session('epoca')=='4' ) active @endif"
-                                                href="/cadernetas/create/{{ $getId_turma }}/{{ $getId_disciplina }}/{{ $getAno_lectivo }}/4">EXAME</a>
-                                            <div class="slide"></div>
-                                        </li>
-                                    @endif
-                                    @if ($getEpoca5->estado != 'off')
-                                        <li class="nav-item">
-                                            <a class="nav-link @if (session('epoca')=='5' ) active @endif"
-                                                href="/cadernetas/create/{{ $getId_turma }}/{{ $getId_disciplina }}/{{ $getAno_lectivo }}/5">REC</a>
-                                            <div class="slide"></div>
-                                        </li>
-                                    @endif
-                                </ul>
-                                <!-- Tab panes -->
-                                <div class="tab-content tabs-left-content card-block">
-                                    @if ($getEpoca1->estado != 'off')
-                                        <div class="tab-pane @if (session('epoca')=='1' ) active @endif" role="tabpanel">
-                                            <p class="m-0">
-
-                                                {{ Form::open(['method' => 'post']) }}
-
-                                            <table class="table table-bordered tabela_notas">
-                                                <thead>
-                                                    <tr>
-                                                        <th colspan="3">DADOS PESSOAIS</th>
-                                                        <th colspan="3">AVALIAÇÕES</th>
-                                                        <th colspan="2">PROVAS</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Nº</th>
-                                                        <th>NOME</th>
-                                                        <th>G</th>
-                                                        <th>OUT</th>
-                                                        <th>NOV</th>
-                                                        <th>DEZ</th>
-                                                        <th>NPP</th>
-                                                        <th>PT</th>
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody>
-                                                    @if (session('epoca') == 1)
-                                                        @if ($getTrimestral != null)
-                                                            @if ($getTrimestral->count() == 0)
-                                                                Nenhum estudante encontrado
-                                                            @else
-                                                                @foreach ($getTrimestral as $trimestral)
-                                                                    <?php $observacao =
-                                                                    ControladorStatic::getObservacaofinal($trimestral->id_estudante,
-                                                                    $trimestral->ano_lectivo); ?>
-                                                                    <tr class="{{ $observacao->observacao_final }}">
-                                                                        <td>{{ $loop->iteration }}</td>
-                                                                        <td>{{ $trimestral->estudante->pessoa->nome }}
-                                                                        </td>
-                                                                        <td>{{ $trimestral->estudante->pessoa->genero }}
-                                                                        </td>
-
-                                                                        <td>
-                                                                            @if($av1)
-                                                                            <input type="number" name="av1"
-                                                                            data-id="{{ $trimestral->id }}"
-                                                                            data-campo="av1"
-                                                                            value="{{ $trimestral->av1 }}"
-                                                                            class="form-control avaliacao" />
-                                                                            @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if($av2)
-                                                                            <input type="number" name="av2"
-                                                                                data-id="{{ $trimestral->id }}"
-                                                                                data-campo="av2"
-                                                                                value="{{ $trimestral->av2 }}"
-                                                                                class="form-control avaliacao" />
-                                                                                @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if($av3)
-                                                                            <input type="number" name="av3"
-                                                                                data-id="{{ $trimestral->id }}"
-                                                                                data-campo="av3"
-                                                                                value="{{ $trimestral->av3 }}"
-                                                                                class="form-control avaliacao" />
-                                                                                @endif
-                                                                        </td>
-
-                                                                        <td>
-                                                                            @if($p1)
-                                                                            <input type="number" name="npp"
-                                                                                data-id="{{ $trimestral->id }}"
-                                                                                data-campo="npp"
-                                                                                value="{{ $trimestral->npp }}"
-                                                                                class="form-control prova" />
-                                                                                @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if($p2)
-                                                                            <input type="number" name="npp"
-                                                                                data-id="{{ $trimestral->id }}"
-                                                                                data-campo="pt"
-                                                                                value="{{ $trimestral->pt }}"
-                                                                                class="form-control prova" />
-                                                                                @endif
-                                                                        </td>
-                                                                    </tr>
-                                                                @endforeach
-                                                            @endif
-                                                        @endif
-                                                    @endif
-                                                </tbody>
-                                            </table>
-
-                                            {{ Form::close() }}
-                                            </p>
-                                        </div>
-                                    @endif
-
-                                    @if ($getEpoca2->estado != 'off')
-                                        <div class="tab-pane @if (session('epoca')=='2' ) active @endif" role="tabpanel">
-                                            <p class="m-0">
-                                                {{ Form::open(['method' => 'post']) }}
-                                            <table class="table table-bordered tabela_notas">
-                                                <thead>
-                                                    <tr>
-                                                        <th colspan="3">DADOS PESSOAIS</th>
-                                                        <th colspan="3">AVALIAÇÕES</th>
-                                                        <th colspan="2">PROVAS</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Nº</th>
-                                                        <th>NOME</th>
-                                                        <th>G</th>
-                                                        <th>JAN</th>
-                                                        <th>FEV</th>
-                                                        <th>MAR</th>
-                                                        <th>NPP</th>
-                                                        <th>PT</th>
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody>
-                                                    @if (session('epoca') == 2)
-                                                        @if ($getTrimestral != null)
-                                                            @if ($getTrimestral->count() == 0)
-                                                                Nenhum estudante encontrado
-                                                            @else
-                                                                @foreach ($getTrimestral as $trimestral)
-                                                                    <?php $observacao =
-                                                                    ControladorStatic::getObservacaofinal($trimestral->id_estudante,
-                                                                    $trimestral->ano_lectivo); ?>
-                                                                    <tr class="{{ $observacao->observacao_final }}">
-                                                                        <td>{{ $loop->iteration }}</td>
-                                                                        <td>{{ $trimestral->estudante->pessoa->nome }}
-                                                                        </td>
-                                                                        <td>{{ $trimestral->estudante->pessoa->genero }}
-                                                                        </td>
-
-                                                                        <td>
-                                                                            @if($av1)
-                                                                            <input type="number" name="av1"
-                                                                                data-id="{{ $trimestral->id }}"
-                                                                                data-campo="av1"
-                                                                                value="{{ $trimestral->av1 }}"
-                                                                                class="form-control avaliacao" />
-                                                                                @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if($av2)
-                                                                            <input type="number" name="av2"
-                                                                                data-id="{{ $trimestral->id }}"
-                                                                                data-campo="av2"
-                                                                                value="{{ $trimestral->av2 }}"
-                                                                                class="form-control avaliacao" />
-                                                                                @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if($av3)
-                                                                            <input type="number" name="av3"
-                                                                                data-id="{{ $trimestral->id }}"
-                                                                                data-campo="av3"
-                                                                                value="{{ $trimestral->av3 }}"
-                                                                                class="form-control avaliacao" />
-                                                                                @endif
-                                                                        </td>
-
-                                                                        <td>
-                                                                            @if($p1)
-                                                                            <input type="number" name="npp"
-                                                                                data-id="{{ $trimestral->id }}"
-                                                                                data-campo="npp"
-                                                                                value="{{ $trimestral->npp }}"
-                                                                                class="form-control prova" />
-                                                                                @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if($p2)
-                                                                            <input type="number" name="npp"
-                                                                                data-id="{{ $trimestral->id }}"
-                                                                                data-campo="pt"
-                                                                                value="{{ $trimestral->pt }}"
-                                                                                class="form-control prova" />
-                                                                                @endif
-                                                                        </td>
-                                                                    </tr>
-                                                                @endforeach
-                                                            @endif
-                                                        @endif
-                                                    @endif
-                                                </tbody>
-                                            </table>
-                                            {{ Form::close() }}
-                                            </p>
-                                        </div>
-                                    @endif
-
-                                    @if ($getEpoca3->estado != 'off')
-                                        <div class="tab-pane @if (session('epoca')=='3' ) active @endif" role="tabpanel">
-                                            <p class="m-0">
-                                                {{ Form::open(['method' => 'post']) }}
-                                            <table class="table table-bordered tabela_notas">
-                                                <thead>
-                                                    <tr>
-                                                        <th colspan="3">DADOS PESSOAIS</th>
-                                                        <th colspan="3">AVALIAÇÕES</th>
-                                                        <th colspan="2">PROVAS</th>
-                                                    </tr>
-                                                    <tr>
-                                                        <th>Nº</th>
-                                                        <th>NOME</th>
-                                                        <th>G</th>
-                                                        <th>ABR</th>
-                                                        <th>MAI</th>
-                                                        <th>JUN</th>
-                                                        <th>NPP</th>
-                                                        <th>PT</th>
-                                                    </tr>
-                                                </thead>
-
-                                                <tbody>
-                                                    @if (session('epoca') == 3)
-                                                        @if ($getTrimestral != null)
-                                                            @if ($getTrimestral->count() == 0)
-                                                                Nenhum estudante encontrado
-                                                            @else
-                                                                @foreach ($getTrimestral as $trimestral)
-                                                                    <?php $observacao =
-                                                                    ControladorStatic::getObservacaofinal($trimestral->id_estudante,
-                                                                    $trimestral->ano_lectivo); ?>
-                                                                    <tr class="{{ $observacao->observacao_final }}">
-                                                                        <td>{{ $loop->iteration }}</td>
-                                                                        <td>{{ $trimestral->estudante->pessoa->nome }}
-                                                                        </td>
-                                                                        <td>{{ $trimestral->estudante->pessoa->genero }}
-                                                                        </td>
-
-                                                                        <td>
-                                                                            @if($av1)
-                                                                            <input type="number" name="av1"
-                                                                                data-id="{{ $trimestral->id }}"
-                                                                                data-campo="av1"
-                                                                                value="{{ $trimestral->av1 }}"
-                                                                                class="form-control avaliacao" />
-                                                                                @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if($av2)
-                                                                            <input type="number" name="av2"
-                                                                                data-id="{{ $trimestral->id }}"
-                                                                                data-campo="av2"
-                                                                                value="{{ $trimestral->av2 }}"
-                                                                                class="form-control avaliacao" />
-                                                                                @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if($av3)
-                                                                            <input type="number" name="av3"
-                                                                                data-id="{{ $trimestral->id }}"
-                                                                                data-campo="av3"
-                                                                                value="{{ $trimestral->av3 }}"
-                                                                                class="form-control avaliacao" />
-                                                                                @endif
-                                                                        </td>
-
-                                                                        <td>
-                                                                            @if($p1)
-                                                                            <input type="number" name="npp"
-                                                                                data-id="{{ $trimestral->id }}"
-                                                                                data-campo="npp"
-                                                                                value="{{ $trimestral->npp }}"
-                                                                                class="form-control prova" />
-                                                                                @endif
-                                                                        </td>
-                                                                        <td>
-                                                                            @if($p2)
-                                                                            <input type="number" name="npp"
-                                                                                data-id="{{ $trimestral->id }}"
-                                                                                data-campo="pt"
-                                                                                value="{{ $trimestral->pt }}"
-                                                                                class="form-control prova" />
-                                                                                @endif
-                                                                        </td>
-                                                                    </tr>
-                                                                @endforeach
-                                                            @endif
-                                                        @endif
-                                                    @endif
-                                                </tbody>
-                                            </table>
-                                            {{ Form::close() }}
-                                            </p>
-                                        </div>
-                                    @endif
-
-                                    @if ($getEpoca4->estado != 'off')
-                                        <div class="tab-pane @if (session('epoca')=='4' ) active @endif" role="tabpanel">
-                                            @if (!$getCadeiraExame)
-                                                <p class="m-0"> Cadeira sem exames</p>
-                                            @else
+                                    <!-- Nav tabs -->
+                                    <ul class="nav nav-tabs md-tabs tabs-left b-none" role="tablist">
+                                        @if ($getEpoca1->estado != 'off')
+                                            <li class="nav-item">
+                                                <a class="nav-link @if (session('epoca')=='1' ) active @endif"
+                                                    href="/cadernetas/create/{{ $getId_turma }}/{{ $getId_disciplina }}/{{ $getAno_lectivo }}/1">1º
+                                                    TRIMESTRE</a>
+                                                <div class="slide"></div>
+                                            </li>
+                                        @endif
+                                        @if ($getEpoca2->estado != 'off')
+                                            <li class="nav-item">
+                                                <a class="nav-link @if (session('epoca')=='2' ) active @endif"
+                                                    href="/cadernetas/create/{{ $getId_turma }}/{{ $getId_disciplina }}/{{ $getAno_lectivo }}/2">2º
+                                                    TRIMESTRE</a>
+                                                <div class="slide"></div>
+                                            </li>
+                                        @endif
+                                        @if ($getEpoca3->estado != 'off')
+                                            <li class="nav-item">
+                                                <a class="nav-link @if (session('epoca')=='3' ) active @endif"
+                                                    href="/cadernetas/create/{{ $getId_turma }}/{{ $getId_disciplina }}/{{ $getAno_lectivo }}/3">3º
+                                                    TRIMESTRE</a>
+                                                <div class="slide"></div>
+                                            </li>
+                                        @endif
+                                        @if ($getEpoca4->estado != 'off')
+                                            <li class="nav-item">
+                                                <a class="nav-link @if (session('epoca')=='4' ) active @endif"
+                                                    href="/cadernetas/create/{{ $getId_turma }}/{{ $getId_disciplina }}/{{ $getAno_lectivo }}/4">EXAME</a>
+                                                <div class="slide"></div>
+                                            </li>
+                                        @endif
+                                        @if ($getEpoca5->estado != 'off')
+                                            <li class="nav-item">
+                                                <a class="nav-link @if (session('epoca')=='5' ) active @endif"
+                                                    href="/cadernetas/create/{{ $getId_turma }}/{{ $getId_disciplina }}/{{ $getAno_lectivo }}/5">REC</a>
+                                                <div class="slide"></div>
+                                            </li>
+                                        @endif
+                                    </ul>
+                                    <!-- Tab panes -->
+                                    <div class="tab-content tabs-left-content card-block">
+                                        @if ($getEpoca1->estado != 'off')
+                                            <div class="tab-pane @if (session('epoca')=='1' ) active @endif" role="tabpanel">
                                                 <p class="m-0">
-                                                    {{ Form::open(['method' => 'post']) }}
-                                                    <!-- provas-->
+
+
 
                                                 <table class="table table-bordered tabela_notas">
                                                     <thead>
                                                         <tr>
                                                             <th colspan="3">DADOS PESSOAIS</th>
-                                                            <th>PROVA</th>
+                                                            <th colspan="3">AVALIAÇÕES</th>
+                                                            <th colspan="2">PROVAS</th>
                                                         </tr>
                                                         <tr>
                                                             <th>Nº</th>
                                                             <th>NOME</th>
                                                             <th>G</th>
-                                                            <th>NPE</th>
+                                                            <th>OUT</th>
+                                                            <th>NOV</th>
+                                                            <th>DEZ</th>
+                                                            <th>NPP</th>
+                                                            <th>PT</th>
                                                         </tr>
                                                     </thead>
 
                                                     <tbody>
-                                                        @if (session('epoca') == 4)
-                                                            @if ($getGlobal != null)
-                                                                @if ($getGlobal->count() == 0)
+                                                        @if (session('epoca') == 1)
+                                                            @if ($getTrimestral != null)
+                                                                @if ($getTrimestral->count() == 0)
                                                                     Nenhum estudante encontrado
                                                                 @else
-                                                                    @foreach ($getGlobal as $global)
+                                                                    @foreach ($getTrimestral as $trimestral)
                                                                         <?php $observacao =
-                                                                        ControladorStatic::getObservacaofinal($global->id_estudante,
-                                                                        $global->ano_lectivo); ?>
+                                                                        ControladorStatic::getObservacaofinal($trimestral->id_estudante,
+                                                                        $trimestral->ano_lectivo); ?>
                                                                         <tr class="{{ $observacao->observacao_final }}">
                                                                             <td>{{ $loop->iteration }}</td>
-                                                                            <td>{{ $global->estudante->pessoa->nome }}
+                                                                            <td>{{ $trimestral->estudante->pessoa->nome }}
                                                                             </td>
-                                                                            <td>{{ $global->estudante->pessoa->genero }}
+                                                                            <td>{{ $trimestral->estudante->pessoa->genero }}
                                                                             </td>
 
                                                                             <td>
-                                                                                @if($pg)
-                                                                                <input type="number" name="npe"
-                                                                                    data-id="{{ $global->id }}"
-                                                                                    data-campo="npe"
-                                                                                    value="{{ $global->npe }}"
-                                                                                    class="form-control npe" />
+                                                                                @if ($av1)
+                                                                                <form method="post" class="form1">
+                                                                                    <input type="number" name="av1"
+                                                                                        data-id="{{ $trimestral->id }}"
+                                                                                        data-campo="av1"
+                                                                                        value="{{ $trimestral->av1 }}"
+                                                                                        class="form-control avaliacao" />
+                                                                                </form>
                                                                                     @endif
                                                                             </td>
+                                                                            <td>
+                                                                                @if ($av2)
+                                                                                <form method="post" class="form1">
+                                                                                    <input type="number" name="av2"
+                                                                                        data-id="{{ $trimestral->id }}"
+                                                                                        data-campo="av2"
+                                                                                        value="{{ $trimestral->av2 }}"
+                                                                                        class="form-control avaliacao" />
+                                                                                </form>
 
+                                                                                @endif
+                                                                            </td>
+                                                                            <td>
+                                                                                @if ($av3)
+                                                                                <form method="post" class="form1">
+                                                                                    <input type="number" name="av3"
+                                                                                        data-id="{{ $trimestral->id }}"
+                                                                                        data-campo="av3"
+                                                                                        value="{{ $trimestral->av3 }}"
+                                                                                        class="form-control avaliacao" />
+                                                                                </form>
+                                                                                @endif
+                                                                            </td>
+
+                                                                            <td>
+                                                                                @if ($p1)
+                                                                                <form method="post" class="form1">
+                                                                                    <input type="number" name="npp"
+                                                                                        data-id="{{ $trimestral->id }}"
+                                                                                        data-campo="npp"
+                                                                                        value="{{ $trimestral->npp }}"
+                                                                                        class="form-control prova" />
+                                                                                </form>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td>
+                                                                                @if ($p2)
+                                                                                <form method="post" class="form1">
+                                                                                    <input type="number" name="npp"
+                                                                                        data-id="{{ $trimestral->id }}"
+                                                                                        data-campo="pt"
+                                                                                        value="{{ $trimestral->pt }}"
+                                                                                        class="form-control prova" />
+                                                                                </form>
+                                                                                @endif
+                                                                            </td>
                                                                         </tr>
                                                                     @endforeach
                                                                 @endif
@@ -501,67 +250,109 @@ if (session('epoca') <= 3) {
                                                         @endif
                                                     </tbody>
                                                 </table>
-                                                {{ Form::close() }}
+
+
                                                 </p>
-                                            @endif
-                                        </div>
-                                    @endif
+                                            </div>
+                                        @endif
 
-                                    @if ($getEpoca5->estado != 'off')
-                                        <div class="tab-pane @if (session('epoca')=='5' ) active @endif" role="tabpanel">
-                                            @if (!$getCadeiraRecurso)
-                                                <p class="m-0">Cadeira sem Recurso</p>
-                                            @else
+                                        @if ($getEpoca2->estado != 'off')
+                                            <div class="tab-pane @if (session('epoca')=='2' ) active @endif" role="tabpanel">
                                                 <p class="m-0">
-                                                    {{ Form::open(['method' => 'post']) }}
-                                                    <!-- provas-->
-
+                                                    
                                                 <table class="table table-bordered tabela_notas">
                                                     <thead>
                                                         <tr>
                                                             <th colspan="3">DADOS PESSOAIS</th>
-                                                            <th>PROVA</th>
+                                                            <th colspan="3">AVALIAÇÕES</th>
+                                                            <th colspan="2">PROVAS</th>
                                                         </tr>
                                                         <tr>
                                                             <th>Nº</th>
                                                             <th>NOME</th>
                                                             <th>G</th>
-                                                            <th>REC</th>
+                                                            <th>JAN</th>
+                                                            <th>FEV</th>
+                                                            <th>MAR</th>
+                                                            <th>NPP</th>
+                                                            <th>PT</th>
                                                         </tr>
                                                     </thead>
 
                                                     <tbody>
-                                                        @if (session('epoca') == 5)
-                                                            @if ($getGlobal != null)
-                                                                @if ($getGlobal->count() == 0)
+                                                        @if (session('epoca') == 2)
+                                                            @if ($getTrimestral != null)
+                                                                @if ($getTrimestral->count() == 0)
                                                                     Nenhum estudante encontrado
                                                                 @else
-                                                                    @foreach ($getGlobal as $global)
+                                                                    @foreach ($getTrimestral as $trimestral)
                                                                         <?php $observacao =
-                                                                        ControladorStatic::getObservacaofinal($global->id_estudante,
-                                                                        $global->ano_lectivo); ?>
+                                                                        ControladorStatic::getObservacaofinal($trimestral->id_estudante,
+                                                                        $trimestral->ano_lectivo); ?>
                                                                         <tr class="{{ $observacao->observacao_final }}">
                                                                             <td>{{ $loop->iteration }}</td>
-                                                                            <td>{{ $global->estudante->pessoa->nome }}
+                                                                            <td>{{ $trimestral->estudante->pessoa->nome }}
                                                                             </td>
-                                                                            <td>{{ $global->estudante->pessoa->genero }}
+                                                                            <td>{{ $trimestral->estudante->pessoa->genero }}
                                                                             </td>
 
                                                                             <td>
-                                                                                @if($rec)
-                                                                                @if ($global->mf >= 10)
-                                                                                    <input type="number" name="rec" value=""
-                                                                                        class="form-control" disabled />
-                                                                                @else
-                                                                                    <input type="number" name="rec"
-                                                                                        data-id="{{ $global->id }}"
-                                                                                        data-campo="rec"
-                                                                                        value="{{ $global->rec }}"
-                                                                                        class="form-control rec" />
+                                                                                @if ($av1)
+                                                                                <form method="post" class="form1">
+                                                                                    <input type="number" name="av1"
+                                                                                        data-id="{{ $trimestral->id }}"
+                                                                                        data-campo="av1"
+                                                                                        value="{{ $trimestral->av1 }}"
+                                                                                        class="form-control avaliacao" />
+
+                                                                                </form>
                                                                                 @endif
-                                                                            @endif
+                                                                            </td>
+                                                                            <td>
+                                                                                @if ($av2)
+                                                                                <form method="post" class="form1">
+                                                                                    <input type="number" name="av2"
+                                                                                        data-id="{{ $trimestral->id }}"
+                                                                                        data-campo="av2"
+                                                                                        value="{{ $trimestral->av2 }}"
+                                                                                        class="form-control avaliacao" />
+                                                                                </form>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td>
+                                                                                @if ($av3)
+                                                                                <form method="post" class="form1">
+                                                                                    <input type="number" name="av3"
+                                                                                        data-id="{{ $trimestral->id }}"
+                                                                                        data-campo="av3"
+                                                                                        value="{{ $trimestral->av3 }}"
+                                                                                        class="form-control avaliacao" />
+                                                                                </form>
+                                                                                @endif
                                                                             </td>
 
+                                                                            <td>
+                                                                                @if ($p1)
+                                                                                <form method="post" class="form1">
+                                                                                    <input type="number" name="npp"
+                                                                                        data-id="{{ $trimestral->id }}"
+                                                                                        data-campo="npp"
+                                                                                        value="{{ $trimestral->npp }}"
+                                                                                        class="form-control prova" />
+                                                                                </form>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td>
+                                                                                @if ($p2)
+                                                                                <form method="post" class="form1">
+                                                                                    <input type="number" name="npp"
+                                                                                        data-id="{{ $trimestral->id }}"
+                                                                                        data-campo="pt"
+                                                                                        value="{{ $trimestral->pt }}"
+                                                                                        class="form-control prova" />
+                                                                                </form>
+                                                                                @endif
+                                                                            </td>
                                                                         </tr>
                                                                     @endforeach
                                                                 @endif
@@ -569,14 +360,262 @@ if (session('epoca') <= 3) {
                                                         @endif
                                                     </tbody>
                                                 </table>
-                                                {{ Form::close() }}
-                                                </p>
-                                            @endif
-                                        </div>
-                                    @endif
 
+                                                </p>
+                                            </div>
+                                        @endif
+
+                                        @if ($getEpoca3->estado != 'off')
+                                            <div class="tab-pane @if (session('epoca')=='3' ) active @endif" role="tabpanel">
+                                                <p class="m-0">
+
+                                                <table class="table table-bordered tabela_notas">
+                                                    <thead>
+                                                        <tr>
+                                                            <th colspan="3">DADOS PESSOAIS</th>
+                                                            <th colspan="3">AVALIAÇÕES</th>
+                                                            <th colspan="2">PROVAS</th>
+                                                        </tr>
+                                                        <tr>
+                                                            <th>Nº</th>
+                                                            <th>NOME</th>
+                                                            <th>G</th>
+                                                            <th>ABR</th>
+                                                            <th>MAI</th>
+                                                            <th>JUN</th>
+                                                            <th>NPP</th>
+                                                            <th>PT</th>
+                                                        </tr>
+                                                    </thead>
+
+                                                    <tbody>
+                                                        @if (session('epoca') == 3)
+                                                            @if ($getTrimestral != null)
+                                                                @if ($getTrimestral->count() == 0)
+                                                                    Nenhum estudante encontrado
+                                                                @else
+                                                                    @foreach ($getTrimestral as $trimestral)
+                                                                        <?php $observacao =
+                                                                        ControladorStatic::getObservacaofinal($trimestral->id_estudante,
+                                                                        $trimestral->ano_lectivo); ?>
+                                                                        <tr class="{{ $observacao->observacao_final }}">
+                                                                            <td>{{ $loop->iteration }}</td>
+                                                                            <td>{{ $trimestral->estudante->pessoa->nome }}
+                                                                            </td>
+                                                                            <td>{{ $trimestral->estudante->pessoa->genero }}
+                                                                            </td>
+
+                                                                            <td>
+                                                                                @if ($av1)
+                                                                                <form method="post" class="form1">
+                                                                                    <input type="number" name="av1"
+                                                                                        data-id="{{ $trimestral->id }}"
+                                                                                        data-campo="av1"
+                                                                                        value="{{ $trimestral->av1 }}"
+                                                                                        class="form-control avaliacao" />
+                                                                                </form>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td>
+                                                                                @if ($av2)
+                                                                                <form method="post" class="form1">
+                                                                                    <input type="number" name="av2"
+                                                                                        data-id="{{ $trimestral->id }}"
+                                                                                        data-campo="av2"
+                                                                                        value="{{ $trimestral->av2 }}"
+                                                                                        class="form-control avaliacao" />
+                                                                                </form>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td>
+                                                                                @if ($av3)
+                                                                                <form method="post" class="form1">
+                                                                                    <input type="number" name="av3"
+                                                                                        data-id="{{ $trimestral->id }}"
+                                                                                        data-campo="av3"
+                                                                                        value="{{ $trimestral->av3 }}"
+                                                                                        class="form-control avaliacao" />
+                                                                                </form>
+                                                                                @endif
+                                                                            </td>
+
+                                                                            <td>
+                                                                                @if ($p1)
+                                                                                <form method="post" class="form1">
+                                                                                    <input type="number" name="npp"
+                                                                                        data-id="{{ $trimestral->id }}"
+                                                                                        data-campo="npp"
+                                                                                        value="{{ $trimestral->npp }}"
+                                                                                        class="form-control prova" />
+                                                                                </form>
+                                                                                @endif
+                                                                            </td>
+                                                                            <td>
+                                                                                @if ($p2)
+                                                                                <form method="post" class="form1">
+                                                                                    <input type="number" name="npp"
+                                                                                        data-id="{{ $trimestral->id }}"
+                                                                                        data-campo="pt"
+                                                                                        value="{{ $trimestral->pt }}"
+                                                                                        class="form-control prova" />
+                                                                                </form>
+                                                                                @endif
+                                                                            </td>
+                                                                        </tr>
+                                                                    @endforeach
+                                                                @endif
+                                                            @endif
+                                                        @endif
+                                                    </tbody>
+                                                </table>
+
+                                                </p>
+                                            </div>
+                                        @endif
+
+                                        @if ($getEpoca4->estado != 'off')
+                                            <div class="tab-pane @if (session('epoca')=='4' ) active @endif" role="tabpanel">
+                                                @if (!$getCadeiraExame)
+                                                    <p class="m-0"> Cadeira sem exames</p>
+                                                @else
+                                                    <p class="m-0">
+
+                                                        <!-- provas-->
+
+                                                    <table class="table table-bordered tabela_notas">
+                                                        <thead>
+                                                            <tr>
+                                                                <th colspan="3">DADOS PESSOAIS</th>
+                                                                <th>PROVA</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Nº</th>
+                                                                <th>NOME</th>
+                                                                <th>G</th>
+                                                                <th>NPE</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                            @if (session('epoca') == 4)
+                                                                @if ($getGlobal != null)
+                                                                    @if ($getGlobal->count() == 0)
+                                                                        Nenhum estudante encontrado
+                                                                    @else
+                                                                        @foreach ($getGlobal as $global)
+                                                                            <?php $observacao =
+                                                                            ControladorStatic::getObservacaofinal($global->id_estudante,
+                                                                            $global->ano_lectivo); ?>
+                                                                            <tr
+                                                                                class="{{ $observacao->observacao_final }}">
+                                                                                <td>{{ $loop->iteration }}</td>
+                                                                                <td>{{ $global->estudante->pessoa->nome }}
+                                                                                </td>
+                                                                                <td>{{ $global->estudante->pessoa->genero }}
+                                                                                </td>
+
+                                                                                <td>
+                                                                                    @if ($pg)
+                                                                                    <form method="post" class="form1">
+                                                                                        <input type="number" name="npe"
+                                                                                            data-id="{{ $global->id }}"
+                                                                                            data-campo="npe"
+                                                                                            value="{{ $global->npe }}"
+                                                                                            class="form-control npe" />
+                                                                                    </form>
+                                                                                    @endif
+                                                                                </td>
+
+                                                                            </tr>
+                                                                        @endforeach
+                                                                    @endif
+                                                                @endif
+                                                            @endif
+                                                        </tbody>
+                                                    </table>
+
+                                                    </p>
+                                                @endif
+                                            </div>
+                                        @endif
+
+                                        @if ($getEpoca5->estado != 'off')
+                                            <div class="tab-pane @if (session('epoca')=='5' ) active @endif" role="tabpanel">
+                                                @if (!$getCadeiraRecurso)
+                                                    <p class="m-0">Cadeira sem Recurso</p>
+                                                @else
+                                                    <p class="m-0">
+
+                                                        <!-- provas-->
+
+                                                    <table class="table table-bordered tabela_notas">
+                                                        <thead>
+                                                            <tr>
+                                                                <th colspan="3">DADOS PESSOAIS</th>
+                                                                <th>PROVA</th>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Nº</th>
+                                                                <th>NOME</th>
+                                                                <th>G</th>
+                                                                <th>REC</th>
+                                                            </tr>
+                                                        </thead>
+
+                                                        <tbody>
+                                                            @if (session('epoca') == 5)
+                                                                @if ($getGlobal != null)
+                                                                    @if ($getGlobal->count() == 0)
+                                                                        Nenhum estudante encontrado
+                                                                    @else
+                                                                        @foreach ($getGlobal as $global)
+                                                                            <?php $observacao =
+                                                                            ControladorStatic::getObservacaofinal($global->id_estudante,
+                                                                            $global->ano_lectivo); ?>
+                                                                            <tr
+                                                                                class="{{ $observacao->observacao_final }}">
+                                                                                <td>{{ $loop->iteration }}</td>
+                                                                                <td>{{ $global->estudante->pessoa->nome }}
+                                                                                </td>
+                                                                                <td>{{ $global->estudante->pessoa->genero }}
+                                                                                </td>
+
+                                                                                <td>
+                                                                                    @if ($rec)
+                                                                                        @if ($global->mf >= 10)
+                                                                                        <form method="post" class="form1">
+                                                                                            <input type="number" name="rec"
+                                                                                                value=""
+                                                                                                class="form-control"
+                                                                                                disabled />
+                                                                                        </form>
+                                                                                        @else
+                                                                                        <form method="post" class="form1">
+                                                                                            <input type="number" name="rec"
+                                                                                                data-id="{{ $global->id }}"
+                                                                                                data-campo="rec"
+                                                                                                value="{{ $global->rec }}"
+                                                                                                class="form-control rec" />
+                                                                                        </form>
+                                                                                        @endif
+                                                                                    @endif
+                                                                                </td>
+
+                                                                            </tr>
+                                                                        @endforeach
+                                                                    @endif
+                                                                @endif
+                                                            @endif
+                                                        </tbody>
+                                                    </table>
+
+                                                    </p>
+                                                @endif
+                                            </div>
+                                        @endif
+
+                                    </div>
                                 </div>
-                            </div>
 
                             </div>
 
@@ -600,7 +639,9 @@ if (session('epoca') <= 3) {
 
         <script>
             $(document).ready(function() {
-
+                $(".form1").submit(function(e){
+                    e.preventDefault();
+                });
                 $('.avaliacao').on('keypress', function(e) {
                     if (e.which == 13) {
                         var valor = $(this).val();

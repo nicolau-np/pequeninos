@@ -1,5 +1,6 @@
 @php
 use App\Http\Controllers\ControladorStatic;
+$valor_multa = 0;
 @endphp
 <!DOCTYPE html>
 <html lang="{{ app()->getLocale() }}">

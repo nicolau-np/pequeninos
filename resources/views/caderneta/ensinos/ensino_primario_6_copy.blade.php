@@ -149,7 +149,7 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                             <div class="tab-pane @if (session('epoca')=='1' ) active @endif" role="tabpanel">
                                                 <p class="m-0">
 
-                                                    {{ Form::open(['method' => 'post']) }}
+
                                                 <table class="table table-bordered tabela_notas">
                                                     <thead>
                                                         <tr>
@@ -187,48 +187,58 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
 
                                                                             <td>
                                                                                 @if($av1)
+                                                                                <form method="post" class="form1">
                                                                                 <input type="number" name="av1"
                                                                                     data-id="{{ $trimestral->id }}"
                                                                                     data-campo="av1"
                                                                                     value="{{ $trimestral->av1 }}"
                                                                                     class="form-control avaliacao" />
+                                                                                </form>
                                                                                     @endif
                                                                                 </td>
                                                                             <td>
                                                                                 @if($av2)
+                                                                                <form method="post" class="form1">
                                                                                 <input type="number" name="av2"
                                                                                     data-id="{{ $trimestral->id }}"
                                                                                     data-campo="av2"
                                                                                     value="{{ $trimestral->av2 }}"
                                                                                     class="form-control avaliacao" />
+                                                                                </form>
                                                                                     @endif
                                                                                 </td>
                                                                             <td>
                                                                                 @if($av3)
+                                                                                <form method="post" class="form1">
                                                                                 <input type="number" name="av3"
                                                                                     data-id="{{ $trimestral->id }}"
                                                                                     data-campo="av3"
                                                                                     value="{{ $trimestral->av3 }}"
                                                                                     class="form-control avaliacao" />
+                                                                                </form>
                                                                                     @endif
                                                                                 </td>
 
                                                                             <td>
                                                                                 @if($p1)
+                                                                                <form method="post" class="form1">
                                                                                 <input type="number" name="npp"
                                                                                     data-id="{{ $trimestral->id }}"
                                                                                     data-campo="npp"
                                                                                     value="{{ $trimestral->npp }}"
                                                                                     class="form-control prova" />
+                                                                                </form>
                                                                                     @endif
                                                                                 </td>
                                                                             <td>
                                                                                 @if($p2)
+                                                                                <form method="post" class="form1">
                                                                                 <input type="number" name="npp"
                                                                                     data-id="{{ $trimestral->id }}"
                                                                                     data-campo="pt"
                                                                                     value="{{ $trimestral->pt }}"
                                                                                     class="form-control prova" />
+                                                                                </form>
                                                                                     @endif
                                                                                 </td>
                                                                         </tr>
@@ -238,7 +248,7 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                                         @endif
                                                     </tbody>
                                                 </table>
-                                                {{ Form::close() }}
+
                                                 </p>
                                             </div>
                                         @endif
@@ -246,7 +256,7 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                         @if ($getEpoca2->estado != 'off')
                                             <div class="tab-pane @if (session('epoca')=='2' ) active @endif" role="tabpanel">
                                                 <p class="m-0">
-                                                    {{ Form::open(['method' => 'post']) }}
+
                                                 <table class="table table-bordered tabela_notas">
                                                     <thead>
                                                         <tr>
@@ -284,48 +294,58 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
 
                                                                             <td>
                                                                                 @if($av1)
+                                                                                <form method="post" class="form1">
                                                                                 <input type="number" name="av1"
                                                                                     data-id="{{ $trimestral->id }}"
                                                                                     data-campo="av1"
                                                                                     value="{{ $trimestral->av1 }}"
                                                                                     class="form-control avaliacao" />
+                                                                                </form>
                                                                                     @endif
                                                                                 </td>
                                                                             <td>
                                                                                 @if($av2)
+                                                                                <form method="post" class="form1">
                                                                                 <input type="number" name="av2"
                                                                                     data-id="{{ $trimestral->id }}"
                                                                                     data-campo="av2"
                                                                                     value="{{ $trimestral->av2 }}"
                                                                                     class="form-control avaliacao" />
+                                                                                </form>
                                                                                     @endif
                                                                                 </td>
                                                                             <td>
                                                                                 @if($av3)
+                                                                                <form method="post" class="form1">
                                                                                 <input type="number" name="av3"
                                                                                     data-id="{{ $trimestral->id }}"
                                                                                     data-campo="av3"
                                                                                     value="{{ $trimestral->av3 }}"
                                                                                     class="form-control avaliacao" />
+                                                                                </form>
                                                                                     @endif
                                                                                 </td>
 
                                                                             <td>
                                                                                 @if($p1)
+                                                                                <form method="post" class="form1">
                                                                                 <input type="number" name="npp"
                                                                                     data-id="{{ $trimestral->id }}"
                                                                                     data-campo="npp"
                                                                                     value="{{ $trimestral->npp }}"
                                                                                     class="form-control prova" />
+                                                                                </form>
                                                                                     @endif
                                                                                 </td>
                                                                             <td>
                                                                                 @if($p2)
+                                                                                <form method="post" class="form1">
                                                                                 <input type="number" name="npp"
                                                                                     data-id="{{ $trimestral->id }}"
                                                                                     data-campo="pt"
                                                                                     value="{{ $trimestral->pt }}"
                                                                                     class="form-control prova" />
+                                                                                </form>
                                                                                     @endif
                                                                                 </td>
                                                                         </tr>
@@ -335,7 +355,7 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                                         @endif
                                                     </tbody>
                                                 </table>
-                                                {{ Form::close() }}
+
                                                 </p>
                                             </div>
                                         @endif
@@ -343,7 +363,7 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                         @if ($getEpoca3->estado != 'off')
                                             <div class="tab-pane @if (session('epoca')=='3' ) active @endif" role="tabpanel">
                                                 <p class="m-0">
-                                                    {{ Form::open(['method' => 'post']) }}
+                                                   
                                                 <table class="table table-bordered tabela_notas">
                                                     <thead>
                                                         <tr>
@@ -381,48 +401,58 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
 
                                                                             <td>
                                                                                 @if($av1)
+                                                                                <form method="post" class="form1">
                                                                                 <input type="number" name="av1"
                                                                                     data-id="{{ $trimestral->id }}"
                                                                                     data-campo="av1"
                                                                                     value="{{ $trimestral->av1 }}"
                                                                                     class="form-control avaliacao" />
+                                                                                </form>
                                                                                     @endif
                                                                             </td>
                                                                             <td>
                                                                                 @if($av2)
+                                                                                <form method="post" class="form1">
                                                                                 <input type="number" name="av2"
                                                                                     data-id="{{ $trimestral->id }}"
                                                                                     data-campo="av2"
                                                                                     value="{{ $trimestral->av2 }}"
                                                                                     class="form-control avaliacao" />
+                                                                                </form>
                                                                                     @endif
                                                                             </td>
                                                                             <td>
                                                                                 @if($av3)
+                                                                                <form method="post" class="form1">
                                                                                 <input type="number" name="av3"
                                                                                     data-id="{{ $trimestral->id }}"
                                                                                     data-campo="av3"
                                                                                     value="{{ $trimestral->av3 }}"
                                                                                     class="form-control avaliacao" />
+                                                                                </form>
                                                                                     @endif
                                                                             </td>
 
                                                                             <td>
                                                                                 @if($p1)
+                                                                                <form method="post" class="form1">
                                                                                 <input type="number" name="npp"
                                                                                     data-id="{{ $trimestral->id }}"
                                                                                     data-campo="npp"
                                                                                     value="{{ $trimestral->npp }}"
                                                                                     class="form-control prova" />
+                                                                                </form>
                                                                                     @endif
                                                                             </td>
                                                                             <td>
                                                                                 @if($p2)
+                                                                                <form method="post" class="form1">
                                                                                 <input type="number" name="npp"
                                                                                     data-id="{{ $trimestral->id }}"
                                                                                     data-campo="pt"
                                                                                     value="{{ $trimestral->pt }}"
                                                                                     class="form-control prova" />
+                                                                                </form>
                                                                                     @endif
                                                                             </td>
                                                                         </tr>
@@ -432,7 +462,7 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                                         @endif
                                                     </tbody>
                                                 </table>
-                                                {{ Form::close() }}
+
                                                 </p>
                                             </div>
                                         @endif
@@ -443,7 +473,7 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                                     <p class="m-0"> Cadeira sem exames</p>
                                                 @else
                                                     <p class="m-0">
-                                                        {{ Form::open(['method' => 'post']) }}
+
                                                         <!-- provas-->
 
                                                     <table class="table table-bordered tabela_notas">
@@ -478,11 +508,13 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
 
                                                                                 <td>
                                                                                     @if($pg)
+                                                                                    <form method="post" class="form1">
                                                                                     <input type="number" name="npe"
                                                                                         data-id="{{ $global->id }}"
                                                                                         data-campo="npe"
                                                                                         value="{{ $global->npe }}"
                                                                                         class="form-control npe" />
+                                                                                    </form>
                                                                                         @endif
                                                                                     </td>
 
@@ -493,7 +525,7 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                                             @endif
                                                         </tbody>
                                                     </table>
-                                                    {{ Form::close() }}
+
                                                     </p>
                                                 @endif
                                             </div>
@@ -505,7 +537,7 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                                     <p class="m-0">Cadeira sem Recurso</p>
                                                 @else
                                                     <p class="m-0">
-                                                        {{ Form::open(['method' => 'post']) }}
+
                                                         <!-- provas-->
 
                                                     <table class="table table-bordered tabela_notas">
@@ -541,14 +573,18 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                                                                 <td>
                                                                                     @if($rec)
                                                                                     @if ($global->mf >= 5)
+                                                                                    <form method="post" class="form1">
                                                                                         <input type="number" name="rec" value=""
                                                                                             class="form-control" disabled />
+                                                                                    </form>
                                                                                     @else
+                                                                                    <form method="post" class="form1">
                                                                                         <input type="number" name="rec"
                                                                                             data-id="{{ $global->id }}"
                                                                                             data-campo="rec"
                                                                                             value="{{ $global->rec }}"
                                                                                             class="form-control rec" />
+                                                                                    </form>
                                                                                     @endif
                                                                                     @endif
                                                                                 </td>
@@ -560,7 +596,7 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                                             @endif
                                                         </tbody>
                                                     </table>
-                                                    {{ Form::close() }}
+
                                                     </p>
                                                 @endif
                                             </div>
@@ -592,6 +628,9 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
 
         <script>
             $(document).ready(function() {
+                $(".form1").submit(function(e){
+                    e.preventDefault();
+                });
 
                 $('.avaliacao').on('keypress', function(e) {
                     if (e.which == 13) {

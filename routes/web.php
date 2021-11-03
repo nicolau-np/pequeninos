@@ -260,6 +260,7 @@ Route::group(['prefix' => 'pagamentos', 'middleware' => "user"], function () {
     Route::get('/create/{id_tipo_pagamento}', "PagamentoController@create");
     Route::post('/store', "PagamentoController@store");
     Route::post('/show', "PagamentoController@show")->name('show_pagamento');
+    Route::post('/destroy',"PagamentoController@destroy")->name('delete_pagamento');
 });
 
 Route::group(['prefix' => 'funcionarios', 'middleware' => "AdminSuper"], function () {

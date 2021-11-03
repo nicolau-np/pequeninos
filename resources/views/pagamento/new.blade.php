@@ -165,6 +165,8 @@ use App\Http\Controllers\ControladorStatic;
                                                             <li><a data-epoca="{{ $pagos }}" href="#"
                                                                     style="color:#4680ff;"
                                                                     class="show_pagamento">{{ $pagos }}</a></li>
+
+                                                                    
                                                         @endforeach
                                                     @endif
                                                 </ul>

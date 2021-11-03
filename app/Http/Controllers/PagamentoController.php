@@ -317,9 +317,21 @@ class PagamentoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Request $request)
     {
-        //
+        $request->validate([
+            'factura' => ['required', 'integer'],
+            'ano_lectivo' => ['required', 'string',],
+        ]);
+        $pagamento = Pagamento::where(['fatura' => $request->factura, 'ano_lectivo' => $request->ano_lectivo])->first();
+        if (!$pagamento) {
+            return back()->with(['error' => "Não encontrou factura"]);
+        }
+
+        if (Pagamento::where(['fatura' => $request->factura, 'ano_lectivo' => $request->ano_lectivo])->delete()) {
+            return back()->with(['success' => "Eliminou pagamento com sucesso"]);
+        }
+
     }
 
     public function listar($id_estudante, $ano)

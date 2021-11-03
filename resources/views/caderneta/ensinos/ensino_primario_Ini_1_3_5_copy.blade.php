@@ -196,7 +196,7 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
 
                                                                             <td>
                                                                                 @if($av1)
-                                                                                <input type="number" name="av1"
+                                                                                <input type="text" name="av1"
                                                                                     data-id="{{ $trimestral->id }}"
                                                                                     data-campo="av1"
                                                                                     value="{{ $trimestral->av1 }}"

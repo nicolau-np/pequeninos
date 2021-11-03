@@ -193,7 +193,9 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                                                                     data-campo="av1"
                                                                                     value="{{ $trimestral->av1 }}"
                                                                                     class="form-control avaliacao" />
+
                                                                                     @endif
+
                                                                             </td>
                                                                             <td>
                                                                                 @if($av2)

@@ -39,7 +39,7 @@ if (session('epoca') <= 3) {
     @extends('layouts.app')
     @section('content')
         <style>
-           
+
 
             .avaliacao{
                 width: 80px;
@@ -101,7 +101,8 @@ if (session('epoca') <= 3) {
                                 <div class="alert alert-success">{{ session('success') }}</div>
                             @endif
 
-                            <div class="col-lg-12 col-xl-12">
+                            <div class="tabela_balanco">
+                                 <div class="col-lg-12 col-xl-12">
 
                                 <!-- Nav tabs -->
                                 <ul class="nav nav-tabs md-tabs tabs-left b-none" role="tablist">
@@ -575,6 +576,8 @@ if (session('epoca') <= 3) {
                                     @endif
 
                                 </div>
+                            </div>
+
                             </div>
 
 

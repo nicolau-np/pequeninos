@@ -75,6 +75,8 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
 
     Route::post('/getCursoEnsino', "AjaxController@getCursoEnsino")->name('getCursoEnsino');
     Route::post('/getDisciplinasCurso', "AjaxController@getDisciplinasCurso")->name('getDisciplinasCurso');
+
+    Route::post('/getBalancoDiario', "AjaxController@getBalancoDiario")->name('getBalancoDiario');
 });
 
 Route::group(['prefix' => 'institucional', 'middleware' => "admin"], function () {

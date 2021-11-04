@@ -1137,4 +1137,10 @@ class AjaxController extends Controller
 
         return view('ajax_loads.getGrades', $data);
     }
+
+    public function getBalancoDiario(Request $request)
+    {
+        $data = [];
+        return view('ajax_loads.getBalancoDiario', $data);
+    }
 }

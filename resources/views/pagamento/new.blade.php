@@ -137,7 +137,7 @@ use App\Http\Controllers\ControladorStatic;
                                                 <hr />
                                             </div>
                                             <div class="col-md-6">
-                                                {{ Form::label('data_entrada', 'Data de Entrada') }} <span
+                                                {{ Form::label('data_entrada', 'Data de Pagamento') }} <span
                                                     class="text-danger">*</span>
                                                 {{ Form::date('data_entrada', date('Y-m-d'), ['class' => 'form-control', 'placeholder' => 'Data de entrada']) }}
                                             </div>

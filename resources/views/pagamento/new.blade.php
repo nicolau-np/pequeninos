@@ -136,9 +136,18 @@ use App\Http\Controllers\ControladorStatic;
                                                 @endif
                                                 <hr />
                                             </div>
+                                            <div class="col-md-6">
+                                                {{ Form::label('data_entrada', 'Data de Entrada') }} <span
+                                                    class="text-danger">*</span>
+                                                {{ Form::date('data_entrada', date('Y-m-d'), ['class' => 'form-control', 'placeholder' => 'Data de entrada']) }}
+                                            </div>
+                                            <div class="col-md-6">
+                                                {{ Form::label('descricao', 'Descrição') }}
+                                                {{ Form::text('descricao', null, ['class' => 'form-control', 'placeholder' => 'Descrição']) }}
+                                            </div>
 
                                             <div class="col-md-6">
-
+                                                <br />
                                                 {{ Form::submit('Salvar', ['class' => 'btn btn-primary']) }}
                                             </div>
                                         </div>
@@ -154,11 +163,12 @@ use App\Http\Controllers\ControladorStatic;
                                             @else
                                                 <ul>
                                                     @if ($getTabelaPreco->forma_pagamento == 'Necessidade')
-                                                    @foreach ($getPagos as $pagos)
-                                                            <li>{{$loop->iteration}}º =>
+                                                        @foreach ($getPagos as $pagos)
+                                                            <li>{{ $loop->iteration }}º =>
                                                                 <a data-epoca="{{ $pagos }}" href="#"
                                                                     style="color:#4680ff;"
-                                                                    class="show_pagamento">{{ $getTabelaPreco->tipo_pagamento->tipo }}</a></li>
+                                                                    class="show_pagamento">{{ $getTabelaPreco->tipo_pagamento->tipo }}</a>
+                                                            </li>
                                                         @endforeach
                                                     @else
                                                         @foreach ($getPagos as $pagos)
@@ -166,7 +176,7 @@ use App\Http\Controllers\ControladorStatic;
                                                                     style="color:#4680ff;"
                                                                     class="show_pagamento">{{ $pagos }}</a></li>
 
-                                                                    
+
                                                         @endforeach
                                                     @endif
                                                 </ul>

@@ -18,6 +18,7 @@ class Pagamento extends Model
         'data_pagamento',
         'fatura',
         'mes_pagamento',
+        'descricao',
         'ano_lectivo',
     ];
 

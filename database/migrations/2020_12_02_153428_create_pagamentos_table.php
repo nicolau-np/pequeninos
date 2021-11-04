@@ -24,6 +24,7 @@ class CreatePagamentosTable extends Migration
             $table->date('data_pagamento');
             $table->bigInteger('fatura');
             $table->bigInteger('mes_pagamento');
+            $table->text('descricao')->nullable();
             $table->string('ano_lectivo');
             $table->timestamps();
         });
@@ -32,7 +33,7 @@ class CreatePagamentosTable extends Migration
             $table->foreign('id_tipo_pagamento')->references('id')->on('tipo_pagamentos')->onUpdate('cascade');
             $table->foreign('id_usuario')->references('id')->on('usuarios')->onUpdate('cascade');
             $table->foreign('id_estudante')->references('id')->on('estudantes')->onUpdate('cascade');
-            
+
         });
     }
 

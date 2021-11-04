@@ -132,7 +132,8 @@ class PagamentoController extends Controller
         }
         $request->validate([
             'meses_a_pagar' => ['required'],
-            'meses_a_pagar.*' => ['string']
+            'meses_a_pagar.*' => ['string'],
+            'data_entrada'=>['required', 'date'],
         ]);
 
         $data = [
@@ -165,9 +166,10 @@ class PagamentoController extends Controller
             'id_estudante' => $historico->id_estudante,
             'epoca' => null,
             'preco' => $tabela_preco->preco,
-            'data_pagamento' => date('Y-m-d'),
+            'data_pagamento' => $request->data_entrada,
             'fatura' => $fatura->id,
-            'mes_pagamento' => date('m'),
+            'mes_pagamento' => date('m', strtotime($request->data_entrada)),
+            'descricao'=>$request->descricao,
             'ano_lectivo' => $historico->ano_lectivo,
         ];
 
@@ -184,9 +186,9 @@ class PagamentoController extends Controller
             'id_encarregado' => $historico->estudante->id_encarregado,
             'epoca' => null,
             'preco' => $tabela_preco->preco,
-            'data_pagamento' => date('Y-m-d'),
+            'data_pagamento' => $request->data_entrada,
             'fatura' => $fatura->id,
-            'mes_pagamento' => date('m'),
+            'mes_pagamento' => date('m', strtotime($request->data_entrada)),
             'ano_lectivo' => $historico->ano_lectivo,
         ];
 

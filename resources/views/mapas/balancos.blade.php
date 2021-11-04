@@ -74,12 +74,12 @@ $lastYear = ControladorStatic::getLastYear();
                                     </div>
 
                                     <div class="col-md-4 col-xl-4">
-                                        <a href="/mapas/balancos/turma/{{ $lastYear }}" style="text-decoration: none;">
+                                        <a href="/mapas/balancos/diario" style="text-decoration: none;">
                                             <div class="card widget-card-1">
                                                 <div class="card-block-small">
                                                     <i class="ti-money bg-c-green card1-icon"></i>
                                                     <span class="text-c-pink f-w-600"
-                                                        style="font-size:13px;">Turma</span>
+                                                        style="font-size:13px;">Diário</span>
                                                     <h4 style="font-size:17px;"> </h4>
                                                     <div>
                                                         <span class="f-left m-t-10 text-muted">

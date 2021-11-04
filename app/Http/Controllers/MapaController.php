@@ -137,13 +137,13 @@ class MapaController extends Controller
         return view('mapas.balanco_categoria', $data);
     }
 
-    public function balanco_turma($ano_lectivo){
+    public function balanco_diario(){
         $data = [
             'title' => "Balanços",
             'type' => "mapas",
             'menu' => "Mapas",
-            'submenu' => "Turma",
+            'submenu' => "Diário",
         ];
-        return view('mapas.balanco_turma', $data);
+        return view('mapas.balanco_diario', $data);
     }
 }

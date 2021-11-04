@@ -251,7 +251,7 @@ Route::group(['prefix' => "mapas", 'middleware' => "AdminUserSuperMaster"], func
         Route::get('/', "MapaController@balancos");
         Route::get('/geral/{ano_lectivo}', "MapaController@balanco_geral");
         Route::get('/categoria/{ano_lectivo}', "MapaController@balanco_categoria");
-        Route::get('/turma/{ano_lectivo}', "MapaController@balanco_turma");
+        Route::get('/diario', "MapaController@balanco_diario");
     });
 });
 

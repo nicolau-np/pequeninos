@@ -88,11 +88,11 @@ use App\Http\Controllers\ControladorStatic;
         $(document).ready(function(e) {
             $('.form-balanco').submit(function(e) {
                 e.preventDefault();
-var data ={
-    data_inicio: $('.data_inicio'),
-    data_fim: $('.data_fim'),
-    _token: "{{ csrf_token() }}"
-};
+                    var data ={
+                        data_inicio: $('.data_inicio').val(),
+                        data_fim: $('.data_fim').val(),
+                        _token: "{{ csrf_token() }}"
+                    };
                 $.ajax({
                     type: "post",
                     url: "{{ route('getBalancoDiario') }}",

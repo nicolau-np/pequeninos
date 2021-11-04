@@ -561,11 +561,16 @@ class ControladorStatic extends Controller
         $valoresPagamentos = Pagamento::whereHas('estudante', function ($query) use ($data){
             $query->whereHas('historico', function ($query2)  use($data){
                 $query2->where(['ano_lectivo'=>$data['ano_lectivo']]);
-               
+
             });
         })->where(['id_tipo_pagamento'=>$data['id_tipo_pagamento']])->get();
 
         return $valoresPagamentos;
+    }
+
+    public static function getBalanco($data1, $data2, $id_tipo_pagamento){
+        $pagamentos = Pagamento::where('data_pagamento','>=',$data1)->where('data_pagamento','<=',$data2)->where(['id_tipo_pagamento'=>$id_tipo_pagamento])->get();
+        return $pagamentos;
     }
 
 

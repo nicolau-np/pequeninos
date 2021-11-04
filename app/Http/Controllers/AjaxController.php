@@ -20,6 +20,7 @@ use App\NotaFinal;
 use App\NotaTrimestral;
 use App\ObservacaoConjunta;
 use App\ObservacaoGeral;
+use App\TipoPagamento;
 use App\Trimestral;
 use App\Turma;
 use App\User;
@@ -1140,7 +1141,18 @@ class AjaxController extends Controller
 
     public function getBalancoDiario(Request $request)
     {
-        $data = [];
+        $request->validate([
+            'data_inicio'=> ['required', 'date'],
+            'data_fim'=> ['required', 'date'],
+
+        ]);
+        $tipo_pagamentos = TipoPagamento::all();
+
+        $data = [
+            'getTipoPagamentos'=>$tipo_pagamentos,
+            'data1'=>$request->data_inicio,
+            'data2'=>$request->data_fim,
+        ];
         return view('ajax_loads.getBalancoDiario', $data);
     }
 }

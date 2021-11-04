@@ -79,7 +79,7 @@ $lastYear = ControladorStatic::getLastYear();
                                                 <div class="card-block-small">
                                                     <i class="ti-money bg-c-green card1-icon"></i>
                                                     <span class="text-c-pink f-w-600"
-                                                        style="font-size:13px;">Diário</span>
+                                                        style="font-size:13px;">Período</span>
                                                     <h4 style="font-size:17px;"> </h4>
                                                     <div>
                                                         <span class="f-left m-t-10 text-muted">

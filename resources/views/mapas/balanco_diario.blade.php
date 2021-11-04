@@ -43,7 +43,7 @@ use App\Http\Controllers\ControladorStatic;
                                         {{ Form::date('data_inicio', null, ['class' => 'form-control data_inicio', 'placeholder' => 'DataInicio']) }}
                                     </div>
                                     <div class="col-md-4">
-                                        {{ Form::label('data_fim', 'Até') }} <span class="text-danger"></span>
+                                        {{ Form::label('data_fim', 'Até') }} <span class="text-danger">*</span>
                                         {{ Form::date('data_fim', null, ['class' => 'form-control data_fim', 'placeholder' => 'DataFim']) }}
                                     </div>
 
@@ -60,10 +60,9 @@ use App\Http\Controllers\ControladorStatic;
 
                             <div class="col-md-12 grafico tabela_balanco">
                                 <br />
-                                <br />
 
                                 <div class="loadBalanco">
-                                    hello
+                                    ...
                                 </div>
                             </div>
                         </div>

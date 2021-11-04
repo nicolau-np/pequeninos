@@ -262,7 +262,7 @@ Route::group(['prefix' => 'pagamentos', 'middleware' => "user"], function () {
     Route::get('/create/{id_tipo_pagamento}', "PagamentoController@create");
     Route::post('/store', "PagamentoController@store");
     Route::post('/show', "PagamentoController@show")->name('show_pagamento');
-    Route::post('/destroy',"PagamentoController@destroy")->name('delete_pagamento');
+    Route::post('/destroy', "PagamentoController@destroy")->name('delete_pagamento');
 });
 
 Route::group(['prefix' => 'funcionarios', 'middleware' => "AdminSuper"], function () {
@@ -391,20 +391,12 @@ Route::group(['prefix' => "word", 'middleware' => "AdminUser"], function () {
 
 /*rota de test*/
 Route::get('test', function () {
-    $data = [
-        'categoria' => "Comunidade",
-        'ano_lectivo' => "2021-2022",
-        'id_tipo_pagamento' => 1,
-    ];
+    $data1 = date('Y-m-d');
+    $data2 = date('Y-m-d');
+    $tipo = 1;
 
-    $valoresPagamentos = Pagamento::whereHas('estudante', function ($query) use ($data){
-        $query->whereHas('historico', function ($query2)  use($data){
-            $query2->where(['ano_lectivo'=>$data['ano_lectivo']]);
-            $query2->where(['categoria'=>$data['categoria']]);
-        });
-    })->where(['id_tipo_pagamento'=>$data['id_tipo_pagamento']])->get();
-
-    return $valoresPagamentos;
+    $pagamentos = Pagamento::where('data_pagamento','>=',$data1)->where('data_pagamento','<=',$data2)->where(['id_tipo_pagamento'=>1])->get();
+    return $pagamentos;
 });
 
 /*fim*/

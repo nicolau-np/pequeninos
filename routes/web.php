@@ -333,6 +333,8 @@ Route::group(['prefix' => 'relatorios', 'middleware' => "auth"], function () {
 
     Route::get('/extrato_pagamentos/{id_estudante}/{ano_lectivo}', "RelatorioController@extrato_pagamentos");
     Route::post('/estatistica_geral', "RelatorioController@estatistica_geral");
+
+    Route::get('/balancoDiario/{data1}/{data2}', "RelatorioController@balancoDiario");
 });
 
 

@@ -3,6 +3,7 @@ use App\Http\Controllers\ControladorStatic;
 @endphp
 
 <div>
+<a href="/relatorios/balancoDiario/{{$data1}}/{{$data2}}" class="btn btn-warning btn-sm">Imprimir</a>
     <table class="table table-bordered">
         <thead>
             <tr>

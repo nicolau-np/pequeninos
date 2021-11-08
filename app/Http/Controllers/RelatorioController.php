@@ -674,4 +674,15 @@ class RelatorioController extends Controller
         $pdf = PDF::loadView('relatorios.users', $data)->setPaper('A4', 'normal');
         return $pdf->stream('LISTA DE USUÁRIOS.pdf');
     }
+
+    public function balancoDiario($data1, $data2){
+        $tipo_pagamentos = TipoPagamento::all();
+        $data = [
+            'data1'=>$data1,
+            'data2'=>$data2,
+            'getTiposPagamentos'=>$tipo_pagamentos,
+        ];
+        $pdf = PDF::loadView('relatorios.balanco', $data)->setPaper('A4', 'normal');
+        return $pdf->stream('BALANÇO - ['.date('d-m-Y',strtotime($data1)).' - '.date('d-m-Y',strtotime($data2)).' ].pdf');
+    }
 }

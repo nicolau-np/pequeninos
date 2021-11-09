@@ -65,6 +65,8 @@ class RelatorioController extends Controller
             'id_turno' => $historico->turma->id_turno,
 
         ])->first();
+        $getRecordPagamento = Pagamento::where(['fatura'=> $id_fatura, 'ano_lectivo'=>$historico->ano_lectivo, 'id_estudante'=>$historico->id_estudante])->first();
+
         $data = [
             'getPagamento' => $pagamento,
             'getHistorico' => $historico,
@@ -73,6 +75,7 @@ class RelatorioController extends Controller
             'getFatura' => $fatura,
             'getEducandos' => $educandos,
             'getTabelaPreco' => $tabela_preco,
+            'getRecordPagamento'=>$getRecordPagamento,
         ];
         $pdf = PDF::loadView('relatorios.fatura', $data)->setPaper('A4', 'normal');
 

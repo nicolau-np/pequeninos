@@ -83,14 +83,17 @@ class PagamentoController extends Controller
             $meses_pagos = Pagamento::where($data['pagamento'])->get();
         }
 
+
         //preencher o array de meses pagos
         foreach ($meses_pagos as $pagos) {
             array_push($array_pagos, $pagos->epoca);
         }
+
         //preencher o array de epocas de pagamento
         foreach ($epocas_pagemento as $epocas) {
             array_push($array_epocas_pagamento, $epocas->epoca);
         }
+
         if ($forma_pagamento->forma_pagamento == "Necessidade") {
             //$array_nao_pagos = array_diff_assoc($array_epocas_pagamento, $array_pagos);
             $array_nao_pagos = $array_epocas_pagamento;
@@ -133,7 +136,7 @@ class PagamentoController extends Controller
         $request->validate([
             'meses_a_pagar' => ['required'],
             'meses_a_pagar.*' => ['string'],
-            'data_entrada'=>['required', 'date'],
+            'data_entrada' => ['required', 'date'],
         ]);
 
         $data = [
@@ -169,7 +172,7 @@ class PagamentoController extends Controller
             'data_pagamento' => $request->data_entrada,
             'fatura' => $fatura->id,
             'mes_pagamento' => date('m', strtotime($request->data_entrada)),
-            'descricao'=>$request->descricao,
+            'descricao' => $request->descricao,
             'ano_lectivo' => $historico->ano_lectivo,
         ];
 
@@ -224,16 +227,63 @@ class PagamentoController extends Controller
                         Multado::where($data['multa'])->update(['estado' => "off"]);
                     }
                 }
-            } else {
+            } elseif ($tabela_preco->forma_pagamento == "Mensal") {
                 //caso contrario
                 //pagamento estudante
+
                 foreach ($request->meses_a_pagar as $epoca) {
                     $data['store']['epoca'] = $epoca;
                     $data['where']['epoca'] = $epoca;
                     $data['multa']['mes'] = $epoca;
 
+                    if ($epoca != "Setembro") {
+
+
+                        /**pegar o id da epoca */
+                        $epocasPagamento = EpocaPagamento::where(['epoca' => $epoca])->first();
+                        /*criar mes anterior*/
+                        $id_mes_anterior = $epocasPagamento->id - 1;
+                        /*levar o numero do mes anterior e trazer a resposta */
+                        $epocasPagamento_anterior = EpocaPagamento::find($id_mes_anterior);
+
+                        /**verifica se já pagou o mes anterior*/
+                        if (!Pagamento::where([
+                            'id_tipo_pagamento' => $id_tipo_pagamento,
+                            'id_estudante' => $historico->id_estudante,
+                            'epoca' => $epocasPagamento_anterior->epoca,
+                            'ano_lectivo' => $historico->ano_lectivo,
+                        ])->first()) {
+                            return back()->with(['error' => "Não pagou os mês anterior a este que pretende pagar"]);
+                        }
+                    }
+
                     /**caso ja tenha feito o pagamento */
                     if (!Pagamento::where($data['where'])->first()) {
+                        $pagamento = Pagamento::create($data['store']);
+                        if (Multado::where($data['multa'])->first()) {
+                            Multado::where($data['multa'])->update(['estado' => "off"]);
+                        }
+                    }
+                }
+            } else {
+
+                //caso contrario
+                //pagamento estudante
+
+                foreach ($request->meses_a_pagar as $epoca) {
+                    $data['store']['epoca'] = $epoca;
+                    $data['where']['epoca'] = $epoca;
+                    $data['multa']['mes'] = $epoca;
+
+
+                    /**caso ja tenha feito o pagamento */
+                    $pag = Pagamento::where([
+                        'id_estudante' => $historico->id_estudante,
+                        'id_tipo_pagamento' => $id_tipo_pagamento,
+                        'epoca' => $epoca,
+                        'ano_lectivo' => $historico->ano_lectivo,
+                    ])->first();
+                    if (!$pag) {
                         $pagamento = Pagamento::create($data['store']);
                         if (Multado::where($data['multa'])->first()) {
                             Multado::where($data['multa'])->update(['estado' => "off"]);
@@ -308,9 +358,32 @@ class PagamentoController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $request->validate([
+
+            'data_pagamento' => ['required', 'date'],
+            'id_estudante' => ['required', 'integer'],
+            'factura' => ['required', 'integer'],
+            'ano_lectivo' => ['required', 'string'],
+            'id_tipo_pagamento' => ['required', 'integer'],
+        ]);
+
+        $data['where'] = [
+            'id_tipo_pagamento' => $request->id_tipo_pagamento,
+            'id_estudante' => $request->id_estudante,
+            'fatura' => $request->factura,
+            'ano_lectivo' => $request->ano_lectivo,
+        ];
+
+        $data['update'] = [
+            'data_pagamento' => $request->data_pagamento,
+            'descricao' => $request->descricaoT,
+        ];
+
+        if (Pagamento::where($data['where'])->update($data['update'])) {
+            return back()->with(['success' => "Informação actualizada com sucesso"]);
+        }
     }
 
     /**
@@ -322,18 +395,38 @@ class PagamentoController extends Controller
     public function destroy(Request $request)
     {
         $request->validate([
-            'factura' => ['required', 'integer'],
+            'id_tipo_pagamento' => ['required', 'integer', 'min:1'],
+            'id_estudante' => ['required', 'integer', 'min:1'],
+            'factura' => ['required', 'integer', 'min:1'],
             'ano_lectivo' => ['required', 'string',],
         ]);
-        $pagamento = Pagamento::where(['fatura' => $request->factura, 'ano_lectivo' => $request->ano_lectivo])->first();
+        $pagamento = Pagamento::where(['id_estudante' => $request->id_estudante, 'fatura' => $request->factura, 'ano_lectivo' => $request->ano_lectivo])->first();
         if (!$pagamento) {
             return back()->with(['error' => "Não encontrou factura"]);
         }
 
-        if (Pagamento::where(['fatura' => $request->factura, 'ano_lectivo' => $request->ano_lectivo])->delete()) {
-            return back()->with(['success' => "Eliminou pagamento com sucesso"]);
+        /**verificar forma de pagamento */
+        $tabela_preco = TabelaPreco::where(['id_tipo_pagamento' => $request->id_tipo_pagamento])->first();
+
+        /**end */
+        if ($tabela_preco->forma_pagamento != "Necessidade") {
+            /**pegar pagamentos feitos */
+            $pagamentos_feitos = Pagamento::where([
+                'id_tipo_pagamento' => $request->id_tipo_pagamento,
+                'id_estudante' => $request->id_estudante,
+                'ano_lectivo' => $request->ano_lectivo
+            ])->get();
+
+            foreach ($pagamentos_feitos as $pags) {
+                if ($pags->fatura  > $pagamento->fatura) {
+                    return back()->with(['error' => "Deve eliminar do último ao primeiro"]);
+                }
+            }
         }
 
+        if (Pagamento::where(['id_estudante' => $request->id_estudante, 'fatura' => $request->factura, 'ano_lectivo' => $request->ano_lectivo])->delete()) {
+            return back()->with(['success' => "Eliminou pagamento com sucesso"]);
+        }
     }
 
     public function listar($id_estudante, $ano)

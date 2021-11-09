@@ -123,7 +123,6 @@ use App\Http\Controllers\ControladorStatic;
                                                                 Akz</span>
                                                             <br />
 
-
                                                         @endforeach
                                                     @endif
                                                     <div class="erro">
@@ -172,9 +171,15 @@ use App\Http\Controllers\ControladorStatic;
                                                         @endforeach
                                                     @else
                                                         @foreach ($getPagos as $pagos)
-                                                            <li><a data-epoca="{{ $pagos }}" href="#"
-                                                                    style="color:#4680ff;"
-                                                                    class="show_pagamento">{{ $pagos }}</a></li>
+                                                            <li>
+                                                                <div class="pagos">
+                                                                    
+                                                                    <a data-epoca="{{ $pagos }}" href="#"
+                                                                        style="color:#4680ff;"
+                                                                        class="show_pagamento">{{ $pagos }}</a>
+                                                                </div>
+
+                                                            </li>
 
 
                                                         @endforeach

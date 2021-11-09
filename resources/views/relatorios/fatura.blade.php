@@ -97,9 +97,9 @@ use App\Http\Controllers\ControladorStatic;
                     <td colspan="2">PAGAMENTO DE {{ strtoupper($getTipoPagamento->tipo) }}</td>
                 </tr>
                 <tr>
-                    <td>Fact. Nº {{ date('dmY', strtotime($getFatura->data_fatura)) }}{{ $getFatura->id }}</td>
-                    <td>Data: {{ date('d-m-Y', strtotime($getFatura->data_fatura)) }}
-                        {{ date('H:i:s', strtotime($getFatura->created_at)) }}</td>
+                    <td>Fact. Nº {{ date('dmY', strtotime($getRecordPagamento->data_pagamento)) }}{{ $getFatura->id }}</td>
+                    <td>Data: {{ date('d-m-Y', strtotime($getRecordPagamento->data_pagamento)) }}
+                        </td>
                 </tr>
             </thead>
         </table>
@@ -306,9 +306,9 @@ use App\Http\Controllers\ControladorStatic;
                     <td colspan="2">PAGAMENTO DE {{ strtoupper($getTipoPagamento->tipo) }}</td>
                 </tr>
                 <tr>
-                    <td>Fact. Nº {{ date('dmY', strtotime($getFatura->data_fatura)) }}{{ $getFatura->id }}</td>
-                    <td>Data: {{ date('d-m-Y', strtotime($getFatura->data_fatura)) }}
-                        {{ date('H:i:s', strtotime($getFatura->created_at)) }}</td>
+                    <td>Fact. Nº {{ date('dmY', strtotime($getRecordPagamento->data_pagamento)) }}{{ $getFatura->id }}</td>
+                    <td>Data: {{ date('d-m-Y', strtotime($getRecordPagamento->data_pagamento)) }}
+                        </td>
                 </tr>
             </thead>
         </table>

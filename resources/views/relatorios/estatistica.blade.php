@@ -198,7 +198,7 @@ $chegados_fimT=[
                             $chegados_fimT['f'] = $chegados_fimT['f']+$chegados_fim['f'];
                         @endphp
                         <tr>
-                            <td>{{strtoupper($classes->classe)}}</td>
+                            <td>{{$classes->classe}}</td>
                             <td>{{$matriculados['mf']}}</td>
                             <td>{{$matriculados['f']}}</td>
                             <td>{{$desistidos['mf']}}</td>

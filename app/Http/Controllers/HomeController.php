@@ -33,7 +33,7 @@ class HomeController extends Controller
         $estudantes = Estudante::all();
         $encarregados = Encarregado::all();
         $data = [
-            'title'=>"SIGE - Sistema de Gestão Escolar",
+            'title'=>"SIGE OKUSSOLEKA - Sistema de Gestão Escolar",
             'type'=>"home",
             'menu'=>"Home",
             'submenu'=>"",

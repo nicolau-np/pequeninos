@@ -29,7 +29,7 @@
                         {{Form::open(['method'=>"put", 'url'=>"/verifycode/{$getReset->id}", 'class'=>"md-float-material"])}}
                         @csrf
                             <div class="text-center" style="font-size:30px; font-weight: bold;">
-                                SIGE
+                                SIGE OKUSSOLEKA
                             </div>
                             <div class="auth-box">
                                 <div class="row m-b-20">

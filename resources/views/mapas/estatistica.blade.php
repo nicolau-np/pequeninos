@@ -76,7 +76,7 @@
 <!-- botão pesquisar -->
 <div class="btnPesquisar">
 	<div class="btnPesquisarBtn">
-		<a href="/mapas" class="btn btn-primary btnCircular btnPrincipal" title="Listar"><i class="ti-search"></i></a>
+		<a href="/mapas" class="btn btn-primary btnCircular btnPrincipal" title="Listar"><i class="ti-arrow-left"></i></a>
 	</div>
 </div>
 

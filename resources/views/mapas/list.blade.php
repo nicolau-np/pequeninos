@@ -146,11 +146,11 @@ $lastYear = ControladorStatic::getLastYear();
     <!-- hidden-sm-up -->
 
     <!-- botão pesquisar -->
-    <div class="btnPesquisar">
+    <!--<div class="btnPesquisar">
         <div class="btnPesquisarBtn">
-            <a href="#" class="btn btn-primary btnCircular btnPrincipal" title="Listar"><i class="ti-search"></i></a>
+            <a href="#" class="btn btn-primary btnCircular btnPrincipal" title="Listar"><i class="ti-arrow-left"></i></a>
         </div>
-    </div>
+    </div>-->
 
 
     <!-- modal -->

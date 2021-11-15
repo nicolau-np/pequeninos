@@ -98,11 +98,11 @@ $dadosGerais01 = [
                 <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
                     <thead>
                         <tr>
-                            <th rowspan="2">DISCIPLINA</th>
+                            <th rowspan="2">DISCIPLINAS</th>
                             @foreach ($getClasses as $classes)
-                            <th colspan="4">{{strtoupper($classes->classe)}}</th>
+                            <th colspan="4">{{$classes->classe}}</th>
                             @endforeach
-                            <th colspan="4">TOTAL</th>
+                            <th colspan="4">Total</th>
                         </tr>
 
                         <tr>
@@ -137,7 +137,7 @@ $dadosGerais01 = [
                                     $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
                                 @endphp
                                 <tr>
-                                    <td>{{strtoupper($getDisciplina->disciplina)}}</td>
+                                    <td>{{$getDisciplina->disciplina}}</td>
 
                                     @foreach ($getClasses as $classes)
                                     @php

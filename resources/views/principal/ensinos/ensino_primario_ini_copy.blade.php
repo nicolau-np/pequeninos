@@ -113,7 +113,7 @@ use App\Http\Controllers\ControladorStatic;
                                                 @else
                                                     @foreach ($trimestre1 as $valor1)
                                                         @php
-                                                            $v1_estilo = ControladorNotas::nota_20($valor1->mt);
+                                                            $v1_estilo = ControladorNotas::nota_10($valor1->mt);
                                                         @endphp
                                                         <td class="{{ $v1_estilo }}">
                                                             @if ($valor1->mt == null) ---
@@ -128,7 +128,7 @@ use App\Http\Controllers\ControladorStatic;
                                                 @else
                                                     @foreach ($trimestre2 as $valor2)
                                                         @php
-                                                            $v2_estilo = ControladorNotas::nota_20($valor2->mt);
+                                                            $v2_estilo = ControladorNotas::nota_10($valor2->mt);
                                                         @endphp
                                                         <td class="{{ $v2_estilo }}">
                                                             @if ($valor2->mt == null) ---
@@ -142,7 +142,7 @@ use App\Http\Controllers\ControladorStatic;
                                                 @else
                                                     @foreach ($trimestre3 as $valor3)
                                                         @php
-                                                            $v3_estilo = ControladorNotas::nota_20($valor3->mt);
+                                                            $v3_estilo = ControladorNotas::nota_10($valor3->mt);
                                                         @endphp
                                                         <td class="{{ $v3_estilo }}">
                                                             @if ($valor3->mt == null) ---

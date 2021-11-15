@@ -17,7 +17,7 @@ $lastYear = ControladorStatic::getLastYear();
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta name="description" content="SIGE - Sistema de Gestão Escolar">
+      <meta name="description" content="SIGE OKUSSOLEKA - Sistema de Gestão Escolar">
       <meta name="keywords" content="sistema , gestão, escolar, Sistema, Gestão, Escolar, SIGE, sige, escola, gestor, sistema de gestao escolar">
       <meta name="author" content="Nicolau NP">
       <!-- Favicon icon -->
@@ -83,7 +83,7 @@ $lastYear = ControladorStatic::getLastYear();
                         </a>
                         <a href="/">
                             <!--<img class="img-fluid" src="{{asset('assets/logos/logo2.png')}}" style="width:50%; height:50px;" alt="Theme-Logo" />-->
-                            <span style="font-weight: bold; font-size:25px;">SIGE</span>
+                            <span style="font-weight: bold; font-size:20px;">SIGE OKUSSOLEKA</span>
                         </a>
                         <a class="mobile-options">
                             <i class="ti-more"></i>

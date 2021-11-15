@@ -144,7 +144,7 @@ $total_geral = [
 
                         @endphp
                         <tr>
-                            <td style="width:100px;">{{ strtoupper($turmas->classe->classe) }} [
+                            <td style="width:100px;">{{ $turmas->classe->classe }} [
                                 {{ $turmas->turma }}
                                 ]</td>
                             @foreach ($getCategorias as $categorias)
@@ -224,6 +224,30 @@ $total_geral = [
                     </tr>
                 </tbody>
             </table>
+        </div>
+    </div>
+
+    <br/><br/>
+    <div class="rodape">
+
+        <div class="data">
+            <p style="text-align: center;">
+            Huambo aos, {{date('d')}} de
+            @php
+                $mes_extenso = ControladorStatic::converterMesExtensao(date('m'));
+
+            @endphp
+            {{$mes_extenso}}
+            de {{date('Y')}}
+            </p>
+        </div>
+
+        <div class="director">
+            <p style="text-align: center;">
+                O Director da escola<br/>
+                -------------------------------------------------<br/>
+                Aurélio Messele Tchissende
+             </p>
         </div>
     </div>
 </body>

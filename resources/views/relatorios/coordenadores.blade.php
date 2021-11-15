@@ -117,14 +117,14 @@ $total=[
                                 @if(!$coordenador)
                                 ---
                                 @else
-                                {{strtoupper($coordenador->funcionario->pessoa->nome)}}
+                                {{$coordenador->funcionario->pessoa->nome}}
                                     @php
                                     $total['coordenadores'] ++;
                                     @endphp
                                 @endif
                             </td>
-                            <td>{{strtoupper($turma->classe->classe)}} [ {{$turma->turma}} ]</td>
-                            <td>{{strtoupper($turma->sala)}}</td>
+                            <td>{{$turma->classe->classe}} [ {{$turma->turma}} ]</td>
+                            <td>{{$turma->sala}}</td>
                             <td>
                                 @php
                                     $historico = ControladorStatic::getTotalEstudantesTurma($turma->id, $getAno);
@@ -139,7 +139,7 @@ $total=[
                                 {{$coordenador->funcionario->pessoa->telefone}}
                                 @endif
                             </td>
-                            <td>{{strtoupper($turma->turno->turno)}}</td>
+                            <td>{{$turma->turno->turno}}</td>
                         </tr>
 
                         @endforeach
@@ -174,6 +174,14 @@ $total=[
                 {{$mes_extenso}}
                 de {{date('Y')}}
                 </p>
+            </div>
+
+            <div class="director">
+                <p style="text-align: center;">
+                    O Director da escola<br/>
+                    -------------------------------------------------<br/>
+                    Aurélio Messele Tchissende
+                 </p>
             </div>
         </div>
     </div>

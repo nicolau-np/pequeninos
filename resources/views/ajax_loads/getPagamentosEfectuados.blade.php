@@ -94,6 +94,11 @@ use App\Http\Controllers\ControladorStatic;
                 $('.ano_lectivo').val(data.ano_lectivo);
                 $('#deletemodal').modal('show');
             });
+
+            $('.cancel').click(function(e) {
+                e.preventDefault();
+                $('#deletemodal').modal('hide');
+            });
         });
 
     </script>

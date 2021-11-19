@@ -30,7 +30,8 @@
                                 {{ Form::open(['method' => 'post', 'class' => 'form-pagamentos']) }}
                                 <div class="row">
                                     <div class="col-md-4">
-                                        {{ Form::label('data_inicio', 'Definir Data') }} <span class="text-danger">*</span>
+                                        {{ Form::label('data_inicio', 'Definir Data') }} <span
+                                            class="text-danger">*</span>
                                         {{ Form::date('data_inicio', null, ['class' => 'form-control data_inicio', 'placeholder' => 'Data']) }}
                                     </div>
 
@@ -70,20 +71,24 @@
     <script>
         $(document).ready(function(e) {
             $('.form-pagamentos').submit(function(e) {
+
                 e.preventDefault();
-                    var data ={
-                        data_inicio: $('.data_inicio').val(),
-                        _token: "{{ csrf_token() }}"
-                    };
-                $.ajax({
-                    type: "post",
-                    url: "{{ route('getPagamentosEfectuados') }}",
-                    data: data,
-                    dataType: "html",
-                    success: function(response) {
-                        $('.loadPags').html(response);
-                    }
-                });
+                var data = {
+                    data_inicio: $('.data_inicio').val(),
+                    _token: "{{ csrf_token() }}"
+                };
+                if (data.data_inicio !== "") {
+                    $.ajax({
+                        type: "post",
+                        url: "{{ route('getPagamentosEfectuados') }}",
+                        data: data,
+                        dataType: "html",
+                        success: function(response) {
+                            $('.loadPags').html(response);
+                        }
+                    });
+                }
+
             })
         });
 

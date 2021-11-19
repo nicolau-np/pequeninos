@@ -456,4 +456,15 @@ class PagamentoController extends Controller
         ];
         return view('pagamento.list', $data);
     }
+
+    public function mapas(){
+        $data = [
+            'title' => "Pagamentos efectuados",
+            'type' => "mapa",
+            'menu' => "Pagamentos",
+            'submenu' => "Mapa",
+        ];
+        return view('pagamento.mapas', $data);
+    }
+
 }

@@ -77,6 +77,8 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/getDisciplinasCurso', "AjaxController@getDisciplinasCurso")->name('getDisciplinasCurso');
 
     Route::post('/getBalancoDiario', "AjaxController@getBalancoDiario")->name('getBalancoDiario');
+
+    Route::post('/getPagamentosEfectuados', "AjaxController@getPagamentosEfectuados")->name('getPagamentosEfectuados');
 });
 
 Route::group(['prefix' => 'institucional', 'middleware' => "admin"], function () {
@@ -264,6 +266,7 @@ Route::group(['prefix' => 'pagamentos', 'middleware' => "user"], function () {
     Route::post('/show', "PagamentoController@show")->name('show_pagamento');
     Route::post('/destroy', "PagamentoController@destroy")->name('delete_pagamento');
     Route::post('/update', "PagamentoController@update")->name('update_pagamento');
+    Route::get('/mapas', "PagamentoController@mapas");
 });
 
 Route::group(['prefix' => 'funcionarios', 'middleware' => "AdminSuper"], function () {

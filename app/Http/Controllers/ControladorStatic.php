@@ -524,12 +524,12 @@ class ControladorStatic extends Controller
             'id_tipo_pagamento' => $id_tipo_pagamento,
         ];
 
-        $valoresPagamentos = Pagamento::whereHas('estudante', function ($query) use ($data){
-            $query->whereHas('historico', function ($query2)  use($data){
-                $query2->where(['ano_lectivo'=>$data['ano_lectivo']]);
-                $query2->where(['categoria'=>$data['categoria']]);
+        $valoresPagamentos = Pagamento::whereHas('estudante', function ($query) use ($data) {
+            $query->whereHas('historico', function ($query2)  use ($data) {
+                $query2->where(['ano_lectivo' => $data['ano_lectivo']]);
+                $query2->where(['categoria' => $data['categoria']]);
             });
-        })->where(['id_tipo_pagamento'=>$data['id_tipo_pagamento']])->get();
+        })->where(['id_tipo_pagamento' => $data['id_tipo_pagamento']])->get();
 
         return $valoresPagamentos;
     }
@@ -541,10 +541,10 @@ class ControladorStatic extends Controller
             'ano_lectivo' => $ano_lectivo,
         ];
 
-        $valoresPagamentos = Pagamento::whereHas('estudante', function ($query) use ($data){
-            $query->whereHas('historico', function ($query2)  use($data){
-                $query2->where(['ano_lectivo'=>$data['ano_lectivo']]);
-                $query2->where(['categoria'=>$data['categoria']]);
+        $valoresPagamentos = Pagamento::whereHas('estudante', function ($query) use ($data) {
+            $query->whereHas('historico', function ($query2)  use ($data) {
+                $query2->where(['ano_lectivo' => $data['ano_lectivo']]);
+                $query2->where(['categoria' => $data['categoria']]);
             });
         })->get();
 
@@ -558,20 +558,24 @@ class ControladorStatic extends Controller
             'id_tipo_pagamento' => $id_tipo_pagamento,
         ];
 
-        $valoresPagamentos = Pagamento::whereHas('estudante', function ($query) use ($data){
-            $query->whereHas('historico', function ($query2)  use($data){
-                $query2->where(['ano_lectivo'=>$data['ano_lectivo']]);
-
+        $valoresPagamentos = Pagamento::whereHas('estudante', function ($query) use ($data) {
+            $query->whereHas('historico', function ($query2)  use ($data) {
+                $query2->where(['ano_lectivo' => $data['ano_lectivo']]);
             });
-        })->where(['id_tipo_pagamento'=>$data['id_tipo_pagamento']])->get();
+        })->where(['id_tipo_pagamento' => $data['id_tipo_pagamento']])->get();
 
         return $valoresPagamentos;
     }
 
-    public static function getBalanco($data1, $data2, $id_tipo_pagamento){
-        $pagamentos = Pagamento::where('data_pagamento','>=',$data1)->where('data_pagamento','<=',$data2)->where(['id_tipo_pagamento'=>$id_tipo_pagamento])->get();
+    public static function getBalanco($data1, $data2, $id_tipo_pagamento)
+    {
+        $pagamentos = Pagamento::where('data_pagamento', '>=', $data1)->where('data_pagamento', '<=', $data2)->where(['id_tipo_pagamento' => $id_tipo_pagamento])->get();
         return $pagamentos;
     }
 
-
+    public static function getPagamentosEfectuados($id_estudante, $data_pagamento)
+    {
+        $pagamentos = Pagamento::where(['id_estudante' => $id_estudante, 'data_pagamento' => $data_pagamento])->get();
+        return $pagamentos;
+    }
 }

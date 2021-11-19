@@ -1142,17 +1142,33 @@ class AjaxController extends Controller
     public function getBalancoDiario(Request $request)
     {
         $request->validate([
-            'data_inicio'=> ['required', 'date'],
-            'data_fim'=> ['required', 'date'],
+            'data_inicio' => ['required', 'date'],
+            'data_fim' => ['required', 'date'],
 
         ]);
         $tipo_pagamentos = TipoPagamento::all();
 
         $data = [
-            'getTipoPagamentos'=>$tipo_pagamentos,
-            'data1'=>$request->data_inicio,
-            'data2'=>$request->data_fim,
+            'getTipoPagamentos' => $tipo_pagamentos,
+            'data1' => $request->data_inicio,
+            'data2' => $request->data_fim,
         ];
         return view('ajax_loads.getBalancoDiario', $data);
+    }
+
+    public function getPagamentosEfectuados(Request $request)
+    {
+        $request->validate([
+            'data_inicio' => ['required', 'date'],
+        ]);
+        $pags_efectuados = Estudante::whereHas('pagamento', function ($query) use ($request) {
+            $query->where(['data_pagamento' => $request->data_inicio]);
+        })->get();
+        $data = [
+            'getData' => $request->data_inicio,
+            'getAno' => date('Y', strtotime($request->data_inicio)),
+            'getPagamentosEfectuados' => $pags_efectuados,
+        ];
+        return view('ajax_loads.getPagamentosEfectuados', $data);
     }
 }

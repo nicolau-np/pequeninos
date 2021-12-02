@@ -62,7 +62,7 @@ class MinhaTurmaController extends Controller
             return back()->with(['error' => "Não encontrou"]);
         }
 
-        if ((Auth::user()->nivel_acesso == "user") || (Auth::user()->nivel_acesso == "admin")) {
+        if ((Auth::user()->nivel_acesso == "user") || (Auth::user()->nivel_acesso == "admin") || (Auth::user()->nivel_acesso == "super")) {
         } else {
             $funcionario = Funcionario::where('id_pessoa', $id_pessoa)->first();
             if (!$funcionario) {
@@ -105,7 +105,7 @@ class MinhaTurmaController extends Controller
 
         $id_pessoa = Auth::user()->pessoa->id;
         //se for administrador
-        if ((Auth::user()->nivel_acesso == "admin") || (Auth::user()->nivel_acesso == "user")) {
+        if ((Auth::user()->nivel_acesso == "admin") || (Auth::user()->nivel_acesso == "user")|| (Auth::user()->nivel_acesso == "super")) {
             $directorTurma = DirectorTurma::where([
                 'id_turma' => $id_turma,
                 'ano_lectivo' => $ano_lectivo,

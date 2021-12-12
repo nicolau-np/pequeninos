@@ -688,4 +688,58 @@ class RelatorioController extends Controller
         $pdf = PDF::loadView('relatorios.balanco', $data)->setPaper('A4', 'normal');
         return $pdf->stream('BALANÇO - ['.date('d-m-Y',strtotime($data1)).' - '.date('d-m-Y',strtotime($data2)).' ].pdf');
     }
+
+    public function pautatrimestral(Request $request, $id_turma, $ano_lectivo){
+        $request->validate([
+            'epoca' => ['required', 'integer', 'min:1',],
+        ]);
+
+        $turma = Turma::find($id_turma);
+        if (!$turma) {
+            return back()->with(['error' => "Não encontrou turma"]);
+        }
+
+        $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
+        if (!$ano_lectivos) {
+            return back()->with(['error' => "Não encontrou ano lectivo"]);
+        }
+
+        if (!Session::has('disciplinas')) {
+            return back()->with(['error' => "Deve selecionar as disciplinas"]);
+        }
+
+        $historico = HistoricEstudante::where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])
+            ->orderBy('numero', 'asc')->get();
+
+        $data['view'] = [
+            'getTurma' => $turma,
+            'getHistorico' => $historico,
+            'getEpoca' => $request->epoca,
+        ];
+
+        //buscando ensino atraves de turma
+        $id_ensino = $turma->classe->id_ensino;
+        $classe = $turma->classe->classe;
+
+
+        if ($id_ensino == 1) { //iniciacao ate 6
+            //se for classificacao quantitativa
+            if (($classe == "2ª classe") || ($classe == "4ª classe")|| ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
+
+                $pdf = PDF::loadView('relatorios.ensinos.boletins.ensino_primario_2_4_copy', $data['view'])->setPaper('A4', 'normal');
+            } //se for classificacao quantitativa
+            elseif (($classe == "Iniciação") ) {
+                $pdf = PDF::loadView('relatorios.ensinos.boletins.ensino_primario_Ini_1_3_5_copy', $data['view'])->setPaper('A4', 'normal');
+            } elseif (($classe == "6ª classe")) {
+                $pdf = PDF::loadView('relatorios.ensinos.boletins.ensino_primario_6_copy', $data['view'])->setPaper('A4', 'normal');
+            }
+        } elseif ($id_ensino == 2) { //7 classe ate 9 ensino geral
+            if ($classe == "9ª classe") {
+                $pdf = PDF::loadView('relatorios.ensinos.boletins.ensino_1ciclo_9_copy', $data['view'])->setPaper('A4', 'normal');
+            } else {
+                $pdf = PDF::loadView('relatorios.ensinos.boletins.ensino_1ciclo_7_8_copy', $data['view'])->setPaper('A4', 'normal');
+            }
+        }
+        return $pdf->stream('BOLETIM DE NOTAS ' . $request->epoca . 'º TRIMESTRE - ' . $ano_lectivo . '[ ' . strtoupper($turma->turma) . ' ' . strtoupper($turma->turno->turno) . '-' . strtoupper($turma->curso->curso) . ' ].pdf');
+    }
 }

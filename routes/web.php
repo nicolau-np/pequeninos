@@ -342,6 +342,7 @@ Route::group(['prefix' => 'relatorios', 'middleware' => "auth"], function () {
     Route::post('/estatistica_geral', "RelatorioController@estatistica_geral");
 
     Route::get('/balancoDiario/{data1}/{data2}', "RelatorioController@balancoDiario");
+    Route::put('/pautatrimestral/{id_turma}/{ano_lectivo}', "RelatorioController@pautatrimestral");
 });
 
 

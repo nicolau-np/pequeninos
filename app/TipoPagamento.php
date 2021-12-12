@@ -32,4 +32,8 @@ class TipoPagamento extends Model
     public function multado(){
         return $this->hasMany(Multado::class, 'id_tipo_pagamento', 'id');
     }
+
+    public function restricao_nota(){
+        return $this->hasMany(RestricaoNota::class, 'id_tipo_pagamento', 'id');
+    }
 }

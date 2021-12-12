@@ -3,6 +3,7 @@
 use App\AnoLectivo;
 use App\Estudante;
 use App\Pagamento;
+use App\RestricaoNota;
 use Illuminate\Support\Facades\Route;
 
 
@@ -234,9 +235,11 @@ Route::group(['prefix' => 'estudantes', 'middleware' => "AdminSuperUser"], funct
     Route::get('/desistencia/{id_estudante}/{ano_lectivo}', "EstudanteController@desistencia");
     Route::put('/store_desistencias/{id_estudante}', "EstudanteController@store_desistencias");
     Route::get('/declaracaocom/{id_declaracao}', "EstudanteController@choose_declaracao");
-    Route::get('/restringir_notas/{id_estudante}/{ano_lectivo}', "EstudanteController@restringir_notas");
 
     Route::get('/extrato/{id_estudante}/{ano_lectivo}', "EstudanteController@extrato");
+
+    Route::get('/restringir_notas', "EstudanteController@restringir_notas");
+    Route::post('/restringir', "EstudanteController@restringir");
 });
 
 Route::group(['prefix' => "turmas", 'middleware' => "AdminSuperUser"], function () {
@@ -367,6 +370,7 @@ Route::group(['prefix' => 'minha_turma', 'middleware' => "AdminProfSuper"], func
     Route::get('/boletins_notas/{id_turma}/{ano_lectivo}', "MinhaTurmaController@boletins_notas");
     Route::get('/fotografias/{id_turma}/{ano_lectivo}', "MinhaTurmaController@fotografias");
     Route::put('/updateFoto/{id_pessoa}/{ano_lectivo}/{id_turma}', "MinhaTurmaController@updateFoto");
+    Route::get('/pautatrimestre/{id_turma}/{ano_lectivo}', "MinhaTurmaController@pautatrimestre");
 });
 
 Route::group(['prefix' => 'pautas', 'middleware' => "AdminProfSuper"], function () {
@@ -397,12 +401,9 @@ Route::group(['prefix' => "word", 'middleware' => "AdminUser"], function () {
 
 /*rota de test*/
 Route::get('test', function () {
-    $data1 = date('Y-m-d');
-    $data2 = date('Y-m-d');
-    $tipo = 1;
+    $restricao = RestricaoNota::all();
 
-    $pagamentos = Pagamento::where('data_pagamento','>=',$data1)->where('data_pagamento','<=',$data2)->where(['id_tipo_pagamento'=>1])->get();
-    return $pagamentos;
+    return $restricao;
 });
 
 /*fim*/

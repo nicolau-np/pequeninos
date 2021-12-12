@@ -71,8 +71,8 @@ class MinhaTurmaController extends Controller
         }
 
         $data = [
-            'id_classe'=>$turma->id_classe,
-            'id_curso'=>$turma->id_curso,
+            'id_classe' => $turma->id_classe,
+            'id_curso' => $turma->id_curso,
         ];
 
         $grades = Grade::where($data)->get();
@@ -84,7 +84,7 @@ class MinhaTurmaController extends Controller
             'submenu' => "Horário",
             'getTurma' => $turma,
             'getAno' => $ano_lectivo,
-            'getGrades'=>$grades,
+            'getGrades' => $grades,
         ];
 
 
@@ -105,7 +105,7 @@ class MinhaTurmaController extends Controller
 
         $id_pessoa = Auth::user()->pessoa->id;
         //se for administrador
-        if ((Auth::user()->nivel_acesso == "admin") || (Auth::user()->nivel_acesso == "user")|| (Auth::user()->nivel_acesso == "super")) {
+        if ((Auth::user()->nivel_acesso == "admin") || (Auth::user()->nivel_acesso == "user") || (Auth::user()->nivel_acesso == "super")) {
             $directorTurma = DirectorTurma::where([
                 'id_turma' => $id_turma,
                 'ano_lectivo' => $ano_lectivo,
@@ -182,14 +182,14 @@ class MinhaTurmaController extends Controller
 
     public function updateFoto(Request $request, $id_pessoa, $ano_lectivo, $id_turma)
     {
-        if($request->foto){
+        if ($request->foto) {
             $request->validate([
                 'foto' => ['required', 'mimes:jpg,png,jpeg,JPG,PNG,JPEG', 'max:5000']
             ]);
         }
 
 
-        if($request->numero){
+        if ($request->numero) {
             $request->validate([
                 'numero' => ['required', 'integer', 'min:1'],
             ]);
@@ -208,8 +208,8 @@ class MinhaTurmaController extends Controller
             return back()->with(['error' => "Não encontrou turma"]);
         }
 
-        $estudante = Estudante::where(['id_pessoa'=> $id_pessoa])->first();
-        if(!$estudante){
+        $estudante = Estudante::where(['id_pessoa' => $id_pessoa])->first();
+        if (!$estudante) {
             return back()->with(['error' => "Não encontrou"]);
         }
 
@@ -230,17 +230,29 @@ class MinhaTurmaController extends Controller
             'foto' => $path
         ];
 
-        $data['estudante_historico'] =[
-            'numero'=>$request->numero,
+        $data['estudante_historico'] = [
+            'numero' => $request->numero,
         ];
 
         if (Pessoa::find($id_pessoa)->update($data['pessoa'])) {
-            if(Estudante::where(['id' => $estudante->id, 'ano_lectivo'=> $ano_lectivo])->update($data['estudante_historico'])){
-                if(HistoricEstudante::where(['id_estudante' => $estudante->id, 'ano_lectivo'=> $ano_lectivo])->update($data['estudante_historico'])){
+            if (Estudante::where(['id' => $estudante->id, 'ano_lectivo' => $ano_lectivo])->update($data['estudante_historico'])) {
+                if (HistoricEstudante::where(['id_estudante' => $estudante->id, 'ano_lectivo' => $ano_lectivo])->update($data['estudante_historico'])) {
                     return back()->with(['success' => "Feito com sucesso"]);
                 }
             }
+        }
+    }
 
+    public function pautatrimestre($id_turma, $ano_lectivo)
+    {
+        $turma = Turma::find($id_turma);
+        if (!$turma) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+
+        $anos = AnoLectivo::where(['ano_lectivo' => $ano_lectivo])->first();
+        if (!$anos) {
+            return back()->with(['error' => "Não encontrou"]);
         }
     }
 }

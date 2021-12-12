@@ -18,6 +18,7 @@ use App\Horario;
 use App\Multado;
 use App\Pagamento;
 use App\PagamentoPai;
+use App\RestricaoNota;
 use App\TabelaPreco;
 use App\TipoPagamento;
 use App\Transferencia;
@@ -577,5 +578,18 @@ class ControladorStatic extends Controller
     {
         $pagamentos = Pagamento::where(['id_estudante' => $id_estudante, 'data_pagamento' => $data_pagamento])->get();
         return $pagamentos;
+    }
+
+    public static function getRestricao($epoca, $ano_lectivo, $id_estudante)
+    {
+        $data = [
+            'id_estudante' => $id_estudante,
+            'epoca' => $epoca,
+            'ano_lectivo' => $ano_lectivo,
+        ];
+
+        $restricao = RestricaoNota::where($data)->first();
+
+        return $restricao;
     }
 }

@@ -19,23 +19,28 @@ class Estudante extends Model
         'ano_lectivo',
     ];
 
-    public function turma(){
+    public function turma()
+    {
         return $this->belongsTo(Turma::class, 'id_turma', 'id');
     }
 
-    public function pessoa(){
+    public function pessoa()
+    {
         return $this->belongsTo(Pessoa::class, 'id_pessoa', 'id');
     }
 
-    public function pagamento(){
+    public function pagamento()
+    {
         return $this->hasMany(Pagamento::class, 'id_estudante', 'id');
     }
 
-    public function historico(){
+    public function historico()
+    {
         return $this->hasMany(HistoricEstudante::class, 'id_estudante', 'id');
     }
 
-    public function encarregado(){
+    public function encarregado()
+    {
         return $this->belongsTo(Encarregado::class, 'id_encarregado', 'id');
     }
 
@@ -59,32 +64,43 @@ class Estudante extends Model
         return $this->hasMany(NotaFinal::class, 'id_estudante', 'id');
     }
 
-    public function declaracaos(){
+    public function declaracaos()
+    {
         return $this->hasMany(Declaracaos::class, 'id_estudante', 'id');
     }
 
-    public function transferencia(){
+    public function transferencia()
+    {
         return $this->hasMany(Transferencia::class, 'id_estudante', 'id');
     }
 
-    public function desistencia(){
+    public function desistencia()
+    {
         return $this->hasMany(Desistencia::class, 'id_estudante', 'id');
     }
 
-    public function eja_nota_mensal(){
+    public function eja_nota_mensal()
+    {
         return $this->hasMany(EjaNotaMensal::class, 'id_estudante', 'id');
     }
 
-    public function eja_nota_trimestral(){
+    public function eja_nota_trimestral()
+    {
         return $this->hasMany(EjaNotaTrimestral::class, 'id_estudante', 'id');
     }
 
-    public function eja_nota_final(){
+    public function eja_nota_final()
+    {
         return $this->hasMany(EjaNotaFinal::class, 'id_estudante', 'id');
     }
 
-    public function multado(){
+    public function multado()
+    {
         return $this->hasMany(Multado::class, 'id_estudante', 'id');
     }
 
+    public function estudante()
+    {
+        return $this->hasMany(Estudante::class, 'id_estudante', 'id');
+    }
 }

@@ -12,9 +12,10 @@ use App\Estudante;
 use App\Grade;
 use App\HistoricEstudante;
 use App\Pagamento;
-use App\PagamentoPai;
 use App\Pessoa;
 use App\Provincia;
+use App\RestricaoNota;
+use App\TipoPagamento;
 use App\Transferencia;
 use App\Trimestral;
 use App\Turma;
@@ -145,8 +146,8 @@ class EstudanteController extends Controller
             'bairro' => $request->bairro,
             'rua' => $request->rua,
             'residencia' => $request->residencia,
-            'deficiencia'=> $request->deficiencia,
-            'tipo_deficiencia'=> $request->tipo_deficiencia,
+            'deficiencia' => $request->deficiencia,
+            'tipo_deficiencia' => $request->tipo_deficiencia,
         ];
 
         $data['estudante'] = [
@@ -171,9 +172,9 @@ class EstudanteController extends Controller
         ];
 
         $data['docs_entregues'] = [
-            'id_historico'=>null,
-            'documento'=>null,
-            'estado'=> "on",
+            'id_historico' => null,
+            'documento' => null,
+            'estado' => "on",
         ];
 
         if (Pessoa::where([
@@ -191,10 +192,10 @@ class EstudanteController extends Controller
                 $data['historico']['numero_acesso'] = $gerando_aleatorio . "-" . $estudante->id;
                 $data['historico']['id_estudante'] = $estudante->id;
                 $numero_acesso = $gerando_aleatorio . "-" . $estudante->id;
-                $historico =HistoricEstudante::create($data['historico']);
+                $historico = HistoricEstudante::create($data['historico']);
                 if ($historico) {
                     if (Estudante::find($estudante->id)->update(['numero_acesso' => $numero_acesso])) {
-                        foreach($request->docs_entregues as $docs){
+                        foreach ($request->docs_entregues as $docs) {
                             $data['docs_entregues']['documento'] = $docs;
                             $data['docs_entregues']['id_historico'] = $historico->id;
                             DocumentoEntregue::create($data['docs_entregues']);
@@ -234,8 +235,8 @@ class EstudanteController extends Controller
         $provincias = Provincia::pluck('provincia', 'id');
         $cursos = Curso::pluck('curso', 'id');
         $ano_lectivos = AnoLectivo::pluck('ano_lectivo', 'ano_lectivo');
-        $historico = HistoricEstudante::where(['id_estudante' => $estudante->id, 'ano_lectivo'=> $estudante->ano_lectivo])->first();
-        $docs_entregues = DocumentoEntregue::where(['id_historico'=> $historico->id])->get();
+        $historico = HistoricEstudante::where(['id_estudante' => $estudante->id, 'ano_lectivo' => $estudante->ano_lectivo])->first();
+        $docs_entregues = DocumentoEntregue::where(['id_historico' => $historico->id])->get();
         $data = [
             'title' => "Estudantes",
             'type' => "estudantes",
@@ -247,7 +248,7 @@ class EstudanteController extends Controller
             'getEstudante' => $estudante,
             'getAno' => $ano_lectivo,
             'getCategorias' => $categorias,
-            'getDocsEntregues'=>$docs_entregues,
+            'getDocsEntregues' => $docs_entregues,
         ];
         return view('estudantes.edit', $data);
     }
@@ -309,7 +310,7 @@ class EstudanteController extends Controller
             $path = $request->foto->store('fotos_estudantes/' . $nome_pasta);
         }
 
-        $historico = HistoricEstudante::where(['id_estudante' => $estudante->id, 'ano_lectivo'=> $estudante->ano_lectivo])->first();
+        $historico = HistoricEstudante::where(['id_estudante' => $estudante->id, 'ano_lectivo' => $estudante->ano_lectivo])->first();
 
         $data['pessoa'] = [
             'id_municipio' => $request->municipio,
@@ -329,8 +330,8 @@ class EstudanteController extends Controller
             'bairro' => $request->bairro,
             'rua' => $request->rua,
             'residencia' => $request->residencia,
-            'deficiencia'=> $request->deficiencia,
-            'tipo_deficiencia'=> $request->tipo_deficiencia,
+            'deficiencia' => $request->deficiencia,
+            'tipo_deficiencia' => $request->tipo_deficiencia,
         ];
 
         $data['estudante'] = [
@@ -349,9 +350,9 @@ class EstudanteController extends Controller
         ];
 
         $data['docs_entregues'] = [
-            'id_historico'=>$historico->id,
-            'documento'=>null,
-            'estado'=> "on",
+            'id_historico' => $historico->id,
+            'documento' => null,
+            'estado' => "on",
         ];
 
         if ($request->nome != $data['pessoa']['nome'] || $request->data_nascimento != $data['pessoa']['data_nascimento']) {
@@ -368,8 +369,8 @@ class EstudanteController extends Controller
 
             if (Estudante::find($estudante->id)->update($data['estudante'])) {
                 if (HistoricEstudante::find($estudante->id)->update($data['historico'])) {
-                    DocumentoEntregue::where(['id_historico'=>$historico->id])->delete();
-                    foreach($request->docs_entregues as $docs){
+                    DocumentoEntregue::where(['id_historico' => $historico->id])->delete();
+                    foreach ($request->docs_entregues as $docs) {
                         $data['docs_entregues']['documento'] = $docs;
                         DocumentoEntregue::create($data['docs_entregues']);
                     }
@@ -474,8 +475,8 @@ class EstudanteController extends Controller
             'bairro' => $request->bairro,
             'rua' => $request->rua,
             'residencia' => $request->residencia,
-            'deficiencia'=> $request->deficiencia,
-            'tipo_deficiencia'=> $request->tipo_deficiencia,
+            'deficiencia' => $request->deficiencia,
+            'tipo_deficiencia' => $request->tipo_deficiencia,
         ];
 
         $data['estudante'] = [
@@ -496,9 +497,9 @@ class EstudanteController extends Controller
         ];
 
         $data['docs_entregues'] = [
-            'id_historico'=>null,
-            'documento'=>null,
-            'estado'=> "on",
+            'id_historico' => null,
+            'documento' => null,
+            'estado' => "on",
         ];
 
         if (HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $data['estudante']['ano_lectivo']])->first()) {
@@ -509,7 +510,7 @@ class EstudanteController extends Controller
             if (Estudante::find($estudante->id)->update($data['estudante'])) {
                 $historico = HistoricEstudante::create($data['historico']);
                 if ($historico) {
-                    foreach($request->docs_entregues as $docs){
+                    foreach ($request->docs_entregues as $docs) {
                         $data['docs_entregues']['documento'] = $docs;
                         $data['docs_entregues']['id_historico'] = $historico->id;
                         DocumentoEntregue::create($data['docs_entregues']);
@@ -805,32 +806,18 @@ class EstudanteController extends Controller
         }
     }
 
-    public function restringir_notas($id_estudante, $ano_lectivo)
+    public function restringir_notas()
     {
-        $estudante = Estudante::find($id_estudante);
-        if (!$estudante) {
-            return back()->with(['error' => "Não encontrou"]);
-        }
-
-        $historico = HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])->first();
-        if (!$historico) {
-            return back()->with(['error' => "Estudante nao matriculado neste ano lectivo"]);
-        }
-
-        $trimestres = [
-            '1',
-            '2',
-            '3',
-            '4',
-        ];
+        $tipos_pagamentos = TipoPagamento::pluck('tipo', 'id');
+        $anos_lectivos = AnoLectivo::orderBy('id', 'desc')->pluck('ano_lectivo', 'id');
 
         $data = [
             'title' => "Estudantes",
             'type' => "estudantes",
             'menu' => "Estudantes",
             'submenu' => "Restringir Notas",
-            'getHistorico' => $historico,
-            'getTrimestres' => $trimestres,
+            'getTipoPagamentos' => $tipos_pagamentos,
+            'getAnos' => $anos_lectivos,
         ];
         return view('estudantes.restringir_notas', $data);
     }
@@ -858,5 +845,82 @@ class EstudanteController extends Controller
             'getPagamentos' => $pagamentos,
         ];
         return view('estudantes.extrato_pagamentos', $data);
+    }
+
+    public function restringir(Request $request)
+    {
+        $request->validate([
+            'tipo_pagamento' => ['required', 'integer', 'min:1'],
+            'epoca' => ['required', 'integer', 'min:1'],
+            'ano_lectivo' => ['required', 'integer', 'min:1'],
+        ]);
+
+        $ano_lectivo = AnoLectivo::find($request->ano_lectivo);
+        if (!$ano_lectivo) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+        $epocas = null;
+        if ($request->epoca == 1) {
+            $epocas = [
+                'Setembro',
+                'Outubro',
+                'Novembro',
+                'Dezembro'
+            ];
+        } elseif ($request->epoca == 2) {
+            $epocas = [
+                'Janeiro',
+                'Fevereiro',
+                'Março',
+                'Abril'
+            ];
+        } elseif ($request->epoca == 3) {
+            $epocas = [
+                'Abril',
+                'Maio',
+                'Junho',
+                'Julho',
+            ];
+        }
+        $historico_estudantes = HistoricEstudante::where(['ano_lectivo' => $ano_lectivo->ano_lectivo])->get();
+        /**lista de historico */
+        foreach ($historico_estudantes as $historico) {
+
+            /**lista de epocas */
+            foreach ($epocas as $epoca) {
+
+                /**verifica na tabela de pagamentos se o estudante efectuou nestas epocas */
+                $pagamentos = Pagamento::where([
+                    'id_estudante' => $historico->id_estudante,
+                    'ano_lectivo' => $ano_lectivo->ano_lectivo,
+                    'id_tipo_pagamento' => $request->tipo_pagamento,
+                    'epoca' => $epoca,
+                ])->first();
+
+                $data['restricao'] = [
+
+                    'id_estudante' => $historico->id_estudante,
+                    'ano_lectivo' => $ano_lectivo->ano_lectivo,
+                    'epoca' => $request->epoca,
+                    'mes' => $epoca,
+                    'id_tipo_pagamento' => $request->tipo_pagamento,
+                    'estado' => "on"
+                ];
+
+                if (!$pagamentos) {
+                    /**se nao pagou entao leva ele para lista das restricao */
+                    /**se ainda nao existe cadastra*/
+                    if (!RestricaoNota::where($data['restricao'])->first()) {
+                        /**manda para restricao */
+                        RestricaoNota::create($data['restricao']);
+                    }
+                } else {
+                    /*pagou deve eliminar os os que estao nas restricoes*/
+                    RestricaoNota::where($data['restricao'])->delete();
+                }
+            }
+        }
+
+        return back()->with(['success' => "Feito com sucesso"]);
     }
 }

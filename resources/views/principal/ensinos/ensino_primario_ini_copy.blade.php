@@ -32,7 +32,7 @@ use App\Http\Controllers\ControladorStatic;
             border: 1px solid #333;
             font-size: 13px;
             font-weight: bold;
-            color:#4680ff;
+            color: #4680ff;
         }
 
         @media(max-width:700px) {
@@ -66,7 +66,7 @@ use App\Http\Controllers\ControladorStatic;
                 </div>
                 <div class="col-md-3">
                     <img src="
-                                                @if ($getEstudante->pessoa->foto) {{ asset($getEstudante->pessoa->foto) }}
+                                                    @if ($getEstudante->pessoa->foto) {{ asset($getEstudante->pessoa->foto) }}
                 @else
                     {{ asset('assets/template/images/profile.png') }} @endif
 
@@ -76,7 +76,7 @@ use App\Http\Controllers\ControladorStatic;
 
             <div class="row">
                 <div class="col-md-12">
-                    <br/>
+                    <br />
                     <fieldset>
                         <legend>Aproveitamento e Notas</legend>
                         <div class="row">
@@ -106,49 +106,67 @@ use App\Http\Controllers\ControladorStatic;
                                                     $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestralPDF($grades->id_disciplina, $getEstudante->id, 1, $getEstudante->ano_lectivo);
                                                     $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($grades->id_disciplina, $getEstudante->id, 2, $getEstudante->ano_lectivo);
                                                     $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestralPDF($grades->id_disciplina, $getEstudante->id, 3, $getEstudante->ano_lectivo);
+
+                                                    $restricao1 = ControladorStatic::getRestricao(1, $getEstudante->ano_lectivo, $getEstudante->id);
+                                                    $restricao2 = ControladorStatic::getRestricao(2, $getEstudante->ano_lectivo, $getEstudante->id);
+                                                    $restricao3 = ControladorStatic::getRestricao(3, $getEstudante->ano_lectivo, $getEstudante->id);
                                                 @endphp
 
-                                                @if ($trimestre1->count() == 0)
-                                                    <td>---</td>
+                                                @if ($restricao1)
+                                                    <td>DEVEDOR</td>
                                                 @else
-                                                    @foreach ($trimestre1 as $valor1)
-                                                        @php
-                                                            $v1_estilo = ControladorNotas::nota_10($valor1->mt);
-                                                        @endphp
-                                                        <td class="{{ $v1_estilo }}">
-                                                            @if ($valor1->mt == null) ---
-                                                            @else {{ round($valor1->mt, 2) }} @endif
-                                                        </td>
-                                                    @endforeach
+                                                    @if ($trimestre1->count() == 0)
+                                                        <td>---</td>
+                                                    @else
+                                                        @foreach ($trimestre1 as $valor1)
+                                                            @php
+                                                                $v1_estilo = ControladorNotas::nota_10($valor1->mt);
+                                                            @endphp
+                                                            <td class="{{ $v1_estilo }}">
+                                                                @if ($valor1->mt == null)
+                                                                    ---
+                                                                @else {{ round($valor1->mt, 2) }} @endif
+                                                            </td>
+                                                        @endforeach
+                                                    @endif
                                                 @endif
 
-
-                                                @if ($trimestre2->count() == 0)
-                                                    <td>---</td>
+                                                @if ($restricao2)
+                                                    <td>DEVEDOR</td>
                                                 @else
-                                                    @foreach ($trimestre2 as $valor2)
-                                                        @php
-                                                            $v2_estilo = ControladorNotas::nota_10($valor2->mt);
-                                                        @endphp
-                                                        <td class="{{ $v2_estilo }}">
-                                                            @if ($valor2->mt == null) ---
-                                                            @else {{ round($valor2->mt, 2) }} @endif
-                                                        </td>
-                                                    @endforeach
+                                                    @if ($trimestre2->count() == 0)
+                                                        <td>---</td>
+                                                    @else
+                                                        @foreach ($trimestre2 as $valor2)
+                                                            @php
+                                                                $v2_estilo = ControladorNotas::nota_10($valor2->mt);
+                                                            @endphp
+                                                            <td class="{{ $v2_estilo }}">
+                                                                @if ($valor2->mt == null)
+                                                                    ---
+                                                                @else {{ round($valor2->mt, 2) }} @endif
+                                                            </td>
+                                                        @endforeach
+                                                    @endif
                                                 @endif
 
-                                                @if ($trimestre3->count() == 0)
-                                                    <td>---</td>
+                                                @if ($restricao3)
+                                                    <td>DEVEDOR</td>
                                                 @else
-                                                    @foreach ($trimestre3 as $valor3)
-                                                        @php
-                                                            $v3_estilo = ControladorNotas::nota_10($valor3->mt);
-                                                        @endphp
-                                                        <td class="{{ $v3_estilo }}">
-                                                            @if ($valor3->mt == null) ---
-                                                            @else {{ round($valor3->mt, 2) }} @endif
-                                                        </td>
-                                                    @endforeach
+                                                    @if ($trimestre3->count() == 0)
+                                                        <td>---</td>
+                                                    @else
+                                                        @foreach ($trimestre3 as $valor3)
+                                                            @php
+                                                                $v3_estilo = ControladorNotas::nota_10($valor3->mt);
+                                                            @endphp
+                                                            <td class="{{ $v3_estilo }}">
+                                                                @if ($valor3->mt == null)
+                                                                    ---
+                                                                @else {{ round($valor3->mt, 2) }} @endif
+                                                            </td>
+                                                        @endforeach
+                                                    @endif
                                                 @endif
                                             </tr>
                                         @endforeach
@@ -159,7 +177,7 @@ use App\Http\Controllers\ControladorStatic;
                     </fieldset>
 
 
-<br/>
+                    <br />
                     <fieldset>
                         <legend>Pagamentos efectuados</legend>
                         <div class="corpo">

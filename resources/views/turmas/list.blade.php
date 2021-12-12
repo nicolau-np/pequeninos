@@ -91,6 +91,10 @@ use App\Http\Controllers\ControladorStatic;
                                                                     <a href="/minha_turma/horario/{{$turmas->id}}/{{$getAno}}" type="button" class="btn btn-info btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Horário">
                                                                         <i class="ti-alarm-clock"></i>
                                                                     </a>&nbsp;
+
+                                                                    <a href="/minha_turma/pautatrimestre/{{$turmas->id}}/{{$getAno}}" type="button" class="btn btn-inverse btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Pauta do Trimestre">
+                                                                        <i class="icon-copy ti-direction-alt"></i>
+                                                                    </a>&nbsp;
                                                                 </div>
                                                                 </span>
                                                             </div>

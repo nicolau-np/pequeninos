@@ -1,5 +1,6 @@
 @php
 use App\Http\Controllers\ControladorNotas;
+use App\Http\Controllers\ControladorStatic;
 $numero_colspan = 2;
 if($getCadeiraRecurso){
     $numero_colspan = $numero_colspan + 1;
@@ -109,9 +110,14 @@ if($getCadeiraExame){
 
                                     <!-- primeiro trimestre-->
                                     <?php
-                                        $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 1, $getHorario->ano_lectivo);
-                                        if($trimestre1->count()==0){
-                                    ?>
+                                       $restricao1 = ControladorStatic::getRestricao(1,
+                                                    $getHorario->ano_lectivo, $historico->id_estudante);
+                                                    $trimestre1 =
+                                                    ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina,
+                                                    $historico->id_estudante, 1, $getHorario->ano_lectivo);
+                                                    if ($restricao1) { ?>
+                                                    <td colspan="4">DÍVIDAS POR PAGAR</td>
+                                                    <?php } else {if ($trimestre1->count() == 0) { ?>
                                     <td>---</td>
                                     <td>---</td>
                                     <td>---</td>
@@ -129,14 +135,19 @@ if($getCadeiraExame){
                                     <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{round($valor1->npp,2)}} @endif</td>
                                     <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{round($valor1->pt,2)}} @endif</td>
                                     <td class="{{$v4_estilo}} td_color">@if($valor1->mt==null) --- @else {{round($valor1->mt,2)}} @endif</td>
-                                            <?php }}?>
+                                            <?php }}}?>
                                     <!-- fim primeiro trimestre-->
 
                                     <!-- segundo trimestre-->
                                     <?php
-                                        $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 2, $getHorario->ano_lectivo);
-                                        if($trimestre2->count()==0){
-                                    ?>
+                                        $restricao2 = ControladorStatic::getRestricao(2,
+                                                    $getHorario->ano_lectivo, $historico->id_estudante);
+                                                    $trimestre2 =
+                                                    ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina,
+                                                    $historico->id_estudante, 2, $getHorario->ano_lectivo);
+                                                    if ($restricao2) { ?>
+                                                    <td colspan="4">DÍVIDAS POR PAGAR</td>
+                                                    <?php } else {if ($trimestre2->count() == 0) { ?>
                                     <td>---</td>
                                     <td>---</td>
                                     <td>---</td>
@@ -154,14 +165,19 @@ if($getCadeiraExame){
                                     <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{round($valor2->npp,2)}} @endif</td>
                                     <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{round($valor2->pt,2)}} @endif</td>
                                     <td class="{{$v4_estilo}} td_color">@if($valor2->mt==null) --- @else {{round($valor2->mt,2)}} @endif</td>
-                                            <?php }}?>
+                                            <?php }}}?>
                                     <!-- fim segundo trimestre-->
 
                                      <!-- terceiro trimestre-->
                                      <?php
-                                     $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 3, $getHorario->ano_lectivo);
-                                     if($trimestre3->count()==0){
-                                 ?>
+                                      $restricao3 = ControladorStatic::getRestricao(3,
+                                                    $getHorario->ano_lectivo, $historico->id_estudante);
+                                                    $trimestre3 =
+                                                    ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina,
+                                                    $historico->id_estudante, 3, $getHorario->ano_lectivo);
+                                                    if ($restricao3) { ?>
+                                                    <td colspan="4">DÍVIDAS POR PAGAR</td>
+                                                    <?php } else {if ($trimestre3->count() == 0) { ?>
                                  <td>---</td>
                                  <td>---</td>
                                  <td>---</td>
@@ -179,7 +195,7 @@ if($getCadeiraExame){
                                  <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{round($valor3->npp,2)}} @endif</td>
                                  <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{round($valor3->pt,2)}} @endif</td>
                                  <td class="{{$v4_estilo}} td_color">@if($valor3->mt==null) --- @else {{round($valor3->mt,2)}} @endif</td>
-                                         <?php }}?>
+                                         <?php }}}?>
                                  <!-- fim terceiro trimestre-->
 
                                  <!-- dados finais-->

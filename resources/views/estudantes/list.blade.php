@@ -39,8 +39,16 @@ use App\Http\Controllers\ControladorStatic; ?>
                                 </div>
                                 @if (Auth::user()->nivel_acesso == 'user')
                                     <div class="col-md-1">
-                                        <a href="/pagamentos/mapas" class="btn btn-warning btn-sm" alt="Pagamentos"><i
-                                                class="ti-money"></i></a>
+                                        <a href="/pagamentos/mapas" class="btn btn-warning btn-sm" alt="Pagamentos"
+                                            title="Mapa de Pagamentos"><i class="ti-money"></i></a>
+                                    </div>
+                                @endif
+
+                                @if (Auth::user()->nivel_acesso == 'admin' || Auth::user()->nivel_acesso=="super")
+                                    <div class="col-md-1">
+                                        <a href="/estudantes/restringir_notas" class="btn btn-inverse btn-sm"><i
+                                                class="icon-copy ti-write" alt="Restringir Notas"
+                                                title="Restringir Notas"></i></a>
                                     </div>
                                 @endif
 
@@ -76,7 +84,7 @@ use App\Http\Controllers\ControladorStatic; ?>
                                                 <th scope="row">{{ $estudantes->id }}</th>
                                                 <td>
                                                     <img src="
-                                                @if ($estudantes->pessoa->foto) {{ asset($estudantes->pessoa->foto) }}
+                                                                            @if ($estudantes->pessoa->foto) {{ asset($estudantes->pessoa->foto) }}
                                                 @else
                                                     {{ asset('assets/template/images/profile.png') }} @endif
                                                     " alt="" style="width:47px; height:47px; border-radius:4px;">

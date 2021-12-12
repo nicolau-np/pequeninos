@@ -254,5 +254,23 @@ class MinhaTurmaController extends Controller
         if (!$anos) {
             return back()->with(['error' => "Não encontrou"]);
         }
+
+        $grade_disciplinas = Grade::where([
+            'id_curso' => $turma->id_curso,
+            'id_classe' => $turma->id_classe,
+        ])->get();
+
+        Session::forget('disciplinas');
+
+        $data = [
+            'title' => "Pauta do Trimestre",
+            'type' => "pautatrimestre",
+            'menu' => "Minha Turma",
+            'submenu' => "Pauta do Trimestre",
+            'getTurma' => $turma,
+            'getGrade' => $grade_disciplinas,
+            'getAno'=>$ano_lectivo
+        ];
+        return view('minha_turma.pautatrimestral', $data);
     }
 }

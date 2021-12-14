@@ -118,11 +118,17 @@ use App\Http\Controllers\ControladorStatic;
                             <th>Nº</th>
                             <th>NOME COMPLETO</th>
                             <th>G</th>
-                            <?php foreach (Session::get('disciplinas') as $disciplina) {
-                            $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']); ?>
+                            <?php
+                            $count_disciplinas = 0;
+                            foreach (Session::get('disciplinas') as $disciplina) {
+
+                            $count_disciplinas++;
+                            $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
+                            ?>
                             <th>{{ strtoupper($getDisciplina->disciplina) }}</th>
                             <?php
-                            } ?>
+                            }
+                            ?>
                         </tr>
                     </thead>
                     <tbody>
@@ -133,10 +139,25 @@ use App\Http\Controllers\ControladorStatic;
                                 <td>{{ $historico->estudante->pessoa->genero }}</td>
 
                                 <?php foreach (Session::get('disciplinas') as $disciplina) {
-                                    $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']); ?>
-                                    <td>---</td>
-                                    <?php
-                                    } ?>
+                                $restricao = ControladorStatic::getRestricao($getEpoca, $getAno,
+                                $historico->id_estudante);
+                                $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
+                                $getValoresMiniPautaTrimestralPDF =
+                                ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina,
+                                $historico->id_estudante, $getEpoca, $getAno);
+                                if ($restricao) { ?>
+                                <td>DEVEDOR</td>
+                                <?php } else {if ($getValoresMiniPautaTrimestralPDF->count() == 0) { ?>
+                                <td>---</td>
+                                <?php } else {foreach ($getValoresMiniPautaTrimestralPDF as $valor) {
+                                $v1_estilo = ControladorNotas::nota_20($valor->mt); ?>
+                                <td class="{{ $v1_estilo }}">
+                                @if ($valor->mt == null) --- @else
+                                        {{ round($valor->mt, 2) }} @endif
+                                </td>
+                                <?php
+                                }}}
+                                } ?>
                                 <!-- primeiro trimestre-->
 
                             </tr>
@@ -151,7 +172,9 @@ use App\Http\Controllers\ControladorStatic;
         <br /><br />
         <div class="rodape">
             <div class="teacher_name">
-
+                O Director da escola<br />
+                -------------------------------------------------<br />
+                Aurélio Messele Tchissende
             </div>
         </div>
     </div>

@@ -39,7 +39,7 @@ class HorarioController extends Controller
         }
         $cursos = Curso::pluck('curso', 'id');
         $ano_lectivos = AnoLectivo::pluck('ano_lectivo', 'id');
-        $horarios = Horario::orderBy('id', 'desc')->where('id_funcionario', $id_funcionario)->paginate('8');
+        $horarios = Horario::orderBy('id', 'desc')->where('id_funcionario', $id_funcionario)->get();
 
         $data = [
             'title' => "Horários",
@@ -49,7 +49,7 @@ class HorarioController extends Controller
             'getCursos' => $cursos,
             'getAnoLectivo' => $ano_lectivos,
             'getFuncionario' => $funcionario,
-            'getHorarios'=>$horarios,
+            'getHorarios' => $horarios,
         ];
         return view('horarios.new', $data);
     }
@@ -73,35 +73,35 @@ class HorarioController extends Controller
         }
 
         $request->validate([
-            'curso'=>['required', 'integer'],
-            'classe'=>['required', 'integer'],
-            'disciplina'=>['required', 'integer'],
-            'turma'=>['required', 'integer'],
-            'ano_lectivo'=>['required', 'integer'],
+            'curso' => ['required', 'integer'],
+            'classe' => ['required', 'integer'],
+            'disciplina' => ['required', 'integer'],
+            'turma' => ['required', 'integer'],
+            'ano_lectivo' => ['required', 'integer'],
         ]);
 
-        $data ['store'] = [
-        'id_funcionario'=>$id_funcionario,
-        'id_turma'=>$request->turma,
-        'id_disciplina'=>$request->disciplina,
-        'estado'=>"visivel",
-        'ano_lectivo'=>$ano_lectivo->ano_lectivo,
+        $data['store'] = [
+            'id_funcionario' => $id_funcionario,
+            'id_turma' => $request->turma,
+            'id_disciplina' => $request->disciplina,
+            'estado' => "visivel",
+            'ano_lectivo' => $ano_lectivo->ano_lectivo,
 
         ];
 
-        $data['where4']=[
-            'id_disciplina'=>$request->disciplina,
-            'id_turma'=>$request->turma,
-            'ano_lectivo'=>$ano_lectivo->ano_lectivo,
+        $data['where4'] = [
+            'id_disciplina' => $request->disciplina,
+            'id_turma' => $request->turma,
+            'ano_lectivo' => $ano_lectivo->ano_lectivo,
         ];
 
         //existencia de horario
-        if(Horario::where($data['where4'])->first()){
-            return back()->with(['error'=>"Já cadastrou este horário"]);
+        if (Horario::where($data['where4'])->first()) {
+            return back()->with(['error' => "Já cadastrou este horário"]);
         }
 
-        if(Horario::create($data['store'])){
-            return back()->with(['success'=>"Feito com sucesso"]);
+        if (Horario::create($data['store'])) {
+            return back()->with(['success' => "Feito com sucesso"]);
         }
     }
 
@@ -140,7 +140,8 @@ class HorarioController extends Controller
     }
 
 
-    public function import(){
+    public function import()
+    {
         $data = [
             'title' => "Horários",
             'type' => "funcionarios",
@@ -150,12 +151,14 @@ class HorarioController extends Controller
         return view('horarios.import', $data);
     }
 
-    public function export(){
+    public function export()
+    {
         $fileName = "horarios_model.xlsx";
         return Excel::download(new HorarioExport(), $fileName);
     }
 
-    public function import_store(Request $request){
+    public function import_store(Request $request)
+    {
         $request->validate([
             'arquivo' => ['required', 'mimes:xlsx,xls'],
         ]);
@@ -168,14 +171,15 @@ class HorarioController extends Controller
         }
     }
 
-    public function destroy($id_horario){
+    public function destroy($id_horario)
+    {
         $horario = Horario::find($id_horario);
-        if(!$horario) {
+        if (!$horario) {
             return back()->with(['error' => "Não encontrou horario"]);
         }
 
-        if(Horario::find($id_horario)->delete()){
-            return back()->with(['success'=>"Eliminado com sucesso"]);
+        if (Horario::find($id_horario)->delete()) {
+            return back()->with(['success' => "Eliminado com sucesso"]);
         }
     }
 }

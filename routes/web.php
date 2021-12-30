@@ -400,6 +400,11 @@ Route::group(['prefix' => "word", 'middleware' => "AdminUser"], function () {
     Route::get('declaracaocom/{id_declaracao}', "PhpWordController@declaracaocomnota");
 });
 
+
+Route::group(['prefix' => "excel"], function () {
+    Route::get('lista_nominal/{id_turma}/{ano_lectivo}', "ExcelController@lista_nominal");
+});
+
 /*rota de test*/
 Route::get('test', function () {
     $restricao = RestricaoNota::all();

@@ -277,8 +277,13 @@
                                 </div>
                                 <hr />
                                 <div class="row">
-                                    <div class="col-md-12">
+                                    <div class="col-md-10">
                                         {{ Form::text('encarregador', null, ['class' => 'form-control encarregador', 'placeholder' => 'Encarregado']) }}
+                                    </div>
+
+                                    <div class="col-md-2">
+                                        <a href="#" class="btn btn-success btn-sm modalEncarregado"> <i class="ti-plus"></i>
+                                            Novo</a>
                                     </div>
                                     <div class="col-md-12">
                                         <span class="load_encarregados">
@@ -364,7 +369,7 @@
                                             $atestado = false;
                                             $foto = false;
                                             $isExist = false;
-
+                                            
                                             if ($getDocsEntregues->count() == 0) {
                                                 $isExist = false;
                                             } else {
@@ -379,7 +384,7 @@
                                                     }
                                                 }
                                             }
-
+                                            
                                         @endphp
 
 
@@ -390,13 +395,13 @@
 
 
 
-                                        <input type="checkbox" name="docs_entregues[]" value="Atestado Médico" @if($atestado) checked @endif />
+                                        <input type="checkbox" name="docs_entregues[]" value="Atestado Médico" @if ($atestado) checked @endif />
                                         Atestado Médico
                                         &nbsp;&nbsp;
 
 
 
-                                        <input type="checkbox" name="docs_entregues[]" value="4 Fotografias" @if($foto) checked @endif /> 4
+                                        <input type="checkbox" name="docs_entregues[]" value="4 Fotografias" @if ($foto) checked @endif /> 4
                                         Fotografias
 
 
@@ -440,6 +445,65 @@
         </div>
 
     </div>
+
+
+    <!--encarregado modal-->
+    <div class="modal fade" id="encarregadomodal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+
+                <div class="modal-body">
+                    <div class="col-md-12 alert alert-success sms-save">
+
+                    </div>
+                    {{ Form::open(['method' => 'post', 'class' => 'formEncarregado', 'url' => '']) }}
+                    @csrf
+                    <div class="row">
+                        <div class="col-md-12">
+                            {{ Form::label('encarregado', 'Nome do Encarregado') }} <span class="text-danger">*</span>
+                            {{ Form::text('encarregado', null, ['class' => 'form-control', 'placeholder' => 'Nome do Encarregado', 'id' => 'nomeP']) }}
+                        </div>
+
+                        <div class="col-md-6">
+
+                            {{ Form::label('telefone', 'Telefone') }} <span class="text-danger">*</span>
+                            {{ Form::number('telefone', null, ['class' => 'form-control', 'placeholder' => 'Telefone', 'id' => 'telefoneP']) }}
+                        </div>
+
+                        <div class="col-md-6">
+
+                            {{ Form::label('genero', 'Gênero') }} <span class="text-danger">*</span>
+                            {{ Form::select(
+    'genero',
+    [
+        'M' => 'M',
+        'F' => 'F',
+    ],
+    null,
+    ['class' => 'form-control', 'placeholder' => 'Gênero', 'id' => 'generoP'],
+) }}
+                        </div>
+
+                        <div class="col-md-9" style="text-align: center;">
+                            <br />
+                            {{ Form::submit('SALVAR', ['class' => 'btn btn-primary btn-block']) }}&nbsp;&nbsp;
+
+                        </div>
+                        <div class="col-md-3">
+                            <br />
+                            <a href="#" class="btn btn-danger closemodal">SAIR</a>
+                        </div>
+                    </div>
+                    {{ Form::close() }}
+
+                </div>
+
+            </div>
+            <!-- /.modal-content -->
+        </div>
+        <!-- /.modal-dialog -->
+    </div>
+    <!--end-->
 
     <!-- hidden-sm-up -->
 
@@ -501,6 +565,41 @@
                         $('.load_encarregados').html(response);
                     }
                 });
+            });
+
+            $('.modalEncarregado').click(function(e) {
+                e.preventDefault();
+                $('#encarregadomodal').modal('show');
+            });
+
+            $('.closemodal').click(function(e) {
+                e.preventDefault();
+                $('#encarregadomodal').modal('hide');
+            });
+
+            $('.formEncarregado').submit(function(e) {
+                e.preventDefault();
+                var data = {
+                    nome: $('#nomeP').val(),
+                    genero: $('#generoP').val(),
+                    telefone: $('#telefoneP').val(),
+                    _token: "{{ csrf_token() }}"
+                };
+
+                $.ajax({
+                    type: "post",
+                    url: "{{ route('encarregadoModal') }}",
+                    data: data,
+                    dataType: "html",
+                    success: function(response) {
+                        if (response === "yes") {
+                            $('.sms-save').html("Feito com sucesso");
+                        } else if (response === "no") {
+                            $('.sms-save').html("Já Cadastrou este encarregado");
+                        }
+                    }
+                });
+
             });
 
         });

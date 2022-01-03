@@ -20,6 +20,7 @@ use App\NotaFinal;
 use App\NotaTrimestral;
 use App\ObservacaoConjunta;
 use App\ObservacaoGeral;
+use App\Pessoa;
 use App\TipoPagamento;
 use App\Trimestral;
 use App\Turma;
@@ -1170,5 +1171,39 @@ class AjaxController extends Controller
             'getPagamentosEfectuados' => $pags_efectuados,
         ];
         return view('ajax_loads.getPagamentosEfectuados', $data);
+    }
+
+
+    public function encarregadoModal(Request $request)
+    {
+        $request->validate([
+            'nome' => ['required', 'string',],
+            'genero' => ['required', 'string',],
+            'telefone' => ['required', 'Integer',],
+        ]);
+
+        $data['pessoa'] = [
+            'nome' => $request->nome,
+            'genero' => $request->genero,
+            'id_municipio' => 1,
+            'telefone' => $request->telefone,
+        ];
+
+        $data['encarregado'] = [
+            'id_pessoa' => null,
+            'estado' => "on",
+        ];
+
+        if (Pessoa::where($data['pessoa'])->first()) {
+            return "no";
+        }
+
+        $pessoa = Pessoa::create($data['pessoa']);
+        if ($pessoa) {
+            $data['encarregado']['id_pessoa'] = $pessoa->id;
+            if (Encarregado::create($data['encarregado'])) {
+                return "yes";
+            }
+        }
     }
 }

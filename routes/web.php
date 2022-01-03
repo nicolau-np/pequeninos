@@ -80,6 +80,8 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/getBalancoDiario', "AjaxController@getBalancoDiario")->name('getBalancoDiario');
 
     Route::post('/getPagamentosEfectuados', "AjaxController@getPagamentosEfectuados")->name('getPagamentosEfectuados');
+
+    Route::post('/encarregadoModal', "AjaxController@encarregadoModal")->name('encarregadoModal');
 });
 
 Route::group(['prefix' => 'institucional', 'middleware' => "admin"], function () {

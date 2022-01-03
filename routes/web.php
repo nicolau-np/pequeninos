@@ -209,7 +209,7 @@ Route::group(['prefix' => 'financas', 'middleware' => "AdminUser"], function () 
     });
 });
 
-Route::group(['prefix' => 'encarregados', 'middleware' => "AdminUser"], function () {
+Route::group(['prefix' => 'encarregados', 'middleware' => "AdminSuperUser"], function () {
     Route::get('/', "EncarregadoController@index");
     Route::get('/create', "EncarregadoController@create");
     Route::post('/store', "EncarregadoController@store");
@@ -395,7 +395,7 @@ Route::group(['prefix' => "about"], function () {
     Route::get('/instituicao', "AboutController@instituicao");
 });
 
-Route::group(['prefix' => "word", 'middleware' => "AdminUser"], function () {
+Route::group(['prefix' => "word", 'middleware' => "AdminSuperUser"], function () {
     Route::get('declaracaosem/{id_declaracao}', "PhpWordController@declaracaosemnota");
     Route::get('declaracaocom/{id_declaracao}', "PhpWordController@declaracaocomnota");
 });

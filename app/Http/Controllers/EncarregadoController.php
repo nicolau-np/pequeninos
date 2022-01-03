@@ -11,14 +11,10 @@ use Illuminate\Http\Request;
 class EncarregadoController extends Controller
 {
   
-    public function __construct()
-    {
-        $this->middleware('AdminUser');   
-    }
-    
+
     public function index()
     {
-        
+
         $encarregados = Encarregado::paginate(5);
         $anos = AnoLectivo::pluck('ano_lectivo', 'id');
         $data = [
@@ -72,7 +68,7 @@ class EncarregadoController extends Controller
             'id_municipio'=>$request->municipio,
             'telefone'=>$request->telefone,
         ];
-        
+
         $data['encarregado'] = [
             'id_pessoa'=>null,
             'estado'=>"on",
@@ -87,7 +83,7 @@ class EncarregadoController extends Controller
             $data['encarregado']['id_pessoa'] = $pessoa->id;
             if(Encarregado::create($data['encarregado'])){
                 return back()->with(['success'=>"Feito com sucesso"]);
-            } 
+            }
         }
     }
 
@@ -155,14 +151,14 @@ class EncarregadoController extends Controller
             'id_municipio'=>$request->municipio,
             'telefone'=>$request->telefone,
         ];
-        
-        if($request->nome!=$encarregado->pessoa->nome || $request->genero!=$encarregado->pessoa->genero 
+
+        if($request->nome!=$encarregado->pessoa->nome || $request->genero!=$encarregado->pessoa->genero
         || $request->municipio!=$encarregado->pessoa->id_municipio || $request->telefone!=$encarregado->pessoa->telefone){
            if(Pessoa::where($data['pessoa'])->first()){
             return back()->with(['error'=>"Já cadastrou este encarregado"]);
-            } 
+            }
         }
-        
+
 
         $pessoa = Pessoa::find($encarregado->pessoa->id)->update($data['pessoa']);
         if($pessoa){

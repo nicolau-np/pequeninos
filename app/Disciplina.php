@@ -14,60 +14,78 @@ class Disciplina extends Model
         'sigla',
     ];
 
-    public function componente(){
+    public function componente()
+    {
         return $this->belongsTo(CompoDisciplina::class, 'id_componente', 'id');
     }
 
-    public function grade(){
+    public function grade()
+    {
         return $this->hasMany(Grade::class, 'id_disciplina', 'id');
     }
 
-    public function horario(){
+    public function horario()
+    {
         return $this->hasMany(Horario::class, 'id_disciplina', 'id');
     }
 
-    public function avaliacao(){
+    public function avaliacao()
+    {
         return $this->hasMany(Avaliacao::class, 'id_disciplina', 'id');
     }
 
-    public function prova(){
+    public function prova()
+    {
         return $this->hasMany(Prova::class, 'id_disciplina', 'id');
     }
 
-    public function notas_trimestrais(){
+    public function notas_trimestrais()
+    {
         return $this->hasMany(NotaTrimestral::class, 'id_disciplina', 'id');
     }
 
-    public function nota_final(){
+    public function nota_final()
+    {
         return $this->hasMany(NotaFinal::class, 'id_disciplina', 'id');
     }
 
-    public function cadeira_recurso(){
+    public function cadeira_recurso()
+    {
         return $this->hasMany(CadeiraRecurso::class, 'id_disciplina', 'id');
     }
 
-    public function cadeira_exame(){
+    public function cadeira_exame()
+    {
         return $this->hasMany(CadeiraExame::class, 'id_disciplina', 'id');
     }
 
-    public function eja_nota_mensal(){
+    public function eja_nota_mensal()
+    {
         return $this->hasMany(EjaNotaMensal::class, 'id_disciplina', 'id');
     }
 
-    public function eja_nota_trimestral(){
+    public function eja_nota_trimestral()
+    {
         return $this->hasMany(EjaNotaTrimestral::class, 'id_disciplina', 'id');
     }
 
-    public function eja_nota_final(){
+    public function eja_nota_final()
+    {
         return $this->hasMany(EjaNotaFinal::class, 'id_disciplina', 'id');
     }
 
-    public function obs_conjunta1(){
+    public function obs_conjunta1()
+    {
         return $this->hasMany(ObservacaoConjunta::class, 'id_disciplina1', 'id');
     }
 
-    public function obs_conjunta2(){
+    public function obs_conjunta2()
+    {
         return $this->hasMany(ObservacaoConjunta::class, 'id_disciplina2', 'id');
     }
 
+    public function ordena_disciplina()
+    {
+        return $this->hasMany(OrdenaDisciplina::class, 'id_disciplina', 'id');
+    }
 }

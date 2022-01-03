@@ -33,7 +33,7 @@ class Classe extends Model
         return $this->hasMany(ObservacaoGeral::class, 'id_classe', 'id');
     }
 
-   
+
     public function observacao_conjunta(){
         return $this->hasMany(ObservacaoConjunta::class, 'id_classe', 'id');
     }
@@ -44,5 +44,9 @@ class Classe extends Model
 
     public function cadeira_exame(){
         return $this->hasMany(CadeiraExame::class, 'id_classe', 'id');
+    }
+
+    public function ordena_disciplina(){
+        return $this->hasMany(OrdenaDisciplina::class, 'id_classe', 'id');
     }
 }

@@ -41,4 +41,8 @@ class Curso extends Model
     public function cadeira_exame(){
         return $this->hasMany(CadeiraExame::class, 'id_curso', 'id');
     }
+
+    public function ordena_disciplina(){
+        return $this->hasMany(OrdenaDisciplina::class, 'id_curso', 'id');
+    }
 }

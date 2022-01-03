@@ -382,6 +382,13 @@ $lastYear = ControladorStatic::getLastYear();
                                             </a>
                                         </li>
 
+                                        <li class="@if($menu=="Ordenar Disciplinas") active @endif">
+                                            <a href="/institucional/ordenar_disciplinas/">
+                                                <span class="pcoded-micon"><i class="ti-angle-right"></i></span>
+                                                <span class="pcoded-mtext" data-i18n="nav.basic-components.alert">Ordenar Disciplinas</span>
+                                                <span class="pcoded-mcaret"></span>
+                                            </a>
+                                        </li>
                                     </ul>
                                 </li>
                                 @endif

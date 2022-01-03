@@ -425,7 +425,7 @@ class InstitucionalController extends Controller
             'epoca' => ['required', 'string'],
         ]);
 
-/*         if (!Session::has('disciplinas')) {
+        /*         if (!Session::has('disciplinas')) {
             return back()->with(['error' => "Deve selecionar disciplinas"]);
         }
 
@@ -447,7 +447,7 @@ class InstitucionalController extends Controller
             'id_disciplina' => null,
         ];
 
-        foreach ($request->get('disciplinas',[]) as $disciplina) {
+        foreach ($request->get('disciplinas', []) as $disciplina) {
             $data['store']['id_disciplina'] = $disciplina['id'];
             $data['where']['id_disciplina'] = $disciplina['id'];
             $data["store"]['nuclear'] = $disciplina['is_nuclear'];
@@ -1103,5 +1103,27 @@ class InstitucionalController extends Controller
 
     public function exames_update(Request $request, $id)
     {
+    }
+
+
+    public function ordenar_disciplinas_list()
+    {
+    }
+
+    public function ordenar_disciplinas_create()
+    {
+    }
+
+    public function ordenar_disciplinas_store(Request $request)
+    {
+    }
+
+    public function ordenar_disciplinas_edit($id)
+    {
+    }
+
+    public function ordenar_disciplinas_update(Request $request, $id)
+    {
+        
     }
 }

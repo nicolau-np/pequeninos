@@ -182,6 +182,14 @@ Route::group(['prefix' => 'institucional', 'middleware' => "admin"], function ()
         Route::get('/edit/{id}', "InstitucionalController@exames_edit");
         Route::put('/update/{id}', "InstitucionalController@exames_update");
     });
+
+    Route::group(['prefix' => "ordenar_disciplinas"], function () {
+        Route::get('/', "InstitucionalController@ordenar_disciplinas_list");
+        Route::get('/create', "InstitucionalController@ordenar_disciplinas_create");
+        Route::post('/store', "InstitucionalController@ordenar_disciplinas_store");
+        Route::get('/edit/{id}', "InstitucionalController@ordenar_disciplinas_edit");
+        Route::put('/update/{id}', "InstitucionalController@ordenar_disciplinas_update");
+    });
 });
 
 Route::group(['prefix' => 'bloqueios', 'middleware' => "AdminUser"], function () {

@@ -250,8 +250,12 @@ $getEstudante->pessoa->deficiencia,
                             </div>
                           <hr/>
                             <div class="row">
-                                <div class="col-md-12">
+                                <div class="col-md-10">
                                     {{Form::text('encarregador', null, ['class'=>"form-control encarregador", 'placeholder'=>"Encarregado"])}}
+                                </div>
+                                <div class="col-md-2">
+                                    <a href="#" class="btn btn-success btn-sm modalEncarregado"> <i class="ti-plus"></i>
+                                        Novo</a>
                                 </div>
                                 <div class="col-md-12">
                                     <span class="load_encarregados">

@@ -1,9 +1,17 @@
 <?php
 
 use App\AnoLectivo;
+use App\Declaracao;
+use App\Desistencia;
+use App\DocumentoEntregue;
 use App\Estudante;
+use App\Finals;
+use App\HistoricEstudante;
 use App\Pagamento;
+use App\Pessoa;
 use App\RestricaoNota;
+use App\Transferencia;
+use App\Trimestral;
 use Illuminate\Support\Facades\Route;
 
 
@@ -421,5 +429,7 @@ Route::get('test', function () {
 
     return $restricao;
 });
+
+
 
 /*fim*/

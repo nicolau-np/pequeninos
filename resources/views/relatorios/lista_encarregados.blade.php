@@ -14,7 +14,7 @@ $trimestre_totais = [
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-<title>LISTA DE COMPARTICIPAÇÃO - {{$getAno->ano_lectivo}}</title>
+<title>LISTA DE ENCARREGADOS - {{$getAno->ano_lectivo}}</title>
 <style>
     @page{
         font-family: Arial, Helvetica, sans-serif;
@@ -36,7 +36,7 @@ $trimestre_totais = [
     </div>
 
     <div class="body-header">
-        <p style="text-align: center; font-weight: bold;">LISTA DE COMPARTICIPAÇÃO DE ENCARREGADOS</p>
+        <p style="text-align: center; font-weight: bold;">LISTA DE ENCARREGADOS</p>
         <br/>
         ANO LECTIVO: [ {{$getAno->ano_lectivo}} ]<br/>
     </div>
@@ -49,9 +49,7 @@ $trimestre_totais = [
                     <th>ENCARREGADO</th>
                     <th>TELEFONE</th>
                     <th>ESTUDANTE</th>
-                    @foreach ($trimestres as $epoca)
-                       <th>{{strtoupper($epoca)}}</th>
-                    @endforeach
+                  
                 </tr>
             </thead>
             <tbody>
@@ -74,20 +72,6 @@ $trimestre_totais = [
                         ?>
                     </td>
 
-                    @foreach ($trimestres as $epoca)
-
-                    <td>
-                     <?php
-                       $valores = ControladorStatic::getValoresComparticipacao($epoca, $encarregados->id, $getAno->ano_lectivo);
-                     ?>
-                     @if($valores==null)
-                     ---
-                     @else
-                        {{number_format($valores->preco,2,',','.')}} Akz
-                    @endif
-                    <?php ?>
-                    </td>
-                    @endforeach
                 </tr>
                 @endif
                 @endforeach

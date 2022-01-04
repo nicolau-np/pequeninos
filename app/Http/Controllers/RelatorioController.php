@@ -151,9 +151,9 @@ class RelatorioController extends Controller
             'getAno' => $ano_lectivo,
             'getEncarregados' => $encarregados,
         ];
-        $pdf = PDF::loadView('relatorios.lista_encarregados', $data)->setPaper('A4', 'landscape');
+        $pdf = PDF::loadView('relatorios.lista_encarregados', $data)->setPaper('A4', 'normal');
 
-        return $pdf->stream('LISTA DE COMPARTICIPAÇÃO - ' . $ano_lectivo->ano_lectivo . '.pdf');
+        return $pdf->stream('LISTA DE ENCARREGADOS - ' . $ano_lectivo->ano_lectivo . '.pdf');
     }
 
     public function lista_nominal($id_turma, $ano_lectivo)

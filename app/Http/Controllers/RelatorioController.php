@@ -65,7 +65,7 @@ class RelatorioController extends Controller
             'id_turno' => $historico->turma->id_turno,
 
         ])->first();
-        $getRecordPagamento = Pagamento::where(['fatura'=> $id_fatura, 'ano_lectivo'=>$historico->ano_lectivo, 'id_estudante'=>$historico->id_estudante])->first();
+        $getRecordPagamento = Pagamento::where(['fatura' => $id_fatura, 'ano_lectivo' => $historico->ano_lectivo, 'id_estudante' => $historico->id_estudante])->first();
 
         $data = [
             'getPagamento' => $pagamento,
@@ -75,7 +75,7 @@ class RelatorioController extends Controller
             'getFatura' => $fatura,
             'getEducandos' => $educandos,
             'getTabelaPreco' => $tabela_preco,
-            'getRecordPagamento'=>$getRecordPagamento,
+            'getRecordPagamento' => $getRecordPagamento,
         ];
         $pdf = PDF::loadView('relatorios.fatura', $data)->setPaper('A4', 'normal');
 
@@ -143,9 +143,7 @@ class RelatorioController extends Controller
             return back()->with(['error' => "Ano lectivo não encontrado"]);
         }
 
-        $encarregados = Encarregado::WhereHas('pessoa', function ($query) {
-            $query->orderBy('nome', 'desc');
-        })->get();
+        $encarregados = Encarregado::get()->sortBy('pessoa.nome');
 
         $data = [
             'getAno' => $ano_lectivo,
@@ -252,10 +250,10 @@ class RelatorioController extends Controller
 
         if ($id_ensino == 1) { //iniciacao ate 6
             //se for classificacao quantitativa
-            if (($classe == "2ª classe") || ($classe == "4ª classe")|| ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
+            if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
                 $pdf = PDF::loadView('minipauta.pdf.ensino_primario_2_4_copy', $data['view'])->setPaper('A4', 'normal');
             } //se for classificacao quantitativa
-            elseif (($classe == "Iniciação") ) {
+            elseif (($classe == "Iniciação")) {
                 $pdf = PDF::loadView('minipauta.pdf.ensino_primario_Ini_1_3_5_copy', $data['view'])->setPaper('A4', 'normal');
             } elseif (($classe == "6ª classe")) {
                 $pdf = PDF::loadView('minipauta.pdf.ensino_primario_6_copy', $data['view'])->setPaper('A4', 'normal');
@@ -335,7 +333,7 @@ class RelatorioController extends Controller
             if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
                 $pdf = PDF::loadView('pauta.pdf.ensino_primario_2_4_copy', $data['view'])->setPaper('A3', 'landscape');
             } //se for classificacao quantitativa
-            elseif (($classe == "Iniciação") ) {
+            elseif (($classe == "Iniciação")) {
                 $pdf = PDF::loadView('pauta.pdf.ensino_primario_Ini_1_3_5_copy', $data['view'])->setPaper('A3', 'landscape');
             } elseif (($classe == "6ª classe")) {
                 $pdf = PDF::loadView('pauta.pdf.ensino_primario_6_copy', $data['view'])->setPaper('A3', 'landscape');
@@ -402,10 +400,10 @@ class RelatorioController extends Controller
 
         if ($id_ensino == 1) { //iniciacao ate 6
             //se for classificacao quantitativa
-            if (($classe == "2ª classe") || ($classe == "4ª classe")|| ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
+            if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
                 $pdf = PDF::loadView('relatorios.ensinos.declaracao.ensino_primario_2_4_copy', $data['view'])->setPaper('A4', 'normal');
             } //se for classificacao quantitativa
-            elseif (($classe == "Iniciação") ) {
+            elseif (($classe == "Iniciação")) {
                 $pdf = PDF::loadView('relatorios.ensinos.declaracao.ensino_primario_Ini_1_3_5_copy', $data['view'])->setPaper('A4', 'normal');
             } elseif (($classe == "6ª classe")) {
                 $pdf = PDF::loadView('relatorios.ensinos.declaracao.ensino_primario_6_copy', $data['view'])->setPaper('A4', 'normal');
@@ -501,11 +499,11 @@ class RelatorioController extends Controller
 
         if ($id_ensino == 1) { //iniciacao ate 6
             //se for classificacao quantitativa
-            if (($classe == "2ª classe") || ($classe == "4ª classe")|| ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
+            if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
 
                 $pdf = PDF::loadView('relatorios.ensinos.boletins.ensino_primario_2_4_copy', $data['view'])->setPaper('A4', 'normal');
             } //se for classificacao quantitativa
-            elseif (($classe == "Iniciação") ) {
+            elseif (($classe == "Iniciação")) {
                 $pdf = PDF::loadView('relatorios.ensinos.boletins.ensino_primario_Ini_1_3_5_copy', $data['view'])->setPaper('A4', 'normal');
             } elseif (($classe == "6ª classe")) {
                 $pdf = PDF::loadView('relatorios.ensinos.boletins.ensino_primario_6_copy', $data['view'])->setPaper('A4', 'normal');
@@ -660,36 +658,38 @@ class RelatorioController extends Controller
         $categorias = CategoriaEstudante::get();
         $turmas = Turma::where('turma', '!=', 'Nenhuma')->orderBy('id_classe', 'asc')->get();
         $data = [
-            'getTurmas'=>$turmas,
+            'getTurmas' => $turmas,
             'getCategorias' => $categorias,
             'getAno' => $ano_lectivo->ano_lectivo,
         ];
         $pdf = PDF::loadView('relatorios.estatistica_geral', $data)->setPaper('A4', 'landscape');
         return $pdf->stream('ESTATÍSTICA GERAL - [' . $ano_lectivo->ano_lectivo .  ' ].pdf');
-
     }
 
-    public function printusers(){
+    public function printusers()
+    {
         $users = User::all();
         $data = [
-            'getUsuarios'=>$users
+            'getUsuarios' => $users
         ];
         $pdf = PDF::loadView('relatorios.users', $data)->setPaper('A4', 'normal');
         return $pdf->stream('LISTA DE USUÁRIOS.pdf');
     }
 
-    public function balancoDiario($data1, $data2){
+    public function balancoDiario($data1, $data2)
+    {
         $tipo_pagamentos = TipoPagamento::all();
         $data = [
-            'data1'=>$data1,
-            'data2'=>$data2,
-            'getTiposPagamentos'=>$tipo_pagamentos,
+            'data1' => $data1,
+            'data2' => $data2,
+            'getTiposPagamentos' => $tipo_pagamentos,
         ];
         $pdf = PDF::loadView('relatorios.balanco', $data)->setPaper('A4', 'normal');
-        return $pdf->stream('BALANÇO - ['.date('d-m-Y',strtotime($data1)).' - '.date('d-m-Y',strtotime($data2)).' ].pdf');
+        return $pdf->stream('BALANÇO - [' . date('d-m-Y', strtotime($data1)) . ' - ' . date('d-m-Y', strtotime($data2)) . ' ].pdf');
     }
 
-    public function pautatrimestral(Request $request, $id_turma, $ano_lectivo){
+    public function pautatrimestral(Request $request, $id_turma, $ano_lectivo)
+    {
         $request->validate([
             'epoca' => ['required', 'integer', 'min:1',],
         ]);
@@ -715,7 +715,7 @@ class RelatorioController extends Controller
             'getTurma' => $turma,
             'getHistorico' => $historico,
             'getEpoca' => $request->epoca,
-            'getAno'=>$ano_lectivo,
+            'getAno' => $ano_lectivo,
         ];
 
 
@@ -726,11 +726,11 @@ class RelatorioController extends Controller
 
         if ($id_ensino == 1) { //iniciacao ate 6
             //se for classificacao quantitativa
-            if (($classe == "2ª classe") || ($classe == "4ª classe")|| ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
+            if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
 
                 $pdf = PDF::loadView('minha_turma.ensinos.ensino_primario_2_4_copy', $data['view'])->setPaper('A4', 'landscape');
             } //se for classificacao quantitativa
-            elseif (($classe == "Iniciação") ) {
+            elseif (($classe == "Iniciação")) {
                 $pdf = PDF::loadView('minha_turma.ensinos.ensino_primario_Ini_1_3_5_copy', $data['view'])->setPaper('A4', 'landscape');
             } elseif (($classe == "6ª classe")) {
                 $pdf = PDF::loadView('minha_turma.ensinos.ensino_primario_6_copy', $data['view'])->setPaper('A4', 'landscape');

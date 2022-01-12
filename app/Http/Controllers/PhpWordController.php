@@ -219,7 +219,7 @@ class PhpWordController extends Controller
         $values = [];
         $nota_valor = "[######]";
         $nota_extensao = "[####]";
-        if (($id_ensino == 1) && (($classe == "Iniciação") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe"))) {//para notas qualitativa
+        if (($id_ensino == 1) && (($classe == "Iniciação") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe"))) { //para notas qualitativa
             foreach (Session::get('disciplinas') as $disciplina) {
                 $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
                 $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina['id_disciplina'], $historico->ano_lectivo);
@@ -272,5 +272,10 @@ class PhpWordController extends Controller
             echo $e->getMessage();
         }
         return response()->download('word_models/declaracao_notas/' . $filename . '.docx')->deleteFileAfterSend(true);
+    }
+
+    public function termo(Request $request, $id_estudante, $ano_lectivo)
+    {
+        
     }
 }

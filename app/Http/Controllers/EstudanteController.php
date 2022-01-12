@@ -923,4 +923,39 @@ class EstudanteController extends Controller
 
         return back()->with(['success' => "Feito com sucesso"]);
     }
+
+    public function termo($id_estudante, $ano_lectivo)
+    {
+        $estudante = Estudante::find($id_estudante);
+        if (!$estudante) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+        $ano = AnoLectivo::where(['ano_lectivo' => $ano_lectivo])->first();
+        if (!$ano) {
+            return back()->with(['error' => "Nao encontrou"]);
+        }
+
+        $historico = HistoricEstudante::where(['id_estudante' => $id_estudante, 'ano_lectivo' => $ano_lectivo])->first();
+        if (!$historico) {
+            return back()->with(['error' => "Estudante nao matriculado neste ano lectivo"]);
+        }
+
+        $turma = Turma::find($historico->id_turma);
+        $grade_disciplinas = Grade::where([
+            'id_curso' => $turma->id_curso,
+            'id_classe' => $turma->id_classe,
+        ])->get();
+
+        Session::forget('disciplinas');
+        $data = [
+            'title' => "Estudantes",
+            'type' => "estudantes",
+            'menu' => "Estudantes",
+            'submenu' => "Termos",
+            'getTurma' => $turma,
+            'getHistorico' => $historico,
+            'getGrade' => $grade_disciplinas,
+        ];
+        return view('estudantes.create_termo', $data);
+    }
 }

@@ -258,6 +258,8 @@ Route::group(['prefix' => 'estudantes', 'middleware' => "AdminSuperUser"], funct
 
     Route::get('/restringir_notas', "EstudanteController@restringir_notas");
     Route::post('/restringir', "EstudanteController@restringir");
+
+    Route::get('/termo/{id}/{ano_lectivo}', "EstudanteController@termo");
 });
 
 Route::group(['prefix' => "turmas", 'middleware' => "AdminSuperUser"], function () {
@@ -416,6 +418,7 @@ Route::group(['prefix' => "about"], function () {
 Route::group(['prefix' => "word", 'middleware' => "AdminSuperUser"], function () {
     Route::get('declaracaosem/{id_declaracao}', "PhpWordController@declaracaosemnota");
     Route::get('declaracaocom/{id_declaracao}', "PhpWordController@declaracaocomnota");
+    Route::put('termo/{id_estudante}/{ano_lectivo}', "PhpWordController@termo");
 });
 
 

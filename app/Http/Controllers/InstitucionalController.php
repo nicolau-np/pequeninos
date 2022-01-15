@@ -19,6 +19,7 @@ use App\ObservacaoConjunta;
 use App\ObservacaoConjuntaRegra;
 use App\ObservacaoGeral;
 use App\ObservacaoUnica;
+use App\OrdernaDisciplina;
 use App\Sala;
 use App\TipoSala;
 use App\Turma;
@@ -409,9 +410,6 @@ class InstitucionalController extends Controller
 
     public function grade_store(Request $request)
     {
-
-
-
         $request->validate([
             'disciplinas' => 'required',
             'disciplinas.*.id' => [
@@ -1108,14 +1106,62 @@ class InstitucionalController extends Controller
 
     public function ordenar_disciplinas_list()
     {
+        $data = [
+            'title' => "Ordenar Disciplinas",
+            'type' => "institucional",
+            'menu' => "Ordenar Disciplinas",
+            'submenu' => "Listar",
+        ];
+        return view('institucional.order_disciplinas.list', $data);
     }
 
     public function ordenar_disciplinas_create()
     {
+        $cursos = Curso::pluck('curso', 'id');
+        $data = [
+            'title' => "Ordenar Disciplinas",
+            'type' => "institucional",
+            'menu' => "Ordenar Disciplinas",
+            'submenu' => "Novo",
+            'getCursos' => $cursos,
+        ];
+        return view('institucional.order_disciplinas.new', $data);
     }
 
     public function ordenar_disciplinas_store(Request $request)
     {
+        $request->validate([
+            'curso' => ['required', 'Integer'],
+            'classe' => ['required', 'Integer'],
+
+        ]);
+
+        if (!Session::has('disciplinas')) {
+            return back()->with(['error' => "Deve selecionar disciplinas"]);
+        }
+
+        if (Session::get('disciplinas') == null) {
+            return back()->with(['error' => "Deve selecionar disciplinas"]);
+        }
+
+        foreach (Session::get('disciplinas') as $disciplinas) {
+            $order = OrdernaDisciplina::where([
+                'id_curso' => $request->curso,
+                'id_classe' => $request->classe,
+                'id_disciplina' => $disciplinas['id_disciplina'],
+            ])->first();
+
+            if (!$order) {
+                OrdernaDisciplina::create([
+                    'id_curso' => $request->curso,
+                    'id_classe' => $request->classe,
+                    'id_disciplina' => $disciplinas['id_disciplina'],
+                    'estado' => "on",
+                ]);
+            }
+        }
+        Session::forget('disciplinas');
+        return back()->with(['success' => "Feito com sucesso"]);
     }
 
     public function ordenar_disciplinas_edit($id)
@@ -1124,6 +1170,5 @@ class InstitucionalController extends Controller
 
     public function ordenar_disciplinas_update(Request $request, $id)
     {
-        
     }
 }

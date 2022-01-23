@@ -235,7 +235,7 @@
                 <div class="row">
                     <div class="col-sm-4">
                         <div class="copy-text">
-                            <p>Todos os direitos reservados | Copyright {{ date('Y') }} © powered by SIGE OKUSSOLEKA</p>
+                            <p>Todos os direitos reservados | Copyright {{ date('Y') }} © powered by Brini-Investiment</p>
                         </div>
                     </div>
                     <div class="col-sm-5">

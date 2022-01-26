@@ -1,14 +1,17 @@
 <?php
 
 use App\AnoLectivo;
+use App\Avaliacao;
 use App\Declaracao;
 use App\Desistencia;
 use App\DocumentoEntregue;
 use App\Estudante;
 use App\Finals;
 use App\HistoricEstudante;
+use App\Multado;
 use App\Pagamento;
 use App\Pessoa;
+use App\Prova;
 use App\RestricaoNota;
 use App\Transferencia;
 use App\Trimestral;
@@ -427,7 +430,7 @@ Route::group(['prefix' => "excel"], function () {
 });
 
 /*rota de test*/
-Route::get('test', function () {
+Route::get('/test', function () {
     $restricao = RestricaoNota::all();
 
     return $restricao;
@@ -436,3 +439,34 @@ Route::get('test', function () {
 
 
 /*fim*/
+
+
+/**eliminar estudantes */
+
+Route::get('/elminar_estudantes/{id_estudante}', function ($id_estudante) {
+    /*$estudante = Estudante::find($id_estudante);
+    if (!$estudante) {
+        return "Estudante nao encontrado";
+    }
+    $historico = HistoricEstudante::where(['id_estudante' => $id_estudante])->first();
+    $id_pessoa = $estudante->id_pessoa;
+    $nome = $estudante->pessoa->nome;
+
+
+    Avaliacao::where(['id_estudante' => $estudante->id])->delete();
+    Prova::where(['id_estudante' => $estudante->id])->delete();
+    Declaracao::where(['id_estudante' => $estudante->id])->delete();
+    Transferencia::where(['id_estudante' => $estudante->id])->delete();
+    Desistencia::where(['id_estudante' => $estudante->id])->delete();
+    Pagamento::where(['id_estudante' => $estudante->id])->delete();
+    Finals::where(['id_estudante' => $estudante->id])->delete();
+    Trimestral::where(['id_estudante' => $estudante->id])->delete();
+    RestricaoNota::where(['id_estudante' => $estudante->id])->delete();
+    Multado::where(['id_estudante' => $estudante->id])->delete();
+    DocumentoEntregue::where(['id_historico' => $historico->id])->delete();
+    HistoricEstudante::where(['id_estudante' => $estudante->id])->delete();
+    Estudante::find($estudante->id)->delete();
+    Pessoa::find($id_pessoa)->delete();
+
+    echo "eliminado com sucesso    => " . $nome;*/
+});

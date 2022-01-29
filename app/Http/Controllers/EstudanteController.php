@@ -958,4 +958,34 @@ class EstudanteController extends Controller
         ];
         return view('estudantes.create_termo', $data);
     }
+
+    public function search_advanced()
+    {
+        $estudante = "nada";
+        $data = [
+            'title' => "Estudantes",
+            'type' => "estudantes",
+            'menu' => "Estudantes",
+            'submenu' => "Pesquisa Avançada",
+            'getEstudante' => $estudante,
+        ];
+        return view('estudantes.search_advanced', $data);
+    }
+
+    public function search_advancedP(Request $request)
+    {
+        $request->validate([
+            'processo' => ['required', 'integer'],
+        ]);
+        $estudante = true;
+        $estudante = Estudante::find($request->processo);
+        $data = [
+            'title' => "Estudantes",
+            'type' => "estudantes",
+            'menu' => "Estudantes",
+            'submenu' => "Pesquisa Avançada",
+            'getEstudante' => $estudante,
+        ];
+        return view('estudantes.search_advanced', $data);
+    }
 }

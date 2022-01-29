@@ -263,6 +263,9 @@ Route::group(['prefix' => 'estudantes', 'middleware' => "AdminSuperUser"], funct
     Route::post('/restringir', "EstudanteController@restringir");
 
     Route::get('/termo/{id}/{ano_lectivo}', "EstudanteController@termo");
+
+    Route::get('/search_advanced', "EstudanteController@search_advanced");
+    Route::post('/search_advanced', "EstudanteController@search_advancedP");
 });
 
 Route::group(['prefix' => "turmas", 'middleware' => "AdminSuperUser"], function () {

@@ -8,7 +8,7 @@ use App\Http\Controllers\ControladorStatic; ?>
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header">
-                        <h5>{{ $submenu }}</h5>
+                        <h5>{{ $submenu }} &nbsp;&nbsp;&nbsp;  <a href="/estudantes/search_advanced" class="btn btn-primary"><i class="ti-search"></i> Pesquisa Avançada</a></h5>
                         <span></span>
                         <div class="card-header-right">
 

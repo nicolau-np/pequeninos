@@ -988,4 +988,11 @@ class EstudanteController extends Controller
         ];
         return view('estudantes.search_advanced', $data);
     }
+
+    public function restringir_destroy()
+    {
+        $restrincao = RestricaoNota::where('id', '>=', 1)->delete();
+
+        return back()->with(['success' => "Feito com sucesso"]);
+    }
 }

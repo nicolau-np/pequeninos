@@ -113,9 +113,12 @@ use App\Http\Controllers\ControladorStatic;
                                 </div>
 
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-5">
                                         <br />
                                         {{ Form::submit('Aplicar', ['class' => 'btn btn-primary']) }}
+                                        &nbsp;&nbsp;
+                                        <a href="/estudantes/restringir/destroy" class="btn btn-danger">Remover
+                                            Restrições</a>
                                     </div>
                                 </div>
                                 {{ Form::close() }}

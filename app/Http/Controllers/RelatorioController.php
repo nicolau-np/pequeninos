@@ -20,6 +20,7 @@ use App\FormaPagamento;
 use App\Funcionario;
 use App\HistoricEstudante;
 use App\Horario;
+use App\OrdernaDisciplina;
 use App\Pagamento;
 use App\PagamentoPai;
 use App\TabelaPreco;
@@ -311,9 +312,11 @@ class RelatorioController extends Controller
             }
         }
 
-        if (!Session::has('disciplinas')) {
-            return back()->with(['error' => "Deve selecionar as disciplinas"]);
-        }
+       //verificar se selecionou a ordem das disciplinas
+       $ordena_disciplina = null;
+       if (!Session::has('disciplinas')) {
+           $ordena_disciplina = OrdernaDisciplina::where(['id_curso' => $turma->id_curso, 'id_classe' => $turma->id_classe])->get();
+       }
 
         $historico = HistoricEstudante::where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])
             ->orderBy('numero', 'asc')->get();
@@ -321,6 +324,7 @@ class RelatorioController extends Controller
         $data['view'] = [
             'getDirector' => $directorTurma,
             'getHistorico' => $historico,
+            'getOrdenaDisciplinas' =>$ordena_disciplina,
         ];
 
         //buscando ensino atraves de turma

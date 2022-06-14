@@ -7,6 +7,7 @@ use App\DirectorTurma;
 use App\Funcionario;
 use App\Grade;
 use App\HistoricEstudante;
+use App\OrdernaDisciplina;
 use App\Turma;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -124,6 +125,11 @@ class PautaController_copy extends Controller
             'ano_lectivo' => $ano_lectivo
         ])->orderBy('numero', 'asc')->get();
 
+        //verificar se selecionou a ordem das disciplinas
+        $ordena_disciplina = null;
+        if (!Session::has('disciplinas')) {
+            $ordena_disciplina = OrdernaDisciplina::where(['id_curso' => $turma->id_curso, 'id_classe' => $turma->id_classe])->get();
+        }
 
         $data = [
             'title' => "Pauta",
@@ -132,20 +138,18 @@ class PautaController_copy extends Controller
             'submenu' => "Novo",
             'getDirector' => $directorTurma,
             'getHistorico' => $historico,
+            'getOrdenaDisciplinas' =>$ordena_disciplina,
         ];
 
-        //verificar se selecionou a ordem das disciplinas
-        if (!Session::has('disciplinas')) {
-            return back()->with(['error' => "Deve selecionar as disciplinas"]);
-        }
+
         if ($id_ensino == 1) {
             //se for classificacao quantitativa
             if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
                 return view('pauta.ensinos.ensino_primario_2_4_copy', $data);
             } //se for classificacao quantitativa
-            elseif (($classe == "Iniciação") ) {
+            elseif (($classe == "Iniciação")) {
                 return view('pauta.ensinos.ensino_primario_Ini_1_3_5_copy', $data);
-            }elseif(($classe == "6ª classe")){
+            } elseif (($classe == "6ª classe")) {
                 return view('pauta.ensinos.ensino_primario_6_copy', $data);
             }
         } elseif ($id_ensino == 2) {

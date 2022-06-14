@@ -177,13 +177,7 @@
     </div>
     <script>
         //var DISCIPLINAS = JSON.parse(JSON.stringify('{{ $getDisciplinas->toJson() }}'));
-
-
-
         $(document).ready(function() {
-
-
-
             $('#btnAdDisciplina').click(function(e) {
                 e.preventDefault();
 

@@ -1106,11 +1106,13 @@ class InstitucionalController extends Controller
 
     public function ordenar_disciplinas_list()
     {
+        $cursos = Curso::orderBy('id', 'asc')->paginate(1);
         $data = [
             'title' => "Ordenar Disciplinas",
             'type' => "institucional",
             'menu' => "Ordenar Disciplinas",
             'submenu' => "Listar",
+            'getCursos' => $cursos,
         ];
         return view('institucional.order_disciplinas.list', $data);
     }

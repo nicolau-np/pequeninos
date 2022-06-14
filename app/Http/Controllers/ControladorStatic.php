@@ -16,6 +16,7 @@ use App\Grade;
 use App\HistoricEstudante;
 use App\Horario;
 use App\Multado;
+use App\OrdernaDisciplina;
 use App\Pagamento;
 use App\PagamentoPai;
 use App\RestricaoNota;
@@ -289,6 +290,12 @@ class ControladorStatic extends Controller
     public static function getDisciplinasGrade($id_curso, $id_classe)
     {
         $grades = Grade::where(['id_curso' => $id_curso, 'id_classe' => $id_classe])->get();
+        return $grades;
+    }
+
+    public static function getDisciplinasOrdem($id_curso, $id_classe)
+    {
+        $grades = OrdernaDisciplina::where(['id_curso' => $id_curso, 'id_classe' => $id_classe])->get();
         return $grades;
     }
 

@@ -94,7 +94,8 @@ use App\Http\Controllers\ControladorNotas;
                 de {{ $mes_extenso }} de
                 {{ date('Y', strtotime($getHistorico->estudante->pessoa->data_nascimento)) }}, natural de
                 @if ($getHistorico->estudante->pessoa->naturalidade)
-                {{ $getHistorico->estudante->pessoa->naturalidade }} @else [########################] @endif
+                {{ $getHistorico->estudante->pessoa->naturalidade }} @else [########################]
+                @endif
                 Município de {{ $getHistorico->estudante->pessoa->municipio->municipio }} província de
                 {{ $getHistorico->estudante->pessoa->municipio->provincia->provincia }}, portador (a) do Bilhete de
                 Identidade Nº
@@ -117,43 +118,80 @@ use App\Http\Controllers\ControladorNotas;
             </div>
 
             <div class="table-responsive">
-
-                <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 50%;">
-                    <thead>
-                        <tr>
-                            <td>DISCIPLINAS</td>
-                            <td>NOTAS</td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (Session::get('disciplinas') as $disciplina)
-                            @php
-                                $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
-                                $final = ControladorNotas::getValoresPautaFinalPDF($getHistorico->id_estudante, $disciplina['id_disciplina'], $getHistorico->ano_lectivo);
-                            @endphp
+                @if (!$getOrdenaDisciplinas)
+                    <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 50%;">
+                        <thead>
                             <tr>
-                                <td>{{ strtoupper($getDisciplina->disciplina) }}</td>
-                                @if ($final->count() == 0)
-                                    <td>---</td>
-                                @else
-                                    @foreach ($final as $valorf)
-                                        @php
-                                            $v1_estilo = ControladorNotas::nota_20($valorf->mf);
-                                            $v2_estilo = ControladorNotas::notaRec_10($valorf->rec);
-                                        @endphp
-
-                                        @if ($valorf->rec == null)
-                                            <td class="{{ $v1_estilo }}">{{ $valorf->mf }}</td>
-                                        @else
-                                            <td class="{{ $v2_estilo }}">{{ $valorf->rec }}</td>
-                                        @endif
-                                    @endforeach
-                                @endif
+                                <td>DISCIPLINAS</td>
+                                <td>NOTAS</td>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach (Session::get('disciplinas') as $disciplina)
+                                @php
+                                    $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
+                                    $final = ControladorNotas::getValoresPautaFinalPDF($getHistorico->id_estudante, $disciplina['id_disciplina'], $getHistorico->ano_lectivo);
+                                @endphp
+                                <tr>
+                                    <td>{{ strtoupper($getDisciplina->disciplina) }}</td>
+                                    @if ($final->count() == 0)
+                                        <td>---</td>
+                                    @else
+                                        @foreach ($final as $valorf)
+                                            @php
+                                                $v1_estilo = ControladorNotas::nota_20($valorf->mf);
+                                                $v2_estilo = ControladorNotas::notaRec_10($valorf->rec);
+                                            @endphp
 
+                                            @if ($valorf->rec == null)
+                                                <td class="{{ $v1_estilo }}">{{ $valorf->mf }}</td>
+                                            @else
+                                                <td class="{{ $v2_estilo }}">{{ $valorf->rec }}</td>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 50%;">
+                        <thead>
+                            <tr>
+                                <td>DISCIPLINAS</td>
+                                <td>NOTAS</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($getOrdenaDisciplinas as $disciplina)
+                                @php
+                                    $getDisciplina = ControladorStatic::getDisciplinaID($disciplina->id_disciplina);
+                                    $final = ControladorNotas::getValoresPautaFinalPDF($getHistorico->id_estudante, $disciplina->id_disciplina, $getHistorico->ano_lectivo);
+                                @endphp
+                                <tr>
+                                    <td>{{ strtoupper($getDisciplina->disciplina) }}</td>
+                                    @if ($final->count() == 0)
+                                        <td>---</td>
+                                    @else
+                                        @foreach ($final as $valorf)
+                                            @php
+                                                $v1_estilo = ControladorNotas::nota_20($valorf->mf);
+                                                $v2_estilo = ControladorNotas::notaRec_10($valorf->rec);
+                                            @endphp
+
+                                            @if ($valorf->rec == null)
+                                                <td class="{{ $v1_estilo }}">{{ $valorf->mf }}</td>
+                                            @else
+                                                <td class="{{ $v2_estilo }}">{{ $valorf->rec }}</td>
+                                            @endif
+                                        @endforeach
+                                    @endif
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                @endif
             </div>
             <br />
             <div class="segundo-paragrafo">

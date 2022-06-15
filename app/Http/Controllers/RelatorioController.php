@@ -312,11 +312,11 @@ class RelatorioController extends Controller
             }
         }
 
-       //verificar se selecionou a ordem das disciplinas
-       $ordena_disciplina = null;
-       if (!Session::has('disciplinas')) {
-           $ordena_disciplina = OrdernaDisciplina::where(['id_curso' => $turma->id_curso, 'id_classe' => $turma->id_classe])->get();
-       }
+        //verificar se selecionou a ordem das disciplinas
+        $ordena_disciplina = null;
+        if (!Session::has('disciplinas')) {
+            $ordena_disciplina = OrdernaDisciplina::where(['id_curso' => $turma->id_curso, 'id_classe' => $turma->id_classe])->get();
+        }
 
         $historico = HistoricEstudante::where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])
             ->orderBy('numero', 'asc')->get();
@@ -324,7 +324,7 @@ class RelatorioController extends Controller
         $data['view'] = [
             'getDirector' => $directorTurma,
             'getHistorico' => $historico,
-            'getOrdenaDisciplinas' =>$ordena_disciplina,
+            'getOrdenaDisciplinas' => $ordena_disciplina,
         ];
 
         //buscando ensino atraves de turma
@@ -388,9 +388,12 @@ class RelatorioController extends Controller
             return back()->with(['error' => "Não encontrou turma"]);
         }
 
+        //verificar se selecionou a ordem das disciplinas
+        $ordena_disciplina = null;
         if (!Session::has('disciplinas')) {
-            return back()->with(['error' => "Deve selecionar as disciplinas"]);
+            $ordena_disciplina = OrdernaDisciplina::where(['id_curso' => $turma->id_curso, 'id_classe' => $turma->id_classe])->get();
         }
+
 
         //buscando ensino atraves de turma
         $id_ensino = $turma->classe->id_ensino;
@@ -400,6 +403,7 @@ class RelatorioController extends Controller
             'getHistorico' => $historico,
             'getDeclaracao' => $declaracao,
             'getTurma' => $turma,
+            'getOrdenaDisciplinas' => $ordena_disciplina,
         ];
 
         if ($id_ensino == 1) { //iniciacao ate 6

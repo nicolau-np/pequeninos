@@ -8,6 +8,7 @@ use App\HistoricEstudante;
 use Illuminate\Http\Request;
 use App\Http\Controllers\ControladorStatic;
 use App\Http\Controllers\ControladorNotas;
+use App\OrdernaDisciplina;
 use App\Turma;
 use Illuminate\Support\Facades\Session;
 
@@ -152,7 +153,7 @@ class PhpWordController extends Controller
         $provincia = "[##############]";
         $ano_lectivo = "[##############]";
         $classe = "[##############]";
-        $turma = "[##############]";
+        $turmaF = "[##############]";
         $numero = "[##############]";
         $dia_hoje = "[##############]";
         $mes_hoje = "[##############]";
@@ -184,7 +185,7 @@ class PhpWordController extends Controller
             $provincia = $historico->estudante->pessoa->municipio->provincia->provincia;
         }
         $numero = $historico->numero;
-        $turma = $historico->turma->turma;
+        $turmaF = $historico->turma->turma;
         $classe = $historico->turma->classe->classe;
         $ano_lectivo = $historico->ano_lectivo;
 
@@ -206,7 +207,7 @@ class PhpWordController extends Controller
         $templateProcessor->setValue('provincia', $provincia);
         $templateProcessor->setValue('ano_lectivo', $ano_lectivo);
         $templateProcessor->setValue('classe', $classe);            // On section/content
-        $templateProcessor->setValue('turma', $turma);
+        $templateProcessor->setValue('turma', $turmaF);
         $templateProcessor->setValue('numero', $numero);
         $templateProcessor->setValue('dia_hoje', $dia_hoje);            // On section/content
         $templateProcessor->setValue('mes_hoje', $mes_hoje);
@@ -220,47 +221,99 @@ class PhpWordController extends Controller
         $values = [];
         $nota_valor = "[######]";
         $nota_extensao = "[####]";
-        if (($id_ensino == 1) && (($classe == "Iniciação"))) { //para notas qualitativa
-            foreach (Session::get('disciplinas') as $disciplina) {
-                $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
-                $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina['id_disciplina'], $historico->ano_lectivo);
-                if ($final) {
-                    foreach ($final as $valorf) {
-                        if ($valorf->rec == null) {
-                            $nota_valor = ControladorNotas::estado_nota_qualitativa($valorf->mf);
-                        } else {
-                            $nota_valor = ControladorNotas::estado_nota_qualitativaRec($valorf->rec);
+        //verificar se selecionou a ordem das disciplinas
+        $ordena_disciplina = null;
+        if (!Session::has('disciplinas')) {
+            $ordena_disciplina = OrdernaDisciplina::where(['id_curso' => $turma->id_curso, 'id_classe' => $turma->id_classe])->get();
+        }
+
+        if (!$ordena_disciplina) {
+            if (($id_ensino == 1) && (($classe == "Iniciação"))) { //para notas qualitativa
+                foreach (Session::get('disciplinas') as $disciplina) {
+                    $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
+                    $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina['id_disciplina'], $historico->ano_lectivo);
+                    if ($final) {
+                        foreach ($final as $valorf) {
+                            if ($valorf->rec == null) {
+                                $nota_valor = ControladorNotas::estado_nota_qualitativa($valorf->mf);
+                            } else {
+                                $nota_valor = ControladorNotas::estado_nota_qualitativaRec($valorf->rec);
+                            }
                         }
                     }
+
+                    array_push($values, ['disciplinas' => $getDisciplina->disciplina, 'valores' => $nota_valor, 'extensao' => $nota_extensao]);
+
+                    $nota_valor = "[######]";
+                    $nota_extensao = "[####]";
                 }
+            } else { //para notas quantitativa
+                foreach (Session::get('disciplinas') as $disciplina) {
+                    $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
+                    $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina['id_disciplina'], $historico->ano_lectivo);
+                    if ($final) {
+                        foreach ($final as $valorf) {
+                            if ($valorf->rec == null) {
+                                $nota_valor = str_pad($valorf->mf, 2, 0, STR_PAD_LEFT);
+                                $nota_extensao = ControladorNotas::converter_nota($valorf->mf);
+                            } else {
+                                $nota_valor = str_pad($valorf->rec, 2, 0, STR_PAD_LEFT);
+                                $nota_extensao = ControladorNotas::converter_nota($valorf->rec);
+                            }
+                        }
+                    }
 
-                array_push($values, ['disciplinas' => $getDisciplina->disciplina, 'valores' => $nota_valor, 'extensao' => $nota_extensao]);
+                    array_push($values, ['disciplinas' => $getDisciplina->disciplina, 'valores' => $nota_valor, 'extensao' => $nota_extensao]);
 
-                $nota_valor = "[######]";
-                $nota_extensao = "[####]";
+                    $nota_valor = "[######]";
+                    $nota_extensao = "[####]";
+                }
             }
-        } else { //para notas quantitativa
-            foreach (Session::get('disciplinas') as $disciplina) {
-                $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
-                $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina['id_disciplina'], $historico->ano_lectivo);
-                if ($final) {
-                    foreach ($final as $valorf) {
-                        if ($valorf->rec == null) {
-                            $nota_valor = str_pad($valorf->mf, 2, 0, STR_PAD_LEFT);
-                            $nota_extensao = ControladorNotas::converter_nota($valorf->mf);
-                        } else {
-                            $nota_valor = str_pad($valorf->rec, 2, 0, STR_PAD_LEFT);
-                            $nota_extensao = ControladorNotas::converter_nota($valorf->rec);
+        } else {
+            if (($id_ensino == 1) && (($classe == "Iniciação"))) { //para notas qualitativa
+                foreach ($ordena_disciplina as $disciplina) {
+                    $getDisciplina = ControladorStatic::getDisciplinaID($disciplina->id_disciplina);
+                    $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina->id_disciplina, $historico->ano_lectivo);
+                    if ($final) {
+                        foreach ($final as $valorf) {
+                            if ($valorf->rec == null) {
+                                $nota_valor = ControladorNotas::estado_nota_qualitativa($valorf->mf);
+                            } else {
+                                $nota_valor = ControladorNotas::estado_nota_qualitativaRec($valorf->rec);
+                            }
                         }
                     }
+
+                    array_push($values, ['disciplinas' => $getDisciplina->disciplina, 'valores' => $nota_valor, 'extensao' => $nota_extensao]);
+
+                    $nota_valor = "[######]";
+                    $nota_extensao = "[####]";
                 }
+            } else { //para notas quantitativa
+                foreach ($ordena_disciplina as $disciplina) {
+                    $getDisciplina = ControladorStatic::getDisciplinaID($disciplina->id_disciplina);
+                    $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina->id_disciplina, $historico->ano_lectivo);
+                    if ($final) {
+                        foreach ($final as $valorf) {
+                            if ($valorf->rec == null) {
+                                $nota_valor = str_pad($valorf->mf, 2, 0, STR_PAD_LEFT);
+                                $nota_extensao = ControladorNotas::converter_nota($valorf->mf);
+                            } else {
+                                $nota_valor = str_pad($valorf->rec, 2, 0, STR_PAD_LEFT);
+                                $nota_extensao = ControladorNotas::converter_nota($valorf->rec);
+                            }
+                        }
+                    }
 
-                array_push($values, ['disciplinas' => $getDisciplina->disciplina, 'valores' => $nota_valor, 'extensao' => $nota_extensao]);
+                    array_push($values, ['disciplinas' => $getDisciplina->disciplina, 'valores' => $nota_valor, 'extensao' => $nota_extensao]);
 
-                $nota_valor = "[######]";
-                $nota_extensao = "[####]";
+                    $nota_valor = "[######]";
+                    $nota_extensao = "[####]";
+                }
             }
         }
+
+
 
         $templateProcessor->cloneRowAndSetValues('disciplinas', $values);
         /**fim */
@@ -318,7 +371,7 @@ class PhpWordController extends Controller
         $provincia = "[##############]";
         $ano_lectivo = "[##############]";
         $classe = "[##############]";
-        $turma = "[##############]";
+        $turmaF = "[##############]";
         $numero = "[##############]";
         $bairro = "[##############]";
         $bilhete = "[##############]";
@@ -381,7 +434,7 @@ class PhpWordController extends Controller
 
 
         $numero = $historico->numero;
-        $turma = $historico->turma->turma;
+        $turmaF = $historico->turma->turma;
         $classe = $historico->turma->classe->classe;
         $ano_lectivo = $historico->ano_lectivo;
         $processo = $historico->id_estudante;
@@ -403,7 +456,7 @@ class PhpWordController extends Controller
         $templateProcessor->setValue('provincia', $provincia);
         $templateProcessor->setValue('ano_lectivo', $ano_lectivo);
         $templateProcessor->setValue('classe', $classe);            // On section/content
-        $templateProcessor->setValue('turma', $turma);
+        $templateProcessor->setValue('turma', $turmaF);
         $templateProcessor->setValue('numero', $numero);
         $templateProcessor->setValue('bi', $bilhete);           // On footer
         $templateProcessor->setValue('bairro', $bairro);
@@ -422,128 +475,247 @@ class PhpWordController extends Controller
         // On header
 
 
+        //verificar se selecionou a ordem das disciplinas
+        $ordena_disciplina = null;
+        if (!Session::has('disciplinas')) {
+            $ordena_disciplina = OrdernaDisciplina::where(['id_curso' => $turma->id_curso, 'id_classe' => $turma->id_classe])->get();
+        }
+
         /**trabalhando nas notas */
 
         $values = [];
-        if (($id_ensino == 1) && (($classe == "Iniciação"))) { //para notas qualitativa
-            foreach (Session::get('disciplinas') as $disciplina) {
-                $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
-                $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'], $historico->id_estudante, 1, $historico->ano_lectivo);
-                if ($trimestre1->count() >= 1) {
-                    foreach ($trimestre1 as $t1) {
-                        if ($t1 != null) {
-                            $mt1 = ControladorNotas::estado_nota_qualitativa($t1->mt);
-
-                        } else {
-                            $mt1 = "[##]";
+        if (!$ordena_disciplina) {
+            if (($id_ensino == 1) && (($classe == "Iniciação"))) { //para notas qualitativa
+                foreach (Session::get('disciplinas') as $disciplina) {
+                    $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
+                    $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'], $historico->id_estudante, 1, $historico->ano_lectivo);
+                    if ($trimestre1->count() >= 1) {
+                        foreach ($trimestre1 as $t1) {
+                            if ($t1 != null) {
+                                $mt1 = ControladorNotas::estado_nota_qualitativa($t1->mt);
+                            } else {
+                                $mt1 = "[##]";
+                            }
                         }
                     }
-                }
 
-                $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'], $historico->id_estudante, 2, $historico->ano_lectivo);
-                if ($trimestre2->count() >= 1) {
-                    foreach ($trimestre2 as $t2) {
-                        if ($t2 != null) {
-                            $mt2 = ControladorNotas::estado_nota_qualitativa($t2->mt);
-
-                        } else {
-                            $mt2 = "[##]";
+                    $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'], $historico->id_estudante, 2, $historico->ano_lectivo);
+                    if ($trimestre2->count() >= 1) {
+                        foreach ($trimestre2 as $t2) {
+                            if ($t2 != null) {
+                                $mt2 = ControladorNotas::estado_nota_qualitativa($t2->mt);
+                            } else {
+                                $mt2 = "[##]";
+                            }
                         }
                     }
-                }
 
-                $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'], $historico->id_estudante, 3, $historico->ano_lectivo);
-                if ($trimestre3->count() >= 1) {
-                    foreach ($trimestre3 as $t3) {
-                        if ($t3 != null) {
-                            $mt3 = ControladorNotas::estado_nota_qualitativa($t3->mt);
-                        } else {
-                            $mt3 = "[##]";
+                    $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'], $historico->id_estudante, 3, $historico->ano_lectivo);
+                    if ($trimestre3->count() >= 1) {
+                        foreach ($trimestre3 as $t3) {
+                            if ($t3 != null) {
+                                $mt3 = ControladorNotas::estado_nota_qualitativa($t3->mt);
+                            } else {
+                                $mt3 = "[##]";
+                            }
                         }
                     }
-                }
 
-                $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina['id_disciplina'], $historico->ano_lectivo);
-                if ($final->count() >= 1) {
-                    foreach ($final as $f) {
-                        if ($f != null) {
-                            $mfd = ControladorNotas::estado_nota_qualitativa($f->mfd);
-                            $mf = ControladorNotas::estado_nota_qualitativa($f->mf);
-                        } else {
-                            $mfd = "[##]";
-                            $mf = "[##]";
+                    $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina['id_disciplina'], $historico->ano_lectivo);
+                    if ($final->count() >= 1) {
+                        foreach ($final as $f) {
+                            if ($f != null) {
+                                $mfd = ControladorNotas::estado_nota_qualitativa($f->mfd);
+                                $mf = ControladorNotas::estado_nota_qualitativa($f->mf);
+                            } else {
+                                $mfd = "[##]";
+                                $mf = "[##]";
+                            }
                         }
                     }
-                }
-                array_push($values, ['disciplinas' => $getDisciplina->disciplina, 'mt1' => $mt1, 'mt2' => $mt2, 'mt3' => $mt3, 'mfd' => $mfd, 'mf' => $mf]);
+                    array_push($values, ['disciplinas' => $getDisciplina->disciplina, 'mt1' => $mt1, 'mt2' => $mt2, 'mt3' => $mt3, 'mfd' => $mfd, 'mf' => $mf]);
 
-                $mfd = "[##]";
-                $mf = "[##]";
-                $mt3 = "[##]";
-                $mt2 = "[##]";
-                $mt1 = "[##]";
+                    $mfd = "[##]";
+                    $mf = "[##]";
+                    $mt3 = "[##]";
+                    $mt2 = "[##]";
+                    $mt1 = "[##]";
+                }
+            } else { //para notas quantitativa
+                foreach (Session::get('disciplinas') as $disciplina) {
+                    $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
+                    $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'], $historico->id_estudante, 1, $historico->ano_lectivo);
+                    if ($trimestre1->count() >= 1) {
+                        foreach ($trimestre1 as $t1) {
+                            if ($t1 != null) {
+                                $mt1 = str_pad($t1->mt, 2, 0, STR_PAD_LEFT);
+                            } else {
+                                $mt1 = "[##]";
+                            }
+                        }
+                    }
+
+                    $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'], $historico->id_estudante, 2, $historico->ano_lectivo);
+                    if ($trimestre2->count() >= 1) {
+                        foreach ($trimestre2 as $t2) {
+                            if ($t2 != null) {
+                                $mt2 = str_pad($t2->mt, 2, 0, STR_PAD_LEFT);
+                            } else {
+                                $mt2 = "[##]";
+                            }
+                        }
+                    }
+
+                    $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'], $historico->id_estudante, 3, $historico->ano_lectivo);
+                    if ($trimestre3->count() >= 1) {
+                        foreach ($trimestre3 as $t3) {
+                            if ($t3 != null) {
+                                $mt3 = str_pad($t3->mt, 2, 0, STR_PAD_LEFT);
+                            } else {
+                                $mt3 = "[##]";
+                            }
+                        }
+                    }
+
+                    $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina['id_disciplina'], $historico->ano_lectivo);
+                    if ($final->count() >= 1) {
+                        foreach ($final as $f) {
+                            if ($f != null) {
+                                $mfd = str_pad($f->mfd, 2, 0, STR_PAD_LEFT);
+                                $mf = str_pad($f->mf, 2, 0, STR_PAD_LEFT);
+                            } else {
+                                $mfd = "[##]";
+                                $mf = "[##]";
+                            }
+                        }
+                    }
+                    array_push($values, ['disciplinas' => $getDisciplina->disciplina, 'mt1' => $mt1, 'mt2' => $mt2, 'mt3' => $mt3, 'mfd' => $mfd, 'mf' => $mf]);
+
+                    $mfd = "[##]";
+                    $mf = "[##]";
+                    $mt3 = "[##]";
+                    $mt2 = "[##]";
+                    $mt1 = "[##]";
+                }
             }
-        } else { //para notas quantitativa
-            foreach (Session::get('disciplinas') as $disciplina) {
-                $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
-                $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'], $historico->id_estudante, 1, $historico->ano_lectivo);
-                if ($trimestre1->count() >= 1) {
-                    foreach ($trimestre1 as $t1) {
-                        if ($t1 != null) {
-                            $mt1 = str_pad($t1->mt, 2, 0, STR_PAD_LEFT);
-                        } else {
-                            $mt1 = "[##]";
+        } else {
+            if (($id_ensino == 1) && (($classe == "Iniciação"))) { //para notas qualitativa
+                foreach ($ordena_disciplina as $disciplina) {
+                    $getDisciplina = ControladorStatic::getDisciplinaID($disciplina->id_disciplina);
+                    $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina->id_disciplina, $historico->id_estudante, 1, $historico->ano_lectivo);
+                    if ($trimestre1->count() >= 1) {
+                        foreach ($trimestre1 as $t1) {
+                            if ($t1 != null) {
+                                $mt1 = ControladorNotas::estado_nota_qualitativa($t1->mt);
+                            } else {
+                                $mt1 = "[##]";
+                            }
                         }
                     }
-                }
 
-                $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'], $historico->id_estudante, 2, $historico->ano_lectivo);
-                if ($trimestre2->count() >= 1) {
-                    foreach ($trimestre2 as $t2) {
-                        if ($t2 != null) {
-                            $mt2 = str_pad($t2->mt, 2, 0, STR_PAD_LEFT);
-                        } else {
-                            $mt2 = "[##]";
+                    $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina->id_disciplina, $historico->id_estudante, 2, $historico->ano_lectivo);
+                    if ($trimestre2->count() >= 1) {
+                        foreach ($trimestre2 as $t2) {
+                            if ($t2 != null) {
+                                $mt2 = ControladorNotas::estado_nota_qualitativa($t2->mt);
+                            } else {
+                                $mt2 = "[##]";
+                            }
                         }
                     }
-                }
 
-                $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'], $historico->id_estudante, 3, $historico->ano_lectivo);
-                if ($trimestre3->count() >= 1) {
-                    foreach ($trimestre3 as $t3) {
-                        if ($t3 != null) {
-                            $mt3 = str_pad($t3->mt, 2, 0, STR_PAD_LEFT);
-                        } else {
-                            $mt3 = "[##]";
+                    $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina->id_disciplina, $historico->id_estudante, 3, $historico->ano_lectivo);
+                    if ($trimestre3->count() >= 1) {
+                        foreach ($trimestre3 as $t3) {
+                            if ($t3 != null) {
+                                $mt3 = ControladorNotas::estado_nota_qualitativa($t3->mt);
+                            } else {
+                                $mt3 = "[##]";
+                            }
                         }
                     }
-                }
 
-                $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina['id_disciplina'], $historico->ano_lectivo);
-                if ($final->count() >= 1) {
-                    foreach ($final as $f) {
-                        if ($f != null) {
-                            $mfd = str_pad($f->mfd, 2, 0, STR_PAD_LEFT);
-                            $mf = str_pad($f->mf, 2, 0, STR_PAD_LEFT);
-                        } else {
-                            $mfd = "[##]";
-                            $mf = "[##]";
+                    $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina->id_disciplina, $historico->ano_lectivo);
+                    if ($final->count() >= 1) {
+                        foreach ($final as $f) {
+                            if ($f != null) {
+                                $mfd = ControladorNotas::estado_nota_qualitativa($f->mfd);
+                                $mf = ControladorNotas::estado_nota_qualitativa($f->mf);
+                            } else {
+                                $mfd = "[##]";
+                                $mf = "[##]";
+                            }
                         }
                     }
-                }
-                array_push($values, ['disciplinas' => $getDisciplina->disciplina, 'mt1' => $mt1, 'mt2' => $mt2, 'mt3' => $mt3, 'mfd' => $mfd, 'mf' => $mf]);
+                    array_push($values, ['disciplinas' => $getDisciplina->disciplina, 'mt1' => $mt1, 'mt2' => $mt2, 'mt3' => $mt3, 'mfd' => $mfd, 'mf' => $mf]);
 
-                $mfd = "[##]";
-                $mf = "[##]";
-                $mt3 = "[##]";
-                $mt2 = "[##]";
-                $mt1 = "[##]";
+                    $mfd = "[##]";
+                    $mf = "[##]";
+                    $mt3 = "[##]";
+                    $mt2 = "[##]";
+                    $mt1 = "[##]";
+                }
+            } else { //para notas quantitativa
+                foreach ($ordena_disciplina as $disciplina) {
+                    $getDisciplina = ControladorStatic::getDisciplinaID($disciplina->id_disciplina);
+                    $trimestre1 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina->id_disciplina, $historico->id_estudante, 1, $historico->ano_lectivo);
+                    if ($trimestre1->count() >= 1) {
+                        foreach ($trimestre1 as $t1) {
+                            if ($t1 != null) {
+                                $mt1 = str_pad($t1->mt, 2, 0, STR_PAD_LEFT);
+                            } else {
+                                $mt1 = "[##]";
+                            }
+                        }
+                    }
+
+                    $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina->id_disciplina, $historico->id_estudante, 2, $historico->ano_lectivo);
+                    if ($trimestre2->count() >= 1) {
+                        foreach ($trimestre2 as $t2) {
+                            if ($t2 != null) {
+                                $mt2 = str_pad($t2->mt, 2, 0, STR_PAD_LEFT);
+                            } else {
+                                $mt2 = "[##]";
+                            }
+                        }
+                    }
+
+                    $trimestre3 = ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina->id_disciplina, $historico->id_estudante, 3, $historico->ano_lectivo);
+                    if ($trimestre3->count() >= 1) {
+                        foreach ($trimestre3 as $t3) {
+                            if ($t3 != null) {
+                                $mt3 = str_pad($t3->mt, 2, 0, STR_PAD_LEFT);
+                            } else {
+                                $mt3 = "[##]";
+                            }
+                        }
+                    }
+
+                    $final = ControladorNotas::getValoresPautaFinalPDF($historico->id_estudante, $disciplina->id_disciplina, $historico->ano_lectivo);
+                    if ($final->count() >= 1) {
+                        foreach ($final as $f) {
+                            if ($f != null) {
+                                $mfd = str_pad($f->mfd, 2, 0, STR_PAD_LEFT);
+                                $mf = str_pad($f->mf, 2, 0, STR_PAD_LEFT);
+                            } else {
+                                $mfd = "[##]";
+                                $mf = "[##]";
+                            }
+                        }
+                    }
+                    array_push($values, ['disciplinas' => $getDisciplina->disciplina, 'mt1' => $mt1, 'mt2' => $mt2, 'mt3' => $mt3, 'mfd' => $mfd, 'mf' => $mf]);
+
+                    $mfd = "[##]";
+                    $mf = "[##]";
+                    $mt3 = "[##]";
+                    $mt2 = "[##]";
+                    $mt1 = "[##]";
+                }
             }
         }
 
         $templateProcessor->cloneRowAndSetValues('disciplinas', $values);
         /**fim */
-
 
         $filename = $historico->estudante->pessoa->nome . "termo.docx";
         try {

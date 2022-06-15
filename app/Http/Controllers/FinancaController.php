@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Curso;
+use App\Saida;
 use App\TabelaPreco;
 use App\TipoPagamento;
 use App\Turno;
@@ -215,8 +216,8 @@ class FinancaController extends Controller
 
         $data = [
             'tipo' => $request->tipo_pagamento,
-            'multa'=>$request->multa,
-            'dia_cobranca_multa'=>$request->dia_cobranca_multa,
+            'multa' => $request->multa,
+            'dia_cobranca_multa' => $request->dia_cobranca_multa,
         ];
 
         if (TipoPagamento::create($data)) {
@@ -249,7 +250,7 @@ class FinancaController extends Controller
         }
 
         $request->validate([
-            'tipo_pagamento' => ['required', 'string', 'min:5', 'max:255', ],
+            'tipo_pagamento' => ['required', 'string', 'min:5', 'max:255',],
             'multa' => ['required', 'string', 'min:3'],
         ]);
 
@@ -259,7 +260,7 @@ class FinancaController extends Controller
             ]);
         }
 
-        if($request->tipo_pagamento!=$tipo_pagamento->tipo){
+        if ($request->tipo_pagamento != $tipo_pagamento->tipo) {
             $request->validate([
                 'tipo_pagamento' => ['required', 'string', 'min:5', 'max:255', 'unique:tipo_pagamentos,tipo'],
 
@@ -268,11 +269,97 @@ class FinancaController extends Controller
 
         $data = [
             'tipo' => $request->tipo_pagamento,
-            'multa'=>$request->multa,
-            'dia_cobranca_multa'=>$request->dia_cobranca_multa,
+            'multa' => $request->multa,
+            'dia_cobranca_multa' => $request->dia_cobranca_multa,
         ];
 
         if (TipoPagamento::find($tipo_pagamento->id)->update($data)) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
+    }
+
+    public function saidas_list()
+    {
+        $saidas = Saida::paginate(5);
+        $data = [
+            'title' => "Saídas",
+            'type' => "financas",
+            'menu' => "Saídas",
+            'submenu' => "Listar",
+            'getSaidas' => $saidas,
+        ];
+        return view('financas.saidas.list', $data);
+    }
+
+    public function saidas_create()
+    {
+
+        $data = [
+            'title' => "Saídas",
+            'type' => "financas",
+            'menu' => "Saídas",
+            'submenu' => "Novo",
+        ];
+        return view('financas.saidas.new', $data);
+    }
+
+    public function saidas_store(Request $request)
+    {
+        $request->validate([
+            'descricao' => ['required', 'string', 'min:10'],
+            'data_saida' => ['required', 'date'],
+            'valor' => ['required', 'numeric', 'min:1'],
+        ]);
+
+        $data = [
+            'descricao' => $request->descricao,
+            'data_saida' => $request->data_saida,
+            'valor' => $request->valor,
+            'estado' => "on",
+        ];
+        $saidas = Saida::create($data);
+        if ($saidas) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
+    }
+
+    public function saidas_edit($id)
+    {
+        $saida = Saida::find($id);
+        if (!$saida) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+        $data = [
+            'title' => "Saídas",
+            'type' => "financas",
+            'menu' => "Saídas",
+            'submenu' => "Novo",
+            'getSaida'=>$saida,
+        ];
+        return view('financas.saidas.edit', $data);
+    }
+
+    public function saidas_update(Request $request, $id)
+    {
+        $saida = Saida::find($id);
+        if (!$saida) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+
+        $request->validate([
+            'descricao' => ['required', 'string', 'min:10'],
+            'data_saida' => ['required', 'date'],
+            'valor' => ['required', 'numeric', 'min:1'],
+        ]);
+
+        $data = [
+            'descricao' => $request->descricao,
+            'data_saida' => $request->data_saida,
+            'valor' => $request->valor,
+            'estado' => "on",
+        ];
+        $saidas = Saida::find($id)->update($data);
+        if ($saidas) {
             return back()->with(['success' => "Feito com sucesso"]);
         }
     }

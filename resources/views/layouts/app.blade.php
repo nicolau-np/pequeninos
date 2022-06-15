@@ -494,6 +494,16 @@ $lastYear = ControladorStatic::getLastYear();
                                                         </a>
                                                     </li>
 
+                                                    <li class="@if ($menu=='Saídas' ) active @endif">
+                                                        <a href="/financas/saidas/">
+                                                            <span class="pcoded-micon"><i
+                                                                    class="ti-angle-right"></i></span>
+                                                            <span class="pcoded-mtext"
+                                                                data-i18n="nav.basic-components.breadcrumbs">Saídas</span>
+                                                            <span class="pcoded-mcaret"></span>
+                                                        </a>
+                                                    </li>
+
                                                 </ul>
                                             </li>
                                         @endif

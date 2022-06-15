@@ -228,6 +228,14 @@ Route::group(['prefix' => 'financas', 'middleware' => "AdminUser"], function () 
         Route::get('/edit/{id}', "FinancaController@tipo_pagamento_edit");
         Route::put('/update/{id}', "FinancaController@tipo_pagamento_update");
     });
+
+    Route::group(['prefix' => "saidas"], function () {
+        Route::get('/', "FinancaController@saidas_list");
+        Route::get('/create', "FinancaController@saidas_create");
+        Route::post('/store', "FinancaController@saidas_store");
+        Route::get('/edit/{id}', "FinancaController@saidas_edit");
+        Route::put('/update/{id}', "FinancaController@saidas_update");
+    });
 });
 
 Route::group(['prefix' => 'encarregados', 'middleware' => "AdminSuperUser"], function () {

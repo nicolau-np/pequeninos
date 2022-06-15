@@ -264,10 +264,22 @@ $posit3 = [
     font-weight: bold;
 }
 
-.td_color{
-    background-color: #e2dfd3;
-    font-weight: bold;
-}
+        .td_color {
+            background-color: #e2dfd3;
+            font-weight: bold;
+        }
+
+        .positivotd_color {
+            background-color: #e2dfd3;
+            color: #4680ff;
+            font-weight: bold;
+        }
+
+        .negativotd_color {
+            background-color: #e2dfd3;
+            color: #FC6180;
+            font-weight: bold;
+        }
 
 </style>
 </head>
@@ -362,7 +374,7 @@ $posit3 = [
                          <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$valor1->mac}} @endif</td>
                          <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{round($valor1->npp,2)}} @endif</td>
                          <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{round($valor1->pt,2)}} @endif</td>
-                         <td class="{{$v4_estilo}} td_color">@if($valor1->mt==null) --- @else {{$valor1->mt}} @endif</td>
+                         <td class="{{$v4_estilo}}td_color">@if($valor1->mt==null) --- @else {{$valor1->mt}} @endif</td>
                                  <?php }}?>
                          <!-- fim primeiro trimestre-->
 
@@ -387,7 +399,7 @@ $posit3 = [
                          <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{$valor2->mac}} @endif</td>
                          <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{round($valor2->npp,2)}} @endif</td>
                          <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{round($valor2->pt,2)}} @endif</td>
-                         <td class="{{$v4_estilo}} td_color">@if($valor2->mt==null) --- @else {{$valor2->mt}} @endif</td>
+                         <td class="{{$v4_estilo}}td_color">@if($valor2->mt==null) --- @else {{$valor2->mt}} @endif</td>
                                  <?php }}?>
                          <!-- fim segundo trimestre-->
 
@@ -412,7 +424,7 @@ $posit3 = [
                       <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$valor3->mac}} @endif</td>
                       <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{round($valor3->npp,2)}} @endif</td>
                       <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{round($valor3->pt,2)}} @endif</td>
-                      <td class="{{$v4_estilo}} td_color">@if($valor3->mt==null) --- @else {{$valor3->mt}} @endif</td>
+                      <td class="{{$v4_estilo}}td_color">@if($valor3->mt==null) --- @else {{$valor3->mt}} @endif</td>
                               <?php }}?>
                       <!-- fim terceiro trimestre-->
 
@@ -445,7 +457,7 @@ $posit3 = [
                          @if ($getCadeiraExame)
                              <td class="{{$v2_estilo}}">@if($valorf->npe==null) --- @else {{$valorf->npe}} @endif</td>
                          @endif
-                         <td class="{{$v3_estilo}} td_color">@if($valorf->mf==null) --- @else {{$valorf->mf}} @endif</td>
+                         <td class="{{$v3_estilo}}td_color">@if($valorf->mf==null) --- @else {{$valorf->mf}} @endif</td>
                          @if ($getCadeiraRecurso)
                              <td class="{{$v4_estilo}}">@if($valorf->rec==null) --- @else {{$valorf->rec}} @endif</td>
                          @endif
@@ -1307,7 +1319,7 @@ $posit3 = [
                           <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{round($valor1->mac,2)}} @endif</td>
                           <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{round($valor1->npp,2)}} @endif</td>
                           <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{round($valor1->pt,2)}} @endif</td>
-                          <td class="{{$v4_estilo}} td_color">@if($valor1->mt==null) --- @else {{$valor1->mt}} @endif</td>
+                          <td class="{{$v4_estilo}}td_color">@if($valor1->mt==null) --- @else {{$valor1->mt}} @endif</td>
                                   <?php }}?>
                           <!-- fim primeiro trimestre-->
 
@@ -1406,7 +1418,7 @@ $posit3 = [
                           <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{round($valor2->mac,2)}} @endif</td>
                           <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{round($valor2->npp,2)}} @endif</td>
                           <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{round($valor2->pt,2)}} @endif</td>
-                          <td class="{{$v4_estilo}} td_color">@if($valor2->mt==null) --- @else {{$valor2->mt}} @endif</td>
+                          <td class="{{$v4_estilo}}td_color">@if($valor2->mt==null) --- @else {{$valor2->mt}} @endif</td>
                                   <?php }}?>
                           <!-- fim primeiro trimestre-->
 
@@ -1506,7 +1518,7 @@ $posit3 = [
                       <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{round($valor3->mac,2)}} @endif</td>
                       <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{round($valor3->npp,2)}} @endif</td>
                       <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{round($valor3->pt,2)}} @endif</td>
-                      <td class="{{$v4_estilo}} td_color">@if($valor3->mt==null) --- @else {{$valor3->mt}} @endif</td>
+                      <td class="{{$v4_estilo}}td_color">@if($valor3->mt==null) --- @else {{$valor3->mt}} @endif</td>
                               <?php }}?>
                       <!-- fim primeiro trimestre-->
 

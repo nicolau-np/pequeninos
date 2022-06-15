@@ -267,7 +267,7 @@ $posit3 = [
     font-weight: bold;
 }
 .td_color{
-    background-color:#badaf1;
+    background-color: #e2dfd3;
     font-weight: bold;
 }
 </style>

@@ -148,6 +148,7 @@ $percent_negativasf = [
     'mf'=>0,
 ];
 
+
 $t1 = [
     'get' => null,
 ];
@@ -218,7 +219,6 @@ $posit3 = [
         margin-right: 10px;
         margin-top: 10px;
         margin-bottom: 10px;
-
     }
     .mini-cabecalho{
         display: block;
@@ -235,6 +235,9 @@ $posit3 = [
     }
     .negativo{
         color: #FC6180;
+    }
+    .neutro{
+        color: #FFB64D;
     }
     .nenhum{
         color: #333;
@@ -263,12 +266,22 @@ $posit3 = [
     color:#fff;
     font-weight: bold;
 }
+        .td_color {
+            background-color: #e2dfd3;
+            font-weight: bold;
+        }
 
-.td_color{
-    background-color: #e2dfd3;
-    font-weight: bold;
-}
+        .positivotd_color {
+            background-color: #e2dfd3;
+            color: #4680ff;
+            font-weight: bold;
+        }
 
+        .negativotd_color {
+            background-color: #e2dfd3;
+            color: #FC6180;
+            font-weight: bold;
+        }
 </style>
 </head>
 <body>
@@ -353,16 +366,21 @@ $posit3 = [
                              <?php }
                              else{
                                  foreach($trimestre1 as $valor1){
-                                     $v1_estilo = ControladorNotas::nota_10($valor1->mac);
-                                     $v2_estilo = ControladorNotas::nota_10($valor1->npp);
-                                     $v3_estilo = ControladorNotas::nota_10($valor1->pt);
-                                     $v4_estilo = ControladorNotas::nota_10($valor1->mt);
+                                     $v1_estilo = ControladorNotas::nota_10Qualitativa($valor1->mac);
+                                     $v2_estilo = ControladorNotas::nota_10Qualitativa($valor1->npp);
+                                     $v3_estilo = ControladorNotas::nota_10Qualitativa($valor1->pt);
+                                     $v4_estilo = ControladorNotas::nota_10Qualitativa($valor1->mt);
+
+                                     $v1_valor = ControladorNotas::estado_nota_qualitativa($valor1->mac);
+                                     $v2_valor = ControladorNotas::estado_nota_qualitativa($valor1->npp);
+                                     $v3_valor = ControladorNotas::estado_nota_qualitativa($valor1->pt);
+                                     $v4_valor = ControladorNotas::estado_nota_qualitativa($valor1->mt);
                                  ?>
 
-                         <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$valor1->mac}} @endif</td>
-                         <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{round($valor1->npp,2)}} @endif</td>
-                         <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{round($valor1->pt,2)}} @endif</td>
-                         <td class="{{$v4_estilo}} td_color">@if($valor1->mt==null) --- @else {{$valor1->mt}} @endif</td>
+                                     <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$v1_valor}} @endif</td>
+                                     <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$v2_valor}} @endif</td>
+                                     <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$v3_valor}} @endif</td>
+                                     <td class="{{$v4_estilo}}td_color">@if($valor1->mt==null) --- @else {{$v4_valor}} @endif</td>
                                  <?php }}?>
                          <!-- fim primeiro trimestre-->
 
@@ -378,16 +396,21 @@ $posit3 = [
                              <?php }
                              else{
                                  foreach($trimestre2 as $valor2){
-                                     $v1_estilo = ControladorNotas::nota_10($valor2->mac);
-                                     $v2_estilo = ControladorNotas::nota_10($valor2->npp);
-                                     $v3_estilo = ControladorNotas::nota_10($valor2->pt);
-                                     $v4_estilo = ControladorNotas::nota_10($valor2->mt);
+                                     $v1_estilo = ControladorNotas::nota_10Qualitativa($valor2->mac);
+                                     $v2_estilo = ControladorNotas::nota_10Qualitativa($valor2->npp);
+                                     $v3_estilo = ControladorNotas::nota_10Qualitativa($valor2->pt);
+                                     $v4_estilo = ControladorNotas::nota_10Qualitativa($valor2->mt);
+
+                                     $v1_valor = ControladorNotas::estado_nota_qualitativa($valor2->mac);
+                                     $v2_valor = ControladorNotas::estado_nota_qualitativa($valor2->npp);
+                                     $v3_valor = ControladorNotas::estado_nota_qualitativa($valor2->pt);
+                                     $v4_valor = ControladorNotas::estado_nota_qualitativa($valor2->mt);
                                  ?>
 
-                         <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{$valor2->mac}} @endif</td>
-                         <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{round($valor2->npp,2)}} @endif</td>
-                         <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{round($valor2->pt,2)}} @endif</td>
-                         <td class="{{$v4_estilo}} td_color">@if($valor2->mt==null) --- @else {{$valor2->mt}} @endif</td>
+                                     <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{$v1_valor}} @endif</td>
+                                     <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{$v2_valor}} @endif</td>
+                                     <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{$v3_valor}} @endif</td>
+                                     <td class="{{$v4_estilo}}td_color">@if($valor2->mt==null) --- @else {{$v4_valor}} @endif</td>
                                  <?php }}?>
                          <!-- fim segundo trimestre-->
 
@@ -403,16 +426,21 @@ $posit3 = [
                           <?php }
                           else{
                               foreach($trimestre3 as $valor3){
-                                  $v1_estilo = ControladorNotas::nota_10($valor3->mac);
-                                  $v2_estilo = ControladorNotas::nota_10($valor3->npp);
-                                  $v3_estilo = ControladorNotas::nota_10($valor3->pt);
-                                  $v4_estilo = ControladorNotas::nota_10($valor3->mt);
+                                  $v1_estilo = ControladorNotas::nota_10Qualitativa($valor3->mac);
+                                  $v2_estilo = ControladorNotas::nota_10Qualitativa($valor3->npp);
+                                  $v3_estilo = ControladorNotas::nota_10Qualitativa($valor3->pt);
+                                  $v4_estilo = ControladorNotas::nota_10Qualitativa($valor3->mt);
+
+                                  $v1_valor = ControladorNotas::estado_nota_qualitativa($valor3->mac);
+                                  $v2_valor = ControladorNotas::estado_nota_qualitativa($valor3->npp);
+                                  $v3_valor = ControladorNotas::estado_nota_qualitativa($valor3->pt);
+                                  $v4_valor = ControladorNotas::estado_nota_qualitativa($valor3->mt);
                               ?>
 
-                      <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$valor3->mac}} @endif</td>
-                      <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{round($valor3->npp,2)}} @endif</td>
-                      <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{round($valor3->pt,2)}} @endif</td>
-                      <td class="{{$v4_estilo}} td_color">@if($valor3->mt==null) --- @else {{$valor3->mt}} @endif</td>
+                      <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$v1_valor}} @endif</td>
+                      <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{$v2_valor}} @endif</td>
+                      <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{$v3_valor}} @endif</td>
+                      <td class="{{$v4_estilo}}td_color">@if($valor3->mt==null) --- @else {{$v4_valor}} @endif</td>
                               <?php }}?>
                       <!-- fim terceiro trimestre-->
 
@@ -432,25 +460,37 @@ $posit3 = [
                      <?php }
                          else{
                              foreach ($final as $valorf){
-                             $v1_estilo = ControladorNotas::nota_10($valorf->mfd);
+                             $v1_estilo = ControladorNotas::nota_10Qualitativa($valorf->mfd);
                              if($getCadeiraExame){
-                             $v2_estilo = ControladorNotas::nota_10($valorf->npe);
+                             $v2_estilo = ControladorNotas::nota_10Qualitativa($valorf->npe);
                              }
-                             $v3_estilo = ControladorNotas::nota_10($valorf->mf);
+                             $v3_estilo = ControladorNotas::nota_10Qualitativa($valorf->mf);
                              if($getCadeiraRecurso){
                              $v4_estilo = ControladorNotas::notaRec_5($valorf->rec);
                              }
+
+                             $v1_valor = ControladorNotas::estado_nota_qualitativa($valorf->mfd);
+                             if($getCadeiraExame){
+                             $v2_valor = ControladorNotas::estado_nota_qualitativa($valorf->npe);
+                             }
+                             $v3_valor = ControladorNotas::estado_nota_qualitativa($valorf->mf);
+                             if($getCadeiraRecurso){
+                             $v4_valor = ControladorNotas::estado_nota_qualitativaRec($valorf->rec);
+                             }
                      ?>
-                         <td class="{{$v1_estilo}}">@if($valorf->mfd==null) --- @else {{$valorf->mfd}} @endif</td>
+
+                         <td class="{{$v1_estilo}}">@if($valorf->mfd==null) --- @else {{$v1_valor}} @endif</td>
                          @if ($getCadeiraExame)
-                             <td class="{{$v2_estilo}}">@if($valorf->npe==null) --- @else {{$valorf->npe}} @endif</td>
+                             <td class="{{$v2_estilo}}">@if($valorf->npe==null) --- @else {{$v2_valor}} @endif</td>
                          @endif
-                         <td class="{{$v3_estilo}} td_color">@if($valorf->mf==null) --- @else {{$valorf->mf}} @endif</td>
+                         <td class="{{$v3_estilo}}td_color">@if($valorf->mf==null) --- @else {{$v3_valor}} @endif</td>
                          @if ($getCadeiraRecurso)
-                             <td class="{{$v4_estilo}}">@if($valorf->rec==null) --- @else {{$valorf->rec}} @endif</td>
+                             <td class="{{$v4_estilo}}">@if($valorf->rec==null) --- @else {{$v4_valor}} @endif</td>
                          @endif
+
                      <?php }}?>
                      <!-- fim dados finais-->
+
                      </tr>
                      @endforeach
                    </tbody>
@@ -1255,7 +1295,7 @@ $posit3 = [
          <div class="corpo">
 
             <div class="table-responsive tabela">
-                <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;" bordercolor="red">
+                <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
                     <thead>
                         <tr>
                             <th>Nº</th>
@@ -1292,31 +1332,40 @@ $posit3 = [
                               <?php }
                               else{
                                   foreach($trimestre1 as $valor1){
-                                      $v01_estilo = ControladorNotas::nota_10($valor1->av1);
-                                      $v02_estilo = ControladorNotas::nota_10($valor1->av2);
-                                      $v03_estilo = ControladorNotas::nota_10($valor1->av3);
+                                      $v01_estilo = ControladorNotas::nota_10Qualitativa($valor1->av1);
+                                      $v02_estilo = ControladorNotas::nota_10Qualitativa($valor1->av2);
+                                      $v03_estilo = ControladorNotas::nota_10Qualitativa($valor1->av3);
 
-                                      $v1_estilo = ControladorNotas::nota_10($valor1->mac);
-                                      $v2_estilo = ControladorNotas::nota_10($valor1->npp);
-                                      $v3_estilo = ControladorNotas::nota_10($valor1->pt);
-                                      $v4_estilo = ControladorNotas::nota_10($valor1->mt);
+                                      $v1_estilo = ControladorNotas::nota_10Qualitativa($valor1->mac);
+                                      $v2_estilo = ControladorNotas::nota_10Qualitativa($valor1->npp);
+                                      $v3_estilo = ControladorNotas::nota_10Qualitativa($valor1->pt);
+                                      $v4_estilo = ControladorNotas::nota_10Qualitativa($valor1->mt);
+
+
+                                      $v01_valor = ControladorNotas::estado_nota_qualitativa($valor1->av1);
+                                      $v02_valor = ControladorNotas::estado_nota_qualitativa($valor1->av2);
+                                      $v03_valor = ControladorNotas::estado_nota_qualitativa($valor1->av3);
+
+                                      $v1_valor = ControladorNotas::estado_nota_qualitativa($valor1->mac);
+                                      $v2_valor = ControladorNotas::estado_nota_qualitativa($valor1->npp);
+                                      $v3_valor = ControladorNotas::estado_nota_qualitativa($valor1->pt);
+                                      $v4_valor = ControladorNotas::estado_nota_qualitativa($valor1->mt);
                                   ?>
-                          <td class="{{$v01_estilo}}">@if($valor1->av1==null) --- @else {{round($valor1->av1,2)}} @endif</td>
-                          <td class="{{$v02_estilo}}">@if($valor1->av2==null) --- @else {{round($valor1->av2,2)}} @endif</td>
-                          <td class="{{$v03_estilo}}">@if($valor1->av3==null) --- @else {{round($valor1->av3,2)}} @endif</td>
-                          <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{round($valor1->mac,2)}} @endif</td>
-                          <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{round($valor1->npp,2)}} @endif</td>
-                          <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{round($valor1->pt,2)}} @endif</td>
-                          <td class="{{$v4_estilo}} td_color">@if($valor1->mt==null) --- @else {{$valor1->mt}} @endif</td>
+
+                                      <td class="{{$v01_estilo}}">@if($valor1->av1==null) --- @else {{$v01_valor}} @endif</td>
+                                      <td class="{{$v02_estilo}}">@if($valor1->av2==null) --- @else {{$v02_valor}} @endif</td>
+                                      <td class="{{$v03_estilo}}">@if($valor1->av3==null) --- @else {{$v03_valor}} @endif</td>
+                                      <td class="{{$v1_estilo}}">@if($valor1->mac==null) --- @else {{$v1_valor}} @endif</td>
+                                      <td class="{{$v2_estilo}}">@if($valor1->npp==null) --- @else {{$v2_valor}} @endif</td>
+                                      <td class="{{$v3_estilo}}">@if($valor1->pt==null) --- @else {{$v3_valor}} @endif</td>
+                                      <td class="{{$v4_estilo}}td_color">@if($valor1->mt==null) --- @else {{$v4_valor}} @endif</td>
                                   <?php }}?>
                           <!-- fim primeiro trimestre-->
-
 
                       </tr>
                       @endforeach
                     </tbody>
                  </table>
-
 
             </div>
 
@@ -1354,68 +1403,81 @@ $posit3 = [
          <div class="corpo">
 
             <div class="table-responsive tabela">
-                <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;" bordercolor="red">
-                    <thead>
-                        <tr>
-                            <th>Nº</th>
-                            <th>NOME COMPLETO</th>
-                            <th>G</th>
-                            <th>JAN</th>
-                            <th>FEV</th>
-                            <th>MAR</th>
-                            <th>MAC2</th>
-                            <th>NPP2</th>
-                            <th>PT2</th>
-                            <th>MT2</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                      @foreach ($getHistorico as $historico)
-                      <tr class="{{$historico->observacao_final}}">
-                          <td>{{$loop->iteration}}</td>
-                          <td>{{$historico->estudante->pessoa->nome}}</td>
-                          <td>{{$historico->estudante->pessoa->genero}}</td>
 
-                          <!-- primeiro trimestre-->
-                          <?php
-                              $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 2, $getHorario->ano_lectivo);
-                              if($trimestre2->count()==0){
-                          ?>
-                          <td>---</td>
-                          <td>---</td>
-                          <td>---</td>
-                          <td>---</td>
-                          <td>---</td>
-                          <td>---</td>
-                          <td class="td_color">---</td>
-                              <?php }
-                              else{
-                                  foreach($trimestre2 as $valor2){
-                                      $v01_estilo = ControladorNotas::nota_10($valor2->av1);
-                                      $v02_estilo = ControladorNotas::nota_10($valor2->av2);
-                                      $v03_estilo = ControladorNotas::nota_10($valor2->av3);
+                <div class="table-responsive tabela">
+                    <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
+                        <thead>
+                            <tr>
+                                <th>Nº</th>
+                                <th>NOME COMPLETO</th>
+                                <th>G</th>
+                                <th>JAN</th>
+                                <th>FEV</th>
+                                <th>MAR</th>
+                                <th>MAC2</th>
+                                <th>NPP2</th>
+                                <th>PT2</th>
+                                <th>MT2</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                          @foreach ($getHistorico as $historico)
+                          <tr class="{{$historico->observacao_final}}">
+                              <td>{{$loop->iteration}}</td>
+                              <td>{{$historico->estudante->pessoa->nome}}</td>
+                              <td>{{$historico->estudante->pessoa->genero}}</td>
 
-                                      $v1_estilo = ControladorNotas::nota_10($valor2->mac);
-                                      $v2_estilo = ControladorNotas::nota_10($valor2->npp);
-                                      $v3_estilo = ControladorNotas::nota_10($valor2->pt);
-                                      $v4_estilo = ControladorNotas::nota_10($valor2->mt);
-                                  ?>
-                          <td class="{{$v01_estilo}}">@if($valor2->av1==null) --- @else {{round($valor2->av1,2)}} @endif</td>
-                          <td class="{{$v02_estilo}}">@if($valor2->av2==null) --- @else {{round($valor2->av2,2)}} @endif</td>
-                          <td class="{{$v03_estilo}}">@if($valor2->av3==null) --- @else {{round($valor2->av3,2)}} @endif</td>
-                          <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{round($valor2->mac,2)}} @endif</td>
-                          <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{round($valor2->npp,2)}} @endif</td>
-                          <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{round($valor2->pt,2)}} @endif</td>
-                          <td class="{{$v4_estilo}} td_color">@if($valor2->mt==null) --- @else {{$valor2->mt}} @endif</td>
-                                  <?php }}?>
-                          <!-- fim primeiro trimestre-->
+                              <!-- primeiro trimestre-->
+                              <?php
+                                  $trimestre2 = ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina, $historico->id_estudante, 2, $getHorario->ano_lectivo);
+                                  if($trimestre2->count()==0){
+                              ?>
+                              <td>---</td>
+                              <td>---</td>
+                              <td>---</td>
+                              <td>---</td>
+                              <td>---</td>
+                              <td>---</td>
+                              <td class="td_color">---</td>
+                                  <?php }
+                                  else{
+                                      foreach($trimestre2 as $valor2){
+                                          $v01_estilo = ControladorNotas::nota_10Qualitativa($valor2->av1);
+                                          $v02_estilo = ControladorNotas::nota_10Qualitativa($valor2->av2);
+                                          $v03_estilo = ControladorNotas::nota_10Qualitativa($valor2->av3);
+
+                                          $v1_estilo = ControladorNotas::nota_10Qualitativa($valor2->mac);
+                                          $v2_estilo = ControladorNotas::nota_10Qualitativa($valor2->npp);
+                                          $v3_estilo = ControladorNotas::nota_10Qualitativa($valor2->pt);
+                                          $v4_estilo = ControladorNotas::nota_10Qualitativa($valor2->mt);
 
 
-                      </tr>
-                      @endforeach
-                    </tbody>
-                 </table>
+                                          $v01_valor = ControladorNotas::estado_nota_qualitativa($valor2->av1);
+                                          $v02_valor = ControladorNotas::estado_nota_qualitativa($valor2->av2);
+                                          $v03_valor = ControladorNotas::estado_nota_qualitativa($valor2->av3);
 
+                                          $v1_valor = ControladorNotas::estado_nota_qualitativa($valor2->mac);
+                                          $v2_valor = ControladorNotas::estado_nota_qualitativa($valor2->npp);
+                                          $v3_valor = ControladorNotas::estado_nota_qualitativa($valor2->pt);
+                                          $v4_valor = ControladorNotas::estado_nota_qualitativa($valor2->mt);
+                                      ?>
+
+                                          <td class="{{$v01_estilo}}">@if($valor2->av1==null) --- @else {{$v01_valor}} @endif</td>
+                                          <td class="{{$v02_estilo}}">@if($valor2->av2==null) --- @else {{$v02_valor}} @endif</td>
+                                          <td class="{{$v03_estilo}}">@if($valor2->av3==null) --- @else {{$v03_valor}} @endif</td>
+                                          <td class="{{$v1_estilo}}">@if($valor2->mac==null) --- @else {{$v1_valor}} @endif</td>
+                                          <td class="{{$v2_estilo}}">@if($valor2->npp==null) --- @else {{$v2_valor}} @endif</td>
+                                          <td class="{{$v3_estilo}}">@if($valor2->pt==null) --- @else {{$v3_valor}} @endif</td>
+                                          <td class="{{$v4_estilo}}td_color">@if($valor2->mt==null) --- @else {{$v4_valor}} @endif</td>
+                                      <?php }}?>
+                              <!-- fim primeiro trimestre-->
+
+                          </tr>
+                          @endforeach
+                        </tbody>
+                     </table>
+
+                </div>
 
             </div>
 
@@ -1454,7 +1516,7 @@ $posit3 = [
      <div class="corpo">
 
         <div class="table-responsive tabela">
-            <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;" bordercolor="red">
+            <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
                 <thead>
                     <tr>
                         <th>Nº</th>
@@ -1491,25 +1553,35 @@ $posit3 = [
                           <?php }
                           else{
                               foreach($trimestre3 as $valor3){
-                                  $v01_estilo = ControladorNotas::nota_10($valor3->av1);
-                                  $v02_estilo = ControladorNotas::nota_10($valor3->av2);
-                                  $v03_estilo = ControladorNotas::nota_10($valor3->av3);
+                                  $v01_estilo = ControladorNotas::nota_10Qualitativa($valor3->av1);
+                                  $v02_estilo = ControladorNotas::nota_10Qualitativa($valor3->av2);
+                                  $v03_estilo = ControladorNotas::nota_10Qualitativa($valor3->av3);
 
-                                  $v1_estilo = ControladorNotas::nota_10($valor3->mac);
-                                  $v2_estilo = ControladorNotas::nota_10($valor3->npp);
-                                  $v3_estilo = ControladorNotas::nota_10($valor3->pt);
-                                  $v4_estilo = ControladorNotas::nota_10($valor3->mt);
+                                  $v1_estilo = ControladorNotas::nota_10Qualitativa($valor3->mac);
+                                  $v2_estilo = ControladorNotas::nota_10Qualitativa($valor3->npp);
+                                  $v3_estilo = ControladorNotas::nota_10Qualitativa($valor3->pt);
+                                  $v4_estilo = ControladorNotas::nota_10Qualitativa($valor3->mt);
+
+
+                                  $v01_valor = ControladorNotas::estado_nota_qualitativa($valor3->av1);
+                                  $v02_valor = ControladorNotas::estado_nota_qualitativa($valor3->av2);
+                                  $v03_valor = ControladorNotas::estado_nota_qualitativa($valor3->av3);
+
+                                  $v1_valor = ControladorNotas::estado_nota_qualitativa($valor3->mac);
+                                  $v2_valor = ControladorNotas::estado_nota_qualitativa($valor3->npp);
+                                  $v3_valor = ControladorNotas::estado_nota_qualitativa($valor3->pt);
+                                  $v4_valor = ControladorNotas::estado_nota_qualitativa($valor3->mt);
                               ?>
-                      <td class="{{$v01_estilo}}">@if($valor3->av1==null) --- @else {{round($valor3->av1,2)}} @endif</td>
-                      <td class="{{$v02_estilo}}">@if($valor3->av2==null) --- @else {{round($valor3->av2,2)}} @endif</td>
-                      <td class="{{$v03_estilo}}">@if($valor3->av3==null) --- @else {{round($valor3->av3,2)}} @endif</td>
-                      <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{round($valor3->mac,2)}} @endif</td>
-                      <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{round($valor3->npp,2)}} @endif</td>
-                      <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{round($valor3->pt,2)}} @endif</td>
-                      <td class="{{$v4_estilo}} td_color">@if($valor3->mt==null) --- @else {{$valor3->mt}} @endif</td>
+
+                                  <td class="{{$v01_estilo}}">@if($valor3->av1==null) --- @else {{$v01_valor}} @endif</td>
+                                  <td class="{{$v02_estilo}}">@if($valor3->av2==null) --- @else {{$v02_valor}} @endif</td>
+                                  <td class="{{$v03_estilo}}">@if($valor3->av3==null) --- @else {{$v03_valor}} @endif</td>
+                                  <td class="{{$v1_estilo}}">@if($valor3->mac==null) --- @else {{$v1_valor}} @endif</td>
+                                  <td class="{{$v2_estilo}}">@if($valor3->npp==null) --- @else {{$v2_valor}} @endif</td>
+                                  <td class="{{$v3_estilo}}">@if($valor3->pt==null) --- @else {{$v3_valor}} @endif</td>
+                                  <td class="{{$v4_estilo}}td_color">@if($valor3->mt==null) --- @else {{$v4_valor}} @endif</td>
                               <?php }}?>
                       <!-- fim primeiro trimestre-->
-
 
                   </tr>
                   @endforeach

@@ -282,6 +282,18 @@ $posit3 = [
             font-weight: bold;
         }
 
+        .positivotd_color {
+            background-color: #e2dfd3;
+            color: #4680ff;
+            font-weight: bold;
+        }
+
+        .negativotd_color {
+            background-color: #e2dfd3;
+            color: #FC6180;
+            font-weight: bold;
+        }
+
     </style>
 </head>
 
@@ -387,7 +399,7 @@ $posit3 = [
                                 @if ($valor1->pt == null) --- @else
                                         {{ round($valor1->pt, 2) }} @endif
                                 </td>
-                                <td class="{{ $v4_estilo }} td_color">
+                                <td class="{{ $v4_estilo }}td_color">
                                 @if ($valor1->mt == null) --- @else
                                         {{ $valor1->mt }} @endif
                                 </td>
@@ -426,7 +438,7 @@ $posit3 = [
                                 @if ($valor2->pt == null) --- @else
                                         {{ round($valor2->pt, 2) }} @endif
                                 </td>
-                                <td class="{{ $v4_estilo }} td_color">
+                                <td class="{{ $v4_estilo }}td_color">
                                 @if ($valor2->mt == null) --- @else
                                         {{ $valor2->mt }} @endif
                                 </td>
@@ -465,7 +477,7 @@ $posit3 = [
                                 @if ($valor3->pt == null) --- @else
                                         {{ round($valor3->pt, 2) }} @endif
                                 </td>
-                                <td class="{{ $v4_estilo }} td_color">
+                                <td class="{{ $v4_estilo }}td_color">
                                 @if ($valor3->mt == null) --- @else
                                         {{ $valor3->mt }} @endif
                                 </td>
@@ -508,7 +520,7 @@ $posit3 = [
                                             {{ $valorf->npe }} @endif
                                     </td>
                                 @endif
-                                <td class="{{ $v3_estilo }} td_color">
+                                <td class="{{ $v3_estilo }}td_color">
                                 @if ($valorf->mf == null) --- @else
                                         {{ $valorf->mf }} @endif
                                 </td>
@@ -722,7 +734,7 @@ $posit3 = [
                     </tbody>
                 </table>
             </div>
-            <br/><br/>
+            <br /><br />
             <div class="table-responsive tabela">
                 <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;">
                     <thead>
@@ -1423,7 +1435,7 @@ $posit3 = [
                                 @if ($valor1->pt == null) --- @else
                                         {{ round($valor1->pt, 2) }} @endif
                                 </td>
-                                <td class="{{ $v4_estilo }} td_color">
+                                <td class="{{ $v4_estilo }}td_color">
                                 @if ($valor1->mt == null) --- @else
                                         {{ $valor1->mt }} @endif
                                 </td>
@@ -1548,7 +1560,7 @@ $posit3 = [
                                 @if ($valor2->pt == null) --- @else
                                         {{ round($valor2->pt, 2) }} @endif
                                 </td>
-                                <td class="{{ $v4_estilo }} td_color">
+                                <td class="{{ $v4_estilo }}td_color">
                                 @if ($valor2->mt == null) --- @else
                                         {{ $valor2->mt }} @endif
                                 </td>
@@ -1674,7 +1686,7 @@ $posit3 = [
                                 @if ($valor3->pt == null) --- @else
                                         {{ round($valor3->pt, 2) }} @endif
                                 </td>
-                                <td class="{{ $v4_estilo }} td_color">
+                                <td class="{{ $v4_estilo }}td_color">
                                 @if ($valor3->mt == null) --- @else
                                         {{ $valor3->mt }} @endif
                                 </td>

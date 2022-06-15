@@ -439,6 +439,7 @@ Route::group(['prefix' => "word", 'middleware' => "AdminSuperUser"], function ()
 
 Route::group(['prefix' => "excel"], function () {
     Route::get('lista_nominal/{id_turma}/{ano_lectivo}', "ExcelController@lista_nominal");
+    Route::get('minipautas/{id_turma}/{id_disciplina}/{ano_lectivo}', "ExcelController@minipautas");
 });
 
 /*rota de test*/

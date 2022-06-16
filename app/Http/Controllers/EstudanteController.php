@@ -879,7 +879,6 @@ class EstudanteController extends Controller
                 'Abril',
                 'Maio',
                 'Junho',
-                'Julho',
             ];
         }
         $historico_estudantes = HistoricEstudante::where(['ano_lectivo' => $ano_lectivo->ano_lectivo])->get();

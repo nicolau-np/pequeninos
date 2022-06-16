@@ -52,7 +52,7 @@ use App\Http\Controllers\ControladorStatic;
                                     - Abril<br />
                                     - Maio<br />
                                     - Junho<br />
-                                    - Julho
+
                                     <br /><br />
                                 </div>
 

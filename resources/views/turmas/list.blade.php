@@ -159,16 +159,7 @@ use App\Http\Controllers\ControladorStatic; ?>
                                                                                                         class="ti-printer"></i>
                                                                                                 </a>&nbsp;
 
-                                                                                                <a href="/excel/pauta/{{ $turmas->id }}/{{ $getAno }}"
-                                                                                                    type="button"
-                                                                                                    class="btn btn-success btn-icon waves-effect waves-light"
-                                                                                                    data-toggle="tooltip"
-                                                                                                    data-placement="right"
-                                                                                                    title=""
-                                                                                                    data-original-title="Pauta Excel">
-                                                                                                    <i
-                                                                                                        class="ti-download"></i>
-                                                                                                </a>&nbsp;
+                                                                                                
                                                                                             </div>
                                                                                         </span>
                                                                                     </div>

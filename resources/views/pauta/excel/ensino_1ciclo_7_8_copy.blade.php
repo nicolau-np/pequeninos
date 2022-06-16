@@ -100,10 +100,22 @@ $getCadeiraRecurso = false;
         float: center;
     }
 
-    .td_color{
-    background-color: #e2dfd3;
-    font-weight: bold;
-}
+    .td_color {
+        background-color: #e2dfd3;
+        font-weight: bold;
+    }
+
+    .positivotd_color {
+        background-color: #e2dfd3;
+        color: #4680ff;
+        font-weight: bold;
+    }
+
+    .negativotd_color {
+        background-color: #e2dfd3;
+        color: #FC6180;
+        font-weight: bold;
+    }
 
 </style>
 
@@ -303,7 +315,7 @@ $getCadeiraRecurso = false;
                                         @if ($valorf->npe == null) --- @else
                                                 {{ $valorf->npe }} @endif
                                         </td>
-                                        <td class="{{ $v3_estilo }} td_color">
+                                        <td class="{{ $v3_estilo }}td_color">
                                         @if ($valorf->mf == null) --- @else
                                                 {{ $valorf->mf }} @endif
                                         </td>
@@ -513,7 +525,7 @@ $getCadeiraRecurso = false;
                                         @if ($valorf->npe == null) --- @else
                                                 {{ $valorf->npe }} @endif
                                         </td>
-                                        <td class="{{ $v3_estilo }} td_color">
+                                        <td class="{{ $v3_estilo }}td_color">
                                         @if ($valorf->mf == null) --- @else
                                                 {{ $valorf->mf }} @endif
                                         </td>

@@ -100,10 +100,10 @@ $getCadeiraRecurso = false;
         float: center;
     }
 
-    .td_color {
-        background-color: #badaf1;
-        font-weight: bold;
-    }
+    .td_color{
+    background-color: #e2dfd3;
+    font-weight: bold;
+}
 
 </style>
 

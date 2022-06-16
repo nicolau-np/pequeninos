@@ -65,6 +65,10 @@ use App\Http\Controllers\ControladorStatic;
                                     <a href="/minha_turma/horario/{{$turmas->id_turma}}/{{$turmas->ano_lectivo}}" type="button" class="btn btn-info btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Horário">
                                         <i class="ti-alarm-clock"></i>
                                     </a>&nbsp;
+
+                                    <a href="/excel/pauta/{{$turmas->id_turma}}/{{$turmas->ano_lectivo}}" type="button" class="btn btn-success btn-icon waves-effect waves-light" data-toggle="tooltip" data-placement="right" title="" data-original-title="Pauta Excel">
+                                        <i class="ti-download"></i>
+                                    </a>&nbsp;
                                    </div>
                                 </span>
                             </div>

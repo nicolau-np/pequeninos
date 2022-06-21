@@ -195,11 +195,10 @@ use App\Http\Controllers\ControladorStatic;
                                     <td>{{ $historico->estudante->pessoa->genero }}</td>
 
                                     <?php foreach ($getOrdenaDisciplinas as $disciplina) {
-                                    $restricao = ControladorStatic::getRestricao($getEpoca, $getAno,
-                                    $historico->id_estudante);
+                                    $restricao = ControladorStatic::getRestricao($getEpoca, $getAno, $historico->id_estudante);
                                     $getDisciplina = ControladorStatic::getDisciplinaID($disciplina->id_disciplina);
                                     $getValoresMiniPautaTrimestralPDF =
-                                    ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina,
+                                    ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina->id_disciplina,
                                     $historico->id_estudante, $getEpoca, $getAno);
                                     if ($restricao) { ?>
                                     <td>DEVEDOR</td>

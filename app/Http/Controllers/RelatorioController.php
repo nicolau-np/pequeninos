@@ -712,8 +712,10 @@ class RelatorioController extends Controller
             return back()->with(['error' => "Não encontrou ano lectivo"]);
         }
 
+        //verificar se selecionou a ordem das disciplinas
+        $ordena_disciplina = null;
         if (!Session::has('disciplinas')) {
-            return back()->with(['error' => "Deve selecionar as disciplinas"]);
+            $ordena_disciplina = OrdernaDisciplina::where(['id_curso' => $turma->id_curso, 'id_classe' => $turma->id_classe])->get();
         }
 
         $historico = HistoricEstudante::where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])
@@ -724,6 +726,7 @@ class RelatorioController extends Controller
             'getHistorico' => $historico,
             'getEpoca' => $request->epoca,
             'getAno' => $ano_lectivo,
+            'getOrdenaDisciplinas' =>$ordena_disciplina,
         ];
 
 

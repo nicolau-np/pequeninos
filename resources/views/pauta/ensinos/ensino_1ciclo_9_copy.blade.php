@@ -356,7 +356,7 @@ use App\Http\Controllers\ControladorStatic;
                                                     <td>{{ $historico->estudante->pessoa->nome }}</td>
                                                     <td>{{ $historico->estudante->pessoa->genero }}</td>
 
-                                                    <?php foreach (Session::get('disciplinas') as
+                                                    <?php foreach ($getOrdenaDisciplinas as
                                                     $disciplina) {
                                                     $getCadeiraExame =
                                                     ControladorStatic::getExameStatus($getDirector->turma->id_curso,

@@ -144,7 +144,7 @@ use App\Http\Controllers\ControladorStatic;
                                     $historico->id_estudante);
                                     $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
                                     $getValoresMiniPautaTrimestralPDF =
-                                    ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina,
+                                    ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'],
                                     $historico->id_estudante, $getEpoca, $getAno);
                                     if ($restricao) { ?>
                                     <td>DEVEDOR</td>

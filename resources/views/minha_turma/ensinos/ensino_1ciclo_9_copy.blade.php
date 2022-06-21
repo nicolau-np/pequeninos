@@ -111,60 +111,117 @@ use App\Http\Controllers\ControladorStatic;
         <div class="corpo">
 
             <div class="table-responsive tabela">
-                <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;"
-                    bordercolor="red">
-                    <thead>
-                        <tr>
-                            <th>Nº</th>
-                            <th>NOME COMPLETO</th>
-                            <th>G</th>
-                            <?php
-                            $count_disciplinas = 0;
-                            foreach (Session::get('disciplinas') as $disciplina) {
-
-                            $count_disciplinas++;
-                            $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
-                            ?>
-                            <th>{{ strtoupper($getDisciplina->disciplina) }}</th>
-                            <?php
-                            }
-                            ?>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($getHistorico as $historico)
-                            <tr class="{{ $historico->observacao_final }}">
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $historico->estudante->pessoa->nome }}</td>
-                                <td>{{ $historico->estudante->pessoa->genero }}</td>
-
-                                <?php foreach (Session::get('disciplinas') as $disciplina) {
-                                $restricao = ControladorStatic::getRestricao($getEpoca, $getAno,
-                                $historico->id_estudante);
-                                $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
-                                $getValoresMiniPautaTrimestralPDF =
-                                ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina,
-                                $historico->id_estudante, $getEpoca, $getAno);
-                                if ($restricao) { ?>
-                                <td>DEVEDOR</td>
-                                <?php } else {if ($getValoresMiniPautaTrimestralPDF->count() == 0) { ?>
-                                <td>---</td>
-                                <?php } else {foreach ($getValoresMiniPautaTrimestralPDF as $valor) {
-                                $v1_estilo = ControladorNotas::nota_20($valor->mt); ?>
-                                <td class="{{ $v1_estilo }}">
-                                @if ($valor->mt == null) --- @else
-                                        {{ round($valor->mt, 2) }} @endif
-                                </td>
+                @if (!$getOrdenaDisciplinas)
+                    <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;"
+                        bordercolor="red">
+                        <thead>
+                            <tr>
+                                <th>Nº</th>
+                                <th>NOME COMPLETO</th>
+                                <th>G</th>
                                 <?php
-                                }}}
-                                } ?>
-                                <!-- primeiro trimestre-->
+                                $count_disciplinas = 0;
+                                foreach (Session::get('disciplinas') as $disciplina) {
 
+                                $count_disciplinas++;
+                                $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
+                                ?>
+                                <th>{{ strtoupper($getDisciplina->disciplina) }}</th>
+                                <?php
+                                }
+                                ?>
                             </tr>
-                        @endforeach
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            @foreach ($getHistorico as $historico)
+                                <tr class="{{ $historico->observacao_final }}">
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $historico->estudante->pessoa->nome }}</td>
+                                    <td>{{ $historico->estudante->pessoa->genero }}</td>
 
+                                    <?php foreach (Session::get('disciplinas') as $disciplina) {
+                                    $restricao = ControladorStatic::getRestricao($getEpoca, $getAno,
+                                    $historico->id_estudante);
+                                    $getDisciplina = ControladorStatic::getDisciplinaID($disciplina['id_disciplina']);
+                                    $getValoresMiniPautaTrimestralPDF =
+                                    ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina['id_disciplina'],
+                                    $historico->id_estudante, $getEpoca, $getAno);
+                                    if ($restricao) { ?>
+                                    <td>DEVEDOR</td>
+                                    <?php } else {if ($getValoresMiniPautaTrimestralPDF->count() == 0) {
+                                    ?>
+                                    <td>---</td>
+                                    <?php } else {foreach ($getValoresMiniPautaTrimestralPDF as $valor) {
+                                    $v1_estilo = ControladorNotas::nota_20($valor->mt); ?>
+                                    <td class="{{ $v1_estilo }}">
+                                    @if ($valor->mt == null) --- @else
+                                            {{ round($valor->mt, 2) }} @endif
+                                    </td>
+                                    <?php
+                                    }}}
+                                    } ?>
+                                    <!-- primeiro trimestre-->
+
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @else
+                    <table class="tabela" border="1" cellspacing=0 cellpadding=2 bordercolor="#000" style="width: 100%;"
+                        bordercolor="red">
+                        <thead>
+                            <tr>
+                                <th>Nº</th>
+                                <th>NOME COMPLETO</th>
+                                <th>G</th>
+                                <?php
+                                $count_disciplinas = 0;
+                                foreach ($getOrdenaDisciplinas as $disciplina) {
+
+                                $count_disciplinas++;
+                                $getDisciplina = ControladorStatic::getDisciplinaID($disciplina->id_disciplina);
+                                ?>
+                                <th>{{ strtoupper($getDisciplina->disciplina) }}</th>
+                                <?php
+                                }
+                                ?>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($getHistorico as $historico)
+                                <tr class="{{ $historico->observacao_final }}">
+                                    <td>{{ $loop->iteration }}</td>
+                                    <td>{{ $historico->estudante->pessoa->nome }}</td>
+                                    <td>{{ $historico->estudante->pessoa->genero }}</td>
+
+                                    <?php foreach ($getOrdenaDisciplinas as $disciplina) {
+                                    $restricao = ControladorStatic::getRestricao($getEpoca, $getAno,
+                                    $historico->id_estudante);
+                                    $getDisciplina = ControladorStatic::getDisciplinaID($disciplina->id_disciplina);
+                                    $getValoresMiniPautaTrimestralPDF =
+                                    ControladorNotas::getValoresMiniPautaTrimestralPDF($disciplina->id_disciplina,
+                                    $historico->id_estudante, $getEpoca, $getAno);
+                                    if ($restricao) { ?>
+                                    <td>DEVEDOR</td>
+                                    <?php } else {if ($getValoresMiniPautaTrimestralPDF->count() == 0) {
+                                    ?>
+                                    <td>---</td>
+                                    <?php } else {foreach ($getValoresMiniPautaTrimestralPDF as $valor) {
+                                    $v1_estilo = ControladorNotas::nota_20($valor->mt); ?>
+                                    <td class="{{ $v1_estilo }}">
+                                    @if ($valor->mt == null) --- @else
+                                            {{ round($valor->mt, 2) }} @endif
+                                    </td>
+                                    <?php
+                                    }}}
+                                    } ?>
+                                    <!-- primeiro trimestre-->
+
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+                @endif
 
             </div>
 

@@ -25,11 +25,13 @@ class PrincipalController extends Controller
 
     public function consultar()
     {
+        $estado = false;
         $data = [
             'title' => "SIGE - Sistema de Gestão Escolar",
             'type' => "consulta",
             'menu' => "Consultar",
             'submenu' => "",
+            'getEstado'=>$estado,
         ];
         return view('principal.consulta', $data);
     }

@@ -8,6 +8,7 @@ use App\Http\Controllers\ControladorStatic;
     $numero_colspan = 2;
     $getCadeiraExame = false;
     $getCadeiraRecurso = false;
+    $cadeiras_nulas = 0;
     ?>
     <style>
         table thead {
@@ -126,7 +127,7 @@ use App\Http\Controllers\ControladorStatic;
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>
                                                             <img src="
-                                                    @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
+                                                            @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
                                                         @else
                                                             {{ asset('assets/template/images/profile.png') }} @endif
                                                             " alt="" style="width:47px; height:47px; border-radius:4px;">
@@ -177,14 +178,21 @@ use App\Http\Controllers\ControladorStatic;
 
                                                             <!-- primiero trimestre-->
                                                             <?php if ($trimestre1->count() == 0) { ?>
+                                                            @php
+                                                                $cadeiras_nulas++;
+                                                            @endphp
                                                             <td>---</td>
                                                             <?php } else {foreach ($trimestre1 as $valor1) {
                                                             $v4_estilo = ControladorNotas::nota_10($valor1->mt); ?>
 
                                                             <td class="{{ $v4_estilo }}">
                                                                 @if ($valor1->mt == null)
+                                                                    @php
+                                                                        $cadeiras_nulas++;
+                                                                    @endphp
                                                                     ---
-                                                                @else {{ strtr(round($valor1->mt, 1), '.', ',') }} @endif
+                                                                @else {{ strtr(round($valor1->mt, 1), '.', ',') }}
+                                                                @endif
                                                             </td>
                                                             <?php
                                                             }} ?>
@@ -192,14 +200,21 @@ use App\Http\Controllers\ControladorStatic;
 
                                                             <!-- segundo trimestre-->
                                                             <?php if ($trimestre2->count() == 0) { ?>
+                                                            @php
+                                                                $cadeiras_nulas++;
+                                                            @endphp
                                                             <td>---</td>
                                                             <?php } else {foreach ($trimestre2 as $valor2) {
                                                             $v4_estilo = ControladorNotas::nota_10($valor2->mt); ?>
 
                                                             <td class="{{ $v4_estilo }}">
                                                                 @if ($valor2->mt == null)
+                                                                    @php
+                                                                        $cadeiras_nulas++;
+                                                                    @endphp
                                                                     ---
-                                                                @else {{ strtr(round($valor2->mt, 1), '.', ',') }} @endif
+                                                                @else {{ strtr(round($valor2->mt, 1), '.', ',') }}
+                                                                @endif
                                                             </td>
                                                             <?php
                                                             }} ?>
@@ -207,14 +222,21 @@ use App\Http\Controllers\ControladorStatic;
 
                                                             <!-- terceiro trimestre-->
                                                             <?php if ($trimestre3->count() == 0) { ?>
+                                                            @php
+                                                                $cadeiras_nulas++;
+                                                            @endphp
                                                             <td>---</td>
                                                             <?php } else {foreach ($trimestre3 as $valor3) {
                                                             $v4_estilo = ControladorNotas::nota_10($valor3->mt); ?>
 
                                                             <td class="{{ $v4_estilo }}">
                                                                 @if ($valor3->mt == null)
+                                                                    @php
+                                                                        $cadeiras_nulas++;
+                                                                    @endphp
                                                                     ---
-                                                                @else {{ strtr(round($valor3->mt, 1), '.', ',') }} @endif
+                                                                @else {{ strtr(round($valor3->mt, 1), '.', ',') }}
+                                                                @endif
                                                             </td>
                                                             <?php
                                                             }} ?>
@@ -233,6 +255,9 @@ use App\Http\Controllers\ControladorStatic;
                                                         @if (!$getCadeiraExame)
                                                             <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
                                                                 @if ($valorf->mf == null)
+                                                                    @php
+                                                                        $cadeiras_nulas++;
+                                                                    @endphp
                                                                     ---
                                                                 @else {{ $valorf->mf }} @endif
                                                             </td>
@@ -241,17 +266,27 @@ use App\Http\Controllers\ControladorStatic;
                                                         @if ($getCadeiraExame)
                                                             <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
                                                                 @if ($valorf->mfd == null)
+                                                                    @php
+                                                                        $cadeiras_nulas++;
+                                                                    @endphp
                                                                     ---
                                                                 @else {{ strtr(round($valorf->mfd, 1), '.', ',') }}
                                                                 @endif
                                                             </td>
                                                             <td class="{{ $v2_estilo }}">
                                                                 @if ($valorf->npe == null)
+                                                                    @php
+                                                                        $cadeiras_nulas++;
+                                                                    @endphp
                                                                     ---
-                                                                @else {{ strtr(round($valorf->npe, 1), '.', ',') }} @endif
+                                                                @else {{ strtr(round($valorf->npe, 1), '.', ',') }}
+                                                                @endif
                                                             </td>
                                                             <td class="{{ $v3_estilo }} td_color">
                                                                 @if ($valorf->mf == null)
+                                                                    @php
+                                                                        $cadeiras_nulas++;
+                                                                    @endphp
                                                                     ---
                                                                 @else {{ $valorf->mf }} @endif
                                                             </td>
@@ -272,15 +307,20 @@ use App\Http\Controllers\ControladorStatic;
                                                         @if ($historico->observacao_final)
                                                             <td>{{ strtoupper($historico->observacao_final) }}</td>
                                                         @else
-                                                            @if ($historico->obs_pauta)
-                                                                <td class="@if ($historico->obs_pauta
-                                                                == 'Transita') positivo @else negativo @endif">
-                                                                    {{ strtoupper($historico->obs_pauta) }}
-                                                                </td>
+                                                            @if ($cadeiras_nulas >= 1)
+                                                                <td></td>
                                                             @else
-                                                                <td>
-                                                                    ---
-                                                                </td>
+                                                                @if ($historico->obs_pauta)
+                                                                    <td class="@if ($historico->
+                                                                    obs_pauta == 'Transita') positivo @else
+                                                                        negativo @endif">
+                                                                        {{ strtoupper($historico->obs_pauta) }}
+                                                                    </td>
+                                                                @else
+                                                                    <td>
+                                                                        ---
+                                                                    </td>
+                                                                @endif
                                                             @endif
                                                         @endif
 
@@ -365,7 +405,7 @@ use App\Http\Controllers\ControladorStatic;
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>
                                                             <img src="
-                                                    @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
+                                                            @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
                                                         @else
                                                             {{ asset('assets/template/images/profile.png') }} @endif
                                                             " alt="" style="width:47px; height:47px; border-radius:4px;">
@@ -416,14 +456,21 @@ use App\Http\Controllers\ControladorStatic;
 
                                                             <!-- primiero trimestre-->
                                                             <?php if ($trimestre1->count() == 0) { ?>
+                                                            @php
+                                                                $cadeiras_nulas++;
+                                                            @endphp
                                                             <td>---</td>
                                                             <?php } else {foreach ($trimestre1 as $valor1) {
                                                             $v4_estilo = ControladorNotas::nota_10($valor1->mt); ?>
 
                                                             <td class="{{ $v4_estilo }}">
                                                                 @if ($valor1->mt == null)
+                                                                    @php
+                                                                        $cadeiras_nulas++;
+                                                                    @endphp
                                                                     ---
-                                                                @else {{ strtr(round($valor1->mt, 1), '.', ',') }} @endif
+                                                                @else {{ strtr(round($valor1->mt, 1), '.', ',') }}
+                                                                @endif
                                                             </td>
                                                             <?php
                                                             }} ?>
@@ -431,14 +478,21 @@ use App\Http\Controllers\ControladorStatic;
 
                                                             <!-- segundo trimestre-->
                                                             <?php if ($trimestre2->count() == 0) { ?>
+                                                            @php
+                                                                $cadeiras_nulas++;
+                                                            @endphp
                                                             <td>---</td>
                                                             <?php } else {foreach ($trimestre2 as $valor2) {
                                                             $v4_estilo = ControladorNotas::nota_10($valor2->mt); ?>
 
                                                             <td class="{{ $v4_estilo }}">
                                                                 @if ($valor2->mt == null)
+                                                                    @php
+                                                                        $cadeiras_nulas++;
+                                                                    @endphp
                                                                     ---
-                                                                @else {{ strtr(round($valor2->mt, 1), '.', ',') }} @endif
+                                                                @else {{ strtr(round($valor2->mt, 1), '.', ',') }}
+                                                                @endif
                                                             </td>
                                                             <?php
                                                             }} ?>
@@ -446,14 +500,21 @@ use App\Http\Controllers\ControladorStatic;
 
                                                             <!-- terceiro trimestre-->
                                                             <?php if ($trimestre3->count() == 0) { ?>
+                                                            @php
+                                                                $cadeiras_nulas++;
+                                                            @endphp
                                                             <td>---</td>
                                                             <?php } else {foreach ($trimestre3 as $valor3) {
                                                             $v4_estilo = ControladorNotas::nota_10($valor3->mt); ?>
 
                                                             <td class="{{ $v4_estilo }}">
                                                                 @if ($valor3->mt == null)
+                                                                    @php
+                                                                        $cadeiras_nulas++;
+                                                                    @endphp
                                                                     ---
-                                                                @else {{ strtr(round($valor3->mt, 1), '.', ',') }} @endif
+                                                                @else {{ strtr(round($valor3->mt, 1), '.', ',') }}
+                                                                @endif
                                                             </td>
                                                             <?php
                                                             }} ?>
@@ -472,6 +533,9 @@ use App\Http\Controllers\ControladorStatic;
                                                         @if (!$getCadeiraExame)
                                                             <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
                                                                 @if ($valorf->mf == null)
+                                                                    @php
+                                                                        $cadeiras_nulas++;
+                                                                    @endphp
                                                                     ---
                                                                 @else {{ $valorf->mf }} @endif
                                                             </td>
@@ -480,17 +544,27 @@ use App\Http\Controllers\ControladorStatic;
                                                         @if ($getCadeiraExame)
                                                             <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
                                                                 @if ($valorf->mfd == null)
+                                                                    @php
+                                                                        $cadeiras_nulas++;
+                                                                    @endphp
                                                                     ---
                                                                 @else {{ strtr(round($valorf->mfd, 1), '.', ',') }}
                                                                 @endif
                                                             </td>
                                                             <td class="{{ $v2_estilo }}">
                                                                 @if ($valorf->npe == null)
+                                                                    @php
+                                                                        $cadeiras_nulas++;
+                                                                    @endphp
                                                                     ---
-                                                                @else {{ strtr(round($valorf->npe, 1), '.', ',') }} @endif
+                                                                @else {{ strtr(round($valorf->npe, 1), '.', ',') }}
+                                                                @endif
                                                             </td>
                                                             <td class="{{ $v3_estilo }} td_color">
                                                                 @if ($valorf->mf == null)
+                                                                    @php
+                                                                        $cadeiras_nulas++;
+                                                                    @endphp
                                                                     ---
                                                                 @else {{ $valorf->mf }} @endif
                                                             </td>
@@ -511,15 +585,20 @@ use App\Http\Controllers\ControladorStatic;
                                                         @if ($historico->observacao_final)
                                                             <td>{{ strtoupper($historico->observacao_final) }}</td>
                                                         @else
-                                                            @if ($historico->obs_pauta)
-                                                                <td class="@if ($historico->obs_pauta
-                                                                == 'Transita') positivo @else negativo @endif">
-                                                                    {{ strtoupper($historico->obs_pauta) }}
-                                                                </td>
+                                                            @if ($cadeiras_nulas >= 1)
+                                                                <td></td>
                                                             @else
-                                                                <td>
-                                                                    ---
-                                                                </td>
+                                                                @if ($historico->obs_pauta)
+                                                                    <td class="@if ($historico->
+                                                                    obs_pauta == 'Transita') positivo @else
+                                                                        negativo @endif">
+                                                                        {{ strtoupper($historico->obs_pauta) }}
+                                                                    </td>
+                                                                @else
+                                                                    <td>
+                                                                        ---
+                                                                    </td>
+                                                                @endif
                                                             @endif
                                                         @endif
 

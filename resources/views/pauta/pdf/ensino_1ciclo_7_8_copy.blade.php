@@ -4,6 +4,7 @@ use App\Http\Controllers\ControladorStatic;
 $numero_colspan = 2;
 $getCadeiraExame = false;
 $getCadeiraRecurso = false;
+$cadeiras_nulas = 0;
 @endphp
 
 <!DOCTYPE html>
@@ -100,10 +101,10 @@ $getCadeiraRecurso = false;
         float: center;
     }
 
-    .td_color{
-    background-color: #e2dfd3;
-    font-weight: bold;
-}
+    .td_color {
+        background-color: #e2dfd3;
+        font-weight: bold;
+    }
 
 </style>
 
@@ -197,6 +198,9 @@ $getCadeiraRecurso = false;
                         <tbody>
 
                             @foreach ($getHistorico as $historico)
+                                @php
+                                    $cadeiras_nulas = 0;
+                                @endphp
 
                                 <tr class="{{ $historico->observacao_final }}">
                                     <td>{{ $loop->iteration }}</td>
@@ -244,13 +248,21 @@ $getCadeiraRecurso = false;
 
                                         <!-- primiero trimestre-->
                                         <?php if ($trimestre1->count() == 0) { ?>
+                                        @php
+                                            $cadeiras_nulas++;
+                                        @endphp
                                         <td>---</td>
                                         <?php } else {foreach ($trimestre1 as $valor1) {
                                         $v4_estilo = ControladorNotas::nota_20($valor1->mt); ?>
 
                                         <td class="{{ $v4_estilo }}">
-                                        @if ($valor1->mt == null) --- @else
-                                                {{ round($valor1->mt, 2) }} @endif
+                                            @if ($valor1->mt == null)
+                                                @php
+                                                    $cadeiras_nulas++;
+                                                @endphp
+                                                ---
+                                            @else
+                                                {{ strtr(round($valor1->mt, 1), '.', ',') }} @endif
                                         </td>
                                         <?php
                                         }} ?>
@@ -258,13 +270,20 @@ $getCadeiraRecurso = false;
 
                                         <!-- segundo trimestre-->
                                         <?php if ($trimestre2->count() == 0) { ?>
+                                        @php
+                                            $cadeiras_nulas++;
+                                        @endphp
                                         <td>---</td>
                                         <?php } else {foreach ($trimestre2 as $valor2) {
                                         $v4_estilo = ControladorNotas::nota_20($valor2->mt); ?>
 
                                         <td class="{{ $v4_estilo }}">
-                                        @if ($valor2->mt == null) --- @else
-                                                {{ round($valor2->mt, 2) }} @endif
+                                            @if ($valor2->mt == null)
+                                                @php
+                                                    $cadeiras_nulas++;
+                                                @endphp
+                                            --- @else
+                                                {{ strtr(round($valor2->mt, 1), '.', ',') }} @endif
                                         </td>
                                         <?php
                                         }} ?>
@@ -272,13 +291,20 @@ $getCadeiraRecurso = false;
 
                                         <!-- terceiro trimestre-->
                                         <?php if ($trimestre3->count() == 0) { ?>
+                                        @php
+                                            $cadeiras_nulas++;
+                                        @endphp
                                         <td>---</td>
                                         <?php } else {foreach ($trimestre3 as $valor3) {
                                         $v4_estilo = ControladorNotas::nota_20($valor3->mt); ?>
 
                                         <td class="{{ $v4_estilo }}">
-                                        @if ($valor3->mt == null) --- @else
-                                                {{ round($valor3->mt, 2) }} @endif
+                                            @if ($valor3->mt == null)
+                                                @php
+                                                    $cadeiras_nulas++;
+                                                @endphp
+                                            --- @else
+                                                {{ strtr(round($valor3->mt, 1), '.', ',') }} @endif
                                         </td>
                                         <?php
                                         }} ?>
@@ -294,18 +320,41 @@ $getCadeiraRecurso = false;
                                     $v4_estilo = ControladorNotas::notaRec_10($valorf->rec);
                                     ?>
 
-                                    <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
-                                    @if ($valorf->mfd == null) --- @else
-                                            {{ $valorf->mfd }} @endif
-                                    </td>
+                                    @if (!$getCadeiraExame)
+                                        <td class="{{ $v3_estilo }} @if (!$getCadeiraExame) td_color @endif">
+                                            @if ($valorf->mf == null)
+                                                @php
+                                                    $cadeiras_nulas++;
+                                                @endphp
+                                                ---
+                                            @else {{ $valorf->mf }} @endif
+                                        </td>
+                                    @endif
+
                                     @if ($getCadeiraExame)
+                                        <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
+                                            @if ($valorf->mfd == null)
+                                                @php
+                                                    $cadeiras_nulas++;
+                                                @endphp
+                                                ---
+                                            @else {{ $valorf->mfd }} @endif
+                                        </td>
                                         <td class="{{ $v2_estilo }}">
-                                        @if ($valorf->npe == null) --- @else
-                                                {{ $valorf->npe }} @endif
+                                            @if ($valorf->npe == null)
+                                                @php
+                                                    $cadeiras_nulas++;
+                                                @endphp
+                                                ---
+                                            @else {{ $valorf->npe }} @endif
                                         </td>
                                         <td class="{{ $v3_estilo }} td_color">
-                                        @if ($valorf->mf == null) --- @else
-                                                {{ $valorf->mf }} @endif
+                                            @if ($valorf->mf == null)
+                                                @php
+                                                    $cadeiras_nulas++;
+                                                @endphp
+                                                ---
+                                            @else {{ $valorf->mf }} @endif
                                         </td>
                                     @endif
 
@@ -323,15 +372,19 @@ $getCadeiraRecurso = false;
                                     @if ($historico->observacao_final)
                                         <td>{{ strtoupper($historico->observacao_final) }}</td>
                                     @else
-                                        @if ($historico->obs_pauta)
-                                            <td class="@if ($historico->obs_pauta ==
-                                            'Transita') positivo @else negativo @endif">
-                                                {{ strtoupper($historico->obs_pauta) }}
-                                            </td>
+                                        @if ($cadeiras_nulas >= 1)
+                                            <td></td>
                                         @else
-                                            <td>
-                                                ---
-                                            </td>
+                                            @if ($historico->obs_pauta)
+                                                <td class="@if ($historico->obs_pauta ==
+                                                'Transita') positivo @else negativo @endif">
+                                                    {{ strtoupper($historico->obs_pauta) }}
+                                                </td>
+                                            @else
+                                                <td>
+                                                    ---
+                                                </td>
+                                            @endif
                                         @endif
                                     @endif
 
@@ -407,7 +460,9 @@ $getCadeiraRecurso = false;
                         <tbody>
 
                             @foreach ($getHistorico as $historico)
-
+                                @php
+                                    $cadeiras_nulas = 0;
+                                @endphp
                                 <tr class="{{ $historico->observacao_final }}">
                                     <td>{{ $loop->iteration }}</td>
 
@@ -454,13 +509,20 @@ $getCadeiraRecurso = false;
 
                                         <!-- primiero trimestre-->
                                         <?php if ($trimestre1->count() == 0) { ?>
+                                        @php
+                                            $cadeiras_nulas++;
+                                        @endphp
                                         <td>---</td>
                                         <?php } else {foreach ($trimestre1 as $valor1) {
                                         $v4_estilo = ControladorNotas::nota_20($valor1->mt); ?>
 
                                         <td class="{{ $v4_estilo }}">
-                                        @if ($valor1->mt == null) --- @else
-                                                {{ round($valor1->mt, 2) }} @endif
+                                            @if ($valor1->mt == null)
+                                                @php
+                                                    $cadeiras_nulas++;
+                                                @endphp
+                                            --- @else
+                                                {{ strtr(round($valor1->mt, 1), '.', ',') }} @endif
                                         </td>
                                         <?php
                                         }} ?>
@@ -468,13 +530,20 @@ $getCadeiraRecurso = false;
 
                                         <!-- segundo trimestre-->
                                         <?php if ($trimestre2->count() == 0) { ?>
+                                        @php
+                                            $cadeiras_nulas++;
+                                        @endphp
                                         <td>---</td>
                                         <?php } else {foreach ($trimestre2 as $valor2) {
                                         $v4_estilo = ControladorNotas::nota_20($valor2->mt); ?>
 
                                         <td class="{{ $v4_estilo }}">
-                                        @if ($valor2->mt == null) --- @else
-                                                {{ round($valor2->mt, 2) }} @endif
+                                            @if ($valor2->mt == null)
+                                                @php
+                                                    $cadeiras_nulas++;
+                                                @endphp
+                                            --- @else
+                                                {{ strtr(round($valor2->mt, 1), '.', ',') }} @endif
                                         </td>
                                         <?php
                                         }} ?>
@@ -482,13 +551,20 @@ $getCadeiraRecurso = false;
 
                                         <!-- terceiro trimestre-->
                                         <?php if ($trimestre3->count() == 0) { ?>
+                                        @php
+                                            $cadeiras_nulas++;
+                                        @endphp
                                         <td>---</td>
                                         <?php } else {foreach ($trimestre3 as $valor3) {
                                         $v4_estilo = ControladorNotas::nota_20($valor3->mt); ?>
 
                                         <td class="{{ $v4_estilo }}">
-                                        @if ($valor3->mt == null) --- @else
-                                                {{ round($valor3->mt, 2) }} @endif
+                                            @if ($valor3->mt == null)
+                                                @php
+                                                    $cadeiras_nulas++;
+                                                @endphp
+                                            --- @else
+                                                {{ strtr(round($valor3->mt, 1), '.', ',') }} @endif
                                         </td>
                                         <?php
                                         }} ?>
@@ -504,18 +580,41 @@ $getCadeiraRecurso = false;
                                     $v4_estilo = ControladorNotas::notaRec_10($valorf->rec);
                                     ?>
 
-                                    <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
-                                    @if ($valorf->mfd == null) --- @else
-                                            {{ $valorf->mfd }} @endif
-                                    </td>
+                                    @if (!$getCadeiraExame)
+                                        <td class="{{ $v3_estilo }} @if (!$getCadeiraExame) td_color @endif">
+                                            @if ($valorf->mf == null)
+                                                @php
+                                                    $cadeiras_nulas++;
+                                                @endphp
+                                                ---
+                                            @else {{ $valorf->mf }} @endif
+                                        </td>
+                                    @endif
+
                                     @if ($getCadeiraExame)
+                                        <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
+                                            @if ($valorf->mfd == null)
+                                                @php
+                                                    $cadeiras_nulas++;
+                                                @endphp
+                                                ---
+                                            @else {{ $valorf->mfd }} @endif
+                                        </td>
                                         <td class="{{ $v2_estilo }}">
-                                        @if ($valorf->npe == null) --- @else
-                                                {{ $valorf->npe }} @endif
+                                            @if ($valorf->npe == null)
+                                                @php
+                                                    $cadeiras_nulas++;
+                                                @endphp
+                                                ---
+                                            @else {{ $valorf->npe }} @endif
                                         </td>
                                         <td class="{{ $v3_estilo }} td_color">
-                                        @if ($valorf->mf == null) --- @else
-                                                {{ $valorf->mf }} @endif
+                                            @if ($valorf->mf == null)
+                                                @php
+                                                    $cadeiras_nulas++;
+                                                @endphp
+                                                ---
+                                            @else {{ $valorf->mf }} @endif
                                         </td>
                                     @endif
 
@@ -533,15 +632,19 @@ $getCadeiraRecurso = false;
                                     @if ($historico->observacao_final)
                                         <td>{{ strtoupper($historico->observacao_final) }}</td>
                                     @else
-                                        @if ($historico->obs_pauta)
-                                            <td class="@if ($historico->obs_pauta ==
-                                            'Transita') positivo @else negativo @endif">
-                                                {{ strtoupper($historico->obs_pauta) }}
-                                            </td>
+                                        @if ($cadeiras_nulas >= 1)
+                                            <td></td>
                                         @else
-                                            <td>
-                                                ---
-                                            </td>
+                                            @if ($historico->obs_pauta)
+                                                <td class="@if ($historico->obs_pauta ==
+                                                'Transita') positivo @else negativo @endif">
+                                                    {{ strtoupper($historico->obs_pauta) }}
+                                                </td>
+                                            @else
+                                                <td>
+                                                    ---
+                                                </td>
+                                            @endif
                                         @endif
                                     @endif
 

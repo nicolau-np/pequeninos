@@ -122,6 +122,9 @@ use App\Http\Controllers\ControladorStatic;
                                             <tbody>
 
                                                 @foreach ($getHistorico as $historico)
+                                                @php
+                                                $cadeiras_nulas = 0;
+                                            @endphp
 
                                                     <tr class="{{ $historico->observacao_final }}">
                                                         <td>{{ $loop->iteration }}</td>
@@ -400,6 +403,9 @@ use App\Http\Controllers\ControladorStatic;
                                             <tbody>
 
                                                 @foreach ($getHistorico as $historico)
+                                                @php
+                                                $cadeiras_nulas = 0;
+                                            @endphp
 
                                                     <tr class="{{ $historico->observacao_final }}">
                                                         <td>{{ $loop->iteration }}</td>

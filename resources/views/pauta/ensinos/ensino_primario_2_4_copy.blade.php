@@ -182,7 +182,7 @@ use App\Http\Controllers\ControladorStatic;
 
                                                         <td class="{{ $v4_estilo }}">
                                                             @if ($valor1->mt == null) ---
-                                                            @else {{ round($valor1->mt, 2) }} @endif
+                                                            @else {{ strtr(round($valor1->mt, 1), '.', ',') }} @endif
                                                         </td>
                                                         <?php
                                                         }} ?>
@@ -196,7 +196,7 @@ use App\Http\Controllers\ControladorStatic;
 
                                                         <td class="{{ $v4_estilo }}">
                                                             @if ($valor2->mt == null) ---
-                                                            @else {{ round($valor2->mt, 2) }} @endif
+                                                            @else {{ strtr(round($valor2->mt, 1), '.', ',') }} @endif
                                                         </td>
                                                         <?php
                                                         }} ?>
@@ -210,7 +210,7 @@ use App\Http\Controllers\ControladorStatic;
 
                                                         <td class="{{ $v4_estilo }}">
                                                             @if ($valor3->mt == null) ---
-                                                            @else {{ round($valor3->mt, 2) }} @endif
+                                                            @else {{ strtr(round($valor3->mt, 1), '.', ',') }} @endif
                                                         </td>
                                                         <?php
                                                         }} ?>
@@ -226,11 +226,21 @@ use App\Http\Controllers\ControladorStatic;
                                                     $v4_estilo = ControladorNotas::notaRec_5($valorf->rec);
                                                     ?>
 
-                                                    <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
-                                                        @if ($valorf->mfd == null) ---
-                                                        @else {{ $valorf->mfd }} @endif
-                                                    </td>
-                                                    @if ($getCadeiraExame)
+                                                    @if (!$getCadeiraExame)
+                                                            <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
+                                                                @if ($valorf->mf == null)
+                                                                    ---
+                                                                @else {{ $valorf->mf }} @endif
+                                                            </td>
+                                                        @endif
+
+                                                        @if ($getCadeiraExame)
+                                                            <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
+                                                                @if ($valorf->mfd == null)
+                                                                    ---
+                                                                @else {{ strtr(round($valorf->mfd, 1), '.', ',') }}
+                                                                @endif
+                                                            </td>
                                                         <td class="{{ $v2_estilo }}">
                                                             @if ($valorf->npe == null) ---
                                                             @else {{ $valorf->npe }} @endif
@@ -405,7 +415,7 @@ use App\Http\Controllers\ControladorStatic;
 
                                                         <td class="{{ $v4_estilo }}">
                                                             @if ($valor1->mt == null) ---
-                                                            @else {{ round($valor1->mt, 2) }} @endif
+                                                            @else {{ strtr(round($valor1->mt, 1), '.', ',') }} @endif
                                                         </td>
                                                         <?php
                                                         }} ?>
@@ -419,7 +429,7 @@ use App\Http\Controllers\ControladorStatic;
 
                                                         <td class="{{ $v4_estilo }}">
                                                             @if ($valor2->mt == null) ---
-                                                            @else {{ round($valor2->mt, 2) }} @endif
+                                                            @else {{ strtr(round($valor2->mt, 1), '.', ',') }} @endif
                                                         </td>
                                                         <?php
                                                         }} ?>
@@ -433,7 +443,7 @@ use App\Http\Controllers\ControladorStatic;
 
                                                         <td class="{{ $v4_estilo }}">
                                                             @if ($valor3->mt == null) ---
-                                                            @else {{ round($valor3->mt, 2) }} @endif
+                                                            @else {{ strtr(round($valor3->mt, 1), '.', ',') }} @endif
                                                         </td>
                                                         <?php
                                                         }} ?>
@@ -449,11 +459,21 @@ use App\Http\Controllers\ControladorStatic;
                                                     $v4_estilo = ControladorNotas::notaRec_5($valorf->rec);
                                                     ?>
 
-                                                    <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
-                                                        @if ($valorf->mfd == null) ---
-                                                        @else {{ $valorf->mfd }} @endif
-                                                    </td>
-                                                    @if ($getCadeiraExame)
+                                                    @if (!$getCadeiraExame)
+                                                            <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
+                                                                @if ($valorf->mf == null)
+                                                                    ---
+                                                                @else {{ $valorf->mf }} @endif
+                                                            </td>
+                                                        @endif
+
+                                                        @if ($getCadeiraExame)
+                                                            <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
+                                                                @if ($valorf->mfd == null)
+                                                                    ---
+                                                                @else {{ strtr(round($valorf->mfd, 1), '.', ',') }}
+                                                                @endif
+                                                            </td>
                                                         <td class="{{ $v2_estilo }}">
                                                             @if ($valorf->npe == null) ---
                                                             @else {{ $valorf->npe }} @endif

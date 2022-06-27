@@ -484,3 +484,12 @@ Route::get('/elminar_estudantes/{id_estudante}', function ($id_estudante) {
 
     echo "eliminado com sucesso    => " . $nome;*/
 });
+
+Route::get('/text1', function(){
+
+    $numero = 6.37;
+    $numero_round = round($numero,1);
+    echo number_format($numero_round,1,',','.');
+
+
+});

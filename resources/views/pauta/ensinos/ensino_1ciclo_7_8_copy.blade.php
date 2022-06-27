@@ -129,7 +129,7 @@ use App\Http\Controllers\ControladorStatic;
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>
                                                             <img src="
-                                                                    @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
+                                                                                    @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
                                                         @else
                                                             {{ asset('assets/template/images/profile.png') }} @endif
                                                             " alt="" style="width:47px; height:47px; border-radius:4px;">
@@ -187,7 +187,9 @@ use App\Http\Controllers\ControladorStatic;
                                                             <td class="{{ $v4_estilo }}">
                                                                 @if ($valor1->mt == null)
                                                                     ---
-                                                                @else {{ round($valor1->mt, 2) }} @endif
+                                                                @else
+                                                                    {{ strtr(round($valor1->mt, 1), '.', ',') }}
+                                                                @endif
                                                             </td>
                                                             <?php
                                                             }} ?>
@@ -202,7 +204,9 @@ use App\Http\Controllers\ControladorStatic;
                                                             <td class="{{ $v4_estilo }}">
                                                                 @if ($valor2->mt == null)
                                                                     ---
-                                                                @else {{ round($valor2->mt, 2) }} @endif
+                                                                @else
+                                                                    {{ strtr(round($valor2->mt, 1), '.', ',') }}
+                                                                @endif
                                                             </td>
                                                             <?php
                                                             }} ?>
@@ -217,7 +221,9 @@ use App\Http\Controllers\ControladorStatic;
                                                             <td class="{{ $v4_estilo }}">
                                                                 @if ($valor3->mt == null)
                                                                     ---
-                                                                @else {{ round($valor3->mt, 2) }} @endif
+                                                                @else
+                                                                    {{ strtr(round($valor3->mt, 1), '.', ',') }}
+                                                                @endif
                                                             </td>
                                                             <?php
                                                             }} ?>
@@ -233,11 +239,20 @@ use App\Http\Controllers\ControladorStatic;
                                                         $v4_estilo = ControladorNotas::notaRec_10($valorf->rec);
                                                         ?>
 
-                                                        <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
-                                                            @if ($valorf->mfd == null) ---
-                                                            @else {{ $valorf->mfd }} @endif
-                                                        </td>
+                                                        @if (!$getCadeiraExame)
+                                                            <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
+                                                                @if ($valorf->mf == null)
+                                                                    ---
+                                                                @else {{ $valorf->mf }} @endif
+                                                            </td>
+                                                        @endif
+
                                                         @if ($getCadeiraExame)
+                                                            <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
+                                                                @if ($valorf->mfd == null)
+                                                                    ---
+                                                                @else {{ $valorf->mfd }} @endif
+                                                            </td>
                                                             <td class="{{ $v2_estilo }}">
                                                                 @if ($valorf->npe == null)
                                                                     ---
@@ -362,7 +377,7 @@ use App\Http\Controllers\ControladorStatic;
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>
                                                             <img src="
-                                                                    @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
+                                                                                    @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
                                                         @else
                                                             {{ asset('assets/template/images/profile.png') }} @endif
                                                             " alt="" style="width:47px; height:47px; border-radius:4px;">
@@ -370,8 +385,8 @@ use App\Http\Controllers\ControladorStatic;
                                                         <td>{{ $historico->estudante->pessoa->nome }}</td>
                                                         <td>{{ $historico->estudante->pessoa->genero }}</td>
 
-                                                        <?php foreach ($getOrdenaDisciplinas as
-                                                        $disciplina) {
+                                                        <?php foreach ($getOrdenaDisciplinas as $disciplina)
+                                                        {
                                                         $getCadeiraExame =
                                                         ControladorStatic::getExameStatus($getDirector->turma->id_curso,
                                                         $getDirector->turma->id_classe, $disciplina->id_disciplina);
@@ -420,7 +435,8 @@ use App\Http\Controllers\ControladorStatic;
                                                             <td class="{{ $v4_estilo }}">
                                                                 @if ($valor1->mt == null)
                                                                     ---
-                                                                @else {{ round($valor1->mt, 2) }} @endif
+                                                                @else {{ strtr(round($valor1->mt, 1), '.', ',') }}
+                                                                @endif
                                                             </td>
                                                             <?php
                                                             }} ?>
@@ -435,7 +451,8 @@ use App\Http\Controllers\ControladorStatic;
                                                             <td class="{{ $v4_estilo }}">
                                                                 @if ($valor2->mt == null)
                                                                     ---
-                                                                @else {{ round($valor2->mt, 2) }} @endif
+                                                                @else {{ strtr(round($valor2->mt, 1), '.', ',') }}
+                                                                @endif
                                                             </td>
                                                             <?php
                                                             }} ?>
@@ -450,7 +467,8 @@ use App\Http\Controllers\ControladorStatic;
                                                             <td class="{{ $v4_estilo }}">
                                                                 @if ($valor3->mt == null)
                                                                     ---
-                                                                @else {{ round($valor3->mt, 2) }} @endif
+                                                                @else {{ strtr(round($valor3->mt, 1), '.', ',') }}
+                                                                @endif
                                                             </td>
                                                             <?php
                                                             }} ?>
@@ -466,11 +484,20 @@ use App\Http\Controllers\ControladorStatic;
                                                         $v4_estilo = ControladorNotas::notaRec_10($valorf->rec);
                                                         ?>
 
-                                                        <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
-                                                            @if ($valorf->mfd == null) ---
-                                                            @else {{ $valorf->mfd }} @endif
-                                                        </td>
+                                                        @if (!$getCadeiraExame)
+                                                            <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
+                                                                @if ($valorf->mf == null)
+                                                                    ---
+                                                                @else {{ $valorf->mf }} @endif
+                                                            </td>
+                                                        @endif
+
                                                         @if ($getCadeiraExame)
+                                                            <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
+                                                                @if ($valorf->mfd == null)
+                                                                    ---
+                                                                @else {{ $valorf->mfd }} @endif
+                                                            </td>
                                                             <td class="{{ $v2_estilo }}">
                                                                 @if ($valorf->npe == null)
                                                                     ---

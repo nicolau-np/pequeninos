@@ -275,13 +275,13 @@ use App\Http\Controllers\ControladorStatic;
                                                         ControladorNotas::estado_nota_qualitativaRec($valorf->rec);
                                                         }
                                                         ?>
-                                                        <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
-                                                            @if ($valorf->mfd == null)
+                                                        <td class="{{ $v3_estilo }} @if (!$getCadeiraExame) td_color @endif">
+                                                            @if ($valorf->mf == null)
                                                                 @php
                                                                     $cadeiras_nulas++;
                                                                 @endphp
                                                                 ---
-                                                            @else {{ $v1_valor }} @endif
+                                                            @else {{ $v3_valor }} @endif
                                                         </td>
                                                         @if ($getCadeiraExame)
                                                             <td class="{{ $v2_estilo }}">

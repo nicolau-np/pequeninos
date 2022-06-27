@@ -256,7 +256,7 @@ use App\Http\Controllers\ControladorStatic;
                                                         ?>
 
                                                         @if (!$getCadeiraExame)
-                                                            <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
+                                                            <td class="{{ $v3_estilo }} @if (!$getCadeiraExame) td_color @endif">
                                                                 @if ($valorf->mf == null)
                                                                     @php
                                                                         $cadeiras_nulas++;
@@ -537,7 +537,7 @@ use App\Http\Controllers\ControladorStatic;
                                                         ?>
 
                                                         @if (!$getCadeiraExame)
-                                                            <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
+                                                            <td class="{{ $v3_estilo }} @if (!$getCadeiraExame) td_color @endif">
                                                                 @if ($valorf->mf == null)
                                                                     @php
                                                                         $cadeiras_nulas++;

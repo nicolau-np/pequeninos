@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\AnoLectivo;
+use App\BloqueioEpoca;
 use App\DirectorTurma;
 use App\Funcionario;
 use App\Grade;
@@ -131,6 +132,7 @@ class PautaController_copy extends Controller
             $ordena_disciplina = OrdernaDisciplina::where(['id_curso' => $turma->id_curso, 'id_classe' => $turma->id_classe])->get();
         }
 
+        $epoca6 = BloqueioEpoca::where(['epoca'=>6])->first();
         $data = [
             'title' => "Pauta",
             'type' => "mobile",
@@ -139,6 +141,7 @@ class PautaController_copy extends Controller
             'getDirector' => $directorTurma,
             'getHistorico' => $historico,
             'getOrdenaDisciplinas' =>$ordena_disciplina,
+            'getEpocaBloqueio'=>$epoca6,
         ];
 
 

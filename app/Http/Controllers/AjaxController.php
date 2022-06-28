@@ -1206,4 +1206,26 @@ class AjaxController extends Controller
             }
         }
     }
+
+
+    public function updateObservacao(Request $request)
+    {
+        $request->validate([
+            'id_estudante' => ['required', 'integer'],
+            'id_turma' => ['required', 'integer'],
+            'ano_lectivo' => ['required', 'string'],
+            'observacao' => ['required', 'string']
+        ]);
+
+
+        $historico = HistoricEstudante::where([
+            'id_estudante' => $request->id_estudante,
+            'id_turma' => $request->id_turma,
+            'ano_lectivo' => $request->ano_lectivo
+        ])->update(['obs_pauta' => $request->observacao]);
+
+        if ($historico) {
+            return true;
+        }
+    }
 }

@@ -93,6 +93,8 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
     Route::post('/getPagamentosEfectuados', "AjaxController@getPagamentosEfectuados")->name('getPagamentosEfectuados');
 
     Route::post('/encarregadoModal', "AjaxController@encarregadoModal")->name('encarregadoModal');
+    Route::post('/updateObservacao', "AjaxController@updateObservacao")->name('updateObservacao');
+
 });
 
 Route::group(['prefix' => 'institucional', 'middleware' => "admin"], function () {

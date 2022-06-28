@@ -90,6 +90,7 @@ use App\Http\Controllers\ControladorStatic;
                                                     <?php
                                                     } ?>
                                                     <th rowspan="2">OBSERVAÇÃO</th>
+                                                    <th rowspan="2">OPERAÇÕES</th>
                                                 </tr>
                                                 <tr>
                                                     @foreach (Session::get('disciplinas') as $disciplina)
@@ -129,7 +130,7 @@ use App\Http\Controllers\ControladorStatic;
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>
                                                             <img src="
-                                                            @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
+                                                                @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
                                                         @else
                                                             {{ asset('assets/template/images/profile.png') }} @endif
                                                             " alt="" style="width:47px; height:47px; border-radius:4px;">
@@ -334,7 +335,24 @@ use App\Http\Controllers\ControladorStatic;
                                                             @endif
                                                         @endif
 
-
+                                                        <td>
+                                                            @if ($getEpocaBloqueio->estado == 'on')
+                                                                <a href="#" data-id="{{ $historico->id_estudante }}"
+                                                                    data-estudate="{{ $historico->estudante->pessoa->nome }}"
+                                                                    data-id_turma="{{ $historico->id_turma }}"
+                                                                    data-ano_lectivo="{{ $historico->ano_lectivo }}"
+                                                                    class="btn btn-primary btn-sm transita"><b>{{ $loop->iteration }}
+                                                                        - </b>
+                                                                    TRAN.</a>&nbsp;&nbsp;
+                                                                <a href="#" data-id="{{ $historico->id_estudante }}"
+                                                                    data-estudate="{{ $historico->estudante->pessoa->nome }}"
+                                                                    data-id_turma="{{ $historico->id_turma }}"
+                                                                    data-ano_lectivo="{{ $historico->ano_lectivo }}"
+                                                                    class="btn btn-danger btn-sm ntransita"><b>{{ $loop->iteration }}
+                                                                        - </b>
+                                                                    N\TRAN.</a>
+                                                            @endif
+                                                        </td>
                                                         <!-- fim obs-->
                                                     </tr>
                                                 @endforeach
@@ -378,6 +396,7 @@ use App\Http\Controllers\ControladorStatic;
                                                     <?php
                                                     } ?>
                                                     <th rowspan="2">OBSERVAÇÃO</th>
+                                                    <th rowspan="2">OPERAÇÕES</th>
                                                 </tr>
                                                 <tr>
                                                     @foreach ($getOrdenaDisciplinas as $disciplina)
@@ -416,7 +435,7 @@ use App\Http\Controllers\ControladorStatic;
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>
                                                             <img src="
-                                                            @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
+                                                                @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
                                                         @else
                                                             {{ asset('assets/template/images/profile.png') }} @endif
                                                             " alt="" style="width:47px; height:47px; border-radius:4px;">
@@ -621,7 +640,24 @@ use App\Http\Controllers\ControladorStatic;
                                                             @endif
                                                         @endif
 
-
+                                                        <td>
+                                                            @if ($getEpocaBloqueio->estado == 'on')
+                                                                <a href="#" data-id="{{ $historico->id_estudante }}"
+                                                                    data-estudate="{{ $historico->estudante->pessoa->nome }}"
+                                                                    data-id_turma="{{ $historico->id_turma }}"
+                                                                    data-ano_lectivo="{{ $historico->ano_lectivo }}"
+                                                                    class="btn btn-primary btn-sm transita"><b>{{ $loop->iteration }}
+                                                                        - </b>
+                                                                    TRAN.</a>&nbsp;&nbsp;
+                                                                <a href="#" data-id="{{ $historico->id_estudante }}"
+                                                                    data-estudate="{{ $historico->estudante->pessoa->nome }}"
+                                                                    data-id_turma="{{ $historico->id_turma }}"
+                                                                    data-ano_lectivo="{{ $historico->ano_lectivo }}"
+                                                                    class="btn btn-danger btn-sm ntransita"><b>{{ $loop->iteration }}
+                                                                        - </b>
+                                                                    N\TRAN.</a>
+                                                            @endif
+                                                        </td>
                                                         <!-- fim obs-->
                                                     </tr>
                                                 @endforeach
@@ -648,4 +684,58 @@ use App\Http\Controllers\ControladorStatic;
         </div>
     </div>
 
+    <script>
+        $('document').ready(function() {
+            $('.transita').click(function() {
+                var id_estudante = $(this).data('id');
+                var id_turma = $(this).data('id_turma');
+                var ano_lectivo = $(this).data('ano_lectivo');
+                var nome = $(this).data('estudate');
+                var observacao = "Transita";
+
+                var update = updateObservacao(id_estudante, id_turma, ano_lectivo, observacao);
+                if (update) {
+                    alert(nome + " " + observacao);
+                }
+            });
+
+            $('.ntransita').click(function() {
+                var id_estudante = $(this).data('id');
+                var id_turma = $(this).data('id_turma');
+                var ano_lectivo = $(this).data('ano_lectivo');
+                var nome = $(this).data('estudate');
+                var observacao = "Não Transita";
+
+                var update = updateObservacao(id_estudante, id_turma, ano_lectivo, observacao);
+                if (update) {
+                    alert(nome + " " + observacao);
+                }
+            });
+
+
+            function updateObservacao(id_estudante, id_turma, ano_lectivo, observacao) {
+                retorno = false;
+                var data = {
+                    id_estudante: id_estudante,
+                    id_turma: id_turma,
+                    ano_lectivo: ano_lectivo,
+                    observacao: observacao,
+                    _token: "{{ csrf_token() }}"
+                };
+
+                $.ajax({
+                    type: "post",
+                    url: "{{ route('updateObservacao') }}",
+                    data: data,
+                    dataType: "html",
+                    success: function(response) {
+
+                        console.log(response);
+                    }
+                });
+                return true;
+            }
+        });
+
+    </script>
 @endsection

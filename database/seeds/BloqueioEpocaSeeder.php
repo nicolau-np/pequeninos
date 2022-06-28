@@ -22,6 +22,9 @@ class BloqueioEpocaSeeder extends Seeder
         ],[
             'epoca'=>5,
             'estado'=>"off"
+        ],[
+            'epoca'=>6,
+            'estado'=>"off"
         ]
     ];
 

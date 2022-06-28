@@ -152,10 +152,10 @@ use App\Http\Controllers\ControladorStatic;
                                     ?>
                                     <td>---</td>
                                     <?php } else {foreach ($getValoresMiniPautaTrimestralPDF as $valor) {
-                                    $v1_estilo = ControladorNotas::nota_20($valor->mt); ?>
+                                    $v1_estilo = ControladorNotas::nota_20(round($valor->mt,1)); ?>
                                     <td class="{{ $v1_estilo }}">
                                     @if ($valor->mt == null) --- @else
-                                            {{ round($valor->mt, 2) }} @endif
+                                            {{ strtr(round($valor->mt, 1), '.', ',') }} @endif
                                     </td>
                                     <?php
                                     }}}
@@ -207,10 +207,10 @@ use App\Http\Controllers\ControladorStatic;
                                     ?>
                                     <td>---</td>
                                     <?php } else {foreach ($getValoresMiniPautaTrimestralPDF as $valor) {
-                                    $v1_estilo = ControladorNotas::nota_20($valor->mt); ?>
+                                    $v1_estilo = ControladorNotas::nota_20(round($valor->mt,1)); ?>
                                     <td class="{{ $v1_estilo }}">
                                     @if ($valor->mt == null) --- @else
-                                            {{ round($valor->mt, 2) }} @endif
+                                            {{ strtr(round($valor->mt, 1), '.', ',') }} @endif
                                     </td>
                                     <?php
                                     }}}

@@ -123,15 +123,15 @@ use App\Http\Controllers\ControladorStatic;
                                             <tbody>
 
                                                 @foreach ($getHistorico as $historico)
-                                                @php
-                                                $cadeiras_nulas = 0;
-                                            @endphp
+                                                    @php
+                                                        $cadeiras_nulas = 0;
+                                                    @endphp
 
                                                     <tr class="{{ $historico->observacao_final }}">
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>
                                                             <img src="
-                                                                            @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
+                                                                                    @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
                                                         @else
                                                             {{ asset('assets/template/images/profile.png') }} @endif
                                                             " alt="" style="width:47px; height:47px; border-radius:4px;">
@@ -330,20 +330,24 @@ use App\Http\Controllers\ControladorStatic;
 
                                                         <td>
                                                             @if ($getEpocaBloqueio->estado == 'on')
-                                                                <a href="#" data-id="{{ $historico->id_estudante }}"
-                                                                    data-estudate="{{ $historico->estudante->pessoa->nome }}"
-                                                                    data-id_turma="{{ $historico->id_turma }}"
-                                                                    data-ano_lectivo="{{ $historico->ano_lectivo }}"
-                                                                    class="btn btn-primary btn-sm transita"><b>{{ $loop->iteration }}
-                                                                        - </b>
-                                                                    TRAN.</a>&nbsp;&nbsp;
-                                                                <a href="#" data-id="{{ $historico->id_estudante }}"
-                                                                    data-estudate="{{ $historico->estudante->pessoa->nome }}"
-                                                                    data-id_turma="{{ $historico->id_turma }}"
-                                                                    data-ano_lectivo="{{ $historico->ano_lectivo }}"
-                                                                    class="btn btn-danger btn-sm ntransita"><b>{{ $loop->iteration }}
-                                                                        - </b>
-                                                                    N\TRAN.</a>
+                                                                @if ($cadeiras_nulas >= 1)
+
+                                                                @else
+                                                                    <a href="#" data-id="{{ $historico->id_estudante }}"
+                                                                        data-estudate="{{ $historico->estudante->pessoa->nome }}"
+                                                                        data-id_turma="{{ $historico->id_turma }}"
+                                                                        data-ano_lectivo="{{ $historico->ano_lectivo }}"
+                                                                        class="btn btn-primary btn-sm transita"><b>{{ $loop->iteration }}
+                                                                            - </b>
+                                                                        TRAN.</a>&nbsp;&nbsp;
+                                                                    <a href="#" data-id="{{ $historico->id_estudante }}"
+                                                                        data-estudate="{{ $historico->estudante->pessoa->nome }}"
+                                                                        data-id_turma="{{ $historico->id_turma }}"
+                                                                        data-ano_lectivo="{{ $historico->ano_lectivo }}"
+                                                                        class="btn btn-danger btn-sm ntransita"><b>{{ $loop->iteration }}
+                                                                            - </b>
+                                                                        N\TRAN.</a>
+                                                                @endif
                                                             @endif
                                                         </td>
                                                         <!-- fim obs-->
@@ -422,15 +426,15 @@ use App\Http\Controllers\ControladorStatic;
                                             <tbody>
 
                                                 @foreach ($getHistorico as $historico)
-                                                @php
-                                                $cadeiras_nulas = 0;
-                                            @endphp
+                                                    @php
+                                                        $cadeiras_nulas = 0;
+                                                    @endphp
 
                                                     <tr class="{{ $historico->observacao_final }}">
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>
                                                             <img src="
-                                                                            @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
+                                                                                    @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
                                                         @else
                                                             {{ asset('assets/template/images/profile.png') }} @endif
                                                             " alt="" style="width:47px; height:47px; border-radius:4px;">
@@ -629,20 +633,24 @@ use App\Http\Controllers\ControladorStatic;
 
                                                         <td>
                                                             @if ($getEpocaBloqueio->estado == 'on')
-                                                                <a href="#" data-id="{{ $historico->id_estudante }}"
-                                                                    data-estudate="{{ $historico->estudante->pessoa->nome }}"
-                                                                    data-id_turma="{{ $historico->id_turma }}"
-                                                                    data-ano_lectivo="{{ $historico->ano_lectivo }}"
-                                                                    class="btn btn-primary btn-sm transita"><b>{{ $loop->iteration }}
-                                                                        - </b>
-                                                                    TRAN.</a>&nbsp;&nbsp;
-                                                                <a href="#" data-id="{{ $historico->id_estudante }}"
-                                                                    data-estudate="{{ $historico->estudante->pessoa->nome }}"
-                                                                    data-id_turma="{{ $historico->id_turma }}"
-                                                                    data-ano_lectivo="{{ $historico->ano_lectivo }}"
-                                                                    class="btn btn-danger btn-sm ntransita"><b>{{ $loop->iteration }}
-                                                                        - </b>
-                                                                    N\TRAN.</a>
+                                                                @if ($cadeiras_nulas >= 1)
+
+                                                                @else
+                                                                    <a href="#" data-id="{{ $historico->id_estudante }}"
+                                                                        data-estudate="{{ $historico->estudante->pessoa->nome }}"
+                                                                        data-id_turma="{{ $historico->id_turma }}"
+                                                                        data-ano_lectivo="{{ $historico->ano_lectivo }}"
+                                                                        class="btn btn-primary btn-sm transita"><b>{{ $loop->iteration }}
+                                                                            - </b>
+                                                                        TRAN.</a>&nbsp;&nbsp;
+                                                                    <a href="#" data-id="{{ $historico->id_estudante }}"
+                                                                        data-estudate="{{ $historico->estudante->pessoa->nome }}"
+                                                                        data-id_turma="{{ $historico->id_turma }}"
+                                                                        data-ano_lectivo="{{ $historico->ano_lectivo }}"
+                                                                        class="btn btn-danger btn-sm ntransita"><b>{{ $loop->iteration }}
+                                                                            - </b>
+                                                                        N\TRAN.</a>
+                                                                @endif
                                                             @endif
                                                         </td>
                                                         <!-- fim obs-->

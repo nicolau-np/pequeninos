@@ -330,6 +330,9 @@ use App\Http\Controllers\ControladorStatic;
 
                                                         <td>
                                                             @if ($getEpocaBloqueio->estado == 'on')
+                                                            @if ($cadeiras_nulas >= 1)
+
+                                                            @else
                                                                 <a href="#" data-id="{{ $historico->id_estudante }}"
                                                                     data-estudate="{{ $historico->estudante->pessoa->nome }}"
                                                                     data-id_turma="{{ $historico->id_turma }}"
@@ -344,6 +347,7 @@ use App\Http\Controllers\ControladorStatic;
                                                                     class="btn btn-danger btn-sm ntransita"><b>{{ $loop->iteration }}
                                                                         - </b>
                                                                     N\TRAN.</a>
+                                                                    @endif
                                                             @endif
                                                         </td>
                                                         <!-- fim obs-->
@@ -629,6 +633,9 @@ use App\Http\Controllers\ControladorStatic;
 
                                                         <td>
                                                             @if ($getEpocaBloqueio->estado == 'on')
+                                                            @if ($cadeiras_nulas >= 1)
+
+                                                            @else
                                                                 <a href="#" data-id="{{ $historico->id_estudante }}"
                                                                     data-estudate="{{ $historico->estudante->pessoa->nome }}"
                                                                     data-id_turma="{{ $historico->id_turma }}"
@@ -643,6 +650,7 @@ use App\Http\Controllers\ControladorStatic;
                                                                     class="btn btn-danger btn-sm ntransita"><b>{{ $loop->iteration }}
                                                                         - </b>
                                                                     N\TRAN.</a>
+                                                                    @endif
                                                             @endif
                                                         </td>
                                                         <!-- fim obs-->

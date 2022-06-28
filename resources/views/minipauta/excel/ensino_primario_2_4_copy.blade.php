@@ -283,11 +283,15 @@ $posit3 = [
         }
 
         .positivotd_color {
+            background-color: #e2dfd3;
             color: #4680ff;
+            font-weight: bold;
         }
 
         .negativotd_color {
+            background-color: #e2dfd3;
             color: #FC6180;
+            font-weight: bold;
         }
 
     </style>

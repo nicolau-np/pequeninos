@@ -42,7 +42,7 @@ class PrincipalController extends Controller
     {
         $bloqueio_epocas = BloqueioEpoca::where(['epoca' => 7])->first();
         if ($bloqueio_epocas->estado == "off") {
-            return back()->with(['error' => "Página Indisponível de momento"]);
+            return redirect('/consultar');
         }
         $request->validate([
             'codigo_acesso' => ['required', 'string', 'min:6'],

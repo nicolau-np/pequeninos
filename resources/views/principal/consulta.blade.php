@@ -4,7 +4,7 @@
     <section id="consulta" class="site-padding">
         <div class="container">
             <div class="row">
-                @if (!$getEstado)
+                @if ($getBloqueioEpoca->estado=="off")
                     <div class="col-md-12">
                         <p>
                             <br />

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\BloqueioEpoca;
 use App\Estudante;
 use App\Grade;
 use App\HistoricEstudante;
@@ -25,20 +26,24 @@ class PrincipalController extends Controller
 
     public function consultar()
     {
-        $estado = false;
+        $bloqueio_epocas = BloqueioEpoca::where(['epoca' => 7])->first();
+
         $data = [
             'title' => "SIGE - Sistema de Gestão Escolar",
             'type' => "consulta",
             'menu' => "Consultar",
             'submenu' => "",
-            'getEstado'=>$estado,
+            'getBloqueioEpoca' => $bloqueio_epocas,
         ];
         return view('principal.consulta', $data);
     }
 
     public function dados(Request $request)
     {
-
+        $bloqueio_epocas = BloqueioEpoca::where(['epoca' => 7])->first();
+        if ($bloqueio_epocas->estado == "off") {
+            return back()->with(['error' => "Página Indisponível de momento"]);
+        }
         $request->validate([
             'codigo_acesso' => ['required', 'string', 'min:6'],
         ]);
@@ -68,14 +73,14 @@ class PrincipalController extends Controller
             'submenu' => "Dados",
             'getEstudante' => $estudante,
             'getGrades' => $grades,
-            'getPagamentos'=>$pagamentos,
+            'getPagamentos' => $pagamentos,
         ];
         if ($id_ensino == 1) {
             if (($classe == "Iniciação")) {
                 return view('principal.ensinos.ensino_primario_ini_copy', $data);
-            } elseif(($classe == "2ª classe") || ($classe == "4ª classe") ||($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")){
+            } elseif (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
                 return view('principal.ensinos.ensino_primario_2_4_copy', $data);
-            }elseif (($classe == "6ª classe")) {
+            } elseif (($classe == "6ª classe")) {
                 return view('principal.ensinos.ensino_primario_6_copy', $data);
             }
         } elseif ($id_ensino == 2) {

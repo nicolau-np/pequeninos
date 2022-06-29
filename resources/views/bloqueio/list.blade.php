@@ -59,15 +59,17 @@
                                             <tr>
                                                 <th scope="row">{{ $loop->iteration }}</th>
                                                 <td>
-                                                    @if ($bloqueios->epoca != 6)
-                                                        {{ $bloqueios->epoca }}ª Epoca
+                                                    @if ($bloqueios->epoca == 6)
+                                                    Mudança de Observação
+                                                    @elseif($bloqueios->epoca == 7)
+                                                    Página para Consulta
                                                     @else
-                                                        Mudança de Observação
+                                                    {{ $bloqueios->epoca }}ª Epoca
                                                     @endif
                                                 </td>
                                                 <td>{{ $bloqueios->estado }}</td>
                                                 <td>
-                                                    @if ($bloqueios->epoca != 6)
+                                                    @if ($bloqueios->epoca <= 5)
                                                         <a href="/bloqueios/config/{{ $bloqueios->id }}"
                                                             class="btn btn-warning btn-sm"><i class="fa fa-cogs"></i>
                                                             Configurar</a>&nbsp;&nbsp;

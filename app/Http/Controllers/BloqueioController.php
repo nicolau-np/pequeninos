@@ -43,6 +43,8 @@ class BloqueioController extends Controller
         if (BloqueioEpoca::find($id)->update($data)) {
             if($id==6){
                 return back()->with(['success' => "Mudança de Observação,  alterado para o estado " . $estado]);
+            }elseif($id==7){
+                return back()->with(['success' => "Página para Consulta,  alterado para o estado " . $estado]);
             }else{
                 return back()->with(['success' => "Epoca " . $bloqueio->epoca . " alterada para o estado " . $estado]);
             }

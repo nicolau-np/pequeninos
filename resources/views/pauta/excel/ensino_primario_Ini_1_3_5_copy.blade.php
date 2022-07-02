@@ -121,6 +121,20 @@ $cadeiras_nulas = 0;
             font-weight: bold;
         }
 
+        .neutro .td_color{
+            color: #FFB64D;
+            background-color: #e2dfd3;
+            font-weight: bold;
+        }
+
+        .neutrotd_color{
+            color: #FFB64D;
+            background-color: #e2dfd3;
+            font-weight: bold;
+        }
+
+
+
     </style>
 </head>
 

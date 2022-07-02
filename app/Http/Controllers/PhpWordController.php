@@ -11,6 +11,7 @@ use App\Http\Controllers\ControladorNotas;
 use App\OrdernaDisciplina;
 use App\Turma;
 use Illuminate\Support\Facades\Session;
+use PhpOffice\PhpWord\Element\TextRun;
 
 class PhpWordController extends Controller
 {
@@ -84,8 +85,16 @@ class PhpWordController extends Controller
         $ano_hoje = date('Y', strtotime($declaracao->data_emissao));
         /**fim */
 
+
+       /* $word1 = new TextRun();
+        $word2 = new TextRun();*/
+
         // Variables on different parts of document
-        $templateProcessor->setValue('nome', $nome);            // On section/content
+        $templateProcessor->setValue('nome', $nome);
+        /*$word1->addText($nome, array('name'=>"Arial Narrow",'size'=>13,"color" => "4680ff"));
+        $templateProcessor->setComplexValue('nome', $word1);
+        $word2->addText($pai, array('name'=>"Arial Narrow",'size'=>13,"color" => "FC6180"));        // On section/content
+        $templateProcessor->setComplexValue('pai', $word2);*/
         $templateProcessor->setValue('pai', $pai);
         $templateProcessor->setValue('mae', $mae);
         $templateProcessor->setValue('dia', $dia);            // On section/content
@@ -196,6 +205,14 @@ class PhpWordController extends Controller
         $ano_hoje = date('Y', strtotime($declaracao->data_emissao));
         /**fim */
 
+
+
+
+        /*$word1->addText($nome, array('name'=>"Arial Narrow",'size'=>13,"color" => "4680ff"));
+        $templateProcessor->setComplexValue('nome', $word1);
+        $word2->addText($pai, array('name'=>"Arial Narrow",'size'=>13,"color" => "FC6180"));        // On section/content
+        $templateProcessor->setComplexValue('pai', $word2);*/
+
         // Variables on different parts of document
         $templateProcessor->setValue('nome', $nome);            // On section/content
         $templateProcessor->setValue('pai', $pai);
@@ -298,12 +315,14 @@ class PhpWordController extends Controller
                             if ($valorf->rec == null) {
                                 $nota_valor = str_pad($valorf->mf, 2, 0, STR_PAD_LEFT);
                                 $nota_extensao = ControladorNotas::converter_nota($valorf->mf);
+
                             } else {
                                 $nota_valor = str_pad($valorf->rec, 2, 0, STR_PAD_LEFT);
                                 $nota_extensao = ControladorNotas::converter_nota($valorf->rec);
                             }
                         }
                     }
+
 
                     array_push($values, ['disciplinas' => $getDisciplina->disciplina, 'valores' => $nota_valor, 'extensao' => $nota_extensao]);
 

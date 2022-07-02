@@ -17,108 +17,109 @@ $cadeiras_nulas = 0;
     <title>PAUTA {{ $getDirector->ano_lectivo }} [
         {{ strtoupper($getDirector->turma->turma) }}-{{ strtoupper($getDirector->turma->turno->turno) }}-{{ strtoupper($getDirector->turma->curso->curso) }}
         ]</title>
+
+    <style>
+        .mini-cabecalho {
+            display: block;
+        }
+
+        .ano_curso {
+            float: left;
+        }
+
+        .periodo {
+            float: right;
+        }
+
+        .positivo {
+            color: #4680ff;
+        }
+
+        .negativo {
+            color: #FC6180;
+        }
+
+        .nenhum {
+            color: #333;
+        }
+
+        .transferido {
+            background-color: #FFB64D;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        .desistencia {
+            background-color: #FC6180;
+            color: #fff;
+            font-weight: bold;
+        }
+
+        table thead {
+            background-color: #4680ff;
+            color: #fff;
+        }
+
+        table tbody tr td {
+            border: 1px solid #333;
+        }
+
+        .tabela {
+            font-size: 9px;
+        }
+
+        .teacher_name {
+            display: block;
+        }
+
+        .subdirector {
+            float: left;
+            text-align: center;
+        }
+
+        .director {
+            float: right;
+            text-align: center;
+        }
+
+        .directorTurma {
+            text-align: center;
+            float: center;
+        }
+
+        .td_color {
+            background-color: #e2dfd3;
+            font-weight: bold;
+        }
+
+        .positivo .td_color {
+            background-color: #e2dfd3;
+            color: #4680ff;
+            font-weight: bold;
+        }
+
+        .negativo .td_color {
+            background-color: #e2dfd3;
+            color: #FC6180;
+            font-weight: bold;
+        }
+
+        .positivotd_color {
+            background-color: #e2dfd3;
+            color: #4680ff;
+            font-weight: bold;
+        }
+
+        .negativotd_color {
+            background-color: #e2dfd3;
+            color: #FC6180;
+            font-weight: bold;
+        }
+
+    </style>
+
 </head>
 
-<style>
-    .page-break {
-        page-break-before: always;
-    }
-
-    @page {
-        font-family: Arial, Helvetica, sans-serif;
-        font-size: 9px;
-        margin-left: 10px;
-        margin-right: 10px;
-        margin-top: 10px;
-        margin-bottom: 10px;
-    }
-
-    .mini-cabecalho {
-        display: block;
-    }
-
-    .ano_curso {
-        float: left;
-    }
-
-    .periodo {
-        float: right;
-    }
-
-    .positivo {
-        color: #4680ff;
-    }
-
-    .negativo {
-        color: #FC6180;
-    }
-
-    .nenhum {
-        color: #333;
-    }
-
-    .transferido {
-        background-color: #FFB64D;
-        color: #fff;
-        font-weight: bold;
-    }
-
-    .desistencia {
-        background-color: #FC6180;
-        color: #fff;
-        font-weight: bold;
-    }
-
-    table thead {
-        background-color: #4680ff;
-        color: #fff;
-    }
-
-    table tbody tr td {
-        border: 1px solid #333;
-    }
-
-    .tabela {
-        font-size: 9px;
-    }
-
-    .teacher_name {
-        display: block;
-    }
-
-    .subdirector {
-        float: left;
-        text-align: center;
-    }
-
-    .director {
-        float: right;
-        text-align: center;
-    }
-
-    .directorTurma {
-        text-align: center;
-        float: center;
-    }
-
-    .td_color {
-        background-color: #e2dfd3;
-        font-weight: bold;
-    }
-
-    .positivotd_color {
-        background-color: #e2dfd3;
-        color: #4680ff;
-        font-weight: bold;
-    }
-
-    .negativotd_color {
-        background-color: #e2dfd3;
-        color: #FC6180;
-        font-weight: bold;
-    }
-
-</style>
 
 <body>
 
@@ -245,7 +246,15 @@ $cadeiras_nulas = 0;
                                         <td>---</td>
                                         <td>---</td>
                                     @endif
-                                    <td class="@if (!$getCadeiraExame) td_color @endif">---</td>
+
+                                    @php
+                                        $td1 = null;
+                                        if (!$getCadeiraExame) {
+                                            $td1 = 'td_color';
+                                        }
+                                    @endphp
+
+                                    <td class="{{ $td1 }}">---</td>
                                     @if ($getCadeiraExame)
                                         <td>---</td>
                                         <td class="td_color">---</td>
@@ -332,7 +341,14 @@ $cadeiras_nulas = 0;
                                     ?>
 
                                     @if (!$getCadeiraExame)
-                                        <td class="{{ $v3_estilo }} @if (!$getCadeiraExame) td_color @endif">
+                                        @php
+                                            $td2 = null;
+                                            if (!$getCadeiraExame) {
+                                                $td2 = 'td_color';
+                                            }
+                                        @endphp
+
+                                        <td class="{{ $v3_estilo }}{{ $td2 }}">
                                             @if ($valorf->mf == null)
                                                 @php
                                                     $cadeiras_nulas++;
@@ -343,7 +359,13 @@ $cadeiras_nulas = 0;
                                     @endif
 
                                     @if ($getCadeiraExame)
-                                        <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
+                                        @php
+                                            $td3 = null;
+                                            if (!$getCadeiraExame) {
+                                                $td3 = 'td_color';
+                                            }
+                                        @endphp
+                                        <td class="{{ $v1_estilo }}{{ $td3 }}">
                                             @if ($valorf->mfd == null)
                                                 @php
                                                     $cadeiras_nulas++;
@@ -361,7 +383,7 @@ $cadeiras_nulas = 0;
                                             @else {{ strtr(round($valorf->npe, 1), '.', ',') }}
                                             @endif
                                         </td>
-                                        <td class="{{ $v3_estilo }} td_color">
+                                        <td class="{{ $v3_estilo }}td_color">
                                             @if ($valorf->mf == null)
                                                 @php
                                                     $cadeiras_nulas++;
@@ -389,8 +411,15 @@ $cadeiras_nulas = 0;
                                             <td></td>
                                         @else
                                             @if ($historico->obs_pauta)
-                                                <td class="@if ($historico->obs_pauta ==
-                                                'Transita') positivo @else negativo @endif">
+                                                @php
+                                                    $td4 = null;
+                                                    if ($historico->obs_pauta == 'Transita') {
+                                                        $td4 = 'positivo';
+                                                    } else {
+                                                        $td4 = 'negativo';
+                                                    }
+                                                @endphp
+                                                <td class="{{ $td4 }}">
                                                     {{ strtoupper($historico->obs_pauta) }}
                                                 </td>
                                             @else
@@ -508,7 +537,15 @@ $cadeiras_nulas = 0;
                                         <td>---</td>
                                         <td>---</td>
                                     @endif
-                                    <td class="@if (!$getCadeiraExame) td_color @endif">---</td>
+
+                                    @php
+                                        $td1 = null;
+                                        if (!$getCadeiraExame) {
+                                            $td1 = 'td_color';
+                                        }
+                                    @endphp
+
+                                    <td class="{{ $td1 }}">---</td>
                                     @if ($getCadeiraExame)
                                         <td>---</td>
                                         <td class="td_color">---</td>
@@ -596,7 +633,14 @@ $cadeiras_nulas = 0;
 
 
                                     @if (!$getCadeiraExame)
-                                        <td class="{{ $v3_estilo }} @if (!$getCadeiraExame) td_color @endif">
+                                        @php
+                                            $td2 = null;
+                                            if (!$getCadeiraExame) {
+                                                $td2 = 'td_color';
+                                            }
+                                        @endphp
+
+                                        <td class="{{ $v3_estilo }}{{ $td2 }}">
                                             @if ($valorf->mf == null)
                                                 @php
                                                     $cadeiras_nulas++;
@@ -607,7 +651,14 @@ $cadeiras_nulas = 0;
                                     @endif
 
                                     @if ($getCadeiraExame)
-                                        <td class="{{ $v1_estilo }} @if (!$getCadeiraExame) td_color @endif">
+                                        @php
+                                            $td3 = null;
+                                            if (!$getCadeiraExame) {
+                                                $td3 = 'td_color';
+                                            }
+                                        @endphp
+
+                                        <td class="{{ $v1_estilo }}{{ $td3 }}">
                                             @if ($valorf->mfd == null)
                                                 @php
                                                     $cadeiras_nulas++;
@@ -625,7 +676,7 @@ $cadeiras_nulas = 0;
                                             @else {{ strtr(round($valorf->npe, 1), '.', ',') }}
                                             @endif
                                         </td>
-                                        <td class="{{ $v3_estilo }} td_color">
+                                        <td class="{{ $v3_estilo }}td_color">
                                             @if ($valorf->mf == null)
                                                 @php
                                                     $cadeiras_nulas++;
@@ -653,8 +704,15 @@ $cadeiras_nulas = 0;
                                             <td></td>
                                         @else
                                             @if ($historico->obs_pauta)
-                                                <td class="@if ($historico->obs_pauta ==
-                                                'Transita') positivo @else negativo @endif">
+                                                @php
+                                                    $td4 = null;
+                                                    if ($historico->obs_pauta == 'Transita') {
+                                                        $td4 = 'positivo';
+                                                    } else {
+                                                        $td4 = 'negativo';
+                                                    }
+                                                @endphp
+                                                <td class="{{$td4}}">
                                                     {{ strtoupper($historico->obs_pauta) }}
                                                 </td>
                                             @else
@@ -680,7 +738,7 @@ $cadeiras_nulas = 0;
                 <div class="subdirector">
                     O(A) COOORDENADOR DE TURMA<br />
                     __________________________________<br />
-                    //{{$getDirector->funcionario->pessoa->nome}} //
+                    //{{ $getDirector->funcionario->pessoa->nome }} //
                 </div><br /><br />
 
 

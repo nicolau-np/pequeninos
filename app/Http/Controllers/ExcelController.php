@@ -222,20 +222,21 @@ class ExcelController extends Controller
                 $return = 'pauta.excel.ensino_primario_2_4_copy';
             } //se for classificacao quantitativa
             elseif (($classe == "Iniciação")) {
-                $return = 'pauta.pdf.ensino_primario_Ini_1_3_5_copy';
+                $return = 'pauta.excel.ensino_primario_Ini_1_3_5_copy';
             } elseif (($classe == "6ª classe")) {
-                $return = 'pauta.pdf.ensino_primario_6_copy';
+                $return = 'pauta.excel.ensino_primario_6_copy';
             }
         } elseif ($id_ensino == 2) { //7 classe ate 9 ensino geral
             if ($classe == "9ª classe") {
-                $return = 'pauta.pdf.ensino_1ciclo_9_copy';
-            } else {
-                $return = 'pauta.pdf.ensino_1ciclo_7_8_copy';
+                $return = 'pauta.excel.ensino_1ciclo_9_copy';
+            } elseif(($classe == "7ª classe") || ($classe == "8ª classe")) {
+                $return = 'pauta.excel.ensino_1ciclo_7_8_copy';
             }
         }
 
         $arquivo_saida = 'PAUTA ' . $ano_lectivo . '[ ' . strtoupper($turma->turma) . ' ' . strtoupper($turma->turno->turno) . '-' . strtoupper($turma->curso->curso) . ' ].xls';
         //
+
         // configuracao header para forcar download
         header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
         header("Last-Modified:" . gmdate("D,d M YH:i:s") . "GMT");

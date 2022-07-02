@@ -210,19 +210,7 @@ $posit3 = [
         [{{ strtoupper($getHorario->turma->turma) }}-{{ strtoupper($getHorario->turma->turno->turno) }}-{{ strtoupper($getHorario->turma->curso->curso) }}-{{ strtoupper($getHorario->disciplina->disciplina) }}
         ]</title>
     <style>
-        .page-break {
-            page-break-before: always;
-        }
-
-        @page {
-            font-family: Arial, Helvetica, sans-serif;
-            font-size: 9px;
-            margin-left: 10px;
-            margin-right: 10px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-
-        }
+  
 
         .mini-cabecalho {
             display: block;

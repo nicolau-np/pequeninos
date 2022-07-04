@@ -664,7 +664,7 @@ $cadeiras_nulas = 0;
                 <div class="subdirector">
                     O(A) COOORDENADOR DE TURMA<br />
                     __________________________________<br />
-                    // //
+                    // {{ $getDirector->funcionario->pessoa->nome }} //
                 </div>
 
 

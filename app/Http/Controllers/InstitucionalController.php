@@ -1097,10 +1097,40 @@ class InstitucionalController extends Controller
 
     public function exames_edit($id)
     {
+        $exame = CadeiraExame::find($id);
+        if (!$exame) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+        $data = [
+            'title' => "Exames",
+            'type' => "institucional",
+            'menu' => "Exames",
+            'submenu' => "Editar",
+            'getCadeiraExame' => $exame,
+        ];
+        return view('institucional.exames.edit', $data);
     }
 
     public function exames_update(Request $request, $id)
     {
+        $exame = CadeiraExame::find($id);
+        if (!$exame) {
+            return back()->with(['error' => "Não encontrou"]);
+        }
+
+        $request->validate([
+            'curso' => ['required', 'string', 'min:1'],
+            'classe' => ['required', 'string', 'min:1'],
+            'disciplina' => ['required', 'string', 'min:1'],
+            'exame_oral' => ['required', 'string', 'min:1'],
+        ]);
+        $data = [
+            'exame_oral' => $request->exame_oral,
+        ];
+        $cadeira_exame = CadeiraExame::find($id)->update($data);
+        if ($cadeira_exame) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
     }
 
 

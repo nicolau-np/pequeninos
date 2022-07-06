@@ -41,6 +41,7 @@
                                     <th>Curso</th>
                                     <th>Classe</th>
                                     <th>Disciplina</th>
+                                    <th>Exame Oral</th>
                                     <th>Estado</th>
                                     <th>Operações</th>
                                 </tr>
@@ -56,6 +57,7 @@
                                     <td>{{$cadeira_exames->curso->curso}}</td>
                                     <td>{{$cadeira_exames->classe->classe}}</td>
                                     <td>{{$cadeira_exames->disciplina->disciplina}}</td>
+                                    <td>{{$cadeira_exames->exame_oral}}</td>
                                     <td>{{$cadeira_exames->estado}}</td>
                                     <td>
                                         <a href="/institucional/exames/edit/{{$cadeira_exames->id}}" class="btn btn-primary btn-sm"><i class="ti-pencil-alt"></i> Editar</a>

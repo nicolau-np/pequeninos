@@ -493,7 +493,7 @@ Route::get('/text1', function () {
     echo number_format($numero_round,1,',','.');*/
 
 
-    $phpword = new \PhpOffice\PhpWord\PhpWord();
+    /*$phpword = new \PhpOffice\PhpWord\PhpWord();
     $section = $phpword->createSection();
     $section->addText('Hello world');
     $file = "hello.docx";
@@ -506,6 +506,6 @@ Route::get('/text1', function () {
     header("Expires: 0");
     $xmlwriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpword, "Word2007");
 
-    return view('welcome');
+    return view('welcome');*/
     //$xmlwriter->save("php://output");
 });

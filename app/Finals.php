@@ -4,13 +4,15 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Finals extends Model 
+class Finals extends Model
 {
     protected $table = "finals";
 
     protected $fillable = [
         'id_estudante',
         'id_disciplina',
+        'nee',
+        'neo',
         'mfd',
         'npe',
         'npe_data',

@@ -18,6 +18,7 @@ class CreateCadeiraExamesTable extends Migration
             $table->bigInteger('id_curso')->unsigned()->index();
             $table->bigInteger('id_classe')->unsigned()->index();
             $table->bigInteger('id_disciplina')->unsigned()->index();
+            $table->string('exame_oral')->nullable();
             $table->string('estado');
             $table->timestamps();
         });

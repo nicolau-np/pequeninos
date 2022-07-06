@@ -25,7 +25,11 @@ class BloqueioEpocaSeeder extends Seeder
         ],[
             'epoca'=>6,
             'estado'=>"off"
+        ],[
+            'epoca'=>7,
+            'estado'=>"off"
         ]
+
     ];
 
     public function run()

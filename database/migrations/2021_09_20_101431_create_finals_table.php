@@ -18,6 +18,8 @@ class CreateFinalsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('id_estudante')->unsigned()->index();
             $table->bigInteger('id_disciplina')->unsigned()->index();
+            $table->decimal('nee', 4, 1)->nullable();
+            $table->decimal('neo', 4, 1)->nullable();
             $table->decimal('mfd', 4, 2)->nullable();
             $table->decimal('npe', 4, 2)->nullable();
             $table->date('npe_data')->nullable();

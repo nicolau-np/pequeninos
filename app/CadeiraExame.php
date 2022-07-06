@@ -12,6 +12,7 @@ class CadeiraExame extends Model
         'id_curso',
         'id_classe',
         'id_disciplina',
+        'exame_oral',
         'estado',
     ];
 

@@ -53,6 +53,12 @@ class Finals extends Model
         return $mf;
     }
 
+    public static function mec($nee, $neo){
+        $mec = ($nee + $neo)/2;
+
+        return $mec;
+    }
+
     public static function getNotasEstudantes($data2, $ano_lectivo)
     {
         $data = [

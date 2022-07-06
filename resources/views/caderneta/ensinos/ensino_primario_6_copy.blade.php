@@ -46,6 +46,13 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                 width: 80px;
             }
 
+            .nee {
+                width: 80px;
+            }
+
+            .neo {
+                width: 80px;
+            }
 
             .npe {
                 width: 80px;
@@ -181,66 +188,67 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                                                         $trimestral->ano_lectivo); ?>
                                                                         <tr class="{{ $observacao->observacao_final }}">
                                                                             <td>{{ $loop->iteration }}</td>
-                                                                            <td>{{ $trimestral->estudante->pessoa->nome }}</td>
+                                                                            <td>{{ $trimestral->estudante->pessoa->nome }}
+                                                                            </td>
                                                                             <td>{{ $trimestral->estudante->pessoa->genero }}
                                                                             </td>
 
                                                                             <td>
-                                                                                @if($av1)
-                                                                                <form method="post" class="form1">
-                                                                                <input type="number" name="av1"
-                                                                                    data-id="{{ $trimestral->id }}"
-                                                                                    data-campo="av1"
-                                                                                    value="{{ $trimestral->av1 }}"
-                                                                                    class="form-control avaliacao" />
-                                                                                </form>
-                                                                                    @endif
-                                                                                </td>
+                                                                                @if ($av1)
+                                                                                    <form method="post" class="form1">
+                                                                                        <input type="number" name="av1"
+                                                                                            data-id="{{ $trimestral->id }}"
+                                                                                            data-campo="av1"
+                                                                                            value="{{ $trimestral->av1 }}"
+                                                                                            class="form-control avaliacao" />
+                                                                                    </form>
+                                                                                @endif
+                                                                            </td>
                                                                             <td>
-                                                                                @if($av2)
-                                                                                <form method="post" class="form1">
-                                                                                <input type="number" name="av2"
-                                                                                    data-id="{{ $trimestral->id }}"
-                                                                                    data-campo="av2"
-                                                                                    value="{{ $trimestral->av2 }}"
-                                                                                    class="form-control avaliacao" />
-                                                                                </form>
-                                                                                    @endif
-                                                                                </td>
+                                                                                @if ($av2)
+                                                                                    <form method="post" class="form1">
+                                                                                        <input type="number" name="av2"
+                                                                                            data-id="{{ $trimestral->id }}"
+                                                                                            data-campo="av2"
+                                                                                            value="{{ $trimestral->av2 }}"
+                                                                                            class="form-control avaliacao" />
+                                                                                    </form>
+                                                                                @endif
+                                                                            </td>
                                                                             <td>
-                                                                                @if($av3)
-                                                                                <form method="post" class="form1">
-                                                                                <input type="number" name="av3"
-                                                                                    data-id="{{ $trimestral->id }}"
-                                                                                    data-campo="av3"
-                                                                                    value="{{ $trimestral->av3 }}"
-                                                                                    class="form-control avaliacao" />
-                                                                                </form>
-                                                                                    @endif
-                                                                                </td>
+                                                                                @if ($av3)
+                                                                                    <form method="post" class="form1">
+                                                                                        <input type="number" name="av3"
+                                                                                            data-id="{{ $trimestral->id }}"
+                                                                                            data-campo="av3"
+                                                                                            value="{{ $trimestral->av3 }}"
+                                                                                            class="form-control avaliacao" />
+                                                                                    </form>
+                                                                                @endif
+                                                                            </td>
 
                                                                             <td>
-                                                                                @if($p1)
-                                                                                <form method="post" class="form1">
-                                                                                <input type="number" name="npp"
-                                                                                    data-id="{{ $trimestral->id }}"
-                                                                                    data-campo="npp"
-                                                                                    value="{{ $trimestral->npp }}"
-                                                                                    class="form-control prova" />
-                                                                                </form>
-                                                                                    @endif
-                                                                                </td>
+                                                                                @if ($p1)
+                                                                                    <form method="post" class="form1">
+                                                                                        <input type="number" name="npp"
+                                                                                            data-id="{{ $trimestral->id }}"
+                                                                                            data-campo="npp"
+                                                                                            value="{{ $trimestral->npp }}"
+                                                                                            class="form-control prova" />
+                                                                                    </form>
+                                                                                @endif
+                                                                            </td>
                                                                             <td>
-                                                                                @if($p2)
-                                                                                <form method="post" class="form1">
-                                                                                <input type="number" name="npp"
-                                                                                    data-id="{{ $trimestral->id }}"
-                                                                                    data-campo="pt"
-                                                                                    value="{{ $trimestral->pt }}"
-                                                                                    class="form-control prova" />
-                                                                                </form>
-                                                                                    @endif
-                                                                                </td>
+                                                                                @if ($p2)
+                                                                                    <form method="post" class="form1">
+                                                                                        <input type="number" name="npp"
+                                                                                            data-id="{{ $trimestral->id }}"
+                                                                                            data-campo="pt"
+                                                                                            value="{{ $trimestral->pt }}"
+                                                                                            class="form-control prova" />
+                                                                                    </form>
+                                                                                @endif
+                                                                            </td>
                                                                         </tr>
                                                                     @endforeach
                                                                 @endif
@@ -288,66 +296,67 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                                                         $trimestral->ano_lectivo); ?>
                                                                         <tr class="{{ $observacao->observacao_final }}">
                                                                             <td>{{ $loop->iteration }}</td>
-                                                                            <td>{{ $trimestral->estudante->pessoa->nome }}</td>
+                                                                            <td>{{ $trimestral->estudante->pessoa->nome }}
+                                                                            </td>
                                                                             <td>{{ $trimestral->estudante->pessoa->genero }}
                                                                             </td>
 
                                                                             <td>
-                                                                                @if($av1)
-                                                                                <form method="post" class="form1">
-                                                                                <input type="number" name="av1"
-                                                                                    data-id="{{ $trimestral->id }}"
-                                                                                    data-campo="av1"
-                                                                                    value="{{ $trimestral->av1 }}"
-                                                                                    class="form-control avaliacao" />
-                                                                                </form>
-                                                                                    @endif
-                                                                                </td>
+                                                                                @if ($av1)
+                                                                                    <form method="post" class="form1">
+                                                                                        <input type="number" name="av1"
+                                                                                            data-id="{{ $trimestral->id }}"
+                                                                                            data-campo="av1"
+                                                                                            value="{{ $trimestral->av1 }}"
+                                                                                            class="form-control avaliacao" />
+                                                                                    </form>
+                                                                                @endif
+                                                                            </td>
                                                                             <td>
-                                                                                @if($av2)
-                                                                                <form method="post" class="form1">
-                                                                                <input type="number" name="av2"
-                                                                                    data-id="{{ $trimestral->id }}"
-                                                                                    data-campo="av2"
-                                                                                    value="{{ $trimestral->av2 }}"
-                                                                                    class="form-control avaliacao" />
-                                                                                </form>
-                                                                                    @endif
-                                                                                </td>
+                                                                                @if ($av2)
+                                                                                    <form method="post" class="form1">
+                                                                                        <input type="number" name="av2"
+                                                                                            data-id="{{ $trimestral->id }}"
+                                                                                            data-campo="av2"
+                                                                                            value="{{ $trimestral->av2 }}"
+                                                                                            class="form-control avaliacao" />
+                                                                                    </form>
+                                                                                @endif
+                                                                            </td>
                                                                             <td>
-                                                                                @if($av3)
-                                                                                <form method="post" class="form1">
-                                                                                <input type="number" name="av3"
-                                                                                    data-id="{{ $trimestral->id }}"
-                                                                                    data-campo="av3"
-                                                                                    value="{{ $trimestral->av3 }}"
-                                                                                    class="form-control avaliacao" />
-                                                                                </form>
-                                                                                    @endif
-                                                                                </td>
+                                                                                @if ($av3)
+                                                                                    <form method="post" class="form1">
+                                                                                        <input type="number" name="av3"
+                                                                                            data-id="{{ $trimestral->id }}"
+                                                                                            data-campo="av3"
+                                                                                            value="{{ $trimestral->av3 }}"
+                                                                                            class="form-control avaliacao" />
+                                                                                    </form>
+                                                                                @endif
+                                                                            </td>
 
                                                                             <td>
-                                                                                @if($p1)
-                                                                                <form method="post" class="form1">
-                                                                                <input type="number" name="npp"
-                                                                                    data-id="{{ $trimestral->id }}"
-                                                                                    data-campo="npp"
-                                                                                    value="{{ $trimestral->npp }}"
-                                                                                    class="form-control prova" />
-                                                                                </form>
-                                                                                    @endif
-                                                                                </td>
+                                                                                @if ($p1)
+                                                                                    <form method="post" class="form1">
+                                                                                        <input type="number" name="npp"
+                                                                                            data-id="{{ $trimestral->id }}"
+                                                                                            data-campo="npp"
+                                                                                            value="{{ $trimestral->npp }}"
+                                                                                            class="form-control prova" />
+                                                                                    </form>
+                                                                                @endif
+                                                                            </td>
                                                                             <td>
-                                                                                @if($p2)
-                                                                                <form method="post" class="form1">
-                                                                                <input type="number" name="npp"
-                                                                                    data-id="{{ $trimestral->id }}"
-                                                                                    data-campo="pt"
-                                                                                    value="{{ $trimestral->pt }}"
-                                                                                    class="form-control prova" />
-                                                                                </form>
-                                                                                    @endif
-                                                                                </td>
+                                                                                @if ($p2)
+                                                                                    <form method="post" class="form1">
+                                                                                        <input type="number" name="npp"
+                                                                                            data-id="{{ $trimestral->id }}"
+                                                                                            data-campo="pt"
+                                                                                            value="{{ $trimestral->pt }}"
+                                                                                            class="form-control prova" />
+                                                                                    </form>
+                                                                                @endif
+                                                                            </td>
                                                                         </tr>
                                                                     @endforeach
                                                                 @endif
@@ -363,7 +372,7 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                         @if ($getEpoca3->estado != 'off')
                                             <div class="tab-pane @if (session('epoca')=='3' ) active @endif" role="tabpanel">
                                                 <p class="m-0">
-                                                   
+
                                                 <table class="table table-bordered tabela_notas">
                                                     <thead>
                                                         <tr>
@@ -395,65 +404,66 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                                                         $trimestral->ano_lectivo); ?>
                                                                         <tr class="{{ $observacao->observacao_final }}">
                                                                             <td>{{ $loop->iteration }}</td>
-                                                                            <td>{{ $trimestral->estudante->pessoa->nome }}</td>
+                                                                            <td>{{ $trimestral->estudante->pessoa->nome }}
+                                                                            </td>
                                                                             <td>{{ $trimestral->estudante->pessoa->genero }}
                                                                             </td>
 
                                                                             <td>
-                                                                                @if($av1)
-                                                                                <form method="post" class="form1">
-                                                                                <input type="number" name="av1"
-                                                                                    data-id="{{ $trimestral->id }}"
-                                                                                    data-campo="av1"
-                                                                                    value="{{ $trimestral->av1 }}"
-                                                                                    class="form-control avaliacao" />
-                                                                                </form>
-                                                                                    @endif
+                                                                                @if ($av1)
+                                                                                    <form method="post" class="form1">
+                                                                                        <input type="number" name="av1"
+                                                                                            data-id="{{ $trimestral->id }}"
+                                                                                            data-campo="av1"
+                                                                                            value="{{ $trimestral->av1 }}"
+                                                                                            class="form-control avaliacao" />
+                                                                                    </form>
+                                                                                @endif
                                                                             </td>
                                                                             <td>
-                                                                                @if($av2)
-                                                                                <form method="post" class="form1">
-                                                                                <input type="number" name="av2"
-                                                                                    data-id="{{ $trimestral->id }}"
-                                                                                    data-campo="av2"
-                                                                                    value="{{ $trimestral->av2 }}"
-                                                                                    class="form-control avaliacao" />
-                                                                                </form>
-                                                                                    @endif
+                                                                                @if ($av2)
+                                                                                    <form method="post" class="form1">
+                                                                                        <input type="number" name="av2"
+                                                                                            data-id="{{ $trimestral->id }}"
+                                                                                            data-campo="av2"
+                                                                                            value="{{ $trimestral->av2 }}"
+                                                                                            class="form-control avaliacao" />
+                                                                                    </form>
+                                                                                @endif
                                                                             </td>
                                                                             <td>
-                                                                                @if($av3)
-                                                                                <form method="post" class="form1">
-                                                                                <input type="number" name="av3"
-                                                                                    data-id="{{ $trimestral->id }}"
-                                                                                    data-campo="av3"
-                                                                                    value="{{ $trimestral->av3 }}"
-                                                                                    class="form-control avaliacao" />
-                                                                                </form>
-                                                                                    @endif
+                                                                                @if ($av3)
+                                                                                    <form method="post" class="form1">
+                                                                                        <input type="number" name="av3"
+                                                                                            data-id="{{ $trimestral->id }}"
+                                                                                            data-campo="av3"
+                                                                                            value="{{ $trimestral->av3 }}"
+                                                                                            class="form-control avaliacao" />
+                                                                                    </form>
+                                                                                @endif
                                                                             </td>
 
                                                                             <td>
-                                                                                @if($p1)
-                                                                                <form method="post" class="form1">
-                                                                                <input type="number" name="npp"
-                                                                                    data-id="{{ $trimestral->id }}"
-                                                                                    data-campo="npp"
-                                                                                    value="{{ $trimestral->npp }}"
-                                                                                    class="form-control prova" />
-                                                                                </form>
-                                                                                    @endif
+                                                                                @if ($p1)
+                                                                                    <form method="post" class="form1">
+                                                                                        <input type="number" name="npp"
+                                                                                            data-id="{{ $trimestral->id }}"
+                                                                                            data-campo="npp"
+                                                                                            value="{{ $trimestral->npp }}"
+                                                                                            class="form-control prova" />
+                                                                                    </form>
+                                                                                @endif
                                                                             </td>
                                                                             <td>
-                                                                                @if($p2)
-                                                                                <form method="post" class="form1">
-                                                                                <input type="number" name="npp"
-                                                                                    data-id="{{ $trimestral->id }}"
-                                                                                    data-campo="pt"
-                                                                                    value="{{ $trimestral->pt }}"
-                                                                                    class="form-control prova" />
-                                                                                </form>
-                                                                                    @endif
+                                                                                @if ($p2)
+                                                                                    <form method="post" class="form1">
+                                                                                        <input type="number" name="npp"
+                                                                                            data-id="{{ $trimestral->id }}"
+                                                                                            data-campo="pt"
+                                                                                            value="{{ $trimestral->pt }}"
+                                                                                            class="form-control prova" />
+                                                                                    </form>
+                                                                                @endif
                                                                             </td>
                                                                         </tr>
                                                                     @endforeach
@@ -480,13 +490,24 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                                         <thead>
                                                             <tr>
                                                                 <th colspan="3">DADOS PESSOAIS</th>
-                                                                <th>PROVA</th>
+                                                                @php
+                                                                    $colspan = 1;
+                                                                    if ($getCadeiraExame->exame_oral == 'sim') {
+                                                                        $colspan = 2;
+                                                                    }
+                                                                @endphp
+                                                                <th colspan="{{ $colspan }}">EXAMES</th>
                                                             </tr>
                                                             <tr>
                                                                 <th>Nº</th>
                                                                 <th>NOME</th>
                                                                 <th>G</th>
-                                                                <th>NPE</th>
+                                                                @if ($getCadeiraExame->exame_oral == 'sim')
+                                                                    <th>NEE</th>
+                                                                    <th>NEO</th>
+                                                                @else
+                                                                    <th>MEC</th>
+                                                                @endif
                                                             </tr>
                                                         </thead>
 
@@ -500,24 +521,56 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                                                             <?php $observacao =
                                                                             ControladorStatic::getObservacaofinal($global->id_estudante,
                                                                             $global->ano_lectivo); ?>
-                                                                            <tr class="{{ $observacao->observacao_final }}">
+                                                                            <tr
+                                                                                class="{{ $observacao->observacao_final }}">
                                                                                 <td>{{ $loop->iteration }}</td>
-                                                                                <td>{{ $global->estudante->pessoa->nome }}</td>
+                                                                                <td>{{ $global->estudante->pessoa->nome }}
+                                                                                </td>
                                                                                 <td>{{ $global->estudante->pessoa->genero }}
                                                                                 </td>
 
-                                                                                <td>
-                                                                                    @if($pg)
-                                                                                    <form method="post" class="form1">
-                                                                                    <input type="number" name="npe"
-                                                                                        data-id="{{ $global->id }}"
-                                                                                        data-campo="npe"
-                                                                                        value="{{ $global->npe }}"
-                                                                                        class="form-control npe" />
-                                                                                    </form>
+                                                                                @if ($getCadeiraExame->exame_oral == 'sim')
+                                                                                    <td>
+                                                                                        @if ($pg)
+                                                                                            <form method="post"
+                                                                                                class="form1">
+                                                                                                <input type="number"
+                                                                                                    name="nee"
+                                                                                                    data-id="{{ $global->id }}"
+                                                                                                    data-campo="nee"
+                                                                                                    value="{{ $global->nee }}"
+                                                                                                    class="form-control nee" />
+                                                                                            </form>
                                                                                         @endif
                                                                                     </td>
-
+                                                                                    <td>
+                                                                                        @if ($pg)
+                                                                                            <form method="post"
+                                                                                                class="form1">
+                                                                                                <input type="number"
+                                                                                                    name="neo"
+                                                                                                    data-id="{{ $global->id }}"
+                                                                                                    data-campo="neo"
+                                                                                                    value="{{ $global->neo }}"
+                                                                                                    class="form-control neo" />
+                                                                                            </form>
+                                                                                        @endif
+                                                                                    </td>
+                                                                                @else
+                                                                                    <td>
+                                                                                        @if ($pg)
+                                                                                            <form method="post"
+                                                                                                class="form1">
+                                                                                                <input type="number"
+                                                                                                    name="npe"
+                                                                                                    data-id="{{ $global->id }}"
+                                                                                                    data-campo="npe"
+                                                                                                    value="{{ $global->npe }}"
+                                                                                                    class="form-control npe" />
+                                                                                            </form>
+                                                                                        @endif
+                                                                                    </td>
+                                                                                @endif
                                                                             </tr>
                                                                         @endforeach
                                                                     @endif
@@ -564,28 +617,35 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                                                             <?php $observacao =
                                                                             ControladorStatic::getObservacaofinal($global->id_estudante,
                                                                             $global->ano_lectivo); ?>
-                                                                            <tr class="{{ $observacao->observacao_final }}">
+                                                                            <tr
+                                                                                class="{{ $observacao->observacao_final }}">
                                                                                 <td>{{ $loop->iteration }}</td>
-                                                                                <td>{{ $global->estudante->pessoa->nome }}</td>
+                                                                                <td>{{ $global->estudante->pessoa->nome }}
+                                                                                </td>
                                                                                 <td>{{ $global->estudante->pessoa->genero }}
                                                                                 </td>
 
                                                                                 <td>
-                                                                                    @if($rec)
-                                                                                    @if ($global->mf >= 5)
-                                                                                    <form method="post" class="form1">
-                                                                                        <input type="number" name="rec" value=""
-                                                                                            class="form-control" disabled />
-                                                                                    </form>
-                                                                                    @else
-                                                                                    <form method="post" class="form1">
-                                                                                        <input type="number" name="rec"
-                                                                                            data-id="{{ $global->id }}"
-                                                                                            data-campo="rec"
-                                                                                            value="{{ $global->rec }}"
-                                                                                            class="form-control rec" />
-                                                                                    </form>
-                                                                                    @endif
+                                                                                    @if ($rec)
+                                                                                        @if ($global->mf >= 5)
+                                                                                            <form method="post"
+                                                                                                class="form1">
+                                                                                                <input type="number"
+                                                                                                    name="rec" value=""
+                                                                                                    class="form-control"
+                                                                                                    disabled />
+                                                                                            </form>
+                                                                                        @else
+                                                                                            <form method="post"
+                                                                                                class="form1">
+                                                                                                <input type="number"
+                                                                                                    name="rec"
+                                                                                                    data-id="{{ $global->id }}"
+                                                                                                    data-campo="rec"
+                                                                                                    value="{{ $global->rec }}"
+                                                                                                    class="form-control rec" />
+                                                                                            </form>
+                                                                                        @endif
                                                                                     @endif
                                                                                 </td>
 
@@ -621,14 +681,14 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
         <!-- botão pesquisar -->
         <div class="btnPesquisar">
             <div class="btnPesquisarBtn">
-                <a href="/cadernetas/list/{{ $getHorario->ano_lectivo }}" class="btn btn-primary btnCircular btnPrincipal"
-                    title="Voltar"><i class="ti-arrow-left"></i></a>
+                <a href="/cadernetas/list/{{ $getHorario->ano_lectivo }}"
+                    class="btn btn-primary btnCircular btnPrincipal" title="Voltar"><i class="ti-arrow-left"></i></a>
             </div>
         </div>
 
         <script>
             $(document).ready(function() {
-                $(".form1").submit(function(e){
+                $(".form1").submit(function(e) {
                     e.preventDefault();
                 });
 
@@ -694,6 +754,69 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                     }
                 });
 
+                $('.nee').on('keypress', function(e) {
+                    if (e.which == 13) {
+                        var valor = $(this).val();
+                        var id_final = $(this).data('id');
+                        var campo = $(this).data('campo');
+
+                        if ((valor === "") || (valor < 0) || (valor > 10)) {
+                            $(this).css({
+                                'background': 'red',
+                                'color': 'white',
+                                'font-weight': 'bold'
+                            });
+                        } else {
+                            var update = updateNEENEO(valor, id_final, campo);
+                            if (update) {
+                                $(this).css({
+                                    'background': 'green',
+                                    'color': 'white',
+                                    'font-weight': 'bold'
+                                });
+                            } else {
+                                $(this).css({
+                                    'background': 'red',
+                                    'color': 'white',
+                                    'font-weight': 'bold'
+                                });
+                            }
+                        }
+                    }
+                });
+
+                $('.neo').on('keypress', function(e) {
+                    if (e.which == 13) {
+                        var valor = $(this).val();
+                        var id_final = $(this).data('id');
+                        var campo = $(this).data('campo');
+
+                        if ((valor === "") || (valor < 0) || (valor > 10)) {
+                            $(this).css({
+                                'background': 'red',
+                                'color': 'white',
+                                'font-weight': 'bold'
+                            });
+                        } else {
+                            var update = updateNEENEO(valor, id_final, campo);
+                            if (update) {
+                                $(this).css({
+                                    'background': 'green',
+                                    'color': 'white',
+                                    'font-weight': 'bold'
+                                });
+                            } else {
+                                $(this).css({
+                                    'background': 'red',
+                                    'color': 'white',
+                                    'font-weight': 'bold'
+                                });
+                            }
+                        }
+                    }
+                });
+
+
                 $('.npe').on('keypress', function(e) {
                     if (e.which == 13) {
                         var valor = $(this).val();
@@ -755,6 +878,52 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                         }
                     }
                 });
+
+
+                function updateNEENEO(valor, id_final, campo){
+                    retorno = false;
+                    var data = {
+                        valor: valor,
+                        id_final: id_final,
+                        campo: campo,
+                        _token: "{{ csrf_token() }}"
+                    };
+
+                    $.ajax({
+                        type: "post",
+                        url: "{{ route('updateNEENEO') }}",
+                        data: data,
+                        dataType: "html",
+                        success: function(response) {
+
+                            console.log(response);
+                        }
+                    });
+                    return true;
+                }
+
+                function updateRecurso(valor, id_final, campo) {
+                    retorno = false;
+                    var data = {
+                        valor: valor,
+                        id_final: id_final,
+                        campo: campo,
+                        _token: "{{ csrf_token() }}"
+                    };
+
+                    $.ajax({
+                        type: "post",
+                        url: "{{ route('updateRecurso') }}",
+                        data: data,
+                        dataType: "html",
+                        success: function(response) {
+
+                            console.log(response);
+                        }
+                    });
+                    return true;
+                }
+
 
                 function updateRecurso(valor, id_final, campo) {
                     retorno = false;

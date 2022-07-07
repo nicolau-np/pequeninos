@@ -185,7 +185,7 @@ $cadeiras_nulas = 0;
                                     <th>MFD</th>
 
                                     @if ($getCadeiraExame)
-                                        <th>NPE</th>
+                                        <th>MEC</th>
                                         <th>MF</th>
                                     @endif
 
@@ -448,7 +448,7 @@ $cadeiras_nulas = 0;
                                     <th>MFD</th>
 
                                     @if ($getCadeiraExame)
-                                        <th>NPE</th>
+                                        <th>MEC</th>
                                         <th>MF</th>
                                     @endif
 

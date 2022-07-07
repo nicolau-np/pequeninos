@@ -110,7 +110,7 @@ use App\Http\Controllers\ControladorStatic;
                                                         <th>MFD</th>
 
                                                         @if ($getCadeiraExame)
-                                                            <th>NPE</th>
+                                                            <th>MEC</th>
                                                             <th>MF</th>
                                                         @endif
 
@@ -413,7 +413,7 @@ use App\Http\Controllers\ControladorStatic;
                                                         <th>MFD</th>
 
                                                         @if ($getCadeiraExame)
-                                                            <th>NPE</th>
+                                                            <th>MEC</th>
                                                             <th>MF</th>
                                                         @endif
 

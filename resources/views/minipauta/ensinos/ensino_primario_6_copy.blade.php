@@ -68,7 +68,7 @@ if ($getCadeiraExame) {
                                                 <th rowspan="2">G</th>
                                                 <th colspan="4">1º TRIMESTRE</th>
                                                 <th colspan="4">2º TRIMESTRE</th>
-                                                <th colspan="4">3º TRIMESTRE</th>
+                                                <th colspan="3">3º TRIMESTRE</th>
                                                 <th colspan="{{ $numero_colspan }}">DADOS FINAIS</th>
                                                 <th rowspan="2">OBS.</th>
                                             </tr>
@@ -85,7 +85,7 @@ if ($getCadeiraExame) {
 
                                                 <th>MAC3</th>
                                                 <th>NPP3</th>
-                                                <th>PT3</th>
+                                                <!--<th>PT3</th>-->
                                                 <th>MT3</th>
 
                                                 <th>MFD</th>
@@ -238,10 +238,10 @@ if ($getCadeiraExame) {
                                                         @else {{ strtr(round($valor3->npp, 1), '.', ',') }}
                                                         @endif
                                                     </td>
-                                                    <td class="{{ $v3_estilo }}">
+                                                    <!--<td class="{{ $v3_estilo }}">
                                                     @if ($valor3->pt == null) --- @else
                                                             {{ strtr(round($valor3->pt, 1), '.', ',') }} @endif
-                                                    </td>
+                                                    </td>-->
                                                     <td class="{{ $v4_estilo }} td_color">
                                                     @if ($valor3->mt == null) --- @else
                                                             {{ strtr(round($valor3->mt, 1), '.', ',') }} @endif

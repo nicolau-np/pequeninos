@@ -781,7 +781,7 @@ $posit3 = [
 
                             <th>MFD</th>
                             @if ($getCadeiraExame)
-                                <th>NPE</th>
+                                <th>MEC</th>
                             @endif
                             <th>MF</th>
 

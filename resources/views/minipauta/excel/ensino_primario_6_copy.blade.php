@@ -9,7 +9,11 @@ if ($getCadeiraRecurso) {
 }
 
 if ($getCadeiraExame) {
-    $numero_colspan = $numero_colspan + 1;
+    if ($getCadeiraExame->exame_oral == 'sim') {
+        $numero_colspan = $numero_colspan + 3;
+    } else {
+        $numero_colspan = $numero_colspan + 1;
+    }
     $numero_colspan2 = $numero_colspan2 + 1;
 }
 
@@ -210,7 +214,6 @@ $posit3 = [
         [{{ strtoupper($getHorario->turma->turma) }}-{{ strtoupper($getHorario->turma->turno->turno) }}-{{ strtoupper($getHorario->turma->curso->curso) }}-{{ strtoupper($getHorario->disciplina->disciplina) }}
         ]</title>
     <style>
-
         .mini-cabecalho {
             display: block;
         }
@@ -319,7 +322,7 @@ $posit3 = [
                             <th rowspan="2">G</th>
                             <th colspan="4">1º TRIMESTRE</th>
                             <th colspan="4">2º TRIMESTRE</th>
-                            <th colspan="4">3º TRIMESTRE</th>
+                            <th colspan="3">3º TRIMESTRE</th>
                             <th colspan="{{ $numero_colspan }}">DADOS FINAIS</th>
 
                         </tr>
@@ -336,12 +339,16 @@ $posit3 = [
 
                             <th>MAC3</th>
                             <th>NPP3</th>
-                            <th>PT3</th>
+                            <!--<th>PT3</th>-->
                             <th>MT3</th>
 
                             <th>MFD</th>
                             @if ($getCadeiraExame)
-                                <th>NPE</th>
+                                @if ($getCadeiraExame->exame_oral == 'sim')
+                                    <th>NEE</th>
+                                    <th>NEO</th>
+                                @endif
+                                <th>MEC</th>
                             @endif
                             <th>MF</th>
                             @if ($getCadeiraRecurso)
@@ -443,32 +450,32 @@ $posit3 = [
                                 if ($trimestre3->count() == 0) { ?>
                                 <td>---</td>
                                 <td>---</td>
-                                <td>---</td>
+                                <!--<td>---</td>-->
                                 <td class="td_color">---</td>
                                 <?php } else {foreach ($trimestre3 as $valor3) {
 
-$v1_estilo = ControladorNotas::nota_10(round($valor3->mac,1));
-                                                    $v2_estilo = ControladorNotas::nota_10(round($valor3->npp,1));
-                                                    $v3_estilo = ControladorNotas::nota_10(round($valor3->pt,1));
-                                                    $v4_estilo = ControladorNotas::nota_10(round($valor3->mt,1));
+                                $v1_estilo = ControladorNotas::nota_10(round($valor3->mac, 1));
+                                $v2_estilo = ControladorNotas::nota_10(round($valor3->npp, 1));
+                                $v3_estilo = ControladorNotas::nota_10(round($valor3->pt, 1));
+                                $v4_estilo = ControladorNotas::nota_10(round($valor3->mt, 1));
                                 ?>
 
-<td class="{{ $v1_estilo }}">
-    @if ($valor3->mac == null) ---
-    @else {{ strtr(round($valor3->mac, 1), '.', ',') }} @endif
-</td>
-<td class="{{ $v2_estilo }}">
-    @if ($valor3->npp == null) ---
-    @else {{ strtr(round($valor3->npp, 1), '.', ',') }} @endif
-</td>
-<td class="{{ $v3_estilo }}">
-@if ($valor3->pt == null) --- @else
-        {{ strtr(round($valor3->pt, 1), '.', ',') }} @endif
-</td>
-<td class="{{ $v4_estilo }}td_color">
-@if ($valor3->mt == null) --- @else
-        {{ strtr(round($valor3->mt, 1), '.', ',') }} @endif
-</td>
+                                <td class="{{ $v1_estilo }}">
+                                    @if ($valor3->mac == null) ---
+                                    @else {{ strtr(round($valor3->mac, 1), '.', ',') }} @endif
+                                </td>
+                                <td class="{{ $v2_estilo }}">
+                                    @if ($valor3->npp == null) ---
+                                    @else {{ strtr(round($valor3->npp, 1), '.', ',') }} @endif
+                                </td>
+                                <!--<td class="{{ $v3_estilo }}">
+                        @if ($valor3->pt == null) --- @else
+                                        {{ strtr(round($valor3->pt, 1), '.', ',') }} @endif
+                                </td>-->
+                                <td class="{{ $v4_estilo }}td_color">
+                                @if ($valor3->mt == null) --- @else
+                                        {{ strtr(round($valor3->mt, 1), '.', ',') }} @endif
+                                </td>
                                 <?php
                                 }}
                                 ?>
@@ -481,6 +488,10 @@ $v1_estilo = ControladorNotas::nota_10(round($valor3->mac,1));
                                 if ($final->count() == 0) { ?>
                                 <td>---</td>
                                 @if ($getCadeiraExame)
+                                    @if ($getCadeiraExame->exame_oral == 'sim')
+                                        <td>---</td>
+                                        <td>---</td>
+                                    @endif
                                     <td>---</td>
                                 @endif
                                 <td>---</td>
@@ -489,35 +500,53 @@ $v1_estilo = ControladorNotas::nota_10(round($valor3->mac,1));
                                 @endif
                                 <?php } else {foreach ($final as $valorf) {
 
-$v1_estilo = ControladorNotas::nota_10(round($valorf->mfd,1));
-                                                    if ($getCadeiraExame) {
-                                                    $v2_estilo = ControladorNotas::nota_10(round($valorf->npe,1));
-                                                    }
-                                                    $v3_estilo = ControladorNotas::nota_10($valorf->mf);
-                                                    if ($getCadeiraRecurso) {
-                                                    $v4_estilo = ControladorNotas::notaRec_5($valorf->rec);
-                                                    }
+                                $v1_estilo = ControladorNotas::nota_10(round($valorf->mfd, 1));
+                                if ($getCadeiraExame) {
+                                $v2_estilo = ControladorNotas::nota_10(round($valorf->npe, 1));
+                                if ($getCadeiraExame->exame_oral == 'sim') {
+                                $v02_estilo = ControladorNotas::nota_10(round($valorf->nee, 1));
+                                $v002_estilo = ControladorNotas::nota_10(round($valorf->neo, 1));
+                                }
+                                }
+                                $v3_estilo = ControladorNotas::nota_10($valorf->mf);
+                                if ($getCadeiraRecurso) {
+                                $v4_estilo = ControladorNotas::notaRec_5($valorf->rec);
+                                }
                                 ?>
-                          <td class="{{ $v1_estilo }}">
-                            @if ($valorf->mfd == null) ---
-                            @else {{ strtr(round($valorf->mfd, 1), '.', ',') }} @endif
-                        </td>
-                        @if ($getCadeiraExame)
-                            <td class="{{ $v2_estilo }}">
-                                @if ($valorf->npe == null) ---
-                                @else {{ strtr(round($valorf->npe, 1), '.', ',') }} @endif
-                            </td>
-                        @endif
-                        <td class="{{ $v3_estilo }}td_color">
-                        @if ($valorf->mf == null) --- @else
-                                {{ $valorf->mf }} @endif
-                        </td>
-                        @if ($getCadeiraRecurso)
-                            <td class="{{ $v4_estilo }}">
-                                @if ($valorf->rec == null) ---
-                                @else {{ $valorf->rec }} @endif
-                            </td>
-                        @endif
+                                <td class="{{ $v1_estilo }}">
+                                    @if ($valorf->mfd == null) ---
+                                    @else {{ strtr(round($valorf->mfd, 1), '.', ',') }} @endif
+                                </td>
+                                @if ($getCadeiraExame)
+                                    @if ($getCadeiraExame->exame_oral == 'sim')
+                                        <td class="{{ $v02_estilo }}">
+                                            @if ($valorf->nee == null)
+                                                ---
+                                            @else {{ strtr(round($valorf->nee, 1), '.', ',') }}
+                                            @endif
+                                        </td>
+                                        <td class="{{ $v002_estilo }}">
+                                            @if ($valorf->neo == null)
+                                                ---
+                                            @else {{ strtr(round($valorf->neo, 1), '.', ',') }}
+                                            @endif
+                                        </td>
+                                    @endif
+                                    <td class="{{ $v2_estilo }}">
+                                        @if ($valorf->npe == null) ---
+                                        @else {{ strtr(round($valorf->npe, 1), '.', ',') }} @endif
+                                    </td>
+                                @endif
+                                <td class="{{ $v3_estilo }}td_color">
+                                @if ($valorf->mf == null) --- @else
+                                        {{ $valorf->mf }} @endif
+                                </td>
+                                @if ($getCadeiraRecurso)
+                                    <td class="{{ $v4_estilo }}">
+                                        @if ($valorf->rec == null) ---
+                                        @else {{ $valorf->rec }} @endif
+                                    </td>
+                                @endif
                                 <?php
                                 }}
                                 ?>
@@ -1390,14 +1419,14 @@ $v1_estilo = ControladorNotas::nota_10(round($valorf->mfd,1));
                                 <td class="td_color">---</td>
                                 <?php } else {foreach ($trimestre1 as $valor1) {
 
-                                $v01_estilo = ControladorNotas::nota_10(round($valor1->av1,1));
-                                $v02_estilo = ControladorNotas::nota_10(round($valor1->av2,1));
-                                $v03_estilo = ControladorNotas::nota_10(round($valor1->av3,1));
+                                $v01_estilo = ControladorNotas::nota_10(round($valor1->av1, 1));
+                                $v02_estilo = ControladorNotas::nota_10(round($valor1->av2, 1));
+                                $v03_estilo = ControladorNotas::nota_10(round($valor1->av3, 1));
 
-                                $v1_estilo = ControladorNotas::nota_10(round($valor1->mac,1));
-                                $v2_estilo = ControladorNotas::nota_10(round($valor1->npp,1));
-                                $v3_estilo = ControladorNotas::nota_10(round($valor1->pt,1));
-                                $v4_estilo = ControladorNotas::nota_10(round($valor1->mt,1));
+                                $v1_estilo = ControladorNotas::nota_10(round($valor1->mac, 1));
+                                $v2_estilo = ControladorNotas::nota_10(round($valor1->npp, 1));
+                                $v3_estilo = ControladorNotas::nota_10(round($valor1->pt, 1));
+                                $v4_estilo = ControladorNotas::nota_10(round($valor1->mt, 1));
                                 ?>
                                 <td class="{{ $v01_estilo }}">
                                 @if ($valor1->av1 == null) --- @else
@@ -1409,7 +1438,7 @@ $v1_estilo = ControladorNotas::nota_10(round($valorf->mfd,1));
                                 </td>
                                 <td class="{{ $v03_estilo }}">
                                 @if ($valor1->av3 == null) --- @else
-                                        {{ strtr(round($valor1->av3, 1),'.', ',')}} @endif
+                                        {{ strtr(round($valor1->av3, 1), '.', ',') }} @endif
                                 </td>
                                 <td class="{{ $v1_estilo }}">
                                 @if ($valor1->mac == null) --- @else
@@ -1425,7 +1454,7 @@ $v1_estilo = ControladorNotas::nota_10(round($valorf->mfd,1));
                                 </td>
                                 <td class="{{ $v4_estilo }}td_color">
                                 @if ($valor1->mt == null) --- @else
-                                        {{ strtr(round($valor1->mt,1), '.', ',') }} @endif
+                                        {{ strtr(round($valor1->mt, 1), '.', ',') }} @endif
                                 </td>
                                 <?php
                                 }}
@@ -1515,14 +1544,14 @@ $v1_estilo = ControladorNotas::nota_10(round($valorf->mfd,1));
                                 <td class="td_color">---</td>
                                 <?php } else {foreach ($trimestre2 as $valor2) {
 
-                                $v01_estilo = ControladorNotas::nota_10(round($valor2->av1,1));
-                                $v02_estilo = ControladorNotas::nota_10(round($valor2->av2,1));
-                                $v03_estilo = ControladorNotas::nota_10(round($valor2->av3,1));
+                                $v01_estilo = ControladorNotas::nota_10(round($valor2->av1, 1));
+                                $v02_estilo = ControladorNotas::nota_10(round($valor2->av2, 1));
+                                $v03_estilo = ControladorNotas::nota_10(round($valor2->av3, 1));
 
-                                $v1_estilo = ControladorNotas::nota_10(round($valor2->mac,1));
-                                $v2_estilo = ControladorNotas::nota_10(round($valor2->npp,1));
-                                $v3_estilo = ControladorNotas::nota_10(round($valor2->pt,1));
-                                $v4_estilo = ControladorNotas::nota_10(round($valor2->mt,1));
+                                $v1_estilo = ControladorNotas::nota_10(round($valor2->mac, 1));
+                                $v2_estilo = ControladorNotas::nota_10(round($valor2->npp, 1));
+                                $v3_estilo = ControladorNotas::nota_10(round($valor2->pt, 1));
+                                $v4_estilo = ControladorNotas::nota_10(round($valor2->mt, 1));
                                 ?>
                                 <td class="{{ $v01_estilo }}">
                                 @if ($valor2->av1 == null) --- @else
@@ -1550,7 +1579,7 @@ $v1_estilo = ControladorNotas::nota_10(round($valorf->mfd,1));
                                 </td>
                                 <td class="{{ $v4_estilo }}td_color">
                                 @if ($valor2->mt == null) --- @else
-                                        {{ strtr(round($valor2->mt,1), '.', ',')}} @endif
+                                        {{ strtr(round($valor2->mt, 1), '.', ',') }} @endif
                                 </td>
                                 <?php
                                 }}
@@ -1579,7 +1608,7 @@ $v1_estilo = ControladorNotas::nota_10(round($valorf->mfd,1));
     <!-- end pagina -->
 
 
-    <!-- terceira pagina -->
+    <!-- quarta pagina -->
     <div class="page-break">
         <div class="cabecalho">
             @include('include.header_docs')
@@ -1615,7 +1644,7 @@ $v1_estilo = ControladorNotas::nota_10(round($valorf->mfd,1));
                             <th>JUN</th>
                             <th>MAC3</th>
                             <th>NPP3</th>
-                            <th>PT3</th>
+                            <!--<th>PT3</th>-->
                             <th>MT3</th>
                         </tr>
                     </thead>
@@ -1636,19 +1665,19 @@ $v1_estilo = ControladorNotas::nota_10(round($valorf->mfd,1));
                                 <td>---</td>
                                 <td>---</td>
                                 <td>---</td>
-                                <td>---</td>
+                                <!--<td>---</td>-->
                                 <td>---</td>
                                 <td class="td_color">---</td>
                                 <?php } else {foreach ($trimestre3 as $valor3) {
 
-                                $v01_estilo = ControladorNotas::nota_10(round($valor3->av1,1));
-                                $v02_estilo = ControladorNotas::nota_10(round($valor3->av2,1));
-                                $v03_estilo = ControladorNotas::nota_10(round($valor3->av3,1));
+                                $v01_estilo = ControladorNotas::nota_10(round($valor3->av1, 1));
+                                $v02_estilo = ControladorNotas::nota_10(round($valor3->av2, 1));
+                                $v03_estilo = ControladorNotas::nota_10(round($valor3->av3, 1));
 
-                                $v1_estilo = ControladorNotas::nota_10(round($valor3->mac,1));
-                                $v2_estilo = ControladorNotas::nota_10(round($valor3->npp,1));
-                                $v3_estilo = ControladorNotas::nota_10(round($valor3->pt,1));
-                                $v4_estilo = ControladorNotas::nota_10(round($valor3->mt,1));
+                                $v1_estilo = ControladorNotas::nota_10(round($valor3->mac, 1));
+                                $v2_estilo = ControladorNotas::nota_10(round($valor3->npp, 1));
+                                $v3_estilo = ControladorNotas::nota_10(round($valor3->pt, 1));
+                                $v4_estilo = ControladorNotas::nota_10(round($valor3->mt, 1));
                                 ?>
                                 <td class="{{ $v01_estilo }}">
                                 @if ($valor3->av1 == null) --- @else
@@ -1670,13 +1699,13 @@ $v1_estilo = ControladorNotas::nota_10(round($valorf->mfd,1));
                                 @if ($valor3->npp == null) --- @else
                                         {{ strtr(round($valor3->npp, 1), '.', ',') }} @endif
                                 </td>
-                                <td class="{{ $v3_estilo }}">
+                                <!--<td class="{{ $v3_estilo }}">
                                 @if ($valor3->pt == null) --- @else
                                         {{ strtr(round($valor3->pt, 1), '.', ',') }} @endif
-                                </td>
+                                </td>-->
                                 <td class="{{ $v4_estilo }}td_color">
                                 @if ($valor3->mt == null) --- @else
-                                        {{ strtr(round($valor3->mt,1), '.', ',')}} @endif
+                                        {{ strtr(round($valor3->mt, 1), '.', ',') }} @endif
                                 </td>
                                 <?php
                                 }}

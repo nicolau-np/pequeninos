@@ -108,7 +108,7 @@ if ($getCadeiraExame) {
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>
                                                         <img src="
-                                                    @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
+                                                        @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
                                                     @else
                                                         {{ asset('assets/template/images/profile.png') }} @endif
                                                         " alt="" style="width:47px; height:47px; border-radius:4px;">
@@ -214,11 +214,11 @@ if ($getCadeiraExame) {
                                                     ControladorNotas::getValoresMiniPautaTrimestralPDF($getHorario->id_disciplina,
                                                     $historico->id_estudante, 3, $getHorario->ano_lectivo);
                                                     if ($restricao3) { ?>
-                                                    <td colspan="4">DÍVIDAS POR PAGAR</td>
+                                                    <td colspan="3">DÍVIDAS POR PAGAR</td>
                                                     <?php } else {if ($trimestre3->count() == 0) { ?>
                                                     <td>---</td>
                                                     <td>---</td>
-                                                    <td>---</td>
+                                                    <!--<td>---</td>-->
                                                     <td class="td_color">---</td>
                                                     <?php } else {foreach ($trimestre3 as $valor3) {
 
@@ -240,8 +240,8 @@ if ($getCadeiraExame) {
                                                     </td>
                                                     <!--<td class="{{ $v3_estilo }}">
                                                     @if ($valor3->pt == null) --- @else
-                                                            {{ strtr(round($valor3->pt, 1), '.', ',') }} @endif
-                                                    </td>-->
+                                                                {{ strtr(round($valor3->pt, 1), '.', ',') }} @endif
+                                                        </td>-->
                                                     <td class="{{ $v4_estilo }} td_color">
                                                     @if ($valor3->mt == null) --- @else
                                                             {{ strtr(round($valor3->mt, 1), '.', ',') }} @endif
@@ -259,6 +259,10 @@ if ($getCadeiraExame) {
                                                     if ($final->count() == 0) { ?>
                                                     <td>---</td>
                                                     @if ($getCadeiraExame)
+                                                        @if ($getCadeiraExame->exame_oral == 'sim')
+                                                            <td>---</td>
+                                                            <td>---</td>
+                                                        @endif
                                                         <td>---</td>
                                                     @endif
                                                     <td>---</td>

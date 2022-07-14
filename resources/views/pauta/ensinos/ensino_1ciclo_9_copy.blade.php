@@ -20,6 +20,10 @@ use App\Http\Controllers\ControladorStatic;
             font-weight: normal;
         }
 
+        .recursoobs {
+            color: #4b8a18;
+        }
+
     </style>
     <div class="page-body">
         <div class="row">
@@ -90,7 +94,7 @@ use App\Http\Controllers\ControladorStatic;
                                                     <?php
                                                     } ?>
                                                     <th rowspan="2">OBSERVAÇÃO</th>
-                                                    <th>OPERAÇÕES</th>
+                                                    <th rowspan="2">OPERAÇÕES</th>
                                                 </tr>
                                                 <tr>
                                                     @foreach (Session::get('disciplinas') as $disciplina)
@@ -131,7 +135,7 @@ use App\Http\Controllers\ControladorStatic;
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>
                                                             <img src="
-                                                                                    @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
+                                                                                        @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
                                                         @else
                                                             {{ asset('assets/template/images/profile.png') }} @endif
                                                             " alt="" style="width:47px; height:47px; border-radius:4px;">
@@ -316,8 +320,10 @@ use App\Http\Controllers\ControladorStatic;
                                                             @else
                                                                 @if ($historico->obs_pauta)
                                                                     <td class="@if ($historico->
-                                                                    obs_pauta == 'Transita') positivo @else
-                                                                        negativo @endif">
+                                                                        obs_pauta == 'Transita') positivo
+                                                                    @elseif($historico->
+                                                                    obs_pauta == 'Não Transita') negativo @else
+                                                                        recursoobs @endif">
                                                                         {{ strtoupper($historico->obs_pauta) }}
                                                                     </td>
                                                                 @else
@@ -340,6 +346,13 @@ use App\Http\Controllers\ControladorStatic;
                                                                         class="btn btn-primary btn-sm transita"><b>{{ $loop->iteration }}
                                                                             - </b>
                                                                         TRAN.</a>&nbsp;&nbsp;
+                                                                    <a href="#" data-id="{{ $historico->id_estudante }}"
+                                                                        data-estudate="{{ $historico->estudante->pessoa->nome }}"
+                                                                        data-id_turma="{{ $historico->id_turma }}"
+                                                                        data-ano_lectivo="{{ $historico->ano_lectivo }}"
+                                                                        class="btn btn-success btn-sm recurso"><b>{{ $loop->iteration }}
+                                                                            - </b>
+                                                                        REC.</a>&nbsp;&nbsp;
                                                                     <a href="#" data-id="{{ $historico->id_estudante }}"
                                                                         data-estudate="{{ $historico->estudante->pessoa->nome }}"
                                                                         data-id_turma="{{ $historico->id_turma }}"
@@ -434,7 +447,7 @@ use App\Http\Controllers\ControladorStatic;
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>
                                                             <img src="
-                                                                                    @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
+                                                                                        @if ($historico->estudante->pessoa->foto) {{ asset($historico->estudante->pessoa->foto) }}
                                                         @else
                                                             {{ asset('assets/template/images/profile.png') }} @endif
                                                             " alt="" style="width:47px; height:47px; border-radius:4px;">
@@ -619,8 +632,10 @@ use App\Http\Controllers\ControladorStatic;
                                                             @else
                                                                 @if ($historico->obs_pauta)
                                                                     <td class="@if ($historico->
-                                                                    obs_pauta == 'Transita') positivo @else
-                                                                        negativo @endif">
+                                                                        obs_pauta == 'Transita') positivo
+                                                                    @elseif($historico->
+                                                                    obs_pauta == 'Não Transita') negativo @else
+                                                                        recursoobs @endif">
                                                                         {{ strtoupper($historico->obs_pauta) }}
                                                                     </td>
                                                                 @else
@@ -643,6 +658,13 @@ use App\Http\Controllers\ControladorStatic;
                                                                         class="btn btn-primary btn-sm transita"><b>{{ $loop->iteration }}
                                                                             - </b>
                                                                         TRAN.</a>&nbsp;&nbsp;
+                                                                    <a href="#" data-id="{{ $historico->id_estudante }}"
+                                                                        data-estudate="{{ $historico->estudante->pessoa->nome }}"
+                                                                        data-id_turma="{{ $historico->id_turma }}"
+                                                                        data-ano_lectivo="{{ $historico->ano_lectivo }}"
+                                                                        class="btn btn-success btn-sm recurso"><b>{{ $loop->iteration }}
+                                                                            - </b>
+                                                                        REC.</a>&nbsp;&nbsp;
                                                                     <a href="#" data-id="{{ $historico->id_estudante }}"
                                                                         data-estudate="{{ $historico->estudante->pessoa->nome }}"
                                                                         data-id_turma="{{ $historico->id_turma }}"
@@ -699,6 +721,19 @@ use App\Http\Controllers\ControladorStatic;
                 var ano_lectivo = $(this).data('ano_lectivo');
                 var nome = $(this).data('estudate');
                 var observacao = "Não Transita";
+
+                var update = updateObservacao(id_estudante, id_turma, ano_lectivo, observacao);
+                if (update) {
+                    alert(nome + " " + observacao);
+                }
+            });
+
+            $('.recurso').click(function() {
+                var id_estudante = $(this).data('id');
+                var id_turma = $(this).data('id_turma');
+                var ano_lectivo = $(this).data('ano_lectivo');
+                var nome = $(this).data('estudate');
+                var observacao = "Recurso";
 
                 var update = updateObservacao(id_estudante, id_turma, ano_lectivo, observacao);
                 if (update) {

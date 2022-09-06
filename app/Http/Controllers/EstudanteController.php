@@ -429,7 +429,7 @@ class EstudanteController extends Controller
             'docs_entregues.*' => ['string']
         ]);
 
-        if ($request->bilhete != "" || $request->bilhete != $estudante->bilhete) {
+        if ($request->bilhete != "" && $request->bilhete != $estudante->pessoa->bilhete) {
             $request->validate([
                 'bilhete' => ['required', 'string', 'unique:pessoas,bilhete']
             ]);

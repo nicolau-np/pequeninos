@@ -277,6 +277,7 @@ Route::group(['prefix' => "mapas", 'middleware' => "AdminUserSuperMaster"], func
     Route::get('/aproveitamento/{ano_lectivo}', "MapaController@aproveitamento");
     Route::get('/coordenadores/{ano_lectivo}', "MapaController@coordenadores");
     Route::get('/estatistica/{ano_lectivo}', "MapaController@estatistica");
+    Route::get('/saidas', "MapaController@saidas");
 
     Route::group(['prefix' => "balancos"], function () {
         Route::get('/', "MapaController@balancos");

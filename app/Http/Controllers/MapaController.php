@@ -18,16 +18,17 @@ class MapaController extends Controller
             'type' => "mapas",
             'menu' => "Mapas",
             'submenu' => "Listar",
-            'getAnoLectivo'=>$ano_lectivos
+            'getAnoLectivo' => $ano_lectivos
 
         ];
         return view('mapas.list', $data);
     }
 
 
-    public function coordenadores($ano_lectivo){
+    public function coordenadores($ano_lectivo)
+    {
         $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
-        if(!$ano_lectivos){
+        if (!$ano_lectivos) {
             return back()->with(['error' => "Não encontrou ano lectivo"]);
         }
 
@@ -38,16 +39,17 @@ class MapaController extends Controller
             'type' => "mapas",
             'menu' => "Mapas",
             'submenu' => "Coordenadores",
-            'getEnsinos'=> $ensinos,
-            'getAnos' =>$anos,
-            'getAno'=>$ano_lectivo,
+            'getEnsinos' => $ensinos,
+            'getAnos' => $anos,
+            'getAno' => $ano_lectivo,
         ];
         return view('mapas.coordenadores', $data);
     }
 
-    public function aproveitamento($ano_lectivo){
+    public function aproveitamento($ano_lectivo)
+    {
         $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
-        if(!$ano_lectivos){
+        if (!$ano_lectivos) {
             return back()->with(['error' => "Não encontrou ano lectivo"]);
         }
 
@@ -58,16 +60,17 @@ class MapaController extends Controller
             'type' => "mapas",
             'menu' => "Mapas",
             'submenu' => "Aproveitamento",
-            'getEnsinos'=> $ensinos,
-            'getAnos' =>$anos,
-            'getAno'=>$ano_lectivo,
+            'getEnsinos' => $ensinos,
+            'getAnos' => $anos,
+            'getAno' => $ano_lectivo,
         ];
         return view('mapas.aproveitamento', $data);
     }
 
-    public function estatistica($ano_lectivo){
+    public function estatistica($ano_lectivo)
+    {
         $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
-        if(!$ano_lectivos){
+        if (!$ano_lectivos) {
             return back()->with(['error' => "Não encontrou ano lectivo"]);
         }
 
@@ -78,14 +81,15 @@ class MapaController extends Controller
             'type' => "mapas",
             'menu' => "Mapas",
             'submenu' => "Estatística",
-            'getEnsinos'=> $ensinos,
-            'getAnos' =>$anos,
-            'getAno'=>$ano_lectivo,
+            'getEnsinos' => $ensinos,
+            'getAnos' => $anos,
+            'getAno' => $ano_lectivo,
         ];
         return view('mapas.estatistica', $data);
     }
 
-    public function balancos(){
+    public function balancos()
+    {
         $data = [
             'title' => "Mapas",
             'type' => "mapas",
@@ -95,8 +99,9 @@ class MapaController extends Controller
         return view('mapas.balancos', $data);
     }
 
-    public function balanco_geral($ano_lectivo){
-        $ano_lect = AnoLectivo::where(['ano_lectivo'=>$ano_lectivo])->first();
+    public function balanco_geral($ano_lectivo)
+    {
+        $ano_lect = AnoLectivo::where(['ano_lectivo' => $ano_lectivo])->first();
         if (!$ano_lect) {
             return back()->with(['error' => "Nao encontrou"]);
         }
@@ -107,17 +112,18 @@ class MapaController extends Controller
             'type' => "mobile",
             'menu' => "Mapas",
             'submenu' => "Geral",
-            'getAnos'=>$ano_lectivos,
-            'getTipoPagamentos'=>$tipo_pagamentos,
-            'getAno'=>$ano_lectivo,
+            'getAnos' => $ano_lectivos,
+            'getTipoPagamentos' => $tipo_pagamentos,
+            'getAno' => $ano_lectivo,
 
         ];
         return view('mapas.balanco_geral', $data);
     }
 
 
-    public function balanco_categoria($ano_lectivo){
-      $ano_lect = AnoLectivo::where(['ano_lectivo'=>$ano_lectivo])->first();
+    public function balanco_categoria($ano_lectivo)
+    {
+        $ano_lect = AnoLectivo::where(['ano_lectivo' => $ano_lectivo])->first();
         if (!$ano_lect) {
             return back()->with(['error' => "Nao encontrou"]);
         }
@@ -129,21 +135,33 @@ class MapaController extends Controller
             'type' => "mobile",
             'menu' => "Mapas",
             'submenu' => "Categoria",
-            'getAnos'=>$ano_lectivos,
-            'getTipoPagamentos'=>$tipo_pagamentos,
-            'getAno'=>$ano_lectivo,
+            'getAnos' => $ano_lectivos,
+            'getTipoPagamentos' => $tipo_pagamentos,
+            'getAno' => $ano_lectivo,
             'getCategorias' => $categorias,
         ];
         return view('mapas.balanco_categoria', $data);
     }
 
-    public function balanco_diario(){
+    public function balanco_diario()
+    {
         $data = [
             'title' => "Balanços",
             'type' => "mapas",
             'menu' => "Mapas",
-            'submenu' => "Diário",
+            'submenu' => "Período",
         ];
         return view('mapas.balanco_diario', $data);
+    }
+
+    public function saidas()
+    {
+        $data = [
+            'title' => "Saídas",
+            'type' => "mapas",
+            'menu' => "Mapas",
+            'submenu' => "Saídas",
+        ];
+        return view('mapas.saidas', $data);
     }
 }

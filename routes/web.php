@@ -337,6 +337,7 @@ Route::group(['prefix' => "horarios", 'middleware' => "AdminUser"], function () 
 Route::group(['prefix' => "offline_online", 'middleware' => "AdminUserSuperMaster"], function () {
     Route::get('/list', "OfflineOnlineController@list");
     Route::get('/estudantes', "OfflineOnlineController@estudantes");
+
 });
 
 Route::group(['prefix' => 'estatisticas', 'middleware' => "auth"], function () {

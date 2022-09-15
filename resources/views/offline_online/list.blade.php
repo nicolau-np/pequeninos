@@ -1,7 +1,4 @@
-@php
-use App\Http\Controllers\ControladorStatic;
-$lastYear = ControladorStatic::getLastYear();
-@endphp
+
 @extends('layouts.app')
 @section('content')
 
@@ -54,7 +51,62 @@ $lastYear = ControladorStatic::getLastYear();
                                         </a>
                                     </div>
 
+                                    <div class="col-md-4 col-xl-4">
+                                        <a href="/offline_online/pagamentos" style="text-decoration: none;">
+                                            <div class="card widget-card-1">
+                                                <div class="card-block-small">
+                                                    <i class="ti-server bg-c-blue card1-icon"></i>
+                                                    <span class="text-c-green f-w-600"
+                                                        style="font-size:13px;">Pagamentos</span>
+                                                    <h4 style="font-size:17px;"> </h4>
+                                                    <div>
+                                                        <span class="f-left m-t-10 text-muted">
+                                                            <i
+                                                                class="text-c-green f-16 ti-arrow-circle-right m-r-10"></i>Offline/Online
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
 
+                                    <div class="col-md-4 col-xl-4">
+                                        <a href="/offline_online/saidas" style="text-decoration: none;">
+                                            <div class="card widget-card-1">
+                                                <div class="card-block-small">
+                                                    <i class="ti-server bg-c-blue card1-icon"></i>
+                                                    <span class="text-c-green f-w-600"
+                                                        style="font-size:13px;">Saídas</span>
+                                                    <h4 style="font-size:17px;"> </h4>
+                                                    <div>
+                                                        <span class="f-left m-t-10 text-muted">
+                                                            <i
+                                                                class="text-c-green f-16 ti-arrow-circle-right m-r-10"></i>Offline/Online
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                    <div class="col-md-4 col-xl-4">
+                                        <a href="/offline_online/multas" style="text-decoration: none;">
+                                            <div class="card widget-card-1">
+                                                <div class="card-block-small">
+                                                    <i class="ti-server bg-c-blue card1-icon"></i>
+                                                    <span class="text-c-green f-w-600"
+                                                        style="font-size:13px;">Multas</span>
+                                                    <h4 style="font-size:17px;"> </h4>
+                                                    <div>
+                                                        <span class="f-left m-t-10 text-muted">
+                                                            <i
+                                                                class="text-c-green f-16 ti-arrow-circle-right m-r-10"></i>Offline/Online
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </a>
+                                    </div>
 
                                 </div>
 

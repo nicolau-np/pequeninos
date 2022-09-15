@@ -1,20 +1,7 @@
 <?php
 
-use App\AnoLectivo;
-use App\Avaliacao;
-use App\Declaracao;
-use App\Desistencia;
-use App\DocumentoEntregue;
-use App\Estudante;
-use App\Finals;
-use App\HistoricEstudante;
-use App\Multado;
-use App\Pagamento;
-use App\Pessoa;
-use App\Prova;
 use App\RestricaoNota;
-use App\Transferencia;
-use App\Trimestral;
+
 use Illuminate\Support\Facades\Route;
 
 
@@ -380,6 +367,8 @@ Route::group(['prefix' => 'relatorios', 'middleware' => "auth"], function () {
 
     Route::get('/balancoDiario/{data1}/{data2}', "RelatorioController@balancoDiario");
     Route::put('/pautatrimestral/{id_turma}/{ano_lectivo}', "RelatorioController@pautatrimestral");
+
+    Route::post('/saidas', "RelatorioController@saidas");
 });
 
 

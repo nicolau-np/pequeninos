@@ -20,10 +20,13 @@
                     </div>
                     <div class="card-block">
                         <div class="form">
-                            {{ Form::open(['class' => 'form_search', 'method' => 'post', 'url' => '#']) }}
+                            {{ Form::open(['class' => 'form_search', 'method' => 'post', 'url' => '/relatorios/saidas']) }}
                             <div class="row text-right">
-                                <div class="col-md-8">
-                                    {{ Form::text('text_search', null, ['class' => 'form-control text_seach', 'placeholder' => 'Pesquisar...']) }}
+                                <div class="col-md-5">
+                                    {{ Form::date('data_inicial', null, ['class' => 'form-control', 'placeholder' => 'Data Inicial']) }}
+                                </div>
+                                <div class="col-md-5">
+                                    {{ Form::date('data_final', null, ['class' => 'form-control', 'placeholder' => 'Data Final']) }}
                                 </div>
                                 <div class="col-md-1">
                                     <button class="btn btn-success btn-sm"><i class="ti-search"></i></button>

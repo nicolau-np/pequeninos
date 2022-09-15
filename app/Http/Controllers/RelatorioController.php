@@ -23,6 +23,7 @@ use App\Horario;
 use App\OrdernaDisciplina;
 use App\Pagamento;
 use App\PagamentoPai;
+use App\Saida;
 use App\TabelaPreco;
 use App\TipoPagamento;
 use App\Transferencia;
@@ -726,7 +727,7 @@ class RelatorioController extends Controller
             'getHistorico' => $historico,
             'getEpoca' => $request->epoca,
             'getAno' => $ano_lectivo,
-            'getOrdenaDisciplinas' =>$ordena_disciplina,
+            'getOrdenaDisciplinas' => $ordena_disciplina,
         ];
 
 
@@ -754,5 +755,22 @@ class RelatorioController extends Controller
             }
         }
         return $pdf->stream('PAUTA DO ' . $request->epoca . 'º TRIMESTRE - ' . $ano_lectivo . '[ ' . strtoupper($turma->turma) . ' ' . strtoupper($turma->turno->turno) . '-' . strtoupper($turma->curso->curso) . ' ].pdf');
+    }
+
+    public function saidas(Request $request)
+    {
+        $request->validate([
+            'data_inicial' => ['required', 'date'],
+            'data_final' => ['required', 'date'],
+        ]);
+        $saidas = Saida::whereBetween('data_saida', [$request->data_inicial, $request->data_final])->get();
+        $data = [
+            'getSaidas' => $saidas,
+            'data_inicial' => $request->data_inicial,
+            'data_final' => $request->data_final,
+        ];
+
+        $pdf = PDF::loadView('relatorios.saidas', $data)->setPaper('A4', 'normal');
+        return $pdf->stream('SAÍDAS REFERENTES - [' . $request->data_inicial . ' / ' . $request->data_final . ' ].pdf');
     }
 }

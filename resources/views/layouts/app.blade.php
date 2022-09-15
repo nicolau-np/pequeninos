@@ -580,7 +580,7 @@ $lastYear = ControladorStatic::getLastYear();
                                             Auth::user()->nivel_acesso == 'master' ||
                                             Auth::user()->nivel_acesso == 'user' ||
                                             Auth::user()->nivel_acesso == 'super')
-                                            <li class="@if ($menu == 'Mapas') active @endif">
+                                            <li class="@if ($type == 'offline_online') active @endif">
                                                 <a href="/offline_online/list">
                                                     <span class="pcoded-micon"><i
                                                             class="ti-server"></i><b>M</b></span>

@@ -191,26 +191,13 @@ $lastYear = ControladorStatic::getLastYear();
                                             <i class="ti-angle-down"></i>
                                         </a>
                                         <ul class="show-notification profile-notification">
-                                            <li>
-                                                <a href="#!">
-                                                    <i class="ti-settings"></i> Configurações
-                                                </a>
-                                            </li>
+
                                             <li>
                                                 <a href="/user/profile">
                                                     <i class="ti-user"></i> Perfil
                                                 </a>
                                             </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="ti-email"></i> Mensagens
-                                                </a>
-                                            </li>
-                                            <li>
-                                                <a href="#">
-                                                    <i class="ti-lock"></i> Bloquear
-                                                </a>
-                                            </li>
+
                                             <li>
                                                 <a href="{{ route('logout') }}">
                                                     <i class="ti-layout-sidebar-left"></i> Sair
@@ -227,7 +214,8 @@ $lastYear = ControladorStatic::getLastYear();
                     <div class="pcoded-main-container">
                         <div class="pcoded-wrapper">
                             <nav class="pcoded-navbar">
-                                <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a></div>
+                                <div class="sidebar_toggle"><a href="#"><i class="icon-close icons"></i></a>
+                                </div>
                                 <div class="pcoded-inner-navbar main-menu">
                                     <div class="">
                                         <div class="main-menu-header">
@@ -251,8 +239,7 @@ $lastYear = ControladorStatic::getLastYear();
                                         <div class="main-menu-content">
                                             <ul>
                                                 <li class="more-details">
-                                                    <a href="#"><i class="ti-user"></i>Ver Perfil</a>
-                                                    <a href="#"><i class="ti-settings"></i>Configurações</a>
+                                                    <a href="/user/profile"><i class="ti-user"></i>Ver Perfil</a>
                                                     <a href="{{ route('logout') }}"><i
                                                             class="ti-layout-sidebar-left"></i>Sair</a>
                                                 </li>
@@ -271,7 +258,7 @@ $lastYear = ControladorStatic::getLastYear();
                                     <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">Principal
                                     </div>
                                     <ul class="pcoded-item pcoded-left-item">
-                                        <li class="@if ($menu=='Home' ) active @endif">
+                                        <li class="@if ($menu == 'Home') active @endif">
                                             <a href="/home">
                                                 <span class="pcoded-micon"><i class="ti-home"></i><b>H</b></span>
                                                 <span class="pcoded-mtext" data-i18n="nav.dash.main">Home</span>
@@ -279,17 +266,18 @@ $lastYear = ControladorStatic::getLastYear();
                                             </a>
                                         </li>
                                         @if (Auth::user()->nivel_acesso == 'admin')
-                                            <li class="@if ($menu=='Usuários' ) active @endif">
+                                            <li class="@if ($menu == 'Usuários') active @endif">
                                                 <a href="/usuarios/">
                                                     <span class="pcoded-micon"><i class="ti-user"></i><b>U</b></span>
-                                                    <span class="pcoded-mtext" data-i18n="nav.dash.main">Usuários</span>
+                                                    <span class="pcoded-mtext"
+                                                        data-i18n="nav.dash.main">Usuários</span>
                                                     <span class="pcoded-mcaret"></span>
                                                 </a>
                                             </li>
                                         @endif
 
                                         @if (Auth::user()->nivel_acesso == 'admin' || Auth::user()->nivel_acesso == 'super')
-                                            <li class="@if ($menu=='Funcionários' ) active @endif">
+                                            <li class="@if ($menu == 'Funcionários') active @endif">
                                                 <a href="/funcionarios/">
                                                     <span class="pcoded-micon"><i
                                                             class="ti-layout-tab-v"></i><b>F</b></span>
@@ -301,7 +289,7 @@ $lastYear = ControladorStatic::getLastYear();
                                         @endif
 
                                         @if (Auth::user()->nivel_acesso == 'admin' || Auth::user()->nivel_acesso == 'super')
-                                            <li class="@if ($menu=='Directores de Turma' ) active @endif">
+                                            <li class="@if ($menu == 'Directores de Turma') active @endif">
                                                 <a href="/directores/">
                                                     <span class="pcoded-micon"><i
                                                             class="ti-briefcase"></i><b>D</b></span>
@@ -312,8 +300,10 @@ $lastYear = ControladorStatic::getLastYear();
                                             </li>
                                         @endif
 
-                                        @if (Auth::user()->nivel_acesso == 'admin' || Auth::user()->nivel_acesso == 'super' || Auth::user()->nivel_acesso == 'user')
-                                            <li class="@if ($menu=='Estudantes' ) active @endif">
+                                        @if (Auth::user()->nivel_acesso == 'admin' ||
+                                            Auth::user()->nivel_acesso == 'super' ||
+                                            Auth::user()->nivel_acesso == 'user')
+                                            <li class="@if ($menu == 'Estudantes') active @endif">
                                                 <a href="/estudantes/">
                                                     <span class="pcoded-micon"><i
                                                             class="ti-id-badge"></i><b>F</b></span>
@@ -324,10 +314,13 @@ $lastYear = ControladorStatic::getLastYear();
                                             </li>
                                         @endif
 
-                                        @if (Auth::user()->nivel_acesso == 'admin' || Auth::user()->nivel_acesso == 'super' || Auth::user()->nivel_acesso == 'user')
-                                            <li class="@if ($menu=='Turma' ) active @endif">
+                                        @if (Auth::user()->nivel_acesso == 'admin' ||
+                                            Auth::user()->nivel_acesso == 'super' ||
+                                            Auth::user()->nivel_acesso == 'user')
+                                            <li class="@if ($menu == 'Turma') active @endif">
                                                 <a href="/turmas/list/{{ $lastYear }}">
-                                                    <span class="pcoded-micon"><i class="ti-layers"></i><b>T</b></span>
+                                                    <span class="pcoded-micon"><i
+                                                            class="ti-layers"></i><b>T</b></span>
                                                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Turmas</span>
                                                     <span class="pcoded-mcaret"></span>
                                                 </a>
@@ -341,8 +334,8 @@ $lastYear = ControladorStatic::getLastYear();
                                     <ul class="pcoded-item pcoded-left-item">
 
                                         @if (Auth::user()->nivel_acesso == 'admin')
-                                            <li class="pcoded-hasmenu @if ($type=='institucional'
-                                                ) active pcoded-trigger @endif">
+                                            <li
+                                                class="pcoded-hasmenu @if ($type == 'institucional') active pcoded-trigger @endif">
 
                                                 <a href="javascript:void(0)">
                                                     <span class="pcoded-micon"><i class="ti-settings"></i></span>
@@ -351,7 +344,7 @@ $lastYear = ControladorStatic::getLastYear();
                                                     <span class="pcoded-mcaret"></span>
                                                 </a>
                                                 <ul class="pcoded-submenu">
-                                                    <li class="@if ($menu=='Cursos' ) active @endif">
+                                                    <li class="@if ($menu == 'Cursos') active @endif">
                                                         <a href="/institucional/cursos/">
                                                             <span class="pcoded-micon"><i
                                                                     class="ti-angle-right"></i></span>
@@ -361,7 +354,7 @@ $lastYear = ControladorStatic::getLastYear();
                                                         </a>
                                                     </li>
 
-                                                    <li class="@if ($menu=='Turmas' ) active @endif">
+                                                    <li class="@if ($menu == 'Turmas') active @endif">
                                                         <a href="/institucional/turmas/">
                                                             <span class="pcoded-micon"><i
                                                                     class="ti-angle-right"></i></span>
@@ -370,7 +363,7 @@ $lastYear = ControladorStatic::getLastYear();
                                                             <span class="pcoded-mcaret"></span>
                                                         </a>
                                                     </li>
-                                                    <li class="@if ($menu=='Disciplinas' ) active @endif">
+                                                    <li class="@if ($menu == 'Disciplinas') active @endif">
                                                         <a href="/institucional/disciplinas/">
                                                             <span class="pcoded-micon"><i
                                                                     class="ti-angle-right"></i></span>
@@ -379,8 +372,7 @@ $lastYear = ControladorStatic::getLastYear();
                                                             <span class="pcoded-mcaret"></span>
                                                         </a>
                                                     </li>
-                                                    <li class="@if ($menu=='Grades Curricular'
-                                                        ) active @endif">
+                                                    <li class="@if ($menu == 'Grades Curricular') active @endif">
                                                         <a href="/institucional/grades/">
                                                             <span class="pcoded-micon"><i
                                                                     class="ti-angle-right"></i></span>
@@ -407,7 +399,7 @@ $lastYear = ControladorStatic::getLastYear();
                                             </a>
                                         </li>-->
 
-                                                    <li class="@if ($menu=='Ano Lectivo' ) active @endif">
+                                                    <li class="@if ($menu == 'Ano Lectivo') active @endif">
                                                         <a href="/institucional/ano_lectivos/">
                                                             <span class="pcoded-micon"><i
                                                                     class="ti-angle-right"></i></span>
@@ -418,7 +410,7 @@ $lastYear = ControladorStatic::getLastYear();
                                                         </a>
                                                     </li>
 
-                                                    <li class="@if ($menu=='Observações' ) active @endif">
+                                                    <li class="@if ($menu == 'Observações') active @endif">
                                                         <a href="/institucional/observacoes/">
                                                             <span class="pcoded-micon"><i
                                                                     class="ti-angle-right"></i></span>
@@ -428,7 +420,7 @@ $lastYear = ControladorStatic::getLastYear();
                                                         </a>
                                                     </li>
 
-                                                    <li class="@if ($menu=='Recursos' ) active @endif">
+                                                    <li class="@if ($menu == 'Recursos') active @endif">
                                                         <a href="/institucional/recursos/">
                                                             <span class="pcoded-micon"><i
                                                                     class="ti-angle-right"></i></span>
@@ -438,7 +430,7 @@ $lastYear = ControladorStatic::getLastYear();
                                                         </a>
                                                     </li>
 
-                                                    <li class="@if ($menu=='Exames' ) active @endif">
+                                                    <li class="@if ($menu == 'Exames') active @endif">
                                                         <a href="/institucional/exames/">
                                                             <span class="pcoded-micon"><i
                                                                     class="ti-angle-right"></i></span>
@@ -448,8 +440,7 @@ $lastYear = ControladorStatic::getLastYear();
                                                         </a>
                                                     </li>
 
-                                                    <li class="@if ($menu=='Ordenar Disciplinas'
-                                                        ) active @endif">
+                                                    <li class="@if ($menu == 'Ordenar Disciplinas') active @endif">
                                                         <a href="/institucional/ordenar_disciplinas/">
                                                             <span class="pcoded-micon"><i
                                                                     class="ti-angle-right"></i></span>
@@ -464,7 +455,8 @@ $lastYear = ControladorStatic::getLastYear();
                                         @endif
 
                                         @if (Auth::user()->nivel_acesso == 'user')
-                                            <li class="pcoded-hasmenu @if ($type=='financas' ) active pcoded-trigger @endif">
+                                            <li
+                                                class="pcoded-hasmenu @if ($type == 'financas') active pcoded-trigger @endif">
                                                 <a href="javascript:void(0)">
                                                     <span class="pcoded-micon"><i class="ti-money"></i></span>
                                                     <span class="pcoded-mtext"
@@ -472,8 +464,7 @@ $lastYear = ControladorStatic::getLastYear();
                                                     <span class="pcoded-mcaret"></span>
                                                 </a>
                                                 <ul class="pcoded-submenu">
-                                                    <li class="@if ($menu=='Tipo de Pagamentos'
-                                                        ) active @endif">
+                                                    <li class="@if ($menu == 'Tipo de Pagamentos') active @endif">
                                                         <a href="/financas/tipo_pagamentos/">
                                                             <span class="pcoded-micon"><i
                                                                     class="ti-angle-right"></i></span>
@@ -483,7 +474,7 @@ $lastYear = ControladorStatic::getLastYear();
                                                             <span class="pcoded-mcaret"></span>
                                                         </a>
                                                     </li>
-                                                    <li class="@if ($menu=='Tabela de Preços' ) active @endif">
+                                                    <li class="@if ($menu == 'Tabela de Preços') active @endif">
                                                         <a href="/financas/tabela_precos/">
                                                             <span class="pcoded-micon"><i
                                                                     class="ti-angle-right"></i></span>
@@ -494,7 +485,7 @@ $lastYear = ControladorStatic::getLastYear();
                                                         </a>
                                                     </li>
 
-                                                    <li class="@if ($menu=='Saídas' ) active @endif">
+                                                    <li class="@if ($menu == 'Saídas') active @endif">
                                                         <a href="/financas/saidas/">
                                                             <span class="pcoded-micon"><i
                                                                     class="ti-angle-right"></i></span>
@@ -509,7 +500,7 @@ $lastYear = ControladorStatic::getLastYear();
                                         @endif
 
                                         @if (Auth::user()->nivel_acesso == 'admin' || Auth::user()->nivel_acesso == 'super')
-                                            <li class="@if ($menu=='Encarregados' ) active @endif">
+                                            <li class="@if ($menu == 'Encarregados') active @endif">
                                                 <a href="/encarregados/">
                                                     <span class="pcoded-micon"><i
                                                             class="ti-layout-media-overlay-alt"></i><b>E</b></span>
@@ -521,8 +512,8 @@ $lastYear = ControladorStatic::getLastYear();
                                         @endif
 
                                         @if (Auth::user()->nivel_acesso == 'user')
-                                            <li class="pcoded-hasmenu @if ($type=='estatisticas'
-                                                ) active pcoded-trigger @endif">
+                                            <li
+                                                class="pcoded-hasmenu @if ($type == 'estatisticas') active pcoded-trigger @endif">
                                                 <a href="javascript:void(0)">
                                                     <span class="pcoded-micon"><i class="ti-bar-chart"></i></span>
                                                     <span class="pcoded-mtext"
@@ -531,8 +522,7 @@ $lastYear = ControladorStatic::getLastYear();
                                                 </a>
                                                 <ul class="pcoded-submenu">
 
-                                                    <li class="@if ($menu=='Listas de Pagamentos'
-                                                        ) active @endif">
+                                                    <li class="@if ($menu == 'Listas de Pagamentos') active @endif">
                                                         <a href="/estatisticas/pagamentos/">
                                                             <span class="pcoded-micon"><i
                                                                     class="ti-angle-right"></i></span>
@@ -545,7 +535,7 @@ $lastYear = ControladorStatic::getLastYear();
 
 
 
-                                                    <li class="@if ($menu=='Balanços' ) active @endif">
+                                                    <li class="@if ($menu == 'Balanços') active @endif">
                                                         <a href="/estatisticas/balancos/list/{{ $lastYear }}">
                                                             <span class="pcoded-micon"><i
                                                                     class="ti-angle-right"></i></span>
@@ -562,7 +552,7 @@ $lastYear = ControladorStatic::getLastYear();
                                         @endif
 
                                         @if (Auth::user()->nivel_acesso == 'admin')
-                                            <li class="@if ($menu=='Bloqueios de Epocas' ) active @endif">
+                                            <li class="@if ($menu == 'Bloqueios de Epocas') active @endif">
                                                 <a href="/bloqueios">
                                                     <span class="pcoded-micon"><i class="ti-key"></i><b>B</b></span>
                                                     <span class="pcoded-mtext"
@@ -572,12 +562,30 @@ $lastYear = ControladorStatic::getLastYear();
                                             </li>
                                         @endif
 
-                                        @if (Auth::user()->nivel_acesso == 'admin' || Auth::user()->nivel_acesso == 'master' || Auth::user()->nivel_acesso == 'user' || Auth::user()->nivel_acesso == 'super')
-                                            <li class="@if ($menu=='Mapas' ) active @endif">
+                                        @if (Auth::user()->nivel_acesso == 'admin' ||
+                                            Auth::user()->nivel_acesso == 'master' ||
+                                            Auth::user()->nivel_acesso == 'user' ||
+                                            Auth::user()->nivel_acesso == 'super')
+                                            <li class="@if ($menu == 'Mapas') active @endif">
                                                 <a href="/mapas">
                                                     <span class="pcoded-micon"><i class="ti-map"></i><b>M</b></span>
                                                     <span class="pcoded-mtext"
                                                         data-i18n="nav.form-components.main">Mapas</span>
+                                                    <span class="pcoded-mcaret"></span>
+                                                </a>
+                                            </li>
+                                        @endif
+
+                                        @if (Auth::user()->nivel_acesso == 'admin' ||
+                                            Auth::user()->nivel_acesso == 'master' ||
+                                            Auth::user()->nivel_acesso == 'user' ||
+                                            Auth::user()->nivel_acesso == 'super')
+                                            <li class="@if ($menu == 'Mapas') active @endif">
+                                                <a href="/offline_online/list">
+                                                    <span class="pcoded-micon"><i
+                                                            class="ti-server"></i><b>M</b></span>
+                                                    <span class="pcoded-mtext"
+                                                        data-i18n="nav.form-components.main">Offline / Online</span>
                                                     <span class="pcoded-mcaret"></span>
                                                 </a>
                                             </li>
@@ -589,7 +597,7 @@ $lastYear = ControladorStatic::getLastYear();
                                         <div class="pcoded-navigatio-lavel" data-i18n="nav.category.navigation">
                                             Professor</div>
                                         <ul class="pcoded-item pcoded-left-item">
-                                            <li class="@if ($menu=='Caderneta' ) active @endif">
+                                            <li class="@if ($menu == 'Caderneta') active @endif">
                                                 <a href="/cadernetas/list/{{ $lastYear }}">
                                                     <span class="pcoded-micon"><i
                                                             class="icofont icofont-file-alt"></i><b>H</b></span>
@@ -599,9 +607,10 @@ $lastYear = ControladorStatic::getLastYear();
                                                 </a>
                                             </li>
 
-                                            <li class="@if ($menu=='Minha Turma' ) active @endif">
+                                            <li class="@if ($menu == 'Minha Turma') active @endif">
                                                 <a href="/minha_turma/list/{{ $lastYear }}">
-                                                    <span class="pcoded-micon"><i class="ti-folder"></i><b>U</b></span>
+                                                    <span class="pcoded-micon"><i
+                                                            class="ti-folder"></i><b>U</b></span>
                                                     <span class="pcoded-mtext" data-i18n="nav.dash.main">Minha
                                                         Turma</span>
                                                     <span class="pcoded-mcaret"></span>
@@ -614,7 +623,7 @@ $lastYear = ControladorStatic::getLastYear();
 
                                     <div class="pcoded-navigatio-lavel" data-i18n="nav.category.forms">Acerca</div>
                                     <ul class="pcoded-item pcoded-left-item">
-                                        <li class="@if ($menu=='Sistema' ) active @endif">
+                                        <li class="@if ($menu == 'Sistema') active @endif">
                                             <a href="/about/sistema">
                                                 <span class="pcoded-micon"><i
                                                         class="ti-bookmark-alt"></i><b>S</b></span>
@@ -623,7 +632,7 @@ $lastYear = ControladorStatic::getLastYear();
                                                 <span class="pcoded-mcaret"></span>
                                             </a>
                                         </li>
-                                        <li class="@if ($menu=='Instituição' ) active @endif">
+                                        <li class="@if ($menu == 'Instituição') active @endif">
                                             <a href="/about/instituicao">
                                                 <span class="pcoded-micon"><i
                                                         class="ti-direction-alt"></i><b>I</b></span>
@@ -775,14 +784,14 @@ $lastYear = ControladorStatic::getLastYear();
 
                                 {{ Form::label('genero', 'Gênero') }} <span class="text-danger">*</span>
                                 {{ Form::select(
-    'genero',
-    [
-        'M' => 'M',
-        'F' => 'F',
-    ],
-    null,
-    ['class' => 'form-control', 'placeholder' => 'Gênero', 'id' => 'generoP'],
-) }}
+                                    'genero',
+                                    [
+                                        'M' => 'M',
+                                        'F' => 'F',
+                                    ],
+                                    null,
+                                    ['class' => 'form-control', 'placeholder' => 'Gênero', 'id' => 'generoP'],
+                                ) }}
                             </div>
 
                             <div class="col-md-9" style="text-align: center;">
@@ -812,12 +821,9 @@ $lastYear = ControladorStatic::getLastYear();
         <script type="text/javascript" src="{{ asset('assets/template/js/jquery/jquery.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('assets/template/js/jquery-ui/jquery-ui.min.js') }}"></script>
         <script type="text/javascript" src="{{ asset('assets/template/js/popper.js/popper.min.js') }}"></script>
-        <script type="text/javascript" src="{{ asset('assets/template/js/bootstrap/js/bootstrap.min.js') }}">
-        </script>
+        <script type="text/javascript" src="{{ asset('assets/template/js/bootstrap/js/bootstrap.min.js') }}"></script>
         <!-- jquery slimscroll js -->
-        <script type="text/javascript"
-            src="{{ asset('assets/template/js/jquery-slimscroll/jquery.slimscroll.js') }}">
-        </script>
+        <script type="text/javascript" src="{{ asset('assets/template/js/jquery-slimscroll/jquery.slimscroll.js') }}"></script>
         <!-- modernizr js -->
         <script type="text/javascript" src="{{ asset('assets/template/js/modernizr/modernizr.js') }}"></script>
         <script type="text/javascript" src="{{ asset('assets/template/js/modernizr/css-scrollbars.js') }}"></script>
@@ -871,7 +877,6 @@ $lastYear = ControladorStatic::getLastYear();
 
                 });
             });
-
         </script>
     </body>
 @else

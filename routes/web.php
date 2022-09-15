@@ -334,6 +334,11 @@ Route::group(['prefix' => "horarios", 'middleware' => "AdminUser"], function () 
     Route::post('/import/store', "HorarioController@import_store");
 });
 
+Route::group(['prefix' => "offline_online", 'middleware' => "AdminUserSuperMaster"], function () {
+    Route::get('/list', "OfflineOnlineController@list");
+    Route::get('/estudantes', "OfflineOnlineController@estudantes");
+});
+
 Route::group(['prefix' => 'estatisticas', 'middleware' => "auth"], function () {
 
     Route::group(['prefix' => 'pagamentos', 'middleware' => "MasterAdminUser"], function () {

@@ -16,7 +16,8 @@ use Maatwebsite\Excel\Concerns\WithChunkReading;
 use Maatwebsite\Excel\Concerns\WithHeadingRow;
 use Maatwebsite\Excel\Concerns\WithValidation;
 
-class EstudanteImport implements
+
+class EstudanteOnlineImport implements
     ToCollection,
     WithHeadingRow,
     SkipsOnError,
@@ -24,7 +25,6 @@ class EstudanteImport implements
     WithChunkReading,
     ShouldQueue
 {
-
     use Importable, SkipsErrors;
 
     public function collection(Collection $rows)
@@ -34,38 +34,34 @@ class EstudanteImport implements
             'nome' => null,
             'genero' => null,
             'data_nascimento' => null,
-            'telefone' => null,
-            'bilhete' => null,
-            'id_municipio' => 1,
+            'id_municipio' => null,
         ];
 
         $data['estudante'] = [
             'id_pessoa' => null,
-            'id_turma' => Session::get('id_turmaIMP'),
+            'id_turma' => null,
             'numero' => null,
             'numero_acesso' => null,
-            'id_encarregado' => 1,
+            'id_encarregado' => null,
             'estado' => "on",
             'categoria' => null,
-            'ano_lectivo' => Session::get('ano_lectivoIMP'),
+            'ano_lectivo' => null,
         ];
 
         $data['historico'] = [
             'id_estudante' => null,
-            'id_turma' => Session::get('id_turmaIMP'),
+            'id_turma' => null,
             'numero' => null,
             'numero_acesso' => null,
             'estado' => "on",
             'categoria' => null,
             'observacao_final' => null,
-            'ano_lectivo' => Session::get('ano_lectivoIMP'),
+            'ano_lectivo' => null,
         ];
+        
         foreach ($rows as $row) {
 
             //convertendo data
-            //$data_nascimento = date('Y-m-d', strtotime($this->transformData(intval($row['data_nascimento']))));
-
-
             $data_nascimento = date('Y-m-d', strtotime($this->transformData(intval($row['data_nascimento']))));
 
             if (!Pessoa::where(['nome' => $row['nome']])->first()) {
@@ -75,9 +71,7 @@ class EstudanteImport implements
                 /*fim*/
 
                 $data['pessoa']['nome'] = $row['nome'];
-                $data['pessoa']['genero'] = $row['g'];
-                $data['pessoa']['telefone'] = $row['telefone'];
-                $data['pessoa']['bilhete'] = $row['bi'];
+                $data['pessoa']['genero'] = $row['genero'];
 
                 $data['pessoa']['data_nascimento'] = $data_nascimento;
                 $pessoa = Pessoa::create($data['pessoa']);
@@ -90,8 +84,8 @@ class EstudanteImport implements
                 $data['historico']['numero_acesso'] = $gerando_aleatorio . "-" . $estudante->id;
                 $numero_acesso = $gerando_aleatorio . "-" . $estudante->id;
                 $data['historico']['numero'] = $row['n'];
-                $data['historico']['categoria'] = null;
-                $data['estudante']['categoria'] = null;
+                $data['historico']['categoria'] = $row['categoria'];
+                $data['estudante']['categoria'] = $row['categoria'];
                 $historico = HistoricEstudante::create($data['historico']);
 
                 if ($historico) {

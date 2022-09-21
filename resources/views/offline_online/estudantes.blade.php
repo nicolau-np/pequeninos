@@ -20,55 +20,101 @@
                     </div>
                     <div class="card-block">
                         <div class="row">
+
                             <div class="col-md-12">
                                 <div class="formulario">
-                                    @if(session('error'))
-                                    <div class="alert alert-danger">{{session('error')}}</div>
+                                    @if (session('error'))
+                                        <div class="alert alert-danger">{{ session('error') }}</div>
                                     @endif
 
-                                    @if(session('success'))
-                                    <div class="alert alert-success">{{session('success')}}</div>
+                                    @if (session('success'))
+                                        <div class="alert alert-success">{{ session('success') }}</div>
                                     @endif
-                                        {{Form::open(['method'=>"post", 'url'=>"/offline_online/"])}}
-                                        @csrf
-                                        <fieldset>
-                                            <legend><i class="ti-download"></i> Offline (Exportar)</legend>
-                                            <div class="row">
+                                    {{ Form::open(['method' => 'post', 'url' => '/offline_online/export/estudantes']) }}
+                                    @csrf
+                                    <fieldset>
+                                        <legend><i class="ti-download"></i> Offline (Exportar)</legend>
+                                        <div class="row">
 
 
-                                                <div class="col-md-3">
-                                                    {{Form::label('ano_lectivo', "Ano Lectivo")}} <span class="text-danger">*</span>
-                                                    {{Form::select('ano_lectivo', $getAnos, $getAno->id, ['class'=>"form-control", 'placeholder'=>"Ano Lectivo"])}}
-                                                    <div class="erro">
-                                                        @if($errors->has('ano_lectivo'))
-                                                        <div class="text-danger">{{$errors->first('ano_lectivo')}}</div>
-                                                        @endif
-                                                    </div>
+                                            <div class="col-md-3">
+                                                {{ Form::label('ano_lectivo', 'Ano Lectivo') }} <span
+                                                    class="text-danger">*</span>
+                                                {{ Form::select('ano_lectivo', $getAnos, $getAno->id, ['class' => 'form-control', 'placeholder' => 'Ano Lectivo']) }}
+                                                <div class="erro">
+                                                    @if ($errors->has('ano_lectivo'))
+                                                        <div class="text-danger">{{ $errors->first('ano_lectivo') }}</div>
+                                                    @endif
                                                 </div>
+                                            </div>
 
-                                                <div class="col-md-3">
-                                                    {{Form::label('turma', "Turma")}} <span class="text-danger">*</span>
-                                                    {{Form::select('turma', $getTurmas, null, ['class'=>"form-control", 'placeholder'=>"Turmas"])}}
-                                                    <div class="erro">
-                                                        @if($errors->has('turma'))
-                                                        <div class="text-danger">{{$errors->first('turma')}}</div>
-                                                        @endif
-                                                    </div>
+                                            <div class="col-md-3">
+                                                {{ Form::label('turma', 'Turma') }} <span class="text-danger">*</span>
+                                                {{ Form::select('turma', $getTurmas, null, ['class' => 'form-control', 'placeholder' => 'Turmas']) }}
+                                                <div class="erro">
+                                                    @if ($errors->has('turma'))
+                                                        <div class="text-danger">{{ $errors->first('turma') }}</div>
+                                                    @endif
                                                 </div>
+                                            </div>
 
+                                        </div>
+
+
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                {{ Form::submit('Baixar', ['class' => 'btn btn-primary']) }}
+                                            </div>
+
+                                        </div>
+
+                                        {{ Form::close() }}
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-12">
+                                <br /><br />
+                                <div class="formulario">
+                                    @if (session('error'))
+                                        <div class="alert alert-danger">{{ session('error') }}</div>
+                                    @endif
+
+                                    @if (session('success'))
+                                        <div class="alert alert-success">{{ session('success') }}</div>
+                                    @endif
+                                    {{ Form::open(['method' => 'post', 'url' => '/offline_online/import/estudantes', 'enctype' => 'multipart/form-data']) }}
+                                    @csrf
+                                    <fieldset>
+                                        <legend><i class="ti-upload"></i> Online (Importar)</legend>
+                                        <div class="row">
+
+                                            <div class="col-md-3">
+                                                {{ Form::label('ficheiro', 'Ficheiro') }} <span
+                                                    class="text-danger">*</span>
+                                                {{ Form::file('ficheiro', null, ['class' => 'form-control', 'placeholder' => 'Ficheiro']) }}
+                                                <div class="erro">
+                                                    @if ($errors->has('ficheiro'))
+                                                        <div class="text-danger">{{ $errors->first('ano_lectivo') }}</div>
+                                                    @endif
+                                                </div>
                                             </div>
 
 
-                                            <br/>
-                                            <div class="row">
-                                                <div class="col-md-4">
-                                                    {{Form::submit('Baixar', ['class'=>"btn btn-primary"])}}
-                                                 </div>
+                                        </div>
 
+
+                                        <br />
+                                        <div class="row">
+                                            <div class="col-md-4">
+                                                {{ Form::submit('Upload(Importar)', ['class' => 'btn btn-primary']) }}
                                             </div>
 
-                                        {{Form::close()}}
-                                   </div>
+                                        </div>
+
+                                        {{ Form::close() }}
+                                </div>
                             </div>
                         </div>
                     </div>

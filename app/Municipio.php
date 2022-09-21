@@ -14,7 +14,13 @@ class Municipio extends Model
         'cidade_cede',
     ];
 
-    public function provincia(){
+    public function provincia()
+    {
         return $this->belongsTo(Provincia::class, 'id_provincia', 'id');
+    }
+
+    public function pessoa()
+    {
+        return $this->hasMany(Pessoa::class, 'id_municipio', 'id');
     }
 }

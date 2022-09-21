@@ -338,6 +338,14 @@ Route::group(['prefix' => "offline_online", 'middleware' => "AdminUserSuperMaste
     Route::get('/list', "OfflineOnlineController@list");
     Route::get('/estudantes', "OfflineOnlineController@estudantes");
 
+    Route::group(['prefix'=>"export"], function(){
+        Route::post('/estudantes', "OfflineOnlineController@export_estudante");
+    });
+
+    Route::group(['prefix'=>"import"], function(){
+        Route::post('/estudantes', "OfflineOnlineController@import_estudante");
+    });
+
 });
 
 Route::group(['prefix' => 'estatisticas', 'middleware' => "auth"], function () {

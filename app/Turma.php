@@ -14,34 +14,41 @@ class Turma extends Model
         'id_turno',
         'turma',
         'sala',
+        'ano_lectivo',
     ];
 
-    public function curso(){
+    public function curso()
+    {
         return $this->belongsTo(Curso::class, 'id_curso', 'id');
     }
 
-    public function classe(){
+    public function classe()
+    {
         return $this->belongsTo(Classe::class, 'id_classe', 'id');
     }
 
-    public function turno(){
+    public function turno()
+    {
         return $this->belongsTo(Turno::class, 'id_turno', 'id');
     }
 
-    public function estudante(){
+    public function estudante()
+    {
         return $this->hasMany(Estudante::class, 'id_turma', 'id');
     }
 
-    public function historico(){
+    public function historico()
+    {
         return $this->hasMany(HistoricEstudante::class, 'id_turma', 'id');
     }
 
-    public function horario(){
+    public function horario()
+    {
         return $this->hasMany(Horario::class, 'id_turma', 'id');
     }
 
-    public function director_turma(){
+    public function director_turma()
+    {
         return $this->hasMany(DirectorTurma::class, 'id_turma', 'id');
     }
-
 }

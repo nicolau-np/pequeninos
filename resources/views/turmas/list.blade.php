@@ -2,7 +2,6 @@
 use App\Http\Controllers\ControladorStatic; ?>
 @extends('layouts.app')
 @section('content')
-
     <div class="page-body">
         <div class="row">
             <div class="col-sm-12">
@@ -45,130 +44,126 @@ use App\Http\Controllers\ControladorStatic; ?>
                                                     <div class="accordion-desc">
                                                         <div class="row">
                                                             @foreach ($ensinos->curso as $curso)
-                                                                <?php $getTurmas =
-                                                                ControladorStatic::getTurmaEnsino($curso->id_ensino); ?>
+                                                                <?php $getTurmas = ControladorStatic::getTurmaEnsino($curso->id_ensino); ?>
                                                                 @if ($getTurmas->count() == 0)
                                                                     <div class="col-md-12">
                                                                         <span style="font-size:12px;">Nenhuma turma
                                                                             encontrada para este ensino</span>
                                                                     </div>
-
                                                                 @else
-
                                                                     @foreach ($getTurmas as $turmas)
                                                                         <?php
                                                                         $numero_estudantes = 0;
-                                                                        $getEstudantes =
-                                                                        ControladorStatic::getTotalEstudantesTurma($turmas->id,
-                                                                        $getAno);
+                                                                        $getEstudantes = ControladorStatic::getTotalEstudantesTurma($turmas->id, $getAno);
                                                                         $numero_estudantes = $getEstudantes->count();
                                                                         ?>
-                                                                        <div class="col-md-4 col-xl-4">
-                                                                            <div class="card widget-card-1">
-                                                                                <div class="card-block-small">
-                                                                                    <i
-                                                                                        class="ti-layers bg-c-blue card1-icon"></i>
-                                                                                    <span
-                                                                                        class="text-c-blue f-w-600">{{ $curso->curso }}</span>
-                                                                                    <h4 style="font-size:20px;">
-                                                                                        {{ $turmas->turma }}&nbsp;{{ $turmas->turno->turno }}
-                                                                                    </h4>
-                                                                                    <div>
+                                                                        @if ($getAno == $turmas->ano_lectivo)
+                                                                            <div class="col-md-4 col-xl-4">
+                                                                                <div class="card widget-card-1">
+                                                                                    <div class="card-block-small">
+                                                                                        <i
+                                                                                            class="ti-layers bg-c-blue card1-icon"></i>
                                                                                         <span
-                                                                                            class="f-left m-t-10 text-muted">
-                                                                                            Ano:
-                                                                                            {{ $getAno }}&nbsp;&nbsp;
-                                                                                            <b>[ {{ $numero_estudantes }}
-                                                                                                ]</b>
-                                                                                            <hr />
-                                                                                            <div class="operacoes">
-                                                                                                <a href="/relatorios/lista_nominal/{{ $turmas->id }}/{{ $getAno }}"
-                                                                                                    type="button"
-                                                                                                    class="btn btn-warning btn-icon waves-effect waves-light"
-                                                                                                    data-toggle="tooltip"
-                                                                                                    data-placement="left"
-                                                                                                    title=""
-                                                                                                    data-original-title="Lista Nominal">
-                                                                                                    <i
-                                                                                                        class="ti-printer"></i>
-                                                                                                </a>&nbsp;
+                                                                                            class="text-c-blue f-w-600">{{ $curso->curso }}</span>
+                                                                                        <h4 style="font-size:20px;">
+                                                                                            {{ $turmas->turma }}&nbsp;{{ $turmas->turno->turno }}
+                                                                                        </h4>
+                                                                                        <div>
+                                                                                            <span
+                                                                                                class="f-left m-t-10 text-muted">
+                                                                                                Ano:
+                                                                                                {{ $getAno }}&nbsp;&nbsp;
+                                                                                                <b>[ {{ $numero_estudantes }}
+                                                                                                    ]</b>
+                                                                                                <hr />
+                                                                                                <div class="operacoes">
+                                                                                                    <a href="/relatorios/lista_nominal/{{ $turmas->id }}/{{ $getAno }}"
+                                                                                                        type="button"
+                                                                                                        class="btn btn-warning btn-icon waves-effect waves-light"
+                                                                                                        data-toggle="tooltip"
+                                                                                                        data-placement="left"
+                                                                                                        title=""
+                                                                                                        data-original-title="Lista Nominal">
+                                                                                                        <i
+                                                                                                            class="ti-printer"></i>
+                                                                                                    </a>&nbsp;
 
-                                                                                                <a href="/minha_turma/fotografias/{{ $turmas->id }}/{{ $getAno }}"
-                                                                                                    type="button"
-                                                                                                    class="btn btn-primary btn-icon waves-effect waves-light"
-                                                                                                    data-toggle="tooltip"
-                                                                                                    data-placement="right"
-                                                                                                    title=""
-                                                                                                    data-original-title="Fotografias">
-                                                                                                    <i
-                                                                                                        class="ti-gallery"></i>
-                                                                                                </a>&nbsp;
+                                                                                                    <a href="/minha_turma/fotografias/{{ $turmas->id }}/{{ $getAno }}"
+                                                                                                        type="button"
+                                                                                                        class="btn btn-primary btn-icon waves-effect waves-light"
+                                                                                                        data-toggle="tooltip"
+                                                                                                        data-placement="right"
+                                                                                                        title=""
+                                                                                                        data-original-title="Fotografias">
+                                                                                                        <i
+                                                                                                            class="ti-gallery"></i>
+                                                                                                    </a>&nbsp;
 
-                                                                                                <a href="/turmas/import/create/{{ $turmas->id }}/{{ $getAno }}"
-                                                                                                    type="button"
-                                                                                                    class="btn btn-danger btn-icon waves-effect waves-light"
-                                                                                                    data-toggle="tooltip"
-                                                                                                    data-placement="right"
-                                                                                                    title=""
-                                                                                                    data-original-title="Importar">
-                                                                                                    <i
-                                                                                                        class="ti-upload"></i>
-                                                                                                </a>&nbsp;
+                                                                                                    <a href="/turmas/import/create/{{ $turmas->id }}/{{ $getAno }}"
+                                                                                                        type="button"
+                                                                                                        class="btn btn-danger btn-icon waves-effect waves-light"
+                                                                                                        data-toggle="tooltip"
+                                                                                                        data-placement="right"
+                                                                                                        title=""
+                                                                                                        data-original-title="Importar">
+                                                                                                        <i
+                                                                                                            class="ti-upload"></i>
+                                                                                                    </a>&nbsp;
 
-                                                                                                <a href="/pautas/create/{{ $turmas->id }}/{{ $getAno }}"
-                                                                                                    type="button"
-                                                                                                    class="btn btn-success btn-icon waves-effect waves-light"
-                                                                                                    data-toggle="tooltip"
-                                                                                                    data-placement="top"
-                                                                                                    title=""
-                                                                                                    data-original-title="Pauta">
-                                                                                                    <i
-                                                                                                        class="icofont icofont-clip-board"></i>
-                                                                                                </a>&nbsp;
+                                                                                                    <a href="/pautas/create/{{ $turmas->id }}/{{ $getAno }}"
+                                                                                                        type="button"
+                                                                                                        class="btn btn-success btn-icon waves-effect waves-light"
+                                                                                                        data-toggle="tooltip"
+                                                                                                        data-placement="top"
+                                                                                                        title=""
+                                                                                                        data-original-title="Pauta">
+                                                                                                        <i
+                                                                                                            class="icofont icofont-clip-board"></i>
+                                                                                                    </a>&nbsp;
 
-                                                                                                <a href="/minha_turma/horario/{{ $turmas->id }}/{{ $getAno }}"
-                                                                                                    type="button"
-                                                                                                    class="btn btn-info btn-icon waves-effect waves-light"
-                                                                                                    data-toggle="tooltip"
-                                                                                                    data-placement="right"
-                                                                                                    title=""
-                                                                                                    data-original-title="Horário">
-                                                                                                    <i
-                                                                                                        class="ti-alarm-clock"></i>
-                                                                                                </a>&nbsp;
+                                                                                                    <a href="/minha_turma/horario/{{ $turmas->id }}/{{ $getAno }}"
+                                                                                                        type="button"
+                                                                                                        class="btn btn-info btn-icon waves-effect waves-light"
+                                                                                                        data-toggle="tooltip"
+                                                                                                        data-placement="right"
+                                                                                                        title=""
+                                                                                                        data-original-title="Horário">
+                                                                                                        <i
+                                                                                                            class="ti-alarm-clock"></i>
+                                                                                                    </a>&nbsp;
 
-                                                                                                <a href="/minha_turma/pautatrimestre/{{ $turmas->id }}/{{ $getAno }}"
-                                                                                                    type="button"
-                                                                                                    class="btn btn-inverse btn-icon waves-effect waves-light"
-                                                                                                    data-toggle="tooltip"
-                                                                                                    data-placement="right"
-                                                                                                    title=""
-                                                                                                    data-original-title="Pauta do Trimestre">
-                                                                                                    <i
-                                                                                                        class="icon-copy ti-direction-alt"></i>
-                                                                                                </a>&nbsp;
+                                                                                                    <a href="/minha_turma/pautatrimestre/{{ $turmas->id }}/{{ $getAno }}"
+                                                                                                        type="button"
+                                                                                                        class="btn btn-inverse btn-icon waves-effect waves-light"
+                                                                                                        data-toggle="tooltip"
+                                                                                                        data-placement="right"
+                                                                                                        title=""
+                                                                                                        data-original-title="Pauta do Trimestre">
+                                                                                                        <i
+                                                                                                            class="icon-copy ti-direction-alt"></i>
+                                                                                                    </a>&nbsp;
 
-                                                                                                <a href="/excel/lista_nominal/{{ $turmas->id }}/{{ $getAno }}"
-                                                                                                    type="button"
-                                                                                                    class="btn btn-warning btn-icon waves-effect waves-light"
-                                                                                                    data-toggle="tooltip"
-                                                                                                    data-placement="right"
-                                                                                                    title=""
-                                                                                                    data-original-title="Lista Nominal Excel">
-                                                                                                    <i
-                                                                                                        class="ti-printer"></i>
-                                                                                                </a>&nbsp;
+                                                                                                    <a href="/excel/lista_nominal/{{ $turmas->id }}/{{ $getAno }}"
+                                                                                                        type="button"
+                                                                                                        class="btn btn-warning btn-icon waves-effect waves-light"
+                                                                                                        data-toggle="tooltip"
+                                                                                                        data-placement="right"
+                                                                                                        title=""
+                                                                                                        data-original-title="Lista Nominal Excel">
+                                                                                                        <i
+                                                                                                            class="ti-printer"></i>
+                                                                                                    </a>&nbsp;
 
-                                                                                                
-                                                                                            </div>
-                                                                                        </span>
+
+                                                                                                </div>
+                                                                                            </span>
+                                                                                        </div>
                                                                                     </div>
                                                                                 </div>
                                                                             </div>
-                                                                        </div>
+                                                                        @endif
                                                                     @endforeach
                                                                 @endif
-
                                                             @endforeach
                                                         </div>
                                                     </div>
@@ -197,9 +192,8 @@ use App\Http\Controllers\ControladorStatic; ?>
     <!-- botão pesquisar -->
     <div class="btnPesquisar">
         <div class="btnPesquisarBtn">
-            <a href="#" class="btn btn-primary btnCircular btnPrincipal" title="Listar"><i class="ti-search"></i></a>
+            <a href="#" class="btn btn-primary btnCircular btnPrincipal" title="Listar"><i
+                    class="ti-search"></i></a>
         </div>
     </div>
-
-
 @endsection

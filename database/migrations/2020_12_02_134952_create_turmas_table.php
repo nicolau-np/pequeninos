@@ -21,6 +21,7 @@ class CreateTurmasTable extends Migration
             $table->bigInteger('id_turno')->unsigned()->index();
             $table->string('turma');
             $table->string('sala')->nullable();
+            $table->string('ano_lectivo')->nullable();
             $table->timestamps();
         });
 

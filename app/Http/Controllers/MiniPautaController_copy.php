@@ -89,12 +89,12 @@ class MiniPautaController_copy extends Controller
 
         if ($id_ensino == 1) {
             //se for classificacao quantitativa
-            if (($classe == "2ª classe") || ($classe == "4ª classe")|| ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
+            if (($classe == "2ª classe") || ($classe == "4ª classe")|| ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe") || ($classe == "Módulo 2") || ($classe == "Módulo 1")) {
                 return view('minipauta.ensinos.ensino_primario_2_4_copy', $data);
             } //se for classificacao quantitativa
             elseif (($classe == "Iniciação") ) {
                 return view('minipauta.ensinos.ensino_primario_Ini_1_3_5_copy', $data);
-            } elseif (($classe == "6ª classe")) {
+            } elseif (($classe == "6ª classe") || ($classe == "Módulo 3")) {
                 return view('minipauta.ensinos.ensino_primario_6_copy', $data);
             }
         } elseif ($id_ensino == 2) {

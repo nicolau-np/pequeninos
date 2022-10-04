@@ -136,13 +136,16 @@ class InstitucionalController extends Controller
     {
         $cursos = Curso::pluck('curso', 'id');
         $turnos = Turno::pluck('turno', 'id');
+        $ano_lectivo = AnoLectivo::pluck('ano_lectivo', 'ano_lectivo');
         $data = [
             'title' => "Turmas",
             'type' => "institucional",
             'menu' => "Turmas",
             'submenu' => "Novo",
             'getCursos' => $cursos,
-            'getTurnos' => $turnos
+            'getTurnos' => $turnos,
+            'getAnos'=>$ano_lectivo,
+
         ];
         return view('institucional.turmas.new', $data);
     }
@@ -153,7 +156,8 @@ class InstitucionalController extends Controller
             'curso' => ['required', 'Integer'],
             'classe' => ['required', 'Integer'],
             'turno' => ['required', 'Integer'],
-            'turma' => ['required', 'string', 'min:1', 'max:255']
+            'turma' => ['required', 'string', 'min:1', 'max:255'],
+            'ano_lectivo'=>['required', 'string'],
         ]);
 
         $data = [
@@ -162,6 +166,7 @@ class InstitucionalController extends Controller
             'id_turno' => $request->turno,
             'turma' => $request->turma,
             'sala' => $request->sala,
+            'ano_lectivo'=>$request->ano_lectivo,
         ];
         if (Turma::where($data)->first()) {
             return back()->with(['error' => "Já cadastrou esta turma"]);
@@ -180,6 +185,7 @@ class InstitucionalController extends Controller
         }
         $cursos = Curso::pluck('curso', 'id');
         $turnos = Turno::pluck('turno', 'id');
+        $ano_lectivo = AnoLectivo::pluck('ano_lectivo', 'ano_lectivo');
         $data = [
             'title' => "Turmas",
             'type' => "institucional",
@@ -187,7 +193,8 @@ class InstitucionalController extends Controller
             'submenu' => "Editar",
             'getCursos' => $cursos,
             'getTurnos' => $turnos,
-            'getTurma' => $turma
+            'getTurma' => $turma,
+            'getAnos'=>$ano_lectivo,
         ];
         return view('institucional.turmas.edit', $data);
     }
@@ -202,7 +209,8 @@ class InstitucionalController extends Controller
             'curso' => ['required', 'Integer'],
             'classe' => ['required', 'Integer'],
             'turno' => ['required', 'Integer'],
-            'turma' => ['required', 'string', 'min:1', 'max:255']
+            'turma' => ['required', 'string', 'min:1', 'max:255'],
+            'ano_lectivo'=>['required', 'string'],
         ]);
 
         $data = [
@@ -211,6 +219,7 @@ class InstitucionalController extends Controller
             'id_turno' => $request->turno,
             'turma' => $request->turma,
             'sala' => $request->sala,
+            'ano_lectivo'=>$request->ano_lectivo,
         ];
 
         if (

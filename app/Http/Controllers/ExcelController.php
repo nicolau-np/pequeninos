@@ -125,12 +125,12 @@ class ExcelController extends Controller
 
         if ($id_ensino == 1) { //iniciacao ate 6
             //se for classificacao quantitativa
-            if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
+            if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe") || ($classe == "Módulo 2") || ($classe == "Módulo 1")) {
                 $return = "minipauta.excel.ensino_primario_2_4_copy";
             } //se for classificacao quantitativa
             elseif (($classe == "Iniciação")) {
                 $return = "minipauta.excel.ensino_primario_Ini_1_3_5_copy";
-            } elseif (($classe == "6ª classe")) {
+            } elseif (($classe == "6ª classe") || ($classe == "Módulo 3")) {
                 $return = "minipauta.excel.ensino_primario_6_copy";
             }
         } elseif ($id_ensino == 2) { //7 classe ate 9 ensino geral
@@ -218,12 +218,12 @@ class ExcelController extends Controller
 
         if ($id_ensino == 1) { //iniciacao ate 6
             //se for classificacao quantitativa
-            if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
+            if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe") || ($classe == "Módulo 2") || ($classe == "Módulo 1")) {
                 $return = 'pauta.excel.ensino_primario_2_4_copy';
             } //se for classificacao quantitativa
             elseif (($classe == "Iniciação")) {
                 $return = 'pauta.excel.ensino_primario_Ini_1_3_5_copy';
-            } elseif (($classe == "6ª classe")) {
+            } elseif (($classe == "6ª classe") || ($classe == "Módulo 3")) {
                 $return = 'pauta.excel.ensino_primario_6_copy';
             }
         } elseif ($id_ensino == 2) { //7 classe ate 9 ensino geral

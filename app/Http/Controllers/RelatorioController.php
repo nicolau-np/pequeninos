@@ -252,12 +252,12 @@ class RelatorioController extends Controller
 
         if ($id_ensino == 1) { //iniciacao ate 6
             //se for classificacao quantitativa
-            if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
+            if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe") || ($classe == "Módulo 2") || ($classe == "Módulo 1")) {
                 $pdf = PDF::loadView('minipauta.pdf.ensino_primario_2_4_copy', $data['view'])->setPaper('A4', 'normal');
             } //se for classificacao quantitativa
             elseif (($classe == "Iniciação")) {
                 $pdf = PDF::loadView('minipauta.pdf.ensino_primario_Ini_1_3_5_copy', $data['view'])->setPaper('A4', 'normal');
-            } elseif (($classe == "6ª classe")) {
+            } elseif (($classe == "6ª classe") || ($classe == "Módulo 3")) {
                 $pdf = PDF::loadView('minipauta.pdf.ensino_primario_6_copy', $data['view'])->setPaper('A4', 'normal');
             }
         } elseif ($id_ensino == 2) { //7 classe ate 9 ensino geral
@@ -335,12 +335,12 @@ class RelatorioController extends Controller
 
         if ($id_ensino == 1) { //iniciacao ate 6
             //se for classificacao quantitativa
-            if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
+            if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe") || ($classe == "Módulo 2") || ($classe == "Módulo 1")) {
                 $pdf = PDF::loadView('pauta.pdf.ensino_primario_2_4_copy', $data['view'])->setPaper('A3', 'landscape');
             } //se for classificacao quantitativa
             elseif (($classe == "Iniciação")) {
                 $pdf = PDF::loadView('pauta.pdf.ensino_primario_Ini_1_3_5_copy', $data['view'])->setPaper('A3', 'landscape');
-            } elseif (($classe == "6ª classe")) {
+            } elseif (($classe == "6ª classe") || ($classe == "Módulo 3")) {
                 $pdf = PDF::loadView('pauta.pdf.ensino_primario_6_copy', $data['view'])->setPaper('A3', 'landscape');
             }
         } elseif ($id_ensino == 2) { //7 classe ate 9 ensino geral
@@ -409,12 +409,12 @@ class RelatorioController extends Controller
 
         if ($id_ensino == 1) { //iniciacao ate 6
             //se for classificacao quantitativa
-            if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
+            if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe") || ($classe == "Módulo 2") || ($classe == "Módulo 1")) {
                 $pdf = PDF::loadView('relatorios.ensinos.declaracao.ensino_primario_2_4_copy', $data['view'])->setPaper('A4', 'normal');
             } //se for classificacao quantitativa
             elseif (($classe == "Iniciação")) {
                 $pdf = PDF::loadView('relatorios.ensinos.declaracao.ensino_primario_Ini_1_3_5_copy', $data['view'])->setPaper('A4', 'normal');
-            } elseif (($classe == "6ª classe")) {
+            } elseif (($classe == "6ª classe") || ($classe == "Módulo 3")) {
                 $pdf = PDF::loadView('relatorios.ensinos.declaracao.ensino_primario_6_copy', $data['view'])->setPaper('A4', 'normal');
             }
         } elseif ($id_ensino == 2) { //7 classe ate 9 ensino geral
@@ -508,13 +508,13 @@ class RelatorioController extends Controller
 
         if ($id_ensino == 1) { //iniciacao ate 6
             //se for classificacao quantitativa
-            if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
+            if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe") || ($classe == "Módulo 2") || ($classe == "Módulo 1")) {
 
                 $pdf = PDF::loadView('relatorios.ensinos.boletins.ensino_primario_2_4_copy', $data['view'])->setPaper('A4', 'normal');
             } //se for classificacao quantitativa
             elseif (($classe == "Iniciação")) {
                 $pdf = PDF::loadView('relatorios.ensinos.boletins.ensino_primario_Ini_1_3_5_copy', $data['view'])->setPaper('A4', 'normal');
-            } elseif (($classe == "6ª classe")) {
+            } elseif (($classe == "6ª classe") || ($classe == "Módulo 3")) {
                 $pdf = PDF::loadView('relatorios.ensinos.boletins.ensino_primario_6_copy', $data['view'])->setPaper('A4', 'normal');
             }
         } elseif ($id_ensino == 2) { //7 classe ate 9 ensino geral
@@ -738,13 +738,13 @@ class RelatorioController extends Controller
 
         if ($id_ensino == 1) { //iniciacao ate 6
             //se for classificacao quantitativa
-            if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
+            if (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe") || ($classe == "Módulo 2") || ($classe == "Módulo 1")) {
 
                 $pdf = PDF::loadView('minha_turma.ensinos.ensino_primario_2_4_copy', $data['view'])->setPaper('A4', 'landscape');
             } //se for classificacao quantitativa
             elseif (($classe == "Iniciação")) {
                 $pdf = PDF::loadView('minha_turma.ensinos.ensino_primario_Ini_1_3_5_copy', $data['view'])->setPaper('A4', 'landscape');
-            } elseif (($classe == "6ª classe")) {
+            } elseif (($classe == "6ª classe") || ($classe == "Módulo 3")) {
                 $pdf = PDF::loadView('minha_turma.ensinos.ensino_primario_6_copy', $data['view'])->setPaper('A4', 'landscape');
             }
         } elseif ($id_ensino == 2) { //7 classe ate 9 ensino geral

@@ -1,5 +1,6 @@
 <?php
-use App\Http\Controllers\ControladorStatic; ?>
+use App\Http\Controllers\ControladorStatic;
+?>
 @extends('layouts.app')
 @section('content')
     <div class="page-body">

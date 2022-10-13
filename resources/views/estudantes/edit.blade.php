@@ -348,7 +348,7 @@
                                             {{ Form::select(
     'turma',
     [
-        $getEstudante->id_turma => $getEstudante->turma->turma,
+        $getEstudante->id_turma => $getEstudante->turma->turma. ' (' . $getEstudante->turma->ano_lectivo . ')',
     ],
     $getEstudante->id_turma,
     ['class' => 'form-control', 'placeholder' => 'Turma'],

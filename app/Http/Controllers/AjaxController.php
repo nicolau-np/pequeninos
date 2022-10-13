@@ -97,8 +97,8 @@ class AjaxController extends Controller
             'id_classe' => ['required', 'Integer'],
             'id_curso' => ['required', 'Integer']
         ]);
-        $turmas = Turma::where(['id_curso' => $request->id_curso, 'id_classe' => $request->id_classe])->pluck('turma', 'id');
-
+        //$turmas = Turma::where(['id_curso' => $request->id_curso, 'id_classe' => $request->id_classe])->pluck('turma', 'id');
+        $turmas = Turma::where(['id_curso' => $request->id_curso, 'id_classe' => $request->id_classe])->get();
         $data = [
             'getTurmas' => $turmas,
         ];
@@ -752,7 +752,7 @@ class AjaxController extends Controller
             $npe = Finals::mec($final->nee, $final->neo);
         }
 
-        $final = Finals::find($request->id_final)->update(['npe'=>$npe]);
+        $final = Finals::find($request->id_final)->update(['npe' => $npe]);
         if ($final) {
             echo " \\lancou npe\\ ";
         } else {

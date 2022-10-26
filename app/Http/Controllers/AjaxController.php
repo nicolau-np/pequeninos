@@ -165,7 +165,7 @@ class AjaxController extends Controller
     {
         $estudantes  = Estudante::whereHas('pessoa', function ($query) use ($request) {
             $query->where('nome', 'LIKE', "%{$request->search_text}%");
-        })->limit(5)->get();
+        })->limit(20)->get();
 
         $data = [
             'getEstudantes' => $estudantes

@@ -23,7 +23,9 @@ use App\Http\Controllers\ControladorStatic;
                                     <td>{{$estudantes->turma->classe->classe}}</td>
                                     <td>{{$estudantes->turma->turno->turno}}</td>
                                     <td>{{$estudantes->turma->turma}}</td>
-                                    <td>{{$estudantes->ano_lectivo}}</td>
+                                    <td>{{$estudantes->ano_lectivo}}&nbsp;(
+                                        <span style="font-size:8px; color:red; font-style: italic;">{{$estudantes->turma->ano_lectivo}}</span>)
+                                    </td>
                                     <td>
                                     <a href="/pagamentos/listar/{{$estudantes->id}}/{{$estudantes->ano_lectivo}}" class="btn btn-success btn-sm"><i class="ti-money"></i> Pag.</a>
                                     <a href="/estudantes/ficha/{{$estudantes->id}}/{{$estudantes->ano_lectivo}}" class="btn btn-warning btn-sm"><i class="ti-user"></i> Ficha</a>

@@ -1,7 +1,19 @@
 <?php
 
+use App\Avaliacao;
+use App\Declaracao;
+use App\Desistencia;
+use App\DocumentoEntregue;
+use App\Estudante;
+use App\Finals;
+use App\HistoricEstudante;
+use App\Multado;
+use App\Pagamento;
+use App\Pessoa;
+use App\Prova;
 use App\RestricaoNota;
-
+use App\Transferencia;
+use App\Trimestral;
 use Illuminate\Support\Facades\Route;
 
 
@@ -246,6 +258,7 @@ Route::group(['prefix' => 'estudantes', 'middleware' => "AdminSuperUser"], funct
     Route::get('/confirmar/{id_estudantes}', "EstudanteController@confirmar");
     Route::put('/store_confirmar/{id_estudante}', "EstudanteController@store_confirmar");
     Route::get('/ficha/{id_estudante}/{ano_lectivo}', "EstudanteController@ficha");
+    Route::get('/ficha/modificar/{id_historico}', "EstudanteController@ficha_modificar");
     Route::get('/declaracao/{id_estudante}/{ano_lectivo}', "EstudanteController@declaracao");
     Route::put('/store_declaracao/{id_estudante}', "EstudanteController@store_declaracao");
     Route::get('/guiatransferencia/{id_estudante}/{ano_lectivo}', "EstudanteController@guiatransferencia");
@@ -463,8 +476,8 @@ Route::get('/test', function () {
 
 /**eliminar estudantes */
 
-Route::get('/elminar_estudantes/{id_estudante}', function ($id_estudante) {
-    /*$estudante = Estudante::find($id_estudante);
+/*Route::get('/elminar_estudantes/{id_estudante}', function ($id_estudante) {
+    $estudante = Estudante::find($id_estudante);
     if (!$estudante) {
         return "Estudante nao encontrado";
     }
@@ -488,8 +501,8 @@ Route::get('/elminar_estudantes/{id_estudante}', function ($id_estudante) {
     Estudante::find($estudante->id)->delete();
     Pessoa::find($id_pessoa)->delete();
 
-    echo "eliminado com sucesso    => " . $nome;*/
-});
+    echo "eliminado com sucesso    => " . $nome;
+});*/
 
 Route::get('/text1', function () {
 

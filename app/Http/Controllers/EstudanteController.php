@@ -994,4 +994,15 @@ class EstudanteController extends Controller
 
         return back()->with(['success' => "Feito com sucesso"]);
     }
+
+    public function ficha_modificar($id_historico)
+    {
+        $historico = HistoricEstudante::find($id_historico);
+        if (!$historico) {
+            return back()->with(['error' => "Nao encontrou"]);
+        }
+        $historico->update(['ano_lectivo' => "2021-2022"]);
+
+        return back()->with(['success' => "Feito com sucesso"]);
+    }
 }

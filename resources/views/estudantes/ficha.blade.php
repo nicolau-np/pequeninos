@@ -36,7 +36,7 @@
                                 @endif
 
                                 @if (session('success'))
-                                    <div class="alert alert-danger">{{ session('success') }}</div>
+                                    <div class="alert alert-success">{{ session('success') }}</div>
                                 @endif
                             </div>
 
@@ -72,7 +72,7 @@
                                                     </td>
                                                     <td>
                                                         @if ($class == 'text-danger')
-                                                            <a href="/estudantes/ficha/modificar/{{ $historico->id }}"
+                                                            <a href="/estudantes/ficha_modificar/{{ $historico->id }}"
                                                                 class="btn btn-primary btn-sm">Mod.</a>
                                                         @endif
                                                     </td>

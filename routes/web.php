@@ -258,7 +258,7 @@ Route::group(['prefix' => 'estudantes', 'middleware' => "AdminSuperUser"], funct
     Route::get('/confirmar/{id_estudantes}', "EstudanteController@confirmar");
     Route::put('/store_confirmar/{id_estudante}', "EstudanteController@store_confirmar");
     Route::get('/ficha/{id_estudante}/{ano_lectivo}', "EstudanteController@ficha");
-    Route::get('/ficha/modificar/{id_historico}', "EstudanteController@ficha_modificar");
+    Route::get('/ficha_modificar/{id_historico}', "EstudanteController@ficha_modificar");
     Route::get('/declaracao/{id_estudante}/{ano_lectivo}', "EstudanteController@declaracao");
     Route::put('/store_declaracao/{id_estudante}', "EstudanteController@store_declaracao");
     Route::get('/guiatransferencia/{id_estudante}/{ano_lectivo}', "EstudanteController@guiatransferencia");

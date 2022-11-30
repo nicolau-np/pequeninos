@@ -312,6 +312,7 @@ class EstudanteController extends Controller
 
         $historico = HistoricEstudante::where(['id_estudante' => $estudante->id, 'ano_lectivo' => $estudante->ano_lectivo])->first();
 
+
         $data['pessoa'] = [
             'id_municipio' => $request->municipio,
             'nome' => $request->nome,
@@ -368,7 +369,7 @@ class EstudanteController extends Controller
         if (Pessoa::find($estudante->id_pessoa)->update($data['pessoa'])) {
 
             if (Estudante::find($estudante->id)->update($data['estudante'])) {
-                if (HistoricEstudante::find($estudante->id)->update($data['historico'])) {
+                if (HistoricEstudante::find($historico->id)->update($data['historico'])) {
                     DocumentoEntregue::where(['id_historico' => $historico->id])->delete();
                     foreach ($request->docs_entregues as $docs) {
                         $data['docs_entregues']['documento'] = $docs;

@@ -182,8 +182,7 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                                                         $trimestral->ano_lectivo); ?>
                                                                         <tr class="{{ $observacao->observacao_final }}">
                                                                             <td>{{ $loop->iteration }}</td>
-                                                                            <td>{{ $trimestral->estudante->pessoa->nome }}
-                                                                            </td>
+                                                                            <td>{{ $trimestral->estudante->pessoa->nome }}</td>
                                                                             <td>{{ $trimestral->estudante->pessoa->genero }}
                                                                             </td>
 

@@ -351,14 +351,13 @@ Route::group(['prefix' => "offline_online", 'middleware' => "AdminUserSuperMaste
     Route::get('/list', "OfflineOnlineController@list");
     Route::get('/estudantes', "OfflineOnlineController@estudantes");
 
-    Route::group(['prefix'=>"export"], function(){
+    Route::group(['prefix' => "export"], function () {
         Route::post('/estudantes', "OfflineOnlineController@export_estudante");
     });
 
-    Route::group(['prefix'=>"import"], function(){
+    Route::group(['prefix' => "import"], function () {
         Route::post('/estudantes', "OfflineOnlineController@import_estudante");
     });
-
 });
 
 Route::group(['prefix' => 'estatisticas', 'middleware' => "auth"], function () {
@@ -526,4 +525,22 @@ Route::get('/text1', function () {
 
     return view('welcome');*/
     //$xmlwriter->save("php://output");
+});
+
+Route::get('text_nota', function () {
+    $data2 = [
+        'id_turmaCAD' => 43,
+        'ano_lectivoCAD' => "2022-2023",
+        'epocaCAD' => 3,
+        'id_disciplinaCAD' => 1
+    ];
+    $trimestral = Trimestral::whereHas('estudante', function ($query) use ($data2) {
+        $query->where('id_turma', $data2['id_turmaCAD']);
+        $query->where('ano_lectivo', $data2['ano_lectivoCAD']);
+    })->where(['epoca' => $data2['epocaCAD'], 'id_disciplina' => $data2['id_disciplinaCAD']])
+        ->get()->sortBy('estudante.numero');
+
+    foreach ($trimestral as $trimestral1) {
+        echo $trimestral1->estudante->nome . "<br/>";
+    }
 });

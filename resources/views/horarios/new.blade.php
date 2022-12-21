@@ -120,7 +120,7 @@
                                         @foreach ($getHorarios as $horarios)
                                             <tr>
                                                 <td>{{ $horarios->disciplina->disciplina }}</td>
-                                                <td>{{ $horarios->turma->turma }}</td>
+                                                <td>{{ $horarios->turma->turma }} <span class="text-danger">({{ $horarios->turma->ano_lectivo }})</span></td>
                                                 <td>{{ $horarios->estado }}</td>
                                                 <td>
                                                     <a href="/horarios/destroy/{{ $horarios->id }}"

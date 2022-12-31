@@ -475,7 +475,7 @@ Route::get('/test', function () {
 
 /**eliminar estudantes */
 
-/*Route::get('/elminar_estudantes/{id_estudante}', function ($id_estudante) {
+Route::middleware('AdminSuperUser')->get('/elminar_estudantes/{id_estudante}', function ($id_estudante) {
     $estudante = Estudante::find($id_estudante);
     if (!$estudante) {
         return "Estudante nao encontrado";
@@ -501,7 +501,7 @@ Route::get('/test', function () {
     Pessoa::find($id_pessoa)->delete();
 
     echo "eliminado com sucesso    => " . $nome;
-});*/
+});
 
 Route::get('/text1', function () {
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Encarregado;
 use App\Estudante;
 use App\Funcionario;
+use App\HistoricEstudante;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -43,5 +44,21 @@ class HomeController extends Controller
             'getEncarregados'=>$encarregados,
         ];
         return view('home', $data);
+    }
+
+    public function lista_alterados(){
+        $ano_lectivo = "2022-2023";
+        $getHistoricoEstudanteAnos = HistoricEstudante::whereHas('turma', function($query){
+            $query->where('id_classe', 8);
+        })->get();
+        $data = [
+            'title'=>"Estudantes alterados",
+            'type'=>"home",
+            'menu'=>"Home",
+            'submenu'=>"",
+            'getHistoricoEstudanteAnos'=>$getHistoricoEstudanteAnos,
+        ];
+
+        return view('lista-alterados',$data);
     }
 }

@@ -179,7 +179,7 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                                                         <?php $observacao =
                                                                         ControladorStatic::getObservacaofinal($trimestral->id_estudante,
                                                                         $trimestral->ano_lectivo); ?>
-                                                                        <tr class="{{ $observacao->observacao_final }}">
+                                                                        <tr class="">
                                                                             <td>{{ $loop->iteration }}</td>
                                                                             <td>{{ $trimestral->estudante->pessoa->nome }}
                                                                             </td>
@@ -259,7 +259,7 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
                                         @if ($getEpoca2->estado != 'off')
                                             <div class="tab-pane @if (session('epoca')=='2' ) active @endif" role="tabpanel">
                                                 <p class="m-0">
-                                                    
+
                                                 <table class="table table-bordered tabela_notas">
                                                     <thead>
                                                         <tr>

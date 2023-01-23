@@ -461,6 +461,8 @@ Route::group(['prefix' => "excel"], function () {
     Route::get('pauta/{id_turma}/{ano_lectivo}', "ExcelController@pauta");
 });
 
+Route::get('lista-alterados', "HomeController@lista_alterados");
+
 /*rota de test*/
 Route::get('/test', function () {
     $restricao = RestricaoNota::all();

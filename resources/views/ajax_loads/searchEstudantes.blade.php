@@ -7,7 +7,7 @@ use App\Http\Controllers\ControladorStatic;
                                 <?php
                                 $observacao_final = ControladorStatic::getObservacaofinal($estudantes->id, $estudantes->ano_lectivo);
                                 ?>
-                                <tr class="{{$observacao_final->observacao_final}}">
+                                <tr class="">
                                 <th scope="row">{{$estudantes->id}}</th>
                                 <td>
                                     <img src="

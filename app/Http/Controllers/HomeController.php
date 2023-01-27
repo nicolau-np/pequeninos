@@ -49,7 +49,7 @@ class HomeController extends Controller
     public function lista_alterados(){
         $ano_lectivo = "2022-2023";
         $getHistoricoEstudanteAnos = HistoricEstudante::whereHas('turma', function($query){
-            $query->where('id_classe', 8);
+           
         })->get();
         $data = [
             'title'=>"Estudantes alterados",

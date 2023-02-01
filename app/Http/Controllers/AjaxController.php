@@ -277,6 +277,44 @@ class AjaxController extends Controller
         return view('ajax_loads.getClasses2', $data);
     }
 
+    public function adicionar_estudante($id_estudante, $id_pessoa, $id_turma, $ano_lectivo)
+    {
+        $data = [
+            'id_pessoa' => $id_pessoa,
+            'id_estudante' => $id_estudante,
+            'id_turma' => $id_turma,
+            'ano_lectivo' => $ano_lectivo,
+        ];
+        $estudante = Estudante::where(['id' => $id_estudante, 'id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])->first();
+        if (!$estudante) {
+            Estudante::create([
+                'id_turma'=>$id_turma,
+                'id_pessoa'=>$id_pessoa,
+                'id_encarregado'=>1,
+                'estado'=>"on",
+                'ano_lectivo'=>$ano_lectivo,
+            ]);
+            echo '//novo estudante';
+        } else {
+            echo 'ja existe estudante';
+        }
+
+        $historico = HistoricEstudante::where(['id_estudante' => $id_estudante, 'id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])->first();
+        if (!$historico) {
+            HistoricEstudante::create([
+                'id_estudante'=>$id_estudante,
+                'id_turma'=>$id_turma,
+                'estado'=>"on",
+                'ano_lectivo'=>$ano_lectivo,
+            ]);
+            echo '//novo historico estudante';
+        } else {
+            echo '//ja existe historico estudante';
+        }
+    }
+
+
+
     public function updateAvaliacao(Request $request)
     {
         if (Session::get('id_ensinoCAD') == 1) {
@@ -311,6 +349,13 @@ class AjaxController extends Controller
                 'id_disciplina' => $trimestral->id_disciplina,
                 'ano_lectivo' => $trimestral->ano_lectivo,
                 'estado' => "visivel"
+            ];
+
+            $data['estudante_nao_existe'] = [
+                'id_estudante' => $trimestral->id_estudante,
+                'id_turma' => $trimestral->estudante->id_turma,
+                'ano_lectivo' => $trimestral->ano_lectivo,
+                'id_pessoa' => $trimestral->estudante->id_pessoa,
             ];
 
             $horario = Horario::where($data['where_horario'])->first();
@@ -455,6 +500,10 @@ class AjaxController extends Controller
         if (Finals::where($data['where_mts'])->update($data['calculo_final'])) {
             echo " \\lancou o mfd e mf \\ ";
         }
+
+
+        $this->adicionar_estudante($data['estudante_nao_existe']['id_estudante'], $data['estudante_nao_existe']['id_pessoa'], $data['estudante_nao_existe']['id_turma'], $data['estudante_nao_existe']['ano_lectivo']);
+
         //fim mfd e mf
         $this->acharObervacao($final->id_estudante, $final->ano_lectivo);
     }

@@ -554,6 +554,13 @@ class AjaxController extends Controller
             return null;
         }
 
+        $data['estudante_nao_existe'] = [
+            'id_estudante' => $trimestral->id_estudante,
+            'id_turma' => $trimestral->estudante->id_turma,
+            'ano_lectivo' => $trimestral->ano_lectivo,
+            'id_pessoa' => $trimestral->estudante->id_pessoa,
+        ];
+
         //criando campos
         $campo = "" . $request->campo; //campo de provas
         $campo2 = $request->campo . "_data"; //campo de data
@@ -635,6 +642,7 @@ class AjaxController extends Controller
         if (Finals::where($data['where_mts'])->update($data['calculo_final'])) {
             echo " \\lancou o mfd e mf \\ ";
         }
+        $this->adicionar_estudante($data['estudante_nao_existe']['id_estudante'], $data['estudante_nao_existe']['id_pessoa'], $data['estudante_nao_existe']['id_turma'], $data['estudante_nao_existe']['ano_lectivo']);
         //fim mfd e mf
         $this->acharObervacao($final->id_estudante, $final->ano_lectivo);
     }

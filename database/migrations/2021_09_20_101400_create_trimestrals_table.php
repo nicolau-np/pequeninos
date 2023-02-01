@@ -18,6 +18,7 @@ class CreateTrimestralsTable extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('id_estudante')->unsigned()->index();
             $table->bigInteger('id_disciplina')->unsigned()->index();
+            $table->bigInteger('id_turma')->nullable();
             $table->bigInteger('epoca');
             $table->decimal('av1', 4, 2)->nullable();
             $table->date('av1_data')->nullable();

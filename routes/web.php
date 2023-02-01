@@ -463,6 +463,18 @@ Route::group(['prefix' => "excel"], function () {
 
 Route::get('lista-alterados', "HomeController@lista_alterados");
 
+Route::get('estudantes-caderneta', function(){
+    $data = [
+        'id_turma'=>64 //7.8
+    ];
+    $estudantes = HistoricEstudante::where('id_turma', 64)->get();
+
+    foreach($estudantes as $t){
+        echo $t->id."<br/>";
+    }
+});
+
+
 /*rota de test*/
 Route::get('/test', function () {
     $restricao = RestricaoNota::all();

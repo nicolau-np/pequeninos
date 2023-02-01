@@ -11,6 +11,7 @@ class Trimestral extends Model
     protected $fillable = [
         'id_estudante',
         'id_disciplina',
+        'id_turma',
         'epoca',
         'av1',
         'av1_data',
@@ -37,7 +38,7 @@ class Trimestral extends Model
     {
         return $this->belongsTo(Disciplina::class, 'id_disciplina', 'id');
     }
- 
+
     public static function mac($soma_avaliacoes, $quant_avaliacoes){
         $mac = ($soma_avaliacoes)/$quant_avaliacoes;
 

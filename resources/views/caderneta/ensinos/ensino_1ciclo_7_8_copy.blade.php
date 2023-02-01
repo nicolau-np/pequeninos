@@ -171,6 +171,7 @@ if (session('epoca') <= 3) { foreach ($getConfigBloqueios as $config_bloqueios) 
 
                                                     <tbody>
                                                         @if (session('epoca') == 1)
+                                                        
                                                             @if ($getTrimestral != null)
                                                                 @if ($getTrimestral->count() == 0)
                                                                     Nenhum estudante encontrado

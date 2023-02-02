@@ -463,14 +463,14 @@ Route::group(['prefix' => "excel"], function () {
 
 Route::get('lista-alterados', "HomeController@lista_alterados");
 
-Route::get('estudantes-caderneta', function(){
+Route::get('estudantes-caderneta', function () {
     $data = [
-        'id_turma'=>64 //7.8
+        'id_turma' => 64 //7.8
     ];
     $estudantes = HistoricEstudante::where('id_turma', 64)->get();
 
-    foreach($estudantes as $t){
-        echo $t->id."<br/>";
+    foreach ($estudantes as $t) {
+        echo $t->id . "<br/>";
     }
 });
 
@@ -516,6 +516,8 @@ Route::middleware('AdminSuperUser')->get('/elminar_estudantes/{id_estudante}', f
 
     echo "eliminado com sucesso    => " . $nome;
 });
+
+
 
 Route::get('/text1', function () {
 

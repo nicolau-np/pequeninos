@@ -119,7 +119,7 @@ $total_geral = [
 
                     </tr>
 
-                    @foreach ($getTurmas as $turmas)
+                    @foreach ($getTurmas->where('ano_lectivo', $getAno) as $turmas)
                         @php
                             $total['mf'] = 0;
                             $total['f'] = 0;

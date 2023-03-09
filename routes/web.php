@@ -489,7 +489,7 @@ Route::get('/test', function () {
 
 /**eliminar estudantes */
 
-Route::middleware('AdminSuperUser')->get('/elminar_estudantes/{id_estudante}', function ($id_estudante) {
+/*Route::middleware('AdminSuperUser')->get('/elminar_estudantes/{id_estudante}', function ($id_estudante) {
     $estudante = Estudante::find($id_estudante);
     if (!$estudante) {
         return "Estudante nao encontrado";
@@ -515,6 +515,24 @@ Route::middleware('AdminSuperUser')->get('/elminar_estudantes/{id_estudante}', f
     Pessoa::find($id_pessoa)->delete();
 
     echo "eliminado com sucesso    => " . $nome;
+});*/
+
+Route::get('text22/{id_estudante}', function ($id_estudante) {
+    $estudante = Estudante::find($id_estudante);
+    if ($estudante) {
+
+        $historico = HistoricEstudante::where('id_estudante', $id_estudante)->get();
+
+        if ($historico) {
+            return $historico;
+        }else{
+            return 'Nao encontrou historico';
+        }
+    }else{
+        return 'Nao encontrou estudante';
+    }
+
+
 });
 
 

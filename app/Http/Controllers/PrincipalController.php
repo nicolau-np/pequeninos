@@ -78,9 +78,9 @@ class PrincipalController extends Controller
         if ($id_ensino == 1) {
             if (($classe == "Iniciação")) {
                 return view('principal.ensinos.ensino_primario_ini_copy', $data);
-            } elseif (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
+            } elseif (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe") || ($classe == "Módulo 1") || ($classe == "Módulo 2")) {
                 return view('principal.ensinos.ensino_primario_2_4_copy', $data);
-            } elseif (($classe == "6ª classe")) {
+            } elseif (($classe == "6ª classe") || ($classe == "Módulo 3")) {
                 return view('principal.ensinos.ensino_primario_6_copy', $data);
             }
         } elseif ($id_ensino == 2) {

@@ -138,9 +138,9 @@ class PhpWordController extends Controller
         if ($id_ensino == 1) {
             if (($classe == "Iniciação")) {
                 $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/declaracao_notas/ensino_primario_ini_1_3_5_copy.docx');
-            } elseif (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
+            } elseif (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")  || ($classe == "Módulo 1") || ($classe == "Módulo 2")) {
                 $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/declaracao_notas/ensino_primario_2_4_copy.docx');
-            } elseif ($classe == "6ª classe") {
+            } elseif (($classe == "6ª classe") || ($classe == "Módulo 3")) {
                 $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/declaracao_notas/ensino_primario_6_copy.docx');
             }
         } elseif ($id_ensino == 2) {
@@ -361,9 +361,9 @@ class PhpWordController extends Controller
         if ($id_ensino == 1) {
             if (($classe == "Iniciação")) {
                 $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/termos/ensino_primario_ini_1_3_5_copy.docx');
-            } elseif (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")) {
+            } elseif (($classe == "2ª classe") || ($classe == "4ª classe") || ($classe == "1ª classe") || ($classe == "3ª classe") || ($classe == "5ª classe")|| ($classe == "Módulo 1") || ($classe == "Módulo 2")) {
                 $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/termos/ensino_primario_2_4_copy.docx');
-            } elseif ($classe == "6ª classe") {
+            } elseif (($classe == "6ª classe") || ($classe == "Módulo 3")) {
                 $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor('word_models/termos/ensino_primario_6_copy.docx');
             }
         } elseif ($id_ensino == 2) {

@@ -71,6 +71,7 @@ $total = [
                             <div class="tab-content tabs-left-content card-block">
 
                                 <div class="tab-pane active" id="profile5" role="tabpanel">
+                                    <a href="/balancos">Baixar em Excel</a>
                                     <p class="m-0">
                                         <div class="tabela_balanco">
                                             <table class="table table-bordered" style="font-size:12px;">

@@ -248,4 +248,12 @@ class ExcelController extends Controller
         //fim
         return view("$return", $data['view']);
     }
+
+    public function balanco_geral_mensal($ano_lectivo){
+
+    }
+
+    public function balanco_geral_anual($ano_lectivo){
+
+    }
 }

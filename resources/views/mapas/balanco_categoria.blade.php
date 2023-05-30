@@ -38,6 +38,7 @@ use App\Http\Controllers\ControladorStatic;
                             Ano Lectivo: {{ $getAno }}
                         </div>
                         <div class="tabela_balanco">
+                            <a href="/excel/balanco_categoria/{{$getAno}}" class="btn btn-primary">Imprimir em Excel</a>
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>

@@ -461,6 +461,8 @@ Route::group(['prefix' => "excel"], function () {
     Route::get('pauta/{id_turma}/{ano_lectivo}', "ExcelController@pauta");
     Route::get('balanco_geral_mensal/{ano_lectivo}', "ExcelController@balanco_geral_mensal");
     Route::get('balanco_geral_anual/{ano_lectivo}', "ExcelController@balanco_geral_anual");
+    Route::get('balanco_categoria/{ano_lectivo}', "ExcelController@balanco_categoria");
+    Route::get('balanco_periodo/{data1}/{data2}', "ExcelController@balanco_periodo");
 });
 
 Route::get('lista-alterados', "HomeController@lista_alterados");

@@ -1,11 +1,16 @@
 @php
 use App\Http\Controllers\ControladorStatic;
-@endphp
 
-<div>
-<a href="/relatorios/balancoDiario/{{$data1}}/{{$data2}}" class="btn btn-warning btn-sm">Imprimir</a>
-&nbsp;&nbsp;
-<a href="/excel/balanco_periodo/{{$data1}}/{{$data2}}" class="btn btn-primary">Imprimir em Excel</a>
+@endphp
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Balanço Diário</title>
+</head>
+<body>
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -34,4 +39,5 @@ use App\Http\Controllers\ControladorStatic;
         </tbody>
 
     </table>
-</div>
+</body>
+</html>

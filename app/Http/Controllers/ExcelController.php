@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\AnoLectivo;
 use App\CadeiraExame;
 use App\CadeiraRecurso;
+use App\CategoriaEstudante;
 use App\DirectorTurma;
 use App\Disciplina;
 use App\Funcionario;
@@ -230,7 +231,7 @@ class ExcelController extends Controller
         } elseif ($id_ensino == 2) { //7 classe ate 9 ensino geral
             if ($classe == "9ª classe") {
                 $return = 'pauta.excel.ensino_1ciclo_9_copy';
-            } elseif(($classe == "7ª classe") || ($classe == "8ª classe")) {
+            } elseif (($classe == "7ª classe") || ($classe == "8ª classe")) {
                 $return = 'pauta.excel.ensino_1ciclo_7_8_copy';
             }
         }
@@ -250,7 +251,8 @@ class ExcelController extends Controller
         return view("$return", $data['view']);
     }
 
-    public function balanco_geral_mensal($ano_lectivo){
+    public function balanco_geral_mensal($ano_lectivo)
+    {
 
         $ano_lect = AnoLectivo::where(['ano_lectivo' => $ano_lectivo])->first();
         if (!$ano_lect) {
@@ -263,7 +265,7 @@ class ExcelController extends Controller
             'getTipoPagamentos' => $tipo_pagamentos,
             'getAno' => $ano_lectivo,
         ];
-        $arquivo_saida = 'Balanço Geral Mensal ' . $ano_lectivo .'.xls';
+        $arquivo_saida = 'Balanço Geral Mensal ' . $ano_lectivo . '.xls';
         //
 
         // configuracao header para forcar download
@@ -278,7 +280,8 @@ class ExcelController extends Controller
         return view('excel.balanco_geral_mensal', $data);
     }
 
-    public function balanco_geral_anual($ano_lectivo){
+    public function balanco_geral_anual($ano_lectivo)
+    {
         $ano_lect = AnoLectivo::where(['ano_lectivo' => $ano_lectivo])->first();
         if (!$ano_lect) {
             return back()->with(['error' => "Nao encontrou"]);
@@ -290,7 +293,7 @@ class ExcelController extends Controller
             'getTipoPagamentos' => $tipo_pagamentos,
             'getAno' => $ano_lectivo,
         ];
-        $arquivo_saida = 'Balanço Geral Anual ' . $ano_lectivo .'.xls';
+        $arquivo_saida = 'Balanço Geral Anual ' . $ano_lectivo . '.xls';
         //
 
         // configuracao header para forcar download
@@ -303,5 +306,63 @@ class ExcelController extends Controller
         header("Content-Description: PHP Generated Data");
         //fim
         return view('excel.balanco_geral_anual', $data);
+    }
+
+    public function balanco_categoria($ano_lectivo)
+    {
+
+        $ano_lect = AnoLectivo::where(['ano_lectivo' => $ano_lectivo])->first();
+        if (!$ano_lect) {
+            return back()->with(['error' => "Nao encontrou"]);
+        }
+        $ano_lectivos = AnoLectivo::orderBy('id', 'desc')->get();
+        $tipo_pagamentos = TipoPagamento::get();
+        $categorias = CategoriaEstudante::get();
+        $data = [
+            'getAnos' => $ano_lectivos,
+            'getTipoPagamentos' => $tipo_pagamentos,
+            'getAno' => $ano_lectivo,
+            'getCategorias' => $categorias,
+        ];
+
+        $arquivo_saida = 'Balanço por Categoria ' . $ano_lectivo . '.xls';
+        //
+
+        // configuracao header para forcar download
+        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        header("Last-Modified:" . gmdate("D,d M YH:i:s") . "GMT");
+        header("Cache-Control: no-cache, must-revalidate");
+        header("Pragma: no-cache");
+        header("Content-type: application/x-msexcel");
+        header("Content-Disposition: attachment; filename=\"{$arquivo_saida}\"");
+        header("Content-Description: PHP Generated Data");
+        //fim
+        return view('excel.balanco_categoria', $data);
+    }
+
+    public function balanco_periodo($data1, $data2)
+    {
+
+        $tipo_pagamentos = TipoPagamento::all();
+
+        $data = [
+            'getTipoPagamentos' => $tipo_pagamentos,
+            'data1' => $data1,
+            'data2' => $data2,
+        ];
+
+        $arquivo_saida = 'Balanço Diário ' . $data1 . '/' . $data2 . '.xls';
+        //
+
+        // configuracao header para forcar download
+        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        header("Last-Modified:" . gmdate("D,d M YH:i:s") . "GMT");
+        header("Cache-Control: no-cache, must-revalidate");
+        header("Pragma: no-cache");
+        header("Content-type: application/x-msexcel");
+        header("Content-Disposition: attachment; filename=\"{$arquivo_saida}\"");
+        header("Content-Description: PHP Generated Data");
+        //fim
+        return view('excel.balanco_periodo', $data);
     }
 }

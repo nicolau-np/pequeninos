@@ -23,22 +23,32 @@
             <thead>
                 <tr>
                     <th>#</th>
-                    <th>Data</th>
-                    <th>Nome Completo</th>
-                    <th>Gênero</th>
-                    <th>Turma</th>
-                    <th>Valor Pago</th>
+                    <th>DATA</th>
+                    <th>NOME COMPLETO</th>
+                    <th>GÊNERO</th>
+                    <th>TURMA</th>
+                    <th>MÊS</th>
+                    <th>VALOR PAGO</th>
 
                 </tr>
             </thead>
             <tbody>
-                
-
+                @foreach($getPagamentos as $pagamento)
+                <tr>
+                    <td>{{$loop->iteration}}</td>
+                    <td>{{date('d/m/Y', strtotime($pagamento->data_pagamento))??''}}</td>
+                    <td>{{$pagamento->estudante->pessoa->nome ?? ''}}</td>
+                    <td>{{$pagamento->estudante->pessoa->genero ?? ''}}</td>
+                    <td>{{$pagamento->estudante->turma->turma ?? ''}}</td>
+                    <td>{{$pagamento->epoca ?? ''}}</td>
+                    <td>{{number_format($pagamento->preco,2,',','.') ?? ''}}</td>
+                </tr>
+                @endforeach
             </tbody>
         </table>
     </div>
     <div>
-        TOTAL: {{number_format($getPagamentos->sum('preco'),2,',','.')}}
+        TOTAL GERAL: {{number_format($getPagamentos->sum('preco'),2,',','.')}}
     </div>
 </body>
 </html>

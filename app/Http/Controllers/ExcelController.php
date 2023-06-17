@@ -383,9 +383,9 @@ class ExcelController extends Controller
 
 
         if ($categoria == 'SEM CATEGORIA') {
-            $estudantes = Estudante::where(['categoria'=>"", 'ano_lectivo' => $ano_lectivo])->get();
+            $estudantes = Estudante::where(['categoria'=>"", 'ano_lectivo' => $ano_lectivo])->get()->sortBy('pessoa.nome');
         } else {
-            $estudantes = Estudante::where(['categoria' => $categorias->sigla, 'ano_lectivo' => $ano_lectivo])->get();
+            $estudantes = Estudante::where(['categoria' => $categorias->sigla, 'ano_lectivo' => $ano_lectivo])->get()->sortBy('pessoa.nome');
         }
 
         $data = [
@@ -417,7 +417,7 @@ class ExcelController extends Controller
 
         ]);
 
-        $pagamentos = Pagamento::where('data_pagamento', '>=', $request->data_inicio)->where('data_pagamento', '<=', $request->data_fim)->where(['id_tipo_pagamento' => 1])->get();
+        $pagamentos = Pagamento::where('data_pagamento', '>=', $request->data_inicio)->where('data_pagamento', '<=', $request->data_fim)->where(['id_tipo_pagamento' => 1])->get()->sortBy('estudante.pessoa.nome');
 
         $data = [
 

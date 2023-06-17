@@ -11,6 +11,7 @@
 <body>
 
 <h3>{{$categoria}}</h3>
+<p>ANO LECTIVO:{{$getAno}}</p>
     <div class="corpo">
 
         <div class="table-resposive">
@@ -22,6 +23,7 @@
                         <th>NOME COMPLETO</th>
                         <th>GÊNERO</th>
                         <th>IDADE</th>
+                        <th>TURMA</th>
                     </tr>
 
                 </thead>
@@ -44,12 +46,14 @@
                                 @endif
 
                             </td>
+                            <td>{{$estudante->turma->turma}}</td>
 
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
+        <div>TOTAL ESTUDANTES: {{$getEstudantes->count()}}</div>
     </div>
 </body>
 

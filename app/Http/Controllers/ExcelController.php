@@ -375,16 +375,22 @@ class ExcelController extends Controller
             return back()->with(['error' => "Nao encontrou"]);
         }
 
+        if($categoria != 'SEM CATEGORIA'){
+            $categorias = CategoriaEstudante::where('categoria', $categoria)->first();
+            if (!$categorias)
+                return back()->with('error', 'Nao encontrou');
+        }
 
-        if ($categoria == "SEM CATEGORIA") {
-            $historico = HistoricEstudante::where(['categoria' => "", 'ano_lectivo' => $ano_lectivo])->get();
+
+        if ($categoria == 'SEM CATEGORIA') {
+            $estudantes = Estudante::where(['categoria'=>"", 'ano_lectivo' => $ano_lectivo])->get();
         } else {
-            $historico = HistoricEstudante::where(['categoria' => $categoria, 'ano_lectivo' => $ano_lectivo])->get();
+            $estudantes = Estudante::where(['categoria' => $categorias->sigla, 'ano_lectivo' => $ano_lectivo])->get();
         }
 
         $data = [
             'getAno' => $ano_lectivo,
-            'getHistorico' => $historico,
+            'getEstudantes' => $estudantes,
             'categoria' => $categoria,
         ];
 

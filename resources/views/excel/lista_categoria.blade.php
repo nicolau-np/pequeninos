@@ -10,7 +10,7 @@
 
 <body>
 
-<h1>{{$categoria}}</h1>
+<h3>{{$categoria}}</h3>
     <div class="corpo">
 
         <div class="table-resposive">
@@ -26,15 +26,15 @@
 
                 </thead>
                 <tbody>
-                    @foreach ($getHistorico as $historico)
+                    @foreach ($getEstudantes as $estudante)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $historico->estudante->id }}</td>
-                            <td>{{ $historico->estudante->pessoa->nome }}</td>
-                            <td>{{ $historico->estudante->pessoa->genero }}</td>
+                            <td>{{ $estudante->id }}</td>
+                            <td>{{ $estudante->pessoa->nome }}</td>
+                            <td>{{ $estudante->pessoa->genero }}</td>
                             <td>
                                 <?php
-                                $data_string = explode('-', $historico->estudante->pessoa->data_nascimento);
+                                $data_string = explode('-', $estudante->pessoa->data_nascimento);
                                 $idade = date('Y') - $data_string[0];
                                 ?>
                                 @if ($idade == 0)

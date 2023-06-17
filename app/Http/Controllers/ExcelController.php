@@ -377,14 +377,14 @@ class ExcelController extends Controller
 
 
         if ($categoria == "SEM CATEGORIA") {
-            $estudantes = Estudante::where(['ano_lectivo' => $ano_lectivo, 'categoria' => ""])->get();
+            $historico = HistoricEstudante::where(['categoria' => "", 'ano_lectivo' => $ano_lectivo])->get();
         } else {
-            $estudantes = Estudante::where(['ano_lectivo' => $ano_lectivo, 'categoria' => $categoria])->get();
+            $historico = HistoricEstudante::where(['categoria' => $categoria, 'ano_lectivo' => $ano_lectivo])->get();
         }
 
         $data = [
             'getAno' => $ano_lectivo,
-            'getEstudantes' => $estudantes,
+            'getHistorico' => $historico,
             'categoria' => $categoria,
         ];
 

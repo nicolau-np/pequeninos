@@ -26,15 +26,15 @@
 
                 </thead>
                 <tbody>
-                    @foreach ($getEstudantes as $estudante)
+                    @foreach ($getHistorico as $historico)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $estudante->id }}</td>
-                            <td>{{ $estudante->pessoa->nome }}</td>
-                            <td>{{ $estudante->pessoa->genero }}</td>
+                            <td>{{ $historico->estudante->id }}</td>
+                            <td>{{ $historico->estudante->pessoa->nome }}</td>
+                            <td>{{ $historico->estudante->pessoa->genero }}</td>
                             <td>
                                 <?php
-                                $data_string = explode('-', $estudante->pessoa->data_nascimento);
+                                $data_string = explode('-', $historico->estudante->pessoa->data_nascimento);
                                 $idade = date('Y') - $data_string[0];
                                 ?>
                                 @if ($idade == 0)

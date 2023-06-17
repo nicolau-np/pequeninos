@@ -32,18 +32,7 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach ($getPagamentos as $pagamento)
-                    <tr>
-                        <td>{{$loop->iteration}}</td>
-                        <td>
-                            {{date('d/m/Y', strtotime($pagamento->data_pagamento))}}
-                        </td>
-                        <td>{{$pagamento->estudante->pessoa->nome}}</td>
-                        <td>{{$pagamento->estudante->pessoa->genero}}</td>
-                        <td>{{$pagamento->estudante->turma->turma}}</td>
-                        <td>{{number_format($pagamento->preco,2,',','.')}}</td>
-                    </tr>
-                @endforeach
+                
 
             </tbody>
         </table>

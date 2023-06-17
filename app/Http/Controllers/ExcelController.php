@@ -419,6 +419,7 @@ class ExcelController extends Controller
             'data2' => $request->data_fim,
             'getPagamentos' => $pagamentos,
         ];
+
         $arquivo_saida = 'Pagamentos Estudantes ' . $request->data_inicio . '/' . $request->data_fim . '.xls';
         //
 

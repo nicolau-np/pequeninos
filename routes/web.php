@@ -298,6 +298,14 @@ Route::group(['prefix' => "mapas", 'middleware' => "AdminUserSuperMaster"], func
         Route::get('/categoria/{ano_lectivo}', "MapaController@balanco_categoria");
         Route::get('/diario', "MapaController@balanco_diario");
     });
+
+    Route::group(['prefix'=>"categorias"], function(){
+        Route::get('/{lastYear}', "MapaController@categoriasList");
+    });
+
+    Route::group(['prefix'=>"balancos_estudantes"], function(){
+        Route::get('/', "MapaController@balancosEstudantesList");
+    });
 });
 
 Route::group(['prefix' => 'pagamentos', 'middleware' => "user"], function () {
@@ -463,6 +471,8 @@ Route::group(['prefix' => "excel"], function () {
     Route::get('balanco_geral_anual/{ano_lectivo}', "ExcelController@balanco_geral_anual");
     Route::get('balanco_categoria/{ano_lectivo}', "ExcelController@balanco_categoria");
     Route::get('balanco_periodo/{data1}/{data2}', "ExcelController@balanco_periodo");
+    Route::get('lista_categoria/{ano_lectivo}/{categoria}', "ExcelController@listNominalCategoria");
+    Route::post('balanco_estudantes', "ExcelController@balancoEstudantes");
 });
 
 Route::get('lista-alterados', "HomeController@lista_alterados");

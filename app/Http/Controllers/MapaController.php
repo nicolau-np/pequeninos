@@ -164,4 +164,33 @@ class MapaController extends Controller
         ];
         return view('mapas.saidas', $data);
     }
+
+    public function categoriasList($ano_lectivo){
+        $ano_lect = AnoLectivo::where(['ano_lectivo' => $ano_lectivo])->first();
+        if (!$ano_lect) {
+            return back()->with(['error' => "Nao encontrou"]);
+        }
+
+        $categorias = CategoriaEstudante::get();
+
+        $data = [
+            'title' => "Categorias",
+            'type' => "mapas",
+            'menu' => "Mapas",
+            'submenu' => "Categorias",
+            'getAno' => $ano_lectivo,
+            'getCategorias' => $categorias,
+        ];
+        return view('mapas.categorias.index', $data);
+    }
+
+    public function balancosEstudantesList(){
+        $data = [
+            'title' => "Balanços/Estudantes",
+            'type' => "mapas",
+            'menu' => "Mapas",
+            'submenu' => "Balanços/Estudantes",
+        ];
+        return view('mapas.balanco_estudantes.index', $data);
+    }
 }

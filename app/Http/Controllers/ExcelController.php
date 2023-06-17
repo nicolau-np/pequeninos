@@ -8,10 +8,12 @@ use App\CadeiraRecurso;
 use App\CategoriaEstudante;
 use App\DirectorTurma;
 use App\Disciplina;
+use App\Estudante;
 use App\Funcionario;
 use App\HistoricEstudante;
 use App\Horario;
 use App\OrdernaDisciplina;
+use App\Pagamento;
 use App\TipoPagamento;
 use App\Turma;
 use Illuminate\Http\Request;
@@ -364,5 +366,71 @@ class ExcelController extends Controller
         header("Content-Description: PHP Generated Data");
         //fim
         return view('excel.balanco_periodo', $data);
+    }
+
+    public function listNominalCategoria($ano_lectivo, $categoria)
+    {
+        $ano_lect = AnoLectivo::where(['ano_lectivo' => $ano_lectivo])->first();
+        if (!$ano_lect) {
+            return back()->with(['error' => "Nao encontrou"]);
+        }
+
+
+        if ($categoria == "SEM CATEGORIA") {
+            $estudantes = Estudante::where(['ano_lectivo' => $ano_lectivo, 'categoria' => ""])->get();
+        } else {
+            $estudantes = Estudante::where(['ano_lectivo' => $ano_lectivo, 'categoria' => $categoria])->get();
+        }
+
+        $data = [
+            'getAno' => $ano_lectivo,
+            'getEstudantes' => $estudantes,
+            'categoria' => $categoria,
+        ];
+
+        $arquivo_saida = 'Lista Nominal ' . $categoria . '.xls';
+        //
+
+        // configuracao header para forcar download
+        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        header("Last-Modified:" . gmdate("D,d M YH:i:s") . "GMT");
+        header("Cache-Control: no-cache, must-revalidate");
+        header("Pragma: no-cache");
+        header("Content-type: application/x-msexcel");
+        header("Content-Disposition: attachment; filename=\"{$arquivo_saida}\"");
+        header("Content-Description: PHP Generated Data");
+        //fim
+        return view('excel.lista_categoria', $data);
+    }
+
+    public function balancoEstudantes(Request $request)
+    {
+        $request->validate([
+            'data_inicio' => ['required', 'date'],
+            'data_fim' => ['required', 'date'],
+
+        ]);
+
+        $pagamentos = Pagamento::where('data_pagamento', '>=', $request->data_inicio)->where('data_pagamento', '<=', $request->data_fim)->where(['id_tipo_pagamento' => 1])->get();
+
+        $data = [
+
+            'data1' => $request->data_inicio,
+            'data2' => $request->data_fim,
+            'getPagamentos' => $pagamentos,
+        ];
+        $arquivo_saida = 'Pagamentos Estudantes ' . $request->data_inicio . '/' . $request->data_fim . '.xls';
+        //
+
+        // configuracao header para forcar download
+        header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+        header("Last-Modified:" . gmdate("D,d M YH:i:s") . "GMT");
+        header("Cache-Control: no-cache, must-revalidate");
+        header("Pragma: no-cache");
+        header("Content-type: application/x-msexcel");
+        header("Content-Disposition: attachment; filename=\"{$arquivo_saida}\"");
+        header("Content-Description: PHP Generated Data");
+        //fim
+        return view('excel.balancos_estudantes', $data);
     }
 }

@@ -94,6 +94,7 @@ Route::group(['prefix' => 'ajax', 'middleware' => "auth"], function () {
 
     Route::post('/encarregadoModal', "AjaxController@encarregadoModal")->name('encarregadoModal');
     Route::post('/updateObservacao', "AjaxController@updateObservacao")->name('updateObservacao');
+    Route::post('/updateMS', "AjaxController@updateMS")->name('updateMS');
 });
 
 Route::group(['prefix' => 'institucional', 'middleware' => "admin"], function () {
@@ -419,6 +420,7 @@ Route::group(['prefix' => 'cadernetas', 'middleware' => "prof"], function () {
     Route::get('/store_copy_ejatrimestral/{id_turma}/{id_disciplina}/{epoca}/{ano_lectivo}', "CadernetaController_copy@store_copy_ejatrimestral");
 
     Route::get('/printer/{id_turma}/{id_disciplina}/{ano_lectivo}', "RelatorioController@minipauta");
+    Route::get('/store_copy_modulo/{id_turma}/{id_disciplina}/{ano_lectivo}', "CadernetaController_copy@store_copy_modulo");
 });
 
 Route::group(['prefix' => 'minipautas', 'middleware' => "auth"], function () {

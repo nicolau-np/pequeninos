@@ -49,6 +49,11 @@ class Disciplina extends Model
         return $this->hasMany(NotaFinal::class, 'id_disciplina', 'id');
     }
 
+    public function modulo_final()
+    {
+        return $this->hasMany(ModuloFinal::class, 'id_disciplina', 'id');
+    }
+
     public function cadeira_recurso()
     {
         return $this->hasMany(CadeiraRecurso::class, 'id_disciplina', 'id');

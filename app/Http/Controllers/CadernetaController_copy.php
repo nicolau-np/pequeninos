@@ -17,6 +17,7 @@ use App\Funcionario;
 use App\Horario;
 use App\Trimestral;
 use App\Turma;
+use App\ModuloFinal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -76,11 +77,6 @@ class CadernetaController_copy extends Controller
             Session::put('epoca', $epoca);
         }
 
-        //verificando se a epoca está bloqueada
-        $bloqueios = BloqueioEpoca::where(['epoca' => $epoca])->first();
-        if ($bloqueios->estado == "off") {
-            return back()->with(['error' => "Epoca bloqueiada"]);
-        }
 
         //veirficar turma se existe
         $id_ensino = null;
@@ -91,6 +87,15 @@ class CadernetaController_copy extends Controller
         //buscando ensino atraves de turma
         $id_ensino = $turma->classe->id_ensino;
         $classe = $turma->classe->classe;
+
+        if ($classe != "Módulo 3") {
+            //verificando se a epoca está bloqueada
+            $bloqueios = BloqueioEpoca::where(['epoca' => $epoca])->first();
+            if ($bloqueios->estado == "off") {
+                return back()->with(['error' => "Epoca bloqueiada"]);
+            }
+        }
+
 
         //pegando ano lectivo e verificando
         $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
@@ -151,14 +156,14 @@ class CadernetaController_copy extends Controller
             $trimestral = Trimestral::whereHas('estudante', function ($query) use ($data2) {
                 $query->where('id_turma', $data2['id_turmaCAD']);
                 $query->where('ano_lectivo', $data2['ano_lectivoCAD']);
-            })->where(['epoca' => $data2['epocaCAD'], 'id_disciplina' => $data2['id_disciplinaCAD'], 'ano_lectivo'=>$data2['ano_lectivoCAD']])
+            })->where(['epoca' => $data2['epocaCAD'], 'id_disciplina' => $data2['id_disciplinaCAD'], 'ano_lectivo' => $data2['ano_lectivoCAD']])
                 ->get()->sortBy('estudante.numero');
         } else {
             //pegando dados finais para exibir na view
             $global = Finals::whereHas('estudante', function ($query) use ($data2) {
                 $query->where('id_turma', $data2['id_turmaCAD']);
                 $query->where('ano_lectivo', $data2['ano_lectivoCAD']);
-            })->where(['id_disciplina' => $data2['id_disciplinaCAD'], 'ano_lectivo'=>$data2['ano_lectivoCAD']])
+            })->where(['id_disciplina' => $data2['id_disciplinaCAD'], 'ano_lectivo' => $data2['ano_lectivoCAD']])
                 ->get()->sortBy('estudante.numero');
         }
 
@@ -189,6 +194,15 @@ class CadernetaController_copy extends Controller
 
         $config_bloqueios = ConfigBloqueio::where(['id_bloqueio' => $epoca])->get();
 
+        $modulo_finals = null;
+        if ($classe == "Módulo 3") {
+            $modulo_finals = ModuloFinal::whereHas('estudante', function ($query) use ($data2) {
+                $query->where('id_turma', $data2['id_turmaCAD']);
+                $query->where('ano_lectivo', $data2['ano_lectivoCAD']);
+            })->where(['id_disciplina' => $data2['id_disciplinaCAD'], 'ano_lectivo' => $data2['ano_lectivoCAD']])
+                ->get()->sortBy('estudante.numero');
+        }
+
         $data = [
             'title' => "Caderneta",
             'type' => "mobile",
@@ -209,6 +223,7 @@ class CadernetaController_copy extends Controller
             'getCadeiraRecurso' => $cadeira_recurso,
             'getCadeiraExame' => $cadeira_exame,
             'getConfigBloqueios' => $config_bloqueios,
+            'getModuloFinals' => $modulo_finals,
         ];
 
         if ($id_ensino == 1) { //iniciacao ate 6
@@ -218,8 +233,10 @@ class CadernetaController_copy extends Controller
             } //se for classificacao quantitativa
             elseif (($classe == "Iniciação")) {
                 return view('caderneta.ensinos.ensino_primario_Ini_1_3_5_copy', $data);
-            } elseif (($classe == "6ª classe") || ($classe == "Módulo 3")) {
+            } elseif (($classe == "6ª classe")) {
                 return view('caderneta.ensinos.ensino_primario_6_copy', $data);
+            } elseif (($classe == "Módulo 3")) {
+                return view('caderneta.ensinos.ensino_1ciclo_3_modulo_copy', $data);
             }
         } elseif ($id_ensino == 2) { //7 classe ate 9 ensino geral
             if ($classe == "9ª classe") {
@@ -715,5 +732,64 @@ class CadernetaController_copy extends Controller
         } else {
             return back(['success' => "Actualizado com sucesso"]);
         }
+    }
+
+    public function store_copy_modulo($id_turma, $id_disciplina, $ano_lectivo)
+    {
+
+        $turma = Turma::find($id_turma);
+        if (!$turma) {
+            return back()->with(['error' => "Não encontrou turma"]);
+        }
+
+        $ano_lectivos = AnoLectivo::where('ano_lectivo', $ano_lectivo)->first();
+        if (!$ano_lectivos) {
+            return back()->with(['error' => "Não encontrou ano lectivo"]);
+        }
+
+        //negar se o ano lectivo ja estiver bloqueado
+        if ($ano_lectivos->estado == "off") {
+            return back()->with(['error' => "Sem permissão de fazer lançamentos para esta turma"]);
+        }
+
+        $disciplina = Disciplina::find($id_disciplina);
+        if (!$disciplina) {
+            return back()->with(['error' => "Não encontrou disciplina"]);
+        }
+
+        if (Session::has('id_funcionario')) {
+            //verificando horario e funcionario
+            $data['where_horario'] = [
+                'id_funcionario' => Session::get('id_funcionario'),
+                'id_turma' => $id_turma,
+                'id_disciplina' => $id_disciplina,
+                'ano_lectivo' => $ano_lectivo,
+                'estado' => "visivel"
+            ];
+
+            $horario = Horario::where($data['where_horario'])->first();
+            if (!$horario) {
+                return back()->with(['error' => "Não é professor desta turma"]);
+            }
+        } else {
+            return back()->with(['error' => "Deve iniciar sessão"]);
+        }
+
+        $data = [
+            'id_estudante' => null,
+            'id_disciplina' => $id_disciplina,
+            'ano_lectivo' => $ano_lectivo,
+        ];
+
+        $estudantes = Estudante::where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])->get();
+
+        //cadastar trimestral
+        foreach ($estudantes as $estudante) {
+            $data['id_estudante'] = $estudante->id;
+            if (!ModuloFinal::where($data)->first()) {
+                $modulo_final = ModuloFinal::create($data);
+            }
+        }
+        return back()->with(['success' => "Actualizou com sucesso"]);
     }
 }

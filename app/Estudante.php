@@ -64,6 +64,11 @@ class Estudante extends Model
         return $this->hasMany(NotaFinal::class, 'id_estudante', 'id');
     }
 
+    public function modulo_final()
+    {
+        return $this->hasMany(ModuloFinal::class, 'id_estudante', 'id');
+    }
+
     public function declaracaos()
     {
         return $this->hasMany(Declaracaos::class, 'id_estudante', 'id');

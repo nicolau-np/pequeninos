@@ -27,6 +27,7 @@ use App\Turma;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use App\ModuloFinal;
 
 class AjaxController extends Controller
 {
@@ -506,6 +507,59 @@ class AjaxController extends Controller
 
         //fim mfd e mf
         $this->acharObervacao($final->id_estudante, $final->ano_lectivo);
+    }
+
+    public function updateMS(Request $request){
+
+        $request->validate([
+                'valor' => ['required', 'numeric', 'min:0', 'max:10'],
+                'campo' => ['required', 'string',],
+                'id_modulo' => ['required', 'integer', 'min:1'],
+            ]);
+
+
+        //verificar se mudou o id do trimestre
+        $modulo_final = ModuloFinal::find($request->id_modulo);
+        if (!$modulo_final) {
+            return null;
+        }
+
+        //verificando se o professor e dono desta turma
+        if (Session::has('id_funcionario')) {
+            //verificando horario e funcionario
+            $data['where_horario'] = [
+                'id_funcionario' => Session::get('id_funcionario'),
+                'id_turma' => $modulo_final->estudante->id_turma,
+                'id_disciplina' => $modulo_final->id_disciplina,
+                'ano_lectivo' => $modulo_final->ano_lectivo,
+                'estado' => "visivel"
+            ];
+
+
+
+            $horario = Horario::where($data['where_horario'])->first();
+            if (!$horario) {
+                return null;
+            }
+        } else {
+            return null;
+        }
+
+        //criando campos
+        $campo = "" . $request->campo; //campo de avaliacao
+        $data['modulo_final'] = [
+            "$campo" => $request->valor,
+        ];
+
+        //salvando a nota avaliacao
+        $modulo_final = ModuloFinal::find($request->id_modulo)->update($data['modulo_final']);
+        if ($modulo_final) {
+            echo " \\lancou modulo\\ ";
+        } else {
+            return null;
+        }
+
+
     }
 
     public function updateProva(Request $request)

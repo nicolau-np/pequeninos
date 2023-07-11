@@ -29,6 +29,15 @@ class ClasseSeeder extends Seeder
         ],[
             'id_ensino'=>1,
             'classe'=>'6ª classe',
+        ],[
+            'id_ensino'=>1,
+            'classe'=>'Módulo 1',
+        ],[
+            'id_ensino'=>1,
+            'classe'=>'Módulo 2',
+        ],[
+            'id_ensino'=>1,
+            'classe'=>'Módulo 3',
         ],
         //ensino 2
         [

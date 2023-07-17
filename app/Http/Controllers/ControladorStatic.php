@@ -346,6 +346,8 @@ class ControladorStatic extends Controller
         return $directores;
     }
 
+
+
     public static function getDisciplinaCurso($id_curso)
     {
         $grade_curricular = Grade::where(['id_curso' => $id_curso])->distinct('id_disciplina')->get();

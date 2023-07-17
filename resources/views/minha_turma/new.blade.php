@@ -47,6 +47,7 @@
                                 <a href="/pautas/pdf/{{ $getDirector->id_turma }}/{{ $getDirector->ano_lectivo }}"
                                     class="btn btn-warning btn-sm"><i class="ti-printer"></i> PDF</a>
                                 &nbsp;&nbsp;&nbsp;
+                                
                                 <a href="/excel/pauta/{{ $getDirector->id_turma }}/{{ $getDirector->ano_lectivo }}"
                                     type="button" class="btn btn-success btn-sm" title="Pauta Excel">
                                     <i class="ti-download"></i> Excel

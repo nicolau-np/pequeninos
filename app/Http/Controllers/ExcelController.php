@@ -16,6 +16,7 @@ use App\OrdernaDisciplina;
 use App\Pagamento;
 use App\TipoPagamento;
 use App\Turma;
+use App\ModuloFinal;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -209,6 +210,8 @@ class ExcelController extends Controller
         $historico = HistoricEstudante::where(['id_turma' => $id_turma, 'ano_lectivo' => $ano_lectivo])
             ->orderBy('numero', 'asc')->get();
 
+           
+
         $data['view'] = [
             'getDirector' => $directorTurma,
             'getHistorico' => $historico,
@@ -227,8 +230,10 @@ class ExcelController extends Controller
             } //se for classificacao quantitativa
             elseif (($classe == "Iniciação")) {
                 $return = 'pauta.excel.ensino_primario_Ini_1_3_5_copy';
-            } elseif (($classe == "6ª classe") || ($classe == "Módulo 3")) {
+            } elseif (($classe == "6ª classe")) {
                 $return = 'pauta.excel.ensino_primario_6_copy';
+            }elseif(($classe == "Módulo 3")){
+                $return = 'pauta.excel.ensino_primario_modulo3_copy';
             }
         } elseif ($id_ensino == 2) { //7 classe ate 9 ensino geral
             if ($classe == "9ª classe") {
@@ -440,4 +445,6 @@ class ExcelController extends Controller
         //fim
         return view('excel.balancos_estudantes', $data);
     }
+
+    
 }

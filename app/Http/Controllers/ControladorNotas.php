@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\EjaNotaMensal;
 use App\Finals;
+use App\ModuloFinal;
 use App\ObservacaoGeral;
 use App\ObservacaoUnica;
 use App\Trimestral;
@@ -207,6 +208,16 @@ class ControladorNotas extends Controller
         ];
         $final = Finals::where($data)->get();
         return $final;
+    }
+
+    public static function getPautaModulo($id_estudante, $id_disciplina, $ano_lectivo){
+       $data = [
+            'id_estudante' => $id_estudante,
+            'id_disciplina' => $id_disciplina,
+            'ano_lectivo' => $ano_lectivo,
+        ];
+        $modulo_final = ModuloFinal::where($data)->first();
+        return $modulo_final;
     }
 
     public static function getNotasEstudantesFinalPDF($id_turma, $id_disciplina, $ano_lectivo)

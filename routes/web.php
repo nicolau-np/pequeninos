@@ -15,6 +15,7 @@ use App\RestricaoNota;
 use App\Transferencia;
 use App\Trimestral;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Artisan;
 
 
 /*
@@ -27,6 +28,13 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+ Route::get('optimize', function(Request $request){
+
+    $clearrouter = Artisan::call('optimize');
+    echo "Optimize<br>";
+
+ });
+
 
 Route::get('/', "PrincipalController@index")->name('principal')->middleware('guest');
 Route::get('/home', "HomeController@index")->name('home');
